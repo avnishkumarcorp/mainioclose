@@ -11,8 +11,6 @@ const MainPage = () => {
             <SideBar /> 
         </div>
         <div className="right-data">
-            <h1>main</h1>
-            <h1>main</h1>
             <Outlet />
         </div>
     </div>
