@@ -4,6 +4,31 @@
   box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
+
+/* font-family: 'Inter', sans-serif; */
+
 body{
   overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+:root{
+  --mainBlue: #2B62F9;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+/* common classes */
+
+.all-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.all-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
