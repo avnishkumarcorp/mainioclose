@@ -1,0 +1,20 @@
+@import "../../CommonColors.scss";
+
+.main-page{
+    background-color: $mainBlue;
+    color: $white;
+    display: flex;
+    height: 100vh;
+    .side-nav{
+      flex: 3;
+      position: sticky;
+      top: 0;
+      overflow: auto;
+    }
+    .right-data{
+        background-color: $white;
+        flex: 10;
+        color: $black;
+        overflow: auto;
+    }
+}
