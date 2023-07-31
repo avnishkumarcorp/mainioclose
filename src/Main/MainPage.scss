@@ -6,10 +6,11 @@
     display: flex;
     height: 100vh;
     .side-nav{
-      flex: 3;
+      width: 280px;
       position: sticky;
       top: 0;
       overflow: auto;
+      padding: 12px;
     }
     .right-data{
         background-color: $white;

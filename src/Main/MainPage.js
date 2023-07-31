@@ -1,6 +1,7 @@
 import React from "react";
 import "./MainPage.scss"
 import SideBar from "./SideBar";
+import { Outlet } from "react-router";
 
 
 const MainPage = () => {
@@ -12,55 +13,7 @@ const MainPage = () => {
         <div className="right-data">
             <h1>main</h1>
             <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-            <h1>main</h1>
-    
+            <Outlet />
         </div>
     </div>
   )
