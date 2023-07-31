@@ -5,7 +5,6 @@ import MainPage from './Main/MainPage';
 function App() {
   return (
     <div className="App">
-      <h1>Close.io</h1>
       <BrowserRouter>
       <Routes>
           <Route path="/" element={<MainPage />} />
