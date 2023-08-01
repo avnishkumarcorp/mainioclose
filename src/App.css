@@ -47,3 +47,10 @@ body{
   text-decoration: none;
 }
 
+.cm-padding-one{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+

@@ -4,6 +4,7 @@ import MainPage from './Main/MainPage';
 import DashBoard from './Main/DashBoard/DashBoard';
 import HRMod from './Main/HR/HRMod';
 import SalesMod from './Main/Sales/SalesMod';
+import InboxPage from './Main/Sales/Inbox/InboxPage';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
             <Route path="/" element={<DashBoard />} />
             <Route path="/hr" element={ <HRMod /> } />
             <Route path="/sales" element={ <SalesMod /> } >
-              <Route path="inbox"  element={ <div>sales outlet</div> } />
+              <Route path=""  element={ <InboxPage /> } />
               <Route path="oppurtities" element={ <div>oppurtities</div> } />
               <Route path="estimate" element={ <div>estimate</div> } />
               <Route path="orders" element={ <div>orders</div> } />
