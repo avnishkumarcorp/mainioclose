@@ -79,7 +79,7 @@ const SideBar = () => {
           data-parent="#accordion"
         >
           <div class="link-child">
-            <NavLink className="link-itemss" to="sales/inbox">
+            <NavLink className="link-itemss" to="sales">
               Inbox
             </NavLink>
             <NavLink className="link-itemss" to="sales/oppurtities">
