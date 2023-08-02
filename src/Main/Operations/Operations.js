@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import "./Operations.scss"
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 
 const Operations = () => {
   return (
@@ -8,6 +8,6 @@ const Operations = () => {
       <Outlet />
     </div>
   )
-};
+}
 
-export default Operations;
+export default Operations

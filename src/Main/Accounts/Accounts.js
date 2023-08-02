@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import "./Accounts.scss"
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 
 const Accounts = () => {
   return (
@@ -8,6 +8,6 @@ const Accounts = () => {
       <Outlet />
     </div>
   )
-};
+}
 
-export default Accounts;
+export default Accounts

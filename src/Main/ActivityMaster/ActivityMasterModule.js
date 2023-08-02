@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 import "./ActivityMasterModule.scss"
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 
 const ActivityMasterModule = () => {
-    return (
-        <div>
-          <Outlet />
-        </div>
-      )
-};
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
+}
 
-export default ActivityMasterModule;
+export default ActivityMasterModule

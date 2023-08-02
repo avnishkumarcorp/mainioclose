@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 import "./HRMod.scss"
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 
 const HRMod = () => {
   return (
@@ -8,6 +8,6 @@ const HRMod = () => {
       <Outlet />
     </div>
   )
-};
+}
 
-export default HRMod;
+export default HRMod

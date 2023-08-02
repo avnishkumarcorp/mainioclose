@@ -1,50 +1,49 @@
-.top-navbar{
-    padding: 10px 20px;
-    background-color: azure;
+.top-navbar {
+  padding: 10px 20px;
+  background-color: azure;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  .search-box {
+    border: none;
+    padding: 4px 8px;
+    border: 1px solid #2b62f9;
+    &:focus {
+      outline: none;
+    }
+  }
+  .user-profile {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-  .search-box{
-        border: none;
-        padding: 4px 8px;
-        border: 1px solid #2B62F9;
-        &:focus{
-            outline: none;
-        }
+    .profile-image {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
     }
-    .user-profile{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        .profile-image{
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            img{
-                height: 100%;
-                width: 100%;
-                object-fit: cover;
-            }
-        }
-        .profile-info{
-            h4{
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 15px;
-                margin-bottom: 0px;
-                margin-bottom: 3px;
-
-            }
-            h5{
-                font-size: 13px;
-                font-weight: 400;
-                line-height: 15px;
-                margin-bottom: 0px;
-            }   
-        }
+    .profile-info {
+      h4 {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 15px;
+        margin-bottom: 0px;
+        margin-bottom: 3px;
+      }
+      h5 {
+        font-size: 13px;
+        font-weight: 400;
+        line-height: 15px;
+        margin-bottom: 0px;
+      }
     }
+  }
 }

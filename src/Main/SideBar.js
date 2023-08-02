@@ -46,25 +46,24 @@ const SideBar = () => {
               HR First
             </NavLink>
             <NavLink className="link-itemss" to="hr/hrlinktwo">
-            HR Second
+              HR Second
             </NavLink>
             <NavLink className="link-itemss" to="hr/hrlinkthree">
-            HR Third
+              HR Third
             </NavLink>
             <NavLink className="link-itemss" to="hr/hrlinkfour">
-            HR Forth
+              HR Forth
             </NavLink>
             <NavLink className="link-itemss" to="hr/hrlinkfive">
-            HR Fifth
+              HR Fifth
             </NavLink>
             <NavLink className="link-itemss" to="hr/hrlinksix">
-            HR Six
+              HR Six
             </NavLink>
           </div>
         </div>
       </div>
       {/* end */}
-
 
       {/* sales links start */}
       <div className="side-tabs">
@@ -91,25 +90,24 @@ const SideBar = () => {
               Inbox
             </NavLink>
             <NavLink className="link-itemss" to="sales/oppurtities">
-            Oppurtities
+              Oppurtities
             </NavLink>
             <NavLink className="link-itemss" to="sales/estimate">
-            Estimate
+              Estimate
             </NavLink>
             <NavLink className="link-itemss" to="sales/orders">
-            Orders
+              Orders
             </NavLink>
             <NavLink className="link-itemss" to="sales/contacts">
-            Contacts
+              Contacts
             </NavLink>
             <NavLink className="link-itemss" to="sales/leads">
-            Leads
+              Leads
             </NavLink>
           </div>
         </div>
       </div>
       {/* end */}
-
 
       {/* accounts links start */}
       <div className="side-tabs">
@@ -136,29 +134,27 @@ const SideBar = () => {
               Account Link 1
             </NavLink>
             <NavLink className="link-itemss" to="account/accounttwo">
-            Account Link 2
+              Account Link 2
             </NavLink>
             <NavLink className="link-itemss" to="account/accountthird">
-            Account Link 3
+              Account Link 3
             </NavLink>
             <NavLink className="link-itemss" to="account/accountforth">
-            Account Link 4
+              Account Link 4
             </NavLink>
             <NavLink className="link-itemss" to="account/accountfive">
-            Account Link 5
+              Account Link 5
             </NavLink>
             <NavLink className="link-itemss" to="account/accountsix">
-            Account Link 6
+              Account Link 6
             </NavLink>
           </div>
         </div>
       </div>
       {/* end */}
 
-
-
-        {/* operations links start */}
-        <div className="side-tabs">
+      {/* operations links start */}
+      <div className="side-tabs">
         <NavLink
           to="/operation"
           className={`nav-heading ${({ isActive }) =>
@@ -182,31 +178,27 @@ const SideBar = () => {
               Operation Link 1
             </NavLink>
             <NavLink className="link-itemss" to="operation/operationtwo">
-            Operation Link 2
+              Operation Link 2
             </NavLink>
             <NavLink className="link-itemss" to="operation/operationthree">
-            Operation Link 3
+              Operation Link 3
             </NavLink>
             <NavLink className="link-itemss" to="operation/operationfour">
-            Operation Link 4
+              Operation Link 4
             </NavLink>
             <NavLink className="link-itemss" to="operation/operationfive">
-            Operation Link 5
+              Operation Link 5
             </NavLink>
             <NavLink className="link-itemss" to="operation/operationsix">
-            Operation Link 6
+              Operation Link 6
             </NavLink>
           </div>
         </div>
       </div>
       {/* end */}
 
-
-
-
-
-  {/* Manage Clinets links start */}
-  <div className="side-tabs">
+      {/* Manage Clinets links start */}
+      <div className="side-tabs">
         <NavLink
           to="/manageclient"
           className={`nav-heading ${({ isActive }) =>
@@ -226,34 +218,32 @@ const SideBar = () => {
           data-parent="#accordion"
         >
           <div className="link-child">
-            <NavLink className="link-itemss" to="manageclient">    Manage Client 1
+            <NavLink className="link-itemss" to="manageclient">
+              {" "}
+              Manage Client 1
             </NavLink>
             <NavLink className="link-itemss" to="manageclient/clienttwo">
-            Manage Client 2
+              Manage Client 2
             </NavLink>
             <NavLink className="link-itemss" to="manageclient/clientthree">
-            Manage Client 3
+              Manage Client 3
             </NavLink>
             <NavLink className="link-itemss" to="manageclient/clientfour">
-          Manage Client 4
+              Manage Client 4
             </NavLink>
             <NavLink className="link-itemss" to="manageclient/clientfive">
-            Manage Client 5
+              Manage Client 5
             </NavLink>
             <NavLink className="link-itemss" to="manageclient/clientsix">
-            Manage Client 6
+              Manage Client 6
             </NavLink>
           </div>
         </div>
       </div>
       {/* end */}
 
-
-
-
-
-  {/* activity Master links start */}
-  <div className="side-tabs">
+      {/* activity Master links start */}
+      <div className="side-tabs">
         <NavLink
           to="/activity"
           className={`nav-heading ${({ isActive }) =>
@@ -277,31 +267,27 @@ const SideBar = () => {
               Activity Link 1
             </NavLink>
             <NavLink className="link-itemss" to="activity/activitytwo">
-            Activity Link 2
+              Activity Link 2
             </NavLink>
             <NavLink className="link-itemss" to="activity/activitythree">
-            Activity Link 3
+              Activity Link 3
             </NavLink>
             <NavLink className="link-itemss" to="activity/activityfour">
-            Activity Link 4
+              Activity Link 4
             </NavLink>
             <NavLink className="link-itemss" to="activity/activityfive">
-            Activity Link 5
+              Activity Link 5
             </NavLink>
             <NavLink className="link-itemss" to="activity/activitysix">
-            Activity Link 6
+              Activity Link 6
             </NavLink>
           </div>
         </div>
       </div>
       {/* end */}
 
-
-
-
-
-  {/* Quality links start */}
-  <div className="side-tabs">
+      {/* Quality links start */}
+      <div className="side-tabs">
         <NavLink
           to="/quality"
           className={`nav-heading ${({ isActive }) =>
@@ -321,34 +307,32 @@ const SideBar = () => {
           data-parent="#accordion"
         >
           <div className="link-child">
-            <NavLink className="link-itemss" to="quality">         Quality Link 1
+            <NavLink className="link-itemss" to="quality">
+              {" "}
+              Quality Link 1
             </NavLink>
             <NavLink className="link-itemss" to="quality/qualitytwo">
-            Quality Link 2
+              Quality Link 2
             </NavLink>
             <NavLink className="link-itemss" to="quality/qualitythree">
-            Quality Link 3
+              Quality Link 3
             </NavLink>
             <NavLink className="link-itemss" to="quality/qualityfour">
-            Quality Link 4
+              Quality Link 4
             </NavLink>
             <NavLink className="link-itemss" to="quality/qualityfive">
-            Quality Link 5
+              Quality Link 5
             </NavLink>
             <NavLink className="link-itemss" to="quality/qualitysix">
-            Account Link 6
+              Account Link 6
             </NavLink>
           </div>
         </div>
       </div>
       {/* end */}
 
-
-
-
-
-  {/* Profile links start */}
-  <div className="side-tabs">
+      {/* Profile links start */}
+      <div className="side-tabs">
         <NavLink
           to="/profile"
           className={`nav-heading ${({ isActive }) =>
@@ -372,35 +356,18 @@ const SideBar = () => {
               Profile Link 1
             </NavLink>
             <NavLink className="link-itemss" to="profile/profiletwo">
-            Profile Link 2
+              Profile Link 2
             </NavLink>
             <NavLink className="link-itemss" to="profile/profilethree">
-            Profile Link 3
+              Profile Link 3
             </NavLink>
             <NavLink className="link-itemss" to="profile/profilefour">
-            Profile Link 4
+              Profile Link 4
             </NavLink>
-            
           </div>
         </div>
       </div>
       {/* end */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
   )
 }
