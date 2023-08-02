@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 import "./ManageClientModule.scss"
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom"
 
 const ManageClientModule = () => {
-    return (
-        <div>
-          <Outlet />
-        </div>
-      )
-};
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
+}
 
-export default ManageClientModule;
+export default ManageClientModule

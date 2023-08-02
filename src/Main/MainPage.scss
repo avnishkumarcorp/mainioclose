@@ -1,21 +1,21 @@
 @import "../../CommonColors.scss";
 
-.main-page{
-    background-color: $mainBlue;
-    color: $white;
-    display: flex;
-    height: 100vh;
-    .side-nav{
-      width: 280px;
-      position: sticky;
-      top: 0;
-      overflow: auto;
-      padding: 12px;
-    }
-    .right-data{
-        background-color: $white;
-        flex: 10;
-        color: $black;
-        overflow: auto;
-    }
+.main-page {
+  background-color: $mainBlue;
+  color: $white;
+  display: flex;
+  height: 100vh;
+  .side-nav {
+    width: 280px;
+    position: sticky;
+    top: 0;
+    overflow: auto;
+    padding: 12px;
+  }
+  .right-data {
+    background-color: $white;
+    flex: 10;
+    color: $black;
+    overflow: auto;
+  }
 }
