@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom"
 const SideBar = () => {
   return (
     <div className="sideTab">
+      {/* Dashboard links start */}
       <div className="side-tabs">
         <NavLink
           to="/"
@@ -18,62 +19,69 @@ const SideBar = () => {
           <i class="fa-solid mr-2 fa-gear"></i> DashBoard
         </NavLink>
       </div>
+      {/* end */}
 
+      {/* hr links start */}
       <div className="side-tabs">
         <NavLink
           to="/hr"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
-          data-target={`#collapseTwo`}
+          data-target={`#collapseHrModule`}
           aria-expanded="true"
-          aria-controls="collapseOne"
+          aria-controls="collapseHrModule"
         >
           <i class="fa-solid mr-1 fa-angle-right"></i>{" "}
           <i class="fa-solid mr-2 fa-gear"></i> HR
         </NavLink>
         <div
-          id={`collapseTwo`}
+          id={`collapseHrModule`}
           class="collapse"
           aria-labelledby="headingOne"
           data-parent="#accordion"
         >
           <div class="link-child">
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="hr">
+              HR First
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="hr/hrlinktwo">
+            HR Second
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="hr/hrlinkthree">
+            HR Third
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="hr/hrlinkfour">
+            HR Forth
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="hr/hrlinkfive">
+            HR Fifth
+            </NavLink>
+            <NavLink className="link-itemss" to="hr/hrlinksix">
+            HR Six
             </NavLink>
           </div>
         </div>
       </div>
+      {/* end */}
 
 
+      {/* sales links start */}
       <div className="side-tabs">
         <NavLink
           to="/sales"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
-          data-target={`#collapseThree`}
+          data-target={`#collapseSalesModule`}
           aria-expanded="true"
-          aria-controls="collapseThree"
+          aria-controls="collapseSalesModule"
         >
           <i class="fa-solid mr-1 fa-angle-right"></i>{" "}
           <i class="fa-solid mr-2 fa-gear"></i> Sales
         </NavLink>
         <div
-          id={`collapseThree`}
+          id={`collapseSalesModule`}
           class="collapse"
           aria-labelledby="headingOne"
           data-parent="#accordion"
@@ -100,47 +108,61 @@ const SideBar = () => {
           </div>
         </div>
       </div>
+      {/* end */}
 
+
+      {/* accounts links start */}
       <div className="side-tabs">
         <NavLink
-          to="/"
+          to="/account"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
-          data-target={`#collapseFour`}
+          data-target={`#collapseAccountModule`}
           aria-expanded="true"
-          aria-controls="collapseFour"
+          aria-controls="collapseAccountModule"
         >
           <i class="fa-solid mr-1 fa-angle-right"></i>{" "}
           <i class="fa-solid mr-2 fa-gear"></i> Accounts
         </NavLink>
         <div
-          id={`collapseFour`}
+          id={`collapseAccountModule`}
           class="collapse"
           aria-labelledby="headingOne"
           data-parent="#accordion"
         >
           <div class="link-child">
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="account">
+              Account Link 1
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="account/accounttwo">
+            Account Link 2
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="account/accountthird">
+            Account Link 3
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="account/accountforth">
+            Account Link 4
             </NavLink>
-            <NavLink className="link-itemss" to="/go">
-              first
+            <NavLink className="link-itemss" to="account/accountfive">
+            Account Link 5
+            </NavLink>
+            <NavLink className="link-itemss" to="account/accountsix">
+            Account Link 6
             </NavLink>
           </div>
         </div>
       </div>
+      {/* end */}
 
-      
+
+
+
+
+
+
+
+
 
     </div>
   )
