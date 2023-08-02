@@ -1,7 +1,13 @@
 import React from "react";
+import "./HRMod.scss"
+import { Outlet } from "react-router-dom";
 
 const HRMod = () => {
-  return <div>HRMod</div>;
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
 };
 
 export default HRMod;

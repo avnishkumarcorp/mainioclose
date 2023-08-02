@@ -1,7 +1,13 @@
 import React from "react";
+import "./Operations.scss"
+import { Outlet } from "react-router-dom";
 
 const Operations = () => {
-  return <div>Operations</div>;
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
 };
 
 export default Operations;
