@@ -2,11 +2,19 @@ import React from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
 import { NavLink } from "react-router-dom"
+import corpseedLogo from "../Images/corpseed-logo.png";
 
 const SideBar = () => {
   return (
     <div className="sideTab">
       {/* Dashboard links start */}
+      <div className="corpseed-logo">
+        <div className="logo-image">
+          <img src={corpseedLogo} alt="corpseed-logo" />
+        </div>
+      </div>
+
+
       <div className="side-tabs">
         <NavLink
           to="/"
@@ -254,7 +262,7 @@ const SideBar = () => {
           aria-controls="collapseActivityMasterModule"
         >
           <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-          <i className="fa-solid mr-2 fa-gear"></i> Activity Master
+          <i class="fa-solid mr-2 fa-user-group"></i> Activity Master
         </NavLink>
         <div
           id={`collapseActivityMasterModule`}
@@ -343,7 +351,7 @@ const SideBar = () => {
           aria-controls="collapseProfileModule"
         >
           <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-          <i className="fa-solid mr-2 fa-gear"></i> Profile
+          <i class="fa-regular mr-2 fa-user"></i> Profile
         </NavLink>
         <div
           id={`collapseProfileModule`}
