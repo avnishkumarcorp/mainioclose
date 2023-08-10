@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 import "./Opportunities.scss"
 
 const Opportunities = () => {
-  return <div>Opportunities</div>;
-};
+  return <div>Opportunities</div>
+}
 
-export default Opportunities;
+export default Opportunities
