@@ -3,7 +3,7 @@ import thunk from "redux-thunk"
 import { counterReducer } from "./Reducer/CounterReducer"
 
 const rootReducer = combineReducers({
-    counterReducer
-})  
+  counterReducer,
+})
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

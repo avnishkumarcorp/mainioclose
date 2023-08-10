@@ -45,21 +45,21 @@
         margin-bottom: 0px;
       }
     }
-    .all-leads{
-        padding: 20px;
-        background: #eef7fb;
-        height: 450px;
-        overflow: auto;
+    .all-leads {
+      padding: 20px;
+      background: #eef7fb;
+      height: 450px;
+      overflow: auto;
     }
     .all-leads::-webkit-scrollbar {
-        // display: none;
-        width: 2px;
-        background: lightgray;
-      }
+      // display: none;
+      width: 2px;
+      background: lightgray;
+    }
   }
 }
 
 .display-lead::-webkit-scrollbar {
-    height: 5px;
-    background: lightgray;
-  }
+  height: 5px;
+  background: lightgray;
+}

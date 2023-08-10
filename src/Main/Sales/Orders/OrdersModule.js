@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 import "./OrdersModule.scss"
 
 const OrdersModule = () => {
-  return <div>OrdersModule</div>;
-};
+  return <div>OrdersModule</div>
+}
 
-export default OrdersModule;
+export default OrdersModule
