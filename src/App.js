@@ -11,6 +11,11 @@ import ManageClientModule from "./Main/ManageClients/ManageClientModule"
 import ActivityMasterModule from "./Main/ActivityMaster/ActivityMasterModule"
 import QualityModule from "./Main/Quality/QualityModule"
 import MyProfile from "./Main/MyProfile/MyProfile"
+import ContactModule from "./Main/Sales/Contacts/ContactModule"
+import Estimate from "./Main/Sales/Estimate/Estimate"
+import LeadsModule from "./Main/Sales/Leads/LeadsModule"
+import Opportunities from "./Main/Sales/Opportunities/Opportunities"
+import OrdersModule from "./Main/Sales/Orders/OrdersModule"
 
 function App() {
   return (
@@ -32,11 +37,11 @@ function App() {
             {/* slaes module routes */}
             <Route path="/sales" element={<SalesMod />}>
               <Route path="" element={<InboxPage />} />
-              <Route path="oppurtities" element={<div>oppurtities</div>} />
-              <Route path="estimate" element={<div>estimate</div>} />
-              <Route path="orders" element={<div>orders</div>} />
-              <Route path="contacts" element={<div>comntacts</div>} />
-              <Route path="leads" element={<div>leads</div>} />
+              <Route path="oppurtities" element={<Opportunities />} />
+              <Route path="estimate" element={<Estimate />} />
+              <Route path="orders" element={<OrdersModule />} />
+              <Route path="contacts" element={<ContactModule />} />
+              <Route path="leads" element={<LeadsModule />} />
             </Route>
             {/* end */}
             {/* accounts module routes */}
