@@ -2,7 +2,7 @@ import React from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
 import { NavLink } from "react-router-dom"
-import corpseedLogo from "../Images/corpseed-logo.png";
+import corpseedLogo from "../Images/corpseed-logo.png"
 
 const SideBar = () => {
   return (
@@ -13,7 +13,6 @@ const SideBar = () => {
           <img src={corpseedLogo} alt="corpseed-logo" />
         </div>
       </div>
-
 
       <div className="side-tabs">
         <NavLink

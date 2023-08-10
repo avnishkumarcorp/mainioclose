@@ -33,9 +33,8 @@ const LeadsModule = () => {
           </button>
         </div>
       </div>
-        
-        <AllLeadsDisplay />
 
+      <AllLeadsDisplay />
     </div>
   )
 }
