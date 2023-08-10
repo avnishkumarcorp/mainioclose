@@ -16,12 +16,14 @@ import Estimate from "./Main/Sales/Estimate/Estimate"
 import LeadsModule from "./Main/Sales/Leads/LeadsModule"
 import Opportunities from "./Main/Sales/Opportunities/Opportunities"
 import OrdersModule from "./Main/Sales/Orders/OrdersModule"
+import CounterExample from "./components/CounterExample"
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/counter" element={<CounterExample />} />
           <Route path="/" element={<MainPage />}>
             <Route path="/" element={<DashBoard />} />
             {/* hr module routes */}
