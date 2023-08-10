@@ -53,3 +53,19 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.small-box-padding{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+.main-heading{
+  font-family: Segoe UI;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  margin-bottom: 20px;  
+}
