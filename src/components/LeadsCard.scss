@@ -1,0 +1,55 @@
+.lead-card {
+  background: #fff;
+  margin-bottom: 10px;
+  .card-heading {
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    .lead-name{
+      font-family: Segoe UI;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #3781b8;
+      margin-bottom: 0px;
+    }
+  }
+  .card-body {
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      .image {
+        height: 30px;
+        width: 30px;
+        border: 1px solid #e0dbcf;
+        justify-content: center;
+        align-items: center;
+        color: #ec601e;
+        background-color: #f1ebdf;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2px;
+      }
+      .text {
+        .above-text {
+          font-family: Segoe UI;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 16px;
+        }
+        .date-per {
+          font-family: Segoe UI;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 14px;
+        }
+      }
+    }
+  }
+}
