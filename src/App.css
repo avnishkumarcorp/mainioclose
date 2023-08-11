@@ -11,6 +11,7 @@
 body {
   overflow: hidden;
   font-family: "Inter", sans-serif;
+  font-family: Segoe UI;
 }
 
 :root {
@@ -68,3 +69,23 @@ body {
   line-height: 32px;
   margin-bottom: 20px;
 }
+
+.login-button{
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  outline: none;
+  color: var(--white);
+  background: var(--mainBlue);
+  font-weight: 400;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.login-button:focus{
+  outline: none;
+}
+
+
