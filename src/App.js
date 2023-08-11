@@ -17,6 +17,8 @@ import LeadsModule from "./Main/Sales/Leads/LeadsModule"
 import Opportunities from "./Main/Sales/Opportunities/Opportunities"
 import OrdersModule from "./Main/Sales/Orders/OrdersModule"
 import CounterExample from "./components/CounterExample"
+import Login from "./Login/Login"
+import SignUp from "./Login/SignUp"
 
 function App() {
   return (
@@ -24,6 +26,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/counter" element={<CounterExample />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          
           <Route path="/" element={<MainPage />}>
             <Route path="/" element={<DashBoard />} />
             {/* hr module routes */}

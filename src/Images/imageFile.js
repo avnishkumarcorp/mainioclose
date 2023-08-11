@@ -1,0 +1,1 @@
+export const  image1 = "https://i.pinimg.com/564x/3a/bf/ac/3abfacf994ae2eb9e4b92d7c174f7713.jpg"
