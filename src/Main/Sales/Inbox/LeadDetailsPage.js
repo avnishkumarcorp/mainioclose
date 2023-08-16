@@ -1,7 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import "./LeadDetailsPage.scss"
+import FilterButton from "../../../components/FilterButton"
 
 const LeadDetailsPage = () => {
+  const [notes, setNotes] = useState(false);
+  const [notes1, setNotes1] = useState(false);
+
+  
   return (
     <div className="lead-details cm-padding-one">
       <div className="row">
@@ -468,7 +473,12 @@ const LeadDetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-8">9</div>
+        <div className="col-md-8">
+          <div className="lead-filter-above">
+            <FilterButton name={"note"} icon={<i class="fa-solid fa-note-sticky"></i>} data={notes} setData={setNotes}/>
+            <FilterButton name={"note"} icon={<i class="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/>
+          </div>
+        </div>
       </div>
     </div>
   )
