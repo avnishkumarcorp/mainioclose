@@ -1,0 +1,46 @@
+.left-lead-section {
+  .company-name {
+    font-family: Segoe UI;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 40px;
+    color: #262e39;
+  }
+  .card{
+    .card-btn{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 12px;
+    }
+  }
+  .my-card-content{
+    background-color: #EDF7FC;
+    padding: 10px;
+  }
+  .lead-btn-box{
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 0px;
+    gap: 10px;
+    font-size: 14px;
+        .lead-cancel-btn{
+            color: #262E39;
+            border: 1px solid #262E39;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .lead-save-btn{
+            color: #ffffff;
+            background-color: #47BB7F;
+            border: 1px solid #47BB7F;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+  }
+ 
+}
+
+
