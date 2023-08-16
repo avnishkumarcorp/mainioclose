@@ -22,6 +22,11 @@ body {
 
 /* common classes */
 
+button:focus{
+  outline: none;
+}
+
+
 .all-center {
   display: flex;
   justify-content: center;
@@ -86,6 +91,40 @@ body {
 
 .login-button:focus{
   outline: none;
+}
+
+
+/* common in inbox  */
+.lead-heading{
+  font-family: Segoe UI;
+  font-size: 14px;
+  font-weight: 400; 
+  line-height: 20px;
+  color: #262E39;
+  margin: 0;
+}
+
+.lead-blue-head{
+  font-family: Segoe UI;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #2B62F9;
+  margin: 0;
+} 
+
+.lead-cm-input{
+  padding: 4px 8px;
+   background: 
+  linear-gradient(0deg, #FFFFFF, #FFFFFF);
+  border: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.13);
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.lead-cm-input:focus{
+  outline: none;  
 }
 
 
