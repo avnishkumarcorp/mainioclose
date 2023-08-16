@@ -1,7 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import "./LeadDetailsPage.scss"
+import FilterButton from "../../../components/FilterButton"
 
 const LeadDetailsPage = () => {
+  const [notes, setNotes] = useState(false);
+  const [notes1, setNotes1] = useState(false);
+
+  
   return (
     <div className="lead-details cm-padding-one">
       <div className="row">
@@ -11,10 +16,10 @@ const LeadDetailsPage = () => {
             <p className="lead-blue-head">Abhishek Kumar</p>
             <p className="lead-blue-head mt-4">Gurugram, india</p>
             <div className="lead-product">
-              <div class="card mt-2">
-                <div class="" id="headingThree">
+              <div className="card mt-2">
+                <div className="" id="headingThree">
                   <div
-                    class="card-btn collapsed"
+                    className="card-btn collapsed"
                     data-toggle="collapse"
                     data-target="#collapseThree"
                     aria-expanded="false"
@@ -22,22 +27,22 @@ const LeadDetailsPage = () => {
                   >
                     <h3 className="lead-heading">Product</h3>
                     <p className="lead-heading">
-                      <i class="fa-solid fa-plus"></i>
+                      <i className="fa-solid fa-plus"></i>
                     </p>
                   </div>
                 </div>
                 <div
                   id="collapseThree"
-                  class="collapse"
+                  className="collapse"
                   aria-labelledby="headingThree"
                   data-parent="#accordion"
                 >
-                  <div class="my-card-content">
+                  <div className="my-card-content">
                     <form>
                       <div className="product-box">
                         <label
                           className="lead-heading"
-                          for="select-product-category"
+                          htmlFor="select-product-category"
                         >
                           Select Product Category
                         </label>
@@ -54,7 +59,7 @@ const LeadDetailsPage = () => {
                         </select>
                       </div>
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Select Product
                         </label>
 
@@ -89,7 +94,7 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i class="fa-solid fa-trash"></i>
+                      <i className="fa-solid fa-trash"></i>
                     </div>
                   </div>
 
@@ -102,7 +107,7 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i class="fa-solid fa-trash"></i>
+                      <i className="fa-solid fa-trash"></i>
                     </div>
                   </div>
 
@@ -115,7 +120,7 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i class="fa-solid fa-trash"></i>
+                      <i className="fa-solid fa-trash"></i>
                     </div>
                   </div>
                   {/* all leads save */}
@@ -123,10 +128,10 @@ const LeadDetailsPage = () => {
               </div>
 
               {/* Estimate*/}
-              <div class="card mt-2">
-                <div class="" id="headingThree">
+              <div className="card mt-2">
+                <div className="" id="headingThree">
                   <div
-                    class="card-btn collapsed"
+                    className="card-btn collapsed"
                     data-toggle="collapse"
                     data-target="#estimateCollapse"
                     aria-expanded="false"
@@ -134,20 +139,20 @@ const LeadDetailsPage = () => {
                   >
                     <h3 className="lead-heading">Estimate</h3>
                     <p className="lead-heading">
-                      <i class="fa-solid fa-plus"></i>
+                      <i className="fa-solid fa-plus"></i>
                     </p>
                   </div>
                 </div>
                 <div
                   id="estimateCollapse"
-                  class="collapse"
+                  className="collapse"
                   aria-labelledby="headingThree"
                   data-parent="#accordion"
                 >
-                  <div class="my-card-content">
+                  <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Select Product
                         </label>
 
@@ -182,7 +187,7 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i class="fa-solid fa-trash"></i>
+                      <i className="fa-solid fa-trash"></i>
                     </div>
                   </div>
 
@@ -192,10 +197,10 @@ const LeadDetailsPage = () => {
               {/* end estimate */}
 
               {/* tasks */}
-              <div class="card mt-2">
-                <div class="" id="headingThree">
+              <div className="card mt-2">
+                <div className="" id="headingThree">
                   <div
-                    class="card-btn collapsed"
+                    className="card-btn collapsed"
                     data-toggle="collapse"
                     data-target="#TasksCollapse"
                     aria-expanded="false"
@@ -203,20 +208,20 @@ const LeadDetailsPage = () => {
                   >
                     <h3 className="lead-heading">Tasks</h3>
                     <p className="lead-heading">
-                      <i class="fa-solid fa-plus"></i>
+                      <i className="fa-solid fa-plus"></i>
                     </p>
                   </div>
                 </div>
                 <div
                   id="TasksCollapse"
-                  class="collapse"
+                  className="collapse"
                   aria-labelledby="headingThree"
                   data-parent="#accordion"
                 >
-                  <div class="my-card-content">
+                  <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Task Description
                         </label>
 
@@ -224,7 +229,7 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           date
                         </label>
 
@@ -232,7 +237,7 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Assign user
                         </label>
 
@@ -267,7 +272,7 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i class="fa-solid fa-trash"></i>
+                      <i className="fa-solid fa-trash"></i>
                     </div>
                   </div>
 
@@ -278,10 +283,10 @@ const LeadDetailsPage = () => {
               {/* end  tasks */}
 
               {/* opportunities */}
-              <div class="card mt-2">
-                <div class="" id="headingThree">
+              <div className="card mt-2">
+                <div className="" id="headingThree">
                   <div
-                    class="card-btn collapsed"
+                    className="card-btn collapsed"
                     data-toggle="collapse"
                     data-target="#opportunitiesCollapse"
                     aria-expanded="false"
@@ -289,20 +294,20 @@ const LeadDetailsPage = () => {
                   >
                     <h3 className="lead-heading">Opportunities</h3>
                     <p className="lead-heading">
-                      <i class="fa-solid fa-plus"></i>
+                      <i className="fa-solid fa-plus"></i>
                     </p>
                   </div>
                 </div>
                 <div
                   id="opportunitiesCollapse"
-                  class="collapse"
+                  className="collapse"
                   aria-labelledby="headingThree"
                   data-parent="#accordion"
                 >
-                  <div class="my-card-content">
+                  <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Status
                         </label>
 
@@ -310,14 +315,14 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Contact
                         </label>
                         <input className="lead-cm-input" type="text" />
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           user
                         </label>
 
@@ -334,7 +339,7 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Notes
                         </label>
                         <textarea className="lead-cm-input" type="text" />
@@ -360,7 +365,7 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i class="fa-solid fa-trash"></i>
+                      <i className="fa-solid fa-trash"></i>
                     </div>
                   </div>
 
@@ -371,10 +376,10 @@ const LeadDetailsPage = () => {
               {/* end  opportunities */}
 
               {/* contact */}
-              <div class="card mt-2">
-                <div class="" id="headingThree">
+              <div className="card mt-2">
+                <div className="" id="headingThree">
                   <div
-                    class="card-btn collapsed"
+                    className="card-btn collapsed"
                     data-toggle="collapse"
                     data-target="#contactCollapse"
                     aria-expanded="false"
@@ -382,20 +387,20 @@ const LeadDetailsPage = () => {
                   >
                     <h3 className="lead-heading">Contacts</h3>
                     <p className="lead-heading">
-                      <i class="fa-solid fa-plus"></i>
+                      <i className="fa-solid fa-plus"></i>
                     </p>
                   </div>
                 </div>
                 <div
                   id="contactCollapse"
-                  class="collapse"
+                  className="collapse"
                   aria-labelledby="headingThree"
                   data-parent="#accordion"
                 >
-                  <div class="my-card-content">
+                  <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Name
                         </label>
 
@@ -403,7 +408,7 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Title
                         </label>
 
@@ -411,21 +416,21 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Contact Detail
                         </label>
                         <div className="my-details">
-                          <i class="fa-solid fa-envelope"></i>
+                          <i className="fa-solid fa-envelope"></i>
                           <input className="lead-cm-input" type="email" />
                         </div>
                         <div className="my-details">
-                          <i class="fa-solid fa-phone"></i>
+                          <i className="fa-solid fa-phone"></i>
                           <input className="lead-cm-input" type="text" />
                         </div>
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" for="select-product">
+                        <label className="lead-heading" htmlFor="select-product">
                           Contact Role
                         </label>
 
@@ -452,9 +457,9 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i class="fa-solid fa-pen mr-3"></i>
-                      <i class="fa-solid fa-ellipsis mr-3"></i>
-                      <i class="fa-solid fa-envelope"></i>
+                      <i className="fa-solid fa-pen mr-3"></i>
+                      <i className="fa-solid fa-ellipsis mr-3"></i>
+                      <i className="fa-solid fa-envelope"></i>
                     </div>
                   </div>
 
@@ -468,7 +473,12 @@ const LeadDetailsPage = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-8">9</div>
+        <div className="col-md-8">
+          <div className="lead-filter-above">
+            <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes} setData={setNotes}/>
+            <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/>
+          </div>
+        </div>
       </div>
     </div>
   )

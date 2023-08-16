@@ -19,8 +19,8 @@ const LeadsCard = () => {
           </div>
         </div>
         <div className="right-item">
-          <i class="fa-solid fa-pencil"></i>
-          <i class="fa-solid fa-trash ml-3"></i>
+          <i className="fa-solid fa-pencil"></i>
+          <i className="fa-solid fa-trash ml-3"></i>
         </div>
       </div>
     </div>
