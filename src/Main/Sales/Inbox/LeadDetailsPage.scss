@@ -19,6 +19,15 @@
         align-items: center;
         padding: 6px 12px;
     }
+    .product-box{
+        .my-details{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: 	#a5a5a7;
+        }
+    }
   }
   .my-card-content {
     background-color: #edf7fc;

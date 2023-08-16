@@ -20,7 +20,7 @@ const LeadDetailsPage = () => {
                     aria-expanded="false"
                     aria-controls="collapseThree"
                   >
-                    <h3 className="lead-heading">PRODUCT</h3>
+                    <h3 className="lead-heading">Product</h3>
                     <p className="lead-heading">
                       <i class="fa-solid fa-plus"></i>
                     </p>
@@ -369,6 +369,100 @@ const LeadDetailsPage = () => {
               </div>
 
               {/* end  opportunities */}
+
+              {/* contact */}
+              <div class="card mt-2">
+                <div class="" id="headingThree">
+                  <div
+                    class="card-btn collapsed"
+                    data-toggle="collapse"
+                    data-target="#contactCollapse"
+                    aria-expanded="false"
+                    aria-controls="contactCollapse"
+                  >
+                    <h3 className="lead-heading">Contacts</h3>
+                    <p className="lead-heading">
+                      <i class="fa-solid fa-plus"></i>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="contactCollapse"
+                  class="collapse"
+                  aria-labelledby="headingThree"
+                  data-parent="#accordion"
+                >
+                  <div class="my-card-content">
+                    <form>
+                      <div className="product-box">
+                        <label className="lead-heading" for="select-product">
+                          Name
+                        </label>
+
+                        <input className="lead-cm-input" type="text" />
+                      </div>
+
+                      <div className="product-box">
+                        <label className="lead-heading" for="select-product">
+                          Title
+                        </label>
+
+                        <input className="lead-cm-input" type="text" />
+                      </div>
+
+                      <div className="product-box">
+                        <label className="lead-heading" for="select-product">
+                          Contact Detail
+                        </label>
+                        <div className="my-details">
+                          <i class="fa-solid fa-envelope"></i>
+                          <input className="lead-cm-input" type="email" />
+                        </div>
+                        <div className="my-details">
+                          <i class="fa-solid fa-phone"></i>
+                          <input className="lead-cm-input" type="text" />
+                        </div>
+                      </div>
+
+                      <div className="product-box">
+                        <label className="lead-heading" for="select-product">
+                          Contact Role
+                        </label>
+
+                        <input className="lead-cm-input" type="text" />
+                      </div>
+
+                      <div className="lead-btn-box">
+                        <button className="lead-cm-btn lead-cancel-btn">
+                          Cancel
+                        </button>
+                        <button className="lead-cm-btn lead-save-btn">
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  {/* all leads save */}
+                  <div className="save-lead-data">
+                    <div>
+                      <p className="lead-heading">BIS Registration</p>
+                      <h6 className="lead-sm-heading">
+                        Business certifications
+                      </h6>
+                    </div>
+
+                    <div className="lead-heading">
+                      <i class="fa-solid fa-pen mr-3"></i>
+                      <i class="fa-solid fa-ellipsis mr-3"></i>
+                      <i class="fa-solid fa-envelope"></i>
+                    </div>
+                  </div>
+
+                  {/* all leads save */}
+                </div>
+              </div>
+
+              {/* end  contact */}
 
               {/* nbew */}
             </div>
