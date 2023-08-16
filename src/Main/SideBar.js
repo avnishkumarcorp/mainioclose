@@ -261,7 +261,7 @@ const SideBar = () => {
           aria-controls="collapseActivityMasterModule"
         >
           <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-          <i class="fa-solid mr-2 fa-user-group"></i> Activity Master
+          <i className="fa-solid mr-2 fa-user-group"></i> Activity Master
         </NavLink>
         <div
           id={`collapseActivityMasterModule`}
@@ -350,7 +350,7 @@ const SideBar = () => {
           aria-controls="collapseProfileModule"
         >
           <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-          <i class="fa-regular mr-2 fa-user"></i> Profile
+          <i className="fa-regular mr-2 fa-user"></i> Profile
         </NavLink>
         <div
           id={`collapseProfileModule`}

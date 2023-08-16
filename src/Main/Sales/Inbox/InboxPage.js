@@ -28,7 +28,7 @@ const InboxPage = () => {
 
       {/* data table */}
       <div className="table-responsive mt-5">
-        <table class="table table-dark">
+        <table className="table table-dark">
           <thead>
             <tr>
               <th scope="col">id</th>

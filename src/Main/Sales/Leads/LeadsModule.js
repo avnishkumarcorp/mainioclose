@@ -16,19 +16,19 @@ const LeadsModule = () => {
       <div className="filter-fields">
         <div className="single-fields">
           <button>
-            <i class="fa-solid fa-user mr-2"></i>
+            <i className="fa-solid fa-user mr-2"></i>
             <span>Expected All Time</span>
           </button>
         </div>
         <div className="single-fields">
           <button>
-            <i class="fa-solid fa-user mr-2"></i>
+            <i className="fa-solid fa-user mr-2"></i>
             <span>All users</span>
           </button>
         </div>
         <div className="single-fields">
           <button>
-            <i class="fa-solid fa-user mr-2"></i>
+            <i className="fa-solid fa-user mr-2"></i>
             <span>All Leads</span>
           </button>
         </div>
