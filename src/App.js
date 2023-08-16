@@ -19,6 +19,7 @@ import OrdersModule from "./Main/Sales/Orders/OrdersModule"
 import CounterExample from "./components/CounterExample"
 import Login from "./Login/Login"
 import SignUp from "./Login/SignUp"
+import LeadDetailsPage from "./Main/Sales/Inbox/LeadDetailsPage"
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
             {/* slaes module routes */}
             <Route path="/sales" element={<SalesMod />}>
               <Route path="" element={<InboxPage />} />
+              <Route path="/sales/:id" element={<LeadDetailsPage />} />
+              
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
