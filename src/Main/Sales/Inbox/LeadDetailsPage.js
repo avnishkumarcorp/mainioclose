@@ -33,45 +33,166 @@ const LeadDetailsPage = () => {
                   data-parent="#accordion"
                 >
                   <div class="my-card-content">
-                    <div className="product-box">
-                      <label className="lead-heading" for="select-product-category">
-                      Select Product Category
-                      </label>
+                    <form>
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          for="select-product-category"
+                        >
+                          Select Product Category
+                        </label>
 
-                      <select
-                        className="lead-cm-input"
-                        name="select-product-category"
-                        id="select-product-category"
-                      >
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                      </select>
-                    </div>
-                    <div className="product-box">
-                      <label className="lead-heading" for="select-product">
-                        Select Product
-                      </label>
+                        <select
+                          className="lead-cm-input"
+                          name="select-product-category"
+                          id="select-product-category"
+                        >
+                          <option value="volvo">Volvo</option>
+                          <option value="saab">Saab</option>
+                          <option value="mercedes">Mercedes</option>
+                          <option value="audi">Audi</option>
+                        </select>
+                      </div>
+                      <div className="product-box">
+                        <label className="lead-heading" for="select-product">
+                          Select Product
+                        </label>
 
-                      <select
-                        className="lead-cm-input"
-                        name="select-product"
-                        id="select-product"
-                      >
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                      </select>
+                        <select
+                          className="lead-cm-input"
+                          name="select-product"
+                          id="select-product"
+                        >
+                          <option value="volvo">Volvo</option>
+                          <option value="saab">Saab</option>
+                          <option value="mercedes">Mercedes</option>
+                          <option value="audi">Audi</option>
+                        </select>
+                      </div>
+                      <div className="lead-btn-box">
+                        <button className="lead-cm-btn lead-cancel-btn">
+                          Cancel
+                        </button>
+                        <button className="lead-cm-btn lead-save-btn">
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  {/* all leads save */}
+                  <div className="save-lead-data">
+                    <div>
+                      <p className="lead-heading">BIS Registration</p>
+                      <h6 className="lead-sm-heading">
+                        Business certifications
+                      </h6>
                     </div>
-                    <div className="lead-btn-box">
-                        <button className="lead-cm-btn lead-cancel-btn">Cancel</button>
-                        <button className="lead-cm-btn lead-save-btn">Save</button>
+
+                    <div className="lead-heading">
+                      <i class="fa-solid fa-trash"></i>
                     </div>
                   </div>
+
+                  <div className="save-lead-data">
+                    <div>
+                      <p className="lead-heading">BIS Registration</p>
+                      <h6 className="lead-sm-heading">
+                        Business certifications
+                      </h6>
+                    </div>
+
+                    <div className="lead-heading">
+                      <i class="fa-solid fa-trash"></i>
+                    </div>
+                  </div>
+
+                  <div className="save-lead-data">
+                    <div>
+                      <p className="lead-heading">BIS Registration</p>
+                      <h6 className="lead-sm-heading">
+                        Business certifications
+                      </h6>
+                    </div>
+
+                    <div className="lead-heading">
+                      <i class="fa-solid fa-trash"></i>
+                    </div>
+                  </div>
+                  {/* all leads save */}
                 </div>
               </div>
+
+              {/* Estimate*/}
+              <div class="card mt-2">
+                <div class="" id="headingThree">
+                  <div
+                    class="card-btn collapsed"
+                    data-toggle="collapse"
+                    data-target="#estimateCollapse"
+                    aria-expanded="false"
+                    aria-controls="estimateCollapse"
+                  >
+                    <h3 className="lead-heading">Estimate</h3>
+                    <p className="lead-heading">
+                      <i class="fa-solid fa-plus"></i>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="estimateCollapse"
+                  class="collapse"
+                  aria-labelledby="headingThree"
+                  data-parent="#accordion"
+                >
+                  <div class="my-card-content">
+                    <form>
+                     
+                      <div className="product-box">
+                        <label className="lead-heading" for="select-product">
+                          Select Product
+                        </label>
+
+                        <select
+                          className="lead-cm-input"
+                          name="select-product"
+                          id="select-product"
+                        >
+                          <option value="volvo">Volvo</option>
+                          <option value="saab">Saab</option>
+                          <option value="mercedes">Mercedes</option>
+                          <option value="audi">Audi</option>
+                        </select>
+                      </div>
+                      <div className="lead-btn-box">
+                        <button className="lead-cm-btn lead-cancel-btn">
+                          Cancel
+                        </button>
+                        <button className="lead-cm-btn lead-save-btn">
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  {/* all leads save */}
+                  <div className="save-lead-data">
+                    <div>
+                      <p className="lead-heading">BIS Registration</p>
+                      <h6 className="lead-sm-heading">
+                        Business certifications
+                      </h6>
+                    </div>
+
+                    <div className="lead-heading">
+                      <i class="fa-solid fa-trash"></i>
+                    </div>
+                  </div>
+
+                 
+                  
+                  {/* all leads save */}
+                </div>
+              </div>
+              {/* nbew */}
             </div>
           </div>
         </div>
