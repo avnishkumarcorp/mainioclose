@@ -4,47 +4,70 @@ import { image1 } from "../Images/imageFile"
 import corpseedlogo from "../Images/corpseed-logo.png"
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useDispatch, useSelector } from "react-redux"
+import { userInformation, userToken } from "../Redux/Action/AuthAction"
 
 const Login = () => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   })
+  const [wrongInput, setWrongInput] = useState(false);
 
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const currentUser =  useSelector((state) => state.AuthReducer);
+  const dispatch = useDispatch();
+
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const userEmailRef = useRef()
   const userPasswordRef = useRef()
 
   const UserInfo = (e) => {
-    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    setUserData((prev) => ({ ...prev, [e. target.name]: e.target.value }))
   }
 
-  const userLogin = (e) =>{
+  const userLogin = (e) => {
     e.preventDefault()
-    setLoading(true);
+   
     if (userEmailRef.current.value === "") {
       userEmailRef.current.style.border = "1px solid red"
-      setError(true);
+      setError(true)
       return
     }
     if (userPasswordRef.current.value === "") {
       userPasswordRef.current.style.border = "1px solid red"
-      setError(true);
+      setError(true)
       return
     }
-    navigate("/")
 
-    const userLogin = async  () =>{
-      const loginData = await axios.post("")
+    const userLogin = async () => {
+      setLoading(true)
+      try {
+
+        const loginData = await axios.post(
+          "http://localhost:9990/apis/auth/signin",
+          {
+            email: userEmailRef.current.value,
+            password: userPasswordRef.current.value,
+          }
+        )
+        dispatch(userInformation(loginData.data))
+        dispatch(userToken(loginData.data.jwt))
+
+        let token = loginData?.data?.jwt;
+        localStorage.setItem("Access Token", token);
+        navigate("/")
+      } catch (err) {
+          console.log(err)
+        setWrongInput(true)
+    
+        setLoading(false)
+      } 
     }
-
-
+    userLogin();
   }
-
-
 
   return (
     <div className="login-page">
@@ -77,9 +100,29 @@ const Login = () => {
                 required
               />
             </div>
-            {error ? <div><span className="text-danger">Email or Password can't be Blank</span></div> : " "}
+            {error ? (
+              <div>
+                <span className="text-danger">
+                  Email or Password can't be Blank
+                </span>
+              </div>
+            ) : (
+              " "
+            )}
+             {wrongInput ? (
+              <div>
+                <span className="text-danger">
+                  Email or Password does not match
+                </span>
+              </div>
+            ) : (
+              " "
+            )}
             <div className="center-btn">
-              <button onClick={(e) => userLogin(e)}  className="login-button">  {loading ?  "loading" :  "Login"   }</button>
+              <button onClick={(e) => userLogin(e)} className="login-button">
+                {" "}
+                {loading ? "loading" : "Login"}
+              </button>
             </div>
             <p className="dont-account">
               Don't have an Account{" "}
