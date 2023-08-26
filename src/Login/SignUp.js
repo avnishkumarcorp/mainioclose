@@ -15,9 +15,7 @@ const SignUp = () => {
 
   const userNameRef = useRef()
   const userEmailRef = useRef()
-  const userPasswordRef = useRef()
-
-  console.log(userNameRef.current)
+    const userPasswordRef = useRef()
 
   const UserInfo = (e) => {
     setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))

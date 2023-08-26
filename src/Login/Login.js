@@ -12,11 +12,11 @@ const Login = () => {
     email: "",
     password: "",
   })
+  const [wrongInput, setWrongInput] = useState(false);
 
   const currentUser =  useSelector((state) => state.AuthReducer);
   const dispatch = useDispatch();
-  console.log("i am current user", currentUser);
-  
+
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -25,12 +25,12 @@ const Login = () => {
   const userPasswordRef = useRef()
 
   const UserInfo = (e) => {
-    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    setUserData((prev) => ({ ...prev, [e. target.name]: e.target.value }))
   }
 
   const userLogin = (e) => {
     e.preventDefault()
-    setLoading(true)
+   
     if (userEmailRef.current.value === "") {
       userEmailRef.current.style.border = "1px solid red"
       setError(true)
@@ -43,7 +43,9 @@ const Login = () => {
     }
 
     const userLogin = async () => {
+      setLoading(true)
       try {
+
         const loginData = await axios.post(
           "http://localhost:9990/apis/auth/signin",
           {
@@ -51,8 +53,6 @@ const Login = () => {
             password: userPasswordRef.current.value,
           }
         )
-        console.log("my login", loginData.data)
-        console.log("my JWT", loginData.data.jwt)
         dispatch(userInformation(loginData.data))
         dispatch(userToken(loginData.data.jwt))
 
@@ -60,8 +60,11 @@ const Login = () => {
         localStorage.setItem("Access Token", token);
         navigate("/")
       } catch (err) {
-        console.log(err)
-      }
+          console.log(err)
+        setWrongInput(true)
+    
+        setLoading(false)
+      } 
     }
     userLogin();
   }
@@ -101,6 +104,15 @@ const Login = () => {
               <div>
                 <span className="text-danger">
                   Email or Password can't be Blank
+                </span>
+              </div>
+            ) : (
+              " "
+            )}
+             {wrongInput ? (
+              <div>
+                <span className="text-danger">
+                  Email or Password does not match
                 </span>
               </div>
             ) : (

@@ -1,13 +1,21 @@
 import React from "react"
 import "./TopNav.scss"
+import { useNavigate } from "react-router-dom"
 
 const TopNav = () => {
+  const navigate = useNavigate();
+  const logoutUser = () =>{
+    const token = localStorage.removeItem("Access Token");
+    navigate("/login")
+  } 
+
   return (
     <div className="top-navbar">
       <div>
         <input className="search-box" type="search" placeholder="Serach..." />
       </div>
       <div className="user-profile">
+        <button onClick={logoutUser}>Logout</button>
         <div className="profile-image">
           <img
             src={`https://images.pexels.com/photos/17739178/pexels-photo-17739178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`}
