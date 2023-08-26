@@ -16,7 +16,7 @@ const SideBar = () => {
 
       <div className="side-tabs">
         <NavLink
-          to="/"
+          to="/erp"
           className={`nav-heading ml-3`}
           data-toggle="collapse"
           data-target={`#collapseOne`}
@@ -31,7 +31,7 @@ const SideBar = () => {
       {/* hr links start */}
       <div className="side-tabs">
         <NavLink
-          to="/hr"
+          to="/erp/hr"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -75,7 +75,7 @@ const SideBar = () => {
       {/* sales links start */}
       <div className="side-tabs">
         <NavLink
-          to="/sales"
+          to="/erp/sales"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -119,7 +119,7 @@ const SideBar = () => {
       {/* accounts links start */}
       <div className="side-tabs">
         <NavLink
-          to="/account"
+          to="/erp/account"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -163,7 +163,7 @@ const SideBar = () => {
       {/* operations links start */}
       <div className="side-tabs">
         <NavLink
-          to="/operation"
+          to="/erp/operation"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -207,7 +207,7 @@ const SideBar = () => {
       {/* Manage Clinets links start */}
       <div className="side-tabs">
         <NavLink
-          to="/manageclient"
+          to="/erp/manageclient"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -252,7 +252,7 @@ const SideBar = () => {
       {/* activity Master links start */}
       <div className="side-tabs">
         <NavLink
-          to="/activity"
+          to="/erp/activity"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -296,7 +296,7 @@ const SideBar = () => {
       {/* Quality links start */}
       <div className="side-tabs">
         <NavLink
-          to="/quality"
+          to="/erp/quality"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -341,7 +341,7 @@ const SideBar = () => {
       {/* Profile links start */}
       <div className="side-tabs">
         <NavLink
-          to="/profile"
+          to="/erp/profile"
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
