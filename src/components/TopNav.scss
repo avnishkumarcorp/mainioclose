@@ -1,3 +1,7 @@
+@import "../SCSS/Colors.scss";
+@import "../SCSS/CommonStyle.scss";
+
+
 .top-navbar {
   padding: 10px 20px;
   background-color: azure;
@@ -8,15 +12,13 @@
   .search-box {
     border: none;
     padding: 4px 8px;
-    border: 1px solid #2b62f9;
+    border: 1px solid $blue;
     &:focus {
       outline: none;
     }
   }
   .user-profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+   @include all-center;
     flex-wrap: wrap;
     gap: 10px;
     .profile-image {
@@ -25,9 +27,7 @@
       border-radius: 50%;
       overflow: hidden;
       img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
+        @include image-cover;
       }
     }
     .profile-info {
