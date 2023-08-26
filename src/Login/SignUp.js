@@ -52,10 +52,7 @@ const SignUp = () => {
           email: userEmailRef.current.value,
           password: userPasswordRef.current.value,
         })
-
-        console.log("i am userdata", userData.data);
         navigate("/login")
-               // userDetails();
       } catch (err) {
         setError(err)
       }
