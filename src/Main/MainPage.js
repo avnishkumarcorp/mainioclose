@@ -14,7 +14,7 @@ const MainPage = () => {
     if(!UserToken || currentUserToken !== UserToken){
       navigate("/login")
     }
-  },[])
+  })
 
   return (
     <div className="main-page">
