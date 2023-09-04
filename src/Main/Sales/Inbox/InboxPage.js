@@ -37,14 +37,13 @@ const InboxPage = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((d) => (
-              <tr>
+            {data.map((d, i) => (
+              <tr key={i}>
                 <td>{d.id}</td>
                 <td>
                   <Link to="/sales/1">{d.name}</Link>
                 </td>
                 <td>{d.link}</td>
-           
               </tr>
             ))}
           </tbody>

@@ -26,14 +26,15 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<div>Home page</div>} />
           <Route path="/counter" element={<CounterExample />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           
-          <Route path="/" element={<MainPage />}>
-            <Route path="/" element={<DashBoard />} />
+          <Route path="/erp" element={<MainPage />}>
+            <Route path="" element={<DashBoard />} />
             {/* hr module routes */}
-            <Route path="/hr" element={<HRMod />}>
+            <Route path="/erp/hr" element={<HRMod />}>
               <Route path="" element={<div>hrlinkone</div>} />
               <Route path="hrlinktwo" element={<div>hrlinktwo</div>} />
               <Route path="hrlinkthree" element={<div>hrlinkthree</div>} />
@@ -43,9 +44,9 @@ function App() {
             </Route>
             {/* end */}
             {/* slaes module routes */}
-            <Route path="/sales" element={<SalesMod />}>
+            <Route path="/erp/sales" element={<SalesMod />}>
               <Route path="" element={<InboxPage />} />
-              <Route path="/sales/:id" element={<LeadDetailsPage />} />
+              <Route path=":id" element={<LeadDetailsPage />} />
               
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="estimate" element={<Estimate />} />
@@ -55,7 +56,7 @@ function App() {
             </Route>
             {/* end */}
             {/* accounts module routes */}
-            <Route path="/account" element={<Accounts />}>
+            <Route path="/erp/account" element={<Accounts />}>
               <Route path="" element={<div>accounts first page</div>} />
               <Route
                 path="accounttwo"
@@ -77,7 +78,7 @@ function App() {
             </Route>
             {/* end */}
             {/* operation module Routes */}
-            <Route path="/operation" element={<Operations />}>
+            <Route path="/erp/operation" element={<Operations />}>
               <Route path="" element={<div>Operation Number one </div>} />
               <Route
                 path="operationtwo"
@@ -102,7 +103,7 @@ function App() {
             </Route>
             {/* end */}
             {/* manage client module route */}
-            <Route path="/manageclient" element={<ManageClientModule />}>
+            <Route path="/erp/manageclient" element={<ManageClientModule />}>
               <Route path="" element={<div>Client Number One</div>} />
               <Route path="clienttwo" element={<div>Client Number Two</div>} />
               <Route
@@ -121,7 +122,7 @@ function App() {
             </Route>
             {/* end */}
             {/* Activity Master module routes */}
-            <Route path="/activity" element={<ActivityMasterModule />}>
+            <Route path="/erp/activity" element={<ActivityMasterModule />}>
               <Route path="" element={<div>Activity Number One</div>} />
               <Route
                 path="activitytwo"
@@ -146,7 +147,7 @@ function App() {
             </Route>
             {/* end */}
             {/* quality module routes */}
-            <Route path="/quality" element={<QualityModule />}>
+            <Route path="/erp/quality" element={<QualityModule />}>
               <Route path="" element={<div>Quality Number One</div>} />
               <Route
                 path="qualitytwo"
@@ -171,7 +172,7 @@ function App() {
             </Route>
             {/* end */}
             {/* profile routes */}
-            <Route path="/profile" element={<MyProfile />}>
+            <Route path="/erp/profile" element={<MyProfile />}>
               <Route path="" element={<div>Profile Number One</div>} />
               <Route
                 path="profiletwo"
