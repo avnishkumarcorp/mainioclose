@@ -66,46 +66,71 @@ const SignUp = () => {
         <div className="left-login"></div>
         <div className="right-login">
           <form className="w-100">
-            <h3 className="heading-text">Sign Up</h3>
-            <div className="py-2">
-              <label className="inp-label">Enter Your UserName*</label>
+            <div>
+              <Link to="/" className="main-logo link-cm">Logo</Link>
+            </div>
+           <div className="signup-text">
+            <h3 className="start-text">Start Now - It's Free</h3>
+            <div className="text-points"><p>All features</p><span>•</span><p>Free support & training</p><span>•</span><p>No credit card required</p></div>
+            <p></p>
+           </div>
+            <div className="input-element">
+            <div className="">
+              <label className="inp-label">Full Name*</label>
               <input
                 className="input-design"
                 type="text"
-                placeholder="Enter Your UserName"
                 name="username"
                 ref={userNameRef}
                 onChange={(e) => UserInfo(e)}
               />
             </div>
-            <div className="py-2">
-              <label className="inp-label">Enter Your Email*</label>
+            <div className="">
+              <label className="inp-label">Mobile Number*</label>
+              <input
+                className="input-design"
+                type="text"
+                name="mobile"
+                onChange={(e) => UserInfo(e)}
+              />
+            </div>
+            <div className="">
+              <label className="inp-label">Email ID*</label>
               <input
                 className="input-design"
                 type="email"
-                placeholder="Enter Your Email"
                 name="email"
                 ref={userEmailRef}
                 onChange={(e) => UserInfo(e)}
                 required
               />
             </div>
-            <div className="py-2">
-              <label className="inp-label">Enter Your Password*</label>
+            <div className="">
+              <label className="inp-label">Company  name*</label>
               <input
                 className="input-design"
-                type="password"
-                placeholder="Enter Your password"
-                name="password"
-                ref={userPasswordRef}
+                type="text"
                 onChange={(e) => UserInfo(e)}
                 required
               />
             </div>
+            </div>
             {error ? <div><span className="text-danger">Please fill All Mandatory Fields</span></div> : " "}
+            <div className="check-boxes">
+              <div className="item-center">
+              <input className="box-input" type="checkbox" id="remember"  />
+                <label className="box-label" for="remember">Remember me</label>
+              </div>
+              <div className="item-center">
+              <input className="box-input" type="checkbox" id="terms" />
+                <label className="box-label" for="terms">I agree to all the <span className="text-blue"> Terms </span> and <span className="text-blue">Privacy policy </span></label>
+              </div>
+            </div>
+            
+
             <div className="center-btn">
               <Link onClick={(e) => userSignUp(e)} className="login-button">
-                {loading ?  "loading" :  "Sign up"   }
+                {loading ?  "loading" :  "Create Account"   }
               </Link>
             </div>
             <p className="dont-account">

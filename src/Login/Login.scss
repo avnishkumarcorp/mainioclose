@@ -9,7 +9,7 @@
     width: 85%;
     background-color: #fff;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     min-height: 600px;
     // border: 1px solid red;
     .left-login {
@@ -28,10 +28,80 @@
       }
     }
     .right-login {
-      padding: 30px 30px;
+      padding: 10px 30px;
       display: flex;
       justify-content: center;
       align-items: center;
+      .main-logo{
+        font-size: 35px;
+        font-weight: 700;
+        line-height: 26px;
+        color: #0067FF;
+      }
+      .signup-text{
+        text-align: center;
+        padding: 20px 0px;
+        .start-text{
+          font-size: 22px;
+          font-weight: 700;
+          line-height: 26px;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+        .text-points{
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 14px;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+       
+        }
+      }
+      .input-element{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 20px 0px;
+        .inp-label {
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 14px;  
+          color: #2D3748;
+
+        }
+        .input-design {
+          width: 100%;
+          width: 100%;
+          padding: 8px 16px;
+          border: 1px solid #D1D1D1;
+          border-radius: 4px;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+      .check-boxes{
+        padding: 20px 0px;
+        .item-center{
+          display: flex;
+          align-items: center;
+          padding-bottom: 15px;
+        .box-input{
+          height: 15px;
+          width: 15px;
+          border: 1px solid #D1D1D1;
+        }
+        .box-label{
+          margin: 0px;
+          margin-left: 10px;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 14px;
+        }
+      }
+
+      }
       .heading-text {
         font-size: 32px;
         text-align: center;
@@ -39,28 +109,12 @@
         color: #2b62f9;
         text-transform: uppercase;
       }
-      .inp-label {
-        font-size: 16px;
-        color: gray;
-        margin-bottom: 5px;
-      }
-      .input-design {
-        width: 100%;
-        width: 100%;
-        padding: 8px 16px;
-        border: none;
-        border: 1px solid gray;
-        &:focus {
-          outline: none;
-        }
-      }
+     
       .center-btn {
         display: flex;
-        justify-content: center;
         padding: 10px 0px;
       }
       .dont-account {
-        text-align: center;
         margin-top: 5px;
         font-size: 15px;
         color: gray;
@@ -68,6 +122,27 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 992px) {
+  .login-page {
+    .login-form {
+      grid-template-columns: 1fr;
+      .left-login {
+        display: none;
+      }
+      .right-login{
+        .input-element{
+          grid-template-columns: 1fr;
+        }
+        
+      }
+    }
+  }
+}
+
+
+
 
 @media only screen and (max-width: 768px) {
   .login-page {
@@ -79,3 +154,22 @@
     }
   }
 }
+
+
+@media only screen and (max-width: 576px) {
+  .login-page {
+    .login-form {
+     
+      .right-login{
+        
+        .center-btn{
+          justify-content: center;
+        }
+        .dont-account{
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
