@@ -1,5 +1,3 @@
-
-
 .home-footer {
   display: grid;
   grid-template-columns: 4fr 3fr 3fr 3fr;
@@ -7,7 +5,7 @@
   .product-part {
     .footer-heading {
       font-size: 30px;
-      font-weight: 600;  
+      font-weight: 600;
       line-height: 30px;
       color: #093252;
       margin-bottom: 35px;
@@ -60,7 +58,7 @@
     line-height: 26px;
     color: #093252;
     cursor: pointer;
-    &:hover{
+    &:hover {
       text-decoration: none;
     }
   }
@@ -83,16 +81,15 @@
   }
   .below-footer {
     flex-direction: column-reverse;
-    .right-links{
+    .right-links {
       justify-content: space-between;
       width: 90%;
       padding-left: 10px;
       padding-right: 10px;
-      border-top: 1px solid #DADCE0;
-      border-bottom: 1px solid #DADCE0;
+      border-top: 1px solid #dadce0;
+      border-bottom: 1px solid #dadce0;
       padding-top: 10px;
       padding-bottom: 10px;
-    
     }
   }
 }
@@ -113,7 +110,7 @@
   .below-footer {
     padding-left: 10px;
     padding-right: 10px;
-    .right-links{
+    .right-links {
       width: 100%;
     }
   }
