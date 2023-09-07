@@ -20,13 +20,18 @@ import CounterExample from "./components/CounterExample"
 import Login from "./Login/Login"
 import SignUp from "./Login/SignUp"
 import LeadDetailsPage from "./Main/Sales/Inbox/LeadDetailsPage"
+import HomePage from "./Home/HomePage"
+import FrontMainPage from "./Home/FrontMainPage"
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<div>Home page</div>} />
+          <Route path="/" element={<HomePage />} >
+            <Route path="/" element={<FrontMainPage />} />   
+            <Route path="/contact" element={<div>Contact</div>} />
+          </Route>
           <Route path="/counter" element={<CounterExample />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
