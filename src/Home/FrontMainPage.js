@@ -1,12 +1,12 @@
-import React from "react";
-import HeroSection from "./HeroSection";
+import React from "react"
+import HeroSection from "./HeroSection"
 
 const FrontMainPage = () => {
   return (
     <div>
-        <HeroSection />
+      <HeroSection />
     </div>
   )
-};
+}
 
-export default FrontMainPage;
+export default FrontMainPage
