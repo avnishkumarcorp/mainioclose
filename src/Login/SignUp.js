@@ -85,7 +85,7 @@ const SignUp = () => {
                 <span>•</span>
                 <p>Free support & training</p>
                 <span>•</span>
-                <p>No credit card required</p>
+                <p className="text-primary">No credit card required</p>
               </div>
               <p></p>
             </div>
@@ -140,12 +140,6 @@ const SignUp = () => {
               " "
             )}
             <div className="check-boxes">
-              <div className="item-center">
-                <input className="box-input" type="checkbox" id="remember" />
-                <label className="box-label" for="remember">
-                  Remember me
-                </label>
-              </div>
               <div className="item-center">
                 <input className="box-input" type="checkbox" id="terms" />
                 <label className="box-label" for="terms">
