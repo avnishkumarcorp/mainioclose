@@ -74,18 +74,20 @@ button:focus {
 }
 
 .login-button {
-  width: 50%;
+  width: 35%;
   padding: 12px 24px;
   border: none;
   outline: none;
   color: var(--white);
   background: var(--mainBlue);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 2px;
   cursor: pointer;
   text-align: center;
   border-radius: 4px;
+
+
 }
 
 .login-button:focus {
@@ -157,6 +159,9 @@ button:focus {
 }
 
 @media only screen and (max-width: 768px) {
+  .login-button {
+    width: 60%;
+  }
 }
 
 @media only screen and (max-width: 576px) {

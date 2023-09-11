@@ -72,7 +72,6 @@ const SignUp = () => {
   return (
     <div className="login-page">
       <div className="login-form">
-        <div className="left-login"></div>
         <div className="right-login">
           <form className={`w-100 ${goPassword ? "d-none": "d-block"}`}>
             {/* <div>
@@ -91,7 +90,7 @@ const SignUp = () => {
             </div>
             <div className="input-element">
               <div className="">
-                <label className="inp-label">Full Name*</label>
+                <label className="inp-label">Full Name<span className="text-danger">*</span></label>
                 <input
                   className="input-design"
                   type="text"
@@ -101,16 +100,17 @@ const SignUp = () => {
                 />
               </div>
               <div className="">
-                <label className="inp-label">Mobile Number*</label>
+                <label className="inp-label">Mobile Number<span className="text-danger">*</span></label>
                 <input
                   className="input-design"
                   type="text"
                   name="mobile"
+                  placeholder="+91"
                   onChange={(e) => UserInfo(e)}
                 />
               </div>
               <div className="">
-                <label className="inp-label">Email ID*</label>
+                <label className="inp-label">Email ID<span className="text-danger">*</span></label>
                 <input
                   className="input-design"
                   type="email"
@@ -121,7 +121,7 @@ const SignUp = () => {
                 />
               </div>
               <div className="">
-                <label className="inp-label">Company name*</label>
+                <label className="inp-label">Company name<span className="text-danger">*</span></label>
                 <input
                   className="input-design"
                   type="text"
@@ -129,7 +129,26 @@ const SignUp = () => {
                   required
                 />
               </div>
+              <div className="">
+                <label className="inp-label">Password<span className="text-danger">*</span></label>
+                <input
+                  className="input-design"  
+                  type="password"
+                  onChange={(e) => UserInfo(e)}
+                  required
+                />
+              </div>
+              <div className="">
+                <label className="inp-label">Confirm Password<span className="text-danger">*</span></label>
+                <input
+                  className="input-design"
+                  type="password"
+                  onChange={(e) => UserInfo(e)}
+                  required
+                />
+              </div>
             </div>
+            
             {error ? (
               <div>
                 <span className="text-danger">
@@ -156,7 +175,7 @@ const SignUp = () => {
             </div>
             <p className="dont-account">
               Already have an Account{" "}
-              <Link className="ml-1" to="/login">
+              <Link className="ml-1" to="/erp/login">
                 Login
               </Link>
             </p>
