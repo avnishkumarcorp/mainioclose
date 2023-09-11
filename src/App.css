@@ -25,6 +25,11 @@ button:focus {
   outline: none;
 }
 
+.out-none:hover{
+  text-decoration: none;
+}
+
+
 .all-center {
   display: flex;
   justify-content: center;

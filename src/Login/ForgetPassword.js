@@ -6,7 +6,7 @@ const ForgetPassword = () => {
     <div className="cm-box container">
       <h2 className="cm-heading">Forget Password</h2>
       <div className="cm-input-box">
-        <i class="cm-icon fa-solid fa-user"></i>
+      <i class="fa-regular cm-icon fa-envelope"></i>
         <input
           className="cm-input"
           type="text"

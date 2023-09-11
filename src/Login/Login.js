@@ -80,7 +80,7 @@ const Login = () => {
         />
       </div>
       <div className="cm-input-box">
-        <i class="cm-icon fa-solid fa-user"></i>
+      <i class="fa-regular cm-icon fa-eye-slash"></i>
         <input
           className="cm-input"
           type="password"
@@ -91,7 +91,7 @@ const Login = () => {
         <div className="agree-text">
           <input className="box-input" type="checkbox" id="terms" />
           <label className="box-label m-0" for="terms">
-            I agree to all the
+            Remember me
           </label>
         </div>
         <div>
@@ -99,7 +99,7 @@ const Login = () => {
         </div>
       </div>
       <button className="login-button my-3">Login</button>
-      <p className="note-user">Not a User <Link to="/erp/signup">Signup</Link></p>
+      <p className="note-user">Not a User <Link className="ml-1 out-none" to="/erp/signup">Signup</Link></p>
     </div>
   )
 }
