@@ -15,7 +15,7 @@ const HeroSection = () => {
         <div className="hero-button">
           <button className="left-btn">Start Now - It's Free</button>
           <button className="right-btn">
-            Talk to Expert <i class="fa-solid fa-arrow-right"></i>
+            Talk to Expert <i className="fa-solid fa-arrow-right"></i>
           </button>
         </div>
         <p className="forever-text">
