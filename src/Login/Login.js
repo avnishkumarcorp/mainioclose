@@ -72,7 +72,7 @@ const Login = () => {
     <div className="cm-box container">
       <h2 className="cm-heading">Login</h2>
       <div className="cm-input-box">
-        <i class="cm-icon fa-solid fa-user"></i>
+        <i className="cm-icon fa-solid fa-user"></i>
         <input
           className="cm-input"
           type="text"
@@ -80,7 +80,7 @@ const Login = () => {
         />
       </div>
       <div className="cm-input-box">
-      <i class="fa-regular cm-icon fa-eye-slash"></i>
+      <i className="fa-regular cm-icon fa-eye-slash"></i>
         <input
           className="cm-input"
           type="password"

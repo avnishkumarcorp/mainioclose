@@ -160,6 +160,13 @@ button:focus {
 
 /* home page css */
 
+.errors-new{
+  color: #ff0000;
+  margin: 0px;
+} 
+
+
+
 @media only screen and (max-width: 992px) {
 }
 
