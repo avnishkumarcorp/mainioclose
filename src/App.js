@@ -22,20 +22,23 @@ import SignUp from "./Login/SignUp"
 import LeadDetailsPage from "./Main/Sales/Inbox/LeadDetailsPage"
 import HomePage from "./Home/HomePage"
 import FrontMainPage from "./Home/FrontMainPage"
+import MainLoginRouter from "./Login/MainLoginRouter"
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} >
-            <Route path="/" element={<FrontMainPage />} />   
+          <Route path="/" element={<HomePage />}>
+            <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />
           </Route>
           <Route path="/counter" element={<CounterExample />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          
+          <Route path="/erp" element={<MainLoginRouter />}>
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<SignUp />} />
+          </Route>
+
           <Route path="/erp" element={<MainPage />}>
             <Route path="" element={<DashBoard />} />
             {/* hr module routes */}
@@ -52,7 +55,7 @@ function App() {
             <Route path="/erp/sales" element={<SalesMod />}>
               <Route path="" element={<InboxPage />} />
               <Route path=":id" element={<LeadDetailsPage />} />
-              
+
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
