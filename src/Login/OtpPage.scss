@@ -1,0 +1,58 @@
+.otp-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  min-height: 70vh;
+  gap: 20px;
+  .otp-heading {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 35px;
+  }
+  .otp-number {
+    font-size: 16px;
+    line-height: 40px;
+  }
+  .input-boxes {
+    display: flex;
+    gap: 25px;
+    .single-input {
+      height: 70px;
+      width: 70px;
+      border-radius: 5px;
+      border: 1px solid #093252;
+      padding: 20px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .resend-text {
+        font-size: 16px;
+        line-height: 19px;
+        color: #0067FF;
+        margin: 40px 0px;
+        outline: none;
+        border: none;
+        cursor: pointer;
+  }
+}
+
+
+@media only screen and (max-width: 576px){
+    .otp-page{
+        .otp-heading{
+            font-size: 28px;
+        }
+        .input-boxes{
+            gap: 10px;
+            .single-input{
+                height: 55px;
+                width: 55px;
+            }
+
+        }
+    }
+}

@@ -23,6 +23,7 @@ import LeadDetailsPage from "./Main/Sales/Inbox/LeadDetailsPage"
 import HomePage from "./Home/HomePage"
 import FrontMainPage from "./Home/FrontMainPage"
 import MainLoginRouter from "./Login/MainLoginRouter"
+import OtpPage from "./Login/OtpPage"
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
+            <Route path="otp" element={<OtpPage />} />
           </Route>
 
           <Route path="/erp" element={<MainPage />}>

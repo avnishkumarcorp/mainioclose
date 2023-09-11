@@ -1,9 +1,9 @@
 .login-page {
   width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 75vh;
   // background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   .login-form {
     width: 85%;
@@ -73,6 +73,7 @@
           padding: 8px 16px;
           border: 1px solid #D1D1D1;
           border-radius: 4px;
+          background: #EBEEF0;
           &:focus {
             outline: none;
           }
@@ -112,19 +113,36 @@
       .center-btn {
         display: flex;
         padding: 10px 0px;
+        justify-content: center;
       }
       .dont-account {
         margin-top: 5px;
         font-size: 15px;
         color: gray;
+        text-align: center;
       }
     }
   }
 }
 
+// logo header css
+
+.logo-header{
+  padding: 20px 24px;
+  .logo-icon{
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 26px;
+      color: #0067FF;
+
+  }
+}
+
+
 
 @media only screen and (max-width: 992px) {
   .login-page {
+    height: auto;
     .login-form {
       grid-template-columns: 1fr;
       .left-login {
@@ -147,9 +165,23 @@
   .login-page {
     .login-form {
       grid-template-columns: 1fr;
-      .left-login {
-        display: none;
+      .right-login{
+         .signup-text{
+          .text-points{
+            flex-direction: column;
+            span{
+              display: none;
+            }
+          }
+        }.check-boxes{
+          .item-center{
+            .box-label{
+              line-height: 25px;
+            }
+          }
+        }
       }
+
     }
   }
 }
@@ -158,15 +190,14 @@
 @media only screen and (max-width: 576px) {
   .login-page {
     .login-form {
-     
-      .right-login{
-        
+      .right-login{   
         .center-btn{
           justify-content: center;
         }
         .dont-account{
           text-align: center;
         }
+        
       }
     }
   }
