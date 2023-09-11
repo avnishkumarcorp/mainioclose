@@ -12,10 +12,10 @@ const Login = () => {
     email: "",
     password: "",
   })
-  const [wrongInput, setWrongInput] = useState(false);
+  const [wrongInput, setWrongInput] = useState(false)
 
-  const currentUser =  useSelector((state) => state.AuthReducer);
-  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.AuthReducer)
+  const dispatch = useDispatch()
 
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -25,12 +25,12 @@ const Login = () => {
   const userPasswordRef = useRef()
 
   const UserInfo = (e) => {
-    setUserData((prev) => ({ ...prev, [e. target.name]: e.target.value }))
+    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const userLogin = (e) => {
     e.preventDefault()
-   
+
     if (userEmailRef.current.value === "") {
       userEmailRef.current.style.border = "1px solid red"
       setError(true)
@@ -45,7 +45,6 @@ const Login = () => {
     const userLogin = async () => {
       setLoading(true)
       try {
-
         const loginData = await axios.post(
           "http://localhost:9990/apis/auth/signin",
           {
@@ -56,83 +55,51 @@ const Login = () => {
         dispatch(userInformation(loginData.data))
         dispatch(userToken(loginData.data.jwt))
 
-        let token = loginData?.data?.jwt;
-        localStorage.setItem("Access Token", token);
+        let token = loginData?.data?.jwt
+        localStorage.setItem("Access Token", token)
         navigate("/")
       } catch (err) {
-          console.log(err)
+        console.log(err)
         setWrongInput(true)
-    
+
         setLoading(false)
-      } 
+      }
     }
-    userLogin();
+    userLogin()
   }
 
   return (
-    <div className="login-page">
-      <div className="login-form">
-        <div className="left-login"></div>
-        <div className="right-login">
-          <form className="w-100">
-            <h3 className="heading-text">Login</h3>
-            <div className="py-2">
-              <label className="inp-label">Enter Your Email</label>
-              <input
-                className="input-design"
-                type="email"
-                placeholder="Enter Your Email"
-                name="email"
-                ref={userEmailRef}
-                onChange={(e) => UserInfo(e)}
-                required
-              />
-            </div>
-            <div className="py-2">
-              <label className="inp-label">Enter Your Password</label>
-              <input
-                className="input-design"
-                type="password"
-                placeholder="Enter Your password"
-                name="password"
-                ref={userPasswordRef}
-                onChange={(e) => UserInfo(e)}
-                required
-              />
-            </div>
-            {error ? (
-              <div>
-                <span className="text-danger">
-                  Email or Password can't be Blank
-                </span>
-              </div>
-            ) : (
-              " "
-            )}
-             {wrongInput ? (
-              <div>
-                <span className="text-danger">
-                  Email or Password does not match
-                </span>
-              </div>
-            ) : (
-              " "
-            )}
-            <div className="center-btn">
-              <button onClick={(e) => userLogin(e)} className="login-button">
-                {" "}
-                {loading ? "loading" : "Login"}
-              </button>
-            </div>
-            <p className="dont-account">
-              Don't have an Account{" "}
-              <Link className="ml-1" to="/erp/signup">
-                Sign up
-              </Link>
-            </p>
-          </form>
+    <div className="cm-box container">
+      <h2 className="cm-heading">Login</h2>
+      <div className="cm-input-box">
+        <i class="cm-icon fa-solid fa-user"></i>
+        <input
+          className="cm-input"
+          type="text"
+          placeholder="Enter Your Email"
+        />
+      </div>
+      <div className="cm-input-box">
+        <i class="cm-icon fa-solid fa-user"></i>
+        <input
+          className="cm-input"
+          type="password"
+          placeholder="Enter Your password"
+        />
+      </div>
+      <div className="remember">
+        <div className="agree-text">
+          <input className="box-input" type="checkbox" id="terms" />
+          <label className="box-label m-0" for="terms">
+            I agree to all the
+          </label>
+        </div>
+        <div>
+          <Link to="/erp/forget">Forget Passowrd</Link>
         </div>
       </div>
+      <button className="login-button my-3">Login</button>
+      <p className="note-user">Not a User <Link to="/erp/signup">Signup</Link></p>
     </div>
   )
 }

@@ -9,7 +9,6 @@ const SignUp = () => {
     email: "",
     password: "",
   })
-  const [goPassword, setGoPassword] = useState(false);
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -22,12 +21,7 @@ const SignUp = () => {
     setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const passwordPage = () =>{
-    setGoPassword(prev=> (prev=true));
-  }
-
-  console.log(goPassword)
-
+ 
   const userSignUp = (e) => {
     e.preventDefault()
     setLoading(true)
@@ -73,7 +67,7 @@ const SignUp = () => {
     <div className="login-page">
       <div className="login-form">
         <div className="right-login">
-          <form className={`w-100 ${goPassword ? "d-none": "d-block"}`}>
+          <form className={`w-100`}>
             {/* <div>
               <Link to="/" className="main-logo link-cm">Logo</Link>
             </div> */}
@@ -169,7 +163,7 @@ const SignUp = () => {
             </div>
 
             <div className="center-btn">
-              <Link onClick={passwordPage}   className="login-button">
+              <Link    className="login-button sign-up">
                 {loading ? "loading" : "Create Account"}
               </Link>
             </div>
@@ -181,9 +175,7 @@ const SignUp = () => {
             </p>
           </form>
               {/* password page */}
-          <form className={`${goPassword ? "d-block": "d-none"}`}>
-              <h1>Password</h1>
-          </form>
+         
           {/* end password page */}
         </div>
       </div>
