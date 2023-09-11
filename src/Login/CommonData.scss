@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 70vh;
   flex-direction: column;
   gap: 30px;
   .cm-heading {
@@ -27,7 +27,7 @@
       padding: 12px 36px;
       padding-left: 55px;
       background-color: #ebeef0;
-      border: 1px solid #d1d1d1;
+      border: 1px solid rgba(0, 103, 255, .2);
       min-width: 550px;
       &:focus {
         outline: none;

@@ -5,7 +5,7 @@ const ChangePassword = () => {
     <div className="cm-box container">
     <h2 className="cm-heading">Change Password</h2>
     <div className="cm-input-box">
-      <i class="cm-icon fa-solid fa-user"></i>
+      <i class="fa-regular cm-icon fa-eye-slash"></i>
       <input
         className="cm-input"
         type="password"
@@ -13,7 +13,7 @@ const ChangePassword = () => {
       />
     </div>
     <div className="cm-input-box">
-      <i class="cm-icon fa-solid fa-user"></i>
+      <i class="fa-regular cm-icon fa-eye-slash"></i>
       <input
         className="cm-input"
         type="password"
