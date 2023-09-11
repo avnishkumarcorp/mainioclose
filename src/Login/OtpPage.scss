@@ -30,29 +30,27 @@
     }
   }
   .resend-text {
-        font-size: 16px;
-        line-height: 19px;
-        color: #0067FF;
-        margin: 40px 0px;
-        outline: none;
-        border: none;
-        cursor: pointer;
+    font-size: 16px;
+    line-height: 19px;
+    color: #0067ff;
+    margin: 40px 0px;
+    outline: none;
+    border: none;
+    cursor: pointer;
   }
 }
 
-
-@media only screen and (max-width: 576px){
-    .otp-page{
-        .otp-heading{
-            font-size: 28px;
-        }
-        .input-boxes{
-            gap: 10px;
-            .single-input{
-                height: 55px;
-                width: 55px;
-            }
-
-        }
+@media only screen and (max-width: 576px) {
+  .otp-page {
+    .otp-heading {
+      font-size: 28px;
     }
+    .input-boxes {
+      gap: 10px;
+      .single-input {
+        height: 55px;
+        width: 55px;
+      }
+    }
+  }
 }

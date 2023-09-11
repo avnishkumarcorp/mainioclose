@@ -160,12 +160,18 @@ button:focus {
 
 @media only screen and (max-width: 768px) {
   .login-button {
-    width: 60%;
+    width: 35%;
   }
+  /* .login-button.cm-btn{
+    width: 60% !important;
+  } */
 }
 
 @media only screen and (max-width: 576px) {
   .login-button {
+    width: 50%;
+  }
+  .login-button.sign-up{
     width: 100%;
   }
 }

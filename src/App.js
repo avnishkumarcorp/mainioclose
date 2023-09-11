@@ -24,6 +24,8 @@ import HomePage from "./Home/HomePage"
 import FrontMainPage from "./Home/FrontMainPage"
 import MainLoginRouter from "./Login/MainLoginRouter"
 import OtpPage from "./Login/OtpPage"
+import ForgetPassword from "./Login/ForgetPassword"
+import ChangePassword from "./Login/ChangePassword"
 
 function App() {
   return (
@@ -39,6 +41,10 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="otp" element={<OtpPage />} />
+            <Route path="forget" element={<ForgetPassword />} />
+            <Route path="change" element={<ChangePassword />} />
+            
+            
           </Route>
 
           <Route path="/erp" element={<MainPage />}>
