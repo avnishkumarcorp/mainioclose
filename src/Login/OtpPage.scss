@@ -29,15 +29,35 @@
       }
     }
   }
-  .resend-text {
-    font-size: 16px;
-    line-height: 19px;
-    color: #0067ff;
-    margin: 40px 0px;
-    outline: none;
-    border: none;
-    cursor: pointer;
+  .resend-timer{
+    margin: 40px 0px !important;
+    div{
+      button{
+        background-color: #fff !important;
+        span{
+          font-size: 16px !important;
+          line-height: 19px !important;
+          color:#0067FF !important;
+          margin: 40px 0px !important;
+          outline: none !important;
+          border: none !important;
+          // background-color: white;
+        }
+      }
+    }
   }
+  // .resend-text{
+  //   font-size: 16px !important;
+  //   line-height: 19px !important;
+  //   color: #0067ff !important;
+  //   margin: 40px 0px !important;
+  //   outline: none !important;
+  //   border: none !important;
+  //   cursor: pointer !important;
+  //   span{
+  //     color: red;
+  //   }
+  // }
 }
 
 @media only screen and (max-width: 576px) {
