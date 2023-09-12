@@ -4,64 +4,109 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 
 const SignUp = () => {
-  const [userData, setUserData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  })
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  //states
+  const [fullNameErr, setFullNameErr] = useState(false)
+  const [mobileNumberErr, setMobileNumberErr] = useState(false)
+  const [emailIdErr, setEmailIdErr] = useState(false)
+  const [companyNameErr, setCompanyNameErr] = useState(false)
+  const [passwordErr, setPasswordErr] = useState(false);
+  const [confirmPasswordErr, setconfirmPasswordErr] = useState(false);
 
-  const userNameRef = useRef()
-  const userEmailRef = useRef()
-  const userPasswordRef = useRef()
+  // refs
+  const fullNameRef = useRef()
+  const mobileNumberRef = useRef()
+  const emailIdRef = useRef()
+  const companyNameRef = useRef()
+  const passwordRef = useRef()
+  const confirmPasswordRef = useRef()
 
-  const UserInfo = (e) => {
-    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  }
+  // signup function
 
- 
   const userSignUp = (e) => {
     e.preventDefault()
-    setLoading(true)
-    if (userNameRef.current.value === "") {
-      console.log("name can not blank")
-      userNameRef.current.style.border = "1px solid red"
-      setError(true)
-      return
+    console.log("submit")
+    if (fullNameRef.current.value === "") {
+      fullNameRef.current.style.border = "1px solid red"
+      setFullNameErr(true)
     }
-    if (userEmailRef.current.value === "") {
-      console.log("Email can not blank")
-      userEmailRef.current.style.border = "1px solid red"
-      setError(true)
-      return
+    if (mobileNumberRef.current.value === "") {
+      mobileNumberRef.current.style.border = "1px solid red"
+      setMobileNumberErr(true)
     }
-    if (userPasswordRef.current.value === "") {
-      console.log("password can not blank")
-      userPasswordRef.current.style.border = "1px solid red"
-      setError(true)
-      return
+    if (emailIdRef.current.value === "") {
+      emailIdRef.current.style.border = "1px solid red"
+      setEmailIdErr(true)
     }
-
-    const createUser = async () => {
-      try {
-        const userData = await axios.post(
-          `http://localhost:9990/api/auth/createNewUser`,
-          {
-            username: userNameRef.current.value,
-            email: userEmailRef.current.value,
-            password: userPasswordRef.current.value,
-          }
-        )
-        navigate("/login")
-      } catch (err) {
-        setError(err)
-      }
+    if (companyNameRef.current.value === "") {
+      companyNameRef.current.style.border = "1px solid red"
+      setCompanyNameErr(true)
     }
-    createUser()
+    if (passwordRef.current.value === "") {
+      passwordRef.current.style.border = "1px solid red"
+      setPasswordErr(true)
+    }
+    if (confirmPasswordRef.current.value === "") {
+      confirmPasswordRef.current.style.border = "1px solid red"
+      setconfirmPasswordErr(true)
+    }
   }
 
+  // const [userData, setUserData] = useState({
+  //   username: "",
+  //   email: "",
+  //   password: "",
+  // })
+  // const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  // const navigate = useNavigate()
+
+  // const userNameRef = useRef()
+  // const userEmailRef = useRef()
+  // const userPasswordRef = useRef()
+
+  // const UserInfo = (e) => {
+  //   setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  // }
+
+  // const userSignUp = (e) => {
+  //   e.preventDefault()
+  //   setLoading(true)
+  //   if (userNameRef.current.value === "") {
+  //     console.log("name can not blank")
+  //     userNameRef.current.style.border = "1px solid red"
+  //     setError(true)
+  //     return
+  //   }
+  //   if (userEmailRef.current.value === "") {
+  //     console.log("Email can not blank")
+  //     userEmailRef.current.style.border = "1px solid red"
+  //     setError(true)
+  //     return
+  //   }
+  //   if (userPasswordRef.current.value === "") {
+  //     console.log("password can not blank")
+  //     userPasswordRef.current.style.border = "1px solid red"
+  //     setError(true)
+  //     return
+  //   }
+
+  //   const createUser = async () => {
+  //     try {
+  //       const userData = await axios.post(
+  //         `http://localhost:9990/api/auth/createNewUser`,
+  //         {
+  //           username: userNameRef.current.value,
+  //           email: userEmailRef.current.value,
+  //           password: userPasswordRef.current.value,
+  //         }
+  //       )
+  //       navigate("/login")
+  //     } catch (err) {
+  //       setError(err)
+  //     }
+  //   }
+  //   createUser()
+  // }
 
   return (
     <div className="login-page">
@@ -84,66 +129,90 @@ const SignUp = () => {
             </div>
             <div className="input-element">
               <div className="">
-                <label className="inp-label">Full Name<span className="text-danger">*</span></label>
+                <label className="inp-label">
+                  Full Name<span className="text-danger">*</span>
+                </label>
                 <input
                   className="input-design"
+                  ref={fullNameRef}
                   type="text"
                   name="username"
-                  ref={userNameRef}
-                  onChange={(e) => UserInfo(e)}
+                  // onChange={(e) => UserInfo(e)}
                 />
+                {fullNameErr ? <p className="errors-new">Name Can't be Blank!</p> : "" }
+                
               </div>
               <div className="">
-                <label className="inp-label">Mobile Number<span className="text-danger">*</span></label>
+                <label className="inp-label">
+                  Mobile Number<span className="text-danger">*</span>
+                </label>
                 <input
                   className="input-design"
+                  ref={mobileNumberRef}
                   type="text"
                   name="mobile"
                   placeholder="+91"
-                  onChange={(e) => UserInfo(e)}
+                  // onChange={(e) => UserInfo(e)}
                 />
+                {mobileNumberErr ?  <p className="errors-new">Mobile can't be Blank</p> : "" }
+                
               </div>
               <div className="">
-                <label className="inp-label">Email ID<span className="text-danger">*</span></label>
+                <label className="inp-label">
+                  Email ID<span className="text-danger">*</span>
+                </label>
                 <input
                   className="input-design"
                   type="email"
                   name="email"
-                  ref={userEmailRef}
-                  onChange={(e) => UserInfo(e)}
+                  ref={emailIdRef}
+                  // onChange={(e) => UserInfo(e)}
                   required
                 />
+                  {emailIdErr ?  <p className="errors-new">Email ID can't be Blank</p> : "" }
               </div>
               <div className="">
-                <label className="inp-label">Company name<span className="text-danger">*</span></label>
+                <label className="inp-label">
+                  Company name<span className="text-danger">*</span>
+                </label>
                 <input
                   className="input-design"
                   type="text"
-                  onChange={(e) => UserInfo(e)}
+                  ref={companyNameRef}
+                  // onChange={(e) => UserInfo(e)}
                   required
                 />
+                    {companyNameErr ?  <p className="errors-new">Company Name can't be Blank</p> : "" }
               </div>
               <div className="">
-                <label className="inp-label">Password<span className="text-danger">*</span></label>
-                <input
-                  className="input-design"  
-                  type="password"
-                  onChange={(e) => UserInfo(e)}
-                  required
-                />
-              </div>
-              <div className="">
-                <label className="inp-label">Confirm Password<span className="text-danger">*</span></label>
+                <label className="inp-label">
+                  Password<span className="text-danger">*</span>
+                </label>
                 <input
                   className="input-design"
                   type="password"
-                  onChange={(e) => UserInfo(e)}
+                  ref={passwordRef}
+                  // onChange={(e) => UserInfo(e)}
                   required
                 />
+                {passwordErr ?  <p className="errors-new">password can't be Blank</p> : "" }
+              </div>
+              <div className="">
+                <label className="inp-label">
+                  Confirm Password<span className="text-danger">*</span>
+                </label>
+                <input
+                  className="input-design"
+                  type="password"
+                  ref={confirmPasswordRef}
+                  // onChange={(e) => UserInfo(e)}
+                  required
+                />
+                 {confirmPasswordErr ?  <p className="errors-new">confirm password can't be Blank</p> : "" }
               </div>
             </div>
-            
-            {error ? (
+
+            {/* {error ? (
               <div>
                 <span className="text-danger">
                   Please fill All Mandatory Fields
@@ -151,7 +220,7 @@ const SignUp = () => {
               </div>
             ) : (
               " "
-            )}
+            )} */}
             <div className="check-boxes">
               <div className="item-center">
                 <input className="box-input" type="checkbox" id="terms" />
@@ -163,9 +232,12 @@ const SignUp = () => {
             </div>
 
             <div className="center-btn">
-              <Link    className="login-button sign-up">
+              <button
+                onClick={(e) => userSignUp(e)}
+                className="login-button sign-up"
+              >
                 {loading ? "loading" : "Create Account"}
-              </Link>
+              </button>
             </div>
             <p className="dont-account">
               Already have an Account{" "}
@@ -174,8 +246,8 @@ const SignUp = () => {
               </Link>
             </p>
           </form>
-              {/* password page */}
-         
+          {/* password page */}
+
           {/* end password page */}
         </div>
       </div>

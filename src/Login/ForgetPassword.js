@@ -11,10 +11,13 @@ const ForgetPassword = () => {
     e.preventDefault()
     if (emailRef.current.value === "") {
       setEmailErr(true)
+      setEmailFormat(false)
+      return
     }
     let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
     if (regex.test(emailRef.current.value) !== true) {
       setEmailFormat(true)
+      setEmailErr(false)
     }
   }
 
