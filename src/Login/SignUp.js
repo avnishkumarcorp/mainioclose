@@ -12,6 +12,7 @@ const SignUp = () => {
   const [passwordErr, setPasswordErr] = useState(false);
   const [confirmPasswordErr, setconfirmPasswordErr] = useState(false);
   const [emailFormatErr, setEmailFormatErr] = useState(false)
+  const [mobileFormatErr, setMobileFormatErr] = useState(false)
   // refs
   const fullNameRef = useRef()
   const mobileNumberRef = useRef()
@@ -53,10 +54,17 @@ const SignUp = () => {
 
     let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
     if (regex.test(emailIdRef.current.value) !== true) {
+      emailIdRef.current.style.border = "1px solid red"
       setEmailFormatErr(true)
       setEmailIdErr(false)
     }
-
+    let numberRegex =  new RegExp("^([+]\d{9})?\d{18}$")
+    if (numberRegex.test(mobileNumberRef.current.value) !== true) {
+      mobileNumberRef.current.style.border = "1px solid red"
+      setMobileFormatErr(true)
+      setMobileNumberErr(false)
+    }
+   
   }
 
   // const [userData, setUserData] = useState({
@@ -163,7 +171,8 @@ const SignUp = () => {
                   // onChange={(e) => UserInfo(e)}
                 />
                 {mobileNumberErr ?  <p className="errors-new">Mobile can't be Blank</p> : "" }
-                
+                {mobileFormatErr ?  <p className="errors-new">Please Enter Digit Only</p> : "" }
+                {/* mobileFormatErr */}
               </div>
               <div className="">
                 <label className="inp-label">
