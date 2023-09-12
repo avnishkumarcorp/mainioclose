@@ -11,7 +11,7 @@ const SignUp = () => {
   const [companyNameErr, setCompanyNameErr] = useState(false)
   const [passwordErr, setPasswordErr] = useState(false);
   const [confirmPasswordErr, setconfirmPasswordErr] = useState(false);
-
+  const [emailFormatErr, setEmailFormatErr] = useState(false)
   // refs
   const fullNameRef = useRef()
   const mobileNumberRef = useRef()
@@ -48,7 +48,15 @@ const SignUp = () => {
     if (confirmPasswordRef.current.value === "") {
       confirmPasswordRef.current.style.border = "1px solid red"
       setconfirmPasswordErr(true)
+      return
     }
+
+    let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
+    if (regex.test(emailIdRef.current.value) !== true) {
+      setEmailFormatErr(true)
+      setEmailIdErr(false)
+    }
+
   }
 
   // const [userData, setUserData] = useState({
@@ -170,6 +178,7 @@ const SignUp = () => {
                   required
                 />
                   {emailIdErr ?  <p className="errors-new">Email ID can't be Blank</p> : "" }
+                  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" }
               </div>
               <div className="">
                 <label className="inp-label">

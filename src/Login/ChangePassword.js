@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 const ChangePassword = () => {
+  
+  const[passwordErr, setPasswordErr] = useState(false);
+  const[confirmPasswordErr, setConfirmPasswordErr] = useState(false);
+
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+  
+
+  const updateUserPassword = (e) =>{
+  }
+
   return (
     <div className="cm-box container">
     <h2 className="cm-heading">Change Password</h2>
@@ -10,6 +21,7 @@ const ChangePassword = () => {
         className="cm-input"
         type="password"
         placeholder="New password"
+        ref={passwordRef}
       />
     </div>
     <div className="cm-input-box">
@@ -18,9 +30,10 @@ const ChangePassword = () => {
         className="cm-input"
         type="password"
         placeholder="Confirm New password"
+        ref={confirmPasswordRef}
       />
     </div>
-    <button className="login-button">Set Password</button>
+    <button onClick={(e)=> updateUserPassword(e)} className="login-button">Set Password</button>
   </div>
   )
 };
