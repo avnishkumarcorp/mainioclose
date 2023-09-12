@@ -8,84 +8,133 @@ import { useDispatch, useSelector } from "react-redux"
 import { userInformation, userToken } from "../Redux/Action/AuthAction"
 
 const Login = () => {
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-  })
-  const [wrongInput, setWrongInput] = useState(false)
 
-  const currentUser = useSelector((state) => state.AuthReducer)
-  const dispatch = useDispatch()
+  const [emailErr, setEmailErr] = useState(false);
+  const [emailProperErr, setEmailProperErr] = useState(false)
+  
+  const [passwordErr, setPasswordErr]= useState(false);
 
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
 
-  const userEmailRef = useRef()
-  const userPasswordRef = useRef()
+  const emailRef = useState();
+  const passwordRef = useState();
 
-  const UserInfo = (e) => {
-    setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+
+  const userSignIn = (e) =>{
+    e.preventDefault();
+
+    if (emailRef.current.value === "") {
+      emailRef.current.style.border = "1px solid red"
+      setEmailErr(true)
+    }
+    if (passwordRef.current.value === "") {
+      passwordRef.current.style.border = "1px solid red"
+      setPasswordErr(true)
+    }
+   
+    // let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
+    // if (regex.test(emailRef.current.value) !== true) {
+    //   emailRef.current.style.border = "1px solid red"
+    //   setEmailProperErr(true)
+    //   setEmailErr(false)
+    // }
+
   }
 
-  const userLogin = (e) => {
-    e.preventDefault()
 
-    if (userEmailRef.current.value === "") {
-      userEmailRef.current.style.border = "1px solid red"
-      setError(true)
-      return
-    }
-    if (userPasswordRef.current.value === "") {
-      userPasswordRef.current.style.border = "1px solid red"
-      setError(true)
-      return
-    }
 
-    const userLogin = async () => {
-      setLoading(true)
-      try {
-        const loginData = await axios.post(
-          "http://localhost:9990/apis/auth/signin",
-          {
-            email: userEmailRef.current.value,
-            password: userPasswordRef.current.value,
-          }
-        )
-        dispatch(userInformation(loginData.data))
-        dispatch(userToken(loginData.data.jwt))
 
-        let token = loginData?.data?.jwt
-        localStorage.setItem("Access Token", token)
-        navigate("/")
-      } catch (err) {
-        console.log(err)
-        setWrongInput(true)
 
-        setLoading(false)
-      }
-    }
-    userLogin()
-  }
+
+
+  // const [userData, setUserData] = useState({
+  //   email: "",
+  //   password: "",
+  // })
+  // const [wrongInput, setWrongInput] = useState(false)
+
+  // const currentUser = useSelector((state) => state.AuthReducer)
+  // const dispatch = useDispatch()
+
+  // const [error, setError] = useState(false)
+  // const [loading, setLoading] = useState(false)
+  // const navigate = useNavigate()
+
+  // const userEmailRef = useRef()
+  // const userPasswordRef = useRef()
+
+  // const UserInfo = (e) => {
+  //   setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  // }
+
+  // const userLogin = (e) => {
+  //   e.preventDefault()
+
+  //   if (userEmailRef.current.value === "") {
+  //     userEmailRef.current.style.border = "1px solid red"
+  //     setError(true)
+  //     return
+  //   }
+  //   if (userPasswordRef.current.value === "") {
+  //     userPasswordRef.current.style.border = "1px solid red"
+  //     setError(true)
+  //     return
+  //   }
+
+  //   const userLogin = async () => {
+  //     setLoading(true)
+  //     try {
+  //       const loginData = await axios.post(
+  //         "http://localhost:9990/apis/auth/signin",
+  //         {
+  //           email: userEmailRef.current.value,
+  //           password: userPasswordRef.current.value,
+  //         }
+  //       )
+  //       dispatch(userInformation(loginData.data))
+  //       dispatch(userToken(loginData.data.jwt))
+
+  //       let token = loginData?.data?.jwt
+  //       localStorage.setItem("Access Token", token)
+  //       navigate("/")
+  //     } catch (err) {
+  //       console.log(err)
+  //       setWrongInput(true)
+
+  //       setLoading(false)
+  //     }
+  //   }
+  //   userLogin()
+  // }
 
   return (
     <div className="cm-box container">
       <h2 className="cm-heading">Login</h2>
+      <div>
       <div className="cm-input-box">
         <i className="cm-icon fa-solid fa-user"></i>
         <input
           className="cm-input"
           type="text"
+          ref={emailRef}
           placeholder="Enter Your Email"
         />
       </div>
+       {emailErr ?  <p className="errors-new">Email ID can't be Blank</p> : "" }
+       {emailProperErr ?  <p className="errors-new">Email not in Proper Format</p> : "" }
+       </div>
+      {/* {emailErr ? <p></p>} */}
+      {/* //  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" } */}
+      <div>
       <div className="cm-input-box">
       <i className="fa-regular cm-icon fa-eye-slash"></i>
         <input
           className="cm-input"
           type="password"
           placeholder="Enter Your password"
+          ref={passwordRef}
         />
+      </div>
+      {passwordErr ?  <p className="errors-new">password can't be Blank</p> : "" }
       </div>
       <div className="remember">
         <div className="agree-text">
@@ -98,7 +147,7 @@ const Login = () => {
           <Link to="/erp/forget">Forget Passowrd</Link>
         </div>
       </div>
-      <button className="login-button my-3">Login</button>
+      <button onClick={(e)=> userSignIn(e)} className="login-button my-3">Login</button>
       <p className="note-user">Not a User <Link className="ml-1 out-none" to="/erp/signup">Signup</Link></p>
     </div>
   )
