@@ -242,7 +242,7 @@ const SignUp = () => {
             <div className="check-boxes">
               <div className="item-center">
                 <input className="box-input" type="checkbox" id="terms" />
-                <label className="box-label" for="terms">
+                <label className="box-label" htmlFor="terms">
                   I agree to all the <span className="text-blue"> Terms </span>{" "}
                   and <span className="text-blue">Privacy policy </span>
                 </label>
