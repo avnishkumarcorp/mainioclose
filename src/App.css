@@ -5,7 +5,7 @@
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-/* font-family: 'Inter', sans-serif; */
+
 
 body {
   overflow: hidden;
@@ -43,7 +43,6 @@ button:focus {
 }
 
 .nav-heading {
-  font-family: Inter;
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
@@ -71,7 +70,6 @@ button:focus {
 }
 
 .main-heading {
-  font-family: Segoe UI;
   font-size: 24px;
   font-weight: 400;
   line-height: 32px;
@@ -106,7 +104,6 @@ button:focus {
 
 /* common in inbox  */
 .lead-heading {
-  font-family: Segoe UI;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -115,7 +112,6 @@ button:focus {
 }
 
 .lead-blue-head {
-  font-family: Segoe UI;
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
@@ -124,7 +120,6 @@ button:focus {
 }
 
 .lead-sm-heading {
-  font-family: Segoe UI;
   font-size: 11px;
   font-weight: 400;
   line-height: 16px;
