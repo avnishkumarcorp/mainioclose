@@ -1,10 +1,27 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import "./Login.scss"
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 
 const SignUp = () => {
   //states
+  const [createUserData, setCreateUserData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    mobile: "",
+    companyName: "",
+    otp: ""
+  });
+
+  const [generateOtpData, setGenerateOtpData] = useState({
+    mobile: "",
+    name: "",
+    password: "",
+  })
+
+  const [loading, setLoading] = useState(false)
+  // Errors
   const [fullNameErr, setFullNameErr] = useState(false)
   const [mobileNumberErr, setMobileNumberErr] = useState(false)
   const [emailIdErr, setEmailIdErr] = useState(false)
@@ -23,9 +40,15 @@ const SignUp = () => {
 
   // signup function
 
+   const UserInfoData = (e) => {
+    setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+   }
+
+
+
   const userSignUp = (e) => {
     e.preventDefault()
-    console.log("submit")
+   
     if (fullNameRef.current.value === "") {
       fullNameRef.current.style.border = "1px solid red"
       setFullNameErr(true)
@@ -58,22 +81,43 @@ const SignUp = () => {
       setEmailFormatErr(true)
       setEmailIdErr(false)
     }
-    let numberRegex =  new RegExp("^([+]\d{9})?\d{18}$")
+    let numberRegex =  new RegExp("^[0-9]{10}$")
     if (numberRegex.test(mobileNumberRef.current.value) !== true) {
       mobileNumberRef.current.style.border = "1px solid red"
       setMobileFormatErr(true)
       setMobileNumberErr(false)
     }
-   
+    let {username, password, mobile} = {...createUserData};
+    setGenerateOtpData((prev)=> ({...prev, name: username, password: password, mobile: mobile}))
+    
+    const generateNewOtpFun = async  () =>{
+      console.log(generateOtpData)
+      try{   
+        const getNewOtp = await axios.post(`/auth/otp`, {
+          ...generateOtpData,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        });
+        console.log("generate otp data", getNewOtp);
+
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    generateNewOtpFun();
+
+
   }
 
-  // const [userData, setUserData] = useState({
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  // })
-  // const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(false)
+
+
+  console.log("create data", createUserData)
+  console.log("generate Otp Data", generateOtpData)
+
+ 
   // const navigate = useNavigate()
 
   // const userNameRef = useRef()
@@ -153,7 +197,7 @@ const SignUp = () => {
                   ref={fullNameRef}
                   type="text"
                   name="username"
-                  // onChange={(e) => UserInfo(e)}
+                  onChange={(e) => UserInfoData(e)}
                 />
                 {fullNameErr ? <p className="errors-new">Name Can't be Blank!</p> : "" }
                 
@@ -168,6 +212,7 @@ const SignUp = () => {
                   type="text"
                   name="mobile"
                   placeholder="+91"
+                  onChange={(e) => UserInfoData(e)}
                   // onChange={(e) => UserInfo(e)}
                 />
                 {mobileNumberErr ?  <p className="errors-new">Mobile can't be Blank</p> : "" }
@@ -183,6 +228,7 @@ const SignUp = () => {
                   type="email"
                   name="email"
                   ref={emailIdRef}
+                  onChange={(e) => UserInfoData(e)}
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
@@ -197,6 +243,8 @@ const SignUp = () => {
                   className="input-design"
                   type="text"
                   ref={companyNameRef}
+                  name="companyName"
+                  onChange={(e) => UserInfoData(e)}
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
@@ -210,6 +258,8 @@ const SignUp = () => {
                   className="input-design"
                   type="password"
                   ref={passwordRef}
+                  name="password"
+                  onChange={(e) => UserInfoData(e)}
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
