@@ -190,7 +190,7 @@ const Login = () => {
           </label>
         </div>
         <div>
-          <Link to="/erp/forget">Forget Passowrd</Link>
+          <Link to="/erp/forgetpassword">Forget Passowrd</Link>
         </div>
       </div>
       <button onClick={(e) => userSignIn(e)} className="login-button my-3">

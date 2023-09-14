@@ -26,6 +26,7 @@ import MainLoginRouter from "./Login/MainLoginRouter"
 import OtpPage from "./Login/OtpPage"
 import ForgetPassword from "./Login/ForgetPassword"
 import ChangePassword from "./Login/ChangePassword"
+import ForgetOtpPage from "./Login/ForgetOtpPage"
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="otp" element={<OtpPage />} />
-            <Route path="forget" element={<ForgetPassword />} />
+            <Route path="forgetotp" element={<ForgetOtpPage />} />
+            <Route path="forgetpassword" element={<ForgetPassword />} />
             <Route path="change" element={<ChangePassword />} />
           </Route>
 
