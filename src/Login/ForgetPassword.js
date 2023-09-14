@@ -1,11 +1,30 @@
 import React, { useRef, useState } from "react"
 import "./CommonData.scss"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import {
+  forgetPasswordAction,
+  userIsPresentData,
+} from "../Redux/Action/AuthAction"
 
 const ForgetPassword = () => {
+  const [emailData, setEmailData] = useState("")
   const [emailErr, setEmailErr] = useState(false)
   const [emailFormat, setEmailFormat] = useState(false)
+  const [emailNotExist, setEmailNotExist] = useState(false)
 
   const emailRef = useRef()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const forgetOtpResponse = useSelector(
+    (auth) => auth.AuthReducer.forgetPassword
+  )
+  const isUserData = useSelector((user) => user.AuthReducer)
+
+  // console.log("forget redux", forgetOtpResponse);
+  console.log("is user data", isUserData)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -19,7 +38,48 @@ const ForgetPassword = () => {
       setEmailFormat(true)
       setEmailErr(false)
     }
+
+    const forgetPass = async () => {
+      try {
+        // const passwordOtp = await axios.post(`/auth/forgetOtp`,{...emailData, } )
+        const passwordOtp = await axios.post(
+          `/auth/forgetOtp?email=${emailData}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        console.log("data forget password", passwordOtp.data)
+        dispatch(forgetPasswordAction(passwordOtp.data))
+
+        navigate("/erp/forgetotp")
+      } catch (err) {
+        console.log(err.response.status)
+        if (err.response.status === 401) {
+          setEmailNotExist(true)
+        }
+      }
+    }
+
+    const userIsExist = async () => {
+      try {
+        const userIsPresent = await axios(
+          `/auth/isUserExistOrNot?email=${emailData}`
+        )
+        console.log("user Present", userIsPresent.data)
+        dispatch(userIsPresentData(userIsPresent.data))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    forgetPass()
+    userIsExist()
   }
+
+  console.log("email data", emailData)
 
   return (
     <form>
@@ -31,12 +91,18 @@ const ForgetPassword = () => {
             className="cm-input"
             ref={emailRef}
             type="text"
+            onChange={(e) => setEmailData(e.target.value)}
             placeholder="Enter Your Email"
           />
         </div>
         {emailErr ? <p className="errors-new">Email can't be blank</p> : ""}
         {emailFormat ? (
           <p className="errors-new">Email Not in Proper Format</p>
+        ) : (
+          ""
+        )}
+        {emailNotExist ? (
+          <p className="errors-new">Email Not Found in System </p>
         ) : (
           ""
         )}
