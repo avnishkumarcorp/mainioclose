@@ -73,13 +73,12 @@ const Login = () => {
   //   userLogin()
   // }
 
-    // let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
-    // if (regex.test(emailRef.current.value) !== true) {
-    //   emailRef.current.style.border = "1px solid red"
-    //   setEmailProperErr(true)
-    //   setEmailErr(false)
-    // }
-
+  // let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
+  // if (regex.test(emailRef.current.value) !== true) {
+  //   emailRef.current.style.border = "1px solid red"
+  //   setEmailProperErr(true)
+  //   setEmailErr(false)
+  // }
 
   const [userLoginData, setUserLoginData] = useState({
     email: "",
@@ -94,14 +93,15 @@ const Login = () => {
   const passwordRef = useRef()
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userInfo = (e) => {
     setUserLoginData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const CurrentuserData = useSelector((prev)=> (prev.AuthReducer));
+  const CurrentuserData = useSelector((prev) => prev.AuthReducer)
 
-  console.log("current user", CurrentuserData);
+  console.log("current user", CurrentuserData)
 
   const userSignIn = (e) => {
     e.preventDefault()
@@ -129,6 +129,7 @@ const Login = () => {
         dispatch(currentUserAction(collectUserData.data))
         dispatch(userTokenAction(collectUserData.data.jwt))
         localStorage.setItem("Access-token", collectUserData.data.jwt)
+        navigate("/erp/sales")
       } catch (err) {
         console.log(err)
       }
