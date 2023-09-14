@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react"
 import "./Login.scss"
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useDispatch, useSelector } from "react-redux"
+import { SignupDataAction } from "../Redux/Action/SignUpDataAction"
 
 const SignUp = () => {
   //states
@@ -38,15 +40,27 @@ const SignUp = () => {
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  
+  // redux
+  const signUpRedux = useSelector((state) => state.SignUpDataReducer.data);
+
+  console.log("signup Redux dataa", signUpRedux);
+  
+  
   // signup function
 
    const UserInfoData = (e) => {
     setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
    }
 
+ 
 
 
   const userSignUp = (e) => {
+    e.stopPropagation()
     e.preventDefault()
    
     if (fullNameRef.current.value === "") {
@@ -87,8 +101,11 @@ const SignUp = () => {
       setMobileFormatErr(true)
       setMobileNumberErr(false)
     }
-    let {username, password, mobile} = {...createUserData};
+    
+    const {username, password, mobile} = {...createUserData};
     setGenerateOtpData((prev)=> ({...prev, name: username, password: password, mobile: mobile}))
+   
+    dispatch(SignupDataAction(createUserData))
     
     const generateNewOtpFun = async  () =>{
       console.log(generateOtpData)
@@ -100,16 +117,16 @@ const SignUp = () => {
             "Content-Type": "application/json",
           },
         });
-        console.log("generate otp data", getNewOtp);
-
+        console.log("generate otp data", getNewOtp.data);
+        navigate("/erp/otp")
 
       }catch(err){
         console.log(err)
       }
     }
-    generateNewOtpFun();
-
-
+  
+      generateNewOtpFun();
+  
   }
 
 
