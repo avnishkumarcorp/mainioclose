@@ -13,8 +13,8 @@ const SignUp = () => {
     password: "",
     mobile: "",
     companyName: "",
-    otp: ""
-  });
+    otp: "",
+  })
 
   const [generateOtpData, setGenerateOtpData] = useState({
     mobile: "",
@@ -28,8 +28,8 @@ const SignUp = () => {
   const [mobileNumberErr, setMobileNumberErr] = useState(false)
   const [emailIdErr, setEmailIdErr] = useState(false)
   const [companyNameErr, setCompanyNameErr] = useState(false)
-  const [passwordErr, setPasswordErr] = useState(false);
-  const [confirmPasswordErr, setconfirmPasswordErr] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false)
+  const [confirmPasswordErr, setconfirmPasswordErr] = useState(false)
   const [emailFormatErr, setEmailFormatErr] = useState(false)
   const [mobileFormatErr, setMobileFormatErr] = useState(false)
   // refs
@@ -40,29 +40,24 @@ const SignUp = () => {
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  
   // redux
-  const signUpRedux = useSelector((state) => state.SignUpDataReducer.data);
+  const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
 
-  console.log("signup Redux dataa", signUpRedux);
-  
-  
+  console.log("signup Redux dataa", signUpRedux)
+
   // signup function
 
-   const UserInfoData = (e) => {
+  const UserInfoData = (e) => {
     setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-   }
-
- 
-
+  }
 
   const userSignUp = (e) => {
     e.stopPropagation()
     e.preventDefault()
-   
+
     if (fullNameRef.current.value === "") {
       fullNameRef.current.style.border = "1px solid red"
       setFullNameErr(true)
@@ -95,46 +90,46 @@ const SignUp = () => {
       setEmailFormatErr(true)
       setEmailIdErr(false)
     }
-    let numberRegex =  new RegExp("^[0-9]{10}$")
+    let numberRegex = new RegExp("^[0-9]{10}$")
     if (numberRegex.test(mobileNumberRef.current.value) !== true) {
       mobileNumberRef.current.style.border = "1px solid red"
       setMobileFormatErr(true)
       setMobileNumberErr(false)
     }
-    
-    const {username, password, mobile} = {...createUserData};
-    setGenerateOtpData((prev)=> ({...prev, name: username, password: password, mobile: mobile}))
-   
+
+    const { username, password, mobile } = { ...createUserData }
+    setGenerateOtpData((prev) => ({
+      ...prev,
+      name: username,
+      password: password,
+      mobile: mobile,
+    }))
+
     dispatch(SignupDataAction(createUserData))
-    
-    const generateNewOtpFun = async  () =>{
+
+    const generateNewOtpFun = async () => {
       console.log(generateOtpData)
-      try{   
+      try {
         const getNewOtp = await axios.post(`/auth/otp`, {
           ...generateOtpData,
           headers: {
             "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
-        });
-        console.log("generate otp data", getNewOtp.data);
+        })
+        console.log("generate otp data", getNewOtp.data)
         navigate("/erp/otp")
-
-      }catch(err){
+      } catch (err) {
         console.log(err)
       }
     }
-  
-      generateNewOtpFun();
-  
+
+    generateNewOtpFun()
   }
-
-
 
   console.log("create data", createUserData)
   console.log("generate Otp Data", generateOtpData)
 
- 
   // const navigate = useNavigate()
 
   // const userNameRef = useRef()
@@ -216,8 +211,11 @@ const SignUp = () => {
                   name="username"
                   onChange={(e) => UserInfoData(e)}
                 />
-                {fullNameErr ? <p className="errors-new">Name Can't be Blank!</p> : "" }
-                
+                {fullNameErr ? (
+                  <p className="errors-new">Name Can't be Blank!</p>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="">
                 <label className="inp-label">
@@ -232,8 +230,16 @@ const SignUp = () => {
                   onChange={(e) => UserInfoData(e)}
                   // onChange={(e) => UserInfo(e)}
                 />
-                {mobileNumberErr ?  <p className="errors-new">Mobile can't be Blank</p> : "" }
-                {mobileFormatErr ?  <p className="errors-new">Please Enter Digit Only</p> : "" }
+                {mobileNumberErr ? (
+                  <p className="errors-new">Mobile can't be Blank</p>
+                ) : (
+                  ""
+                )}
+                {mobileFormatErr ? (
+                  <p className="errors-new">Please Enter Digit Only</p>
+                ) : (
+                  ""
+                )}
                 {/* mobileFormatErr */}
               </div>
               <div className="">
@@ -249,8 +255,16 @@ const SignUp = () => {
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
-                  {emailIdErr ?  <p className="errors-new">Email ID can't be Blank</p> : "" }
-                  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" }
+                {emailIdErr ? (
+                  <p className="errors-new">Email ID can't be Blank</p>
+                ) : (
+                  ""
+                )}
+                {emailFormatErr ? (
+                  <p className="errors-new">Email not in Proper Format</p>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="">
                 <label className="inp-label">
@@ -265,7 +279,11 @@ const SignUp = () => {
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
-                    {companyNameErr ?  <p className="errors-new">Company Name can't be Blank</p> : "" }
+                {companyNameErr ? (
+                  <p className="errors-new">Company Name can't be Blank</p>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="">
                 <label className="inp-label">
@@ -280,7 +298,11 @@ const SignUp = () => {
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
-                {passwordErr ?  <p className="errors-new">password can't be Blank</p> : "" }
+                {passwordErr ? (
+                  <p className="errors-new">password can't be Blank</p>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="">
                 <label className="inp-label">
@@ -293,7 +315,11 @@ const SignUp = () => {
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
-                 {confirmPasswordErr ?  <p className="errors-new">confirm password can't be Blank</p> : "" }
+                {confirmPasswordErr ? (
+                  <p className="errors-new">confirm password can't be Blank</p>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
 
