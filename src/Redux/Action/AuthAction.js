@@ -1,11 +1,11 @@
-export const userInformation = (data) =>{
+export const currentUserAction = (data) =>{
     return {
-        type: "USERINFO",
+        type: "CURRENT_USER",
         payload: data,
     }
 }
 
-export const userToken = (data) =>{
+export const userTokenAction = (data) =>{
     return {
         type: "TOKEN",
         payload: data,

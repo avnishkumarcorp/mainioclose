@@ -17,6 +17,8 @@ const MainPage = () => {
   // })
 
   return (
+
+    
     <div className="main-page">
       <div className="side-nav">
         <SideBar />
