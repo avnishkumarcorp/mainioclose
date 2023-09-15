@@ -183,7 +183,7 @@ const SignUp = () => {
   return (
     <div className="login-page">
       <div className="login-form">
-        <div className="right-login">
+        <div className="container right-login">
           <form className={`w-100`}>
             {/* <div>
               <Link to="/" className="main-logo link-cm">Logo</Link>
