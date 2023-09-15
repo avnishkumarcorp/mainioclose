@@ -1,0 +1,21 @@
+.main-web-logo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  .main-nav-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    list-style-type: none;
+    .single-link {
+      font-size: 22px;
+      color: #000;
+      font-weight: 600;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
