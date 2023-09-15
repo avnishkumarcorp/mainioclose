@@ -6,7 +6,7 @@ const TopNav = () => {
   const navigate = useNavigate();
   const logoutUser = () =>{
     const token = localStorage.removeItem("Access Token");
-    navigate("/login")
+    navigate("/erp/login")
   } 
 
   return (
@@ -15,7 +15,7 @@ const TopNav = () => {
         <input className="search-box" type="search" placeholder="Serach..." />
       </div>
       <div className="user-profile">
-        <button onClick={logoutUser}>Logout</button>
+        <button className="btn btn-primary" onClick={logoutUser}>Logout</button>
         <div className="profile-image">
           <img
             src={`https://images.pexels.com/photos/17739178/pexels-photo-17739178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`}
