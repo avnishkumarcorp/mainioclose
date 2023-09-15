@@ -6,10 +6,10 @@ const InboxPage = () => {
   const [activeTab, setActiveTab] = useState(false)
 
   const data = [
-    { id: 1, name: "new name", link: "go to next" },
-    { id: 2, name: "new name 2", link: "go to next 2" },
-    { id: 3, name: "new name 3", link: "go to next 3" },
-    { id: 4, name: "new name 4", link: "go to next 4" },
+    { id: 1, name: "Lead 1", link: "Client 1" },
+    { id: 2, name: "Lead 2", link: "client 2" },
+    { id: 3, name: "Lead 3", link: "Client 3" },
+    { id: 4, name: "Lead 4", link: "Client 4" },
   ]
 
   return (
@@ -28,7 +28,7 @@ const InboxPage = () => {
 
       {/* data table */}
       <div className="table-responsive mt-5">
-        <table className="table table-dark">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">id</th>
@@ -41,7 +41,7 @@ const InboxPage = () => {
               <tr key={i}>
                 <td>{d.id}</td>
                 <td>
-                  <Link to="/sales/1">{d.name}</Link>
+                  <Link to={`/erp/sales/${d.id}`}>{d.name}</Link>
                 </td>
                 <td>{d.link}</td>
               </tr>
