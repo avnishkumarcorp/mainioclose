@@ -20,7 +20,7 @@ const HomeNavbar = () => {
             <Link className="single-link" to="/">company</Link>
           </li>
           <li>
-            <Link className="single-link" to="/">About us</Link>
+            <Link className="single-link" to="/erp/login">Login</Link>
           </li>
         </ul>
       </div>
