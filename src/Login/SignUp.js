@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { SignupDataAction } from "../Redux/Action/SignUpDataAction"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const SignUp = () => {
   //states
@@ -121,7 +124,10 @@ const SignUp = () => {
         navigate("/erp/otp")
       } catch (err) {
         console.log(err)
+         if(err.response.status === 500){
+          toast.error("please Referesh this page or try again later")
       }
+       }
     }
 
     generateNewOtpFun()

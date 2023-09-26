@@ -11,6 +11,9 @@ import {
   userToken,
   userTokenAction,
 } from "../Redux/Action/AuthAction"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const Login = () => {
   // const [userData, setUserData] = useState({
@@ -132,13 +135,16 @@ const Login = () => {
         navigate("/erp/sales")
       } catch (err) {
         console.log(err)
+        if(err.response.status === 500){
+          toast.error("please Referesh this page or try again later")
+      }
       }
     }
 
     loginUser()
   }
 
-  console.log("user data", userLoginData)
+  console.log("user data", userLoginData) 
 
   return (
     <div className="cm-box container">
