@@ -58,7 +58,7 @@ const SignUp = () => {
   }
 
   const userSignUp = (e) => {
-    e.stopPropagation()
+    
     e.preventDefault()
 
     if (fullNameRef.current.value === "") {
@@ -113,7 +113,7 @@ const SignUp = () => {
     const generateNewOtpFun = async () => {
       console.log(generateOtpData)
       try {
-        const getNewOtp = await axios.post(`/auth/otp`, {
+        const getNewOtp = await axios.post(`/api/auth/otp`, {
           ...generateOtpData,
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -136,64 +136,14 @@ const SignUp = () => {
   console.log("create data", createUserData)
   console.log("generate Otp Data", generateOtpData)
 
-  // const navigate = useNavigate()
 
-  // const userNameRef = useRef()
-  // const userEmailRef = useRef()
-  // const userPasswordRef = useRef()
 
-  // const UserInfo = (e) => {
-  //   setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  // }
-
-  // const userSignUp = (e) => {
-  //   e.preventDefault()
-  //   setLoading(true)
-  //   if (userNameRef.current.value === "") {
-  //     console.log("name can not blank")
-  //     userNameRef.current.style.border = "1px solid red"
-  //     setError(true)
-  //     return
-  //   }
-  //   if (userEmailRef.current.value === "") {
-  //     console.log("Email can not blank")
-  //     userEmailRef.current.style.border = "1px solid red"
-  //     setError(true)
-  //     return
-  //   }
-  //   if (userPasswordRef.current.value === "") {
-  //     console.log("password can not blank")
-  //     userPasswordRef.current.style.border = "1px solid red"
-  //     setError(true)
-  //     return
-  //   }
-
-  //   const createUser = async () => {
-  //     try {
-  //       const userData = await axios.post(
-  //         `http://localhost:9990/api/auth/createNewUser`,
-  //         {
-  //           username: userNameRef.current.value,
-  //           email: userEmailRef.current.value,
-  //           password: userPasswordRef.current.value,
-  //         }
-  //       )
-  //       navigate("/login")
-  //     } catch (err) {
-  //       setError(err)
-  //     }
-  //   }
-  //   createUser()
-  // }
-
+ 
   return (
     <div className="login-page">
       <div className="login-form">
         <div className="container right-login">
           <form className={`w-100`}>
-            {/* <div>
-              <Link to="/" className="main-logo link-cm">Logo</Link>
-            </div> */}
             <div className="signup-text">
               <h3 className="start-text">Start Now - It's Free</h3>
               <div className="text-points">
@@ -216,6 +166,7 @@ const SignUp = () => {
                   type="text"
                   name="username"
                   onChange={(e) => UserInfoData(e)}
+                  autoComplete="on"
                 />
                 {fullNameErr ? (
                   <p className="errors-new">Name Can't be Blank!</p>
@@ -234,6 +185,7 @@ const SignUp = () => {
                   name="mobile"
                   placeholder="+91"
                   onChange={(e) => UserInfoData(e)}
+                  autoComplete="on"
                   // onChange={(e) => UserInfo(e)}
                 />
                 {mobileNumberErr ? (
@@ -258,6 +210,7 @@ const SignUp = () => {
                   name="email"
                   ref={emailIdRef}
                   onChange={(e) => UserInfoData(e)}
+                  autoComplete="on"
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
@@ -282,6 +235,7 @@ const SignUp = () => {
                   ref={companyNameRef}
                   name="companyName"
                   onChange={(e) => UserInfoData(e)}
+                  autoComplete="on"
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
@@ -301,6 +255,7 @@ const SignUp = () => {
                   ref={passwordRef}
                   name="password"
                   onChange={(e) => UserInfoData(e)}
+                  autoComplete="on"
                   // onChange={(e) => UserInfo(e)}
                   required
                 />
@@ -318,6 +273,7 @@ const SignUp = () => {
                   className="input-design"
                   type="password"
                   ref={confirmPasswordRef}
+                  autoComplete="on"
                   // onChange={(e) => UserInfo(e)}
                   required
                 />

@@ -8,15 +8,15 @@ import { useSelector } from "react-redux"
 const MainPage = () => {
   const navigate = useNavigate()
   const currentUserToken = useSelector((state) => state.AuthReducer.token)
-  useEffect(() => {
-    let UserToken = localStorage.getItem("Access-token")
-    console.log("user token ", UserToken)
-    console.log("current user token", currentUserToken)
-    console.log(UserToken === currentUserToken);
-    if (!UserToken || currentUserToken !== UserToken) {
-      navigate("/erp/login")
-    }
-  })
+  // useEffect(() => {
+  //   let UserToken = localStorage.getItem("Access-token")
+  //   console.log("user token ", UserToken)
+  //   console.log("current user token", currentUserToken)
+  //   console.log(UserToken === currentUserToken);
+  //   if (!UserToken || currentUserToken !== UserToken) {
+  //     navigate("/erp/login")
+  //   }
+  // })
 
   return (
     <div className="main-page">

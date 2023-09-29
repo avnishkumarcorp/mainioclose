@@ -15,66 +15,8 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 toast.configure()
 
+
 const Login = () => {
-  // const [userData, setUserData] = useState({
-  //   email: "",
-  //   password: "",
-  // })
-  // const [wrongInput, setWrongInput] = useState(false)
-
-  // const currentUser = useSelector((state) => state.AuthReducer)
-  // const dispatch = useDispatch()
-
-  // const [error, setError] = useState(false)
-  // const [loading, setLoading] = useState(false)
-  // const navigate = useNavigate()
-
-  // const userEmailRef = useRef()
-  // const userPasswordRef = useRef()
-
-  // const UserInfo = (e) => {
-  //   setUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-  // }
-
-  // const userLogin = (e) => {
-  //   e.preventDefault()
-
-  //   if (userEmailRef.current.value === "") {
-  //     userEmailRef.current.style.border = "1px solid red"
-  //     setError(true)
-  //     return
-  //   }
-  //   if (userPasswordRef.current.value === "") {
-  //     userPasswordRef.current.style.border = "1px solid red"
-  //     setError(true)
-  //     return
-  //   }
-
-  //   const userLogin = async () => {
-  //     setLoading(true)
-  //     try {
-  //       const loginData = await axios.post(
-  //         "http://localhost:9990/apis/auth/signin",
-  //         {
-  //           email: userEmailRef.current.value,
-  //           password: userPasswordRef.current.value,
-  //         }
-  //       )
-  //       dispatch(userInformation(loginData.data))
-  //       dispatch(userToken(loginData.data.jwt))
-
-  //       let token = loginData?.data?.jwt
-  //       localStorage.setItem("Access Token", token)
-  //       navigate("/")
-  //     } catch (err) {
-  //       console.log(err)
-  //       setWrongInput(true)
-
-  //       setLoading(false)
-  //     }
-  //   }
-  //   userLogin()
-  // }
 
   // let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
   // if (regex.test(emailRef.current.value) !== true) {
@@ -120,7 +62,7 @@ const Login = () => {
 
     const loginUser = async () => {
       try {
-        const collectUserData = await axios.post(`/auth/signin`, {
+        const collectUserData = await axios.post(`/securityService/api/auth/signin`, {
           ...userLoginData,
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -134,7 +76,6 @@ const Login = () => {
         localStorage.setItem("Access-token", collectUserData.data.jwt)
         navigate("/erp/sales")
       } catch (err) {
-        console.log(err)
         if(err.response.status === 500){
           toast.error("please Referesh this page or try again later")
       }
