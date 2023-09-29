@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
 import "./App.css"
 import MainPage from "./Main/MainPage"
 import DashBoard from "./Main/DashBoard/DashBoard"
@@ -33,6 +33,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+        <Route path="*" element={<div>not found</div>} />
           <Route path="/" element={<HomePage />}>
             <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />

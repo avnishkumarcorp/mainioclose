@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react"
 import "./InboxPage.scss"
 import { Link } from "react-router-dom"
 import axios from "axios"
+import MUIDataTable from "mui-datatables"
+import DataGridTables from "../../../components/DataGridTables"
+
 
 const InboxPage = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -11,23 +14,92 @@ const InboxPage = () => {
     getAllLead()
   }, [])
 
-  const data = [
-    { id: 1, name: "Lead 1", link: "Client 1" },
-    { id: 2, name: "Lead 2", link: "client 2" },
-    { id: 3, name: "Lead 3", link: "Client 3" },
-    { id: 4, name: "Lead 4", link: "Client 4" },
+  console.log("all e")
+
+  const columns = [
+    {
+      name: "name",
+      label: "Name",
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: "company",
+      label: "Company",
+      options: {
+        filter: true,
+        sort: false,
+      },
+    },
+    {
+      name: "city",
+      label: "City",
+      options: {
+        filter: true,
+        sort: false,
+      },
+    },
+    {
+      name: "state",
+      label: "State",
+      options: {
+        filter: true,
+        sort: false,
+      },
+    },
   ]
 
-  const getAllLead = async () => {
-    const allLead = await axios.get(`/v1/lead/getAllLead?userId=${1}`, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    })
+  const data = [
+    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
+    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
+    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
+    {
+      name: "James Houston",
+      company: "Test Corp",
+      city: "Dallas",
+      state: "TX",
+    },
+  ]
 
-    console.log("all Lead data", allLead.data)
-    setAllLeadData(allLead.data)
+  const options = {
+    filterType: "checkbox",
+  }
+
+  useEffect(()=>{
+    testData();
+  },[])
+
+  const testData = async () =>{
+    try{
+      const postdata = await axios.get(`/leadService/api/v1/lead/testPost`);
+      console.log("data", postdata);
+
+    }catch(err){
+      console.log("err", err);
+
+    }
+  }
+
+
+
+
+
+  const getAllLead = async () => {
+    try {
+      const allLead = await axios.get(`/leadService/api/v1/lead/getAllLead?userId=${1}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+
+      console.log("all Lead data", allLead.data)
+      setAllLeadData(allLead.data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   // http://localhost:8089/api/v1/lead/getAllLead?userId=1
@@ -44,6 +116,16 @@ const InboxPage = () => {
         <button to="/sales3" className={`tab-btn `}>
           Failure (45)
         </button>
+      </div>
+
+      <DataGridTables />
+      <div className="mt-5">
+        <MUIDataTable
+          title={"Employee List"}
+          data={data}
+          columns={columns}
+          options={options}
+        />
       </div>
 
       {/* data table */}
