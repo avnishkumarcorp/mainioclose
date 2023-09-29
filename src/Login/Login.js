@@ -62,11 +62,10 @@ const Login = () => {
 
     const loginUser = async () => {
       try {
-        const collectUserData = await axios.post(`/securityService/api/auth/signin`, {
-          ...userLoginData,
+        const collectUserData = await axios.get(`/securityService/api/auth/signin?email=rahul123%40gmail.com&password=password`,{
           headers: {
             "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
+            // "Content-Type": "application/json",
           },
         })
         console.log("api data", collectUserData.data.jwt)
@@ -76,9 +75,12 @@ const Login = () => {
         localStorage.setItem("Access-token", collectUserData.data.jwt)
         navigate(`/erp/${collectUserData.data.id}/sales`)
       } catch (err) {
+        if(err.response.status === 401){
+          toast.error("Enter a valid username or password")
+        }
         if(err.response.status === 500){
           toast.error("please Referesh this page or try again later")
-      }
+        }
       }
     }
 
