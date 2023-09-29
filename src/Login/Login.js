@@ -74,7 +74,7 @@ const Login = () => {
         dispatch(currentUserAction(collectUserData.data))
         dispatch(userTokenAction(collectUserData.data.jwt))
         localStorage.setItem("Access-token", collectUserData.data.jwt)
-        navigate("/erp/sales")
+        navigate(`/erp/${collectUserData.data.id}/sales`)
       } catch (err) {
         if(err.response.status === 500){
           toast.error("please Referesh this page or try again later")

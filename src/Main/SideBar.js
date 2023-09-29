@@ -1,10 +1,19 @@
 import React from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import corpseedLogo from "../Images/corpseed-logo.png"
 
 const SideBar = () => {
+
+  const location = useLocation();
+
+  const currentPath = location.pathname.split()
+  const splitPath = currentPath[0].split("/")
+  const currentUserId = Number(splitPath[2]);
+
+
+
   return (
     <div className="sideTab">
       {/* Dashboard links start */}
@@ -16,7 +25,7 @@ const SideBar = () => {
 
       <div className="side-tabs">
         <NavLink
-          to="/erp"
+          to={`/erp/${currentUserId}`}
           className={`nav-heading ml-3`}
           data-toggle="collapse"
           data-target={`#collapseOne`}
@@ -31,7 +40,7 @@ const SideBar = () => {
       {/* hr links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/hr"
+          to={`/erp/${currentUserId}/hr`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -75,7 +84,7 @@ const SideBar = () => {
       {/* sales links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/sales"
+          to={`/erp/${currentUserId}/sales`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -119,7 +128,7 @@ const SideBar = () => {
       {/* accounts links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/account"
+          to={`/erp/${currentUserId}/account`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -163,7 +172,7 @@ const SideBar = () => {
       {/* operations links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/operation"
+          to={`/erp/${currentUserId}/operation`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -207,7 +216,7 @@ const SideBar = () => {
       {/* Manage Clinets links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/manageclient"
+          to={`/erp/${currentUserId}/manageclient`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -252,7 +261,7 @@ const SideBar = () => {
       {/* activity Master links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/activity"
+          to={`/erp/${currentUserId}/activity`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -296,7 +305,7 @@ const SideBar = () => {
       {/* Quality links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/quality"
+          to={`/erp/${currentUserId}/quality`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
@@ -341,7 +350,7 @@ const SideBar = () => {
       {/* Profile links start */}
       <div className="side-tabs">
         <NavLink
-          to="/erp/profile"
+          to={`/erp/${currentUserId}/profile`}
           className={`nav-heading ${({ isActive }) =>
             isActive ? "linkactive" : ""}`}
           data-toggle="collapse"
