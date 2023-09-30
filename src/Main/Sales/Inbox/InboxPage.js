@@ -5,6 +5,7 @@ import axios from "axios"
 import MUIDataTable from "mui-datatables"
 import DataGridTables from "../../../components/DataGridTables"
 import LeadsModule from "../Leads/LeadsModule"
+import DataTableFirst from "../../../components/DataTableFirst"
 
 
 const InboxPage = () => {
@@ -24,7 +25,7 @@ const InboxPage = () => {
 
   console.log("all e")
 
-  const columns = [
+  const leadColumns = [
     {
       name: "name",
       label: "Name",
@@ -34,69 +35,32 @@ const InboxPage = () => {
       },
     },
     {
-      name: "company",
-      label: "Company",
+      name: "comment",
+      label: "Comment",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
       },
     },
     {
-      name: "city",
-      label: "City",
+      name: "count",
+      label: "Count",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
       },
     },
-    {
-      name: "state",
-      label: "State",
-      options: {
-        filter: true,
-        sort: false,
-      },
-    },
+    
   ]
 
-  const data = [
-    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-    {
-      name: "James Houston",
-      company: "Test Corp",
-      city: "Dallas",
-      state: "TX",
-    },
-  ]
-
-  const options = {
+  const filterOptions = {
     filterType: "checkbox",
   }
-
-  // useEffect(()=>{
-  //   testData();
-  // },[])
-
-  // const testData = async () =>{
-  //   try{
-  //     const postdata = await axios.get(`/leadService/api/v1/lead/testPost`);
-  //     console.log("data", postdata);
-
-  //   }catch(err){
-  //     console.log("err", err);
-
-  //   }
-  // }
-
-
-
 
 
   const getAllLead = async () => {
     try {
-      const allLead = await axios.get(`/leadService/api/v1/lead/getAllLead?userId=${1}`, {
+      const allLead = await axios.get(`/leadService/api/v1/inbox/getAllInboxData`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
@@ -128,13 +92,16 @@ const InboxPage = () => {
 
       {/* <LeadsModule */}
 
-      {/* <DataGridTables />
-      <div className="mt-5">
+      {/* <DataGridTables /> */}
+    {/* <DataTableFirst allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} /> */}
+
+
+      {/* <div className="mt-5">
         <MUIDataTable
-          title={"Employee List"}
-          data={data}
-          columns={columns}
-          options={options}
+          title={"Inbox"}
+          data={allLeadData}
+          columns={leadColumns}
+          options={filterOptions}
         />
       </div> */}
 
@@ -145,11 +112,8 @@ const InboxPage = () => {
             <tr>
               <th scope="col">id</th>
               <th scope="col">Name</th>
-              <th scope="col">Mobile Number</th>
-              <th scope="col">Email</th>
-              <th scope="col">Created</th>
-              <th scope="col">Description</th>
-              <th scope="col">Source</th>
+              <th scope="col">Comment</th>
+              <th scope="col">Count</th>
             </tr>
           </thead>
           <tbody>
@@ -159,11 +123,8 @@ const InboxPage = () => {
                 <td>
                   <Link to={`/erp/${currentUserId}/sales/${lead.id}`}>{lead.name}</Link>
                 </td>
-                <td>{lead.mobileNo}</td>
-                <td>{lead.email}</td>
-                <td>{lead.createDate}</td>
-                <td>{lead.leadDescription}</td>
-                <td>{lead.source}</td>
+                <td>{lead.comment}</td>
+                <td>{lead.count===0 ? lead.count : <div className="lead-count">{lead.count}</div>}</td>
               </tr>
             ))}
           </tbody>

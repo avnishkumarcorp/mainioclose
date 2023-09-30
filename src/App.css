@@ -162,6 +162,33 @@ button:focus {
 
 
 
+
+/* mui tabkle */
+
+.tss-dbu3l1-MUIDataTableViewCol-formGroup{
+  padding: 15px;
+}
+.css-levciy-MuiTablePagination-displayedRows{
+  margin: 0;
+}
+
+.css-pdct74-MuiTablePagination-selectLabel{
+  margin: 0;
+}
+
+
+/* mui table */
+
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 992px) {
 }
 

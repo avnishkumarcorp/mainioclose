@@ -5,6 +5,7 @@ import "react-calendar/dist/Calendar.css"
 import AllLeadsDisplay from "./AllLeadsDisplay"
 import { Link, useLocation } from "react-router-dom"
 import axios from "axios"
+import DataTableFirst from "../../../components/DataTableFirst"
 
 
 const LeadsModule = () => {
@@ -110,13 +111,16 @@ const LeadsModule = () => {
         </button>
       </div>
 
+      {/* <DataTableFirst allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} /> */}
+
+
       <div className="table-responsive mt-5">
         <table className="table">
           <thead>
             <tr>
               <th scope="col">id</th>
               <th scope="col">Name</th>
-              <th scope="col">Mobile Number</th>
+              <th scope="col">Mobile Numberfff</th>
               <th scope="col">Email</th>
               <th scope="col">Created</th>
               <th scope="col">Description</th>
