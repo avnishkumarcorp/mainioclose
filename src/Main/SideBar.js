@@ -102,10 +102,10 @@ const SideBar = () => {
           data-parent="#accordion"
         >
           <div className="link-child">
-            <NavLink className="link-itemss" to="sales">
+            <NavLink className="link-itemss" to={`${currentUserId}/sales`}>
               Inbox
             </NavLink>
-            <NavLink className="link-itemss" to="sales/oppurtities">
+            <NavLink className="link-itemss" to={`${currentUserId}/sales/oppurtities`}>
               Oppurtities
             </NavLink>
             <NavLink className="link-itemss" to="sales/estimate">
@@ -117,7 +117,7 @@ const SideBar = () => {
             <NavLink className="link-itemss" to="sales/contacts">
               Contacts
             </NavLink>
-            <NavLink className="link-itemss" to="sales/leads">
+            <NavLink className="link-itemss" to={`${currentUserId}/sales/leads`}>
               Leads
             </NavLink>
           </div>

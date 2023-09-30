@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import "./InboxPage.scss"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import axios from "axios"
 import MUIDataTable from "mui-datatables"
 import DataGridTables from "../../../components/DataGridTables"
+import LeadsModule from "../Leads/LeadsModule"
 
 
 const InboxPage = () => {
@@ -13,6 +14,13 @@ const InboxPage = () => {
   useEffect(() => {
     getAllLead()
   }, [])
+
+  const location = useLocation();
+  const currentPath = location.pathname.split()
+  const splitPath = currentPath[0].split("/")
+  const currentUserId = Number(splitPath[2]);
+
+  console.log("id is ", currentUserId)
 
   console.log("all e")
 
@@ -67,20 +75,20 @@ const InboxPage = () => {
     filterType: "checkbox",
   }
 
-  useEffect(()=>{
-    testData();
-  },[])
+  // useEffect(()=>{
+  //   testData();
+  // },[])
 
-  const testData = async () =>{
-    try{
-      const postdata = await axios.get(`/leadService/api/v1/lead/testPost`);
-      console.log("data", postdata);
+  // const testData = async () =>{
+  //   try{
+  //     const postdata = await axios.get(`/leadService/api/v1/lead/testPost`);
+  //     console.log("data", postdata);
 
-    }catch(err){
-      console.log("err", err);
+  //   }catch(err){
+  //     console.log("err", err);
 
-    }
-  }
+  //   }
+  // }
 
 
 
@@ -102,7 +110,7 @@ const InboxPage = () => {
     }
   }
 
-  // http://localhost:8089/api/v1/lead/getAllLead?userId=1
+  
 
   return (
     <div className="inbox-page cm-padding-one">
@@ -118,7 +126,9 @@ const InboxPage = () => {
         </button>
       </div>
 
-      <DataGridTables />
+      {/* <LeadsModule */}
+
+      {/* <DataGridTables />
       <div className="mt-5">
         <MUIDataTable
           title={"Employee List"}
@@ -126,7 +136,7 @@ const InboxPage = () => {
           columns={columns}
           options={options}
         />
-      </div>
+      </div> */}
 
       {/* data table */}
       <div className="table-responsive mt-5">
@@ -147,7 +157,7 @@ const InboxPage = () => {
               <tr key={i}>
                 <td>{lead.id}</td>
                 <td>
-                  <Link to={`/erp/sales/${lead.id}`}>{lead.name}</Link>
+                  <Link to={`/erp/${currentUserId}/sales/${lead.id}`}>{lead.name}</Link>
                 </td>
                 <td>{lead.mobileNo}</td>
                 <td>{lead.email}</td>
