@@ -71,7 +71,7 @@ const AllLeadsDisplay = () => {
           <p className="value">Annualized Value</p>
           <p className="price">INR 4,000</p>
         </div>
-        <div className="all-lead  s">
+        <div className="all-leads">
           <LeadsCard />
           <LeadsCard />
           <LeadsCard />
@@ -80,6 +80,9 @@ const AllLeadsDisplay = () => {
           <LeadsCard />
         </div>
       </div>
+
+
+   
     </div>
   )
 }
