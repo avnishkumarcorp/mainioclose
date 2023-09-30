@@ -1,10 +1,43 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import "./LeadDetailsPage.scss"
 import FilterButton from "../../../components/FilterButton"
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false);
   const [notes1, setNotes1] = useState(false);
+
+  useEffect(()=>{
+    editViewData();
+  },[])
+
+  // const editViewData = async  ()  =>{  
+  //   const viewData = await axios.get(`/leadService/api/v1/inbox/editView?leadId=3`,{
+
+  //   })
+  // }
+
+  const location = useLocation();
+  const currentPath = location.pathname.split()
+  const splitPath = currentPath[0].split("/")
+  const leadPathId = Number(splitPath[4]);
+ 
+  const editViewData = async () => {
+    try {
+      const viewData = await axios.get(`/leadService/api/v1/inbox/editView?leadId=${leadPathId}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+
+      console.log("view data")
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 
   
   return (
