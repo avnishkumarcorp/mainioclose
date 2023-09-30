@@ -71,7 +71,7 @@ const AllLeadsDisplay = () => {
           <p className="value">Annualized Value</p>
           <p className="price">INR 4,000</p>
         </div>
-        <div className="all-leads">
+        <div className="all-lead  s">
           <LeadsCard />
           <LeadsCard />
           <LeadsCard />

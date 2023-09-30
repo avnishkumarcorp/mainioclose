@@ -5,6 +5,7 @@ import axios from "axios"
 import MUIDataTable from "mui-datatables"
 import DataGridTables from "../../../components/DataGridTables"
 import LeadsModule from "../Leads/LeadsModule"
+import DataTableFirst from "../../../components/DataTableFirst"
 
 
 const InboxPage = () => {
@@ -24,7 +25,7 @@ const InboxPage = () => {
 
   console.log("all e")
 
-  const columns = [
+  const leadColumns = [
     {
       name: "name",
       label: "Name",
@@ -52,7 +53,7 @@ const InboxPage = () => {
     
   ]
 
-  const options = {
+  const filterOptions = {
     filterType: "checkbox",
   }
 
@@ -91,15 +92,18 @@ const InboxPage = () => {
 
       {/* <LeadsModule */}
 
-      <DataGridTables />
-      <div className="mt-5">
+      {/* <DataGridTables /> */}
+    {/* <DataTableFirst allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} /> */}
+
+
+      {/* <div className="mt-5">
         <MUIDataTable
-          title={"Employee List"}
+          title={"Inbox"}
           data={allLeadData}
-          columns={columns}
-          options={options}
+          columns={leadColumns}
+          options={filterOptions}
         />
-      </div>
+      </div> */}
 
       {/* data table */}
       <div className="table-responsive mt-5">
