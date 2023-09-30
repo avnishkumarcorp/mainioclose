@@ -96,7 +96,7 @@ const InboxPage = () => {
 
   const getAllLead = async () => {
     try {
-      const allLead = await axios.get(`/leadService/api/v1/lead/getAllLead?userId=${1}`, {
+      const allLead = await axios.get(`/leadService/api/v1/inbox/getAllInboxData`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
@@ -145,11 +145,8 @@ const InboxPage = () => {
             <tr>
               <th scope="col">id</th>
               <th scope="col">Name</th>
-              <th scope="col">Mobile Number</th>
-              <th scope="col">Email</th>
-              <th scope="col">Created</th>
-              <th scope="col">Description</th>
-              <th scope="col">Source</th>
+              <th scope="col">Comment</th>
+              <th scope="col">Count</th>
             </tr>
           </thead>
           <tbody>
@@ -159,11 +156,8 @@ const InboxPage = () => {
                 <td>
                   <Link to={`/erp/${currentUserId}/sales/${lead.id}`}>{lead.name}</Link>
                 </td>
-                <td>{lead.mobileNo}</td>
-                <td>{lead.email}</td>
-                <td>{lead.createDate}</td>
-                <td>{lead.leadDescription}</td>
-                <td>{lead.source}</td>
+                <td>{lead.comment}</td>
+                <td>{lead.count===0 ? lead.count : <div className="lead-count">{lead.count}</div>}</td>
               </tr>
             ))}
           </tbody>
