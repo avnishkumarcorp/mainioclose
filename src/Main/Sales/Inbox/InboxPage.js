@@ -60,7 +60,7 @@ const InboxPage = () => {
 
   const getAllLead = async () => {
     try {
-      const allLead = await axios.get(`/leadService/api/v1/inbox/getAllInboxData`, {
+      const allLead = await axios.get(`/leadService/api/v1/inbox/getAllInboxData?userId=${1}`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
@@ -73,6 +73,7 @@ const InboxPage = () => {
       console.log(err)
     }
   }
+
 
   
 
@@ -119,9 +120,9 @@ const InboxPage = () => {
           <tbody>
             {allLeadData.map((lead, i) => (
               <tr key={i}>
-                <td>{lead.id}</td>
+                <td>{lead.leadId}</td>
                 <td>
-                  <Link to={`/erp/${currentUserId}/sales/${lead.id}`}>{lead.name}</Link>
+                  <Link to={`/erp/${currentUserId}/sales/${lead.leadId}`}>{lead.name}</Link>
                 </td>
                 <td>{lead.comment}</td>
                 <td>{lead.count===0 ? lead.count : <div className="lead-count">{lead.count}</div>}</td>
