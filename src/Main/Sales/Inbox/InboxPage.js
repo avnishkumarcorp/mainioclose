@@ -34,64 +34,27 @@ const InboxPage = () => {
       },
     },
     {
-      name: "company",
-      label: "Company",
+      name: "comment",
+      label: "Comment",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
       },
     },
     {
-      name: "city",
-      label: "City",
+      name: "count",
+      label: "Count",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
       },
     },
-    {
-      name: "state",
-      label: "State",
-      options: {
-        filter: true,
-        sort: false,
-      },
-    },
-  ]
-
-  const data = [
-    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-    {
-      name: "James Houston",
-      company: "Test Corp",
-      city: "Dallas",
-      state: "TX",
-    },
+    
   ]
 
   const options = {
     filterType: "checkbox",
   }
-
-  // useEffect(()=>{
-  //   testData();
-  // },[])
-
-  // const testData = async () =>{
-  //   try{
-  //     const postdata = await axios.get(`/leadService/api/v1/lead/testPost`);
-  //     console.log("data", postdata);
-
-  //   }catch(err){
-  //     console.log("err", err);
-
-  //   }
-  // }
-
-
-
 
 
   const getAllLead = async () => {
@@ -128,15 +91,15 @@ const InboxPage = () => {
 
       {/* <LeadsModule */}
 
-      {/* <DataGridTables />
+      <DataGridTables />
       <div className="mt-5">
         <MUIDataTable
           title={"Employee List"}
-          data={data}
+          data={allLeadData}
           columns={columns}
           options={options}
         />
-      </div> */}
+      </div>
 
       {/* data table */}
       <div className="table-responsive mt-5">
