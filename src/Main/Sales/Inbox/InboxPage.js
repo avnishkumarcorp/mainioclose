@@ -93,7 +93,7 @@ const InboxPage = () => {
       {/* <LeadsModule */}
 
       {/* <DataGridTables /> */}
-    {/* <DataTableFirst allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} /> */}
+    <DataTableFirst  tabletitle={"Inbox"} allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} />
 
 
       {/* <div className="mt-5">

@@ -28,6 +28,14 @@ const LeadsModule = () => {
 
   const columns = [
     {
+      name: "id",
+      label: "ID",
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
       name: "name",
       label: "Name",
       options: {
@@ -36,27 +44,43 @@ const LeadsModule = () => {
       },
     },
     {
-      name: "company",
-      label: "Company",
+      name: "mobileNo",
+      label: "Mobile",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
       },
     },
     {
-      name: "city",
-      label: "City",
+      name: "email",
+      label: "Email",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
       },
     },
     {
-      name: "state",
-      label: "State",
+      name: "createDate",
+      label: "create Date",
       options: {
         filter: true,
-        sort: false,
+        sort: true,
+      },
+    },
+    {
+      name: "leadDescription",
+      label: "Description",
+      options: {
+        filter: true,
+        sort: true,
+      },
+    },
+    {
+      name: "source",
+      label: "Source",
+      options: {
+        filter: true,
+        sort: true,
       },
     },
   ]
@@ -107,11 +131,11 @@ const LeadsModule = () => {
           Done (25)
         </button>
         <button to="/sales3" className={`tab-btn `}>
-          Failure (45)
+          Failure (454545)
         </button>
       </div>
 
-      {/* <DataTableFirst allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} /> */}
+      <DataTableFirst tabletitle={"Leads"} allleaddata = {allLeadData} leadColumns= {columns} filterOptions={options} />
 
 
       <div className="table-responsive mt-5">

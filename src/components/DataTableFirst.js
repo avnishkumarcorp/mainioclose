@@ -3,7 +3,7 @@ import DataGridTables from "./DataGridTables";
 import MUIDataTable from "mui-datatables";
 
 
-const DataTableFirst = ({allleaddata, leadColumns, filterOptions}) => {
+const DataTableFirst = ({tabletitle, allleaddata, leadColumns, filterOptions}) => {
  
  
    
@@ -13,7 +13,7 @@ const DataTableFirst = ({allleaddata, leadColumns, filterOptions}) => {
     <>
     <div className="mt-5">
         <MUIDataTable
-          title={"Inbox"}
+          title={tabletitle}
           data={allleaddata}
           columns={leadColumns}
           options={filterOptions}
