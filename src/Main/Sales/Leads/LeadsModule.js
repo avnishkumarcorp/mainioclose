@@ -6,6 +6,9 @@ import AllLeadsDisplay from "./AllLeadsDisplay"
 import { Link, useLocation } from "react-router-dom"
 import axios from "axios"
 import DataTableFirst from "../../../components/DataTableFirst"
+// import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
+import DataGridNewTable from "../../../components/DataGridNewTable"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -97,6 +100,9 @@ const LeadsModule = () => {
     },
   ]
 
+
+
+
   const options = {
     filterType: "checkbox",
   }
@@ -113,7 +119,7 @@ const LeadsModule = () => {
 
     
     try{
-     await axios.put(`/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${1}`,{
+     await axios.put(`/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${2}`,{
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
@@ -172,7 +178,8 @@ const LeadsModule = () => {
         </button>
       </div>
 
-      {/* <DataTableFirst tabletitle={"Leads"} allleaddata = {allLeadData} leadColumns= {columns} filterOptions={options} /> */}
+      {/* <DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} /> */}
+      <DataGridNewTable />
 
       <div className="table-responsive mt-5">
         <table className="table">
