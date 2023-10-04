@@ -161,6 +161,14 @@ button:focus {
 } 
 
 
+.assignee-button{
+  min-width: 140px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+
 
 
 /* mui tabkle */

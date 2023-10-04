@@ -25,7 +25,7 @@ const OtpPage = () => {
     const createUserApi = async () => {
       try {
         console.log("final data for api", finalApiData)
-        const signupResponse = await axios.post(`/auth/createNewUser`, {
+        const signupResponse = await axios.post(`/securityService/api/auth/createNewUser`, {
           ...finalApiData,
           headers: {
             "Access-Control-Allow-Origin": "*",

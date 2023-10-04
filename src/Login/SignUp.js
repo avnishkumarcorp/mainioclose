@@ -113,7 +113,7 @@ const SignUp = () => {
     const generateNewOtpFun = async () => {
       console.log(generateOtpData)
       try {
-        const getNewOtp = await axios.post(`/api/auth/otp`, {
+        const getNewOtp = await axios.post(`/securityService/api/auth/otp`, {
           ...generateOtpData,
           headers: {
             "Access-Control-Allow-Origin": "*",

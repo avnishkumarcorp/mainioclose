@@ -43,7 +43,7 @@ const ForgetPassword = () => {
       try {
         // const passwordOtp = await axios.post(`/auth/forgetOtp`,{...emailData, } )
         const passwordOtp = await axios.post(
-          `/auth/forgetOtp?email=${emailData}`,
+          `/securityService/api/auth/forgetOtp?email=${emailData}`,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
