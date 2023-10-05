@@ -17,6 +17,9 @@ const SideBar = () => {
   return (
     <div className="sideTab">
       {/* Dashboard links start */}
+
+
+      
       <div className="corpseed-logo">
         <div className="logo-image">
           <img src={corpseedLogo} alt="corpseed-logo" />
@@ -24,6 +27,53 @@ const SideBar = () => {
       </div>
 
       <div className="side-tabs">
+        <NavLink
+           to={`/erp/${currentUserId}`} 
+          className={`nav-heading ${({ isActive }) =>
+            isActive ? "linkactive" : ""}`}
+          data-toggle="collapse"
+          data-target={`#collapseDashboardModule`}
+          aria-expanded="true"
+          aria-controls="collapseDashboardModule"
+        >
+          <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+          <i className="fa-solid mr-2 fa-gear"></i> Dashboard
+        </NavLink>
+        <div
+          id={`collapseDashboardModule`}
+          className="collapse"
+          aria-labelledby="headingOne"
+          data-parent="#accordion"
+        >
+          <div className="link-child">
+            <NavLink className="link-itemss" to={`${currentUserId}/users`}>
+              users
+            </NavLink>
+            {/* <NavLink className="link-itemss" to="hr/hrlinktwo">
+              HR Second
+            </NavLink>
+            <NavLink className="link-itemss" to="hr/hrlinkthree">
+              HR Third
+            </NavLink>
+            <NavLink className="link-itemss" to="hr/hrlinkfour">
+              HR Forth
+            </NavLink>
+            <NavLink className="link-itemss" to="hr/hrlinkfive">
+              HR Fifth
+            </NavLink>
+            <NavLink className="link-itemss" to="hr/hrlinksix">
+              HR Six
+            </NavLink> */}
+          </div>
+        </div>
+      </div>
+
+      {/*  */}
+
+
+
+
+      {/* <div className="side-tabs">
         <NavLink
           to={`/erp/${currentUserId}`}
           className={`nav-heading ml-3`}
@@ -34,7 +84,8 @@ const SideBar = () => {
         >
           <i className="fa-solid mr-2 fa-gear"></i> DashBoard
         </NavLink>
-      </div>
+        
+      </div> */}
       {/* end */}
 
       {/* hr links start */}
