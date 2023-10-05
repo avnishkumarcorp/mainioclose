@@ -27,6 +27,7 @@ import OtpPage from "./Login/OtpPage"
 import ForgetPassword from "./Login/ForgetPassword"
 import ChangePassword from "./Login/ChangePassword"
 import ForgetOtpPage from "./Login/ForgetOtpPage"
+import DisplayDashboardUser from "./Main/DashBoard/DisplayDashboardUser"
 
 function App() {
   return (
@@ -49,7 +50,9 @@ function App() {
           </Route>
 
           <Route path="/erp" element={<MainPage />}>
-            <Route path=":id" element={<DashBoard />} />
+            <Route path=":id" element={<DashBoard />} >
+              <Route path="users" element={<DisplayDashboardUser />} />
+            </Route>
             {/* hr module routes */}
             <Route path="/erp/:id/hr" element={<HRMod />}>
               <Route path="" element={<div>hrlinkone</div>} />

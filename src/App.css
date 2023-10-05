@@ -188,6 +188,23 @@ button:focus {
 /* mui table */
 
 
+.create-user-box{
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.create-user-box .create-user-btn{
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 36px;
+
+}
+
+.create-user-box .create-user-btn i{
+  color: green;
+}
 
 
 
