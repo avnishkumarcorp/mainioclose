@@ -10,7 +10,7 @@ const DataGridExample = ({rows, columns}) => {
 
   return (
     <div>
-      <DataGrid  rows={rows} columns={columns} />
+      <DataGrid checkboxSelection  rows={rows} columns={columns} />
     </div>
   )
 }
