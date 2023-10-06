@@ -32,7 +32,7 @@ const DisplayUserTwo = () => {
     }},
     
   ]
-
+  
   const displayUser = async () => {
     try {
       const userData = await axios.get(`/leadService/api/v1/users/getAllUser`, {

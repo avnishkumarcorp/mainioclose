@@ -1,4 +1,4 @@
-import { DataGrid } from "@mui/x-data-grid"
+import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import axios from "axios"
 import React from "react"
 import { useState } from "react"
@@ -10,7 +10,7 @@ const DataGridExample = ({rows, columns}) => {
 
   return (
     <div>
-      <DataGrid checkboxSelection  rows={rows} columns={columns} />
+      <DataGrid checkboxSelection slots={{ toolbar: GridToolbar }}   rows={rows} columns={columns} />
     </div>
   )
 }
