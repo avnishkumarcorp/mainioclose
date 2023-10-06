@@ -24,7 +24,7 @@ const DisplayUserTwo = () => {
         return <Link to="/" >{params.row.lastName}</Link>
     } },
     { field: "fullName", headerName: "Full Name", width: 150 },
-    { field: "email", headerName: "Email", width: 150 },
+    { field: "email", headerName: "Email", width: 150, hideable: false  },
     { field: "designation", headerName: "Designation", width: 150 },
     { field: "department", headerName: "Department", width: 150 },
     { field: "Edit", headerName: "Edit", width: 150, renderCell: (params)=>{
