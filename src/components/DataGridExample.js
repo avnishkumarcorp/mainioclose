@@ -4,13 +4,15 @@ import React from "react"
 import { useState } from "react"
 import { useEffect } from "react"
 
-const DataGridExample = ({rows, columns}) => {
-
-
-
+const DataGridExample = ({ rows, columns }) => {
   return (
     <div>
-      <DataGrid checkboxSelection slots={{ toolbar: GridToolbar }}   rows={rows} columns={columns} />
+      <DataGrid
+        checkboxSelection
+        slots={{ toolbar: GridToolbar }}
+        rows={rows}
+        columns={columns}
+      />
     </div>
   )
 }
