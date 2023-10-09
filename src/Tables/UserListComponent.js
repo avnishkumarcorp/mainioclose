@@ -15,7 +15,7 @@ const UserListComponent = ({row, columns, tableName}) => {
             showQuickFilter: true,
           },
         }}
-      />~
+      />
     </div>
   )
 };
