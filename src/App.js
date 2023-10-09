@@ -29,6 +29,7 @@ import ChangePassword from "./Login/ChangePassword"
 import ForgetOtpPage from "./Login/ForgetOtpPage"
 import DisplayDashboardUser from "./Main/DashBoard/DisplayDashboardUser"
 import DisplayUserTwo from "./Main/DashBoard/DisplayUserTwo"
+import SetNewPasswordPage from "./Login/SetNewPasswordPage"
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="forgetotp" element={<ForgetOtpPage />} />
             <Route path="forgetpassword" element={<ForgetPassword />} />
             <Route path="change" element={<ChangePassword />} />
+            <Route path="setpassword" element={<SetNewPasswordPage />} />
           </Route>
 
           <Route path="/erp" element={<MainPage />}>
