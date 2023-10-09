@@ -6,7 +6,7 @@ import logoImage from "../Images/main-logo.png";
 const HomeNavbar = () => {
   return (
     <div className="container main-web-logo logo-container">
-      <div class="logo"><div class="erp-image"><img class="main-logo-image" src={logoImage} /></div><h2 class="erp-text">ERP</h2></div>
+      <div className="logo"><div className="erp-image"><img className="main-logo-image" src={logoImage} /></div><h2 className="erp-text">ERP</h2></div>
       {/* <div className="main-logo">
         <h1>Logo</h1>
         

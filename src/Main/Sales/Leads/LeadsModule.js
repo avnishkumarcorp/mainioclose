@@ -7,8 +7,9 @@ import { Link, useLocation } from "react-router-dom"
 import axios from "axios"
 import DataTableFirst from "../../../components/DataTableFirst"
 // import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid"
 import DataGridNewTable from "../../../components/DataGridNewTable"
+import UserLeadComponent from "../../../Tables/UserLeadComponent"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -29,104 +30,130 @@ const LeadsModule = () => {
 
   console.log("all e")
 
+  // const columns = [
+  //   {
+  //     name: "id",
+  //     label: "ID",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "name",
+  //     label: "Name",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "mobileNo",
+  //     label: "Mobile",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "email",
+  //     label: "Email",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "createDate",
+  //     label: "create Date",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "leadDescription",
+  //     label: "Description",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "source",
+  //     label: "Source",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  // ]
+
   const columns = [
+    { field: "id", headerName: "ID", width: 150 },
     {
-      name: "id",
-      label: "ID",
-      options: {
-        filter: true,
-        sort: true,
+      field: "name",
+      headerName: "Name",
+      width: 150,
+      renderCell: (props) => {
+        return (
+          <Link to={`/erp/${currentUserId}/sales/${props.row.id}`}>
+            {props.row.name}
+          </Link>
+        )
       },
     },
+    { field: "mobileNo", headerName: "Comment", width: 150 },
+    { field: "email", headerName: "Count", width: 150 },
+    { field: "createDate", headerName: "Count", width: 150 },
     {
-      name: "name",
-      label: "Name",
-      options: {
-        filter: true,
-        sort: true,
+      field: "assignee",
+      headerName: "Assignee",
+      width: 150,
+      renderCell: (props) => {
+        return (
+          <select
+            className="assignee-button"
+            onChange={(id) => changeLeadAssignee(props.row.id)}
+            name="lead"
+            id="lead"
+          >
+            {leadUserNew.map((user, index) => (
+              <option key={index} value={user.fullName}>
+                {user.fullName}
+              </option>
+            ))}
+          </select>
+        )
       },
     },
-    {
-      name: "mobileNo",
-      label: "Mobile",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      name: "email",
-      label: "Email",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      name: "createDate",
-      label: "create Date",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      name: "leadDescription",
-      label: "Description",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      name: "source",
-      label: "Source",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
+    { field: "leadDescription", headerName: "Count", width: 150 },
+    { field: "source", headerName: "Count", width: 150 },
   ]
 
-  const data = [
-    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-    {
-      name: "James Houston",
-      company: "Test Corp",
-      city: "Dallas",
-      state: "TX",
-    },
-  ]
+  // const options = {
+  //   filterType: "checkbox",
+  // }
 
-
-
-
-  const options = {
-    filterType: "checkbox",
+  const changeUserAssignee = (user) => {
+    console.log("user is selectd", user)
   }
-
-
-  const changeUserAssignee = (user) =>{
-    console.log("user is selectd", user);
-
-  }
-
 
   const changeLeadAssignee = async (id) => {
-    console.log("id is call", id);
+    console.log("id is call", id)
 
-    
-    try{
-     await axios.put(`/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${2}`,{
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      await axios.put(
+        `/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${2}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
       console.log(`updateLeadAssignee is`)
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
@@ -166,7 +193,7 @@ const LeadsModule = () => {
 
   return (
     <div className="lead-module small-box-padding">
-      <div className="inbox-top-btn">
+      {/* <div className="inbox-top-btn">
         <button to="/sales" className={`tab-btn `}>
           Inbox
         </button>
@@ -176,12 +203,18 @@ const LeadsModule = () => {
         <button to="/sales3" className={`tab-btn `}>
           Failure (454545)
         </button>
-      </div>
+      </div> */}
 
-      {/* <DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} /> */}
-      <DataGridNewTable />
+      {/* <DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />
+      <DataGridNewTable /> */}
 
-      <div className="table-responsive mt-5">
+      <UserLeadComponent
+        tableName={"lead"}
+        columns={columns}
+        row={allLeadData}
+      />
+
+      {/* <div className="table-responsive mt-5">
         <table className="table">
           <thead>
             <tr>
@@ -223,7 +256,7 @@ const LeadsModule = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   )
 }
