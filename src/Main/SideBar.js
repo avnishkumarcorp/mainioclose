@@ -49,6 +49,9 @@ const SideBar = () => {
             <NavLink className="link-itemss" to={`${currentUserId}/users`}>
               users
             </NavLink>
+            {/* <NavLink className="link-itemss" to={`${currentUserId}/muiuser`}>
+              mui users
+            </NavLink> */}
             {/* <NavLink className="link-itemss" to="hr/hrlinktwo">
               HR Second
             </NavLink>

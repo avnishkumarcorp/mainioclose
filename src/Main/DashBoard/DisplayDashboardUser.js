@@ -1,5 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
+import UserListComponent from "../../Tables/UserListComponent"
+import { Link } from "react-router-dom"
 
 const DisplayDashboardUser = () => {
   const [displayAlluser, setDisplayAllUser] = useState([])
@@ -8,6 +10,10 @@ const DisplayDashboardUser = () => {
   useEffect(() => {
     displayUser()
   }, [])
+
+  const handleEdit = (id) =>{
+    console.log("Selected row id is ", id);
+  }
 
   const displayUser = async () => {
     try {
@@ -26,13 +32,31 @@ const DisplayDashboardUser = () => {
     }
   }
 
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 150 }, 
+    { field: "firstName", headerName: "First", width: 150 },
+    { field: "lastName", headerName: "Last", width: 150,},
+    { field: "fullName", headerName: "Full Name", width: 150 },
+    { field: "email", headerName: "Email", width: 150, hideable: false  },
+    { field: "designation", headerName: "Designation", width: 150 },
+    { field: "department", headerName: "Department", width: 150 },
+    { field: "Edit", headerName: "Edit", width: 150, renderCell: (params)=>{
+        return <button className="table-edit-btn" onClick={(id)=> handleEdit(params.row.id) }><i className="fa-solid fa-pencil"></i></button> 
+    }}, 
+  ]
+
   // /leadService/api/v1/users/getAllUser
   return (
     <div className="small-box-padding">
         <div className="create-user-box">
-        <button className="create-user-btn"><i class="fa-solid mr-1 fa-circle-plus"></i></button>
+        <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button>
         </div>
-      <div className="table-responsive mt-5">
+
+
+      <UserListComponent tableName={"All User List"} columns={columns} row = {displayAlluser} />
+
+      {/* <div className="table-responsive mt-5">
         <table className="table">
           <thead>
             <tr>
@@ -63,7 +87,7 @@ const DisplayDashboardUser = () => {
             </tbody>
           )}
         </table>
-      </div>
+      </div> */}
     </div>
   )
 }

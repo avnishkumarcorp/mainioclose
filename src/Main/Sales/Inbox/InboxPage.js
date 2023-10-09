@@ -6,7 +6,8 @@ import MUIDataTable from "mui-datatables"
 import DataGridTables from "../../../components/DataGridTables"
 import LeadsModule from "../Leads/LeadsModule"
 import DataTableFirst from "../../../components/DataTableFirst"
-
+import UserListComponent from "../../../Tables/UserListComponent"
+import InboxListComponent from "../../../Tables/InboxListComponent"
 
 const InboxPage = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -16,56 +17,65 @@ const InboxPage = () => {
     getAllLead()
   }, [])
 
-  const location = useLocation();
+  const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
-  const currentUserId = Number(splitPath[2]);
+  const currentUserId = Number(splitPath[2])
 
   console.log("id is ", currentUserId)
 
   console.log("all e")
 
-  const leadColumns = [
-    {
-      name: "name",
-      label: "Name",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      name: "comment",
-      label: "Comment",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      name: "count",
-      label: "Count",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    
+  // const leadColumns = [
+  //   {
+  //     name: "name",
+  //     label: "Name",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "comment",
+  //     label: "Comment",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "count",
+  //     label: "Count",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+
+  // ]
+
+  const columns = [
+    { field: "leadId", headerName: "ID", width: 150 },
+    { field: "name", headerName: "Name", width: 150 },
+    { field: "comment", headerName: "Comment", width: 150 },
+    { field: "count", headerName: "Count", width: 150 },
   ]
 
   const filterOptions = {
     filterType: "checkbox",
   }
 
-
   const getAllLead = async () => {
     try {
-      const allLead = await axios.get(`/leadService/api/v1/inbox/getAllInboxData?userId=${1}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
+      const allLead = await axios.get(
+        `/leadService/api/v1/inbox/getAllInboxData?userId=${1}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
 
       console.log("all Lead data", allLead.data)
       setAllLeadData(allLead.data)
@@ -73,9 +83,6 @@ const InboxPage = () => {
       console.log(err)
     }
   }
-
-
-  
 
   return (
     <div className="inbox-page cm-padding-one">
@@ -94,9 +101,10 @@ const InboxPage = () => {
       {/* <LeadsModule */}
 
       {/* <DataGridTables /> */}
-    <DataTableFirst  tabletitle={"Inbox"} allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} />
+      {/* <DataTableFirst  tabletitle={"Inbox"} allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} /> */}
 
-
+      {/* <UserListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData} />
+      <InboxListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData}  /> */}
       {/* <div className="mt-5">
         <MUIDataTable
           title={"Inbox"}
@@ -107,7 +115,7 @@ const InboxPage = () => {
       </div> */}
 
       {/* data table */}
-      <div className="table-responsive mt-5">
+      {/* <div className="table-responsive mt-5">
         <table className="table">
           <thead>
             <tr>
@@ -130,7 +138,7 @@ const InboxPage = () => {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   )
 }

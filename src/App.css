@@ -170,6 +170,29 @@ button:focus {
 
 
 
+/* table data */
+
+.table-main-heading{
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.table-edit-btn{
+  border: none;
+  outline: none;
+  color: #464a55;
+}
+
+.table-edit-btn:hover{
+  color: #007aff;
+}
+
+
+
+/* table data */
+
+
+
 
 /* mui tabkle */
 
