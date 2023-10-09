@@ -103,9 +103,9 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "mobileNo", headerName: "Comment", width: 150 },
-    { field: "email", headerName: "Count", width: 150 },
-    { field: "createDate", headerName: "Count", width: 150 },
+    { field: "mobileNo", headerName: "Mobile No", width: 150 },
+    { field: "email", headerName: "Email", width: 150 },
+    { field: "createDate", headerName: "Date", width: 150 },
     {
       field: "assignee",
       headerName: "Assignee",
@@ -127,13 +127,11 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "leadDescription", headerName: "Count", width: 150 },
-    { field: "source", headerName: "Count", width: 150 },
+    { field: "leadDescription", headerName: "lead Description", width: 150 },
+    { field: "source", headerName: "Source", width: 150 },
   ]
 
-  // const options = {
-  //   filterType: "checkbox",
-  // }
+  
 
   const changeUserAssignee = (user) => {
     console.log("user is selectd", user)
@@ -205,8 +203,7 @@ const LeadsModule = () => {
         </button>
       </div> */}
 
-      {/* <DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />
-      <DataGridNewTable /> */}
+      {/* {<DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />} */}
 
       <UserLeadComponent
         tableName={"lead"}
