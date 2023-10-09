@@ -1,4 +1,4 @@
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import React from "react";
 
 const UserListComponent = ({row, columns, tableName}) => {
@@ -9,7 +9,13 @@ const UserListComponent = ({row, columns, tableName}) => {
         checkboxSelection
         rows={row}
         columns={columns}
-      />
+        slots={{ toolbar: GridToolbar }}
+        slotProps={{
+          toolbar: {
+            showQuickFilter: true,
+          },
+        }}
+      />~
     </div>
   )
 };
