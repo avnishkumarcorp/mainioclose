@@ -53,6 +53,17 @@ const SignUp = () => {
   // console.log("signup Redux dataa", signUpRedux)
 
   // signup function
+// useEffect(()=>{
+//   const { username, password, mobile } = { ...createUserData }
+//   setGenerateOtpData((prev) => ({
+//     ...prev,
+//     name: username,
+//     password: password,
+//     mobile: mobile,
+//   }))
+
+// },[])
+  
 
   const UserInfoData = (e) => {
     setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -101,6 +112,7 @@ const SignUp = () => {
     }
 
     const { username, password, mobile } = { ...createUserData }
+   const otpNewData = {name: username, password: password, mobile: mobile}
     setGenerateOtpData((prev) => ({
       ...prev,
       name: username,
@@ -111,7 +123,7 @@ const SignUp = () => {
     dispatch(SignupDataAction(createUserData))
 
     const generateNewOtpFun = async () => {
-      console.log(generateOtpData)
+      console.log("before api call data is", generateOtpData)
       try {
         const getNewOtp = await postQuery(
           "/securityService/api/auth/otp",

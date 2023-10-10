@@ -7,14 +7,18 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { postQuery } from "../API/PostQuery"
 toast.configure()
 
 const OtpPage = () => {
   const [otpData, setOtpData] = useState({})
-  const [createApiId, setCreateApiId] = useState({})
+
+  
   const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
+  const [leadUserInfo, setLeadUserInfo] = useState({});
   const dispatch = useDispatch()
   const navigate = useNavigate();
+
 
   console.log("redux data", signUpRedux)
   let one = Object.values(otpData)
@@ -31,20 +35,19 @@ const OtpPage = () => {
     const createUserApi = async () => {
       try {
         console.log("final data for api", finalApiData)
-        const signupResponse = await axios.post(`/securityService/api/auth/createNewUser`, {
-          ...finalApiData,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        })
-
-        console.log("")
+        const signupResponse = await postQuery('/securityService/api/auth/createNewUser',finalApiData)
         console.log("signup aryan response data", signupResponse)
-        console.log("signup aryan response data", signupResponse?.data?.data?.id)
-        let dataId = signupResponse?.data?.data?.id;
-        // console.log(dataId);
-        setCreateApiId(signupResponse.data);
+        console.log("signup aryan response data", signupResponse.data.data);
+        const {id} = signupResponse.data.data;
+        console.log("id is response ", id);
+        const leadUserData = {...finalApiData, id: id};
+        delete leadUserData.otp;
+        delete leadUserData.companyName;
+        console.log("final lead user data", leadUserData);
+
+        const createLeadResponse = await postQuery(``)
+        
+       
         navigate('/erp/login')
         toast.success("User SignUp Sucessfully")
       } catch (err) {
@@ -55,7 +58,10 @@ const OtpPage = () => {
     createUserApi()
   }
 
-  console.log("create id data", createApiId);
+
+  console.log("my api state data", leadUserInfo);
+
+  // console.log("create id data aryan", createApiId);
   // console.log("final api data", finalApiData);
   // console.log();
 
