@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { SignupDataAction } from "../Redux/Action/SignUpDataAction"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { postQuery } from "../API/PostQuery"
 toast.configure()
 
 const SignUp = () => {
@@ -49,7 +50,7 @@ const SignUp = () => {
   // redux
   const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
 
-  console.log("signup Redux dataa", signUpRedux)
+  // console.log("signup Redux dataa", signUpRedux)
 
   // signup function
 
@@ -58,7 +59,6 @@ const SignUp = () => {
   }
 
   const userSignUp = (e) => {
-    
     e.preventDefault()
 
     if (fullNameRef.current.value === "") {
@@ -113,32 +113,25 @@ const SignUp = () => {
     const generateNewOtpFun = async () => {
       console.log(generateOtpData)
       try {
-        const getNewOtp = await axios.post(`/securityService/api/auth/otp`, {
-          ...generateOtpData,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        })
+        const getNewOtp = await postQuery(
+          "/securityService/api/auth/otp",
+          generateOtpData
+        )
         console.log("generate otp data", getNewOtp.data)
         navigate("/erp/otp")
       } catch (err) {
         console.log(err)
-         if(err.response.status === 500){
+        if (err.response.status === 500) {
           toast.error("please Referesh this page or try again later")
+        }
       }
-       }
     }
-
     generateNewOtpFun()
   }
 
   console.log("create data", createUserData)
   console.log("generate Otp Data", generateOtpData)
 
-
-
- 
   return (
     <div className="login-page">
       <div className="login-form">

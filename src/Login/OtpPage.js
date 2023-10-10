@@ -4,22 +4,28 @@ import OtpTimer from "otp-timer"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const OtpPage = () => {
   const [otpData, setOtpData] = useState({})
-
+  const [createApiId, setCreateApiId] = useState({})
   const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   console.log("redux data", signUpRedux)
+  let one = Object.values(otpData)
+    const finalOtp = one.join("")
+    // console.log(finalOtp)
+    const finalApiData = { ...signUpRedux, otp: finalOtp }
+    // console.log("i mam final data", finalApiData)
 
   const userRegistration = (e) => {
     e.preventDefault()
-    let one = Object.values(otpData)
-    const finalOtp = one.join("")
-    console.log(finalOtp)
-    const finalApiData = { ...signUpRedux, otp: finalOtp }
-    console.log(finalApiData)
+    
 
     console.log("before api call")
     const createUserApi = async () => {
@@ -33,7 +39,14 @@ const OtpPage = () => {
           },
         })
 
-        console.log("signup response", signupResponse)
+        console.log("")
+        console.log("signup aryan response data", signupResponse)
+        console.log("signup aryan response data", signupResponse?.data?.data?.id)
+        let dataId = signupResponse?.data?.data?.id;
+        // console.log(dataId);
+        setCreateApiId(signupResponse.data);
+        navigate('/erp/login')
+        toast.success("User SignUp Sucessfully")
       } catch (err) {
         console.log(err)
       }
@@ -41,6 +54,10 @@ const OtpPage = () => {
 
     createUserApi()
   }
+
+  console.log("create id data", createApiId);
+  // console.log("final api data", finalApiData);
+  // console.log();
 
   const sendTimer = () => {
     return (
