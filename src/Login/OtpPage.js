@@ -40,13 +40,18 @@ const OtpPage = () => {
         console.log("signup aryan response data", signupResponse.data.data);
         const {id} = signupResponse.data.data;
         console.log("id is response ", id);
-        const leadUserData = {...finalApiData, id: id};
+        const leadUserData = {...finalApiData, id: id, designation: "NA", department: "NA", role: ["ADMIN"]};
         delete leadUserData.otp;
         delete leadUserData.companyName;
+        delete leadUserData.password;
+        delete leadUserData.mobile;
+        // leadUserData.designation = "NA",
+        // leadUserData.department = "NA",
+        
         console.log("final lead user data", leadUserData);
 
-        const createLeadResponse = await postQuery(``)
-        
+        const createLeadResponse = await postQuery(`/leadService/api/v1/users/createUsser`,leadUserData )
+          console.log("create lead user  user response", createLeadResponse);
        
         navigate('/erp/login')
         toast.success("User SignUp Sucessfully")
