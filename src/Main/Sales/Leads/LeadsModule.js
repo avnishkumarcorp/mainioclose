@@ -27,68 +27,10 @@ const LeadsModule = () => {
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
 
-  console.log("id is ", currentUserId)
+  // console.log("id is ", currentUserId)
 
-  console.log("all e")
+  // console.log("all e")
 
-  // const columns = [
-  //   {
-  //     name: "id",
-  //     label: "ID",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "name",
-  //     label: "Name",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "mobileNo",
-  //     label: "Mobile",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "email",
-  //     label: "Email",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "createDate",
-  //     label: "create Date",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "leadDescription",
-  //     label: "Description",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "source",
-  //     label: "Source",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  // ]
 
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
@@ -160,14 +102,14 @@ const LeadsModule = () => {
       const allLeadUser = await axios.get(
         `/leadService/api/v1/users/getAllUser`
       )
-      console.log("all User", allLeadUser.data)
+      // console.log("all User", allLeadUser.data)
       setLeadUserNew(allLeadUser.data)
     } catch (err) {
       console.log(err)
     }
   }
 
-  console.log("New Lead user", leadUserNew)
+  // console.log("New Lead user", leadUserNew)
 
   const getAllLead = async () => {
     try {
@@ -181,7 +123,7 @@ const LeadsModule = () => {
         }
       )
 
-      console.log("all Lead data", allLead.data)
+      // console.log("all Lead data", allLead.data)
       setAllLeadData(allLead.data)
     } catch (err) {
       console.log(err)
@@ -265,3 +207,63 @@ export default LeadsModule
           </tbody>
         </table>
       </div> */}
+
+      
+  // const columns = [
+  //   {
+  //     name: "id",
+  //     label: "ID",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "name",
+  //     label: "Name",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "mobileNo",
+  //     label: "Mobile",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "email",
+  //     label: "Email",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "createDate",
+  //     label: "create Date",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "leadDescription",
+  //     label: "Description",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  //   {
+  //     name: "source",
+  //     label: "Source",
+  //     options: {
+  //       filter: true,
+  //       sort: true,
+  //     },
+  //   },
+  // ]
