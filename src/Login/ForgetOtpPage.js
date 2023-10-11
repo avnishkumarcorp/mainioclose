@@ -37,7 +37,7 @@ const ForgetOtpPage = () => {
         console.log("validate user response", validateUser.data.isSuccess);
         if(validateUser.data.status === 200 && validateUser.data.isSuccess === true){
           navigate("/erp/change");
-        }
+        } 
         
       } catch (err) {
         console.log(err)

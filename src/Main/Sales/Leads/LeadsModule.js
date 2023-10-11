@@ -204,9 +204,12 @@ const LeadsModule = () => {
       </div> */}
 
       {/* {<DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />} */}
+      <div className="create-user-box">
+        <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button>
+        </div>
 
       <UserLeadComponent
-        tableName={"lead"}
+        tableName={"leads"}
         columns={columns}
         row={allLeadData}
       />
