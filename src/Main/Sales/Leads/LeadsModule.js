@@ -10,6 +10,7 @@ import DataTableFirst from "../../../components/DataTableFirst"
 import { DataGrid } from "@mui/x-data-grid"
 import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
+import LeadCreateModel from "../../../Model/LeadCreateModel"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -131,8 +132,6 @@ const LeadsModule = () => {
     { field: "source", headerName: "Source", width: 150 },
   ]
 
-  
-
   const changeUserAssignee = (user) => {
     console.log("user is selectd", user)
   }
@@ -191,7 +190,24 @@ const LeadsModule = () => {
 
   return (
     <div className="lead-module small-box-padding">
-      {/* <div className="inbox-top-btn">
+      <div className="create-user-box">
+        <LeadCreateModel />
+      </div>
+
+      <UserLeadComponent
+        tableName={"leads"}
+        columns={columns}
+        row={allLeadData}
+      />
+
+     
+    </div>
+  )
+}
+
+export default LeadsModule
+
+ {/* <div className="inbox-top-btn">
         <button to="/sales" className={`tab-btn `}>
           Inbox
         </button>
@@ -204,15 +220,7 @@ const LeadsModule = () => {
       </div> */}
 
       {/* {<DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />} */}
-      <div className="create-user-box">
-        <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button>
-        </div>
-
-      <UserLeadComponent
-        tableName={"leads"}
-        columns={columns}
-        row={allLeadData}
-      />
+      {/* <LeadCreateModel /> */}
 
       {/* <div className="table-responsive mt-5">
         <table className="table">
@@ -257,8 +265,3 @@ const LeadsModule = () => {
           </tbody>
         </table>
       </div> */}
-    </div>
-  )
-}
-
-export default LeadsModule
