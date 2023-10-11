@@ -1,7 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Model.css"
 
 const LeadCreateModel = () => {
+   const [data, setData] = useState( {
+        "uuid": "string",
+        "name": "Fssai",
+        "leadName": "string",
+        "email": "rahul199jain@gmail.com",
+        "leadDescription": "string",
+        "mobileNo": "808898798",
+        "urls": "fdfd",
+        "createDate": "2023-10-11T08:50:25.515Z",
+        "lastUpdated": "2023-10-11T08:50:25.515Z",
+        "latestStatusChangeDate": "2023-10-11T08:50:25.515Z",
+        "source": "string",
+        "city": "string",
+        "categoryId": "1",
+        "serviceId": "1",
+        "industryId": "1",
+        "ipAddress": "378.34.2.234",
+        "displayStatus": "string",
+        "assigneeId": 1,
+        "whatsAppStatus": 0,
+        "deleted": false,
+        "primaryAddress": "string"
+      });
+
+      
+
+
+
+
   return (
     <nav>
     <div className="team-model">
@@ -31,7 +60,7 @@ const LeadCreateModel = () => {
             <div className="add-team-body">
               {/* START */}
               <div className="personal-info container">
-                <h4 className="info-text model-heading">Edit Team</h4>
+                <h4 className="info-text model-heading">Add New Lead</h4>
                 <div className="cross-icon">
                   <i
                     data-dismiss="modal"

@@ -13,6 +13,7 @@ import {
 } from "../Redux/Action/AuthAction"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { postQuery } from "../API/PostQuery"
 toast.configure()
 
 
@@ -62,12 +63,7 @@ const Login = () => {
 
     const loginUser = async () => {
       try {
-        const collectUserData = await axios.get(`/securityService/api/auth/signin?email=rahul123%40gmail.com&password=password`,{
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            // "Content-Type": "application/json",
-          },
-        })
+        const collectUserData = await postQuery(`/securityService/api/auth/signin`,userLoginData)
         console.log("api data", collectUserData.data.jwt)
         console.log("api data", collectUserData.data)
         dispatch(currentUserAction(collectUserData.data))

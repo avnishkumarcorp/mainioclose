@@ -4,6 +4,10 @@ import SideBar from "./SideBar"
 import { Outlet, useNavigate } from "react-router"
 import TopNav from "../components/TopNav"
 import { useSelector } from "react-redux"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
+
 
 const MainPage = () => {
   const navigate = useNavigate()
@@ -15,6 +19,7 @@ const MainPage = () => {
   //   console.log(UserToken === currentUserToken);
   //   if (!UserToken || currentUserToken !== UserToken) {
   //     navigate("/erp/login")
+  //     toast.error("your Session has Expired Please Login again")
   //   }
   // })
 
