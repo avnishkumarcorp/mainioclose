@@ -1,7 +1,62 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./Model.css"
+import { postQuery } from "../API/PostQuery";
+import InputErrorComponent from "../components/InputErrorComponent";
+// import InputComponent from "../components/InputComponent";
 
 const LeadCreateModel = () => {
+   const [leadData, setLeadData] = useState({
+        "uuid": "string",
+        "name": "",
+        "leadName": "string",
+        "email": "rahul199jain@gmail.com",
+        "leadDescription": "string",
+        "mobileNo": "808898798",
+        "urls": "fdfd",
+        "createDate": "2023-10-11T08:50:25.515Z",
+        "lastUpdated": "2023-10-11T08:50:25.515Z",
+        "latestStatusChangeDate": "2023-10-11T08:50:25.515Z",
+        "source": "string",
+        "city": "string",
+        "categoryId": "1",
+        "serviceId": "1",
+        "industryId": "1",
+        "ipAddress": "378.34.2.234",
+        "displayStatus": "string",
+        "assigneeId": 1,
+        "whatsAppStatus": 0,
+        "deleted": false,
+        "primaryAddress": "string"
+      });
+
+      const [nameError, setNameError] = useState(false);
+
+      const nameRef = useRef();
+
+
+      const leadRowData = (e) => {
+        setLeadData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+      }
+
+      const newLeadCreate = (e) =>{
+        e.preventDefault();
+        if(nameRef.current.value === ""){
+            setNameError(true)
+            return
+        }
+        const leadCreateFun = async () => {
+            try{
+            const createNewLeadData = await postQuery(`/leadService/api/v1/lead/createLead`,leadData);
+            console.log("lead crteated ", createNewLeadData);
+            window.location.reload();
+            }catch(err){
+                console.log(err);
+            }
+        }
+        leadCreateFun();
+      }
+      console.log("row data is ", leadData);
+
   return (
     <nav>
     <div className="team-model">
@@ -31,7 +86,7 @@ const LeadCreateModel = () => {
             <div className="add-team-body">
               {/* START */}
               <div className="personal-info container">
-                <h4 className="info-text model-heading">Edit Team</h4>
+                <h4 className="info-text model-heading">Add New Lead</h4>
                 <div className="cross-icon">
                   <i
                     data-dismiss="modal"
@@ -52,10 +107,13 @@ const LeadCreateModel = () => {
                           type="text"
                           className="form-control input-focus"
                           id="teamName"
+                          ref={nameRef}
                           placeholder="Enter Team Name"
-                          name="teamName"
+                          name="name"
+                          onChange={(e)=> leadRowData(e)}
                         />
                       </div>
+                        {nameError ? <InputErrorComponent value={"Name can't be Blank!"} /> : ""}
                     </div>    
                     <div className="form-group col-md-6">
                       <div className="pl-ten">
@@ -113,7 +171,7 @@ const LeadCreateModel = () => {
                       <div className="all-center">
                       </div>
                       <div>
-                        <button className="first-button form-prev-btn">
+                        <button onClick={(e)=> newLeadCreate(e)} className="first-button form-prev-btn">
                           Submit
                         </button>
                       </div>
