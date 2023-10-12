@@ -8,8 +8,7 @@
 
 
 body {
-  overflow: hidden;
-
+  overflow-x: hidden;
   font-family: "Roboto", sans-serif;
 }
 
