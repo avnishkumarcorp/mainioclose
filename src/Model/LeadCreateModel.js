@@ -30,6 +30,14 @@ const LeadCreateModel = () => {
   })
 
   const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [mobileNoError, setMobileNoError] = useState(false)
+  const [cityError, setCityError] = useState(false)
+  const [ipAddressError, setIpAddressError] = useState(false)
+  const [sourceError, setSourceError] = useState(false)
+  const [leadDescriptionError, setLeadDescriptionError] = useState(false)
+  
+
 
   const nameRef = useRef()
   const emailRef = useRef()
@@ -44,14 +52,75 @@ const LeadCreateModel = () => {
 
   const leadRowData = (e) => {
     setLeadData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+
+    if (nameRef.current.value !== "") {
+      setNameError(false)
+      
+    }
+
+    if (emailRef.current.value !== "") {
+      setEmailError(false)  
+    }
+    if (mobileNoRef.current.value !== "") {
+      setMobileNoError(false)  
+    }
+    if (cityRef.current.value !== "") {
+      setCityError(false)  
+    }
+    if (ipAddressRef.current.value !== "") {
+      setIpAddressError(false)  
+    }
+    if (sourceRef.current.value !== "") {
+      setSourceError(false)  
+    }
+    if (leadDescriptionRef.current.value !== "") {
+      setLeadDescriptionError(false)  
+    }
   }
 
   const newLeadCreate = (e) => {
     e.preventDefault()
     if (nameRef.current.value === "") {
       setNameError(true)
+      
+    }
+
+    if (emailRef.current.value === "") {
+      setEmailError(true)  
+    }
+    if (mobileNoRef.current.value === "") {
+      setMobileNoError(true)  
+    }
+    if (cityRef.current.value === "") {
+      setCityError(true)  
+    }
+    if (ipAddressRef.current.value === "") {
+      setIpAddressError(true)  
+    }
+    if (sourceRef.current.value === "") {
+      setSourceError(true)  
+    }
+    if (leadDescriptionRef.current.value === "") {
+      setLeadDescriptionError(true)  
       return
     }
+
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const leadCreateFun = async () => {
       try {
         const createNewLeadData = await postQuery(
@@ -148,6 +217,11 @@ const LeadCreateModel = () => {
                             onChange={(e) => leadRowData(e)}
                           />
                         </div>
+                        {emailError ? (
+                          <InputErrorComponent value={"Email can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
                       </div>
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -167,8 +241,8 @@ const LeadCreateModel = () => {
                             onChange={(e) => leadRowData(e)}
                           />
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        {mobileNoError ? (
+                          <InputErrorComponent value={"Mobile can't be Blank!"} />
                         ) : (
                           ""
                         )}
@@ -179,7 +253,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            Url's*
+                            Url's
                           </label>
                           <input
                             type="text"
@@ -191,11 +265,7 @@ const LeadCreateModel = () => {
                             onChange={(e) => leadRowData(e)}
                           />
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
-                        ) : (
-                          ""
-                        )}
+                        
                       </div>
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -215,8 +285,8 @@ const LeadCreateModel = () => {
                             onChange={(e) => leadRowData(e)}
                           />
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        {cityError ? (
+                          <InputErrorComponent value={"City can't be Blank!"} />
                         ) : (
                           ""
                         )}
@@ -233,14 +303,14 @@ const LeadCreateModel = () => {
                             type="text"
                             className="form-control input-focus"
                             id="mobileNo"
-                            ref={ipAddressRef}
+                             ref={ipAddressRef}
                             placeholder="IP Address"
                             name="ipAddress"
                             onChange={(e) => leadRowData(e)}
                           />
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        {ipAddressError ? (
+                          <InputErrorComponent value={"Ip Address can't be Blank!"} />
                         ) : (
                           ""
                         )}
@@ -251,7 +321,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            assignee Id*
+                            assignee Id
                           </label>
                           <input
                             type="text"
@@ -263,11 +333,7 @@ const LeadCreateModel = () => {
                             onChange={(e) => leadRowData(e)}
                           />
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
-                        ) : (
-                          ""
-                        )}
+                       
                       </div>
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -287,8 +353,8 @@ const LeadCreateModel = () => {
                             onChange={(e) => leadRowData(e)}
                           />
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        {sourceError ? (
+                          <InputErrorComponent value={"Source can't be Blank!"} />
                         ) : (
                           ""
                         )}
@@ -315,8 +381,8 @@ const LeadCreateModel = () => {
                             required
                           ></textarea>
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        {leadDescriptionError ? (
+                          <InputErrorComponent value={"lead Description can't be Blank!"} />
                         ) : (
                           ""
                         )}
@@ -343,11 +409,7 @@ const LeadCreateModel = () => {
                             required
                           ></textarea>
                         </div>
-                        {nameError ? (
-                          <InputErrorComponent value={"Name can't be Blank!"} />
-                        ) : (
-                          ""
-                        )}
+                       
                       </div>
 
                       {/* <textarea
