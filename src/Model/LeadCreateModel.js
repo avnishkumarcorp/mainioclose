@@ -1,191 +1,416 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState } from "react"
 import "./Model.css"
-import { postQuery } from "../API/PostQuery";
-import InputErrorComponent from "../components/InputErrorComponent";
+import { postQuery } from "../API/PostQuery"
+import InputErrorComponent from "../components/InputErrorComponent"
 // import InputComponent from "../components/InputComponent";
 
 const LeadCreateModel = () => {
-   const [leadData, setLeadData] = useState({
-        "uuid": "string",
-        "name": "",
-        "leadName": "string",
-        "email": "rahul199jain@gmail.com",
-        "leadDescription": "string",
-        "mobileNo": "808898798",
-        "urls": "fdfd",
-        "createDate": "2023-10-11T08:50:25.515Z",
-        "lastUpdated": "2023-10-11T08:50:25.515Z",
-        "latestStatusChangeDate": "2023-10-11T08:50:25.515Z",
-        "source": "string",
-        "city": "string",
-        "categoryId": "1",
-        "serviceId": "1",
-        "industryId": "1",
-        "ipAddress": "378.34.2.234",
-        "displayStatus": "string",
-        "assigneeId": 1,
-        "whatsAppStatus": 0,
-        "deleted": false,
-        "primaryAddress": "string"
-      });
+  const [leadData, setLeadData] = useState({
+    uuid: "",
+    name: "",
+    leadName: "",
+    email: "",
+    leadDescription: "",
+    mobileNo: "",
+    urls: "",
+    createDate: "",
+    lastUpdated: "",
+    latestStatusChangeDate: "",
+    source: "",
+    city: "",
+    categoryId: "1",
+    serviceId: "1",
+    industryId: "1",
+    ipAddress: "",
+    displayStatus: "string",
+    assigneeId: 1,
+    whatsAppStatus: 0,
+    deleted: false,
+    primaryAddress: "",
+  })
 
-      const [nameError, setNameError] = useState(false);
+  const [nameError, setNameError] = useState(false)
 
-      const nameRef = useRef();
+  const nameRef = useRef()
+  const emailRef = useRef()
+  const leadDescriptionRef = useRef()
+  const mobileNoRef = useRef()
+  const urlsRef = useRef()
+  const cityRef = useRef()
+  const ipAddressRef = useRef()
+  const assigneeIdRef = useRef()
+  const primaryAddressRef = useRef()
+  const sourceRef = useRef()
 
+  const leadRowData = (e) => {
+    setLeadData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
-      const leadRowData = (e) => {
-        setLeadData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  const newLeadCreate = (e) => {
+    e.preventDefault()
+    if (nameRef.current.value === "") {
+      setNameError(true)
+      return
+    }
+    const leadCreateFun = async () => {
+      try {
+        const createNewLeadData = await postQuery(
+          `/leadService/api/v1/lead/createLead`,
+          leadData
+        )
+        console.log("lead crteated ", createNewLeadData)
+        window.location.reload()
+      } catch (err) {
+        console.log(err)
       }
-
-      const newLeadCreate = (e) =>{
-        e.preventDefault();
-        if(nameRef.current.value === ""){
-            setNameError(true)
-            return
-        }
-        const leadCreateFun = async () => {
-            try{
-            const createNewLeadData = await postQuery(`/leadService/api/v1/lead/createLead`,leadData);
-            console.log("lead crteated ", createNewLeadData);
-            window.location.reload();
-            }catch(err){
-                console.log(err);
-            }
-        }
-        leadCreateFun();
-      }
-      console.log("row data is ", leadData);
+    }
+    leadCreateFun()
+  }
+  console.log("row data is ", leadData)
 
   return (
     <nav>
-    <div className="team-model">
-      <button
-        type="button"
-        className="team-edit-button create-user-btn"
-        data-toggle="modal"
-        data-target="#createLead"
-      >
-       <i className="fa-solid mr-1 fa-circle-plus"></i>
-      </button>
-
-      {/* MODAL */}
-      <div
-        className="modal fade"
-        id="createLead"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div
-          className="modal-dialog mod-center modal-dialog-centered"
-          role="document"
+      <div className="team-model">
+        <button
+          type="button"
+          className="team-edit-button create-user-btn"
+          data-toggle="modal"
+          data-target="#createLead"
         >
-          <div className="modal-content all-center">
-            <div className="add-team-body">
-              {/* START */}
-              <div className="personal-info container">
-                <h4 className="info-text model-heading">Add New Lead</h4>
-                <div className="cross-icon">
-                  <i
-                    data-dismiss="modal"
-                    className="fa-sharp fa-solid fa-circle-xmark"
-                  ></i>
-                </div>
-                <form>
-                  <div className="first-form form-row">
-                    <div className="form-group col-md-6">
-                      <div className="pr-ten">
-                        <label
-                          className="label-heading mb-1"
-                          htmlFor="teamName"
-                        >
-                          Team Name *
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control input-focus"
-                          id="teamName"
-                          ref={nameRef}
-                          placeholder="Enter Team Name"
-                          name="name"
-                          onChange={(e)=> leadRowData(e)}
-                        />
-                      </div>
-                        {nameError ? <InputErrorComponent value={"Name can't be Blank!"} /> : ""}
-                    </div>    
-                    <div className="form-group col-md-6">
-                      <div className="pl-ten">
-                        <label
-                          className="label-heading mb-1"
-                          htmlFor="teamLeadName"
-                        >
-                          Team Lead Name*
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control input-focus"
-                          id="teamLeadName"
-                          placeholder="Enter Team Lead Name"
-                          name="teamLeadName"
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group col-md-6">
-                      <div className="pr-ten">
-                        <label
-                          className="label-heading mb-1"
-                          htmlFor="teamDesignation"
-                        >
-                          Team Designation *
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control input-focus"
-                          id="teamDesignation"
-                          name="leadDesignation"
-                          placeholder="Enter Team Designation"
-                        />
-                      </div>
-                    </div>
-                    <div className="form-group col-md-6">
-                      <div className="pl-ten">
-                        <label
-                          className="label-heading mb-1"
-                          htmlFor="teamType"
-                        >
-                          Team Type*
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control input-focus"
-                          id="teamType"
-                          name="teamType"
-                          placeholder="Enter Team Type"
-                        />
-                      </div>
-                    </div>
+          <i className="fa-solid mr-1 fa-circle-plus"></i>
+        </button>
 
-                    <div className="all-between-items">
-                      <div className="all-center">
+        {/* MODAL */}
+        <div
+          className="modal fade"
+          id="createLead"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div
+            className="modal-dialog mod-center modal-dialog-centered"
+            role="document"
+          >
+            <div className="modal-content all-center">
+              <div className="add-team-body">
+                {/* START */}
+                <div className="personal-info container">
+                  <h4 className="info-text model-heading">Add New Lead</h4>
+                  <div className="cross-icon">
+                    <i
+                      data-dismiss="modal"
+                      className="fa-sharp fa-solid fa-circle-xmark"
+                    ></i>
+                  </div>
+                  <form>
+                    <div className="first-form form-row">
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="teamName"
+                          >
+                            Lead name *
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="teamName"
+                            ref={nameRef}
+                            placeholder="Enter Team Name"
+                            name="name"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
                       </div>
-                      <div>
-                        <button onClick={(e)=> newLeadCreate(e)} className="first-button form-prev-btn">
-                          Submit
-                        </button>
+                      <div className="form-group col-md-6">
+                        <div className="pl-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="teamLeadName"
+                          >
+                            Lead email*
+                          </label>
+                          <input
+                            type="email"
+                            className="form-control input-focus"
+                            id="teamLeadName"
+                            placeholder="Enter Email"
+                            name="email"
+                            ref={emailRef}
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            Mobile Number*
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="mobileNo"
+                            ref={mobileNoRef}
+                            placeholder="Enter Team Name"
+                            name="mobileNo"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            Url's*
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="mobileNo"
+                            ref={urlsRef}
+                            placeholder="Enter Url's"
+                            name="urls"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            city*
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="mobileNo"
+                            ref={cityRef}
+                            placeholder="Enter city"
+                            name="city"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            IP Address*
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="mobileNo"
+                            ref={ipAddressRef}
+                            placeholder="IP Address"
+                            name="ipAddress"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            assignee Id*
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="mobileNo"
+                            ref={assigneeIdRef}
+                            placeholder="Assignee ID"
+                            name="assigneeId"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            source*
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="Source"
+                            ref={sourceRef}
+                            placeholder="Assignee ID"
+                            name="source"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            Lead Description*
+                          </label>
+                          <textarea
+                            className="form-control input-focus"
+                            id="opunit"
+                            rows="4"
+                            cols="50"
+                            placeholder="Enter Description here..."
+                            value={leadData.leadDescription || ""}
+                            name="leadDescription"
+                            ref={leadDescriptionRef}
+                            onChange={(e) => leadRowData(e)}
+                            required
+                          ></textarea>
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            Primary Address*
+                          </label>
+                          <textarea
+                            className="form-control input-focus"
+                            id="opunit"
+                            rows="4"
+                            cols="50"
+                            placeholder="Enter Address here..."
+                            value={leadData.primaryAddress || ""}
+                            name="primaryAddress"
+                            ref={primaryAddressRef}
+                            onChange={(e) => leadRowData(e)}
+                            required
+                          ></textarea>
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+
+                      {/* <textarea
+                      className="form-group input-focus text-a-size w-100"
+                      id="opunit"
+                      rows="4"
+                      cols="50"
+                      placeholder="Enter Address here..."
+                      value={companyData.operationUnitAddress || ""}
+                      name="operationUnitAddress"
+                      onChange={(e) => nameData(e)}
+                      ref={operationUnitAddressRef}
+                      required
+                    ></textarea> */}
+
+                      {/* <div className="form-group col-md-6">
+                  <div className="pr-ten">
+                    <label className="label-heading" htmlFor="sel2">
+                      City*
+                    </label>
+                    <select
+                      value={companyData.companyCity || ""}
+                      name="companyCity"
+                      onChange={(e) => nameData(e)}
+                      className="form-control input-focus"
+                      ref={companyCityRef}
+                      id="sel2"
+                    >
+                      {cityData.map((city, index) => (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
+                    {companyCityErr ? (
+                      <p className="error-show">company City can't be Blank</p>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div> */}
+
+                      <div className="all-between-items">
+                        <div className="all-center"></div>
+                        <div>
+                          <button
+                            onClick={(e) => newLeadCreate(e)}
+                            className="first-button form-prev-btn"
+                          >
+                            Submit
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
   )
-};
+}
 
-export default LeadCreateModel;
+export default LeadCreateModel

@@ -130,6 +130,8 @@ const LeadsModule = () => {
     }
   }
 
+  console.log("i am all lead data", allLeadData);
+
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
