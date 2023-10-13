@@ -2,6 +2,7 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import UserListComponent from "../../Tables/UserListComponent"
 import { Link } from "react-router-dom"
+import CreateuserDashboard from "../../Model/CreateuserDashboard"
 
 const DisplayDashboardUser = () => {
   const [displayAlluser, setDisplayAllUser] = useState([])
@@ -50,7 +51,8 @@ const DisplayDashboardUser = () => {
   return (
     <div className="small-box-padding">
         <div className="create-user-box">
-        <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button>
+          <CreateuserDashboard />
+        {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
         </div>
 
 
