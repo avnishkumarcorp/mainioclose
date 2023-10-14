@@ -83,7 +83,7 @@ const LeadsModule = () => {
 
     try {
       await axios.put(
-        `/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${2}`,
+        `/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${currentUserId}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -114,7 +114,7 @@ const LeadsModule = () => {
   const getAllLead = async () => {
     try {
       const allLead = await axios.get(
-        `/leadService/api/v1/lead/getAllLead?userId=${1}`,
+        `/leadService/api/v1/lead/getAllLead?userId=${currentUserId}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
