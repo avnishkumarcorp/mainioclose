@@ -12,16 +12,16 @@ toast.configure()
 const MainPage = () => {
   const navigate = useNavigate()
   const currentUserToken = useSelector((state) => state.AuthReducer.token)
-  useEffect(() => {
-    let UserToken = localStorage.getItem("Access-token")
-    console.log("user token ", UserToken)
-    console.log("current user token", currentUserToken)
-    console.log(UserToken === currentUserToken);
-    if (!UserToken || currentUserToken !== UserToken) {
-      navigate("/erp/login")
-      toast.error("your Session has Expired Please Login again")
-    }
-  })
+  // useEffect(() => {
+  //   let UserToken = localStorage.getItem("Access-token")
+  //   console.log("user token ", UserToken)
+  //   console.log("current user token", currentUserToken)
+  //   console.log(UserToken === currentUserToken);
+  //   if (!UserToken || currentUserToken !== UserToken) {
+  //     navigate("/erp/login")
+  //     toast.error("your Session has Expired Please Login again")
+  //   }
+  // })
 
   return (
     <div className="main-page">
