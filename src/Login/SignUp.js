@@ -67,6 +67,7 @@ const SignUp = () => {
 
   const UserInfoData = (e) => {
     setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    setGenerateOtpData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const userSignUp = (e) => {
@@ -113,17 +114,19 @@ const SignUp = () => {
 
     const { username, password, mobile } = { ...createUserData }
    const otpNewData = {name: username, password: password, mobile: mobile}
-    setGenerateOtpData((prev) => ({
-      ...prev,
-      name: username,
-      password: password,
-      mobile: mobile,
-    }))
+    // setGenerateOtpData((prev) => ({
+    //   ...prev,
+    //   name: username,
+    //   password: password,
+    //   mobile: mobile,
+    // }))
+
+    console.log("OTP data kdjld", otpNewData);
 
     dispatch(SignupDataAction(createUserData))
 
     const generateNewOtpFun = async () => {
-      console.log("before api call data is", generateOtpData)
+      console.log("before api call data is", otpNewData)
       try {
         const getNewOtp = await postQuery(
           "/securityService/api/auth/otp",
