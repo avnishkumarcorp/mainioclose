@@ -187,6 +187,18 @@ button:focus {
 }
 
 
+.filter-btn-design{
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: #fff;
+  background-color: var(--mainBlue);
+  font-weight: 300;
+}
+
+
 
 /* table data */
 

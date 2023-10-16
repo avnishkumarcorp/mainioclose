@@ -70,13 +70,15 @@ function App() {
             {/* slaes module routes */}
             <Route path="/erp/:id/sales" element={<SalesMod />}>
               <Route path="" element={<InboxPage />} />
-              <Route path=":id" element={<LeadDetailsPage />} />
+              {/* <Route path=":id" element={<LeadDetailsPage />} /> */}
 
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
+                <Route path=":id" element={<LeadDetailsPage />} />
               <Route path="contacts" element={<ContactModule />} />
-              <Route path="leads" element={<LeadsModule />} />
+              <Route path="leads" element={<LeadsModule />} >
+              </Route>
             </Route>
             {/* end */}
             {/* accounts module routes */}

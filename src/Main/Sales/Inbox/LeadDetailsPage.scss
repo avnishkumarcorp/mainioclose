@@ -12,20 +12,20 @@
       align-items: center;
       padding: 8px 12px;
     }
-     .save-lead-data{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 6px 12px;
+    .save-lead-data {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
     }
-    .product-box{
-        .my-details{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            color: 	#a5a5a7;
-        }
+    .product-box {
+      .my-details {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        color: #a5a5a7;
+      }
     }
   }
   .my-card-content {
@@ -52,9 +52,79 @@
       padding: 8px 16px;
       border-radius: 20px;
     }
-   
   }
-  .lead-filter-above{
-    padding: 10px;
+}
+
+.lead-filter-above {
+  padding: 10px 0px;
+  .notes-box {
+    display: flex;
+    gap: 10px;
+    .comment-icon {
+      // border: 1px solid red;
+      width: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .cm-icon {
+        color: #2b62f9;
+        font-size: 35px;
+      }
+      .line {
+        border: 1px solid #2b62f9;
+        height: 100%;
+      }
+    }
+    .side-notes {
+      width: 100%;
+      .comment-above {
+        background-color: #2b62f9;
+        margin: 0;
+        padding: 5px 10px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        .write-heading {
+          font-size: 16px;
+          font-weight: 400;
+          margin-bottom: 0px;
+          color: #fff;
+        }
+      }
+      .comment-below {
+        background-color: #2b62f9;
+        padding: 5px 10px;
+        margin-top: 0px;
+        position: relative;
+        top: -7px;
+        display: flex;
+        justify-content: flex-end;
+        
+        .comment-btn {
+          padding: 5px 10px;
+          font-size: 14px;
+          background: #D3d3d3;
+          color: #000;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          border-radius: 4px;
+          font-weight: 500;
+        }
+      }
+
+      .text-area-box {
+        min-height: 200px;
+        width: 100%;
+        resize: none;
+        padding: 10px;
+        border: 1px solid gray;
+        // border-radius: 4px;
+      }
+      .text-area-box:focus {
+        outline: none;
+        border: 1px solid #2b62f9;
+      }
+    }
   }
 }

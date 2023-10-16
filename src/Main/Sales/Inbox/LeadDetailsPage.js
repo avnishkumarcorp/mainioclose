@@ -3,14 +3,32 @@ import "./LeadDetailsPage.scss"
 import FilterButton from "../../../components/FilterButton"
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { getQuery } from "../../../API/GetQuery";
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false);
   const [notes1, setNotes1] = useState(false);
+  
+
 
   useEffect(()=>{
     editViewData();
+    leadNotesData();
   },[])
+
+
+
+  const leadNotesData = async (id) =>{
+    const getAllLeadNotes = await getQuery(`/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`) 
+    // axios.get(`/leadService/api/v1/getAllRemarks?leadId=${3}`,{
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    console.log("notes is here", getAllLeadNotes);
+  }
+
 
   // const editViewData = async  ()  =>{  
   //   const viewData = await axios.get(`/leadService/api/v1/inbox/editView?leadId=3`,{
@@ -38,6 +56,8 @@ const LeadDetailsPage = () => {
     }
   }
 
+  console.log("lead path ", leadPathId);
+
 
   
   return (
@@ -52,7 +72,7 @@ const LeadDetailsPage = () => {
               <div className="card mt-2">
                 <div className="" id="headingThree">
                   <div
-                    className="card-btn collapsed"
+                    className="card-btn"
                     data-toggle="collapse"
                     data-target="#collapseThree"
                     aria-expanded="false"
@@ -66,7 +86,7 @@ const LeadDetailsPage = () => {
                 </div>
                 <div
                   id="collapseThree"
-                  className="collapse"
+                  className="collapse show"
                   aria-labelledby="headingThree"
                   data-parent="#accordion"
                 >
@@ -507,10 +527,54 @@ const LeadDetailsPage = () => {
           </div>
         </div>
         <div className="col-md-8">
+          {/* notes ui */}
           <div className="lead-filter-above">
-            <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes} setData={setNotes}/>
-            <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/>
+            <FilterButton  name={"notes"} icon={<i className="fa-regular  fa-note-sticky"></i>} data={notes} setData={setNotes}/>
+            {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
+            <div className={`notes-box mt-4 ${notes=== true ? "d-none":""}`}>
+              <div className="comment-icon">
+                <i className="fa-regular cm-icon fa-comment"></i>
+                <div className="line"></div>
+              </div>
+              
+          <div className="side-notes">
+            <div className="comment-above">
+              <h2 className="write-heading">Write a Notes</h2>
+            </div>
+          <textarea className="text-area-box" id="notes" placeholder="write a notes ......" name="notes" rows="4" cols="50"></textarea>
+          <div className="comment-below">
+            <button className="comment-btn">Submit</button>
           </div>
+          </div>
+          </div>
+          </div>
+
+    {/* notes ui end */}
+
+
+    {/* all notes data ui */}
+
+
+          <div className="lead-filter-above">
+            
+            {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
+            <div className={`notes-box mt-4`}>
+              <div className="comment-icon">
+                <i className="fa-regular cm-icon fa-comment"></i>
+                <div className="line"></div>
+              </div>
+              
+          <div className="side-notes">
+            <div className="comment-above">
+              <h2 className="write-heading">Notes</h2>
+            </div>
+          <div className="text-area-box"></div>
+          </div>
+          </div>
+          </div>
+
+          {/* all notes data ui ends */}
+          
         </div>
       </div>
     </div>

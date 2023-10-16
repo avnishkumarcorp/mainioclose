@@ -8,7 +8,7 @@ const FilterButton = ({name, icon, data, setData}) => {
     
     return (
     <div className="filter-box">
-        <button onClick={handleClick}><span>{icon}</span>{name}</button>
+        <button className="filter-btn-design" onClick={handleClick}><span className="mr-2">{icon}</span>{name}</button>
     </div>
   )
 };
