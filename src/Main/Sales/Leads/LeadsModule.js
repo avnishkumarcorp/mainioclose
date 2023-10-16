@@ -11,6 +11,7 @@ import { DataGrid } from "@mui/x-data-grid"
 import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import LeadCreateModel from "../../../Model/LeadCreateModel"
+import { useSelector } from "react-redux"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -30,6 +31,11 @@ const LeadsModule = () => {
   // console.log("id is ", currentUserId)
 
   // console.log("all e")
+  // const currentUserData = useSelector((user)=> user.AuthReducer.currentUser)
+
+  // console.log("current user is ", currentUserData);
+
+
 
 
   const columns = [
@@ -110,6 +116,13 @@ const LeadsModule = () => {
   }
 
   // console.log("New Lead user", leadUserNew)
+
+
+
+
+  
+
+
 
   const getAllLead = async () => {
     try {
