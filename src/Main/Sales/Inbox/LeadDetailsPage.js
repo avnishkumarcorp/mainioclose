@@ -1,54 +1,57 @@
 import React, { useEffect, useState } from "react"
 import "./LeadDetailsPage.scss"
 import FilterButton from "../../../components/FilterButton"
-import { useLocation } from "react-router-dom";
-import axios from "axios";
-import { getQuery } from "../../../API/GetQuery";
+import { useLocation } from "react-router-dom"
+import axios from "axios"
+import { getQuery } from "../../../API/GetQuery"
 
 const LeadDetailsPage = () => {
-  const [notes, setNotes] = useState(false);
-  const [notes1, setNotes1] = useState(false);
-  
+  const [notes, setNotes] = useState(false)
+  const [notes1, setNotes1] = useState(false)
+  const [notesApiData, setNotesApiData] = useState([])
 
+  useEffect(() => {
+    editViewData()
+    leadNotesData()
+    getSingleLeadData()
+  }, [])
 
-  useEffect(()=>{
-    editViewData();
-    leadNotesData();
-  },[])
-
-
-
-  const leadNotesData = async (id) =>{
-    const getAllLeadNotes = await getQuery(`/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`) 
+  const leadNotesData = async (id) => {
+    const getAllLeadNotes = await getQuery(
+      `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
+    )
     // axios.get(`/leadService/api/v1/getAllRemarks?leadId=${3}`,{
     //   headers: {
     //     "Access-Control-Allow-Origin": "*",
     //     "Content-Type": "application/json",
     //   },
     // })
-    console.log("notes is here", getAllLeadNotes);
+    console.log("notes is here", getAllLeadNotes)
+    setNotesApiData(getAllLeadNotes.data)
   }
 
-
-  // const editViewData = async  ()  =>{  
+  // const editViewData = async  ()  =>{
   //   const viewData = await axios.get(`/leadService/api/v1/inbox/editView?leadId=3`,{
 
   //   })
   // }
 
-  const location = useLocation();
+  const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
-  const leadPathId = Number(splitPath[4]);
- 
+  const leadPathId = Number(splitPath[4])
+
   const editViewData = async () => {
     try {
-      const viewData = await axios.get(`/leadService/api/v1/inbox/editView?leadId=${leadPathId}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
+      const viewData = await axios.get(
+        `/leadService/api/v1/inbox/editView?leadId=${leadPathId}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
 
       console.log("view data")
     } catch (err) {
@@ -56,10 +59,15 @@ const LeadDetailsPage = () => {
     }
   }
 
-  console.log("lead path ", leadPathId);
+  const getSingleLeadData = async () => {
+    const singleLeadApiData = await getQuery(
+      `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
+    )
+    console.log("single lead data", singleLeadApiData)
+  }
 
+  console.log("lead path ", leadPathId)
 
-  
   return (
     <div className="lead-details cm-padding-one">
       <div className="row">
@@ -112,7 +120,10 @@ const LeadDetailsPage = () => {
                         </select>
                       </div>
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Select Product
                         </label>
 
@@ -205,7 +216,10 @@ const LeadDetailsPage = () => {
                   <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Select Product
                         </label>
 
@@ -274,7 +288,10 @@ const LeadDetailsPage = () => {
                   <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Task Description
                         </label>
 
@@ -282,7 +299,10 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           date
                         </label>
 
@@ -290,7 +310,10 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Assign user
                         </label>
 
@@ -360,7 +383,10 @@ const LeadDetailsPage = () => {
                   <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Status
                         </label>
 
@@ -368,14 +394,20 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Contact
                         </label>
                         <input className="lead-cm-input" type="text" />
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           user
                         </label>
 
@@ -392,7 +424,10 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Notes
                         </label>
                         <textarea className="lead-cm-input" type="text" />
@@ -453,7 +488,10 @@ const LeadDetailsPage = () => {
                   <div className="my-card-content">
                     <form>
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Name
                         </label>
 
@@ -461,7 +499,10 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Title
                         </label>
 
@@ -469,7 +510,10 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Contact Detail
                         </label>
                         <div className="my-details">
@@ -483,7 +527,10 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="product-box">
-                        <label className="lead-heading" htmlFor="select-product">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
                           Contact Role
                         </label>
 
@@ -529,52 +576,61 @@ const LeadDetailsPage = () => {
         <div className="col-md-8">
           {/* notes ui */}
           <div className="lead-filter-above">
-            <FilterButton  name={"notes"} icon={<i className="fa-regular  fa-note-sticky"></i>} data={notes} setData={setNotes}/>
+            <FilterButton
+              name={"notes"}
+              icon={<i className="fa-regular  fa-note-sticky"></i>}
+              data={notes}
+              setData={setNotes}
+            />
             {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
-            <div className={`notes-box mt-4 ${notes=== true ? "d-none":""}`}>
+            <div className={`notes-box mt-4 ${notes === true ? "d-none" : ""}`}>
               <div className="comment-icon">
                 <i className="fa-regular cm-icon fa-comment"></i>
                 <div className="line"></div>
               </div>
-              
-          <div className="side-notes">
-            <div className="comment-above">
-              <h2 className="write-heading">Write a Notes</h2>
-            </div>
-          <textarea className="text-area-box" id="notes" placeholder="write a notes ......" name="notes" rows="4" cols="50"></textarea>
-          <div className="comment-below">
-            <button className="comment-btn">Submit</button>
-          </div>
-          </div>
-          </div>
-          </div>
 
-    {/* notes ui end */}
-
-
-    {/* all notes data ui */}
-
-
-          <div className="lead-filter-above">
-            
-            {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
-            <div className={`notes-box mt-4`}>
-              <div className="comment-icon">
-                <i className="fa-regular cm-icon fa-comment"></i>
-                <div className="line"></div>
+              <div className="side-notes">
+                <div className="comment-above">
+                  <h2 className="write-heading">Write a Notes</h2>
+                </div>
+                <textarea
+                  className="text-area-box"
+                  id="notes"
+                  placeholder="write a notes ......"
+                  name="notes"
+                  rows="4"
+                  cols="50"
+                ></textarea>
+                <div className="comment-below">
+                  <button className="comment-btn">Submit</button>
+                </div>
               </div>
-              
-          <div className="side-notes">
-            <div className="comment-above">
-              <h2 className="write-heading">Notes</h2>
             </div>
-          <div className="text-area-box"></div>
-          </div>
-          </div>
           </div>
 
+          {/* notes ui end */}
+
+          {/* all notes data ui */}
+
+          {notesApiData.map((note, index) => (
+            <div className="lead-filter-above" key={index}>
+              {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
+              <div className={`notes-box mt-4`}>
+                <div className="comment-icon">
+                  <i className="fa-regular cm-icon fa-comment"></i>
+                  <div className="line"></div>
+                </div>
+
+                <div className="side-notes">
+                  <div className="comment-above">
+                    <h2 className="write-heading">Notes</h2>
+                  </div>
+                  <div className="text-area-box">{note.message}</div>
+                </div>
+              </div>
+            </div>
+          ))}
           {/* all notes data ui ends */}
-          
         </div>
       </div>
     </div>
