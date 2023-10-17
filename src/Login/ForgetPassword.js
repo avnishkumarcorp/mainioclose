@@ -23,7 +23,6 @@ const ForgetPassword = () => {
   )
   const isUserData = useSelector((user) => user.AuthReducer)
 
-  // console.log("forget redux", forgetOtpResponse);
   console.log("is user data", isUserData)
 
   const handleSubmit = (e) => {
@@ -41,7 +40,6 @@ const ForgetPassword = () => {
 
     const forgetPass = async () => {
       try {
-        // const passwordOtp = await axios.post(`/auth/forgetOtp`,{...emailData, } )
         const passwordOtp = await axios.post(
           `/securityService/api/auth/forgetOtp?email=${emailData}`,
           {

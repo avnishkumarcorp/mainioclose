@@ -33,10 +33,6 @@ const LeadDetailsPage = () => {
 
   console.log("message data", messageData)
 
-  // const setMessageData = (e) => {
-
-  // }
-
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -47,21 +43,10 @@ const LeadDetailsPage = () => {
     const getAllLeadNotes = await getQuery(
       `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
     )
-    // axios.get(`/leadService/api/v1/getAllRemarks?leadId=${3}`,{
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Content-Type": "application/json",
-    //   },
-    // })
+
     console.log("notes is here", getAllLeadNotes)
     setNotesApiData(getAllLeadNotes.data)
   }
-
-  // const editViewData = async  ()  =>{
-  //   const viewData = await axios.get(`/leadService/api/v1/inbox/editView?leadId=3`,{
-
-  //   })
-  // }
 
   const editViewData = async () => {
     try {
@@ -89,12 +74,15 @@ const LeadDetailsPage = () => {
   }
 
   const createRemarkfun = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const createNewRemark = async () => {
       try {
-        const remarkData = await postQuery(`/leadService/api/v1/createRemarks`, remarkMessage)
+        const remarkData = await postQuery(
+          `/leadService/api/v1/createRemarks`,
+          remarkMessage
+        )
         console.log("this is remark response", remarkData)
-        window.location.reload();
+        window.location.reload()
       } catch (err) {
         console.log(err)
       }
@@ -639,7 +627,12 @@ const LeadDetailsPage = () => {
                   onChange={(e) => remarkMessageFunction(e)}
                 ></textarea>
                 <div className="comment-below">
-                  <button className="comment-btn" onClick={(e)=> createRemarkfun(e)}>Submit</button>
+                  <button
+                    className="comment-btn"
+                    onClick={(e) => createRemarkfun(e)}
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             </div>

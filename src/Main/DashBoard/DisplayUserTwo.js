@@ -12,27 +12,39 @@ const DisplayUserTwo = () => {
     displayUser()
   }, [])
 
-
-  const handleEdit = (id) =>{
-    console.log("Selected row id is ", id);
+  const handleEdit = (id) => {
+    console.log("Selected row id is ", id)
   }
- 
+
   const columns = [
-    { field: "id", headerName: "ID", width: 150 }, 
+    { field: "id", headerName: "ID", width: 150 },
     { field: "firstName", headerName: "First", width: 150 },
-    { field: "lastName", headerName: "Last", width: 150, renderCell: (params) =>{
-        return <Link to="/" >{params.row.lastName}</Link>
-    } },
+    {
+      field: "lastName",
+      headerName: "Last",
+      width: 150,
+      renderCell: (params) => {
+        return <Link to="/">{params.row.lastName}</Link>
+      },
+    },
     { field: "fullName", headerName: "Full Name", width: 150 },
-    { field: "email", headerName: "Email", width: 150, hideable: false  },
+    { field: "email", headerName: "Email", width: 150, hideable: false },
     { field: "designation", headerName: "Designation", width: 150 },
     { field: "department", headerName: "Department", width: 150 },
-    { field: "Edit", headerName: "Edit", width: 150, renderCell: (params)=>{
-        return <button onClick={(id)=> handleEdit(params.row.id) }>id is  {params.row.id}</button> 
-    }},
-    
+    {
+      field: "Edit",
+      headerName: "Edit",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <button onClick={(id) => handleEdit(params.row.id)}>
+            id is {params.row.id}
+          </button>
+        )
+      },
+    },
   ]
-  
+
   const displayUser = async () => {
     try {
       const userData = await axios.get(`/leadService/api/v1/users/getAllUser`, {

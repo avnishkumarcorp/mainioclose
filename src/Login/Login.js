@@ -16,9 +16,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { postQuery } from "../API/PostQuery"
 toast.configure()
 
-
 const Login = () => {
-
   // let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
   // if (regex.test(emailRef.current.value) !== true) {
   //   emailRef.current.style.border = "1px solid red"
@@ -63,7 +61,10 @@ const Login = () => {
 
     const loginUser = async () => {
       try {
-        const collectUserData = await postQuery(`/securityService/api/auth/signin`,userLoginData)
+        const collectUserData = await postQuery(
+          `/securityService/api/auth/signin`,
+          userLoginData
+        )
         console.log("api data", collectUserData.data.jwt)
         console.log("api data", collectUserData.data)
         dispatch(currentUserAction(collectUserData.data))
@@ -71,10 +72,10 @@ const Login = () => {
         localStorage.setItem("Access-token", collectUserData.data.jwt)
         navigate(`/erp/${collectUserData.data.id}/sales`)
       } catch (err) {
-        if(err.response.status === 401){
+        if (err.response.status === 401) {
           toast.error("Enter a valid username or password")
         }
-        if(err.response.status === 500){
+        if (err.response.status === 500) {
           toast.error("please Referesh this page or try again later")
         }
       }
@@ -83,7 +84,7 @@ const Login = () => {
     loginUser()
   }
 
-  console.log("user data", userLoginData) 
+  console.log("user data", userLoginData)
 
   return (
     <div className="cm-box container">
@@ -107,8 +108,6 @@ const Login = () => {
           ""
         )}
       </div>
-      {/* {emailErr ? <p></p>} */}
-      {/* //  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" } */}
       <div>
         <div className="cm-input-box">
           <i className="fa-regular cm-icon fa-eye-slash"></i>

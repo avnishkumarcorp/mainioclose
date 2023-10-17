@@ -80,9 +80,6 @@ const AllLeadsDisplay = () => {
           <LeadsCard />
         </div>
       </div>
-
-
-   
     </div>
   )
 }

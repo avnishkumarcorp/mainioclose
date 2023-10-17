@@ -47,23 +47,7 @@ const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // redux
   const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
-
-  // console.log("signup Redux dataa", signUpRedux)
-
-  // signup function
-// useEffect(()=>{
-//   const { username, password, mobile } = { ...createUserData }
-//   setGenerateOtpData((prev) => ({
-//     ...prev,
-//     name: username,
-//     password: password,
-//     mobile: mobile,
-//   }))
-
-// },[])
-  
 
   const UserInfoData = (e) => {
     setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -113,15 +97,9 @@ const SignUp = () => {
     }
 
     const { username, password, mobile } = { ...createUserData }
-   const otpNewData = {name: username, password: password, mobile: mobile}
-    // setGenerateOtpData((prev) => ({
-    //   ...prev,
-    //   name: username,
-    //   password: password,
-    //   mobile: mobile,
-    // }))
+    const otpNewData = { name: username, password: password, mobile: mobile }
 
-    console.log("OTP data kdjld", otpNewData);
+    console.log("OTP data kdjld", otpNewData)
 
     dispatch(SignupDataAction(createUserData))
 
@@ -194,7 +172,6 @@ const SignUp = () => {
                   placeholder="+91"
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                 />
                 {mobileNumberErr ? (
                   <p className="errors-new">Mobile can't be Blank</p>
@@ -219,7 +196,6 @@ const SignUp = () => {
                   ref={emailIdRef}
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {emailIdErr ? (
@@ -244,7 +220,6 @@ const SignUp = () => {
                   name="companyName"
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {companyNameErr ? (
@@ -264,7 +239,6 @@ const SignUp = () => {
                   name="password"
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {passwordErr ? (
@@ -282,7 +256,6 @@ const SignUp = () => {
                   type="password"
                   ref={confirmPasswordRef}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {confirmPasswordErr ? (
@@ -293,15 +266,6 @@ const SignUp = () => {
               </div>
             </div>
 
-            {/* {error ? (
-              <div>
-                <span className="text-danger">
-                  Please fill All Mandatory Fields
-                </span>
-              </div>
-            ) : (
-              " "
-            )} */}
             <div className="check-boxes">
               <div className="item-center">
                 <input className="box-input" type="checkbox" id="terms" />
@@ -327,9 +291,6 @@ const SignUp = () => {
               </Link>
             </p>
           </form>
-          {/* password page */}
-
-          {/* end password page */}
         </div>
       </div>
     </div>

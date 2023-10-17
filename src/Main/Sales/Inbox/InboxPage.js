@@ -51,15 +51,7 @@ const InboxPage = () => {
         sort: true,
       },
     },
-
   ]
-
-  // const columns = [
-  //   { field: "leadId", headerName: "ID", width: 150 },
-  //   { field: "name", headerName: "Name", width: 150 },
-  //   { field: "comment", headerName: "Comment", width: 150 },
-  //   { field: "count", headerName: "Count", width: 150 },
-  // ]
 
   const filterOptions = {
     filterType: "checkbox",
@@ -101,21 +93,47 @@ const InboxPage = () => {
       {/* <LeadsModule */}
 
       {/* <DataGridTables /> */}
-      <DataTableFirst  tabletitle={"Inbox"} allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} />
+      <DataTableFirst
+        tabletitle={"Inbox"}
+        allleaddata={allLeadData}
+        leadColumns={leadColumns}
+        filterOptions={filterOptions}
+      />
+    </div>
+  )
+}
 
-       {/* <UserListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData} /> */}
-      {/* // <InboxListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData}  />  */}
-      {/* <div className="mt-5">
+export default InboxPage
+
+// const columns = [
+//   { field: "leadId", headerName: "ID", width: 150 },
+//   { field: "name", headerName: "Name", width: 150 },
+//   { field: "comment", headerName: "Comment", width: 150 },
+//   { field: "count", headerName: "Count", width: 150 },
+// ]
+
+{
+  /* <UserListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData} /> */
+}
+{
+  /* // <InboxListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData}  />  */
+}
+{
+  /* <div className="mt-5">
         <MUIDataTable
           title={"Inbox"}
           data={allLeadData}
           columns={leadColumns}
           options={filterOptions}
         />
-      </div> */}
+      </div> */
+}
 
-      {/* data table */}
-      {/* <div className="table-responsive mt-5">
+{
+  /* data table */
+}
+{
+  /* <div className="table-responsive mt-5">
         <table className="table">
           <thead>
             <tr>
@@ -138,9 +156,5 @@ const InboxPage = () => {
             ))}
           </tbody>
         </table>
-      </div> */}
-    </div>
-  )
+      </div> */
 }
-
-export default InboxPage
