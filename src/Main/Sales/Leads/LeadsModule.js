@@ -35,9 +35,6 @@ const LeadsModule = () => {
 
   // console.log("current user is ", currentUserData);
 
-
-
-
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
     {
@@ -118,12 +115,6 @@ const LeadsModule = () => {
   // console.log("New Lead user", leadUserNew)
 
 
-
-
-  
-
-
-
   const getAllLead = async () => {
     try {
       const allLead = await axios.get(
@@ -135,7 +126,6 @@ const LeadsModule = () => {
           },
         }
       )
-
       // console.log("all Lead data", allLead.data)
       setAllLeadData(allLead.data)
     } catch (err) {

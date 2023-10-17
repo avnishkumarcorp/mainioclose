@@ -30,6 +30,7 @@ import ForgetOtpPage from "./Login/ForgetOtpPage"
 import DisplayDashboardUser from "./Main/DashBoard/DisplayDashboardUser"
 import DisplayUserTwo from "./Main/DashBoard/DisplayUserTwo"
 import SetNewPasswordPage from "./Login/SetNewPasswordPage"
+import LeadCreateModel from "./Model/LeadCreateModel"
 
 function App() {
   return (
@@ -77,8 +78,7 @@ function App() {
               <Route path="orders" element={<OrdersModule />} />
                 <Route path=":id" element={<LeadDetailsPage />} />
               <Route path="contacts" element={<ContactModule />} />
-              <Route path="leads" element={<LeadsModule />} >
-              </Route>
+              <Route path="leads" element={<LeadsModule />} />
             </Route>
             {/* end */}
             {/* accounts module routes */}
