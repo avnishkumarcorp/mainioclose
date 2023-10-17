@@ -4,17 +4,44 @@ import FilterButton from "../../../components/FilterButton"
 import { useLocation } from "react-router-dom"
 import axios from "axios"
 import { getQuery } from "../../../API/GetQuery"
+import { postQuery } from "../../../API/PostQuery"
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
   const [notes1, setNotes1] = useState(false)
   const [notesApiData, setNotesApiData] = useState([])
+  const [messageData, setMessageData] = useState("")
 
   useEffect(() => {
     editViewData()
     leadNotesData()
     getSingleLeadData()
   }, [])
+
+  const location = useLocation()
+  const currentPath = location.pathname.split()
+  const splitPath = currentPath[0].split("/")
+  console.log("i am sl=plit path", splitPath)
+  const leadPathId = Number(splitPath[4])
+  const currentUserId = Number(splitPath[2])
+
+  const [remarkMessage, setRemarkMessage] = useState({
+    leadId: leadPathId,
+    userId: currentUserId,
+    message: messageData,
+  })
+
+  console.log("message data", messageData)
+
+  // const setMessageData = (e) => {
+
+  // }
+
+  const remarkMessageFunction = (e) => {
+    setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  console.log("remark message", remarkMessage)
 
   const leadNotesData = async (id) => {
     const getAllLeadNotes = await getQuery(
@@ -35,11 +62,6 @@ const LeadDetailsPage = () => {
 
   //   })
   // }
-
-  const location = useLocation()
-  const currentPath = location.pathname.split()
-  const splitPath = currentPath[0].split("/")
-  const leadPathId = Number(splitPath[4])
 
   const editViewData = async () => {
     try {
@@ -64,6 +86,20 @@ const LeadDetailsPage = () => {
       `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
     )
     console.log("single lead data", singleLeadApiData)
+  }
+
+  const createRemarkfun = (e) => {
+    e.preventDefault();
+    const createNewRemark = async () => {
+      try {
+        const remarkData = await postQuery(`/leadService/api/v1/createRemarks`, remarkMessage)
+        console.log("this is remark response", remarkData)
+        window.location.reload();
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    createNewRemark()
   }
 
   console.log("lead path ", leadPathId)
@@ -597,12 +633,13 @@ const LeadDetailsPage = () => {
                   className="text-area-box"
                   id="notes"
                   placeholder="write a notes ......"
-                  name="notes"
+                  name="message"
                   rows="4"
                   cols="50"
+                  onChange={(e) => remarkMessageFunction(e)}
                 ></textarea>
                 <div className="comment-below">
-                  <button className="comment-btn">Submit</button>
+                  <button className="comment-btn" onClick={(e)=> createRemarkfun(e)}>Submit</button>
                 </div>
               </div>
             </div>
@@ -615,7 +652,7 @@ const LeadDetailsPage = () => {
           {notesApiData.map((note, index) => (
             <div className="lead-filter-above" key={index}>
               {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
-              <div className={`notes-box mt-4`}>
+              <div className={`notes-box mt-2`}>
                 <div className="comment-icon">
                   <i className="fa-regular cm-icon fa-comment"></i>
                   <div className="line"></div>
@@ -625,7 +662,7 @@ const LeadDetailsPage = () => {
                   <div className="comment-above">
                     <h2 className="write-heading">Notes</h2>
                   </div>
-                  <div className="text-area-box">{note.message}</div>
+                  <div className="text-display-box">{note.message}</div>
                 </div>
               </div>
             </div>
