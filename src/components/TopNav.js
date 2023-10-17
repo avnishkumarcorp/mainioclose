@@ -12,7 +12,7 @@ const TopNav = () => {
   return (
     <div className="top-navbar">
       <div>
-        <input className="search-box" type="search" placeholder="Serach..." />
+        {/* <input className="search-box" type="search" placeholder="Serach..." /> */}
       </div>
       <div className="user-profile">
         <button className="btn btn-primary" onClick={logoutUser}>Logout</button>
