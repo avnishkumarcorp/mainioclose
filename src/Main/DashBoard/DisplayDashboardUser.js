@@ -36,8 +36,6 @@ const DisplayDashboardUser = () => {
 
   const columns = [
     { field: "id", headerName: "ID", width: 150 }, 
-    { field: "firstName", headerName: "First", width: 150 },
-    { field: "lastName", headerName: "Last", width: 150,},
     { field: "fullName", headerName: "Full Name", width: 150 },
     { field: "email", headerName: "Email", width: 150, hideable: false  },
     { field: "designation", headerName: "Designation", width: 150 },
