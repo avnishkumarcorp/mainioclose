@@ -105,22 +105,6 @@ const LeadCreateModel = () => {
       return
     }
 
-  
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const leadCreateFun = async () => {
       try {
         const createNewLeadData = await postQuery(
