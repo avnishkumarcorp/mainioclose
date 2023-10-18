@@ -49,14 +49,15 @@ const LeadCreateModel = () => {
   const assigneeIdRef = useRef()
   const primaryAddressRef = useRef()
   const sourceRef = useRef()
+  const leadNameRef = useRef();
 
   const leadRowData = (e) => {
     setLeadData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
 
-    if (nameRef.current.value !== "") {
-      setNameError(false)
+    // if (nameRef.current.value !== "") {
+    //   setNameError(false)
       
-    }
+    // }
 
     if (emailRef.current.value !== "") {
       setEmailError(false)  
@@ -159,13 +160,39 @@ const LeadCreateModel = () => {
                   </div>
                   <form>
                     <div className="first-form form-row">
-                      <div className="form-group col-md-6">
+                   
+                    <div className="form-group col-md-6">
                         <div className="pr-ten">
                           <label
                             className="label-heading mb-1"
                             htmlFor="teamName"
                           >
                             Lead name *
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="leadName"
+                            ref={leadNameRef}
+                            placeholder="Enter Team Name"
+                            name="leadName"
+                            onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {nameError ? (
+                          <InputErrorComponent value={"Name can't be Blank!"} />
+                        ) : (
+                          ""
+                        )}
+                      </div>
+
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="teamName"
+                          >
+                            client name *
                           </label>
                           <input
                             type="text"
@@ -281,6 +308,30 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
+                            state*
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="mobileNo"
+                            // ref={cityRef}
+                            placeholder="Enter city"
+                            // name="city"
+                            // onChange={(e) => leadRowData(e)}
+                          />
+                        </div>
+                        {/* {cityError ? (
+                          <InputErrorComponent value={"City can't be Blank!"} />
+                        ) : (
+                          ""
+                        )} */}
+                      </div>
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
                             IP Address*
                           </label>
                           <input
@@ -343,6 +394,31 @@ const LeadCreateModel = () => {
                           ""
                         )}
                       </div>
+
+
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            Primary Address*
+                          </label>
+                          <textarea
+                            className="form-control input-focus"
+                            id="opunit"
+                            rows="4"
+                            cols="50"
+                            placeholder="Enter Address here..."
+                            value={leadData.primaryAddress || ""}
+                            name="primaryAddress"
+                            ref={primaryAddressRef}
+                            onChange={(e) => leadRowData(e)}
+                            required
+                          ></textarea>
+                        </div>
+                       
+                      </div>
                     
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -372,29 +448,7 @@ const LeadCreateModel = () => {
                         )}
                       </div>
 
-                      <div className="form-group col-md-6">
-                        <div className="pr-ten">
-                          <label
-                            className="label-heading mb-1"
-                            htmlFor="mobileNo"
-                          >
-                            Primary Address*
-                          </label>
-                          <textarea
-                            className="form-control input-focus"
-                            id="opunit"
-                            rows="4"
-                            cols="50"
-                            placeholder="Enter Address here..."
-                            value={leadData.primaryAddress || ""}
-                            name="primaryAddress"
-                            ref={primaryAddressRef}
-                            onChange={(e) => leadRowData(e)}
-                            required
-                          ></textarea>
-                        </div>
-                       
-                      </div>
+                     
 
                       {/* <textarea
                       className="form-group input-focus text-a-size w-100"

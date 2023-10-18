@@ -54,7 +54,10 @@ const LeadDetailsPage = () => {
     //   },
     // })
     console.log("notes is here", getAllLeadNotes)
-    setNotesApiData(getAllLeadNotes.data)
+    const newData = getAllLeadNotes.data.reverse();
+    console.log("new reverse data ", newData);
+    // let leadDataNotes = getAllLeadNotes.reverse();
+    setNotesApiData(newData)
   }
 
   // const editViewData = async  ()  =>{

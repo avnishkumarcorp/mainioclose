@@ -38,13 +38,13 @@ const LeadsModule = () => {
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
     {
-      field: "name",
+      field: "leadName",
       headerName: "Name",
       width: 150,
       renderCell: (props) => {
         return (
           <Link to={`/erp/${currentUserId}/sales/${props.row.id}`}>
-            {props.row.name}
+            {props.row.leadName}
           </Link>
         )
       },
