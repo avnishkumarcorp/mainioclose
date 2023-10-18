@@ -11,6 +11,7 @@ const LeadDetailsPage = () => {
   const [notes1, setNotes1] = useState(false)
   const [notesApiData, setNotesApiData] = useState([])
   const [messageData, setMessageData] = useState("")
+  const [singleLeadResponseData, setSingleLeadResponseData] = useState({});
 
   useEffect(() => {
     editViewData()
@@ -31,7 +32,7 @@ const LeadDetailsPage = () => {
     message: messageData,
   })
 
-  console.log("message data", messageData)
+  // console.log("message data", messageData)
 
   // const setMessageData = (e) => {
 
@@ -41,7 +42,7 @@ const LeadDetailsPage = () => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  console.log("remark message", remarkMessage)
+  // console.log("remark message", remarkMessage)
 
   const leadNotesData = async (id) => {
     const getAllLeadNotes = await getQuery(
@@ -55,7 +56,7 @@ const LeadDetailsPage = () => {
     // })
     console.log("notes is here", getAllLeadNotes)
     const newData = getAllLeadNotes.data.reverse();
-    console.log("new reverse data ", newData);
+    // console.log("new reverse data ", newData);
     // let leadDataNotes = getAllLeadNotes.reverse();
     setNotesApiData(newData)
   }
@@ -78,7 +79,7 @@ const LeadDetailsPage = () => {
         }
       )
 
-      console.log("view data")
+      // console.log("view data")
     } catch (err) {
       console.log(err)
     }
@@ -89,6 +90,8 @@ const LeadDetailsPage = () => {
       `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
     )
     console.log("single lead data", singleLeadApiData)
+    setSingleLeadResponseData(singleLeadApiData.data);
+
   }
 
   const createRemarkfun = (e) => {
@@ -105,19 +108,20 @@ const LeadDetailsPage = () => {
     createNewRemark()
   }
 
-  console.log("lead path ", leadPathId)
+  console.log("i am state data", singleLeadResponseData);
+  // console.log("lead path ", leadPathId)
 
   return (
     <div className="lead-details cm-padding-one">
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
-            <h3 className="company-name">No Compnay</h3>
-            <p className="lead-blue-head">Abhishek Kumar</p>
-            <p className="lead-blue-head mt-4">Gurugram, india</p>
+            <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
+            <p className="lead-blue-head">{singleLeadResponseData.name}</p>
+            <p className="lead-blue-head mt-4">{singleLeadResponseData.city}, india</p>
             <div className="lead-product">
               <div className="card mt-2">
-                <div className="" id="headingThree">
+                <div className="" id="headingThree">  
                   <div
                     className="card-btn"
                     data-toggle="collapse"
@@ -665,7 +669,7 @@ const LeadDetailsPage = () => {
                   <div className="comment-above">
                     <h2 className="write-heading">Notes</h2>
                   </div>
-                  <div className="text-display-box">{note.message}</div>
+                  <div className="text-display-box"><pre>{note.message}</pre></div>
                 </div>
               </div>
             </div>
