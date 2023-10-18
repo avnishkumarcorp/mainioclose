@@ -97,15 +97,15 @@ const LeadDetailsPage = () => {
         console.log(err)
       }
     }
-    createNewRemark()
+    createNewRemark() 
   }
 
   const getAllProductWithCattegory = async () => {
-    const gatCategory = await getQuery(
+    const getCategory = await getQuery(
       "/leadService/api/v1/category/getAllCategories"
     )
-    console.log("get category", gatCategory.data)
-    setCategoryData(gatCategory.data)
+    console.log("get category", getCategory.data)
+    setCategoryData(getCategory.data)
 
   }
 
