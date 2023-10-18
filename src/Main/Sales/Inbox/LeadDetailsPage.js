@@ -5,26 +5,31 @@ import { useLocation } from "react-router-dom"
 import axios from "axios"
 import { getQuery } from "../../../API/GetQuery"
 import { postQuery } from "../../../API/PostQuery"
+import { useRef } from "react"
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
   const [notes1, setNotes1] = useState(false)
   const [notesApiData, setNotesApiData] = useState([])
   const [messageData, setMessageData] = useState("")
-  const [singleLeadResponseData, setSingleLeadResponseData] = useState({});
+  const [singleLeadResponseData, setSingleLeadResponseData] = useState({})
+  const [categoryData, setCategoryData] = useState([])
 
   useEffect(() => {
     editViewData()
     leadNotesData()
     getSingleLeadData()
+    getAllProductWithCattegory()
   }, [])
 
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
-  console.log("i am sl=plit path", splitPath)
+  // console.log("i am sl=plit path", splitPath)
   const leadPathId = Number(splitPath[4])
   const currentUserId = Number(splitPath[2])
+
+  const categorySelectRef = useRef();
 
   const [remarkMessage, setRemarkMessage] = useState({
     leadId: leadPathId,
@@ -32,40 +37,26 @@ const LeadDetailsPage = () => {
     message: messageData,
   })
 
-  // console.log("message data", messageData)
-
-  // const setMessageData = (e) => {
-
-  // }
+  console.log("category added", categoryData);
 
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // console.log("remark message", remarkMessage)
+
+  const getCatgegoryInputData = (e) =>{
+    console.log(categorySelectRef)
+    console.log(categorySelectRef.current)
+    console.log("get cat call");
+  }
 
   const leadNotesData = async (id) => {
     const getAllLeadNotes = await getQuery(
       `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
-    )
-    // axios.get(`/leadService/api/v1/getAllRemarks?leadId=${3}`,{
-    //   headers: {
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    console.log("notes is here", getAllLeadNotes)
-    const newData = getAllLeadNotes.data.reverse();
-    // console.log("new reverse data ", newData);
-    // let leadDataNotes = getAllLeadNotes.reverse();
+    ) 
+    const newData = getAllLeadNotes.data.reverse()
     setNotesApiData(newData)
   }
-
-  // const editViewData = async  ()  =>{
-  //   const viewData = await axios.get(`/leadService/api/v1/inbox/editView?leadId=3`,{
-
-  //   })
-  // }
 
   const editViewData = async () => {
     try {
@@ -79,7 +70,6 @@ const LeadDetailsPage = () => {
         }
       )
 
-      // console.log("view data")
     } catch (err) {
       console.log(err)
     }
@@ -89,18 +79,20 @@ const LeadDetailsPage = () => {
     const singleLeadApiData = await getQuery(
       `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
     )
-    console.log("single lead data", singleLeadApiData)
-    setSingleLeadResponseData(singleLeadApiData.data);
 
+    setSingleLeadResponseData(singleLeadApiData.data)
   }
 
   const createRemarkfun = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const createNewRemark = async () => {
       try {
-        const remarkData = await postQuery(`/leadService/api/v1/createRemarks`, remarkMessage)
-        console.log("this is remark response", remarkData)
-        window.location.reload();
+        const remarkData = await postQuery(
+          `/leadService/api/v1/createRemarks`,
+          remarkMessage
+        )
+  
+        window.location.reload()
       } catch (err) {
         console.log(err)
       }
@@ -108,8 +100,18 @@ const LeadDetailsPage = () => {
     createNewRemark()
   }
 
-  console.log("i am state data", singleLeadResponseData);
-  // console.log("lead path ", leadPathId)
+  const getAllProductWithCattegory = async () => {
+    const gatCategory = await getQuery(
+      "/leadService/api/v1/category/getAllCategories"
+    )
+    console.log("get category", gatCategory.data)
+    setCategoryData(gatCategory.data)
+
+  }
+
+  console.log("i am state data", singleLeadResponseData)
+
+  // setCategoryData(singleLeadResponseData)
 
   return (
     <div className="lead-details cm-padding-one">
@@ -118,10 +120,12 @@ const LeadDetailsPage = () => {
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
             <p className="lead-blue-head">{singleLeadResponseData.name}</p>
-            <p className="lead-blue-head mt-4">{singleLeadResponseData.city}, india</p>
+            <p className="lead-blue-head mt-4">
+              {singleLeadResponseData.city}, india
+            </p>
             <div className="lead-product">
               <div className="card mt-2">
-                <div className="" id="headingThree">  
+                <div className="" id="headingThree">
                   <div
                     className="card-btn"
                     data-toggle="collapse"
@@ -153,13 +157,17 @@ const LeadDetailsPage = () => {
 
                         <select
                           className="lead-cm-input"
-                          name="select-product-category"
+                          // name="select-product-category"
                           id="select-product-category"
+                          ref={categorySelectRef}
+                          value={categoryData.categoryName || ""}
+                          // name="categoryName"
+                          onChange={(e) => getCatgegoryInputData(e)}
                         >
-                          <option value="volvo">Volvo</option>
-                          <option value="saab">Saab</option>
-                          <option value="mercedes">Mercedes</option>
-                          <option value="audi">Audi</option>
+                        {categoryData.map((cat, index)=>(
+                            <option key={index} value={cat.categoryName}>{cat.categoryName}</option>
+                        ))}
+                         
                         </select>
                       </div>
                       <div className="product-box">
@@ -646,7 +654,12 @@ const LeadDetailsPage = () => {
                   onChange={(e) => remarkMessageFunction(e)}
                 ></textarea>
                 <div className="comment-below">
-                  <button className="comment-btn" onClick={(e)=> createRemarkfun(e)}>Submit</button>
+                  <button
+                    className="comment-btn"
+                    onClick={(e) => createRemarkfun(e)}
+                  >
+                    Submit
+                  </button>
                 </div>
               </div>
             </div>
@@ -669,7 +682,9 @@ const LeadDetailsPage = () => {
                   <div className="comment-above">
                     <h2 className="write-heading">Notes</h2>
                   </div>
-                  <div className="text-display-box"><pre>{note.message}</pre></div>
+                  <div className="text-display-box">
+                    <pre>{note.message}</pre>
+                  </div>
                 </div>
               </div>
             </div>

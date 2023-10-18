@@ -77,6 +77,12 @@ const LeadsModule = () => {
     { field: "source", headerName: "Source", width: 150 },
   ]
 
+
+  const getUserId =  (id) =>{
+      console.log("id is ", id)
+  }
+
+
   const changeUserAssignee = (user) => {
     console.log("user is selectd", user)
   }
@@ -84,8 +90,9 @@ const LeadsModule = () => {
   const changeLeadAssignee = async (id) => {
     console.log("id is call", id)
 
+
     try {
-      await axios.put(
+     const updatePerson =  await axios.put(
         `/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${currentUserId}`,
         {
           headers: {
@@ -94,7 +101,7 @@ const LeadsModule = () => {
           },
         }
       )
-      console.log(`updateLeadAssignee is`)
+      console.log("updateLeadAssignee is", updatePerson)
     } catch (err) {
       console.log(err)
     }
@@ -105,15 +112,12 @@ const LeadsModule = () => {
       const allLeadUser = await axios.get(
         `/leadService/api/v1/users/getAllUser`
       )
-      // console.log("all User", allLeadUser.data)
+
       setLeadUserNew(allLeadUser.data)
     } catch (err) {
       console.log(err)
     }
   }
-
-  // console.log("New Lead user", leadUserNew)
-
 
   const getAllLead = async () => {
     try {
@@ -133,7 +137,7 @@ const LeadsModule = () => {
     }
   }
 
-  console.log("i am all lead data", allLeadData);
+  console.log("i am all lead data", allLeadData)
 
   return (
     <div className="lead-module small-box-padding">
@@ -146,15 +150,14 @@ const LeadsModule = () => {
         columns={columns}
         row={allLeadData}
       />
-
-     
     </div>
   )
 }
 
 export default LeadsModule
 
- {/* <div className="inbox-top-btn">
+{
+  /* <div className="inbox-top-btn">
         <button to="/sales" className={`tab-btn `}>
           Inbox
         </button>
@@ -164,12 +167,18 @@ export default LeadsModule
         <button to="/sales3" className={`tab-btn `}>
           Failure (454545)
         </button>
-      </div> */}
+      </div> */
+}
 
-      {/* {<DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />} */}
-      {/* <LeadCreateModel /> */}
+{
+  /* {<DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />} */
+}
+{
+  /* <LeadCreateModel /> */
+}
 
-      {/* <div className="table-responsive mt-5">
+{
+  /* <div className="table-responsive mt-5">
         <table className="table">
           <thead>
             <tr>
@@ -211,64 +220,64 @@ export default LeadsModule
             ))}
           </tbody>
         </table>
-      </div> */}
+      </div> */
+}
 
-      
-  // const columns = [
-  //   {
-  //     name: "id",
-  //     label: "ID",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "name",
-  //     label: "Name",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "mobileNo",
-  //     label: "Mobile",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "email",
-  //     label: "Email",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "createDate",
-  //     label: "create Date",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "leadDescription",
-  //     label: "Description",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  //   {
-  //     name: "source",
-  //     label: "Source",
-  //     options: {
-  //       filter: true,
-  //       sort: true,
-  //     },
-  //   },
-  // ]
+// const columns = [
+//   {
+//     name: "id",
+//     label: "ID",
+//     options: {
+//       filter: true,
+//       sort: true,
+//     },
+//   },
+//   {
+//     name: "name",
+//     label: "Name",
+//     options: {
+//       filter: true,
+//       sort: true,
+//     },
+//   },
+//   {
+//     name: "mobileNo",
+//     label: "Mobile",
+//     options: {
+//       filter: true,
+//       sort: true,
+//     },
+//   },
+//   {
+//     name: "email",
+//     label: "Email",
+//     options: {
+//       filter: true,
+//       sort: true,
+//     },
+//   },
+//   {
+//     name: "createDate",
+//     label: "create Date",
+//     options: {
+//       filter: true,
+//       sort: true,
+//     },
+//   },
+//   {
+//     name: "leadDescription",
+//     label: "Description",
+//     options: {
+//       filter: true,
+//       sort: true,
+//     },
+//   },
+//   {
+//     name: "source",
+//     label: "Source",
+//     options: {
+//       filter: true,
+//       sort: true,
+//     },
+//   },
+// ]

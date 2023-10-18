@@ -1,59 +1,55 @@
-import React, { useState } from "react";
-import { postQuery } from "../API/PostQuery";
+import React, { useState } from "react"
+import { postQuery } from "../API/PostQuery"
 
 const CreateuserDashboard = () => {
-    // /securityService/api/auth/createNewUserByEmail
-    const [userRowData, setUserRowData] = useState({
-            userName: "rahul anand",
-            email: "radrrddsdg@gmail.com",
-            role: "ADMIN",
-            designation: "Java Devloper"
-    });
+  // /securityService/api/auth/createNewUserByEmail
+  const [userRowData, setUserRowData] = useState({
+    userName: "rahul anand",
+    email: "radrrddsdg@gmail.com",
+    role: "ADMIN",
+    designation: "Java Devloper",
+  })
 
+  const userRowDataFetch = (e) => {
+    setUserRowData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
-
-
-
-    const userRowDataFetch = (e) => {
-        setUserRowData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-    }
-
-
-    const createuserData = (e) =>{
-        e.preventDefault();
+  const createuserData = (e) => {
+    e.preventDefault()
     const userCreateFun = async () => {
-        try {
-          const createNewUserData = await postQuery(
-            `/securityService/api/auth/createNewUserByEmail`,
-            userRowData
-          )
-          console.log("user data user is created ", createNewUserData)
-          console.log(createNewUserData.data.data.name, createNewUserData.data.data.email, createNewUserData.data.data.role, createNewUserData.data.data.userId );
-        const newLeadObject = 
-            {
-                id: createNewUserData.data.data.userId,
-                email: createNewUserData.data.data.email,
-                role: "string",
-                designation: "string",
-                userName: createNewUserData.data.data.name
-              }
+      try {
+        const createNewUserData = await postQuery(
+          `/securityService/api/auth/createNewUserByEmail`,
+          userRowData
+        )
+        console.log("user data user is created ", createNewUserData)
+        console.log(
+          createNewUserData.data.data.name,
+          createNewUserData.data.data.email,
+          createNewUserData.data.data.role,
+          createNewUserData.data.data.userId
+        )
+        const newLeadObject = {
+          id: createNewUserData.data.data.userId,
+          email: createNewUserData.data.data.email,
+          role: "string",
+          designation: "string",
+          userName: createNewUserData.data.data.name,
+        }
 
-        console.log("New Lead ", newLeadObject);
+        console.log("New Lead ", newLeadObject)
 
-            // const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, ) 
-
-
+        // const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, )
 
         //   window.location.reload()
-        } catch (err) {
-          console.log(err)
-        }
+      } catch (err) {
+        console.log(err)
       }
-      userCreateFun();
     }
+    userCreateFun()
+  }
 
-
-  return(
+  return (
     <nav>
       <div className="team-model">
         <button
@@ -181,17 +177,13 @@ const CreateuserDashboard = () => {
                             onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
-                        
                       </div>
-                     
-
-               
 
                       <div className="all-between-items">
                         <div className="all-center"></div>
                         <div>
                           <button
-                            onClick={(e)=>createuserData(e)}
+                            onClick={(e) => createuserData(e)}
                             className="first-button form-prev-btn"
                           >
                             Submit
@@ -208,6 +200,6 @@ const CreateuserDashboard = () => {
       </div>
     </nav>
   )
-};
+}
 
-export default CreateuserDashboard;
+export default CreateuserDashboard
