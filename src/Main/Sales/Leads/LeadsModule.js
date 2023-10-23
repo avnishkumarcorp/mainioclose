@@ -80,13 +80,6 @@ const LeadsModule = () => {
               </option>
             ))}
           </select>
-        //   <Autocomplete
-        //   disablePortal
-        //   id="combo-box-demo"
-        //   options={allLeadData}
-        //   sx={{ width: 300 }}
-        //   renderInput={(params) => <TextField {...params} label="Movie" />}
-        // />
         )
       },
     },
@@ -120,7 +113,6 @@ const LeadsModule = () => {
         }
       )
       console.log("updateLeadAssignee is", updatePerson)
-      // window.location.reload();
     } catch (err) {
       console.log(err)
     }
@@ -149,7 +141,6 @@ const LeadsModule = () => {
           },
         }
       )
-      // console.log("all Lead data", allLead.data)
       setAllLeadData(allLead.data)
     } catch (err) {
       console.log(err)
