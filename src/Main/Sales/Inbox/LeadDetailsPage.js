@@ -6,6 +6,9 @@ import axios from "axios"
 import { getQuery } from "../../../API/GetQuery"
 import { postQuery } from "../../../API/PostQuery"
 import { useRef } from "react"
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
@@ -14,27 +17,33 @@ const LeadDetailsPage = () => {
   const [messageData, setMessageData] = useState("")
   const [singleLeadResponseData, setSingleLeadResponseData] = useState({})
   const [categoryData, setCategoryData] = useState([])
+  const [getAllStatus, setGetAllStatus] = useState([]);
+  const [singleStatus, setSingleStatus] = useState('');
 
-  const statusFakeApi = [
-    "Potential",
-    "Active",
-    "Inactive",
-    "Interested",
-    "Not Interested",
-    "onHold",
-  ]
+  // const statusFakeApi = [
+  //   "Potential",
+  //   "Active",
+  //   "Inactive",
+  //   "Interested",
+  //   "Not Interested",
+  //   "onHold", 
+  // ]
+
+  console.log("single status", singleStatus);
+  
 
   useEffect(() => {
     editViewData()
     leadNotesData()
     getSingleLeadData()
     getAllProductWithCattegory()
+    getAllStatusData()
   }, [])
 
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
-  // console.log("i am sl=plit path", splitPath)
+
   const leadPathId = Number(splitPath[4])
   const currentUserId = Number(splitPath[2])
 
@@ -57,6 +66,9 @@ const LeadDetailsPage = () => {
     console.log(categorySelectRef.current)
     console.log("get cat call")
   }
+
+
+
 
   const leadNotesData = async (id) => {
     const getAllLeadNotes = await getQuery(
@@ -82,6 +94,7 @@ const LeadDetailsPage = () => {
     }
   }
 
+  // Get Single Lead Data
   const getSingleLeadData = async () => {
     const singleLeadApiData = await getQuery(
       `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
@@ -115,6 +128,16 @@ const LeadDetailsPage = () => {
     setCategoryData(getCategory.data)
   }
 
+  const getAllStatusData = async () =>{
+    const allStatus = await getQuery(`/leadService/api/v1/status/getAllStatus`);
+    console.log("all status", allStatus);
+    setGetAllStatus(allStatus.data)
+  }
+
+
+
+
+
   console.log("i am state data", singleLeadResponseData)
 
   // setCategoryData(singleLeadResponseData)
@@ -126,17 +149,28 @@ const LeadDetailsPage = () => {
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
             <p className="lead-blue-head">{singleLeadResponseData.name}</p>
-           
+            <p className="lead-blue-head">{singleLeadResponseData.status===null ? "NULL":singleLeadResponseData.status}</p>
+
             <p className="lead-blue-head mt-4">
-              <select name="status" id="status" form="statusChange">
-              <label for="status" className="mr-2">Change Status</label>
-                {statusFakeApi.map((status, index) => (
-                  <option value={status} key={index}>
-                    {status}
+              <select name="status" onChange={(e)=> setSingleStatus(e.target.value)} id="status" form="statusChange">
+                {getAllStatus.map((status, index) => (
+                  <option value={status.id} key={index}>
+                   {status.name}
                   </option>
                 ))}
               </select>
             </p>
+            <div>
+              {/* <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={top100Films}
+                sx={{ width: 300 }}
+                renderInput={(params) => (
+                  <TextField {...params} lead="Status" />
+                )}
+              /> */}
+            </div>
             <div className="lead-product">
               <div className="card mt-2">
                 <div className="" id="headingThree">

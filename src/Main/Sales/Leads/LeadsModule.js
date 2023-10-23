@@ -12,6 +12,8 @@ import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import LeadCreateModel from "../../../Model/LeadCreateModel"
 import { useSelector } from "react-redux"
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -21,19 +23,19 @@ const LeadsModule = () => {
   useEffect(() => {
     getAllLead()
     getAllLeadUser()
-  }, [])
+  }, [allLeadData,leadUserNew])
 
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
+  const currentLeadId = Number(splitPath[4])
+  // console.log("current path id  is", splitPath );
+
 
   // console.log("id is ", currentUserId)
 
-  // console.log("all e")
-  // const currentUserData = useSelector((user)=> user.AuthReducer.currentUser)
 
-  // console.log("current user is ", currentUserData);
 
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
@@ -49,6 +51,13 @@ const LeadsModule = () => {
         )
       },
     },
+    { field: "assigneeName", headerName: "Assignee", width: 150, renderCell: (props)=>{
+      return(
+        <p>
+          {props.row.assignee.fullName}
+        </p>
+      )
+    } },
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
     { field: "createDate", headerName: "Date", width: 150 },
@@ -60,16 +69,24 @@ const LeadsModule = () => {
         return (
           <select
             className="assignee-button"
-            onChange={(id) => changeLeadAssignee(props.row.id)}
+            onChange={(e) => changeLeadAssignee(e.target.value, props.row.id)}
+            // onSelect={(e)=> }
             name="lead"
             id="lead"
           >
             {leadUserNew.map((user, index) => (
-              <option key={index} value={user.fullName}>
+              <option key={index} value={user.id}>
                 {user.fullName}
               </option>
             ))}
           </select>
+        //   <Autocomplete
+        //   disablePortal
+        //   id="combo-box-demo"
+        //   options={allLeadData}
+        //   sx={{ width: 300 }}
+        //   renderInput={(params) => <TextField {...params} label="Movie" />}
+        // />
         )
       },
     },
@@ -87,13 +104,14 @@ const LeadsModule = () => {
     console.log("user is selectd", user)
   }
 
-  const changeLeadAssignee = async (id) => {
-    console.log("id is call", id)
+  const changeLeadAssignee = async (id, leadId) => {
+    console.log("id is call ssss", id)
+    console.log("current lead D", leadId);
 
 
     try {
      const updatePerson =  await axios.put(
-        `/leadService/api/v1/lead/updateAssignee?leadId=${id}&userId=${currentUserId}`,
+        `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -102,6 +120,7 @@ const LeadsModule = () => {
         }
       )
       console.log("updateLeadAssignee is", updatePerson)
+      // window.location.reload();
     } catch (err) {
       console.log(err)
     }
