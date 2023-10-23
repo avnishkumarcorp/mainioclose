@@ -16,6 +16,8 @@ const ForgetOtpPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  console.log("response forget api selector", forgetOtpResponse);
+
   // console.log("redux data", signUpRedux)
 
   const userOtpValidate = (e) => {
@@ -23,14 +25,28 @@ const ForgetOtpPage = () => {
     let one = Object.values(otpData)
     const finalOtp = one.join("")
 
+    console.log("i am final otp", finalOtp);
+    console.log("first",  forgetOtpResponse.otp);
+    console.log("second",  forgetOtpResponse.mobile);
+
     if(forgetOtpResponse.otp !== finalOtp ){
       setValidOtpErr(true)
       return
     }
 
+    let { mobile , otp } = {...forgetOtpResponse};
+
+    console.log("i am mobile", mobile);
+    console.log("i am otp", otp);
+
     const validateuserData = async () => {
       try {
-        const validateUser = await axios(`/auth/validateOtp?mobile=${forgetOtpResponse.mobile}&otpNo=${forgetOtpResponse.otp}`)
+        const validateUser = await axios.get(`/securityService/api/auth/validateOtp?mobile=${mobile}&otpNo=${otp}`,{
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        })
         console.log("validate user response", validateUser.data);
         console.log("validate user response", validateUser.data.status);
         console.log("validate user response", validateUser.data);
@@ -38,11 +54,12 @@ const ForgetOtpPage = () => {
         if(validateUser.data.status === 200 && validateUser.data.isSuccess === true){
           navigate("/erp/change");
         } 
-        
+        console.log("success data ");
+
       } catch (err) {
         console.log(err)
+        console.log("not found error");
         setValidOtpErr(true);
-
       }
     }
 

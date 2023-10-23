@@ -15,6 +15,15 @@ const LeadDetailsPage = () => {
   const [singleLeadResponseData, setSingleLeadResponseData] = useState({})
   const [categoryData, setCategoryData] = useState([])
 
+  const statusFakeApi = [
+    "Potential",
+    "Active",
+    "Inactive",
+    "Interested",
+    "Not Interested",
+    "onHold",
+  ]
+
   useEffect(() => {
     editViewData()
     leadNotesData()
@@ -29,7 +38,7 @@ const LeadDetailsPage = () => {
   const leadPathId = Number(splitPath[4])
   const currentUserId = Number(splitPath[2])
 
-  const categorySelectRef = useRef();
+  const categorySelectRef = useRef()
 
   const [remarkMessage, setRemarkMessage] = useState({
     leadId: leadPathId,
@@ -37,23 +46,22 @@ const LeadDetailsPage = () => {
     message: messageData,
   })
 
-  console.log("category added", categoryData);
+  console.log("category added", categoryData)
 
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-
-  const getCatgegoryInputData = (e) =>{
+  const getCatgegoryInputData = (e) => {
     console.log(categorySelectRef)
     console.log(categorySelectRef.current)
-    console.log("get cat call");
+    console.log("get cat call")
   }
 
   const leadNotesData = async (id) => {
     const getAllLeadNotes = await getQuery(
       `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
-    ) 
+    )
     const newData = getAllLeadNotes.data.reverse()
     setNotesApiData(newData)
   }
@@ -69,7 +77,6 @@ const LeadDetailsPage = () => {
           },
         }
       )
-
     } catch (err) {
       console.log(err)
     }
@@ -91,13 +98,13 @@ const LeadDetailsPage = () => {
           `/leadService/api/v1/createRemarks`,
           remarkMessage
         )
-  
+
         window.location.reload()
       } catch (err) {
         console.log(err)
       }
     }
-    createNewRemark() 
+    createNewRemark()
   }
 
   const getAllProductWithCattegory = async () => {
@@ -106,7 +113,6 @@ const LeadDetailsPage = () => {
     )
     console.log("get category", getCategory.data)
     setCategoryData(getCategory.data)
-
   }
 
   console.log("i am state data", singleLeadResponseData)
@@ -120,8 +126,16 @@ const LeadDetailsPage = () => {
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
             <p className="lead-blue-head">{singleLeadResponseData.name}</p>
+           
             <p className="lead-blue-head mt-4">
-              {singleLeadResponseData.city}, india
+              <select name="status" id="status" form="statusChange">
+              <label for="status" className="mr-2">Change Status</label>
+                {statusFakeApi.map((status, index) => (
+                  <option value={status} key={index}>
+                    {status}
+                  </option>
+                ))}
+              </select>
             </p>
             <div className="lead-product">
               <div className="card mt-2">
@@ -164,10 +178,11 @@ const LeadDetailsPage = () => {
                           // name="categoryName"
                           onChange={(e) => getCatgegoryInputData(e)}
                         >
-                        {categoryData.map((cat, index)=>(
-                            <option key={index} value={cat.categoryName}>{cat.categoryName}</option>
-                        ))}
-                         
+                          {categoryData.map((cat, index) => (
+                            <option key={index} value={cat.categoryName}>
+                              {cat.categoryName}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div className="product-box">

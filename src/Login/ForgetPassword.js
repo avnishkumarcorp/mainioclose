@@ -51,7 +51,7 @@ const ForgetPassword = () => {
             },
           }
         )
-        console.log("data forget password", passwordOtp.data)
+        console.log("forget response", passwordOtp.data)
         dispatch(forgetPasswordAction(passwordOtp.data))
 
         navigate("/erp/forgetotp")
@@ -63,20 +63,20 @@ const ForgetPassword = () => {
       }
     }
 
-    const userIsExist = async () => {
-      try {
-        const userIsPresent = await axios(
-          `/auth/isUserExistOrNot?email=${emailData}`
-        )
-        console.log("user Present", userIsPresent.data)
-        dispatch(userIsPresentData(userIsPresent.data))
-      } catch (err) {
-        console.log(err)
-      }
-    }
+    // const userIsExist = async () => {
+    //   try {
+    //     const userIsPresent = await axios(
+    //       `/auth/isUserExistOrNot?email=${emailData}`
+    //     )
+    //     console.log("user Present", userIsPresent.data)
+    //     dispatch(userIsPresentData(userIsPresent.data))
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // }
 
     forgetPass()
-    userIsExist()
+    // userIsExist()
   }
 
   console.log("email data", emailData)
