@@ -151,7 +151,7 @@ const LeadDetailsPage = () => {
             <p className="lead-blue-head">{singleLeadResponseData.name}</p>
             <p className="lead-blue-head">{singleLeadResponseData.status===null ? "NULL":singleLeadResponseData.status}</p>
 
-            <p className="lead-blue-head mt-4">
+            <p className="lead-blue-head my-2">
               <select name="status" onChange={(e)=> setSingleStatus(e.target.value)} id="status" form="statusChange">
                 {getAllStatus.map((status, index) => (
                   <option value={status.id} key={index}>
