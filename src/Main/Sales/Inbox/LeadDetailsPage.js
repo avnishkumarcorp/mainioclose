@@ -12,6 +12,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
+  const [email, setEmail] = useState(true)
+  const [sms, setSms] = useState(true)
   const [notes1, setNotes1] = useState(false)
   const [notesApiData, setNotesApiData] = useState([])
   const [messageData, setMessageData] = useState("")
@@ -168,11 +170,11 @@ const LeadDetailsPage = () => {
         <div className="col-md-4">
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
-            <p className="lead-blue-head">{singleLeadResponseData.name}</p>
+            <p className="lead-location"><i class="fa-solid mr-1 fa-location-dot"></i>{singleLeadResponseData.name}</p>
             <p className="lead-blue-head">{singleLeadResponseData.status===null ? "NULL": singleLeadResponseData.status}</p>
 
-            <p className="lead-blue-head my-2">
-              <select name="status" onChange={(e)=> setSingleStatus(e.target.value)} id="status" form="statusChange">
+            <p className="my-2">
+              <select className="status-select" name="status" onChange={(e)=> setSingleStatus(e.target.value)} id="status" form="statusChange">
                 {getAllStatus.map((status, index) => (
                   <option value={status.id} key={index}>
                    {status.name}
@@ -696,22 +698,102 @@ const LeadDetailsPage = () => {
         <div className="col-md-8">
           {/* notes ui */}
           <div className="lead-filter-above">
+            <div className="filter-box">
             <FilterButton
-              name={"notes"}
+              name={"Note"}
               icon={<i className="fa-regular  fa-note-sticky"></i>}
               data={notes}
               setData={setNotes}
             />
+              <FilterButton
+              name={"Email"}
+              icon={<i class="fa-regular fa-envelope"></i>}
+              data={email}
+              setData={setEmail}
+            />
+              <FilterButton
+              name={"SMS"}
+              icon={<i class="fa-regular fa-message"></i>}
+              data={sms}
+              setData={setSms}
+            />
+            </div>
             {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
+           
+           
             <div className={`notes-box mt-4 ${notes === true ? "d-none" : ""}`}>
               <div className="comment-icon">
-                <i className="fa-regular cm-icon fa-comment"></i>
+                <div className="icon-box notes-cl">
+                <i class="fa-regular fa-note-sticky"></i>
+                </div>
+                <div className="line"></div>
+              </div>
+
+              <div className="side-notes">
+                {/* <div className="comment-above">
+                  <h2 className="write-heading">Write a Notes</h2>
+                </div> */}
+                <textarea
+                  className="text-area-box"
+                  id="notes"
+                  placeholder="write a notes ......"
+                  name="message"
+                  rows="4"
+                  cols="50"
+                  onChange={(e) => remarkMessageFunction(e)}
+                ></textarea>
+                <div className="comment-below">
+                  <button
+                    className="comment-btn"
+                    onClick={(e) => createRemarkfun(e)}
+                  >
+                    Submit
+                  </button> 
+                </div>
+              </div>
+            </div>
+            <div className={`notes-box mt-4 ${email === true ? "d-none" : ""}`}>
+              <div className="comment-icon">
+                <div className="icon-box email-cl">
+                <i class="fa-regular fa-envelope"></i>
+                </div>
                 <div className="line"></div>
               </div>
 
               <div className="side-notes">
                 <div className="comment-above">
-                  <h2 className="write-heading">Write a Notes</h2>
+                  <h2 className="write-heading">Write a Email</h2>
+                </div>
+                <textarea
+                  className="text-area-box"
+                  id="notes"
+                  placeholder="write a notes ......"
+                  name="message"
+                  rows="4"
+                  cols="50"
+                  onChange={(e) => remarkMessageFunction(e)}
+                ></textarea>
+                <div className="comment-below">
+                  <button
+                    className="comment-btn"
+                    onClick={(e) => createRemarkfun(e)}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className={`notes-box mt-4 ${sms === true ? "d-none" : ""}`}>
+              <div className="comment-icon">
+                <div className="icon-box sms-cl">
+                <i className="fa-regular cm-icon fa-comment"></i>
+                </div>
+                <div className="line"></div>
+              </div>
+
+              <div className="side-notes">
+                <div className="comment-above">
+                  <h2 className="write-heading">Write a SMS</h2>
                 </div>
                 <textarea
                   className="text-area-box"
@@ -743,7 +825,9 @@ const LeadDetailsPage = () => {
               {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
               <div className={`notes-box mt-2`}>
                 <div className="comment-icon">
+                  <div className="icon-box">
                   <i className="fa-regular cm-icon fa-comment"></i>
+                  </div>
                   <div className="line"></div>
                 </div>
 
