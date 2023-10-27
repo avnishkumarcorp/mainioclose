@@ -71,11 +71,17 @@ const LeadDetailsPage = () => {
 
 
   const leadNotesData = async (id) => {
+    try{
     const getAllLeadNotes = await getQuery(
       `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
     )
     const newData = getAllLeadNotes.data.reverse()
     setNotesApiData(newData)
+    }catch(err){
+      if(err.response.status === 500){
+        console.log("Something Went Wrong")
+      }
+    }
   }
 
   const editViewData = async () => {
@@ -96,11 +102,16 @@ const LeadDetailsPage = () => {
 
   // Get Single Lead Data
   const getSingleLeadData = async () => {
+    try{
     const singleLeadApiData = await getQuery(
       `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
     )
-
     setSingleLeadResponseData(singleLeadApiData.data)
+    }catch(err){
+      if(err.response.status === 500){
+        console.log("Something Went Wrong")
+      }
+    }
   }
 
   const createRemarkfun = (e) => {
@@ -121,17 +132,31 @@ const LeadDetailsPage = () => {
   }
 
   const getAllProductWithCattegory = async () => {
+    try{
     const getCategory = await getQuery(
       "/leadService/api/v1/category/getAllCategories"
     )
     console.log("get category", getCategory.data)
     setCategoryData(getCategory.data)
+    }catch(err){
+      if(err.response.status === 500){
+        console.log("Something Went Wrong")
+      }
+   
+    }
   }
 
   const getAllStatusData = async () =>{
+    try{
     const allStatus = await getQuery(`/leadService/api/v1/status/getAllStatus`);
     console.log("all status", allStatus);
     setGetAllStatus(allStatus.data)
+    }catch(err){
+      if(err.response.status === 500){
+        console.log("Something Went Wrong")
+      }
+      console.log("500 err", err.response.status)
+    }
   }
 
 

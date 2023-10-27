@@ -114,6 +114,10 @@ const LeadsModule = () => {
       )
       console.log("updateLeadAssignee is", updatePerson)
     } catch (err) {
+      if(err.response.status === 500){
+        console.log("Something Went Wrong")
+      }
+        
       console.log(err)
     }
   }
@@ -126,6 +130,9 @@ const LeadsModule = () => {
 
       setLeadUserNew(allLeadUser.data)
     } catch (err) {
+      // if(err.response.status === 500){
+      //   console.log(err.response.status, "500 error")
+      // }
       console.log(err)
     }
   }
