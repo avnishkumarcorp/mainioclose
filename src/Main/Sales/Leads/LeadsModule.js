@@ -22,6 +22,9 @@ const LeadsModule = () => {
 
   useEffect(() => {
     getAllLead()
+  }, [])
+
+  useEffect(() => {
     getAllLeadUser()
   }, [])
 
@@ -127,12 +130,8 @@ const LeadsModule = () => {
       const allLeadUser = await axios.get(
         `/leadService/api/v1/users/getAllUser`
       )
-
       setLeadUserNew(allLeadUser.data)
     } catch (err) {
-      // if(err.response.status === 500){
-      //   console.log(err.response.status, "500 error")
-      // }
       console.log(err)
     }
   }
