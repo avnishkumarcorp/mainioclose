@@ -10,6 +10,13 @@
     color: #262e39;
     margin-bottom: 0px;
   }
+  .status-select{
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,.2);
+    outline: none;
+
+  }
   .card {
     .card-btn {
       display: flex;
@@ -45,26 +52,32 @@
     justify-content: flex-end;
     padding: 12px 0px;
     gap: 10px;
-    font-size: 14px;
+    font-size: 12px;
     .lead-cancel-btn {
       color: #262e39;
-      border: 1px solid #262e39;
+      border: 1px solid rgba(0,0,0,.2);
       padding: 6px 16px;
-      border-radius: 20px;
+      border-radius: 4px;
+      background-color: #fff;
     }
 
     .lead-save-btn {
       color: #ffffff;
       background-color: #2b62f9;
       border: 1px solid #2b62f9;
-      padding: 8px 16px;
-      border-radius: 20px;
+      padding: 0px 16px;
+      border-radius: 4px;
     }
   }
 }
 
 .lead-filter-above {
   padding: 5px;
+  .filter-box{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
   .notes-box {
     display: flex;
     gap: 10px;
@@ -75,12 +88,27 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      .cm-icon {
-        color: #2b62f9;
-        font-size: 35px;
+      .icon-box{
+        height: 42px;
+        width: 42px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #FAD6A5;
+        color: #fff;
+      }  
+      .notes-cl{
+        background-color: #FAD6A5;   
+      } 
+      .email-cl{
+        background-color: #C08081;
+      }
+      .sms-cl{
+        background-color: #5C5248;
       }
       .line {
-        border: 1px solid #2b62f9;
+        border: 1px solid rgba(0,0,0,.2);
         height: 100%;
       }
     }
@@ -100,7 +128,8 @@
         }
       }
       .comment-below {
-        background-color: #2b62f9;
+        background-color: #fff;
+        border: 1px solid rgba(0,0,0,.2);
         padding: 5px 10px;
         margin-top: 0px;
         position: relative;
@@ -113,13 +142,13 @@
         .comment-btn {
           padding: 5px 10px;
           font-size: 14px;
-          background: #D3d3d3;
-          color: #000;
+          background: #2b62f9;
+          color: #fff;
           outline: none;
           border: none;
           cursor: pointer;
           border-radius: 4px;
-          font-weight: 500;
+          font-weight: 400;
         }
       }
 
@@ -128,7 +157,8 @@
         width: 100%;
         resize: none;
         padding: 10px;
-        border: 1px solid gray;
+        border: 1px solid rgba(0,0,0, .2);
+        border-radius: 4px;
         // border-radius: 4px;
       }
       .text-display-box{
