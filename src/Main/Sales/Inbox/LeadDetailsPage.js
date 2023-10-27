@@ -33,9 +33,7 @@ const LeadDetailsPage = () => {
   //   "onHold", 
   // ]
 
-  console.log("single status", singleStatus);
-  
-
+  console.log("single status id ", singleStatus); 
   useEffect(() => {
     editViewData()
     leadNotesData()
@@ -43,6 +41,10 @@ const LeadDetailsPage = () => {
     getAllProductWithCattegory()
     getAllStatusData()
   }, [])
+
+  // useEffect(()=>{
+
+  // },[changeLeadStatusFun])
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -118,6 +120,30 @@ const LeadDetailsPage = () => {
     }
   }
 
+
+  // change lead status
+
+  const changeLeadStatusFun = (catId) =>{
+    // e.preventDefault();
+    const statusChange = async () =>{
+      try{
+      const statusData = await axios.put(`/leadService/api/v1/status/updateLeadStatus?leadId=${leadPathId}&statusId=${catId}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+      console.log("status data", statusData);
+      window.location.reload();
+    }catch(err){
+      console.log(err);
+    }
+  }
+  statusChange();
+  }
+
+
+
   const createRemarkfun = (e) => {
     e.preventDefault()
     const createNewRemark = async () => {
@@ -173,10 +199,10 @@ const LeadDetailsPage = () => {
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
             <p className="lead-location"><i class="fa-solid mr-1 fa-location-dot"></i>{singleLeadResponseData.name}</p>
-            <p className="lead-blue-head">{singleLeadResponseData.status===null ? "NULL": singleLeadResponseData.status}</p>
+            <p className="lead-blue-head">{singleLeadResponseData?.status?.name}</p>
 
             <p className="my-2">
-              <select className="status-select" name="status" onChange={(e)=> setSingleStatus(e.target.value)} id="status" form="statusChange">
+              <select className="status-select" name="status" onChange={(e)=> changeLeadStatusFun(e.target.value)} id="status" form="statusChange">
                 {getAllStatus.map((status, index) => (
                   <option value={status.id} key={index}>
                    {status.name}
