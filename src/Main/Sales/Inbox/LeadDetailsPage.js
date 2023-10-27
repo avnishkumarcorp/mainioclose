@@ -9,6 +9,8 @@ import { useRef } from "react"
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
+// data-toggle="tooltip" data-placement="top" title="Tooltip on top"
+
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
@@ -280,7 +282,7 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i className="fa-solid fa-trash"></i>
+                      <i  className="fa-solid fa-trash" data-toggle="tooltip" data-placement="top" title="Product Delete" ></i>
                     </div>
                   </div>
 
@@ -706,17 +708,22 @@ const LeadDetailsPage = () => {
               setData={setNotes}
             />
               <FilterButton
-              name={"Email"}
-              icon={<i class="fa-regular fa-envelope"></i>}
-              data={email}
-              setData={setEmail}
-            />
-              <FilterButton
               name={"SMS"}
               icon={<i class="fa-regular fa-message"></i>}
               data={sms}
               setData={setSms}
             />
+              <FilterButton
+              name={"Email"}
+              icon={<i class="fa-regular fa-envelope"></i>}
+              data={email}
+              setData={setEmail}
+            />
+            
+            </div>
+
+            <div>
+              
             </div>
             {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
            
