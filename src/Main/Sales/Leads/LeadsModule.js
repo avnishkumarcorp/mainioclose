@@ -23,7 +23,7 @@ const LeadsModule = () => {
   useEffect(() => {
     getAllLead()
     getAllLeadUser()
-  }, [allLeadData,leadUserNew])
+  }, [])
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -46,7 +46,7 @@ const LeadsModule = () => {
       renderCell: (props) => {
         return (
           <Link to={`/erp/${currentUserId}/sales/${props.row.id}`}>
-            {props.row.leadName}
+            {props?.row?.leadName}
           </Link>
         )
       },
@@ -54,7 +54,7 @@ const LeadsModule = () => {
     { field: "assigneeName", headerName: "Assignee", width: 150, renderCell: (props)=>{
       return(
         <p>
-          {props.row.assignee.fullName}
+          {props?.row?.assignee?.fullName}
         </p>
       )
     } },
@@ -76,7 +76,7 @@ const LeadsModule = () => {
           >
             {leadUserNew.map((user, index) => (
               <option key={index} value={user.id}>
-                {user.fullName}
+                {user?.fullName}
               </option>
             ))}
           </select>

@@ -122,7 +122,6 @@ const LeadDetailsPage = () => {
           `/leadService/api/v1/createRemarks`,
           remarkMessage
         )
-
         window.location.reload()
       } catch (err) {
         console.log(err)
@@ -159,10 +158,6 @@ const LeadDetailsPage = () => {
     }
   }
 
-
-
-
-
   console.log("i am state data", singleLeadResponseData)
 
   // setCategoryData(singleLeadResponseData)
@@ -174,7 +169,7 @@ const LeadDetailsPage = () => {
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
             <p className="lead-blue-head">{singleLeadResponseData.name}</p>
-            <p className="lead-blue-head">{singleLeadResponseData.status===null ? "NULL":singleLeadResponseData.status}</p>
+            <p className="lead-blue-head">{singleLeadResponseData.status===null ? "NULL": singleLeadResponseData.status}</p>
 
             <p className="lead-blue-head my-2">
               <select name="status" onChange={(e)=> setSingleStatus(e.target.value)} id="status" form="statusChange">
@@ -206,7 +201,7 @@ const LeadDetailsPage = () => {
                     aria-expanded="false"
                     aria-controls="collapseThree"
                   >
-                    <h3 className="lead-heading">Product</h3>
+                    <h3 className="lead-heading lead-bold">Product</h3>
                     <p className="lead-heading">
                       <i className="fa-solid fa-plus"></i>
                     </p>
@@ -326,7 +321,7 @@ const LeadDetailsPage = () => {
                     aria-expanded="false"
                     aria-controls="estimateCollapse"
                   >
-                    <h3 className="lead-heading">Estimate</h3>
+                    <h3 className="lead-heading lead-bold">Estimate</h3>
                     <p className="lead-heading">
                       <i className="fa-solid fa-plus"></i>
                     </p>
@@ -398,7 +393,7 @@ const LeadDetailsPage = () => {
                     aria-expanded="false"
                     aria-controls="TasksCollapse"
                   >
-                    <h3 className="lead-heading">Tasks</h3>
+                    <h3 className="lead-heading lead-bold">Tasks</h3>
                     <p className="lead-heading">
                       <i className="fa-solid fa-plus"></i>
                     </p>
@@ -493,7 +488,7 @@ const LeadDetailsPage = () => {
                     aria-expanded="false"
                     aria-controls="opportunitiesCollapse"
                   >
-                    <h3 className="lead-heading">Opportunities</h3>
+                    <h3 className="lead-heading lead-bold">Opportunities</h3>
                     <p className="lead-heading">
                       <i className="fa-solid fa-plus"></i>
                     </p>
@@ -598,7 +593,7 @@ const LeadDetailsPage = () => {
                     aria-expanded="false"
                     aria-controls="contactCollapse"
                   >
-                    <h3 className="lead-heading">Contacts</h3>
+                    <h3 className="lead-heading lead-bold">Contacts</h3>
                     <p className="lead-heading">
                       <i className="fa-solid fa-plus"></i>
                     </p>

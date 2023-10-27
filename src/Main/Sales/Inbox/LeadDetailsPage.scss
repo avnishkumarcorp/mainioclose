@@ -1,9 +1,14 @@
+.lead-details{
+  background-color: #f8f8f8;
+}
+
 .left-lead-section {
   .company-name {
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 40px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 38px;
     color: #262e39;
+    margin-bottom: 0px;
   }
   .card {
     .card-btn {
@@ -11,12 +16,15 @@
       justify-content: space-between;
       align-items: center;
       padding: 8px 12px;
+      background: rgba(38, 46, 57, .05);
+      border: 1px solid #e5e5e5;
     }
     .save-lead-data {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 6px 12px;
+      border: 1px solid #e5e5e5;
     }
     .product-box {
       .my-details {
@@ -29,7 +37,7 @@
     }
   }
   .my-card-content {
-    background-color: #edf7fc;
+    background-color: #f9f9fa;
     padding: 10px;
   }
   .lead-btn-box {
@@ -47,8 +55,8 @@
 
     .lead-save-btn {
       color: #ffffff;
-      background-color: #47bb7f;
-      border: 1px solid #47bb7f;
+      background-color: #2b62f9;
+      border: 1px solid #2b62f9;
       padding: 8px 16px;
       border-radius: 20px;
     }
