@@ -23,7 +23,9 @@ const LeadDetailsPage = () => {
   const [categoryData, setCategoryData] = useState([])
   const [getAllStatus, setGetAllStatus] = useState([]);
   const [singleStatus, setSingleStatus] = useState('');
-
+   
+  const [allProductData, setAllProductData] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState('');
   // const statusFakeApi = [
   //   "Potential",
   //   "Active",
@@ -41,6 +43,10 @@ const LeadDetailsPage = () => {
     getAllProductWithCattegory()
     getAllStatusData()
   }, [])
+
+  useEffect(()=>{
+    getAllProductData();
+  },[])
 
   // useEffect(()=>{
 
@@ -62,16 +68,20 @@ const LeadDetailsPage = () => {
   })
 
   console.log("category added", categoryData)
+  console.log("selected Product is ", selectedProduct);
 
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const getCatgegoryInputData = (e) => {
-    console.log(categorySelectRef)
-    console.log(categorySelectRef.current)
-    console.log("get cat call")
+  const getCatgegoryInputData = (valueIs) => {
+    console.warn("product")
+    console.log(valueIs)
   }
+  // const getCatgegoryInputData = (valueIs) => {
+  //   console.warn("product")
+  //   console.log(valueIs)
+  // }
 
 
 
@@ -175,6 +185,18 @@ const LeadDetailsPage = () => {
     }
   }
 
+  const getAllProductData = async () =>{
+    try{
+      const allProductResponse = await getQuery(`/leadService/api/v1/product/getAllProducts`);
+      console.warn("all here")
+      console.log("all products here", allProductResponse);
+      setAllProductData(allProductResponse.data);
+    }catch(err){
+      console.log(err);
+    }
+  } 
+  console.log("all data hhhh", allProductData);
+
   const getAllStatusData = async () =>{
     try{
     const allStatus = await getQuery(`/leadService/api/v1/status/getAllStatus`);
@@ -198,7 +220,7 @@ const LeadDetailsPage = () => {
         <div className="col-md-4">
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
-            <p className="lead-location"><i class="fa-solid mr-1 fa-location-dot"></i>{singleLeadResponseData.name}</p>
+            <p className="lead-location"><i className="fa-solid mr-1 fa-location-dot"></i>{singleLeadResponseData.name}</p>
             <p className="lead-blue-head">{singleLeadResponseData?.status?.name}</p>
 
             <p className="my-2">
@@ -260,7 +282,7 @@ const LeadDetailsPage = () => {
                           ref={categorySelectRef}
                           value={categoryData.categoryName || ""}
                           // name="categoryName"
-                          onChange={(e) => getCatgegoryInputData(e)}
+                          onChange={(e) => getCatgegoryInputData(e.target.value)}
                         >
                           {categoryData.map((cat, index) => (
                             <option key={index} value={cat.categoryName}>
@@ -278,14 +300,14 @@ const LeadDetailsPage = () => {
                         </label>
 
                         <select
-                          className="lead-cm-input"
+                          className="lead-cm-input" 
                           name="select-product"
                           id="select-product"
+                          onChange = {(e)=> setSelectedProduct(e.target.value)}
                         >
-                          <option value="volvo">Volvo</option>
-                          <option value="saab">Saab</option>
-                          <option value="mercedes">Mercedes</option>
-                          <option value="audi">Audi</option>
+                          {allProductData.map((product, index)=>(
+                            <option value={product?.productName}>{product?.productName}</option>
+                          ))}
                         </select>
                       </div>
                       <div className="lead-btn-box">
@@ -735,13 +757,13 @@ const LeadDetailsPage = () => {
             />
               <FilterButton
               name={"SMS"}
-              icon={<i class="fa-regular fa-message"></i>}
+              icon={<i className="fa-regular fa-message"></i>}
               data={sms}
               setData={setSms}
             />
               <FilterButton
               name={"Email"}
-              icon={<i class="fa-regular fa-envelope"></i>}
+              icon={<i className="fa-regular fa-envelope"></i>}
               data={email}
               setData={setEmail}
             />
@@ -757,7 +779,7 @@ const LeadDetailsPage = () => {
             <div className={`notes-box mt-4 ${notes === true ? "d-none" : ""}`}>
               <div className="comment-icon">
                 <div className="icon-box notes-cl">
-                <i class="fa-regular fa-note-sticky"></i>
+                <i className="fa-regular fa-note-sticky"></i>
                 </div>
                 <div className="line"></div>
               </div>
@@ -788,7 +810,7 @@ const LeadDetailsPage = () => {
             <div className={`notes-box mt-4 ${email === true ? "d-none" : ""}`}>
               <div className="comment-icon">
                 <div className="icon-box email-cl">
-                <i class="fa-regular fa-envelope"></i>
+                <i className="fa-regular fa-envelope"></i>
                 </div>
                 <div className="line"></div>
               </div>
