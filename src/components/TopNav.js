@@ -12,7 +12,7 @@ const TopNav = () => {
   return (
     <div className="top-navbar">
       <div className="top-search-box">
-        <i class="fa-solid search-icon fa-magnifying-glass"></i>
+        <i className="fa-solid search-icon fa-magnifying-glass"></i>
         <input className="search-box" type="search" placeholder="Serach..." />
       </div>
       {/* <div className="user-profile">
