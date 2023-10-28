@@ -306,7 +306,7 @@ const LeadDetailsPage = () => {
                           onChange = {(e)=> setSelectedProduct(e.target.value)}
                         >
                           {allProductData.map((product, index)=>(
-                            <option value={product?.productName}>{product?.productName}</option>
+                            <option key={index} value={product?.productName}>{product?.productName}</option>
                           ))}
                         </select>
                       </div>
