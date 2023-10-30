@@ -26,9 +26,9 @@ const LeadDetailsPage = () => {
   const [changeStatusToggle, setChangeStatusToggle] = useState(false)
   const [updateLeadNameToggle, setUpdateLeadNameToggle] = useState(true)
 
-  const [updateLeadName, setUpdateLeadName] = useState('');
+  const [updateLeadName, setUpdateLeadName] = useState("")
 
-  const [leadNameReload, setLeadNameReload] = useState(false);
+  const [leadNameReload, setLeadNameReload] = useState(false)
 
   const [allProductData, setAllProductData] = useState([])
   const [selectedProduct, setSelectedProduct] = useState("")
@@ -42,9 +42,9 @@ const LeadDetailsPage = () => {
   // ]
 
   // console.log("single status id ", singleStatus)
+  console.log("selected", selectedProduct)
   useEffect(() => {
     editViewData()
-
     getAllProductWithCattegory()
     getAllStatusData()
   }, [])
@@ -81,6 +81,8 @@ const LeadDetailsPage = () => {
 
   // },[changeLeadStatusFun])
 
+  console.log("single Lead", singleLeadResponseData);
+
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
@@ -96,6 +98,12 @@ const LeadDetailsPage = () => {
     message: messageData,
   })
 
+  const [addProductData, setAddProductData] = useState({
+    productId: "",
+    leadId: leadPathId,
+    serviceName: "",
+  })
+
   // console.log("category added", categoryData)
   // console.log("selected Product is ", selectedProduct)
 
@@ -103,9 +111,17 @@ const LeadDetailsPage = () => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const getCatgegoryInputData = (valueIs) => {
-    // console.warn("product")
-    // console.log(valueIs)
+  const getCatgegoryInputData = (categorySelect) => {
+    console.log("Selected category is", categorySelect)
+    setAddProductData((product) => ({
+      ...product,
+      serviceName: categorySelect,
+    }))
+  }
+
+  const getProductInputData = (productIdSelect) => {
+    console.log("Selected category is", productIdSelect)
+    setAddProductData((product) => ({ ...product, productId: productIdSelect }))
   }
   // const getCatgegoryInputData = (valueIs) => {
   //   console.warn("product")
@@ -214,6 +230,8 @@ const LeadDetailsPage = () => {
     }
   }
 
+  console.log("add product data", addProductData)
+
   // console.log("all data hhhh", allProductData)
 
   const getAllStatusData = async () => {
@@ -231,54 +249,55 @@ const LeadDetailsPage = () => {
     }
   }
 
-  const createProductInLeadFun = () => {
-    const productInLead = async () =>{
-      const updateLeadProducts = await axios.put(`/leadService/api/v1/lead/createProductInLead`,{
 
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    })
-      //   {
+  const createProductInLeadFun = async (e) => {
+    e.preventDefault();
+    try {
+      const updateLeadProducts = await axios.put(
+        `/leadService/api/v1/lead/createProductInLead`,
+        {
+          ...addProductData,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      console.log("update lead product", updateLeadProducts)
+    } catch (err) {
+      console.log(err)
+    }
+
+    //   {
     //     "productId": 2,
     //     "leadId": 14,
     //     "serviceName": "fssai"
     //   }
     // const /leadService/api/v1/lead/createProductInLead
-    }
   }
-
 
   // console.log("update lead Nameeee", updateLeadName);
 
-  const updateLeadNameSinglePage = async (e) =>{
-    // e.preventDefault();
-    // console.log("lead id", leadPathId);
-    // console.log("update lead", updateLeadName);
-    // const updateLeadName = async () =>{
-      try{   
-      const leadNameUpdate = await axios.put(`/leadService/api/v1/lead/updateLeadName?leadName=${updateLeadName}&leadId=${leadPathId}`,{
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      });
-        // console.log("lead Name Update", leadNameUpdate);
-        setUpdateLeadNameToggle(true)
-        setLeadNameReload((prev)=> !(prev))
-    }catch(err){
-        console.log(err)
-      }
-    // }
-    // updateLeadName();
+  const updateLeadNameSinglePage = async (e) => {
+    try {
+      const leadNameUpdate = await axios.put(
+        `/leadService/api/v1/lead/updateLeadName?leadName=${updateLeadName}&leadId=${leadPathId}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      // console.log("lead Name Update", leadNameUpdate);
+      setUpdateLeadNameToggle(true)
+      setLeadNameReload((prev) => !prev)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-
-
-
-
-  // console.log("i am state data", singleLeadResponseData)
+  console.log("i am state data", singleLeadResponseData)
 
   // setCategoryData(singleLeadResponseData)
 
@@ -290,15 +309,28 @@ const LeadDetailsPage = () => {
             {/* {setUpdateLeadNameToggle ? <div>true</div>: <p>false</p>} */}
             {updateLeadNameToggle ? (
               <>
-              <h3 className="company-name d-inline">
-                {singleLeadResponseData.leadName}
-              </h3>
-                <i onClick={()=> setUpdateLeadNameToggle(false)} className="fa-solid ml-3 fa-pencil"></i>
-                </>
+                <h3 className="company-name d-inline">
+                  {singleLeadResponseData.leadName}
+                </h3>
+                <i
+                  onClick={() => setUpdateLeadNameToggle(false)}
+                  className="fa-solid ml-3 fa-pencil"
+                ></i>
+              </>
             ) : (
               <>
-                <input value={updateLeadName}  onChange={(e)=> setUpdateLeadName(e.target.value)} className="hide-design-box" type="text" />
-                <button className="small-cm-btn" onClick={(e)=> updateLeadNameSinglePage(e)}>Save</button>
+                <input
+                  value={updateLeadName}
+                  onChange={(e) => setUpdateLeadName(e.target.value)}
+                  className="hide-design-box"
+                  type="text"
+                />
+                <button
+                  className="small-cm-btn"
+                  onClick={(e) => updateLeadNameSinglePage(e)}
+                >
+                  Save
+                </button>
               </>
             )}
             <p className="lead-location">
@@ -324,17 +356,7 @@ const LeadDetailsPage = () => {
                 ))}
               </select>
             </p>
-            <div>
-              {/* <Autocomplete
-                disablePortal
-                id="combo-box-demo"
-                options={top100Films}
-                sx={{ width: 300 }}
-                renderInput={(params) => (
-                  <TextField {...params} lead="Status" />
-                )}
-              /> */}
-            </div>
+            <div></div>
             <div className="lead-product">
               <div className="card mt-2">
                 <div className="" id="headingThree">
@@ -372,7 +394,7 @@ const LeadDetailsPage = () => {
                           // name="select-product-category"
                           id="select-product-category"
                           ref={categorySelectRef}
-                          value={categoryData.categoryName || ""}
+                          value={categoryData.categoryName}
                           // name="categoryName"
                           onChange={(e) =>
                             getCatgegoryInputData(e.target.value)
@@ -385,6 +407,7 @@ const LeadDetailsPage = () => {
                           ))}
                         </select>
                       </div>
+
                       <div className="product-box">
                         <label
                           className="lead-heading"
@@ -397,10 +420,10 @@ const LeadDetailsPage = () => {
                           className="lead-cm-input"
                           name="select-product"
                           id="select-product"
-                          onChange={(e) => setSelectedProduct(e.target.value)}
+                          onChange={(e) => getProductInputData(e.target.value)}
                         >
                           {allProductData.map((product, index) => (
-                            <option key={index} value={product?.productName}>
+                            <option key={index} value={product?.id}>
                               {product?.productName}
                             </option>
                           ))}
@@ -410,7 +433,7 @@ const LeadDetailsPage = () => {
                         <button className="lead-cm-btn lead-cancel-btn">
                           Cancel
                         </button>
-                        <button className="lead-cm-btn lead-save-btn">
+                        <button onClick={(e)=> createProductInLeadFun(e)} className="lead-cm-btn lead-save-btn">
                           Save
                         </button>
                       </div>
@@ -511,7 +534,10 @@ const LeadDetailsPage = () => {
                         <button className="lead-cm-btn lead-cancel-btn">
                           Cancel
                         </button>
-                        <button className="lead-cm-btn lead-save-btn">
+                        <button
+                          onClick={(e) => createProductInLeadFun(e)}
+                          className="lead-cm-btn lead-save-btn"
+                        >
                           Save
                         </button>
                       </div>
