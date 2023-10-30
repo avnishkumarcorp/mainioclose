@@ -23,7 +23,8 @@ const LeadDetailsPage = () => {
   const [categoryData, setCategoryData] = useState([])
   const [getAllStatus, setGetAllStatus] = useState([]);
   const [singleStatus, setSingleStatus] = useState('');
-   
+  const [notesUpdateToggle, setNotesUpdateToggle] = useState(false);
+    
   const [allProductData, setAllProductData] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   // const statusFakeApi = [
@@ -38,15 +39,33 @@ const LeadDetailsPage = () => {
   console.log("single status id ", singleStatus); 
   useEffect(() => {
     editViewData()
-    leadNotesData()
+   
     getSingleLeadData()
     getAllProductWithCattegory()
     getAllStatusData()
   }, [])
+
+  useEffect(()=>{
+    leadNotesData()
+  },[notesUpdateToggle])
   
   useEffect(()=>{
     getAllProductData();
   },[])
+
+  const NotesRef = useRef();
+
+  const getAllProductData = async () =>{
+    try{
+      const allProductResponse = await getQuery(`/leadService/api/v1/product/getAllProducts`);
+      console.warn("all here")
+      console.log("all products here", allProductResponse);
+      setAllProductData(allProductResponse.data);
+    }catch(err){
+      console.log(err);
+    }
+  } 
+  console.log("all data hhhh", allProductData);
 
   // useEffect(()=>{
 
@@ -85,7 +104,6 @@ const LeadDetailsPage = () => {
 
 
 
-
   const leadNotesData = async (id) => {
     try{
     const getAllLeadNotes = await getQuery(
@@ -99,6 +117,8 @@ const LeadDetailsPage = () => {
       }
     }
   }
+
+
 
   const editViewData = async () => {
     try {
@@ -162,7 +182,9 @@ const LeadDetailsPage = () => {
           `/leadService/api/v1/createRemarks`,
           remarkMessage
         )
-        window.location.reload()
+        setNotesUpdateToggle((prev)=> !(prev))
+        NotesRef.current.value="";
+        // window.location.reload()
       } catch (err) {
         console.log(err)
       }
@@ -785,6 +807,7 @@ const LeadDetailsPage = () => {
                   name="message"
                   rows="4"
                   cols="50"
+                  ref={NotesRef}
                   onChange={(e) => remarkMessageFunction(e)}
                 ></textarea>
                 <div className="comment-below">
