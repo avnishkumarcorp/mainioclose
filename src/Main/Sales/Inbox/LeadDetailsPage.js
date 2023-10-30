@@ -6,11 +6,10 @@ import axios from "axios"
 import { getQuery } from "../../../API/GetQuery"
 import { postQuery } from "../../../API/PostQuery"
 import { useRef } from "react"
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import TextField from "@mui/material/TextField"
+import Autocomplete from "@mui/material/Autocomplete"
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
-
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
@@ -21,57 +20,62 @@ const LeadDetailsPage = () => {
   const [messageData, setMessageData] = useState("")
   const [singleLeadResponseData, setSingleLeadResponseData] = useState({})
   const [categoryData, setCategoryData] = useState([])
-  const [getAllStatus, setGetAllStatus] = useState([]);
-  const [singleStatus, setSingleStatus] = useState('');
-  const [notesUpdateToggle, setNotesUpdateToggle] = useState(false);
-  const [changeStatusToggle, setChangeStatusToggle] = useState(false);
-  
-  const [allProductData, setAllProductData] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState('');
+  const [getAllStatus, setGetAllStatus] = useState([])
+  const [singleStatus, setSingleStatus] = useState("")
+  const [notesUpdateToggle, setNotesUpdateToggle] = useState(false)
+  const [changeStatusToggle, setChangeStatusToggle] = useState(false)
+  const [updateLeadNameToggle, setUpdateLeadNameToggle] = useState(true)
+
+  const [updateLeadName, setUpdateLeadName] = useState('');
+
+  const [leadNameReload, setLeadNameReload] = useState(false);
+
+  const [allProductData, setAllProductData] = useState([])
+  const [selectedProduct, setSelectedProduct] = useState("")
   // const statusFakeApi = [
   //   "Potential",
   //   "Active",
   //   "Inactive",
   //   "Interested",
   //   "Not Interested",
-  //   "onHold", 
+  //   "onHold",
   // ]
 
-  console.log("single status id ", singleStatus); 
+  console.log("single status id ", singleStatus)
   useEffect(() => {
     editViewData()
-   
-   
+
     getAllProductWithCattegory()
     getAllStatusData()
   }, [])
 
-
-  useEffect(()=>{
+  useEffect(() => {
     getSingleLeadData()
-  },[changeStatusToggle])
+  }, [changeStatusToggle, leadNameReload])
 
-  useEffect(()=>{
+  useEffect(() => {
     leadNotesData()
-  },[notesUpdateToggle])
-  
-  useEffect(()=>{
-    getAllProductData();
-  },[])
+  }, [notesUpdateToggle])
 
-  const NotesRef = useRef();
+  useEffect(() => {
+    getAllProductData()
+  }, [])
 
-  const getAllProductData = async () =>{
-    try{
-      const allProductResponse = await getQuery(`/leadService/api/v1/product/getAllProducts`);
+  const NotesRef = useRef()
+
+  const getAllProductData = async () => {
+    try {
+      const allProductResponse = await getQuery(
+        `/leadService/api/v1/product/getAllProducts`
+      )
       console.warn("all here")
-      console.log("all products here", allProductResponse);
-      setAllProductData(allProductResponse.data);
-    }catch(err){
-      console.log(err);
+      console.log("all products here", allProductResponse)
+      setAllProductData(allProductResponse.data)
+    } catch (err) {
+      console.log(err)
     }
-  } 
-  console.log("all data hhhh", allProductData);
+  }
+  console.log("all data hhhh", allProductData)
 
   // useEffect(()=>{
 
@@ -93,7 +97,7 @@ const LeadDetailsPage = () => {
   })
 
   console.log("category added", categoryData)
-  console.log("selected Product is ", selectedProduct);
+  console.log("selected Product is ", selectedProduct)
 
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -108,23 +112,19 @@ const LeadDetailsPage = () => {
   //   console.log(valueIs)
   // }
 
-
-
   const leadNotesData = async (id) => {
-    try{
-    const getAllLeadNotes = await getQuery(
-      `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
-    )
-    const newData = getAllLeadNotes.data.reverse()
-    setNotesApiData(newData)
-    }catch(err){
-      if(err.response.status === 500){
+    try {
+      const getAllLeadNotes = await getQuery(
+        `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
+      )
+      const newData = getAllLeadNotes.data.reverse()
+      setNotesApiData(newData)
+    } catch (err) {
+      if (err.response.status === 500) {
         console.log("Something Went Wrong")
       }
     }
   }
-
-
 
   const editViewData = async () => {
     try {
@@ -144,42 +144,43 @@ const LeadDetailsPage = () => {
 
   // Get Single Lead Data
   const getSingleLeadData = async () => {
-    try{
-    const singleLeadApiData = await getQuery(
-      `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
-    )
-    setSingleLeadResponseData(singleLeadApiData.data)
-    }catch(err){
-      if(err.response.status === 500){
+    try {
+      const singleLeadApiData = await getQuery(
+        `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
+      )
+      setSingleLeadResponseData(singleLeadApiData.data)
+      setUpdateLeadName(singleLeadApiData.data.leadName)
+    } catch (err) {
+      if (err.response.status === 500) {
         console.log("Something Went Wrong")
       }
     }
   }
 
-
   // change lead status
 
-  const changeLeadStatusFun = (catId) =>{
+  const changeLeadStatusFun = (catId) => {
     // e.preventDefault();
-    const statusChange = async () =>{
-      try{
-      const statusData = await axios.put(`/leadService/api/v1/status/updateLeadStatus?leadId=${leadPathId}&statusId=${catId}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
-      console.log("status data", statusData);
-      setChangeStatusToggle((prev)=> !(prev))
-      // window.location.reload();
-    }catch(err){
-      console.log(err);
+    const statusChange = async () => {
+      try {
+        const statusData = await axios.put(
+          `/leadService/api/v1/status/updateLeadStatus?leadId=${leadPathId}&statusId=${catId}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        console.log("status data", statusData)
+        setChangeStatusToggle((prev) => !prev)
+        // window.location.reload();
+      } catch (err) {
+        console.log(err)
+      }
     }
+    statusChange()
   }
-  statusChange();
-  }
-
-
 
   const createRemarkfun = (e) => {
     e.preventDefault()
@@ -189,8 +190,8 @@ const LeadDetailsPage = () => {
           `/leadService/api/v1/createRemarks`,
           remarkMessage
         )
-        setNotesUpdateToggle((prev)=> !(prev))
-        NotesRef.current.value="";
+        setNotesUpdateToggle((prev) => !prev)
+        NotesRef.current.value = ""
         // window.location.reload()
       } catch (err) {
         console.log(err)
@@ -200,34 +201,64 @@ const LeadDetailsPage = () => {
   }
 
   const getAllProductWithCattegory = async () => {
-    try{
-    const getCategory = await getQuery(
-      "/leadService/api/v1/category/getAllCategories"
-    )
-    console.log("get category", getCategory.data)
-    setCategoryData(getCategory.data)
-    }catch(err){
-      if(err.response.status === 500){
+    try {
+      const getCategory = await getQuery(
+        "/leadService/api/v1/category/getAllCategories"
+      )
+      console.log("get category", getCategory.data)
+      setCategoryData(getCategory.data)
+    } catch (err) {
+      if (err.response.status === 500) {
         console.log("Something Went Wrong")
       }
-   
     }
   }
 
-  console.log("all data hhhh", allProductData);
+  console.log("all data hhhh", allProductData)
 
-  const getAllStatusData = async () =>{
-    try{
-    const allStatus = await getQuery(`/leadService/api/v1/status/getAllStatus`);
-    console.log("all status", allStatus);
-    setGetAllStatus(allStatus.data)
-    }catch(err){
-      if(err.response.status === 500){
+  const getAllStatusData = async () => {
+    try {
+      const allStatus = await getQuery(
+        `/leadService/api/v1/status/getAllStatus`
+      )
+      console.log("all status", allStatus)
+      setGetAllStatus(allStatus.data)
+    } catch (err) {
+      if (err.response.status === 500) {
         console.log("Something Went Wrong")
       }
       console.log("500 err", err.response.status)
     }
   }
+
+
+  console.log("update lead Nameeee", updateLeadName);
+
+  const updateLeadNameSinglePage = async (e) =>{
+    // e.preventDefault();
+    // console.log("lead id", leadPathId);
+    // console.log("update lead", updateLeadName);
+    // const updateLeadName = async () =>{
+      try{   
+      const leadNameUpdate = await axios.put(`/leadService/api/v1/lead/updateLeadName?leadName=${updateLeadName}&leadId=${leadPathId}`,{
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      });
+        console.log("lead Name Update", leadNameUpdate);
+        setUpdateLeadNameToggle(true)
+        setLeadNameReload((prev)=> !(prev))
+    }catch(err){
+        console.log(err)
+      }
+    // }
+    // updateLeadName();
+  }
+
+
+
+
 
   console.log("i am state data", singleLeadResponseData)
 
@@ -238,18 +269,39 @@ const LeadDetailsPage = () => {
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
-            <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
-
-            <input className="hide-design-box" type="text" />
-            <button className="small-cm-btn">Save</button>
-            <p className="lead-location"><i className="fa-solid mr-1 fa-location-dot"></i>{singleLeadResponseData.name}</p>
-            <p className="lead-blue-head">{singleLeadResponseData?.status?.name}</p>
+            {/* {setUpdateLeadNameToggle ? <div>true</div>: <p>false</p>} */}
+            {updateLeadNameToggle ? (
+              <>
+              <h3 className="company-name d-inline">
+                {singleLeadResponseData.leadName}
+              </h3>
+                <i onClick={()=> setUpdateLeadNameToggle(false)} class="fa-solid ml-3 fa-pencil"></i>
+                </>
+            ) : (
+              <>
+                <input value={updateLeadName}  onChange={(e)=> setUpdateLeadName(e.target.value)} className="hide-design-box" type="text" />
+                <button className="small-cm-btn" onClick={(e)=> updateLeadNameSinglePage(e)}>Save</button>
+              </>
+            )}
+            <p className="lead-location">
+              <i className="fa-solid mr-1 fa-location-dot"></i>
+              {singleLeadResponseData.name}
+            </p>
+            <p className="lead-blue-head">
+              {singleLeadResponseData?.status?.name}
+            </p>
 
             <p className="my-2">
-              <select className="status-select" name="status" onChange={(e)=> changeLeadStatusFun(e.target.value)} id="status" form="statusChange">
+              <select
+                className="status-select"
+                name="status"
+                onChange={(e) => changeLeadStatusFun(e.target.value)}
+                id="status"
+                form="statusChange"
+              >
                 {getAllStatus.map((status, index) => (
                   <option value={status.id} key={index}>
-                   {status.name}
+                    {status.name}
                   </option>
                 ))}
               </select>
@@ -304,7 +356,9 @@ const LeadDetailsPage = () => {
                           ref={categorySelectRef}
                           value={categoryData.categoryName || ""}
                           // name="categoryName"
-                          onChange={(e) => getCatgegoryInputData(e.target.value)}
+                          onChange={(e) =>
+                            getCatgegoryInputData(e.target.value)
+                          }
                         >
                           {categoryData.map((cat, index) => (
                             <option key={index} value={cat.categoryName}>
@@ -322,13 +376,15 @@ const LeadDetailsPage = () => {
                         </label>
 
                         <select
-                          className="lead-cm-input" 
+                          className="lead-cm-input"
                           name="select-product"
                           id="select-product"
-                          onChange = {(e)=> setSelectedProduct(e.target.value)}
+                          onChange={(e) => setSelectedProduct(e.target.value)}
                         >
-                          {allProductData.map((product, index)=>(
-                            <option key={index} value={product?.productName}>{product?.productName}</option>
+                          {allProductData.map((product, index) => (
+                            <option key={index} value={product?.productName}>
+                              {product?.productName}
+                            </option>
                           ))}
                         </select>
                       </div>
@@ -352,7 +408,12 @@ const LeadDetailsPage = () => {
                     </div>
 
                     <div className="lead-heading">
-                      <i  className="fa-solid fa-trash" data-toggle="tooltip" data-placement="top" title="Product Delete" ></i>
+                      <i
+                        className="fa-solid fa-trash"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Product Delete"
+                      ></i>
                     </div>
                   </div>
 
@@ -771,37 +832,33 @@ const LeadDetailsPage = () => {
           {/* notes ui */}
           <div className="lead-filter-above">
             <div className="filter-box">
-            <FilterButton
-              name={"Note"}
-              icon={<i className="fa-regular  fa-note-sticky"></i>}
-              data={notes}
-              setData={setNotes}
-            />
               <FilterButton
-              name={"SMS"}
-              icon={<i className="fa-regular fa-message"></i>}
-              data={sms}
-              setData={setSms}
-            />
+                name={"Note"}
+                icon={<i className="fa-regular  fa-note-sticky"></i>}
+                data={notes}
+                setData={setNotes}
+              />
               <FilterButton
-              name={"Email"}
-              icon={<i className="fa-regular fa-envelope"></i>}
-              data={email}
-              setData={setEmail}
-            />
-            
+                name={"SMS"}
+                icon={<i className="fa-regular fa-message"></i>}
+                data={sms}
+                setData={setSms}
+              />
+              <FilterButton
+                name={"Email"}
+                icon={<i className="fa-regular fa-envelope"></i>}
+                data={email}
+                setData={setEmail}
+              />
             </div>
 
-            <div>
-              
-            </div>
+            <div></div>
             {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
-           
-           
+
             <div className={`notes-box mt-4 ${notes === true ? "d-none" : ""}`}>
               <div className="comment-icon">
                 <div className="icon-box notes-cl">
-                <i className="fa-regular fa-note-sticky"></i>
+                  <i className="fa-regular fa-note-sticky"></i>
                 </div>
                 <div className="line"></div>
               </div>
@@ -826,14 +883,14 @@ const LeadDetailsPage = () => {
                     onClick={(e) => createRemarkfun(e)}
                   >
                     Submit
-                  </button> 
+                  </button>
                 </div>
               </div>
             </div>
             <div className={`notes-box mt-4 ${email === true ? "d-none" : ""}`}>
               <div className="comment-icon">
                 <div className="icon-box email-cl">
-                <i className="fa-regular fa-envelope"></i>
+                  <i className="fa-regular fa-envelope"></i>
                 </div>
                 <div className="line"></div>
               </div>
@@ -864,7 +921,7 @@ const LeadDetailsPage = () => {
             <div className={`notes-box mt-4 ${sms === true ? "d-none" : ""}`}>
               <div className="comment-icon">
                 <div className="icon-box sms-cl">
-                <i className="fa-regular cm-icon fa-comment"></i>
+                  <i className="fa-regular cm-icon fa-comment"></i>
                 </div>
                 <div className="line"></div>
               </div>
@@ -904,7 +961,7 @@ const LeadDetailsPage = () => {
               <div className={`notes-box mt-2`}>
                 <div className="comment-icon">
                   <div className="icon-box">
-                  <i className="fa-regular cm-icon fa-comment"></i>
+                    <i className="fa-regular cm-icon fa-comment"></i>
                   </div>
                   <div className="line"></div>
                 </div>
