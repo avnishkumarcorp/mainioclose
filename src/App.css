@@ -170,6 +170,22 @@ button:focus {
   margin: 0px;
 } 
 
+.small-cm-btn{
+  padding: 4px 8px;
+  border: none;
+  background-color: #007aff;
+  color: #fff;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+.hide-design-box{
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+
 
 .assignee-button{
   min-width: 140px;
