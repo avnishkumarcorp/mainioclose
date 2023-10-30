@@ -24,7 +24,8 @@ const LeadDetailsPage = () => {
   const [getAllStatus, setGetAllStatus] = useState([]);
   const [singleStatus, setSingleStatus] = useState('');
   const [notesUpdateToggle, setNotesUpdateToggle] = useState(false);
-    
+  const [changeStatusToggle, setChangeStatusToggle] = useState(false);
+  
   const [allProductData, setAllProductData] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState('');
   // const statusFakeApi = [
@@ -40,10 +41,15 @@ const LeadDetailsPage = () => {
   useEffect(() => {
     editViewData()
    
-    getSingleLeadData()
+   
     getAllProductWithCattegory()
     getAllStatusData()
   }, [])
+
+
+  useEffect(()=>{
+    getSingleLeadData()
+  },[changeStatusToggle])
 
   useEffect(()=>{
     leadNotesData()
@@ -164,7 +170,8 @@ const LeadDetailsPage = () => {
         },
       })
       console.log("status data", statusData);
-      window.location.reload();
+      setChangeStatusToggle((prev)=> !(prev))
+      // window.location.reload();
     }catch(err){
       console.log(err);
     }
