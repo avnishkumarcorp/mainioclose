@@ -41,7 +41,7 @@ const LeadDetailsPage = () => {
   //   "onHold",
   // ]
 
-  console.log("single status id ", singleStatus)
+  // console.log("single status id ", singleStatus)
   useEffect(() => {
     editViewData()
 
@@ -68,14 +68,14 @@ const LeadDetailsPage = () => {
       const allProductResponse = await getQuery(
         `/leadService/api/v1/product/getAllProducts`
       )
-      console.warn("all here")
-      console.log("all products here", allProductResponse)
+      // console.warn("all here")
+      // console.log("all products here", allProductResponse)
       setAllProductData(allProductResponse.data)
     } catch (err) {
       console.log(err)
     }
   }
-  console.log("all data hhhh", allProductData)
+  // console.log("all data hhhh", allProductData)
 
   // useEffect(()=>{
 
@@ -96,16 +96,16 @@ const LeadDetailsPage = () => {
     message: messageData,
   })
 
-  console.log("category added", categoryData)
-  console.log("selected Product is ", selectedProduct)
+  // console.log("category added", categoryData)
+  // console.log("selected Product is ", selectedProduct)
 
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
   const getCatgegoryInputData = (valueIs) => {
-    console.warn("product")
-    console.log(valueIs)
+    // console.warn("product")
+    // console.log(valueIs)
   }
   // const getCatgegoryInputData = (valueIs) => {
   //   console.warn("product")
@@ -172,7 +172,7 @@ const LeadDetailsPage = () => {
             },
           }
         )
-        console.log("status data", statusData)
+        // console.log("status data", statusData)
         setChangeStatusToggle((prev) => !prev)
         // window.location.reload();
       } catch (err) {
@@ -205,7 +205,7 @@ const LeadDetailsPage = () => {
       const getCategory = await getQuery(
         "/leadService/api/v1/category/getAllCategories"
       )
-      console.log("get category", getCategory.data)
+      // console.log("get category", getCategory.data)
       setCategoryData(getCategory.data)
     } catch (err) {
       if (err.response.status === 500) {
@@ -214,14 +214,14 @@ const LeadDetailsPage = () => {
     }
   }
 
-  console.log("all data hhhh", allProductData)
+  // console.log("all data hhhh", allProductData)
 
   const getAllStatusData = async () => {
     try {
       const allStatus = await getQuery(
         `/leadService/api/v1/status/getAllStatus`
       )
-      console.log("all status", allStatus)
+      // console.log("all status", allStatus)
       setGetAllStatus(allStatus.data)
     } catch (err) {
       if (err.response.status === 500) {
@@ -231,8 +231,26 @@ const LeadDetailsPage = () => {
     }
   }
 
+  const createProductInLeadFun = () => {
+    const productInLead = async () =>{
+      const updateLeadProducts = await axios.put(`/leadService/api/v1/lead/createProductInLead`,{
 
-  console.log("update lead Nameeee", updateLeadName);
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    })
+      //   {
+    //     "productId": 2,
+    //     "leadId": 14,
+    //     "serviceName": "fssai"
+    //   }
+    // const /leadService/api/v1/lead/createProductInLead
+    }
+  }
+
+
+  // console.log("update lead Nameeee", updateLeadName);
 
   const updateLeadNameSinglePage = async (e) =>{
     // e.preventDefault();
@@ -246,7 +264,7 @@ const LeadDetailsPage = () => {
           "Content-Type": "application/json",
         },
       });
-        console.log("lead Name Update", leadNameUpdate);
+        // console.log("lead Name Update", leadNameUpdate);
         setUpdateLeadNameToggle(true)
         setLeadNameReload((prev)=> !(prev))
     }catch(err){
@@ -260,7 +278,7 @@ const LeadDetailsPage = () => {
 
 
 
-  console.log("i am state data", singleLeadResponseData)
+  // console.log("i am state data", singleLeadResponseData)
 
   // setCategoryData(singleLeadResponseData)
 
@@ -275,7 +293,7 @@ const LeadDetailsPage = () => {
               <h3 className="company-name d-inline">
                 {singleLeadResponseData.leadName}
               </h3>
-                <i onClick={()=> setUpdateLeadNameToggle(false)} class="fa-solid ml-3 fa-pencil"></i>
+                <i onClick={()=> setUpdateLeadNameToggle(false)} className="fa-solid ml-3 fa-pencil"></i>
                 </>
             ) : (
               <>
@@ -752,7 +770,6 @@ const LeadDetailsPage = () => {
 
                         <input className="lead-cm-input" type="text" />
                       </div>
-
                       <div className="product-box">
                         <label
                           className="lead-heading"
