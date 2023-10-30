@@ -239,6 +239,9 @@ const LeadDetailsPage = () => {
         <div className="col-md-4">
           <div className="left-lead-section">
             <h3 className="company-name">{singleLeadResponseData.leadName}</h3>
+
+            <input className="hide-design-box" type="text" />
+            <button className="small-cm-btn">Save</button>
             <p className="lead-location"><i className="fa-solid mr-1 fa-location-dot"></i>{singleLeadResponseData.name}</p>
             <p className="lead-blue-head">{singleLeadResponseData?.status?.name}</p>
 
