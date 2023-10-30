@@ -43,7 +43,7 @@ const LeadDetailsPage = () => {
     getAllProductWithCattegory()
     getAllStatusData()
   }, [])
-
+  
   useEffect(()=>{
     getAllProductData();
   },[])
@@ -185,16 +185,6 @@ const LeadDetailsPage = () => {
     }
   }
 
-  const getAllProductData = async () =>{
-    try{
-      const allProductResponse = await getQuery(`/leadService/api/v1/product/getAllProducts`);
-      console.warn("all here")
-      console.log("all products here", allProductResponse);
-      setAllProductData(allProductResponse.data);
-    }catch(err){
-      console.log(err);
-    }
-  } 
   console.log("all data hhhh", allProductData);
 
   const getAllStatusData = async () =>{

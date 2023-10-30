@@ -19,10 +19,11 @@ const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
   const [allLeadData, setAllLeadData] = useState([])
   const [leadUserNew, setLeadUserNew] = useState([])
+  const [updateActive, setUpdateActive] = useState(false);
 
   useEffect(() => {
     getAllLead()
-  }, [])
+  }, [updateActive])
 
   useEffect(() => {
     getAllLeadUser()
@@ -116,6 +117,7 @@ const LeadsModule = () => {
         }
       )
       console.log("updateLeadAssignee is", updatePerson)
+      setUpdateActive((prev)=> !(prev))
     } catch (err) {
       if(err.response.status === 500){
         console.log("Something Went Wrong")
