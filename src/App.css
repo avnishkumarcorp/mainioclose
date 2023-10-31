@@ -248,6 +248,22 @@ button:focus {
 }
 
 
+.create-btn{
+  border: none;
+  outline: none;
+  background-color: #28a745;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.create-btn:hover{
+  color: #fff;
+  text-decoration: none;
+  background-color: #1f8637;
+}
+
+
 /* mui table */
 
 

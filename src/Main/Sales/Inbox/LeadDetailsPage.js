@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./LeadDetailsPage.scss"
 import FilterButton from "../../../components/FilterButton"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import axios from "axios"
 import { getQuery } from "../../../API/GetQuery"
 import { postQuery } from "../../../API/PostQuery"
@@ -531,7 +531,10 @@ const LeadDetailsPage = () => {
                   data-parent="#accordion"
                 >
                   <div className="my-card-content">
-                    <form>
+                    <div className="all-center">
+                      <Link to={"estimate"}  className="create-btn">Create New Estimate</Link>
+                    </div>
+                    {/* <form>
                       <div className="product-box">
                         <label
                           className="lead-heading"
@@ -562,7 +565,7 @@ const LeadDetailsPage = () => {
                           Save
                         </button>
                       </div>
-                    </form>
+                    </form> */}
                   </div>
                   {/* all leads save */}
                   <div className="save-lead-data">

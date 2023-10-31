@@ -31,6 +31,7 @@ import DisplayDashboardUser from "./Main/DashBoard/DisplayDashboardUser"
 import DisplayUserTwo from "./Main/DashBoard/DisplayUserTwo"
 import SetNewPasswordPage from "./Login/SetNewPasswordPage"
 import LeadCreateModel from "./Model/LeadCreateModel"
+import EstimateCreatePage from "./Main/Sales/Leads/EstimateCreatePage"
 
 function App() {
   return (
@@ -76,7 +77,8 @@ function App() {
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
-                <Route path=":id" element={<LeadDetailsPage />} />
+              <Route path=":id" element={<LeadDetailsPage />} />
+              <Route path=":id/estimate" element={<EstimateCreatePage />} />
               <Route path="contacts" element={<ContactModule />} />
               <Route path="leads" element={<LeadsModule />} />
             </Route>
