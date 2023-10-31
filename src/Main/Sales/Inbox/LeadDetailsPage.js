@@ -32,6 +32,10 @@ const LeadDetailsPage = () => {
 
   const [allProductData, setAllProductData] = useState([])
   const [selectedProduct, setSelectedProduct] = useState("")
+  const [productDisplayToggle, setProductDisplayToggle] = useState(false);
+
+  const [allProductsList, setAllProductsList] = useState([]);
+  
   // const statusFakeApi = [
   //   "Potential",
   //   "Active",
@@ -51,7 +55,7 @@ const LeadDetailsPage = () => {
 
   useEffect(() => {
     getSingleLeadData()
-  }, [changeStatusToggle, leadNameReload])
+  }, [changeStatusToggle, leadNameReload, productDisplayToggle])
 
   useEffect(() => {
     leadNotesData()
@@ -75,7 +79,9 @@ const LeadDetailsPage = () => {
       console.log(err)
     }
   }
-  // console.log("all data hhhh", allProductData)
+  console.warn("list");
+  console.log("all list", allProductsList);
+    // console.log("all data hhhh", allProductData)
 
   // useEffect(()=>{
 
@@ -165,6 +171,7 @@ const LeadDetailsPage = () => {
         `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
       )
       setSingleLeadResponseData(singleLeadApiData.data)
+      setAllProductsList(singleLeadApiData.data.serviceDetails)
       setUpdateLeadName(singleLeadApiData.data.leadName)
     } catch (err) {
       if (err.response.status === 500) {
@@ -264,19 +271,11 @@ const LeadDetailsPage = () => {
         }
       )
       console.log("update lead product", updateLeadProducts)
+      setProductDisplayToggle((prev) => !(prev));
     } catch (err) {
       console.log(err)
     }
-
-    //   {
-    //     "productId": 2,
-    //     "leadId": 14,
-    //     "serviceName": "fssai"
-    //   }
-    // const /leadService/api/v1/lead/createProductInLead
   }
-
-  // console.log("update lead Nameeee", updateLeadName);
 
   const updateLeadNameSinglePage = async (e) => {
     try {
@@ -289,7 +288,6 @@ const LeadDetailsPage = () => {
           },
         }
       )
-      // console.log("lead Name Update", leadNameUpdate);
       setUpdateLeadNameToggle(true)
       setLeadNameReload((prev) => !prev)
     } catch (err) {
@@ -298,8 +296,6 @@ const LeadDetailsPage = () => {
   }
 
   console.log("i am state data", singleLeadResponseData)
-
-  // setCategoryData(singleLeadResponseData)
 
   return (
     <div className="lead-details cm-padding-one">
@@ -440,11 +436,12 @@ const LeadDetailsPage = () => {
                     </form>
                   </div>
                   {/* all leads save */}
-                  <div className="save-lead-data">
+                  { allProductsList.map((service, index)=>(
+                    <div className="save-lead-data" key={index}>
                     <div>
-                      <p className="lead-heading">BIS Registration</p>
+                      <p className="lead-heading">{service?.name}</p>
                       <h6 className="lead-sm-heading">
-                        Business certifications
+                        {service?.serviceName}
                       </h6>
                     </div>
 
@@ -458,31 +455,12 @@ const LeadDetailsPage = () => {
                     </div>
                   </div>
 
-                  <div className="save-lead-data">
-                    <div>
-                      <p className="lead-heading">BIS Registration</p>
-                      <h6 className="lead-sm-heading">
-                        Business certifications
-                      </h6>
-                    </div>
+                  ))
+                  }                  
 
-                    <div className="lead-heading">
-                      <i className="fa-solid fa-trash"></i>
-                    </div>
-                  </div>
+                 
 
-                  <div className="save-lead-data">
-                    <div>
-                      <p className="lead-heading">BIS Registration</p>
-                      <h6 className="lead-sm-heading">
-                        Business certifications
-                      </h6>
-                    </div>
-
-                    <div className="lead-heading">
-                      <i className="fa-solid fa-trash"></i>
-                    </div>
-                  </div>
+            
                   {/* all leads save */}
                 </div>
               </div>
