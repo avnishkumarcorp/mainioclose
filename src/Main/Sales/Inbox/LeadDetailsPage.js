@@ -310,7 +310,7 @@ const LeadDetailsPage = () => {
             {updateLeadNameToggle ? (
               <>
                 <h3 className="company-name d-inline">
-                  {singleLeadResponseData.leadName}
+                  {singleLeadResponseData?.leadName}
                 </h3>
                 <i
                   onClick={() => setUpdateLeadNameToggle(false)}
@@ -335,7 +335,7 @@ const LeadDetailsPage = () => {
             )}
             <p className="lead-location">
               <i className="fa-solid mr-1 fa-location-dot"></i>
-              {singleLeadResponseData.name}
+              {singleLeadResponseData?.city}
             </p>
             <p className="lead-blue-head">
               {singleLeadResponseData?.status?.name}
