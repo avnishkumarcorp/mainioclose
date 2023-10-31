@@ -1,6 +1,7 @@
 import React from "react"
 import "./TopNav.scss"
 import { useNavigate } from "react-router-dom"
+import EnquirySend from "./EnquirySend";
 
 const TopNav = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const TopNav = () => {
       </div> */}
       <div>
         <div className="notes-box">
-          Notes
+          <EnquirySend />
         </div>
       </div>
     </div>
