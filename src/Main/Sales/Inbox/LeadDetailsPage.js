@@ -36,7 +36,7 @@ const LeadDetailsPage = () => {
 
   const [clientsContact, setClientsContact] = useState([])
 
-  const [clientContactToggle, setClientContactToggle] = useState(false);
+  const [clientContactToggle, setClientContactToggle] = useState(false)
   const [allProductsList, setAllProductsList] = useState([])
 
   // const statusFakeApi = [
@@ -58,7 +58,12 @@ const LeadDetailsPage = () => {
 
   useEffect(() => {
     getSingleLeadData()
-  }, [changeStatusToggle, leadNameReload, productDisplayToggle, clientContactToggle])
+  }, [
+    changeStatusToggle,
+    leadNameReload,
+    productDisplayToggle,
+    clientContactToggle,
+  ])
 
   useEffect(() => {
     leadNotesData()
@@ -69,9 +74,9 @@ const LeadDetailsPage = () => {
   }, [])
 
   const NotesRef = useRef()
-  const contactNameRef = useRef();
-  const contactEmailRef = useRef();
-  const contactContactNoRef = useRef();
+  const contactNameRef = useRef()
+  const contactEmailRef = useRef()
+  const contactContactNoRef = useRef()
 
   const getAllProductData = async () => {
     try {
@@ -324,10 +329,10 @@ const LeadDetailsPage = () => {
         )
         console.warn("contact data")
         console.log("contact data", apiContactRes)
-        setClientContactToggle((prev)=> !(prev))
-        contactNameRef.current.value ="";
-        contactEmailRef.current.value ="";
-        contactContactNoRef.current.value ="";
+        setClientContactToggle((prev) => !prev)
+        contactNameRef.current.value = ""
+        contactEmailRef.current.value = ""
+        contactContactNoRef.current.value = ""
       } catch (err) {
         console.log("err", err)
       }
@@ -887,15 +892,17 @@ const LeadDetailsPage = () => {
                     <div className="save-lead-data" key={index}>
                       <div>
                         <p className="lead-heading">{client?.clientName}</p>
-                        <h6 className="lead-sm-heading">
-                          {client.contactNo ? client.contactNo : "NA" }, { client?.email}
+                        <h6 className="lead-sm-heading mb-0">
+                          {client?.email}
+                        </h6>
+                        <h6 className="lead-sm-heading ">
+                          {client.contactNo ? client.contactNo : "NA"}
                         </h6>
                       </div>
 
                       <div className="lead-heading">
                         <i className="fa-solid fa-pen mr-3"></i>
-                        <i className="fa-solid fa-ellipsis mr-3"></i>
-                        <i className="fa-solid fa-envelope"></i>
+                        <i class="fa-solid fa-trash"></i>
                       </div>
                     </div>
                   ))}
