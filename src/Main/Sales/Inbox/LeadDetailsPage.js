@@ -32,10 +32,13 @@ const LeadDetailsPage = () => {
 
   const [allProductData, setAllProductData] = useState([])
   const [selectedProduct, setSelectedProduct] = useState("")
-  const [productDisplayToggle, setProductDisplayToggle] = useState(false);
+  const [productDisplayToggle, setProductDisplayToggle] = useState(false)
 
-  const [allProductsList, setAllProductsList] = useState([]);
-  
+  const [clientsContact, setClientsContact] = useState([])
+
+  const [clientContactToggle, setClientContactToggle] = useState(false);
+  const [allProductsList, setAllProductsList] = useState([])
+
   // const statusFakeApi = [
   //   "Potential",
   //   "Active",
@@ -44,7 +47,7 @@ const LeadDetailsPage = () => {
   //   "Not Interested",
   //   "onHold",
   // ]
-
+  console.log("client contact", clientsContact)
   // console.log("single status id ", singleStatus)
   console.log("selected", selectedProduct)
   useEffect(() => {
@@ -55,7 +58,7 @@ const LeadDetailsPage = () => {
 
   useEffect(() => {
     getSingleLeadData()
-  }, [changeStatusToggle, leadNameReload, productDisplayToggle])
+  }, [changeStatusToggle, leadNameReload, productDisplayToggle, clientContactToggle])
 
   useEffect(() => {
     leadNotesData()
@@ -66,6 +69,9 @@ const LeadDetailsPage = () => {
   }, [])
 
   const NotesRef = useRef()
+  const contactNameRef = useRef();
+  const contactEmailRef = useRef();
+  const contactContactNoRef = useRef();
 
   const getAllProductData = async () => {
     try {
@@ -79,15 +85,15 @@ const LeadDetailsPage = () => {
       console.log(err)
     }
   }
-  console.warn("list");
-  console.log("all list", allProductsList);
-    // console.log("all data hhhh", allProductData)
+  console.warn("list")
+  console.log("all list", allProductsList)
+  // console.log("all data hhhh", allProductData)
 
   // useEffect(()=>{
 
   // },[changeLeadStatusFun])
 
-  console.log("single Lead", singleLeadResponseData);
+  console.log("single Lead", singleLeadResponseData)
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -110,8 +116,21 @@ const LeadDetailsPage = () => {
     serviceName: "",
   })
 
+  const [createContact, setCreateContact] = useState({
+    leadId: leadPathId,
+    name: "",
+    contactNo: "",
+    email: "",
+  })
+
   // console.log("category added", categoryData)
   // console.log("selected Product is ", selectedProduct)
+
+  const setContactDataFun = (e) => {
+    setCreateContact((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
+  console.log("create Contact data......", createContact)
 
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -173,6 +192,7 @@ const LeadDetailsPage = () => {
       setSingleLeadResponseData(singleLeadApiData.data)
       setAllProductsList(singleLeadApiData.data.serviceDetails)
       setUpdateLeadName(singleLeadApiData.data.leadName)
+      setClientsContact(singleLeadApiData.data.clients)
     } catch (err) {
       if (err.response.status === 500) {
         console.log("Something Went Wrong")
@@ -256,9 +276,8 @@ const LeadDetailsPage = () => {
     }
   }
 
-
   const createProductInLeadFun = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const updateLeadProducts = await axios.put(
         `/leadService/api/v1/lead/createProductInLead`,
@@ -271,7 +290,7 @@ const LeadDetailsPage = () => {
         }
       )
       console.log("update lead product", updateLeadProducts)
-      setProductDisplayToggle((prev) => !(prev));
+      setProductDisplayToggle((prev) => !prev)
     } catch (err) {
       console.log(err)
     }
@@ -293,6 +312,27 @@ const LeadDetailsPage = () => {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const createLeadContact = (e) => {
+    e.preventDefault()
+    const leadContact = async () => {
+      try {
+        const apiContactRes = await postQuery(
+          `/leadService/api/v1/client/createClient`,
+          createContact
+        )
+        console.warn("contact data")
+        console.log("contact data", apiContactRes)
+        setClientContactToggle((prev)=> !(prev))
+        contactNameRef.current.value ="";
+        contactEmailRef.current.value ="";
+        contactContactNoRef.current.value ="";
+      } catch (err) {
+        console.log("err", err)
+      }
+    }
+    leadContact()
   }
 
   console.log("i am state data", singleLeadResponseData)
@@ -429,38 +469,36 @@ const LeadDetailsPage = () => {
                         <button className="lead-cm-btn lead-cancel-btn">
                           Cancel
                         </button>
-                        <button onClick={(e)=> createProductInLeadFun(e)} className="lead-cm-btn lead-save-btn">
+                        <button
+                          onClick={(e) => createProductInLeadFun(e)}
+                          className="lead-cm-btn lead-save-btn"
+                        >
                           Save
                         </button>
                       </div>
                     </form>
                   </div>
                   {/* all leads save */}
-                  { allProductsList.map((service, index)=>(
+                  {allProductsList.map((service, index) => (
                     <div className="save-lead-data" key={index}>
-                    <div>
-                      <p className="lead-heading">{service?.name}</p>
-                      <h6 className="lead-sm-heading">
-                        {service?.serviceName}
-                      </h6>
+                      <div>
+                        <p className="lead-heading">{service?.name}</p>
+                        <h6 className="lead-sm-heading">
+                          {service?.serviceName}
+                        </h6>
+                      </div>
+
+                      <div className="lead-heading">
+                        <i
+                          className="fa-solid fa-trash"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Product Delete"
+                        ></i>
+                      </div>
                     </div>
+                  ))}
 
-                    <div className="lead-heading">
-                      <i
-                        className="fa-solid fa-trash"
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="Product Delete"
-                      ></i>
-                    </div>
-                  </div>
-
-                  ))
-                  }                  
-
-                 
-
-            
                   {/* all leads save */}
                 </div>
               </div>
@@ -772,9 +810,15 @@ const LeadDetailsPage = () => {
                           Name
                         </label>
 
-                        <input className="lead-cm-input" type="text" />
+                        <input
+                          name="name"
+                          onChange={(e) => setContactDataFun(e)}
+                          className="lead-cm-input"
+                          ref={contactNameRef}
+                          type="text"
+                        />
                       </div>
-                      <div className="product-box">
+                      {/* <div className="product-box">
                         <label
                           className="lead-heading"
                           htmlFor="select-product"
@@ -783,7 +827,7 @@ const LeadDetailsPage = () => {
                         </label>
 
                         <input className="lead-cm-input" type="text" />
-                      </div>
+                      </div> */}
 
                       <div className="product-box">
                         <label
@@ -794,15 +838,27 @@ const LeadDetailsPage = () => {
                         </label>
                         <div className="my-details">
                           <i className="fa-solid fa-envelope"></i>
-                          <input className="lead-cm-input" type="email" />
+                          <input
+                            name="email"
+                            onChange={(e) => setContactDataFun(e)}
+                            className="lead-cm-input"
+                            ref={contactEmailRef}
+                            type="email"
+                          />
                         </div>
                         <div className="my-details">
                           <i className="fa-solid fa-phone"></i>
-                          <input className="lead-cm-input" type="text" />
+                          <input
+                            name="contactNo"
+                            onChange={(e) => setContactDataFun(e)}
+                            className="lead-cm-input"
+                            ref={contactContactNoRef}
+                            type="text"
+                          />
                         </div>
                       </div>
 
-                      <div className="product-box">
+                      {/* <div className="product-box">
                         <label
                           className="lead-heading"
                           htmlFor="select-product"
@@ -811,33 +867,38 @@ const LeadDetailsPage = () => {
                         </label>
 
                         <input className="lead-cm-input" type="text" />
-                      </div>
+                      </div> */}
 
                       <div className="lead-btn-box">
                         <button className="lead-cm-btn lead-cancel-btn">
                           Cancel
                         </button>
-                        <button className="lead-cm-btn lead-save-btn">
+                        <button
+                          onClick={(e) => createLeadContact(e)}
+                          className="lead-cm-btn lead-save-btn"
+                        >
                           Save
                         </button>
                       </div>
                     </form>
                   </div>
                   {/* all leads save */}
-                  <div className="save-lead-data">
-                    <div>
-                      <p className="lead-heading">BIS Registration</p>
-                      <h6 className="lead-sm-heading">
-                        Business certifications
-                      </h6>
-                    </div>
+                  {clientsContact.map((client, index) => (
+                    <div className="save-lead-data" key={index}>
+                      <div>
+                        <p className="lead-heading">{client?.clientName}</p>
+                        <h6 className="lead-sm-heading">
+                          {client.contactNo ? client.contactNo : "NA" }, { client?.email}
+                        </h6>
+                      </div>
 
-                    <div className="lead-heading">
-                      <i className="fa-solid fa-pen mr-3"></i>
-                      <i className="fa-solid fa-ellipsis mr-3"></i>
-                      <i className="fa-solid fa-envelope"></i>
+                      <div className="lead-heading">
+                        <i className="fa-solid fa-pen mr-3"></i>
+                        <i className="fa-solid fa-ellipsis mr-3"></i>
+                        <i className="fa-solid fa-envelope"></i>
+                      </div>
                     </div>
-                  </div>
+                  ))}
 
                   {/* all leads save */}
                 </div>

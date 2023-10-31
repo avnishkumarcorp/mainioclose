@@ -1,0 +1,13 @@
+.enquiry{
+    position: relative;
+    z-index: 1000;
+    .enq-tab{
+        position: absolute;
+        width: 280px;
+        border: 2px solid red;
+        padding: 5px;
+        right: 5px;
+        top: 25px;
+        background-color: #fff;
+    }
+}
