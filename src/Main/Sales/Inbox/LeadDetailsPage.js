@@ -42,6 +42,10 @@ const LeadDetailsPage = () => {
   const [clientContactToggle, setClientContactToggle] = useState(false)
   const [allProductsList, setAllProductsList] = useState([])
 
+  const [getAllLeadUserData, setGetAllLeadUserData] = useState([]);
+
+  const [allTaskStatusData, setAllTaskStatusData] = useState([]);
+
   // const statusFakeApi = [
   //   "Potential",
   //   "Active",
@@ -75,6 +79,14 @@ const LeadDetailsPage = () => {
   useEffect(() => {
     getAllProductData()
   }, [])
+
+  useEffect(()=>{
+    getAllLeadUser()
+  },[])
+
+  useEffect(()=>{
+    getAllTaskStatus();
+  },[])
 
   const NotesRef = useRef()
   const contactNameRef = useRef()
@@ -130,6 +142,35 @@ const LeadDetailsPage = () => {
     contactNo: "",
     email: "",
   })
+
+  const [addNewTask, setAddNewTask] = useState({
+    
+  })
+
+  const getAllTaskStatus = async () => {
+    try {
+      const allTaskStatus = await axios.get(
+        `/leadService/api/v1/getAllTaskStatus`
+      )
+      console.warn("all status");
+      console.log("all task status", allTaskStatus.data);
+      setAllTaskStatusData(allTaskStatus.data) 
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const getAllLeadUser = async () => {
+    try {
+      const allLeadUser = await axios.get(
+        `/leadService/api/v1/users/getAllUser`
+      )
+      console.log("all user .....",allLeadUser.data);
+      setGetAllLeadUserData(allLeadUser.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   // console.log("category added", categoryData)
   // console.log("selected Product is ", selectedProduct)
@@ -618,15 +659,25 @@ const LeadDetailsPage = () => {
                 >
                   <div className="my-card-content">
                     <form>
+                    <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Title
+                        </label>
+                        <input className="lead-cm-input" type="text" />
+                      </div>
+
                       <div className="product-box">
                         <label
                           className="lead-heading"
                           htmlFor="select-product"
                         >
-                          Task Description
+                          Description
                         </label>
 
-                        <input className="lead-cm-input" type="text" />
+                        <textarea className="lead-cm-input min-height-one" type="text" ></textarea>
                       </div>
 
                       <div className="product-box">
@@ -637,7 +688,7 @@ const LeadDetailsPage = () => {
                           date
                         </label>
 
-                        <input className="lead-cm-input" type="date" />
+                        <input className="lead-cm-input" type="datetime-local" />
                       </div>
 
                       <div className="product-box">
@@ -653,10 +704,37 @@ const LeadDetailsPage = () => {
                           name="select-product"
                           id="select-product"
                         >
-                          <option value="volvo">Volvo</option>
+                          {getAllLeadUserData.map((user, index)=>(
+                             <option key={index} value={user?.id}>{user?.fullName}</option>
+                          ))}
+
+                          {/* <option value="volvo">Volvo</option>
                           <option value="saab">Saab</option>
                           <option value="mercedes">Mercedes</option>
-                          <option value="audi">Audi</option>
+                          <option value="audi">Audi</option> */}
+                        </select>
+                      </div>
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Status
+                        </label>
+
+                        <select
+                          className="lead-cm-input"
+                          name="select-product"
+                          id="select-product"
+                        >
+                          {allTaskStatusData.map((status, index)=>(
+                             <option key={index} value={status?.id}>{status?.name}</option>
+                          ))}
+
+                          {/* <option value="volvo">Volvo</option>
+                          <option value="saab">Saab</option>
+                          <option value="mercedes">Mercedes</option>
+                          <option value="audi">Audi</option> */}
                         </select>
                       </div>
                       <div className="lead-btn-box">
