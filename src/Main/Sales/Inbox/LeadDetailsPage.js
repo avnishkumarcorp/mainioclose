@@ -29,6 +29,7 @@ const LeadDetailsPage = () => {
   const [changeStatusToggle, setChangeStatusToggle] = useState(false)
   const [updateLeadNameToggle, setUpdateLeadNameToggle] = useState(true)
 
+  const [taskUpdateToggle, setTaskUpdateToggle] = useState(false);
   const [updateLeadName, setUpdateLeadName] = useState("")
 
   const [leadNameReload, setLeadNameReload] = useState(false)
@@ -92,7 +93,7 @@ const LeadDetailsPage = () => {
 
   useEffect(() => {
     getAllTaskData()
-  }, [])
+  }, [taskUpdateToggle])
 
   const NotesRef = useRef()
   const contactNameRef = useRef()
@@ -428,6 +429,7 @@ const LeadDetailsPage = () => {
           addNewTask
         )
         console.log("task create", taskCreateData)
+        setTaskUpdateToggle((prev)=> !(prev));
         taskTitle.current.value = ""
         taskDescription.current.value = ""
         taskDate.current.value = ""
