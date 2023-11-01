@@ -238,6 +238,15 @@ button:focus {
 }
 
 
+.action-btn{
+  padding: 6px 12px;
+  color: #fff;
+  background-color: #2b62f9;
+  border: 1px solid #2b62f9;
+  border-radius: 4px;
+}
+
+
 
 /* table data */
 

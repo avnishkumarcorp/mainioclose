@@ -13,11 +13,11 @@ const EnquirySend = () => {
         </p>
         {openTab ? (
           <div className="enq-tab">
-            <p className="my-2 lead-heading">Get in touch by filling out the form below</p>
-            <input className="enq-subject hide-design-box my-2" type="text" placeholder="subject" />
-            <textarea className="enq-message hide-design-box my-2" placeholder="message">
+            <p className="my-2 lead-heading enq-title">Get in touch by filling out the form below</p>
+            <input className="enq-subject hide-design-box my-2" type="text" placeholder="Write subject Here..." />
+            <textarea className="enq-message  hide-design-box my-2" placeholder="Write Message here...">
             </textarea>
-            <button className="enq-btn">send</button>
+            <button className="action-btn">Send</button>
           </div>
         ) : (
           ""
