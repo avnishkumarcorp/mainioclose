@@ -71,6 +71,15 @@
   }
 }
 
+.lead-set-data{
+  height: 100vh;
+  overflow: auto;
+}
+
+.lead-set-data::-webkit-scrollbar {
+  display: none;
+}
+
 .lead-filter-above {
   padding: 5px;
   .filter-box{

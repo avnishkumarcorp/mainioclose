@@ -301,7 +301,7 @@ const LeadDetailsPage = () => {
       setProductDisplayToggle((prev) => !prev)
     } catch (err) {
       console.log(err)
-      if(err.response.status === 406){
+      if (err.response.status === 406) {
         toast.error("Product already added")
       }
     }
@@ -538,7 +538,9 @@ const LeadDetailsPage = () => {
                 >
                   <div className="my-card-content">
                     <div className="all-center">
-                      <Link to={"estimate"}  className="create-btn">Create New Estimate</Link>
+                      <Link to={"estimate"} className="create-btn">
+                        Create New Estimate
+                      </Link>
                     </div>
                     {/* <form>
                       <div className="product-box">
@@ -1052,29 +1054,30 @@ const LeadDetailsPage = () => {
           {/* notes ui end */}
 
           {/* all notes data ui */}
-
-          {notesApiData.map((note, index) => (
-            <div className="lead-filter-above" key={index}>
-              {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
-              <div className={`notes-box mt-2`}>
-                <div className="comment-icon">
-                  <div className="icon-box">
-                    <i className="fa-regular cm-icon fa-comment"></i>
+          <div className="lead-set-data">
+            {notesApiData.map((note, index) => (
+              <div className="lead-filter-above" key={index}>
+                {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
+                <div className={`notes-box mt-2`}>
+                  <div className="comment-icon">
+                    <div className="icon-box">
+                      <i className="fa-regular cm-icon fa-comment"></i>
+                    </div>
+                    <div className="line"></div>
                   </div>
-                  <div className="line"></div>
-                </div>
 
-                <div className="side-notes">
-                  <div className="comment-above">
-                    <h2 className="write-heading">Notes</h2>
-                  </div>
-                  <div className="text-display-box">
-                    <pre>{note.message}</pre>
+                  <div className="side-notes">
+                    <div className="comment-above">
+                      <h2 className="write-heading">Notes</h2>
+                    </div>
+                    <div className="text-display-box">
+                      <pre>{note.message}</pre>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
           {/* all notes data ui ends */}
         </div>
       </div>
