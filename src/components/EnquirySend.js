@@ -9,7 +9,7 @@ const EnquirySend = () => {
     <div>
       <div className="enquiry">
         <p className="m-0" onClick={() => setOpenTab((prev) => !prev)}>
-          <i class="fa-regular fa-circle-question"></i>
+          <i className="fa-regular fa-circle-question"></i>
         </p>
         {openTab ? (
           <div className="enq-tab">
