@@ -8,6 +8,9 @@ import { postQuery } from "../../../API/PostQuery"
 import { useRef } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
 
@@ -298,6 +301,9 @@ const LeadDetailsPage = () => {
       setProductDisplayToggle((prev) => !prev)
     } catch (err) {
       console.log(err)
+      if(err.response.status === 406){
+        toast.error("Product already added")
+      }
     }
   }
 
