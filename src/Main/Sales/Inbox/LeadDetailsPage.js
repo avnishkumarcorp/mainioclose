@@ -42,9 +42,11 @@ const LeadDetailsPage = () => {
   const [clientContactToggle, setClientContactToggle] = useState(false)
   const [allProductsList, setAllProductsList] = useState([])
 
-  const [getAllLeadUserData, setGetAllLeadUserData] = useState([]);
+  const [getAllLeadUserData, setGetAllLeadUserData] = useState([])
 
-  const [allTaskStatusData, setAllTaskStatusData] = useState([]);
+  const [allTaskStatusData, setAllTaskStatusData] = useState([])
+
+  const [getSingleLeadTask, setGetSingleLeadTask] = useState([])
 
   // const statusFakeApi = [
   //   "Potential",
@@ -80,18 +82,26 @@ const LeadDetailsPage = () => {
     getAllProductData()
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllLeadUser()
-  },[])
+  }, [])
 
-  useEffect(()=>{
-    getAllTaskStatus();
-  },[])
+  useEffect(() => {
+    getAllTaskStatus()
+  }, [])
+
+  useEffect(() => {
+    getAllTaskData()
+  }, [])
 
   const NotesRef = useRef()
   const contactNameRef = useRef()
   const contactEmailRef = useRef()
   const contactContactNoRef = useRef()
+
+  const taskTitle = useRef()
+  const taskDescription = useRef()
+  const taskDate = useRef()
 
   const getAllProductData = async () => {
     try {
@@ -105,15 +115,15 @@ const LeadDetailsPage = () => {
       console.log(err)
     }
   }
-  console.warn("list")
-  console.log("all list", allProductsList)
+  // console.warn("list")
+  // console.log("all list", allProductsList)
   // console.log("all data hhhh", allProductData)
 
   // useEffect(()=>{
 
   // },[changeLeadStatusFun])
 
-  console.log("single Lead", singleLeadResponseData)
+  // console.log("single Lead", singleLeadResponseData)
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -144,17 +154,25 @@ const LeadDetailsPage = () => {
   })
 
   const [addNewTask, setAddNewTask] = useState({
-    
+    leadId: leadPathId,
+    name: "",
+    description: "",
+    assigneeId: 0,
+    assignedById: currentUserId,
+    expectedDate: "",
+    statusId: 0,
   })
+
+  console.log("add new tasks", addNewTask)
 
   const getAllTaskStatus = async () => {
     try {
       const allTaskStatus = await axios.get(
         `/leadService/api/v1/getAllTaskStatus`
       )
-      console.warn("all status");
-      console.log("all task status", allTaskStatus.data);
-      setAllTaskStatusData(allTaskStatus.data) 
+      // console.warn("all status")
+      // console.log("all task status", allTaskStatus.data)
+      setAllTaskStatusData(allTaskStatus.data)
     } catch (err) {
       console.log(err)
     }
@@ -165,7 +183,7 @@ const LeadDetailsPage = () => {
       const allLeadUser = await axios.get(
         `/leadService/api/v1/users/getAllUser`
       )
-      console.log("all user .....",allLeadUser.data);
+      // console.log("all user .....", allLeadUser.data)
       setGetAllLeadUserData(allLeadUser.data)
     } catch (err) {
       console.log(err)
@@ -175,11 +193,15 @@ const LeadDetailsPage = () => {
   // console.log("category added", categoryData)
   // console.log("selected Product is ", selectedProduct)
 
+  const setTasksDataFun = (e) => {
+    setAddNewTask((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+
   const setContactDataFun = (e) => {
     setCreateContact((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  console.log("create Contact data......", createContact)
+  // console.log("create Contact data......", createContact)
 
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -193,8 +215,17 @@ const LeadDetailsPage = () => {
     }))
   }
 
+  const getAllTaskData = async () => {
+    const allTaskData = await getQuery(
+      `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
+    )
+    console.warn("all tasksss")
+    console.log(allTaskData.data)
+    setGetSingleLeadTask(allTaskData.data)
+  }
+
   const getProductInputData = (productIdSelect) => {
-    console.log("Selected category is", productIdSelect)
+    // console.log("Selected category is", productIdSelect)
     setAddProductData((product) => ({ ...product, productId: productIdSelect }))
   }
   // const getCatgegoryInputData = (valueIs) => {
@@ -338,7 +369,7 @@ const LeadDetailsPage = () => {
           },
         }
       )
-      console.log("update lead product", updateLeadProducts)
+      // console.log("update lead product", updateLeadProducts)
       setProductDisplayToggle((prev) => !prev)
     } catch (err) {
       console.log(err)
@@ -374,8 +405,8 @@ const LeadDetailsPage = () => {
           `/leadService/api/v1/client/createClient`,
           createContact
         )
-        console.warn("contact data")
-        console.log("contact data", apiContactRes)
+        // console.warn("contact data")
+        // console.log("contact data", apiContactRes)
         setClientContactToggle((prev) => !prev)
         contactNameRef.current.value = ""
         contactEmailRef.current.value = ""
@@ -385,6 +416,26 @@ const LeadDetailsPage = () => {
       }
     }
     leadContact()
+  }
+
+  const createTaskFun = (e) => {
+    e.preventDefault()
+
+    const TaskCreateNew = async () => {
+      try {
+        const taskCreateData = await postQuery(
+          `/leadService/api/v1/task/createTask`,
+          addNewTask
+        )
+        console.log("task create", taskCreateData)
+        taskTitle.current.value = ""
+        taskDescription.current.value = ""
+        taskDate.current.value = ""
+      } catch (err) {
+        console.log("err", err)
+      }
+    }
+    TaskCreateNew()
   }
 
   console.log("i am state data", singleLeadResponseData)
@@ -659,14 +710,20 @@ const LeadDetailsPage = () => {
                 >
                   <div className="my-card-content">
                     <form>
-                    <div className="product-box">
+                      <div className="product-box">
                         <label
                           className="lead-heading"
                           htmlFor="select-product"
                         >
                           Title
                         </label>
-                        <input className="lead-cm-input" type="text" />
+                        <input
+                          className="lead-cm-input"
+                          name="name"
+                          ref={taskTitle}
+                          onChange={(e) => setTasksDataFun(e)}
+                          type="text"
+                        />
                       </div>
 
                       <div className="product-box">
@@ -677,7 +734,13 @@ const LeadDetailsPage = () => {
                           Description
                         </label>
 
-                        <textarea className="lead-cm-input min-height-one" type="text" ></textarea>
+                        <textarea
+                          className="lead-cm-input min-height-one"
+                          onChange={(e) => setTasksDataFun(e)}
+                          name="description"
+                          ref={taskDescription}
+                          type="text"
+                        ></textarea>
                       </div>
 
                       <div className="product-box">
@@ -688,7 +751,13 @@ const LeadDetailsPage = () => {
                           date
                         </label>
 
-                        <input className="lead-cm-input" type="datetime-local" />
+                        <input
+                          className="lead-cm-input"
+                          type="datetime-local"
+                          name="expectedDate"
+                          ref={taskDate}
+                          onChange={(e) => setTasksDataFun(e)}
+                        />
                       </div>
 
                       <div className="product-box">
@@ -701,11 +770,14 @@ const LeadDetailsPage = () => {
 
                         <select
                           className="lead-cm-input"
-                          name="select-product"
+                          name="assigneeId"
+                          onChange={(e) => setTasksDataFun(e)}
                           id="select-product"
                         >
-                          {getAllLeadUserData.map((user, index)=>(
-                             <option key={index} value={user?.id}>{user?.fullName}</option>
+                          {getAllLeadUserData.map((user, index) => (
+                            <option key={index} value={user?.id}>
+                              {user?.fullName}
+                            </option>
                           ))}
 
                           {/* <option value="volvo">Volvo</option>
@@ -724,11 +796,14 @@ const LeadDetailsPage = () => {
 
                         <select
                           className="lead-cm-input"
-                          name="select-product"
+                          name="statusId"
+                          onChange={(e) => setTasksDataFun(e)}
                           id="select-product"
                         >
-                          {allTaskStatusData.map((status, index)=>(
-                             <option key={index} value={status?.id}>{status?.name}</option>
+                          {allTaskStatusData.map((status, index) => (
+                            <option key={index} value={status?.id}>
+                              {status?.name}
+                            </option>
                           ))}
 
                           {/* <option value="volvo">Volvo</option>
@@ -741,25 +816,28 @@ const LeadDetailsPage = () => {
                         <button className="lead-cm-btn lead-cancel-btn">
                           Cancel
                         </button>
-                        <button className="lead-cm-btn lead-save-btn">
+                        <button
+                          onClick={(e) => createTaskFun(e)}
+                          className="lead-cm-btn lead-save-btn"
+                        >
                           Save
                         </button>
                       </div>
                     </form>
                   </div>
                   {/* all leads save */}
-                  <div className="save-lead-data">
-                    <div>
-                      <p className="lead-heading">BIS Registration</p>
-                      <h6 className="lead-sm-heading">
-                        Business certifications
-                      </h6>
-                    </div>
+                  {getSingleLeadTask.map((task, index) => (
+                    <div key={index} className="save-lead-data">
+                      <div>
+                        <p className="lead-heading">{task?.name}</p>
+                        <h6 className="lead-sm-heading">{task?.description}</h6>
+                      </div>
 
-                    <div className="lead-heading">
-                      <i className="fa-solid fa-trash"></i>
+                      <div className="lead-heading">
+                        <i className="fa-solid fa-trash"></i>
+                      </div>
                     </div>
-                  </div>
+                  ))}
 
                   {/* all leads save */}
                 </div>
@@ -839,7 +917,10 @@ const LeadDetailsPage = () => {
                         >
                           Notes
                         </label>
-                        <textarea className="lead-cm-input" type="text" />
+                        <textarea
+                          className="lead-cm-input min-height-one"
+                          type="text"
+                        />
                       </div>
 
                       <div className="lead-btn-box">
@@ -991,7 +1072,7 @@ const LeadDetailsPage = () => {
 
                       <div className="lead-heading">
                         <i className="fa-solid fa-pen mr-3"></i>
-                        <i class="fa-solid fa-trash"></i>
+                        <i className="fa-solid fa-trash"></i>
                       </div>
                     </div>
                   ))}
