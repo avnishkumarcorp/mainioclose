@@ -8,6 +8,7 @@ import { postQuery } from "../../../API/PostQuery"
 import { useRef } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
+import Skeleton from '@mui/material/Skeleton';
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 toast.configure()
@@ -28,7 +29,7 @@ const LeadDetailsPage = () => {
   const [notesUpdateToggle, setNotesUpdateToggle] = useState(false)
   const [changeStatusToggle, setChangeStatusToggle] = useState(false)
   const [updateLeadNameToggle, setUpdateLeadNameToggle] = useState(true)
-
+  const [leadStatusScale, setLeadStatusScale] = useState(false);
   const [taskUpdateToggle, setTaskUpdateToggle] = useState(false);
   const [updateLeadName, setUpdateLeadName] = useState("")
 
@@ -49,17 +50,10 @@ const LeadDetailsPage = () => {
 
   const [getSingleLeadTask, setGetSingleLeadTask] = useState([])
 
-  // const statusFakeApi = [
-  //   "Potential",
-  //   "Active",
-  //   "Inactive",
-  //   "Interested",
-  //   "Not Interested",
-  //   "onHold",
-  // ]
+  
   console.log("client contact", clientsContact)
-  // console.log("single status id ", singleStatus)
   console.log("selected", selectedProduct)
+//  useEffect calls Start
   useEffect(() => {
     editViewData()
     getAllProductWithCattegory()
@@ -95,6 +89,10 @@ const LeadDetailsPage = () => {
     getAllTaskData()
   }, [taskUpdateToggle])
 
+  //  useEffect calls End
+
+ 
+
   const NotesRef = useRef()
   const contactNameRef = useRef()
   const contactEmailRef = useRef()
@@ -104,29 +102,8 @@ const LeadDetailsPage = () => {
   const taskDescription = useRef()
   const taskDate = useRef()
 
-  const getAllProductData = async () => {
-    try {
-      const allProductResponse = await getQuery(
-        `/leadService/api/v1/product/getAllProducts`
-      )
-      // console.warn("all here")
-      // console.log("all products here", allProductResponse)
-      setAllProductData(allProductResponse.data)
-    } catch (err) {
-      console.log(err)
-     
-    }
-  }
-  // console.warn("list")
-  // console.log("all list", allProductsList)
-  // console.log("all data hhhh", allProductData)
-
-  // useEffect(()=>{
-
-  // },[changeLeadStatusFun])
-
-  // console.log("single Lead", singleLeadResponseData)
-
+ 
+  
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
@@ -167,20 +144,36 @@ const LeadDetailsPage = () => {
 
   console.log("add new tasks", addNewTask)
 
+  // GET All tasks Status
   const getAllTaskStatus = async () => {
     try {
       const allTaskStatus = await axios.get(
         `/leadService/api/v1/getAllTaskStatus`
       )
-      // console.warn("all status")
-      // console.log("all task status", allTaskStatus.data)
       setAllTaskStatusData(allTaskStatus.data)
+      setLeadStatusScale(true)
     } catch (err) {
       console.log(err)
+      setLeadStatusScale(false)
+
     
     }
   }
 
+  // GET All Product Data
+  const getAllProductData = async () => {
+    try {
+      const allProductResponse = await getQuery(
+        `/leadService/api/v1/product/getAllProducts`
+      )
+      setAllProductData(allProductResponse.data)
+    } catch (err) {
+      console.log(err)
+     
+    }
+  }
+
+// Get All Lead User
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
@@ -193,9 +186,7 @@ const LeadDetailsPage = () => {
     }
   }
 
-  // console.log("category added", categoryData)
-  // console.log("selected Product is ", selectedProduct)
-
+// set Inputs data
   const setTasksDataFun = (e) => {
     setAddNewTask((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -204,11 +195,11 @@ const LeadDetailsPage = () => {
     setCreateContact((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // console.log("create Contact data......", createContact)
-
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
+
+  // END
 
   const getCatgegoryInputData = (categorySelect) => {
     console.log("Selected category is", categorySelect)
@@ -218,6 +209,7 @@ const LeadDetailsPage = () => {
     }))
   }
 
+  // GET All Tasks Data
   const getAllTaskData = async () => {
     try{
     const allTaskData = await getQuery(
@@ -231,15 +223,12 @@ const LeadDetailsPage = () => {
     }
   }
 
+
   const getProductInputData = (productIdSelect) => {
-    // console.log("Selected category is", productIdSelect)
     setAddProductData((product) => ({ ...product, productId: productIdSelect }))
   }
-  // const getCatgegoryInputData = (valueIs) => {
-  //   console.warn("product")
-  //   console.log(valueIs)
-  // }
-
+  
+  // GET All LeadNotes data
   const leadNotesData = async (id) => {
     try {
       const getAllLeadNotes = await getQuery(
@@ -270,7 +259,7 @@ const LeadDetailsPage = () => {
     }
   }
 
-  // Get Single Lead Data
+  // GET Single Lead Data
   const getSingleLeadData = async () => {
     try {
       const singleLeadApiData = await getQuery(
@@ -287,10 +276,9 @@ const LeadDetailsPage = () => {
     }
   }
 
-  // change lead status
 
+  // Change Lead Status Function
   const changeLeadStatusFun = (catId) => {
-    // e.preventDefault();
     const statusChange = async () => {
       try {
         const statusData = await axios.put(
@@ -302,9 +290,7 @@ const LeadDetailsPage = () => {
             },
           }
         )
-        // console.log("status data", statusData)
         setChangeStatusToggle((prev) => !prev)
-        // window.location.reload();
       } catch (err) {
         console.log(err)
         if(err.response.status === 500){
@@ -315,6 +301,7 @@ const LeadDetailsPage = () => {
     statusChange()
   }
 
+  // Create New Notes or Remarks
   const createRemarkfun = (e) => {
     e.preventDefault()
     const createNewRemark = async () => {
@@ -325,7 +312,6 @@ const LeadDetailsPage = () => {
         )
         setNotesUpdateToggle((prev) => !prev)
         NotesRef.current.value = ""
-        // window.location.reload()
       } catch (err) {
         console.log(err)
         if(err.response.status === 500){
@@ -336,12 +322,12 @@ const LeadDetailsPage = () => {
     createNewRemark()
   }
 
+  // GET All Products With Category
   const getAllProductWithCattegory = async () => {
     try {
       const getCategory = await getQuery(
         "/leadService/api/v1/category/getAllCategories"
       )
-      // console.log("get category", getCategory.data)
       setCategoryData(getCategory.data)
     } catch (err) {
       if (err.response.status === 500) {
@@ -352,14 +338,12 @@ const LeadDetailsPage = () => {
 
   console.log("add product data", addProductData)
 
-  // console.log("all data hhhh", allProductData)
-
+  // GET All Status data
   const getAllStatusData = async () => {
     try {
       const allStatus = await getQuery(
         `/leadService/api/v1/status/getAllStatus`
       )
-      // console.log("all status", allStatus)
       setGetAllStatus(allStatus.data)
     } catch (err) {
       if (err.response.status === 500) {
@@ -369,6 +353,7 @@ const LeadDetailsPage = () => {
     }
   }
 
+  // Create Product For Single Lead
   const createProductInLeadFun = async (e) => {
     e.preventDefault()
     try {
@@ -382,7 +367,6 @@ const LeadDetailsPage = () => {
           },
         }
       )
-      // console.log("update lead product", updateLeadProducts)
       setProductDisplayToggle((prev) => !prev)
     } catch (err) {
       console.log(err)
@@ -416,6 +400,7 @@ const LeadDetailsPage = () => {
     }
   }
 
+  // Create New Contact For Lead
   const createLeadContact = (e) => {
     e.preventDefault()
     const leadContact = async () => {
@@ -424,8 +409,6 @@ const LeadDetailsPage = () => {
           `/leadService/api/v1/client/createClient`,
           createContact
         )
-        // console.warn("contact data")
-        // console.log("contact data", apiContactRes)
         setClientContactToggle((prev) => !prev)
         contactNameRef.current.value = ""
         contactEmailRef.current.value = ""
@@ -440,9 +423,9 @@ const LeadDetailsPage = () => {
     leadContact()
   }
 
+  // Create New Tasks for Lead Function 
   const createTaskFun = (e) => {
     e.preventDefault()
-
     const TaskCreateNew = async () => {
       try {
         const taskCreateData = await postQuery(
@@ -471,7 +454,6 @@ const LeadDetailsPage = () => {
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
-            {/* {setUpdateLeadNameToggle ? <div>true</div>: <p>false</p>} */}
             {updateLeadNameToggle ? (
               <>
                 <h3 className="company-name d-inline">
@@ -505,7 +487,7 @@ const LeadDetailsPage = () => {
             <p className="lead-blue-head">
               {singleLeadResponseData?.status?.name}
             </p>
-
+              {leadStatusScale ? (
             <p className="my-2">
               <select
                 className="status-select"
@@ -521,6 +503,8 @@ const LeadDetailsPage = () => {
                 ))}
               </select>
             </p>
+              ): <Skeleton variant="rectangular" width={210} height={25} />
+              }
             <div></div>
             <div className="lead-product">
               <div className="card mt-2">
