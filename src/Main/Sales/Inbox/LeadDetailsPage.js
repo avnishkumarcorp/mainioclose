@@ -114,6 +114,7 @@ const LeadDetailsPage = () => {
       setAllProductData(allProductResponse.data)
     } catch (err) {
       console.log(err)
+     
     }
   }
   // console.warn("list")
@@ -176,6 +177,7 @@ const LeadDetailsPage = () => {
       setAllTaskStatusData(allTaskStatus.data)
     } catch (err) {
       console.log(err)
+    
     }
   }
 
@@ -217,12 +219,16 @@ const LeadDetailsPage = () => {
   }
 
   const getAllTaskData = async () => {
+    try{
     const allTaskData = await getQuery(
       `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
     )
     console.warn("all tasksss")
     console.log(allTaskData.data)
     setGetSingleLeadTask(allTaskData.data)
+    }catch(err){
+      console.log("err", err);
+    }
   }
 
   const getProductInputData = (productIdSelect) => {
@@ -301,6 +307,9 @@ const LeadDetailsPage = () => {
         // window.location.reload();
       } catch (err) {
         console.log(err)
+        if(err.response.status === 500){
+          toast.error("Something Went Wrong")
+        }
       }
     }
     statusChange()
@@ -319,6 +328,9 @@ const LeadDetailsPage = () => {
         // window.location.reload()
       } catch (err) {
         console.log(err)
+        if(err.response.status === 500){
+          toast.error("Something Went Wrong")
+        }
       }
     }
     createNewRemark()
@@ -377,6 +389,9 @@ const LeadDetailsPage = () => {
       if (err.response.status === 406) {
         toast.error("Product already added")
       }
+      if(err.response.status === 500){
+        toast.error("Something Went Wrong")
+      }
     }
   }
 
@@ -395,6 +410,9 @@ const LeadDetailsPage = () => {
       setLeadNameReload((prev) => !prev)
     } catch (err) {
       console.log(err)
+      if(err.response.status === 500){
+        toast.error("Something Went Wrong")
+      }
     }
   }
 
@@ -414,6 +432,9 @@ const LeadDetailsPage = () => {
         contactContactNoRef.current.value = ""
       } catch (err) {
         console.log("err", err)
+        if(err.response.status === 500){
+          toast.error("Something Went Wrong")
+        }
       }
     }
     leadContact()
@@ -435,6 +456,9 @@ const LeadDetailsPage = () => {
         taskDate.current.value = ""
       } catch (err) {
         console.log("err", err)
+        if(err.response.status === 500){
+          toast.error("Something Went Wrong")
+        }
       }
     }
     TaskCreateNew()
