@@ -3,16 +3,21 @@ import "./CommonData.scss"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
+
 import {
   forgetPasswordAction,
   userIsPresentData,
 } from "../Redux/Action/AuthAction"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const ForgetPassword = () => {
   const [emailData, setEmailData] = useState("")
   const [emailErr, setEmailErr] = useState(false)
   const [emailFormat, setEmailFormat] = useState(false)
   const [emailNotExist, setEmailNotExist] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const emailRef = useRef()
   const navigate = useNavigate()
@@ -38,7 +43,7 @@ const ForgetPassword = () => {
       setEmailFormat(true)
       setEmailErr(false)
     }
-
+    setLoading(true)
     const forgetPass = async () => {
       try {
         // const passwordOtp = await axios.post(`/auth/forgetOtp`,{...emailData, } )
@@ -53,13 +58,20 @@ const ForgetPassword = () => {
         )
         console.log("forget response", passwordOtp.data)
         dispatch(forgetPasswordAction(passwordOtp.data))
+        setLoading(false)
 
         navigate("/erp/forgetotp")
       } catch (err) {
         console.log(err.response.status)
+        if (err.response.status === 500) {
+          toast.error("Something Went wrong")
+          setLoading(false)
+        }
         if (err.response.status === 401) {
           setEmailNotExist(true)
+          setLoading(false)
         }
+        setLoading(false)
       }
     }
 

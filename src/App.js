@@ -32,6 +32,7 @@ import DisplayUserTwo from "./Main/DashBoard/DisplayUserTwo"
 import SetNewPasswordPage from "./Login/SetNewPasswordPage"
 import LeadCreateModel from "./Model/LeadCreateModel"
 import EstimateCreatePage from "./Main/Sales/Leads/EstimateCreatePage"
+import TableScalaton from "./components/TableScalaton"
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
             {/* slaes module routes */}
             <Route path="/erp/:id/sales" element={<SalesMod />}>
               <Route path="" element={<InboxPage />} />
+              <Route path="scalaton" element={<TableScalaton />} />
               {/* <Route path=":id" element={<LeadDetailsPage />} /> */}
 
               <Route path="oppurtities" element={<Opportunities />} />

@@ -2,16 +2,22 @@ import React, { useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { postQuery } from "../API/PostQuery"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const ChangePassword = () => {
   const [passwordErr, setPasswordErr] = useState(false)
   const [confirmPasswordErr, setConfirmPasswordErr] = useState(false)
   const [newPassword, setNewPassword] = useState("")
   const [repeatPassword, setRepeatPassword] = useState("")
+  const [loading, setLoading] = useState(false);
   // const [passwordErr, setPasswordErr] = useState(false);
 
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
+  const navigate = useNavigate();
 
   const forgetPasswordResponse = useSelector(
     (auth) => auth.AuthReducer.forgetPassword
@@ -46,7 +52,7 @@ const ChangePassword = () => {
       setPasswordErr(true)
       return
     }
-
+    setLoading(true)
     const updateExistUserPassword = async () => {
       try {
         const checkUser = await axios.put(
@@ -60,8 +66,20 @@ const ChangePassword = () => {
           }
         )
         console.log("password update", checkUser)
+        setLoading(false)
+        toast.success("Password Update Succesfully")
+        navigate("/erp/login")
       } catch (err) {
         console.log("error", err)
+        if (err.response.status === 500) {
+          toast.error("Something Went wrong")
+          setLoading(false)
+        }
+        if (err.response.status === 401) {
+          toast.error("Something Went wrong")
+          setLoading(false)
+        }
+        setLoading(false)
       }
     }
 
@@ -94,7 +112,7 @@ const ChangePassword = () => {
       {/* {passwordErr ? <p>Error</p>: ""} */}
       {passwordErr ? <p className="errors-new">Password Should be Same</p> : ""}
       <button onClick={(e) => updateUserPassword(e)} className="login-button">
-        Set Password
+        {loading ? "Loading..." : "Set Password"}
       </button>
     </div>
   )

@@ -14,12 +14,14 @@ import LeadCreateModel from "../../../Model/LeadCreateModel"
 import { useSelector } from "react-redux"
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import TableScalaton from "../../../components/TableScalaton"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
   const [allLeadData, setAllLeadData] = useState([])
   const [leadUserNew, setLeadUserNew] = useState([])
   const [updateActive, setUpdateActive] = useState(false);
+  const [leadScalatonCall, setLeadScalatonCall] = useState(true);
 
   useEffect(() => {
     getAllLead()
@@ -150,8 +152,10 @@ const LeadsModule = () => {
         }
       )
       setAllLeadData(allLead.data)
+      setLeadScalatonCall(false)
     } catch (err) {
       console.log(err)
+      setLeadScalatonCall(true)
     }
   }
 
@@ -162,12 +166,12 @@ const LeadsModule = () => {
       <div className="create-user-box">
         <LeadCreateModel />
       </div>
-
-      <UserLeadComponent
+      {leadScalatonCall ? <TableScalaton /> : <UserLeadComponent
         tableName={"leads"}
         columns={columns}
         row={allLeadData}
-      />
+      /> }
+      
     </div>
   )
 }
