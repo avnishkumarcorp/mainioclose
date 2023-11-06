@@ -25,6 +25,8 @@ const LeadDetailsPage = () => {
   const [singleLeadResponseData, setSingleLeadResponseData] = useState({})
   const [categoryData, setCategoryData] = useState([])
   const [getAllStatus, setGetAllStatus] = useState([])
+  const [allOportunities, setAllOportunities] = useState([]);
+
   const [singleStatus, setSingleStatus] = useState("")
   const [notesUpdateToggle, setNotesUpdateToggle] = useState(false)
   const [changeStatusToggle, setChangeStatusToggle] = useState(false)
@@ -32,6 +34,7 @@ const LeadDetailsPage = () => {
   const [leadStatusScale, setLeadStatusScale] = useState(false);
   const [taskUpdateToggle, setTaskUpdateToggle] = useState(false);
   const [updateLeadName, setUpdateLeadName] = useState("")
+
 
   const [leadNameReload, setLeadNameReload] = useState(false)
 
@@ -89,9 +92,20 @@ const LeadDetailsPage = () => {
     getAllTaskData()
   }, [taskUpdateToggle])
 
+  useEffect(()=>{
+    getAllOportunities();
+  },[])
+
   //  useEffect calls End
 
+
+  const getAllOportunities = async () =>{
+    const getOportunities = await getQuery(`/leadService/api/v1/leadOpportunity/getAllOpportunity`)
+    console.log("get all opportunities", getOportunities.data);
+    setAllOportunities(getOportunities.data)
+  }
  
+
 
   const NotesRef = useRef()
   const contactNameRef = useRef()
@@ -944,18 +958,24 @@ const LeadDetailsPage = () => {
                     </form>
                   </div>
                   {/* all leads save */}
-                  <div className="save-lead-data">
-                    <div>
-                      <p className="lead-heading">BIS Registration</p>
-                      <h6 className="lead-sm-heading">
-                        Business certifications
-                      </h6>
+                  {allOportunities.map((data, index)=>(
+                      <div className="save-lead-data">
+                      <div>
+                        <p className="lead-heading">BIS Registration</p>
+                        <h6 className="lead-sm-heading mb-0">
+                          {data?.description.split(0,10)}...
+                        </h6>
+                        <h6 className="lead-sm-heading ">
+                          {data?.estimateClose}
+                        </h6>
+                      </div>
+  
+                      <div className="lead-heading">
+                        <i className="fa-solid fa-trash"></i>
+                      </div>
                     </div>
-
-                    <div className="lead-heading">
-                      <i className="fa-solid fa-trash"></i>
-                    </div>
-                  </div>
+                  ))}
+               
 
                   {/* all leads save */}
                 </div>
