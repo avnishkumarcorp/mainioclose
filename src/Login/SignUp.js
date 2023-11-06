@@ -124,7 +124,7 @@ const SignUp = () => {
     console.log("OTP data kdjld", otpNewData);
 
     dispatch(SignupDataAction(createUserData))
-
+    setLoading(true);
     const generateNewOtpFun = async () => {
       console.log("before api call data is", otpNewData)
       try {
@@ -133,12 +133,15 @@ const SignUp = () => {
           generateOtpData
         )
         console.log("generate otp data", getNewOtp.data)
+        setLoading(false);
         navigate("/erp/otp")
       } catch (err) {
         console.log(err)
         if (err.response.status === 500) {
-          toast.error("please Referesh this page or try again later")
+          toast.error("Something went wrong")
+          setLoading(false);
         }
+        setLoading(false);
       }
     }
     generateNewOtpFun()
@@ -317,7 +320,7 @@ const SignUp = () => {
                 onClick={(e) => userSignUp(e)}
                 className="login-button sign-up"
               >
-                {loading ? "loading" : "Create Account"}
+                {loading ? "loading..." : "Create Account"}
               </button>
             </div>
             <p className="dont-account">

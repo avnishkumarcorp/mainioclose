@@ -34,6 +34,9 @@ const Login = () => {
   const [emailErr, setEmailErr] = useState(false)
   const [emailProperErr, setEmailProperErr] = useState(false)
   const [passwordErr, setPasswordErr] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [loadingBtn, setLoadingBtn] = useState(false);
+
 
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -60,7 +63,7 @@ const Login = () => {
       passwordRef.current.style.border = "1px solid red"
       setPasswordErr(true)
     }
-
+    setLoadingBtn(true)
     const loginUser = async () => {
       try {
         const collectUserData = await postQuery(`/securityService/api/auth/signin`,userLoginData)
@@ -68,15 +71,19 @@ const Login = () => {
         console.log("api data", collectUserData.data)
         dispatch(currentUserAction(collectUserData.data))
         dispatch(userTokenAction(collectUserData.data.jwt))
+        setLoadingBtn(false)
         localStorage.setItem("Access-token", collectUserData.data.jwt)
         navigate(`/erp/${collectUserData.data.id}/sales`)
       } catch (err) {
         if(err.response.status === 401){
           toast.error("Enter a valid username or password")
+          setLoadingBtn(false)
         }
         if(err.response.status === 500){
           toast.error("please Referesh this page or try again later")
+          setLoadingBtn(false)
         }
+        setLoadingBtn(false)
       }
     }
 
@@ -111,10 +118,12 @@ const Login = () => {
       {/* //  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" } */}
       <div>
         <div className="cm-input-box">
-          <i className="fa-regular cm-icon fa-eye-slash"></i>
+          {showPassword ? <i onClick={()=> setShowPassword((prev) => !(prev))} class="fa-solid cm-icon fa-eye"></i> :  
+          <i onClick={()=> setShowPassword((prev) => !(prev))} className="fa-regular cm-icon fa-eye-slash"></i> }
+          {/* <i onClick={()=> setShowPassword((prev) => !(prev))} class="fa-solid cm-icon fa-eye"></i> */}
           <input
             className="cm-input"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="Enter Your password"
             ref={passwordRef}
             name="password"
@@ -139,7 +148,7 @@ const Login = () => {
         </div>
       </div>
       <button onClick={(e) => userSignIn(e)} className="login-button my-3">
-        Login
+       {loadingBtn ? "Loading..." : "Login" }
       </button>
       <p className="note-user">
         Not a User{" "}

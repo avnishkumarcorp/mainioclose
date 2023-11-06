@@ -8,10 +8,12 @@ import LeadsModule from "../Leads/LeadsModule"
 import DataTableFirst from "../../../components/DataTableFirst"
 import UserListComponent from "../../../Tables/UserListComponent"
 import InboxListComponent from "../../../Tables/InboxListComponent"
+import TableScalaton from "../../../components/TableScalaton"
 
 const InboxPage = () => {
   const [activeTab, setActiveTab] = useState(false)
   const [allLeadData, setAllLeadData] = useState([])
+  const [inboxScalaton, setInboxScalaton] = useState(true)
 
   useEffect(() => {
     getAllLead()
@@ -51,7 +53,6 @@ const InboxPage = () => {
         sort: true,
       },
     },
-
   ]
 
   // const columns = [
@@ -79,6 +80,7 @@ const InboxPage = () => {
 
       console.log("all Lead data", allLead.data)
       setAllLeadData(allLead.data)
+      setInboxScalaton(false)
     } catch (err) {
       console.log(err)
     }
@@ -101,9 +103,18 @@ const InboxPage = () => {
       {/* <LeadsModule */}
 
       {/* <DataGridTables /> */}
-      <DataTableFirst  tabletitle={"Inbox"} allleaddata = {allLeadData} leadColumns= {leadColumns} filterOptions={filterOptions} />
+      {inboxScalaton ? (
+        <TableScalaton />
+      ) : (
+        <DataTableFirst
+          tabletitle={"Inbox"}
+          allleaddata={allLeadData}
+          leadColumns={leadColumns}
+          filterOptions={filterOptions}
+        />
+      )}
 
-       {/* <UserListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData} /> */}
+      {/* <UserListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData} /> */}
       {/* // <InboxListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData}  />  */}
       {/* <div className="mt-5">
         <MUIDataTable
