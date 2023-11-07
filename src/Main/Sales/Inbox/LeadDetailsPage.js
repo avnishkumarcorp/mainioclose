@@ -11,6 +11,7 @@ import Autocomplete from "@mui/material/Autocomplete"
 import Skeleton from '@mui/material/Skeleton';
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import DataShowScalaton from "../../../components/Scalaton/DataShowScalaton"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -35,7 +36,7 @@ const LeadDetailsPage = () => {
   const [taskUpdateToggle, setTaskUpdateToggle] = useState(false);
   const [updateLeadName, setUpdateLeadName] = useState("")
 
-
+  const [productDataScaleaton, setProductDataScaleaton] = useState(true);
   const [leadNameReload, setLeadNameReload] = useState(false)
 
   const [allProductData, setAllProductData] = useState([])
@@ -275,6 +276,7 @@ const LeadDetailsPage = () => {
 
   // GET Single Lead Data
   const getSingleLeadData = async () => {
+
     try {
       const singleLeadApiData = await getQuery(
         `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
@@ -283,10 +285,13 @@ const LeadDetailsPage = () => {
       setAllProductsList(singleLeadApiData.data.serviceDetails)
       setUpdateLeadName(singleLeadApiData.data.leadName)
       setClientsContact(singleLeadApiData.data.clients)
+      setProductDataScaleaton(false)
     } catch (err) {
       if (err.response.status === 500) {
         console.log("Something Went Wrong")
       }
+      setProductDataScaleaton(false)
+      // productDataScaleaton(false)
     }
   }
 
@@ -585,6 +590,7 @@ const LeadDetailsPage = () => {
                           id="select-product"
                           onChange={(e) => getProductInputData(e.target.value)}
                         >
+                         
                           {allProductData.map((product, index) => (
                             <option key={index} value={product?.id}>
                               {product?.productName}
@@ -606,7 +612,8 @@ const LeadDetailsPage = () => {
                     </form>
                   </div>
                   {/* all leads save */}
-                  {allProductsList.map((service, index) => (
+                  { productDataScaleaton ?  <DataShowScalaton /> : 
+                   allProductsList.map((service, index) => (
                     <div className="save-lead-data" key={index}>
                       <div>
                         <p className="lead-heading">{service?.name}</p>
@@ -624,7 +631,8 @@ const LeadDetailsPage = () => {
                         ></i>
                       </div>
                     </div>
-                  ))}
+                  ))
+                  }
 
                   {/* all leads save */}
                 </div>
