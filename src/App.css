@@ -200,6 +200,12 @@ button:focus {
   gap: 10px;
 }
 
+.scalaton-rectangle{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+
 
 
 /* table data */
