@@ -66,7 +66,14 @@ const LeadsModule = () => {
     } },
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
-    { field: "createDate", headerName: "Date", width: 150 },
+    { field: "createDate", headerName: "Date", width: 150, renderCell: (props) =>{
+      let date = new Date(props.row.createDate);
+      let dateNew =  date.toLocaleDateString()
+      console.log("date is ", date.toLocaleDateString());
+      return(
+        <p>{dateNew.toString()}</p>
+      )
+    } },
     {
       field: "assignee",
       headerName: "Assignee",
