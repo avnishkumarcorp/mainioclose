@@ -43,6 +43,8 @@ const LeadsModule = () => {
 
 
 
+
+
   const columns = [
     { field: "id", headerName: "ID", width: 150 },
     {
@@ -98,6 +100,11 @@ const LeadsModule = () => {
     },
     { field: "leadDescription", headerName: "lead Description", width: 150 },
     { field: "source", headerName: "Source", width: 150 },
+    { field: "action", headerName: "Action", width: 150, renderCell: (props) =>{
+      return(
+      <p onClick={() => leadDeleteResponse(props.row.id)}><i class="fa-solid fa-trash"></i></p>
+      )
+    } },
   ]
 
 
@@ -108,6 +115,24 @@ const LeadsModule = () => {
 
   const changeUserAssignee = (user) => {
     console.log("user is selectd", user)
+  }
+
+
+  const leadDeleteResponse = async (id) =>{
+    // confirm("Are you sure ?")
+    try{
+    const leadResponse = await axios.delete(`/leadService/api/v1/lead/deleteLead?leadId=${id}`,{
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    })
+    console.log("delete", leadResponse)
+  }catch(err){
+    console.log(
+      "err", err
+    )
+  }
   }
 
   const changeLeadAssignee = async (id, leadId) => {
