@@ -61,7 +61,7 @@ const LeadsModule = () => {
     },
     { field: "assigneeName", headerName: "Assignee", width: 150, renderCell: (props)=>{
       return(
-        <p>
+        <p className="mb-0">
           {props?.row?.assignee?.fullName}
         </p>
       )
@@ -73,13 +73,13 @@ const LeadsModule = () => {
       let dateNew =  date.toLocaleDateString()
       console.log("date is ", date.toLocaleDateString());
       return(
-        <p>{dateNew.toString()}</p>
+        <p className="mb-0">{dateNew.toString()}</p>
       )
     } },
     {
       field: "assignee",
       headerName: "Assignee",
-      width: 150,
+      width: 170,
       renderCell: (props) => {
         return (
           <select
@@ -98,7 +98,11 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "leadDescription", headerName: "lead Description", width: 150 },
+    { field: "leadDescription", headerName: "lead Description", width: 200, renderCell: (props) =>{
+      (
+        <p className="mb-0">{props?.row?.leadDescription.slice(0,2)}</p>
+      )
+    } },
     { field: "source", headerName: "Source", width: 150 },
     { field: "action", headerName: "Action", width: 150, renderCell: (props) =>{
       return(
