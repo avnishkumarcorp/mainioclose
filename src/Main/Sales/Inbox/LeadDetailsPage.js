@@ -8,7 +8,7 @@ import { postQuery } from "../../../API/PostQuery"
 import { useRef } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
-import Skeleton from '@mui/material/Skeleton';
+import Skeleton from "@mui/material/Skeleton"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import DataShowScalaton from "../../../components/Scalaton/DataShowScalaton"
@@ -26,17 +26,17 @@ const LeadDetailsPage = () => {
   const [singleLeadResponseData, setSingleLeadResponseData] = useState({})
   const [categoryData, setCategoryData] = useState([])
   const [getAllStatus, setGetAllStatus] = useState([])
-  const [allOportunities, setAllOportunities] = useState([]);
+  const [allOportunities, setAllOportunities] = useState([])
 
   const [singleStatus, setSingleStatus] = useState("")
   const [notesUpdateToggle, setNotesUpdateToggle] = useState(false)
   const [changeStatusToggle, setChangeStatusToggle] = useState(false)
   const [updateLeadNameToggle, setUpdateLeadNameToggle] = useState(true)
-  const [leadStatusScale, setLeadStatusScale] = useState(false);
-  const [taskUpdateToggle, setTaskUpdateToggle] = useState(false);
+  const [leadStatusScale, setLeadStatusScale] = useState(false)
+  const [taskUpdateToggle, setTaskUpdateToggle] = useState(false)
   const [updateLeadName, setUpdateLeadName] = useState("")
 
-  const [productDataScaleaton, setProductDataScaleaton] = useState(true);
+  const [productDataScaleaton, setProductDataScaleaton] = useState(true)
   const [leadNameReload, setLeadNameReload] = useState(false)
 
   const [allProductData, setAllProductData] = useState([])
@@ -54,10 +54,11 @@ const LeadDetailsPage = () => {
 
   const [getSingleLeadTask, setGetSingleLeadTask] = useState([])
 
-  
+  const [userDataResponse, setUserDataResponse] = useState([]);
+
   console.log("client contact", clientsContact)
   console.log("selected", selectedProduct)
-//  useEffect calls Start
+  //  useEffect calls Start
   useEffect(() => {
     editViewData()
     getAllProductWithCattegory()
@@ -93,20 +94,23 @@ const LeadDetailsPage = () => {
     getAllTaskData()
   }, [taskUpdateToggle])
 
+  useEffect(() => {
+    getAllOportunities()
+  }, [])
+
   useEffect(()=>{
-    getAllOportunities();
+    getAllUserData();
   },[])
 
   //  useEffect calls End
 
-
-  const getAllOportunities = async () =>{
-    const getOportunities = await getQuery(`/leadService/api/v1/leadOpportunity/getAllOpportunity`)
-    console.log("get all opportunities", getOportunities.data);
+  const getAllOportunities = async () => {
+    const getOportunities = await getQuery(
+      `/leadService/api/v1/leadOpportunity/getAllOpportunity`
+    )
+    console.log("get all opportunities", getOportunities.data)
     setAllOportunities(getOportunities.data)
   }
- 
-
 
   const NotesRef = useRef()
   const contactNameRef = useRef()
@@ -116,9 +120,6 @@ const LeadDetailsPage = () => {
   const taskTitle = useRef()
   const taskDescription = useRef()
   const taskDate = useRef()
-
- 
-  
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
@@ -170,8 +171,6 @@ const LeadDetailsPage = () => {
     } catch (err) {
       console.log(err)
       setLeadStatusScale(false)
-
-    
     }
   }
 
@@ -184,11 +183,10 @@ const LeadDetailsPage = () => {
       setAllProductData(allProductResponse.data)
     } catch (err) {
       console.log(err)
-     
     }
   }
 
-// Get All Lead User
+  // Get All Lead User
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
@@ -201,7 +199,7 @@ const LeadDetailsPage = () => {
     }
   }
 
-// set Inputs data
+  // set Inputs data
   const setTasksDataFun = (e) => {
     setAddNewTask((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -226,23 +224,22 @@ const LeadDetailsPage = () => {
 
   // GET All Tasks Data
   const getAllTaskData = async () => {
-    try{
-    const allTaskData = await getQuery(
-      `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
-    )
-    console.warn("all tasksss")
-    console.log(allTaskData.data)
-    setGetSingleLeadTask(allTaskData.data)
-    }catch(err){
-      console.log("err", err);
+    try {
+      const allTaskData = await getQuery(
+        `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
+      )
+      console.warn("all tasksss")
+      console.log(allTaskData.data)
+      setGetSingleLeadTask(allTaskData.data)
+    } catch (err) {
+      console.log("err", err)
     }
   }
-
 
   const getProductInputData = (productIdSelect) => {
     setAddProductData((product) => ({ ...product, productId: productIdSelect }))
   }
-  
+
   // GET All LeadNotes data
   const leadNotesData = async (id) => {
     try {
@@ -276,7 +273,6 @@ const LeadDetailsPage = () => {
 
   // GET Single Lead Data
   const getSingleLeadData = async () => {
-
     try {
       const singleLeadApiData = await getQuery(
         `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
@@ -295,7 +291,6 @@ const LeadDetailsPage = () => {
     }
   }
 
-
   // Change Lead Status Function
   const changeLeadStatusFun = (catId) => {
     const statusChange = async () => {
@@ -312,7 +307,7 @@ const LeadDetailsPage = () => {
         setChangeStatusToggle((prev) => !prev)
       } catch (err) {
         console.log(err)
-        if(err.response.status === 500){
+        if (err.response.status === 500) {
           toast.error("Something Went Wrong")
         }
       }
@@ -333,7 +328,7 @@ const LeadDetailsPage = () => {
         NotesRef.current.value = ""
       } catch (err) {
         console.log(err)
-        if(err.response.status === 500){
+        if (err.response.status === 500) {
           toast.error("Something Went Wrong")
         }
       }
@@ -392,7 +387,7 @@ const LeadDetailsPage = () => {
       if (err.response.status === 406) {
         toast.error("Product already added")
       }
-      if(err.response.status === 500){
+      if (err.response.status === 500) {
         toast.error("Something Went Wrong")
       }
     }
@@ -413,7 +408,7 @@ const LeadDetailsPage = () => {
       setLeadNameReload((prev) => !prev)
     } catch (err) {
       console.log(err)
-      if(err.response.status === 500){
+      if (err.response.status === 500) {
         toast.error("Something Went Wrong")
       }
     }
@@ -434,7 +429,7 @@ const LeadDetailsPage = () => {
         contactContactNoRef.current.value = ""
       } catch (err) {
         console.log("err", err)
-        if(err.response.status === 500){
+        if (err.response.status === 500) {
           toast.error("Something Went Wrong")
         }
       }
@@ -442,7 +437,7 @@ const LeadDetailsPage = () => {
     leadContact()
   }
 
-  // Create New Tasks for Lead Function 
+  // Create New Tasks for Lead Function
   const createTaskFun = (e) => {
     e.preventDefault()
     const TaskCreateNew = async () => {
@@ -452,18 +447,43 @@ const LeadDetailsPage = () => {
           addNewTask
         )
         console.log("task create", taskCreateData)
-        setTaskUpdateToggle((prev)=> !(prev));
+        setTaskUpdateToggle((prev) => !prev)
         taskTitle.current.value = ""
         taskDescription.current.value = ""
         taskDate.current.value = ""
       } catch (err) {
         console.log("err", err)
-        if(err.response.status === 500){
+        if (err.response.status === 500) {
           toast.error("Something Went Wrong")
         }
       }
     }
     TaskCreateNew()
+  }
+
+  const getAllUserData = async () =>{
+    const allUserResponse = await getQuery(`/leadService/api/v1/users/getAllUser`);
+    console.log("response user data", allUserResponse.data);
+    setUserDataResponse(allUserResponse.data)
+  } 
+  
+  const changeLeadAssignee = async (id) =>{
+    try{
+      const updatePerson =  await axios.put(
+        `/leadService/api/v1/lead/updateAssignee?leadId=${leadPathId}&userId=${id}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      console.log("assignee update", updatePerson);
+
+    }catch(err){
+      console.log("err", err);
+    }
+ 
   }
 
   console.log("i am state data", singleLeadResponseData)
@@ -506,24 +526,25 @@ const LeadDetailsPage = () => {
             <p className="lead-blue-head">
               {singleLeadResponseData?.status?.name}
             </p>
-              {leadStatusScale ? (
-            <p className="my-2">
-              <select
-                className="status-select"
-                name="status"
-                onChange={(e) => changeLeadStatusFun(e.target.value)}
-                id="status"
-                form="statusChange"
-              >
-                {getAllStatus.map((status, index) => (
-                  <option value={status.id} key={index}>
-                    {status.name}
-                  </option>
-                ))}
-              </select>
-            </p>
-              ): <Skeleton variant="rectangular" width={210} height={25} />
-              }
+            {leadStatusScale ? (
+              <p className="my-2">
+                <select
+                  className="status-select"
+                  name="status"
+                  onChange={(e) => changeLeadStatusFun(e.target.value)}
+                  id="status"
+                  form="statusChange"
+                >
+                  {getAllStatus.map((status, index) => (
+                    <option value={status.id} key={index}>
+                      {status.name}
+                    </option>
+                  ))}
+                </select>
+              </p>
+            ) : (
+              <Skeleton variant="rectangular" width={210} height={25} />
+            )}
             <div></div>
             <div className="lead-product">
               <div className="card mt-2">
@@ -590,7 +611,6 @@ const LeadDetailsPage = () => {
                           id="select-product"
                           onChange={(e) => getProductInputData(e.target.value)}
                         >
-                         
                           {allProductData.map((product, index) => (
                             <option key={index} value={product?.id}>
                               {product?.productName}
@@ -612,27 +632,29 @@ const LeadDetailsPage = () => {
                     </form>
                   </div>
                   {/* all leads save */}
-                  { productDataScaleaton ?  <DataShowScalaton /> : 
-                   allProductsList.map((service, index) => (
-                    <div className="save-lead-data" key={index}>
-                      <div>
-                        <p className="lead-heading">{service?.name}</p>
-                        <h6 className="lead-sm-heading">
-                          {service?.serviceName}
-                        </h6>
-                      </div>
+                  {productDataScaleaton ? (
+                    <DataShowScalaton />
+                  ) : (
+                    allProductsList.map((service, index) => (
+                      <div className="save-lead-data" key={index}>
+                        <div>
+                          <p className="lead-heading">{service?.name}</p>
+                          <h6 className="lead-sm-heading">
+                            {service?.serviceName}
+                          </h6>
+                        </div>
 
-                      <div className="lead-heading">
-                        <i
-                          className="fa-solid fa-trash"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          title="Product Delete"
-                        ></i>
+                        <div className="lead-heading">
+                          <i
+                            className="fa-solid fa-trash"
+                            data-toggle="tooltip"
+                            data-placement="top"
+                            title="Product Delete"
+                          ></i>
+                        </div>
                       </div>
-                    </div>
-                  ))
-                  }
+                    ))
+                  )}
 
                   {/* all leads save */}
                 </div>
@@ -966,24 +988,23 @@ const LeadDetailsPage = () => {
                     </form>
                   </div>
                   {/* all leads save */}
-                  {allOportunities.map((data, index)=>(
-                      <div className="save-lead-data">
+                  {allOportunities.map((data, index) => (
+                    <div className="save-lead-data" key={index}>
                       <div>
                         <p className="lead-heading">BIS Registration</p>
                         <h6 className="lead-sm-heading mb-0">
-                          {data?.description.split(0,10)}...
+                          {data?.description.split(0, 10)}...
                         </h6>
                         <h6 className="lead-sm-heading ">
                           {data?.estimateClose}
                         </h6>
                       </div>
-  
+
                       <div className="lead-heading">
                         <i className="fa-solid fa-trash"></i>
                       </div>
                     </div>
                   ))}
-               
 
                   {/* all leads save */}
                 </div>
@@ -1147,6 +1168,13 @@ const LeadDetailsPage = () => {
                 data={email}
                 setData={setEmail}
               />
+            </div>
+            <div className="filter-box mt-3">
+              <select className="status-select" onChange={(e)=> changeLeadAssignee(e.target.value)} name="user" id="user">
+               {userDataResponse.map((user, index)=>(
+                 <option key={index} value={user?.id}>{user?.fullName}</option>
+               ))}
+              </select>
             </div>
 
             <div></div>
