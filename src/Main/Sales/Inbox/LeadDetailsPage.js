@@ -1170,7 +1170,7 @@ const LeadDetailsPage = () => {
               />
             </div>
             <div className="filter-box mt-3">
-              <select className="status-select" onChange={(e)=> changeLeadAssignee(e.target.value)} name="user" id="user">
+              <select className="user-assign-tab" onChange={(e)=> changeLeadAssignee(e.target.value)} name="user" id="user">
                {userDataResponse.map((user, index)=>(
                  <option key={index} value={user?.id}>{user?.fullName}</option>
                ))}
