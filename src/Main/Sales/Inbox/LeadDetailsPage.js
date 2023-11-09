@@ -8,6 +8,7 @@ import { postQuery } from "../../../API/PostQuery"
 import { useRef } from "react"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
+import { Editor } from "@tinymce/tinymce-react";
 import Skeleton from "@mui/material/Skeleton"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -54,7 +55,7 @@ const LeadDetailsPage = () => {
 
   const [getSingleLeadTask, setGetSingleLeadTask] = useState([])
 
-  const [userDataResponse, setUserDataResponse] = useState([]);
+  const [userDataResponse, setUserDataResponse] = useState([])
 
   console.log("client contact", clientsContact)
   console.log("selected", selectedProduct)
@@ -98,9 +99,9 @@ const LeadDetailsPage = () => {
     getAllOportunities()
   }, [])
 
-  useEffect(()=>{
-    getAllUserData();
-  },[])
+  useEffect(() => {
+    getAllUserData()
+  }, [])
 
   //  useEffect calls End
 
@@ -461,15 +462,17 @@ const LeadDetailsPage = () => {
     TaskCreateNew()
   }
 
-  const getAllUserData = async () =>{
-    const allUserResponse = await getQuery(`/leadService/api/v1/users/getAllUser`);
-    console.log("response user data", allUserResponse.data);
+  const getAllUserData = async () => {
+    const allUserResponse = await getQuery(
+      `/leadService/api/v1/users/getAllUser`
+    )
+    console.log("response user data", allUserResponse.data)
     setUserDataResponse(allUserResponse.data)
-  } 
-  
-  const changeLeadAssignee = async (id) =>{
-    try{
-      const updatePerson =  await axios.put(
+  }
+
+  const changeLeadAssignee = async (id) => {
+    try {
+      const updatePerson = await axios.put(
         `/leadService/api/v1/lead/updateAssignee?leadId=${leadPathId}&userId=${id}`,
         {
           headers: {
@@ -478,12 +481,10 @@ const LeadDetailsPage = () => {
           },
         }
       )
-      console.log("assignee update", updatePerson);
-
-    }catch(err){
-      console.log("err", err);
+      console.log("assignee update", updatePerson)
+    } catch (err) {
+      console.log("err", err)
     }
- 
   }
 
   console.log("i am state data", singleLeadResponseData)
@@ -1170,10 +1171,17 @@ const LeadDetailsPage = () => {
               />
             </div>
             <div className="filter-box mt-3">
-              <select className="user-assign-tab" onChange={(e)=> changeLeadAssignee(e.target.value)} name="user" id="user">
-               {userDataResponse.map((user, index)=>(
-                 <option key={index} value={user?.id}>{user?.fullName}</option>
-               ))}
+              <select
+                className="user-assign-tab"
+                onChange={(e) => changeLeadAssignee(e.target.value)}
+                name="user"
+                id="user"
+              >
+                {userDataResponse.map((user, index) => (
+                  <option key={index} value={user?.id}>
+                    {user?.fullName}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -1212,6 +1220,7 @@ const LeadDetailsPage = () => {
                 </div>
               </div>
             </div>
+
             <div className={`notes-box mt-4 ${email === true ? "d-none" : ""}`}>
               <div className="comment-icon">
                 <div className="icon-box email-cl">
@@ -1224,7 +1233,17 @@ const LeadDetailsPage = () => {
                 <div className="comment-above">
                   <h2 className="write-heading">Write a Email</h2>
                 </div>
-                <textarea
+                <Editor
+                  apiKey="my-api-key"
+                  // value={this.state.content}
+                  init={{
+                    height: 300,
+                    menubar: false,
+                  }}
+                  // onEditorChange={this.handleChange}
+                />
+                ;
+                {/* <textarea
                   className="text-area-box"
                   id="notes"
                   placeholder="write a notes ......"
@@ -1232,7 +1251,7 @@ const LeadDetailsPage = () => {
                   rows="4"
                   cols="50"
                   onChange={(e) => remarkMessageFunction(e)}
-                ></textarea>
+                ></textarea> */}
                 <div className="comment-below">
                   <button
                     className="comment-btn"
