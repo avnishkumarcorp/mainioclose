@@ -7,16 +7,38 @@
    height: 100vh;
    width: 700px;
    border: 1px solid #e5e5e5;
+   padding: 10px;
     .estimate-close{
         height: 20px;
         width: 20px;
         background-color: #fff;
         position: relative;
         border: 1px solid black;
-        left: -20px;
+        left: -30px;
+        top: -10px;
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .estimate-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .estimate-text{
+            font-size: 22px;
+            color: #6a8dec;
+            margin-bottom: 0px;
+        }
+        .estimate-tabs{
+            color: #262e39;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 6px 16px;
+            border-radius: 4px;
+            background-color: #fff;
+            margin-left: 5px;
+            font-size: 14px;
+        }
+
     }
    
 }
