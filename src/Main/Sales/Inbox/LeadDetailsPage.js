@@ -12,6 +12,7 @@ import Skeleton from "@mui/material/Skeleton"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import DataShowScalaton from "../../../components/Scalaton/DataShowScalaton"
+import EstimateDesignPage from "../Leads/EstimateDesignPage"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -55,6 +56,13 @@ const LeadDetailsPage = () => {
   const [getSingleLeadTask, setGetSingleLeadTask] = useState([])
 
   const [userDataResponse, setUserDataResponse] = useState([]);
+  const [estimateOpenBtn, setEstimateOpenBtn] = useState(false);
+
+
+  const openEstimateFun = () =>{
+    setEstimateOpenBtn((prev) => !(prev))
+  }
+
 
   console.log("client contact", clientsContact)
   console.log("selected", selectedProduct)
@@ -490,6 +498,8 @@ const LeadDetailsPage = () => {
 
   return (
     <div className="lead-details cm-padding-one">
+            {estimateOpenBtn ? 
+                  <EstimateDesignPage setEstimateOpenBtn = {setEstimateOpenBtn}/> : "" }
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
@@ -722,18 +732,21 @@ const LeadDetailsPage = () => {
                     </form> */}
                   </div>
                   {/* all leads save */}
+                  
+                  {/* Estimate Create API */}
                   <div className="save-lead-data">
                     <div>
                       <p className="lead-heading">BIS Registration</p>
                       <h6 className="lead-sm-heading">
-                        Business certifications
+                        lead Estimate Create
                       </h6>
                     </div>
-
                     <div className="lead-heading">
+                      <button onClick={() => openEstimateFun()} className="create-btn padding-two mr-2"><i className="fa-solid fa-eye"></i></button>
                       <i className="fa-solid fa-trash"></i>
                     </div>
                   </div>
+              
 
                   {/* all leads save */}
                 </div>
