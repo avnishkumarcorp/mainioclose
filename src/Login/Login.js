@@ -14,6 +14,7 @@ import {
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { postQuery } from "../API/PostQuery"
+import ButtonTwo from "../components/button/ButtonTwo"
 toast.configure()
 
 
@@ -118,7 +119,7 @@ const Login = () => {
       {/* //  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" } */}
       <div>
         <div className="cm-input-box">
-          {showPassword ? <i onClick={()=> setShowPassword((prev) => !(prev))} class="fa-solid cm-icon fa-eye"></i> :  
+          {showPassword ? <i onClick={()=> setShowPassword((prev) => !(prev))} className="fa-solid cm-icon fa-eye"></i> :  
           <i onClick={()=> setShowPassword((prev) => !(prev))} className="fa-regular cm-icon fa-eye-slash"></i> }
           {/* <i onClick={()=> setShowPassword((prev) => !(prev))} class="fa-solid cm-icon fa-eye"></i> */}
           <input
@@ -147,9 +148,10 @@ const Login = () => {
           <Link to="/erp/forgetpassword">Forget Passowrd</Link>
         </div>
       </div>
-      <button onClick={(e) => userSignIn(e)} className="login-button my-3">
+      <ButtonTwo data={loadingBtn ? "Loading..." : "Login" } onClick={(e) => userSignIn(e)} className={`login-button my-3`}  />
+      {/* <button onClick={(e) => userSignIn(e)} className="login-button my-3">
        {loadingBtn ? "Loading..." : "Login" }
-      </button>
+      </button> */}
       <p className="note-user">
         Not a User{" "}
         <Link className="ml-1 out-none" to="/erp/signup">
