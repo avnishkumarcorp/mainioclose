@@ -60,6 +60,12 @@
     .invoice-box{
         border: 1px solid #e4e4e4;
         padding: 5px;
+        max-height: 750px;
+        overflow: auto;
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            width: 10px;
+        }
         .brand-logo{
             height: 70px;
             width: 70px;
@@ -84,6 +90,20 @@
         justify-content: flex-end;
         p{
             font-size: 14px;
+        }
+    }
+
+    .tax-details{
+        .tax-details-box{
+            border: 1px dotted #000;
+           .details-head, .details-body{
+            display: flex;
+            justify-content: space-around;
+            padding: 5px 0px;
+           }
+           .details-body{
+            border-top: 1px dotted #000;
+           }
         }
     }
    

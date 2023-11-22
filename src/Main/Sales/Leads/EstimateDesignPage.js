@@ -100,8 +100,8 @@ const EstimateDesignPage = ({ setEstimateOpenBtn }) => {
             <p className="estimate-data">Place of Supply : Tamil nadu(33)</p>
           </div>
           <div>
-            <p className="estimate-data">Ship To:</p>
-            <p className="estimate-data">Mind Masala</p>
+            <p className="estimate-data mb-1"><b>Estimate Date: </b> 25-10-2023</p>
+            <p className="estimate-data"><b>Order Date: </b> 25-10-2023</p>
           </div>
         </div>
 
@@ -167,7 +167,52 @@ const EstimateDesignPage = ({ setEstimateOpenBtn }) => {
           </table>
         </div>
         <div className="estimate-words">
-          <p>Total In Words: <b>INR Twenty Five Thousand Nine Hundred Sixty only.</b></p>
+          <p>
+            Total In Words:{" "}
+            <b>INR Twenty Five Thousand Nine Hundred Sixty only.</b>
+          </p>
+        </div>
+
+        <div className="tax-details">
+          <p className="estimate-data">Tax Details:</p>
+          <div className="tax-details-box">
+            <div className="details-head">
+              <p className="estimate-bold">HSN</p>
+              <p className="estimate-bold">HSN</p>
+              <p className="estimate-bold">HSN</p>
+              <p className="estimate-bold">HSN</p>
+            </div>
+            <div className="details-body">
+              <p className="estimate-data">HSN</p>
+              <p className="estimate-data">HSN</p>
+              <p className="estimate-data">HSN</p>
+              <p className="estimate-data">HSN</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="estimate-notes mt-2">
+          <p className="estimate-bold">Notes: </p>
+          <p className="estimate-data">
+            This Estimate & Price Quotion is valid for 7 days from the date of
+            issue
+          </p>
+          <p className="estimate-data">
+            ERP PLASTIC WASTE AUTHORIZATION GOVERMENT FRR ON ACYUAL
+          </p>
+        </div>
+        <div className="payment-option mt-2">
+          <p className="estimate-bold">Payment Oprions: </p>
+          <p className="estimate-data">
+            <b>IMPS/NEFT : </b>This Estimate & Price Quotion is valid for 7 days
+            from the date of issue
+          </p>
+          <p className="estimate-data">
+            ERP PLASTIC WASTE AUTHORIZATION GOVERMENT FRR ON ACYUAL
+          </p>
+          <p className="estimate-data">
+            ERP PLASTIC WASTE AUTHORIZATION GOVERMENT FRR ON ACYUAL
+          </p>
         </div>
       </div>
     </div>
