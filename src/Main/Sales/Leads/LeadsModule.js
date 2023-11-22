@@ -89,6 +89,7 @@ const LeadsModule = () => {
             name="lead"
             id="lead"
           >
+             <option>Select Assignee</option>
             {leadUserNew.map((user, index) => (
               <option key={index} value={user.id}>
                 {user?.fullName}

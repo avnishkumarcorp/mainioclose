@@ -599,6 +599,7 @@ const LeadDetailsPage = () => {
                             getCatgegoryInputData(e.target.value)
                           }
                         >
+                          <option>Select Product Category</option>
                           {categoryData.map((cat, index) => (
                             <option key={index} value={cat.categoryName}>
                               {cat.categoryName}
@@ -621,6 +622,7 @@ const LeadDetailsPage = () => {
                           id="select-product"
                           onChange={(e) => getProductInputData(e.target.value)}
                         >
+                          <option>Select Product</option>
                           {allProductData.map((product, index) => (
                             <option key={index} value={product?.id}>
                               {product?.productName}
@@ -841,6 +843,7 @@ const LeadDetailsPage = () => {
                           onChange={(e) => setTasksDataFun(e)}
                           id="select-product"
                         >
+                          <option>Select User</option>
                           {getAllLeadUserData.map((user, index) => (
                             <option key={index} value={user?.id}>
                               {user?.fullName}
@@ -867,6 +870,7 @@ const LeadDetailsPage = () => {
                           onChange={(e) => setTasksDataFun(e)}
                           id="select-product"
                         >
+                           <option>Select Status</option>
                           {allTaskStatusData.map((status, index) => (
                             <option key={index} value={status?.id}>
                               {status?.name}
