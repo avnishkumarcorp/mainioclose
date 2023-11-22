@@ -67,7 +67,7 @@ const EstimateDesignPage = ({ setEstimateOpenBtn }) => {
 
         <div className="py-1 all-between">
           <div>
-            <p className="estimate-data">Corpseed Ites Pvt Ltd</p>
+            <p className="estimate-bold">Corpseed Ites Pvt Ltd</p>
             <p className="estimate-data">CN UN789342984237ESTD03684</p>
             <p className="estimate-data">2nd Floor, A-154 Block, Sector 63</p>
             <p className="estimate-data">Noida Utter Pardesh -201301</p>
