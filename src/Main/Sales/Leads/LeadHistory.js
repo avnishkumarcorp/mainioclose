@@ -3,9 +3,14 @@ import "./LeadHistory.scss"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import { getQuery } from "../../../API/GetQuery"
 import { useLocation } from "react-router-dom"
+import TableScalaton from "../../../components/TableScalaton"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const LeadHistory = () => {
   const [leadHistoryData, setLeadHistoryData] = useState([])
+  const [historyScalaton, setHistoryScalaton] = useState(true);
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -43,7 +48,14 @@ const LeadHistory = () => {
       )
       console.log("history data", leadHistory.data)
       setLeadHistoryData(leadHistory.data)
+      setHistoryScalaton(false);
     } catch (err) {
+        if(err.response.status === 500){
+            toast.error("Something Went Wrong")
+        }
+        if(err.response.status === 401){
+            toast.error("Something Went Wrong")
+        }
       console.log("Err", err)
     }
   }
@@ -51,7 +63,8 @@ const LeadHistory = () => {
   return (
     <div className="p-3">
       <h3 className="big-heading">Lead History</h3>
-      <UserLeadComponent row={leadHistoryData} columns={columns} />
+      {historyScalaton ? <TableScalaton /> : <UserLeadComponent row={leadHistoryData} columns={columns} />}
+      
     </div>
   )
 }
