@@ -132,7 +132,7 @@ const LeadDetailsPage = () => {
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
 
-  const leadPathId = Number(splitPath[4])
+  const leadPathId = Number(splitPath[5])
   const currentUserId = Number(splitPath[2])
 
   const categorySelectRef = useRef()
@@ -1185,6 +1185,14 @@ const LeadDetailsPage = () => {
                 data={email}
                 setData={setEmail}
               />
+              <Link to={`history`} className="filter-btn-design" ><i class="fa-regular mr-1 fa-clipboard"></i>History
+               {/* <FilterButton
+                name={"History"}
+                icon={<i className="fa-regular fa-envelope"></i>}
+                data={"History"}
+                // setData={setEmail}
+              /> */}
+              </Link>
             </div>
             <div className="filter-box mt-3">
               <select className="user-assign-tab" onChange={(e)=> changeLeadAssignee(e.target.value)} name="user" id="user">

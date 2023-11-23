@@ -36,6 +36,9 @@ const LeadsModule = () => {
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
+
+  console.warn("dsnskjdndjk");
+  console.log("path is", splitPath);
   // console.log("current path id  is", splitPath );
 
 
@@ -53,7 +56,7 @@ const LeadsModule = () => {
       width: 150,
       renderCell: (props) => {
         return (
-          <Link to={`/erp/${currentUserId}/sales/${props.row.id}`}>
+          <Link to={`/erp/${currentUserId}/sales/lead/${props.row.id}`}>
             {props?.row?.leadName}
           </Link>
         )
