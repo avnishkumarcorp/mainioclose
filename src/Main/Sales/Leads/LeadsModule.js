@@ -56,7 +56,7 @@ const LeadsModule = () => {
       width: 150,
       renderCell: (props) => {
         return (
-          <Link to={`/erp/${currentUserId}/sales/lead/${props.row.id}`}>
+          <Link to={`/erp/${currentUserId}/sales/leads/${props.row.id}`}>
             {props?.row?.leadName}
           </Link>
         )
