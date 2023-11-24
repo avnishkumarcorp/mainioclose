@@ -80,10 +80,10 @@ function App() {
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
-              <Route path="lead/:id" element={<LeadDetailsPage />} />
+              <Route path="leads/:id" element={<LeadDetailsPage />} />
               <Route path=":id/estimate" element={<EstimateCreatePage />} />
               <Route path="contacts" element={<ContactModule />} />
-              <Route path="lead/:id/history" element={<LeadHistory />} />
+              <Route path="leads/:id/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
             </Route>
             {/* end */}
