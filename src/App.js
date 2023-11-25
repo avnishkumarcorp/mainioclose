@@ -34,12 +34,14 @@ import LeadCreateModel from "./Model/LeadCreateModel"
 import EstimateCreatePage from "./Main/Sales/Leads/EstimateCreatePage"
 import TableScalaton from "./components/TableScalaton"
 import LeadHistory from "./Main/Sales/Leads/LeadHistory"
+import NewGetFile from "./Routes/NewGetFile"
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/newfile" element={<NewGetFile />}></Route>
         <Route path="*" element={<div>not found</div>} />
           <Route path="/" element={<HomePage />}>
             <Route path="/" element={<FrontMainPage />} />
