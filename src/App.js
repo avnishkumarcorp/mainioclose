@@ -81,7 +81,7 @@ function App() {
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
               <Route path="leads/:id" element={<LeadDetailsPage />} />
-              <Route path=":id/estimate" element={<EstimateCreatePage />} />
+              <Route path="leads/:id/estimate" element={<EstimateCreatePage />} />
               <Route path="contacts" element={<ContactModule />} />
               <Route path="leads/:id/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
