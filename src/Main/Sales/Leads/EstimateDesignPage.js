@@ -13,7 +13,7 @@ const EstimateDesignPage = ({ setEstimateOpenBtn }) => {
       <div onClick={() => closeEstimate()} className="estimate-close">
         {/* <p >close</p> */}
         <div className="cross-two-icon">
-          <i class="fa-solid fa-xmark"></i>
+          <i className="fa-solid fa-xmark"></i>
         </div>
       </div>
       <div className="estimate-header">
@@ -31,21 +31,21 @@ const EstimateDesignPage = ({ setEstimateOpenBtn }) => {
       <div className="estimate-action">
         <ButtonWithIcon
           data="Send Email"
-          icon={<i class="fa-regular fa-envelope"></i>}
+          icon={<i className="fa-regular fa-envelope"></i>}
         />
         <ButtonWithIcon
           data="PDF"
-          icon={<i class="fa-solid fa-download"></i>}
+          icon={<i className="fa-solid fa-download"></i>}
         />
-        <ButtonWithIcon data="URL" icon={<i class="fa-solid fa-copy"></i>} />
-        <ButtonWithIcon data="Print" icon={<i class="fa-solid fa-print"></i>} />
+        <ButtonWithIcon data="URL" icon={<i className="fa-solid fa-copy"></i>} />
+        <ButtonWithIcon data="Print" icon={<i className="fa-solid fa-print"></i>} />
         <ButtonWithIcon
           data="Generate Estimate"
-          icon={<i class="fa-solid fa-clipboard-list"></i>}
+          icon={<i className="fa-solid fa-clipboard-list"></i>}
         />
         <ButtonWithIcon
           data="Upload Documents"
-          icon={<i class="fa-solid fa-file-arrow-up"></i>}
+          icon={<i className="fa-solid fa-file-arrow-up"></i>}
         />
       </div>
 
@@ -106,7 +106,7 @@ const EstimateDesignPage = ({ setEstimateOpenBtn }) => {
         </div>
 
         <div className="table-responsive estimate-table">
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th scope="col">#</th>
