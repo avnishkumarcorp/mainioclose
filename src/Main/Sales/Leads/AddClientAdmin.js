@@ -1,5 +1,4 @@
 import React, { useRef } from "react"
-import "./AddClientAdmin.scss"
 import { useState } from "react"
 import { postQuery } from "../../../API/PostQuery";
 import ButtonTwo from "../../../components/button/ButtonTwo";
