@@ -1,0 +1,14 @@
+.d-left-new{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .estimate-btn{
+        border: none;
+        outline: none;
+        color: #2b62f9;
+        background-color: transparent;
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+}

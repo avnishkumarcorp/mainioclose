@@ -1,25 +1,50 @@
 import React from "react"
 import "./EstimateCreatePage.scss"
+import AddClientAdmin from "./AddClientAdmin"
+import { useState } from "react"
+import { getQuery } from "../../../API/GetQuery"
+import { useEffect } from "react"
 
 const EstimateCreatePage = () => {
+  const [allClient, setAllClient] = useState([])
+  const [loadingClient, setLoadingClient] = useState(true);
+
+
+  useEffect(() => {
+    getAllClient()
+  }, [])
+
+  const getAllClient = async () => {
+    try {
+      const clientResponse = await getQuery(
+        `/leadService/api/v1/client/getAllClientInfo`
+      )
+      console.log("client0", clientResponse.data)
+      setLoadingClient(false)
+      setAllClient(clientResponse.data)
+    } catch (err) {
+      if (err.response.status === 500) {
+        console.log("Something Went Wrong")
+      }
+      console.log("Error", err)
+    }
+  }
+
   return (
     <div className="estimate-box">
       <div className="center-box">
         <h1 className="estimate-heading">Create Estimate</h1>
+        <AddClientAdmin />
         <form>
           <div className="form-group">
-            <label className="label-heading mb-1" htmlFor="companyName">
-              Select data
-            </label>
             <select
               className="form-control input-focus"
               name="select-product"
               id="select-product"
             >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
+              {allClient.map((client, index) => (
+                <option key={index} value={client.id}>{client?.name} / {client?.emails} / {client?.contactNo}</option>
+              ))}
             </select>
           </div>
 

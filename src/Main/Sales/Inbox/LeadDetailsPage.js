@@ -1185,7 +1185,7 @@ const LeadDetailsPage = () => {
                 data={email}
                 setData={setEmail}
               />
-              <Link to={`history`} className="filter-btn-design" ><i class="fa-regular mr-1 fa-clipboard"></i>History
+              <Link to={`history`} className="filter-btn-design" ><i className="fa-regular mr-1 fa-clipboard"></i>History
                {/* <FilterButton
                 name={"History"}
                 icon={<i className="fa-regular fa-envelope"></i>}

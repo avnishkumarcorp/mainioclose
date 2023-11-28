@@ -110,7 +110,7 @@ const LeadsModule = () => {
     { field: "source", headerName: "Source", width: 150 },
     { field: "action", headerName: "Action", width: 150, renderCell: (props) =>{
       return(
-      <p onClick={() => leadDeleteResponse(props.row.id)}><i class="fa-solid fa-trash"></i></p>
+      <p onClick={() => leadDeleteResponse(props.row.id)}><i className="fa-solid fa-trash"></i></p>
       )
     } },
   ]
