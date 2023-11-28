@@ -4,14 +4,14 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 toast.configure()
 
-export const useCustomRoute = (link) => {
+export const useCustomRoute = (link, data) => {
   const [productData, setProductData] = useState({})
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getAlldataFun()
-  }, [])
+  }, data)
 
   const getAlldataFun = async () => {
     try {
