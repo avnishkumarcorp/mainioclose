@@ -6,7 +6,7 @@ const NewGetFile = () => {
 
   const url =  `/leadService/api/v1/product/getProduct?id=${1}`
 
-  const {productData, loading} = useCustomRoute(url);
+  const {productData, loading, error} = useCustomRoute(url);
 
   console.log(productData);
   console.log(loading);

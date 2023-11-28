@@ -22,7 +22,8 @@ export const useCustomRoute = (link) => {
     } catch (err) {
       console.log("Err", err)
       setError(true)
+      setLoading(false)
     }
   }
-  return { productData, loading }
+  return { productData, loading, error}
 }
