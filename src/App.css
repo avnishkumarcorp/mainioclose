@@ -257,17 +257,17 @@ button:focus {
 }
 
 .estimate-btn{
-  background-color: #2b62f9;
+  background-color: var(--mainBlue);
   color: #fff;
-  border: 1px solid #2b62f9;
+  border: 1px solid var(--mainBlue);
 }
 
 
 .action-btn{
   padding: 6px 12px;
   color: #fff;
-  background-color: #2b62f9;
-  border: 1px solid #2b62f9;
+  background-color: var(--mainBlue);
+  border: 1px solid var(--mainBlue);
   border-radius: 4px;
 }
 
@@ -281,7 +281,7 @@ button:focus {
 .estimate-btn{
   border: none;
   outline: none;
-  color: #2b62f9;
+  color: var(--mainBlue);
   background-color: transparent;
   font-size: 13px;
   font-weight: 500;
@@ -397,8 +397,8 @@ button:focus {
 .first-button {
   padding: 0px 60px;
   padding-bottom: 2px;
-  background: #1a73e8;
-  border: 1px solid #1a73e8;
+  background: var(--mainBlue);
+  border: 1px solid var(--mainBlue);
   border-radius: 4px;
   font-weight: 500;
   font-size: 18px;
@@ -416,7 +416,7 @@ $lightBlue: #1a73e8;
 .first-button:hover {
   background: transparent;
   color: #000;
-  border: 1px solid  #2b62f9;
+  border: 1px solid var(--mainBlue);
   text-decoration: none;
 }
 
