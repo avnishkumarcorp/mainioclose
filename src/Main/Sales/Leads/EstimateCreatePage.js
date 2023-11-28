@@ -4,11 +4,12 @@ import AddClientAdmin from "./AddClientAdmin"
 import { useState } from "react"
 import { getQuery } from "../../../API/GetQuery"
 import { useEffect } from "react"
+import AddNewCompany from "./AddNewCompany"
+import AddContact from "./AddContact"
 
 const EstimateCreatePage = () => {
   const [allClient, setAllClient] = useState([])
-  const [loadingClient, setLoadingClient] = useState(true);
-
+  const [loadingClient, setLoadingClient] = useState(true)
 
   useEffect(() => {
     getAllClient()
@@ -43,16 +44,15 @@ const EstimateCreatePage = () => {
               id="select-product"
             >
               {allClient.map((client, index) => (
-                <option key={index} value={client.id}>{client?.name} / {client?.emails} / {client?.contactNo}</option>
+                <option key={index} value={client.id}>
+                  {client?.name} / {client?.emails} / {client?.contactNo}
+                </option>
               ))}
             </select>
           </div>
-
+          <AddNewCompany />
           <div className="form-group">
             <div className="pr-ten">
-              <label className="label-heading mb-1" htmlFor="companyName">
-                Company Name
-              </label>
               <input
                 type="text"
                 className="form-control input-focus"
@@ -67,12 +67,14 @@ const EstimateCreatePage = () => {
             ""
           )} */}
           </div>
-
+          {/* <div className="d-left-new">
+            <button className="estimate-btn">
+              <i className="fa-solid fa-plus"></i>Add Contact
+            </button>
+          </div> */}
+          <AddContact />
           <div className="form-group">
             <div className="pr-ten">
-              <label className="label-heading mb-1" htmlFor="mobileNo">
-                Contact
-              </label>
               <input
                 type="text"
                 className="form-control input-focus"
