@@ -17,9 +17,7 @@ import { postQuery } from "../API/PostQuery"
 import ButtonTwo from "../components/button/ButtonTwo"
 toast.configure()
 
-
 const Login = () => {
-
   // let regex = new RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}")
   // if (regex.test(emailRef.current.value) !== true) {
   //   emailRef.current.style.border = "1px solid red"
@@ -35,9 +33,8 @@ const Login = () => {
   const [emailErr, setEmailErr] = useState(false)
   const [emailProperErr, setEmailProperErr] = useState(false)
   const [passwordErr, setPasswordErr] = useState(false)
-  const [showPassword, setShowPassword] = useState(false);
-  const [loadingBtn, setLoadingBtn] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false)
+  const [loadingBtn, setLoadingBtn] = useState(false)
 
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -67,7 +64,10 @@ const Login = () => {
     setLoadingBtn(true)
     const loginUser = async () => {
       try {
-        const collectUserData = await postQuery(`/securityService/api/auth/signin`,userLoginData)
+        const collectUserData = await postQuery(
+          `/securityService/api/auth/signin`,
+          userLoginData
+        )
         console.log("api data", collectUserData.data.jwt)
         console.log("api data", collectUserData.data)
         dispatch(currentUserAction(collectUserData.data))
@@ -76,11 +76,11 @@ const Login = () => {
         localStorage.setItem("Access-token", collectUserData.data.jwt)
         navigate(`/erp/${collectUserData.data.id}/sales`)
       } catch (err) {
-        if(err.response.status === 401){
+        if (err.response.status === 401) {
           toast.error("Enter a valid username or password")
           setLoadingBtn(false)
         }
-        if(err.response.status === 500){
+        if (err.response.status === 500) {
           toast.error("please Referesh this page or try again later")
           setLoadingBtn(false)
         }
@@ -91,7 +91,7 @@ const Login = () => {
     loginUser()
   }
 
-  console.log("user data", userLoginData) 
+  console.log("user data", userLoginData)
 
   return (
     <div className="cm-box container">
@@ -119,8 +119,17 @@ const Login = () => {
       {/* //  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" } */}
       <div>
         <div className="cm-input-box">
-          {showPassword ? <i onClick={()=> setShowPassword((prev) => !(prev))} className="fa-solid cm-icon fa-eye"></i> :  
-          <i onClick={()=> setShowPassword((prev) => !(prev))} className="fa-regular cm-icon fa-eye-slash"></i> }
+          {showPassword ? (
+            <i
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="fa-solid cm-icon fa-eye"
+            ></i>
+          ) : (
+            <i
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="fa-regular cm-icon fa-eye-slash"
+            ></i>
+          )}
           {/* <i onClick={()=> setShowPassword((prev) => !(prev))} class="fa-solid cm-icon fa-eye"></i> */}
           <input
             className="cm-input"
@@ -148,10 +157,11 @@ const Login = () => {
           <Link to="/erp/forgetpassword">Forget Passowrd</Link>
         </div>
       </div>
-      <ButtonTwo data={loadingBtn ? "Loading..." : "Login" } onClick={(e) => userSignIn(e)} className={`login-button my-3`}  />
-      {/* <button onClick={(e) => userSignIn(e)} className="login-button my-3">
-       {loadingBtn ? "Loading..." : "Login" }
-      </button> */}
+      <ButtonTwo
+        data={loadingBtn ? "Loading..." : "Login"}
+        onClick={(e) => userSignIn(e)}
+        className={`login-button my-3`}
+      />
       <p className="note-user">
         Not a User{" "}
         <Link className="ml-1 out-none" to="/erp/signup">

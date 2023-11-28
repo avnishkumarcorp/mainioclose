@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCustomRoute } from "./GetCustomRoutes";
 
 
 const NewGetFile = () => {
 
   const url =  `/leadService/api/v1/product/getProduct?id=${1}`
+
 
   const {productData, loading, error} = useCustomRoute(url);
 
