@@ -15,6 +15,7 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { postQuery } from "../API/PostQuery"
 import ButtonTwo from "../components/button/ButtonTwo"
+import LongButton from "../components/button/LongButton"
 toast.configure()
 
 const Login = () => {
@@ -110,13 +111,11 @@ const Login = () => {
         </div>
         {emailErr ? <p className="errors-new">Email ID can't be Blank</p> : ""}
         {emailProperErr ? (
-          <p className="errors-new">Email not in Proper Format</p>
+          <InputErrorComponent value="Email not in Proper Format" />
         ) : (
           ""
         )}
       </div>
-      {/* {emailErr ? <p></p>} */}
-      {/* //  {emailFormatErr ?  <p className="errors-new">Email not in Proper Format</p> : "" } */}
       <div>
         <div className="cm-input-box">
           {showPassword ? (
@@ -130,7 +129,6 @@ const Login = () => {
               className="fa-regular cm-icon fa-eye-slash"
             ></i>
           )}
-          {/* <i onClick={()=> setShowPassword((prev) => !(prev))} class="fa-solid cm-icon fa-eye"></i> */}
           <input
             className="cm-input"
             type={showPassword ? "text" : "password"}
@@ -141,7 +139,7 @@ const Login = () => {
           />
         </div>
         {passwordErr ? (
-          <p className="errors-new">password can't be Blank</p>
+          <InputErrorComponent value="Password can't be Blank" />
         ) : (
           ""
         )}
@@ -157,10 +155,10 @@ const Login = () => {
           <Link to="/erp/forgetpassword">Forget Passowrd</Link>
         </div>
       </div>
-      <ButtonTwo
+      <LongButton
         data={loadingBtn ? "Loading..." : "Login"}
         onClick={(e) => userSignIn(e)}
-        className={`login-button my-3`}
+        className={`my-3`}
       />
       <p className="note-user">
         Not a User{" "}

@@ -10,6 +10,7 @@ import {
 } from "../Redux/Action/AuthAction"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import InputErrorComponent from "../components/InputErrorComponent"
 toast.configure()
 
 const ForgetPassword = () => {
@@ -28,7 +29,6 @@ const ForgetPassword = () => {
   )
   const isUserData = useSelector((user) => user.AuthReducer)
 
-  // console.log("forget redux", forgetOtpResponse);
   console.log("is user data", isUserData)
 
   const handleSubmit = (e) => {
@@ -46,7 +46,6 @@ const ForgetPassword = () => {
     setLoading(true)
     const forgetPass = async () => {
       try {
-        // const passwordOtp = await axios.post(`/auth/forgetOtp`,{...emailData, } )
         const passwordOtp = await axios.post(
           `/securityService/api/auth/forgetOtp?email=${emailData}`,
           {
@@ -75,20 +74,7 @@ const ForgetPassword = () => {
       }
     }
 
-    // const userIsExist = async () => {
-    //   try {
-    //     const userIsPresent = await axios(
-    //       `/auth/isUserExistOrNot?email=${emailData}`
-    //     )
-    //     console.log("user Present", userIsPresent.data)
-    //     dispatch(userIsPresentData(userIsPresent.data))
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // }
-
     forgetPass()
-    // userIsExist()
   }
 
   console.log("email data", emailData)
@@ -109,12 +95,12 @@ const ForgetPassword = () => {
         </div>
         {emailErr ? <p className="errors-new">Email can't be blank</p> : ""}
         {emailFormat ? (
-          <p className="errors-new">Email Not in Proper Format</p>
+          <InputErrorComponent  value="Email Not in Proper Format"/>
         ) : (
           ""
         )}
         {emailNotExist ? (
-          <p className="errors-new">Email Not Found in System </p>
+           <InputErrorComponent value="Email Not Found in System" />
         ) : (
           ""
         )}

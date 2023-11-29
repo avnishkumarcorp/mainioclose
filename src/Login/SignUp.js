@@ -7,6 +7,8 @@ import { SignupDataAction } from "../Redux/Action/SignUpDataAction"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { postQuery } from "../API/PostQuery"
+import InputErrorComponent from "../components/InputErrorComponent"
+import LongButton from "../components/button/LongButton"
 toast.configure()
 
 const SignUp = () => {
@@ -47,23 +49,7 @@ const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // redux
   const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
-
-  // console.log("signup Redux dataa", signUpRedux)
-
-  // signup function
-// useEffect(()=>{
-//   const { username, password, mobile } = { ...createUserData }
-//   setGenerateOtpData((prev) => ({
-//     ...prev,
-//     name: username,
-//     password: password,
-//     mobile: mobile,
-//   }))
-
-// },[])
-  
 
   const UserInfoData = (e) => {
     setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -113,18 +99,12 @@ const SignUp = () => {
     }
 
     const { username, password, mobile } = { ...createUserData }
-   const otpNewData = {name: username, password: password, mobile: mobile}
-    // setGenerateOtpData((prev) => ({
-    //   ...prev,
-    //   name: username,
-    //   password: password,
-    //   mobile: mobile,
-    // }))
+    const otpNewData = { name: username, password: password, mobile: mobile }
 
-    console.log("OTP data kdjld", otpNewData);
+    console.log("OTP data kdjld", otpNewData)
 
     dispatch(SignupDataAction(createUserData))
-    setLoading(true);
+    setLoading(true)
     const generateNewOtpFun = async () => {
       console.log("before api call data is", otpNewData)
       try {
@@ -133,15 +113,15 @@ const SignUp = () => {
           generateOtpData
         )
         console.log("generate otp data", getNewOtp.data)
-        setLoading(false);
+        setLoading(false)
         navigate("/erp/otp")
       } catch (err) {
         console.log(err)
         if (err.response.status === 500) {
           toast.error("Something went wrong")
-          setLoading(false);
+          setLoading(false)
         }
-        setLoading(false);
+        setLoading(false)
       }
     }
     generateNewOtpFun()
@@ -180,7 +160,7 @@ const SignUp = () => {
                   autoComplete="on"
                 />
                 {fullNameErr ? (
-                  <p className="errors-new">Name Can't be Blank!</p>
+                  <InputErrorComponent value="Name Can't be Blank!" />
                 ) : (
                   ""
                 )}
@@ -197,15 +177,14 @@ const SignUp = () => {
                   placeholder="+91"
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                 />
                 {mobileNumberErr ? (
-                  <p className="errors-new">Mobile can't be Blank</p>
+                  <InputErrorComponent value="Mobile can't be Blank" />
                 ) : (
                   ""
                 )}
                 {mobileFormatErr ? (
-                  <p className="errors-new">Please Enter Digit Only</p>
+                  <InputErrorComponent value="Please Enter Digit Only" />
                 ) : (
                   ""
                 )}
@@ -222,16 +201,15 @@ const SignUp = () => {
                   ref={emailIdRef}
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {emailIdErr ? (
-                  <p className="errors-new">Email ID can't be Blank</p>
+                  <InputErrorComponent value="Email ID can't be Blank" />
                 ) : (
                   ""
                 )}
                 {emailFormatErr ? (
-                  <p className="errors-new">Email not in Proper Format</p>
+                  <InputErrorComponent value="Email not in Proper Format" />
                 ) : (
                   ""
                 )}
@@ -247,11 +225,10 @@ const SignUp = () => {
                   name="companyName"
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {companyNameErr ? (
-                  <p className="errors-new">Company Name can't be Blank</p>
+                  <InputErrorComponent value="Company Name can't be Blank" />
                 ) : (
                   ""
                 )}
@@ -267,11 +244,10 @@ const SignUp = () => {
                   name="password"
                   onChange={(e) => UserInfoData(e)}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {passwordErr ? (
-                  <p className="errors-new">password can't be Blank</p>
+                  <InputErrorComponent value="Password can't be Blank" />
                 ) : (
                   ""
                 )}
@@ -285,26 +261,16 @@ const SignUp = () => {
                   type="password"
                   ref={confirmPasswordRef}
                   autoComplete="on"
-                  // onChange={(e) => UserInfo(e)}
                   required
                 />
                 {confirmPasswordErr ? (
-                  <p className="errors-new">confirm password can't be Blank</p>
+                  <InputErrorComponent value="confirm password can't be Blank" />
                 ) : (
                   ""
                 )}
               </div>
             </div>
 
-            {/* {error ? (
-              <div>
-                <span className="text-danger">
-                  Please fill All Mandatory Fields
-                </span>
-              </div>
-            ) : (
-              " "
-            )} */}
             <div className="check-boxes">
               <div className="item-center">
                 <input className="box-input" type="checkbox" id="terms" />
@@ -316,12 +282,11 @@ const SignUp = () => {
             </div>
 
             <div className="center-btn">
-              <button
+              <LongButton
                 onClick={(e) => userSignUp(e)}
-                className="login-button sign-up"
-              >
-                {loading ? "loading..." : "Create Account"}
-              </button>
+                className="sign-up"
+                data={loading ? "Loading..." : "Create Account"}
+              />
             </div>
             <p className="dont-account">
               Already have an Account{" "}

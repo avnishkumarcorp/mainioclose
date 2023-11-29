@@ -135,7 +135,8 @@ const ForgetOtpPage = () => {
           type="text"
         />
       </div>
-      {validOtpErr ? <p className="errors-new">Otp not match please Enter a valid Otp</p> : ""}
+      {validOtpErr ? 
+       <InputErrorComponent value="Otp not match please Enter a valid Otp" /> : ""}
        
       <div className="resend-timer">
         <OtpTimer seconds={30} minutes={1} resend={sendTimer} />
