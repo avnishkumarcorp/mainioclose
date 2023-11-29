@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { postQuery } from "../API/PostQuery"
 import ButtonTwo from "../components/button/ButtonTwo"
 import LongButton from "../components/button/LongButton"
+import InputErrorComponent from "../components/InputErrorComponent"
 toast.configure()
 
 const Login = () => {
