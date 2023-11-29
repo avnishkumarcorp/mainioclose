@@ -110,7 +110,7 @@ const ChangePassword = () => {
         />
       </div>
       {/* {passwordErr ? <p>Error</p>: ""} */}
-      {passwordErr ? <p className="errors-new">Password Should be Same</p> : ""}
+      {passwordErr ? <InputErrorComponent value="Password Should be Same" /> : ""}
       <button onClick={(e) => updateUserPassword(e)} className="login-button">
         {loading ? "Loading..." : "Set Password"}
       </button>

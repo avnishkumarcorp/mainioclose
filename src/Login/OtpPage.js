@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { postQuery } from "../API/PostQuery"
+import LongButton from "../components/button/LongButton"
 toast.configure()
 
 const OtpPage = () => {
@@ -139,14 +140,13 @@ const OtpPage = () => {
           type="text"
         />
       </div>
-      {/* <button className="resend-text">Resend Code</button> */}
       <div className="resend-timer">
         <OtpTimer seconds={30} minutes={1} resend={sendTimer} />
       </div>
-      <button onClick={(e) => userRegistration(e)} className="login-button">
+      <LongButton  onClick={(e) => userRegistration(e)} data="Continue" />
+      {/* <button onClick={(e) => userRegistration(e)} className="login-button">
         Continue
-      </button>
-      {/* <button onClick={userRegistration} className="login-button">otp data convertor</button> */}
+      </button> */}
     </div>
   )
 }
