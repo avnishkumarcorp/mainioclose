@@ -167,7 +167,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="teamName"
                           >
-                            Lead name *
+                            Lead Name *
                           </label>
                           <input
                             type="text"
@@ -192,7 +192,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="teamName"
                           >
-                            client name *
+                            Client Name *
                           </label>
                           <input
                             type="text"
@@ -216,7 +216,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="teamLeadName"
                           >
-                            Lead email*
+                            Lead Email*
                           </label>
                           <input
                             type="email"
@@ -264,7 +264,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            Url's
+                            URL's
                           </label>
                           <input
                             type="text"
@@ -284,7 +284,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            city*
+                            City*
                           </label>
                           <input
                             type="text"
@@ -308,7 +308,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            state*
+                            State*
                           </label>
                           <input
                             type="text"
@@ -356,7 +356,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            assignee Id
+                            Assignee Id
                           </label>
                           <input
                             type="text"
@@ -376,7 +376,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            source*
+                            Source*
                           </label>
                           <input
                             type="text"
