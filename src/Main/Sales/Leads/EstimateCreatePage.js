@@ -10,6 +10,48 @@ import AddContact from "./AddContact"
 const EstimateCreatePage = () => {
   const [allClient, setAllClient] = useState([])
   const [loadingClient, setLoadingClient] = useState(true)
+  const [estimateData, setEstimateData] = useState(
+    {
+      name: "",
+      "estimateData": "2023-11-29T08:15:53.125Z",
+      "companyId": 0,
+      "company": "string",
+      "panNo": "string",
+      "gstNo": "string",
+      "companyAge": "string",
+      "govermentfees": 0,
+      "govermentCode": "string",
+      "govermentGst": "string",
+      "professionalFees": 0,
+      "professionalCode": "string",
+      "profesionalGst": "string",
+      "serviceCharge": 0,
+      "serviceCode": "string",
+      "serviceGst": "string",
+      "otherFees": 0,
+      "otherCode": "string",
+      "otherGst": "string",
+      "contact": "string",
+      "consultingSale": true,
+      "productType": "string",
+      "orderNumber": "string",
+      "purchaseDate": "string",
+      "cc": [
+        "string"
+      ],
+      "invoiceNote": "string",
+      "remarksForOption": "string",
+      "leadId": 0,
+      "clientName": "string",
+      "contactNo": "string",
+      "email": "string",
+      "clientId": 0,
+      "country": "string",
+      "state": "string",
+      "address": "string",
+      "city": "string"
+    }
+  )
 
   useEffect(() => {
     getAllClient()
