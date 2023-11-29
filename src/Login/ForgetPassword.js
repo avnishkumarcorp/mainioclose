@@ -11,6 +11,8 @@ import {
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import InputErrorComponent from "../components/InputErrorComponent"
+import ButtonTwo from "../components/button/ButtonTwo"
+import LongButton from "../components/button/LongButton"
 toast.configure()
 
 const ForgetPassword = () => {
@@ -104,9 +106,7 @@ const ForgetPassword = () => {
         ) : (
           ""
         )}
-        <button onClick={(e) => handleSubmit(e)} className="login-button">
-          Continue
-        </button>
+        <LongButton onClick={(e) => handleSubmit(e)}  data="Continue" />
       </div>
     </form>
   )
