@@ -13,6 +13,7 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import DataShowScalaton from "../../../components/Scalaton/DataShowScalaton"
 import EstimateDesignPage from "../Leads/EstimateDesignPage"
+import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -177,7 +178,7 @@ const LeadDetailsPage = () => {
       setAllTaskStatusData(allTaskStatus.data)
       setLeadStatusScale(true)
     } catch (err) {
-      console.log(err)
+      // console.log(err)
       setLeadStatusScale(false)
     }
   }
@@ -189,6 +190,9 @@ const LeadDetailsPage = () => {
         `/leadService/api/v1/product/getAllProducts`
       )
       setAllProductData(allProductResponse.data)
+      console.warn("Product Data");
+        console.log("i am product datae", allProductResponse.data);
+            // console.log("");
     } catch (err) {
       console.log(err)
     }
@@ -219,6 +223,17 @@ const LeadDetailsPage = () => {
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
+
+  // get All Products
+
+  const ProductUrl = `/leadService/api/v1/product/getAllProducts`;
+  const depandent = [];
+
+  const {productData, loading, error } = useCustomRoute
+  (ProductUrl, depandent);
+  console.warn("i am Product Data");
+  console.log("product data here", productData);
+
 
   // END
 
