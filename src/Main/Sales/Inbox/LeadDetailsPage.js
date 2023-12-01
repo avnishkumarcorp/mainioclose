@@ -226,13 +226,13 @@ const LeadDetailsPage = () => {
 
   // get All Products
 
-  const ProductUrl = `/leadService/api/v1/product/getAllProducts`;
-  const depandent = [];
+  // const ProductUrl = `/leadService/api/v1/product/getAllProducts`;
+  // const depandent = [];
 
-  const {productData, loading, error } = useCustomRoute
-  (ProductUrl, depandent);
-  console.warn("i am Product Data");
-  console.log("product data here", productData);
+  // const {productData, loading, error } = useCustomRoute
+  // (ProductUrl, depandent);
+  // console.warn("i am Product Data");
+  // console.log("product data here", productData);
 
 
   // END
