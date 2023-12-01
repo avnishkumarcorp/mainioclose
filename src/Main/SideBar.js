@@ -153,7 +153,7 @@ const SideBar = () => {
             aria-controls="collapseSalesModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> Sales
+            <i class="fa-regular mr-2 fa-rectangle-list"></i> Sales
           </NavLink>
           <div
             id={`collapseSalesModule`}
@@ -163,28 +163,28 @@ const SideBar = () => {
           >
             <div className="link-child">
               <NavLink className="link-itemss" to={`${currentUserId}/sales`}>
-                Inbox
+              <i class="fa-solid mr-1 fa-inbox"></i>Inbox
               </NavLink>
               <NavLink
                 className="link-itemss"
                 to={`${currentUserId}/sales/oppurtities`}
               >
-                Oppurtities
+               <i class="fa-solid mr-1 fa-trophy"></i>Oppurtities
               </NavLink>
               <NavLink className="link-itemss" to="sales/estimate">
-                Estimate
+              <i class="fa-solid mr-1 fa-file-lines"></i>Estimate
               </NavLink>
               <NavLink className="link-itemss" to="sales/orders">
-                Orders
+              <i class="fa-solid mr-1 fa-box"></i>  Orders
               </NavLink>
               <NavLink className="link-itemss" to="sales/contacts">
-                Contacts
+              <i class="fa-solid mr-1 fa-user"></i> Contacts
               </NavLink>
               <NavLink
                 className="link-itemss"
                 to={`${currentUserId}/sales/leads`}
               >
-                Leads
+               <i class="fa-solid mr-1 fa-calculator"></i> Leads
               </NavLink>
             </div>
           </div>
