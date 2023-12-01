@@ -536,12 +536,13 @@ const LeadDetailsPage = () => {
                   className="hide-design-box"
                   type="text"
                 />
-                <button
+                {/* <button
                   className="small-cm-btn"
                   onClick={(e) => updateLeadNameSinglePage(e)}
                 >
                   Save
-                </button>
+                </button> */}
+                <i  onClick={(e) => updateLeadNameSinglePage(e)} class=" fa-solid fa-floppy-disk"></i>
               </>
             )}
             <p className="lead-location">
@@ -560,6 +561,7 @@ const LeadDetailsPage = () => {
                   id="status"
                   form="statusChange"
                 >
+                  <option>Change Lead Status</option>
                   {getAllStatus.map((status, index) => (
                     <option value={status.id} key={index}>
                       {status.name}

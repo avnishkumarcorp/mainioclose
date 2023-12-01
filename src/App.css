@@ -6,7 +6,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-
 body {
   overflow-x: hidden;
   font-family: "Roboto", sans-serif;
@@ -24,10 +23,9 @@ button:focus {
   outline: none;
 }
 
-.out-none:hover{
+.out-none:hover {
   text-decoration: none;
 }
-
 
 .all-center {
   display: flex;
@@ -48,8 +46,6 @@ button:focus {
   color: var(--white);
   cursor: pointer;
 }
-
-
 
 .nav-heading:hover {
   color: #fff;
@@ -90,8 +86,6 @@ button:focus {
   cursor: pointer;
   text-align: center;
   border-radius: 4px;
-
-
 }
 
 .login-button:focus {
@@ -112,12 +106,12 @@ button:focus {
   margin: 0;
 }
 
-.lead-bold{
+.lead-bold {
   text-transform: uppercase;
   font-size: 13px;
 }
 
-.lead-location{
+.lead-location {
   font-size: 14px;
   color: #555555;
   margin: 3px 0px;
@@ -160,7 +154,7 @@ button:focus {
   color: #007aff;
 }
 
-.h-70{
+.h-70 {
   height: 70px !important;
 }
 
@@ -172,12 +166,12 @@ button:focus {
 
 /* home page css */
 
-.errors-new{
+.errors-new {
   color: #ff0000;
   margin: 0px;
-} 
+}
 
-.small-cm-btn{
+.small-cm-btn {
   padding: 4px 8px;
   border: none;
   background-color: #007aff;
@@ -186,34 +180,37 @@ button:focus {
   margin-left: 10px;
 }
 
-.hide-design-box{
+.hide-design-box {
   border: none;
   outline: none;
   background-color: transparent;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 38px;
+  color: #262e39;
+  margin-bottom: 0px;
 }
 
-
-
-.assignee-button{
+.assignee-button {
   min-width: 140px;
   border: none;
   outline: none;
   background-color: transparent;
 }
 
-.scalaton-grid{
+.scalaton-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
 }
 
-.scalaton-rectangle{
+.scalaton-rectangle {
   display: grid;
   grid-template-columns: 1fr;
   gap: 5px;
 }
 
-.user-assign-tab{
+.user-assign-tab {
   font-size: 12px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -221,56 +218,52 @@ button:focus {
   padding: 5px 10px;
 }
 
-.padding-two{
+.padding-two {
   padding: 2px 6px !important;
   font-size: 12px;
 }
 
-
-
 /* table data */
 
-.table-main-heading{
+.table-main-heading {
   font-size: 18px;
   font-weight: 400;
 }
 
-.table-edit-btn{
+.table-edit-btn {
   border: none;
   outline: none;
   color: #464a55;
 }
 
-.table-edit-btn:hover{
+.table-edit-btn:hover {
   color: #007aff;
 }
 
-
-.filter-btn-design{
+.filter-btn-design {
   padding: 6px 12px;
   border-radius: 4px;
   border: none;
   outline: none;
   font-size: 12px;
   color: #000;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: #fff;
   font-weight: 500;
-  box-shadow: 0 2px 2px rgba(0,0,0,.2);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
-.min-height-one{
+.min-height-one {
   min-height: 150px;
 }
 
-.estimate-btn{
+.estimate-btn {
   background-color: var(--mainBlue);
   color: #fff;
   border: 1px solid var(--mainBlue);
 }
 
-
-.action-btn{
+.action-btn {
   padding: 6px 12px;
   color: #fff;
   background-color: var(--mainBlue);
@@ -278,14 +271,13 @@ button:focus {
   border-radius: 4px;
 }
 
-.d-left-new{
+.d-left-new {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
 }
 
-.estimate-btn{
+.estimate-btn {
   border: none;
   outline: none;
   color: var(--mainBlue);
@@ -295,28 +287,24 @@ button:focus {
   margin-bottom: 5px;
 }
 
-
-
 /* table data */
-
 
 /* estimate */
 
-.estimate-heading{
-    font-size: 18px;
-    color: #28a745;
-    margin-bottom: 0px;
+.estimate-heading {
+  font-size: 18px;
+  color: #28a745;
+  margin-bottom: 0px;
 }
 
-.estimate-heading-bold{
+.estimate-heading-bold {
   font-size: 18px;
   color: #262e39;
   font-weight: 600;
   margin-bottom: 0px;
 }
 
-
-.estimate-data{
+.estimate-data {
   font-size: 13px;
   /* font-weight: 300; */
   margin-bottom: 0px;
@@ -324,38 +312,31 @@ button:focus {
   color: #262e39;
 }
 
-.estimate-bold{
+.estimate-bold {
   font-size: 13px;
   font-weight: 500;
   margin-bottom: 0px;
 }
 
-.big-heading{
+.big-heading {
   font-size: 22px;
   color: #000;
 }
 
-
-
-
-
-
-
 /* mui tabkle */
 
-.tss-dbu3l1-MUIDataTableViewCol-formGroup{
+.tss-dbu3l1-MUIDataTableViewCol-formGroup {
   padding: 15px;
 }
-.css-levciy-MuiTablePagination-displayedRows{
+.css-levciy-MuiTablePagination-displayedRows {
   margin: 0;
 }
 
-.css-pdct74-MuiTablePagination-selectLabel{
+.css-pdct74-MuiTablePagination-selectLabel {
   margin: 0;
 }
 
-
-.create-btn{
+.create-btn {
   border: none;
   outline: none;
   background-color: #28a745;
@@ -364,49 +345,45 @@ button:focus {
   border-radius: 4px;
 }
 
-.create-btn:hover{
+.create-btn:hover {
   color: #fff;
   text-decoration: none;
   background-color: #1f8637;
 }
 
-
 /* mui table */
 
-
-.create-user-box{
+.create-user-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 5px;
 }
 
-.table-heading{
+.table-heading {
   font-size: 24px;
   font-weight: 500;
   margin-bottom: 0px;
 }
 
-.create-user-box .create-user-btn{
+.create-user-box .create-user-btn {
   border: none;
   outline: none;
   background: transparent;
   font-size: 36px;
   cursor: pointer;
-
 }
 
-.create-user-box .create-user-btn i{
+.create-user-box .create-user-btn i {
   color: green;
 }
 
-.error-display{
+.error-display {
   color: #dc3545;
   margin-top: 2px;
   margin-bottom: 2px;
   font-size: 14px;
 }
-
 
 .first-button {
   padding: 0px 60px;
@@ -438,14 +415,6 @@ $lightBlue: #1a73e8;
   outline: none;
 }
 
-
-
-
-
-
-
-
-
 @media only screen and (max-width: 992px) {
 }
 
@@ -462,7 +431,7 @@ $lightBlue: #1a73e8;
   .login-button {
     width: 50%;
   }
-  .login-button.sign-up{
+  .login-button.sign-up {
     width: 100%;
   }
 }
