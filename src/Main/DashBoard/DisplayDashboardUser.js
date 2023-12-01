@@ -49,12 +49,13 @@ const DisplayDashboardUser = () => {
   return (
     <div className="small-box-padding">
         <div className="create-user-box">
+        <h1 className="table-heading">User List</h1>
           <CreateuserDashboard />
         {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
         </div>
 
 
-      <UserListComponent tableName={"All User List"} columns={columns} row = {displayAlluser} />
+      <UserListComponent tableName={""} columns={columns} row = {displayAlluser} />
 
       {/* <div className="table-responsive mt-5">
         <table className="table">

@@ -204,10 +204,11 @@ const LeadsModule = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
+        <h1 className="table-heading">Leads</h1>
         <LeadCreateModel />
       </div>
       {leadScalatonCall ? <TableScalaton /> : <UserLeadComponent
-        tableName={"leads"}
+        tableName={""}
         columns={columns}
         row={allLeadData}
       /> }
