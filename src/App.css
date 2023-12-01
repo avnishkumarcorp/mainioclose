@@ -392,6 +392,7 @@ button:focus {
   outline: none;
   background: transparent;
   font-size: 36px;
+  cursor: pointer;
 
 }
 
