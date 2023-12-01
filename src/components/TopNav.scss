@@ -21,6 +21,7 @@
     background: #f9f9f9;
     padding: 6px 35px;
     border: 1px solid rgba(0,0,0,.1);
+    font-size: 14px;
     &:focus {
       outline: none;
     }
@@ -30,9 +31,10 @@
     top: 0;
     bottom: 0;
     margin: auto;
-    height: 22px;
-    left: 14px;
+    height: 14px;
+    left: 16px;
     color: gray;
+    font-size: 13px;
   }
 }
   .user-profile {
