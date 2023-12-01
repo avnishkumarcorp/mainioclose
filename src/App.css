@@ -144,6 +144,7 @@ button:focus {
   width: 100%;
   margin-top: 2px;
   margin-bottom: 2px;
+  font-size: 13px;
 }
 .lead-cm-input:focus {
   outline: none;
@@ -155,6 +156,10 @@ button:focus {
 
 .text-blue {
   color: #007aff;
+}
+
+.h-70{
+  height: 70px !important;
 }
 
 /* home page css */

@@ -1325,7 +1325,7 @@ const LeadDetailsPage = () => {
                 {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
                 <div className={`notes-box mt-2`}>
                   <div className="comment-icon">
-                    <div className="icon-box">
+                    <div className="icon-box h-70">
                       <i className="fa-regular cm-icon fa-comment"></i>
                     </div>
                     <div className="line"></div>
