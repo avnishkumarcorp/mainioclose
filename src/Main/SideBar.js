@@ -1,15 +1,27 @@
-import React from "react"
+import React, { useState } from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
 import { NavLink, useLocation } from "react-router-dom"
 import corpseedLogo from "../Images/corpseed-logo.png"
+import { useSelector } from "react-redux"
 
 const SideBar = () => {
   const location = useLocation()
-
+  
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
+
+  const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser);
+
+ 
+  console.log(currentUserProfile);
+
+ 
+
+  // console.log("i am current Usersdnvcsdnvjsljvn", currentUser);
+
+
 
   return (
     <div className="sideTab">
@@ -18,8 +30,8 @@ const SideBar = () => {
       <div className="user-profile">
         {/* <button className="btn btn-primary" >Logout</button> */}
         <div className="profile-info">
-          <h4>Rahul jain</h4>
-          <h5>Corpseed</h5>
+          <h4>{currentUserProfile?.username}</h4>
+          <h5>{currentUserProfile?.email}</h5>
         </div>
         <div className="profile-image">
           <img
