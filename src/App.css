@@ -12,12 +12,37 @@ body {
 }
 
 :root {
-  --mainBlue: #2b62f9;
+  --mainBlue: #093252;
   --white: #ffffff;
   --black: #000000;
+  --main-green: #28a745;
 }
 
 /* common classes */
+
+a{
+  color: var(--mainBlue);
+  text-decoration: none;
+}
+
+a:hover{
+  color: var(--black);
+  text-decoration: none;
+}
+
+.blur-cl{
+  color: var(--mainBlue);
+}
+
+/* .green-cl{
+  color: var(--main-green);
+}
+*/
+
+.disk-size{
+  font-size: 22px;
+} 
+
 
 button:focus {
   outline: none;
@@ -121,7 +146,7 @@ button:focus {
   font-size: 13px;
   font-weight: 400;
   line-height: 20px;
-  color: #2b62f9;
+  color: #093252;
   margin: 0;
 }
 
@@ -151,7 +176,7 @@ button:focus {
 }
 
 .text-blue {
-  color: #007aff;
+  color: #093252;
 }
 
 .h-70 {
@@ -174,7 +199,7 @@ button:focus {
 .small-cm-btn {
   padding: 4px 8px;
   border: none;
-  background-color: #007aff;
+  background-color: #093252;
   color: #fff;
   border-radius: 4px;
   margin-left: 10px;
@@ -237,7 +262,7 @@ button:focus {
 }
 
 .table-edit-btn:hover {
-  color: #007aff;
+  color: #093252;
 }
 
 .filter-btn-design {
@@ -288,6 +313,15 @@ button:focus {
 }
 
 /* table data */
+
+
+/* mui table changes */
+
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
+  color: var(--mainBlue) !important;
+}
+
+
 
 /* estimate */
 
@@ -402,7 +436,7 @@ button:focus {
 }
 /* 
 $lightBlue: #1a73e8;
---blue-color: #2b62f9; */
+--blue-color: #093252; */
 
 .first-button:hover {
   background: transparent;

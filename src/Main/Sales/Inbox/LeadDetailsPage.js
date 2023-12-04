@@ -525,7 +525,7 @@ const LeadDetailsPage = () => {
                 </h3>
                 <i
                   onClick={() => setUpdateLeadNameToggle(false)}
-                  className="fa-solid ml-3 fa-pencil"
+                  className="fa-solid ml-3 fa-pencil green-cl"
                 ></i>
               </>
             ) : (
@@ -542,7 +542,7 @@ const LeadDetailsPage = () => {
                 >
                   Save
                 </button> */}
-                <i  onClick={(e) => updateLeadNameSinglePage(e)} class=" fa-solid fa-floppy-disk"></i>
+                <i  onClick={(e) => updateLeadNameSinglePage(e)} class=" fa-solid green-cl disk-size fa-floppy-disk"></i>
               </>
             )}
             <p className="lead-location">
