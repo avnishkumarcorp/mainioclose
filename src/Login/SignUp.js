@@ -142,7 +142,7 @@ const SignUp = () => {
                 <span>•</span>
                 <p>Free support & training</p>
                 <span>•</span>
-                <p className="text-primary">No credit card required</p>
+                <p className="blue-cl">No credit card required</p>
               </div>
               <p></p>
             </div>
