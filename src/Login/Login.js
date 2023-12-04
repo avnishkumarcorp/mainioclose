@@ -153,7 +153,7 @@ const Login = () => {
           </label>
         </div>
         <div>
-          <Link to="/erp/forgetpassword">Forget Passowrd</Link>
+          <Link to="/erp/forgetpassword">Forget Password ?</Link>
         </div>
       </div>
       <LongButton
