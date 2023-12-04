@@ -65,9 +65,9 @@ const LeadDetailsPage = () => {
   }
 
 
-  console.log("client contact", clientsContact)
-  console.log("selected", selectedProduct)
-  //  useEffect calls Start
+  // console.log("client contact", clientsContact)
+  // console.log("selected", selectedProduct)
+  // //  useEffect calls Start
   useEffect(() => {
     editViewData()
     getAllProductWithCattegory()
@@ -167,7 +167,7 @@ const LeadDetailsPage = () => {
     statusId: 0,
   })
 
-  console.log("add new tasks", addNewTask)
+  // console.log("add new tasks", addNewTask)
 
   // GET All tasks Status
   const getAllTaskStatus = async () => {
@@ -251,8 +251,8 @@ const LeadDetailsPage = () => {
       const allTaskData = await getQuery(
         `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
       )
-      console.warn("all tasksss")
-      console.log(allTaskData.data)
+      // console.warn("all tasksss")
+      // console.log(allTaskData.data)
       setGetSingleLeadTask(allTaskData.data)
     } catch (err) {
       console.log("err", err)
@@ -373,7 +373,7 @@ const LeadDetailsPage = () => {
     }
   }
 
-  console.log("add product data", addProductData)
+  // console.log("add product data", addProductData)
 
   // GET All Status data
   const getAllStatusData = async () => {

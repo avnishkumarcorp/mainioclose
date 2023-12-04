@@ -74,7 +74,7 @@ const LeadsModule = () => {
     { field: "createDate", headerName: "Date", width: 150, renderCell: (props) =>{
       let date = new Date(props.row.createDate);
       let dateNew =  date.toLocaleDateString()
-      console.log("date is ", date.toLocaleDateString());
+      // console.log("date is ", date.toLocaleDateString());
       return(
         <p className="mb-0">{dateNew.toString()}</p>
       )
@@ -117,12 +117,12 @@ const LeadsModule = () => {
 
 
   const getUserId =  (id) =>{
-      console.log("id is ", id)
+      // console.log("id is ", id)
   }
 
 
   const changeUserAssignee = (user) => {
-    console.log("user is selectd", user)
+    // console.log("user is selectd", user)
   }
 
 
@@ -135,7 +135,7 @@ const LeadsModule = () => {
         "Content-Type": "application/json",
       },
     })
-    console.log("delete", leadResponse)
+    // console.log("delete", leadResponse)
   }catch(err){
     console.log(
       "err", err
@@ -144,8 +144,8 @@ const LeadsModule = () => {
   }
 
   const changeLeadAssignee = async (id, leadId) => {
-    console.log("id is call ssss", id)
-    console.log("current lead D", leadId);
+    // console.log("id is call ssss", id)
+    // console.log("current lead D", leadId);
 
 
     try {
@@ -158,7 +158,7 @@ const LeadsModule = () => {
           },
         }
       )
-      console.log("updateLeadAssignee is", updatePerson)
+      // console.log("updateLeadAssignee is", updatePerson)
       setUpdateActive((prev)=> !(prev))
     } catch (err) {
       if(err.response.status === 500){
@@ -199,7 +199,7 @@ const LeadsModule = () => {
     }
   }
 
-  console.log("i am all lead data", allLeadData)
+  // console.log("i am all lead data", allLeadData)
 
   return (
     <div className="lead-module small-box-padding">
