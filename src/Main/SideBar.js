@@ -30,8 +30,8 @@ const SideBar = () => {
       <div className="user-profile">
         {/* <button className="btn btn-primary" >Logout</button> */}
         <div className="profile-info">
-          <h4>{currentUserProfile?.username}</h4>
-          <h5>{currentUserProfile?.email}</h5>
+          <h4>{currentUserProfile?.username ? currentUserProfile?.username : "UserName"}</h4>
+          <h6>{currentUserProfile?.email ? currentUserProfile?.email : "Email"}</h6>
         </div>
         <div className="profile-image">
           <img
