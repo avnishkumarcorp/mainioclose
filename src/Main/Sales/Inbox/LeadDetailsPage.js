@@ -648,8 +648,10 @@ const LeadDetailsPage = () => {
                         </select>
                       </div>
                       <div className="lead-btn-box">
-                        <button className="lead-cm-btn lead-cancel-btn">
-                          Cancel
+                        <button 
+                        type="reset"
+                        className="lead-cm-btn lead-cancel-btn">
+                          Reset
                         </button>
                         <button
                           onClick={(e) => createProductInLeadFun(e)}
@@ -901,8 +903,8 @@ const LeadDetailsPage = () => {
                         </select>
                       </div>
                       <div className="lead-btn-box">
-                        <button className="lead-cm-btn lead-cancel-btn">
-                          Cancel
+                        <button type="reset" className="lead-cm-btn lead-cancel-btn">
+                          Reset
                         </button>
                         <button
                           onClick={(e) => createTaskFun(e)}
@@ -1012,8 +1014,8 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="lead-btn-box">
-                        <button className="lead-cm-btn lead-cancel-btn">
-                          Cancel
+                        <button type="reset" className="lead-cm-btn lead-cancel-btn">
+                          Reset
                         </button>
                         <button className="lead-cm-btn lead-save-btn">
                           Save
@@ -1138,8 +1140,8 @@ const LeadDetailsPage = () => {
                       </div> */}
 
                       <div className="lead-btn-box">
-                        <button className="lead-cm-btn lead-cancel-btn">
-                          Cancel
+                        <button type="reset" className="lead-cm-btn lead-cancel-btn">
+                          Reset
                         </button>
                         <button
                           onClick={(e) => createLeadContact(e)}
