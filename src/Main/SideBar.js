@@ -1,43 +1,53 @@
 import React, { useState } from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
-import { NavLink, useLocation } from "react-router-dom"
+import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import corpseedLogo from "../Images/corpseed-logo.png"
 import { useSelector } from "react-redux"
 
 const SideBar = () => {
   const location = useLocation()
-  
+  const [logoutBtnStatus, setLogoutBtnStatus] = useState(false);
+
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
 
-  const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser);
+  const navigate = useNavigate();
 
- 
-  console.log(currentUserProfile);
+  const logoutUser = () =>{
+    const token = localStorage.removeItem("Access Token");
+    navigate("/erp/login")
+  } 
 
- 
+  const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
+
+  console.log(currentUserProfile)
 
   // console.log("i am current Usersdnvcsdnvjsljvn", currentUser);
-
-
 
   return (
     <div className="sideTab">
       {/* Dashboard links start */}
 
-      <div className="user-profile">
+      <div className="user-profile" >
         {/* <button className="btn btn-primary" >Logout</button> */}
         <div className="profile-info">
-          <h4>{currentUserProfile?.username ? currentUserProfile?.username : "UserName"}</h4>
-          <h6>{currentUserProfile?.email ? currentUserProfile?.email : "Email"}</h6>
+          <h4>
+            {currentUserProfile?.username
+              ? currentUserProfile?.username
+              : "UserName"}
+          </h4>
+          <h6>
+            {currentUserProfile?.email ? currentUserProfile?.email : "Email"}
+          </h6>
         </div>
-        <div className="profile-image">
+        <div className="profile-image" onClick={()=> setLogoutBtnStatus((prev)=> !(prev))}>
           <img
             src={`https://images.pexels.com/photos/17739178/pexels-photo-17739178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`}
           />
         </div>
+          {logoutBtnStatus ? <button onClick={()=> logoutUser()} className="logout-btn">Logout</button> : ""}
       </div>
       {/*       
       <div className="corpseed-logo">
@@ -175,28 +185,28 @@ const SideBar = () => {
           >
             <div className="link-child">
               <NavLink className="link-itemss" to={`${currentUserId}/sales`}>
-              <i class="fa-solid mr-1 fa-inbox"></i>Inbox
+                <i class="fa-solid mr-1 fa-inbox"></i>Inbox
               </NavLink>
               <NavLink
                 className="link-itemss"
                 to={`${currentUserId}/sales/oppurtities`}
               >
-               <i class="fa-solid mr-1 fa-trophy"></i>Oppurtities
+                <i class="fa-solid mr-1 fa-trophy"></i>Oppurtities
               </NavLink>
               <NavLink className="link-itemss" to="sales/estimate">
-              <i class="fa-solid mr-1 fa-file-lines"></i>Estimate
+                <i class="fa-solid mr-1 fa-file-lines"></i>Estimate
               </NavLink>
               <NavLink className="link-itemss" to="sales/orders">
-              <i class="fa-solid mr-1 fa-box"></i>  Orders
+                <i class="fa-solid mr-1 fa-box"></i> Orders
               </NavLink>
               <NavLink className="link-itemss" to="sales/contacts">
-              <i class="fa-solid mr-1 fa-user"></i> Contacts
+                <i class="fa-solid mr-1 fa-user"></i> Contacts
               </NavLink>
               <NavLink
                 className="link-itemss"
                 to={`${currentUserId}/sales/leads`}
               >
-               <i class="fa-solid mr-1 fa-calculator"></i> Leads
+                <i class="fa-solid mr-1 fa-calculator"></i> Leads
               </NavLink>
             </div>
           </div>

@@ -1,27 +1,72 @@
 import React, { useState } from "react"
 import { postQuery } from "../API/PostQuery"
+import { useCustomRoute } from "../Routes/GetCustomRoutes"
+import { useEffect } from "react"
+import { getQuery } from "../API/GetQuery"
 
 const CreateuserDashboard = () => {
   // /securityService/api/auth/createNewUserByEmail
+  const [roleGetRole, setRoleGetRole] = useState([]);
   const [userRowData, setUserRowData] = useState({
-    userName: "rahul anand",
-    email: "radrrddsdg@gmail.com",
-    role: "ADMIN",
-    designation: "Java Devloper",
+    userName: "",
+    email: "",
+    role: [],
+    designation: "",
   })
+  const [btnLoading, setBtnLoading] = useState(false);
+  
+  console.log('get role', roleGetRole);
+  const [allRoles, setAllRoles] = useState([]);
+
+  const GetRoleFun = (e) => {
+    setUserRowData((prev) => ({...prev, role: [e.target.value] }));
+  }
+
+
+  console.log("row datta", userRowData);
 
   const userRowDataFetch = (e) => {
     setUserRowData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
+ useEffect(()=>{
+  getAllRole();
+ }, [])
+
+
+ const roleUrl = `/securityService/api/v1/roles/getRole`;
+ const roleData  = [];
+
+
+ const {productData: allDataRole} = useCustomRoute(roleUrl, roleData);
+
+//  console.warn("data by hook");
+//  console.log("role data", allDataRole);
+
+  const getAllRole = async () => {
+    try {
+      const allRoleResponse = await getQuery(
+        `/securityService/api/v1/roles/getRole`
+      )
+      // console.log("all roles", allRoleResponse.data);
+      setAllRoles(allRoleResponse.data)
+    } catch (err) {
+      console.log("err", err)
+    }
+  }
+
+  // console.log("i am role response", userRowData)
+
   const createuserData = (e) => {
     e.preventDefault()
+    setBtnLoading(true)
     const userCreateFun = async () => {
       try {
         const createNewUserData = await postQuery(
           `/securityService/api/auth/createNewUserByEmail`,
           userRowData
         )
+        console.warn("user crate data");
         console.log("user data user is created ", createNewUserData)
         console.log(
           createNewUserData.data.data.name,
@@ -29,21 +74,32 @@ const CreateuserDashboard = () => {
           createNewUserData.data.data.role,
           createNewUserData.data.data.userId
         )
+
+        let roleData = createNewUserData.data.data.role.map((role)=> (role.name));
+
+        console.log("all role name", roleData);
+
+
         const newLeadObject = {
           id: createNewUserData.data.data.userId,
           email: createNewUserData.data.data.email,
-          role: "string",
-          designation: "string",
+          role: roleData,
+          designation: createNewUserData.data.data.designation,
           userName: createNewUserData.data.data.name,
         }
 
         console.log("New Lead ", newLeadObject)
 
-        // const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, )
+        const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, newLeadObject);
+        console.log("user created done", createLeadUserByEmail);
+        setBtnLoading(false);
+
+        window.location.reload();
 
         //   window.location.reload()
       } catch (err) {
         console.log(err)
+        setBtnLoading(false)
       }
     }
     userCreateFun()
@@ -143,15 +199,20 @@ const CreateuserDashboard = () => {
                           >
                             Role*
                           </label>
-                          <input
-                            type="text"
+
+                          <select
                             className="form-control input-focus"
-                            id="mobileNo"
-                            // ref={mobileNoRef}
-                            placeholder="select role"
                             name="role"
-                            onChange={(e) => userRowDataFetch(e)}
-                          />
+                            id="select-product"
+                            onChange={(e) => GetRoleFun(e)}
+                          >
+                            <option>Select Role</option>
+                            {allRoles.map((role, index) => (
+                              <option key={index} value={role?.name}>
+                                {role?.name}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                         {/* {mobileNoError ? (
                           <InputErrorComponent value={"Mobile can't be Blank!"} />
@@ -186,7 +247,7 @@ const CreateuserDashboard = () => {
                             onClick={(e) => createuserData(e)}
                             className="first-button form-prev-btn"
                           >
-                            Submit
+                          { btnLoading ? "Loading" :  "Submit" }
                           </button>
                         </div>
                       </div>

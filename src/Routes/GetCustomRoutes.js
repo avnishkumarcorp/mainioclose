@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css"
 toast.configure()
 
 export const useCustomRoute = (link, data) => {
-  const [productData, setProductData] = useState({})
+  const [productData, setProductData] = useState([])
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -18,7 +18,6 @@ export const useCustomRoute = (link, data) => {
       const dataResponse = await getQuery(link)
       setProductData(dataResponse.data)
       setLoading(false)
-      toast.success("get all Data")
     } catch (err) {
       console.log("Err", err)
       setError(true)
