@@ -41,6 +41,7 @@
    @include all-center;
     flex-wrap: wrap;
     gap: 10px;
+    position: relative;
     .profile-image {
       height: 40px;
       width: 40px;
