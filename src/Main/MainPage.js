@@ -18,6 +18,7 @@ const MainPage = () => {
     console.log("current user token", currentUserToken)
     console.log(UserToken === currentUserToken);
     if (!UserToken || currentUserToken !== UserToken) {
+      let removeToken = localStorage.removeItem("Access-token")
       navigate("/erp/login")
       toast.error("your Session has Expired Please Login again")
     }

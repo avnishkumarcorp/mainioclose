@@ -49,7 +49,7 @@ const LeadsModule = () => {
 
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150 },
+    { field: "id", headerName: "ID", width: 60 },
     {
       field: "leadName",
       headerName: "Name",
