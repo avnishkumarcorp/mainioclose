@@ -4,7 +4,7 @@ import MUIDataTable from "mui-datatables";
 
 
 
-const DataTableFirst = ({tabletitle, allleaddata, leadColumns, filterOptions}) => {
+const DataTableFirst = ({tabletitle, allleaddata, leadColumns, filterOptions,}) => {
  
  
    
