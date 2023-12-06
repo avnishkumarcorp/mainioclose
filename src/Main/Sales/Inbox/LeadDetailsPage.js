@@ -341,6 +341,10 @@ const LeadDetailsPage = () => {
   // Create New Notes or Remarks
   const createRemarkfun = (e) => {
     e.preventDefault()
+    if(NotesRef.current.value === ""){
+      toast.error("Notes Can't be Blank")
+      return;
+    }
     const createNewRemark = async () => {
       try {
         const remarkData = await postQuery(
