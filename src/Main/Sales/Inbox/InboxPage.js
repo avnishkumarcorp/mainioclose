@@ -9,6 +9,7 @@ import DataTableFirst from "../../../components/DataTableFirst"
 import UserListComponent from "../../../Tables/UserListComponent"
 import InboxListComponent from "../../../Tables/InboxListComponent"
 import TableScalaton from "../../../components/TableScalaton"
+import UserLeadComponent from "../../../Tables/UserLeadComponent"
 
 const InboxPage = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -53,6 +54,13 @@ const InboxPage = () => {
         sort: true,
       },
     },
+  ]
+
+  const inboxColumn = [
+
+    { field: "name", headerName: "Name", width: 250 },
+    { field: "comment", headerName: "Comment", width: 550 },
+    { field: "count", headerName: "Count", width: 150 },
   ]
 
   // const columns = [
@@ -106,13 +114,10 @@ const InboxPage = () => {
       {inboxScalaton ? (
         <TableScalaton />
       ) : (
-        <DataTableFirst
-          tabletitle={"Inbox"}
-          allleaddata={allLeadData}
-          leadColumns={leadColumns}
-          filterOptions={filterOptions}
-        />
+        <UserLeadComponent columns={inboxColumn} getRowId={(row) => row.leadId} row={allLeadData} />
       )}
+
+      {/* <UserLeadComponent columns={inboxColumn} getRowId={(row) => row.leadId} row={allLeadData} /> */}
 
       {/* <UserListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData} /> */}
       {/* // <InboxListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData}  />  */}

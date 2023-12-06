@@ -1,11 +1,11 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid"
 import React from "react"
 
-const UserLeadComponent = ({row, columns, tableName}) => {
+const UserLeadComponent = ({row, columns, tableName, getRowId}) => {
   return (
     <div>
       <h1 className="table-main-heading">{tableName}</h1>
-      <DataGrid checkboxSelection rows={row} columns={columns} slots={{ toolbar: GridToolbar }}
+      <DataGrid checkboxSelection rows={row} getRowId={getRowId} columns={columns} slots={{ toolbar: GridToolbar }}
         slotProps={{
           toolbar: {
             showQuickFilter: true,
