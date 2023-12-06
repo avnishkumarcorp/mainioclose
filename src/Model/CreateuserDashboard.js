@@ -1,8 +1,12 @@
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { postQuery } from "../API/PostQuery"
 import { useCustomRoute } from "../Routes/GetCustomRoutes"
 import { useEffect } from "react"
 import { getQuery } from "../API/GetQuery"
+import InputErrorComponent from "../components/InputErrorComponent"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const CreateuserDashboard = () => {
   // /securityService/api/auth/createNewUserByEmail
@@ -14,10 +18,18 @@ const CreateuserDashboard = () => {
     designation: "",
   })
   const [btnLoading, setBtnLoading] = useState(false);
-  
-  console.log('get role', roleGetRole);
   const [allRoles, setAllRoles] = useState([]);
+  
+  const [nameError, setNameError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [roleError, setRoleError] = useState(false);
 
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const roleRef = useRef();
+  const designationRef = useRef();
+
+  
   const GetRoleFun = (e) => {
     setUserRowData((prev) => ({...prev, role: [e.target.value] }));
   }
@@ -59,6 +71,22 @@ const CreateuserDashboard = () => {
 
   const createuserData = (e) => {
     e.preventDefault()
+    if(nameRef.current.value === ""){
+      setNameError(true)
+    }
+    if(emailRef.current.value === ""){
+      setEmailError(true)
+    }
+    if(roleRef.current.value.length === 0){
+      setRoleError(true)
+      
+    }
+    if(roleRef.current.value === "" || emailRef.current.value === "" || nameRef.current.value === ""){
+      return;   
+    }
+
+
+
     setBtnLoading(true)
     const userCreateFun = async () => {
       try {
@@ -93,9 +121,12 @@ const CreateuserDashboard = () => {
         const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, newLeadObject);
         console.log("user created done", createLeadUserByEmail);
         setBtnLoading(false);
+        roleRef.current.value = "" 
+        emailRef.current.value = "" 
+        nameRef.current.value = ""
+        designationRef.current.value = ""
 
-        window.location.reload();
-
+        toast.success("user craeted Sucessfully")
         //   window.location.reload()
       } catch (err) {
         console.log(err)
@@ -155,17 +186,17 @@ const CreateuserDashboard = () => {
                             type="text"
                             className="form-control input-focus"
                             id="teamName"
-                            // ref={nameRef}
+                            ref={nameRef}
                             placeholder="Enter Username"
                             name="userName"
                             onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
-                        {/* {nameError ? (
+                        {nameError ? (
                           <InputErrorComponent value={"Name can't be Blank!"} />
                         ) : (
                           ""
-                        )} */}
+                        )}
                       </div>
                       <div className="form-group col-md-6">
                         <div className="pl-ten">
@@ -181,15 +212,15 @@ const CreateuserDashboard = () => {
                             id="teamLeadName"
                             placeholder="Enter Email"
                             name="email"
-                            // ref={emailRef}
+                            ref={emailRef}
                             onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
-                        {/* {emailError ? (
+                        {emailError ? (
                           <InputErrorComponent value={"Email can't be Blank!"} />
                         ) : (
                           ""
-                        )} */}
+                        )}
                       </div>
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -204,6 +235,7 @@ const CreateuserDashboard = () => {
                             className="form-control input-focus"
                             name="role"
                             id="select-product"
+                            ref={roleRef}
                             onChange={(e) => GetRoleFun(e)}
                           >
                             <option>Select Role</option>
@@ -214,11 +246,11 @@ const CreateuserDashboard = () => {
                             ))}
                           </select>
                         </div>
-                        {/* {mobileNoError ? (
-                          <InputErrorComponent value={"Mobile can't be Blank!"} />
+                        {roleError ? (
+                          <InputErrorComponent value={"Role can't be Blank!"} />
                         ) : (
                           ""
-                        )} */}
+                        )}
                       </div>
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -232,7 +264,7 @@ const CreateuserDashboard = () => {
                             type="text"
                             className="form-control input-focus"
                             id="mobileNo"
-                            // ref={urlsRef}
+                            ref={designationRef}
                             placeholder="Enter Designation"
                             name="designation"
                             onChange={(e) => userRowDataFetch(e)}
