@@ -55,7 +55,7 @@ function App() {
             <Route path="forgetotp" element={<ForgetOtpPage />} />
             <Route path="forgetpassword" element={<ForgetPassword />} />
             <Route path="change" element={<ChangePassword />} />
-            <Route path="setpassword" element={<SetNewPasswordPage />} />
+            <Route path="setpassword/:id" element={<SetNewPasswordPage />} />
           </Route>
 
           <Route path="/erp" element={<MainPage />}>

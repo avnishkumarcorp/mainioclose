@@ -37,6 +37,7 @@ const LeadDetailsPage = () => {
   const [leadStatusScale, setLeadStatusScale] = useState(false)
   const [taskUpdateToggle, setTaskUpdateToggle] = useState(false)
   const [updateLeadName, setUpdateLeadName] = useState("")
+  const [notesLoading, setNotesLoading] = useState(false);
 
   const [productDataScaleaton, setProductDataScaleaton] = useState(true)
   const [leadNameReload, setLeadNameReload] = useState(false)
@@ -341,7 +342,12 @@ const LeadDetailsPage = () => {
   // Create New Notes or Remarks
   const createRemarkfun = (e) => {
     e.preventDefault()
+    if(NotesRef.current.value === ""){
+      toast.error("Notes Can't be Blank")
+      return;
+    }
     const createNewRemark = async () => {
+      setNotesLoading(true)
       try {
         const remarkData = await postQuery(
           `/leadService/api/v1/createRemarks`,
@@ -349,11 +355,14 @@ const LeadDetailsPage = () => {
         )
         setNotesUpdateToggle((prev) => !prev)
         NotesRef.current.value = ""
+        setNotesLoading(false)
       } catch (err) {
         console.log(err)
         if (err.response.status === 500) {
           toast.error("Something Went Wrong")
+          setNotesLoading(false)
         }
+        setNotesLoading(false)
       }
     }
     createNewRemark()
@@ -1251,7 +1260,7 @@ const LeadDetailsPage = () => {
                     className="comment-btn"
                     onClick={(e) => createRemarkfun(e)}
                   >
-                    Submit
+                    {notesLoading ? "Loading" : "Submit"}
                   </button>
                 </div>
               </div>
