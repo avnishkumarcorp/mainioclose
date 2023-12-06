@@ -2,23 +2,32 @@ import React, { useEffect } from "react"
 import "./MainPage.scss"
 import SideBar from "./SideBar"
 import { Outlet, useNavigate } from "react-router"
+import { useLocation } from "react-router-dom"
 import TopNav from "../components/TopNav"
 import { useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { useId } from "react"
+import { customLocation } from "../Hooks/LocationCustomHook"
 toast.configure()
 
 
 const MainPage = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const paramId = customLocation(2, location); 
+
+  console.log("i am param id", paramId);
   const currentUserToken = useSelector((state) => state.AuthReducer.token)
+  const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
+  console.log("current user id", currentUserId);
   useEffect(() => {
     let UserToken = localStorage.getItem("Access-token")
     console.log("user token ", UserToken)
     console.log("current user token", currentUserToken)
     console.log(UserToken === currentUserToken);
-    if (!UserToken || currentUserToken !== UserToken) {
-      let removeToken = localStorage.removeItem("Access-token")
+    if (!UserToken || currentUserToken !== UserToken || currentUserId !== paramId) {
+      localStorage.removeItem("Access-token")
       navigate("/erp/login")
       toast.error("your Session has Expired Please Login again")
     }
