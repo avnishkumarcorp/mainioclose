@@ -107,6 +107,13 @@ const LeadsModule = () => {
         <p className="mb-0">{props?.row?.leadDescription.slice(0,2)}</p>
       )
     } },
+    { field: "status", headerName: "Status", width: 150, renderCell: (props) =>{
+      const leadStatus = props.row.status?.name
+      console.log("lead status", leadStatus);
+      return(
+        <p>{leadStatus ? leadStatus : "NA"}</p>
+      )
+    }},
     { field: "source", headerName: "Source", width: 150 },
     { field: "action", headerName: "Action", width: 150, renderCell: (props) =>{
       return(
