@@ -3,9 +3,9 @@ import { useState } from "react"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import InputErrorComponent from "../components/InputErrorComponent";
 import { customLocation } from "../Hooks/LocationCustomHook";
-import { postQuery } from "../API/PostQuery";
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { putQuery } from "../API/PutQuery";
 toast.configure()
 
 const SetNewPasswordPage = () => {
@@ -36,7 +36,7 @@ const SetNewPasswordPage = () => {
     const setPasswordFun = async () => {
       setBtnLoading(true)
       try{
-      const passwordData = await postQuery(`/securityService/api/auth/setNewPassword`, newPassword);
+      const passwordData = await putQuery(`/securityService/api/auth/setNewPassword`, newPassword);
 
       console.log(passwordData);
       setBtnLoading(false)
