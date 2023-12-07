@@ -36,6 +36,7 @@ import TableScalaton from "./components/TableScalaton"
 import LeadHistory from "./Main/Sales/Leads/LeadHistory"
 import NewGetFile from "./Routes/NewGetFile"
 import PaswordUpdateMessage from "./Login/PaswordUpdateMessage"
+import ComingSoonPage from "./Home/ComingSoonPage"
 
 function App() {
   return (
@@ -66,7 +67,7 @@ function App() {
               <Route path="muiuser" element={<DisplayUserTwo />} />
             </Route>
             {/* hr module routes */}
-            <Route path="/erp/:id/hr" element={<HRMod />}>
+            <Route path="/erp/:id/hr" element={<ComingSoonPage />}>
               <Route path="" element={<div>hrlinkone</div>} />
               <Route path="hrlinktwo" element={<div>hrlinktwo</div>} />
               <Route path="hrlinkthree" element={<div>hrlinkthree</div>} />
@@ -92,7 +93,7 @@ function App() {
             </Route>
             {/* end */}
             {/* accounts module routes */}
-            <Route path="/erp/:id/account" element={<Accounts />}>
+            <Route path="/erp/:id/account" element={<ComingSoonPage />}>
               <Route path="" element={<div>accounts first page</div>} />
               <Route
                 path="accounttwo"
@@ -114,7 +115,7 @@ function App() {
             </Route>
             {/* end */}
             {/* operation module Routes */}
-            <Route path="/erp/:id/operation" element={<Operations />}>
+            <Route path="/erp/:id/operation" element={<ComingSoonPage />}>
               <Route path="" element={<div>Operation Number one </div>} />
               <Route
                 path="operationtwo"
@@ -139,7 +140,7 @@ function App() {
             </Route>
             {/* end */}
             {/* manage client module route */}
-            <Route path="/erp/:id/manageclient" element={<ManageClientModule />}>
+            <Route path="/erp/:id/manageclient" element={<ComingSoonPage />}>
               <Route path="" element={<div>Client Number One</div>} />
               <Route path="clienttwo" element={<div>Client Number Two</div>} />
               <Route
@@ -158,7 +159,7 @@ function App() {
             </Route>
             {/* end */}
             {/* Activity Master module routes */}
-            <Route path="/erp/:id/activity" element={<ActivityMasterModule />}>
+            <Route path="/erp/:id/activity" element={<ComingSoonPage />}>
               <Route path="" element={<div>Activity Number One</div>} />
               <Route
                 path="activitytwo"
@@ -183,7 +184,7 @@ function App() {
             </Route>
             {/* end */}
             {/* quality module routes */}
-            <Route path="/erp/:id/quality" element={<QualityModule />}>
+            <Route path="/erp/:id/quality" element={<ComingSoonPage />}>
               <Route path="" element={<div>Quality Number One</div>} />
               <Route
                 path="qualitytwo"
@@ -208,7 +209,7 @@ function App() {
             </Route>
             {/* end */}
             {/* profile routes */}
-            <Route path="/erp/:id/profile" element={<MyProfile />}>
+            <Route path="/erp/:id/profile" element={<ComingSoonPage />}>
               <Route path="" element={<div>Profile Number One</div>} />
               <Route
                 path="profiletwo"

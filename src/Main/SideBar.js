@@ -139,7 +139,7 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
-            <div className="link-child">
+            {/* <div className="link-child">
               <NavLink className="link-itemss" to="hr">
                 HR First
               </NavLink>
@@ -158,7 +158,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="hr/hrlinksix">
                 HR Six
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* end */}
@@ -233,7 +233,7 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
-            <div className="link-child">
+            {/* <div className="link-child">
               <NavLink className="link-itemss" to="account">
                 Account Link 1
               </NavLink>
@@ -252,7 +252,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="account/accountsix">
                 Account Link 6
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* end */}
@@ -277,7 +277,7 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
-            <div className="link-child">
+            {/* <div className="link-child">
               <NavLink className="link-itemss" to="operation">
                 Operation Link 1
               </NavLink>
@@ -296,7 +296,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="operation/operationsix">
                 Operation Link 6
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* end */}
@@ -321,7 +321,7 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
-            <div className="link-child">
+            {/* <div className="link-child">
               <NavLink className="link-itemss" to="manageclient">
                 {" "}
                 Manage Client 1
@@ -341,7 +341,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="manageclient/clientsix">
                 Manage Client 6
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* end */}
@@ -366,7 +366,7 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
-            <div className="link-child">
+            {/* <div className="link-child">
               <NavLink className="link-itemss" to="activity">
                 Activity Link 1
               </NavLink>
@@ -385,7 +385,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="activity/activitysix">
                 Activity Link 6
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* end */}
@@ -410,7 +410,7 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
-            <div className="link-child">
+            {/* <div className="link-child">
               <NavLink className="link-itemss" to="quality">
                 {" "}
                 Quality Link 1
@@ -430,7 +430,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="quality/qualitysix">
                 Account Link 6
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* end */}
@@ -455,7 +455,7 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
-            <div className="link-child">
+            {/* <div className="link-child">
               <NavLink className="link-itemss" to="profile">
                 Profile Link 1
               </NavLink>
@@ -468,7 +468,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="profile/profilefour">
                 Profile Link 4
               </NavLink>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* end */}
