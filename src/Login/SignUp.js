@@ -26,6 +26,7 @@ const SignUp = () => {
     mobile: "",
     name: "",
     password: "",
+    email: "",
   })
 
   const [loading, setLoading] = useState(false)
@@ -98,8 +99,8 @@ const SignUp = () => {
       setMobileNumberErr(false)
     }
 
-    const { username, password, mobile } = { ...createUserData }
-    const otpNewData = { name: username, password: password, mobile: mobile }
+    const { username, password, mobile, email } = { ...createUserData }
+    const otpNewData = { name: username, password: password, mobile: mobile, email: email }
 
     console.log("OTP data kdjld", otpNewData)
 
