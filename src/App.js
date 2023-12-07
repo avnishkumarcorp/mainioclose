@@ -35,6 +35,7 @@ import EstimateCreatePage from "./Main/Sales/Leads/EstimateCreatePage"
 import TableScalaton from "./components/TableScalaton"
 import LeadHistory from "./Main/Sales/Leads/LeadHistory"
 import NewGetFile from "./Routes/NewGetFile"
+import PaswordUpdateMessage from "./Login/PaswordUpdateMessage"
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/counter" element={<CounterExample />} />
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
+            <Route path="setpassword/:id/thankyou" element={<PaswordUpdateMessage />} />
             <Route path="signup" element={<SignUp />} />
             <Route path="otp" element={<OtpPage />} />
             <Route path="forgetotp" element={<ForgetOtpPage />} />

@@ -40,7 +40,7 @@ const SetNewPasswordPage = () => {
 
       console.log(passwordData);
       setBtnLoading(false)
-      navigate("/erp/login")
+      navigate(`/erp/setpassword/${currentuserId}/thankyou`)  
 
       }catch(err){
         if(err.response.status === 401){

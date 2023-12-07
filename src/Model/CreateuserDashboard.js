@@ -127,7 +127,7 @@ const CreateuserDashboard = () => {
         designationRef.current.value = ""
 
         toast.success("user craeted Sucessfully")
-        //   window.location.reload()
+        window.location.reload()
       } catch (err) {
         console.log(err)
         setBtnLoading(false)
