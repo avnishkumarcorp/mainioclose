@@ -194,8 +194,11 @@ const SideBar = () => {
             data-parent="#accordion"
           >
             <div className="link-child">
-              <NavLink className="link-itemss" to={`${currentUserId}/sales`}>
-                <i class="fa-solid mr-1 fa-inbox"></i>Inbox
+            <NavLink
+                className="link-itemss"
+                to={`${currentUserId}/sales/leads`}
+              >
+                <i class="fa-solid mr-1 fa-calculator"></i> Leads
               </NavLink>
               <NavLink
                 className="link-itemss"
@@ -212,11 +215,9 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="sales/contacts">
                 <i class="fa-solid mr-1 fa-user"></i> Contacts
               </NavLink>
-              <NavLink
-                className="link-itemss"
-                to={`${currentUserId}/sales/leads`}
-              >
-                <i class="fa-solid mr-1 fa-calculator"></i> Leads
+              
+              <NavLink className="link-itemss" to={`${currentUserId}/sales`}>
+                <i class="fa-solid mr-1 fa-inbox"></i>Inbox
               </NavLink>
             </div>
           </div>
