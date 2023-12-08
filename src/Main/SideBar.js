@@ -21,9 +21,16 @@ const SideBar = () => {
   } 
 
   const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
+  const currentUserRoles = useSelector((prev) => prev.AuthReducer.currentUser.roles)
 
   console.log(currentUserProfile)
+  console.log("user roles", currentUserRoles)
 
+  const adminRole = currentUserRoles.includes('USER');
+
+
+
+  console.log("i am admin role", adminRole);
   // console.log("i am current Usersdnvcsdnvjsljvn", currentUser);
 
   return (
@@ -57,7 +64,7 @@ const SideBar = () => {
       </div> */}
 
       <div className="pt-4">
-        <div className="side-tabs">
+        {adminRole ? <div className="side-tabs">
           <NavLink
             to={`/erp/${currentUserId}`}
             className={`nav-heading ${({ isActive }) =>
@@ -100,7 +107,10 @@ const SideBar = () => {
             </NavLink> */}
             </div>
           </div>
-        </div>
+        </div> : ""}
+        
+
+          
 
         {/*  */}
 
