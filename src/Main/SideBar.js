@@ -234,7 +234,7 @@ const SideBar = () => {
             aria-controls="collapseAccountModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> Accounts
+            <i class="fa-solid fa-money-check-dollar"></i> Accounts
           </NavLink>
           <div
             id={`collapseAccountModule`}
@@ -278,7 +278,7 @@ const SideBar = () => {
             aria-controls="collapseOperationModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> Operations
+            <i class="fa-solid fa-gears"></i> Operations
           </NavLink>
           <div
             id={`collapseOperationModule`}
@@ -322,7 +322,7 @@ const SideBar = () => {
             aria-controls="collapseManageClientModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> Manage Clients
+            <i class="fa-solid fa-people-arrows"></i> Manage Clients
           </NavLink>
           <div
             id={`collapseManageClientModule`}
@@ -411,7 +411,7 @@ const SideBar = () => {
             aria-controls="collapseQualityModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> Quality
+            <i class="fa-solid fa-filter"></i> Quality
           </NavLink>
           <div
             id={`collapseQualityModule`}
