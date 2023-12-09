@@ -25,9 +25,6 @@ const InboxPage = () => {
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
 
-  console.log("id is ", currentUserId)
-
-  console.log("all e")
 
   const leadColumns = [
     {
@@ -86,7 +83,6 @@ const InboxPage = () => {
         }
       )
 
-      console.log("all Lead data", allLead.data)
       setAllLeadData(allLead.data)
       setInboxScalaton(false)
     } catch (err) {

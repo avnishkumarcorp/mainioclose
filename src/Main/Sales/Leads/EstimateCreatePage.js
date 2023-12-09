@@ -20,7 +20,6 @@ const EstimateCreatePage = () => {
       const clientResponse = await getQuery(
         `/leadService/api/v1/client/getAllClientInfo`
       )
-      console.log("client0", clientResponse.data)
       setLoadingClient(false)
       setAllClient(clientResponse.data)
     } catch (err) {

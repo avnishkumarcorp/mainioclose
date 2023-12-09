@@ -28,8 +28,6 @@ const SideBar = () => {
 
 
 
-  console.log("i am admin role", adminRole);
-  // console.log("i am current Usersdnvcsdnvjsljvn", currentUser);
 
   return (
     <div className="sideTab">

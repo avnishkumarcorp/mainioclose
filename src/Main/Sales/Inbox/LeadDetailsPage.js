@@ -65,8 +65,6 @@ const LeadDetailsPage = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
 
-  // console.log("client contact", clientsContact)
-  // console.log("selected", selectedProduct)
   // //  useEffect calls Start
   useEffect(() => {
     editViewData()
@@ -122,7 +120,6 @@ const LeadDetailsPage = () => {
     const getOportunities = await getQuery(
       `/leadService/api/v1/leadOpportunity/getAllOpportunity`
     )
-    console.log("get all opportunities", getOportunities.data)
     setAllOportunities(getOportunities.data)
   }
 
@@ -172,7 +169,6 @@ const LeadDetailsPage = () => {
     statusId: 0,
   })
 
-  // console.log("add new tasks", addNewTask)
 
   // GET All tasks Status
   const getAllTaskStatus = async () => {
@@ -183,7 +179,6 @@ const LeadDetailsPage = () => {
       setAllTaskStatusData(allTaskStatus.data)
       setLeadStatusScale(true)
     } catch (err) {
-      // console.log(err)
       setLeadStatusScale(false)
     }
   }
@@ -195,9 +190,6 @@ const LeadDetailsPage = () => {
         `/leadService/api/v1/product/getAllProducts`
       )
       setAllProductData(allProductResponse.data)
-      console.warn("Product Data")
-      console.log("i am product datae", allProductResponse.data)
-      // console.log("");
     } catch (err) {
       console.log(err)
     }
@@ -209,7 +201,6 @@ const LeadDetailsPage = () => {
       const allLeadUser = await axios.get(
         `/leadService/api/v1/users/getAllUser`
       )
-      // console.log("all user .....", allLeadUser.data)
       setGetAllLeadUserData(allLeadUser.data)
     } catch (err) {
       console.log(err)
@@ -237,12 +228,10 @@ const LeadDetailsPage = () => {
   // const {productData, loading, error } = useCustomRoute
   // (ProductUrl, depandent);
   // console.warn("i am Product Data");
-  // console.log("product data here", productData);
 
   // END
 
   const getCatgegoryInputData = (categorySelect) => {
-    console.log("Selected category is", categorySelect)
     setAddProductData((product) => ({
       ...product,
       serviceName: categorySelect,
@@ -255,8 +244,6 @@ const LeadDetailsPage = () => {
       const allTaskData = await getQuery(
         `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
       )
-      // console.warn("all tasksss")
-      // console.log(allTaskData.data)
       setGetSingleLeadTask(allTaskData.data)
     } catch (err) {
       console.log("err", err)
@@ -333,7 +320,6 @@ const LeadDetailsPage = () => {
         )
         setChangeStatusToggle((prev) => !prev)
       } catch (err) {
-        console.log(err)
         if (err.response.status === 500) {
           toast.error("Something Went Wrong")
         }
@@ -385,7 +371,6 @@ const LeadDetailsPage = () => {
     }
   }
 
-  // console.log("add product data", addProductData)
 
   // GET All Status data
   const getAllStatusData = async () => {
@@ -398,7 +383,6 @@ const LeadDetailsPage = () => {
       if (err.response.status === 500) {
         console.log("Something Went Wrong")
       }
-      console.log("500 err", err.response.status)
     }
   }
 
@@ -481,7 +465,6 @@ const LeadDetailsPage = () => {
           `/leadService/api/v1/task/createTask`,
           addNewTask
         )
-        console.log("task create", taskCreateData)
         setTaskUpdateToggle((prev) => !prev)
         taskTitle.current.value = ""
         taskDescription.current.value = ""
@@ -500,7 +483,6 @@ const LeadDetailsPage = () => {
     const allUserResponse = await getQuery(
       `/leadService/api/v1/users/getAllUser`
     )
-    console.log("response user data", allUserResponse.data)
     setUserDataResponse(allUserResponse.data)
   }
 
@@ -515,13 +497,11 @@ const LeadDetailsPage = () => {
           },
         }
       )
-      console.log("assignee update", updatePerson)
     } catch (err) {
       console.log("err", err)
     }
   }
 
-  console.log("i am state data", singleLeadResponseData)
 
   return (
     <div className="lead-details cm-padding-one">

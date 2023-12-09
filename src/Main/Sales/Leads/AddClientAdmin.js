@@ -24,14 +24,12 @@ const AddClientAdmin = () => {
         setCreateClientData((prev) => ({...prev, [e.target.name]: e.target.value}))
     }
 
-    console.log("create client", createClientData);
-
+ 
     const submitClientFun = (e) => {
         e.preventDefault();
         const submitData = async () =>{
             try{
             const clientResponseData = await postQuery(`/leadService/api/v1/client/createClient`,createClientData);
-            console.log("data", clientResponseData);
             nameRef.current.value = ""
             emailRef.current.value = ""
             mobileRef.current.value = ""

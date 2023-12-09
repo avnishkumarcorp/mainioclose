@@ -16,7 +16,6 @@ const LeadHistory = () => {
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
   const leadId = Number(splitPath[5])
-  console.log("jdj", splitPath)
 
   useEffect(() => {
     leadHistoryFun()
@@ -31,7 +30,6 @@ const LeadHistory = () => {
       renderCell: (props) => {
         let date = new Date(props.row.createdDate)
         let dateNew = date.toLocaleDateString()
-        console.log("date new is", date)
         return <p className="mb-0">{dateNew.toString()}</p>
       },
     },
@@ -46,7 +44,6 @@ const LeadHistory = () => {
       const leadHistory = await getQuery(
         `/leadService/api/v1/leadHistory/getAllLeadHistory?leadId=${leadId}`
       )
-      console.log("history data", leadHistory.data)
       setLeadHistoryData(leadHistory.data)
       setHistoryScalaton(false);
     } catch (err) {

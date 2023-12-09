@@ -24,12 +24,10 @@ const DisplayDashboardUser = () => {
           "Content-Type": "application/json",
         },
       })
-      console.log(userData)
       setDisplayAllUser(userData.data)
         setLoading(false);
       
     } catch (err) {
-      console.log(err)
     }
   }
 
