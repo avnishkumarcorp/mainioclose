@@ -39,14 +39,13 @@ const LeadsModule = () => {
 
   console.warn("dsnskjdndjk");
   console.log("path is", splitPath);
-  // console.log("current path id  is", splitPath );
-
+  
   const currentUserRoles = useSelector((prev) => prev.AuthReducer.currentUser.roles)
   const adminRole = currentUserRoles.includes('ADMIN');
 
 
 
-  // console.log("id is ", currentUserId)
+
 
 
 
@@ -78,7 +77,6 @@ const LeadsModule = () => {
     { field: "createDate", headerName: "Date", width: 150, renderCell: (props) =>{
       let date = new Date(props.row.createDate);
       let dateNew =  date.toLocaleDateString()
-      // console.log("date is ", date.toLocaleDateString());
       return(
         <p className="mb-0">{dateNew.toString()}</p>
       )
@@ -113,7 +111,6 @@ const LeadsModule = () => {
     } },
     { field: "status", headerName: "Status", width: 150, renderCell: (props) =>{
       const leadStatus = props.row.status?.name
-      console.log("lead status", leadStatus);
       return(
         <p>{leadStatus ? leadStatus : "NA"}</p>
       )
@@ -157,10 +154,7 @@ const LeadsModule = () => {
   }
 
   const changeLeadAssignee = async (id, leadId) => {
-    // console.log("id is call ssss", id)
-    // console.log("current lead D", leadId);
-
-
+  
     try {
      const updatePerson =  await axios.put(
         `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}`,
@@ -171,7 +165,6 @@ const LeadsModule = () => {
           },
         }
       )
-      // console.log("updateLeadAssignee is", updatePerson)
       setUpdateActive((prev)=> !(prev))
     } catch (err) {
       if(err.response.status === 500){
@@ -212,8 +205,7 @@ const LeadsModule = () => {
     }
   }
 
-  // console.log("i am all lead data", allLeadData)
-
+ 
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">

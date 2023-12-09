@@ -9,9 +9,6 @@ const HomePage = () => {
 
   const filterRole = roles.includes('ADMIN')
 
-  console.log("role is ", filterRole);
-
-  console.log("i am home page");
   return (
     <div>
       <HomeNavbar />

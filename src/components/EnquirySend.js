@@ -44,14 +44,12 @@ const EnquirySend = () => {
           `/leadService/api/v1/createTicket`,
           EnquiryTicketData
         )
-        console.log("ticket response", ticket)
         toast.success("Message Submit Sucessfully...")
         subjectRef.current.value = ""
         descriptionRef.current.value = ""
 
         setLoading(false)
       } catch (err) {
-        console.log("err", err)
         if (err.response.status === 500) {
           toast.error("Something Went Wrong...")
         }
@@ -61,7 +59,6 @@ const EnquirySend = () => {
     submitTicketData()
   }
 
-  console.log("Ticket Data", EnquiryTicketData)
 
   return (
     <div>

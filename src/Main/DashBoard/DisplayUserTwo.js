@@ -41,15 +41,13 @@ const DisplayUserTwo = () => {
           "Content-Type": "application/json",
         },
       })
-      console.log(userData)
       setDisplayAllUser(userData.data)
       setLoading(false)
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
   }
 
-  console.log("user data ", displayAlluser)
 
   return (
     <div className="p-4">

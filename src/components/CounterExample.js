@@ -5,7 +5,6 @@ import { Decrement, Increment } from "../Redux/Action/CounterAction"
 const CounterExample = () => {
   const counterValue = useSelector((state) => state.counterReducer)
   const dispatch = useDispatch()
-  console.log(counterValue)
 
   return (
     <div>
