@@ -31,8 +31,7 @@ const ForgetPassword = () => {
   )
   const isUserData = useSelector((user) => user.AuthReducer)
 
-  console.log("is user data", isUserData)
-
+  
   const handleSubmit = (e) => {
     e.preventDefault()
     if (emailRef.current.value === "") {
@@ -57,13 +56,11 @@ const ForgetPassword = () => {
             },
           }
         )
-        console.log("forget response", passwordOtp.data)
         dispatch(forgetPasswordAction(passwordOtp.data))
         setLoading(false)
 
         navigate("/erp/forgetotp")
       } catch (err) {
-        console.log(err.response.status)
         if (err.response.status === 500) {
           toast.error("Something Went wrong")
           setLoading(false)
@@ -79,8 +76,7 @@ const ForgetPassword = () => {
     forgetPass()
   }
 
-  console.log("email data", emailData)
-
+ 
   return (
     <form>
       <div className="cm-box container">

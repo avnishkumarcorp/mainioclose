@@ -17,10 +17,7 @@ const ForgetOtpPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  console.log("response forget api selector", forgetOtpResponse);
-
-  // console.log("redux data", signUpRedux)
-
+ 
   const firstRef = useRef()
   const secondRef = useRef()
   const thirdRef = useRef()
@@ -35,19 +32,12 @@ const ForgetOtpPage = () => {
     let one = Object.values(otpData)
     const finalOtp = one.join("")
 
-    console.log("i am final otp", finalOtp);
-    console.log("first",  forgetOtpResponse.otp);
-    console.log("second",  forgetOtpResponse.mobile);
-
     if(forgetOtpResponse.otp !== finalOtp ){
       setValidOtpErr(true)
       return
     }
 
     let { mobile , otp } = {...forgetOtpResponse};
-
-    console.log("i am mobile", mobile);
-    console.log("i am otp", otp);
 
     const validateuserData = async () => {
       try {
@@ -57,18 +47,11 @@ const ForgetOtpPage = () => {
             "Content-Type": "application/json",
           },
         })
-        console.log("validate user response", validateUser.data);
-        console.log("validate user response", validateUser.data.status);
-        console.log("validate user response", validateUser.data);
-        console.log("validate user response", validateUser.data.isSuccess);
         if(validateUser.data.status === 200 && validateUser.data.isSuccess === true){
           navigate("/erp/change");
         } 
-        console.log("success data ");
 
       } catch (err) {
-        console.log(err)
-        console.log("not found error");
         setValidOtpErr(true);
       }
     }
