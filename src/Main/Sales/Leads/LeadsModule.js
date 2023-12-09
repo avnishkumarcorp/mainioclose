@@ -41,6 +41,10 @@ const LeadsModule = () => {
   console.log("path is", splitPath);
   // console.log("current path id  is", splitPath );
 
+  const currentUserRoles = useSelector((prev) => prev.AuthReducer.currentUser.roles)
+  const adminRole = currentUserRoles.includes('ADMIN');
+
+
 
   // console.log("id is ", currentUserId)
 
@@ -117,7 +121,9 @@ const LeadsModule = () => {
     { field: "source", headerName: "Source", width: 150 },
     { field: "action", headerName: "Action", width: 150, renderCell: (props) =>{
       return(
+         adminRole ?
       <p onClick={() => leadDeleteResponse(props.row.id)}><i className="fa-solid fa-trash"></i></p>
+        : ""
       )
     } },
   ]
@@ -212,7 +218,8 @@ const LeadsModule = () => {
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
         <h1 className="table-heading">Leads</h1>
-        <LeadCreateModel />
+        {adminRole ? <LeadCreateModel /> :""}
+        
       </div>
       {leadScalatonCall ? <TableScalaton /> : <UserLeadComponent
         tableName={""}

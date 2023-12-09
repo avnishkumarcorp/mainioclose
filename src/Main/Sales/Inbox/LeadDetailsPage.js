@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css"
 import DataShowScalaton from "../../../components/Scalaton/DataShowScalaton"
 import EstimateDesignPage from "../Leads/EstimateDesignPage"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
+import { useSelector } from "react-redux"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -37,7 +38,7 @@ const LeadDetailsPage = () => {
   const [leadStatusScale, setLeadStatusScale] = useState(false)
   const [taskUpdateToggle, setTaskUpdateToggle] = useState(false)
   const [updateLeadName, setUpdateLeadName] = useState("")
-  const [notesLoading, setNotesLoading] = useState(false);
+  const [notesLoading, setNotesLoading] = useState(false)
 
   const [productDataScaleaton, setProductDataScaleaton] = useState(true)
   const [leadNameReload, setLeadNameReload] = useState(false)
@@ -57,14 +58,12 @@ const LeadDetailsPage = () => {
 
   const [getSingleLeadTask, setGetSingleLeadTask] = useState([])
 
-  const [userDataResponse, setUserDataResponse] = useState([]);
-  const [estimateOpenBtn, setEstimateOpenBtn] = useState(false);
+  const [userDataResponse, setUserDataResponse] = useState([])
+  const [estimateOpenBtn, setEstimateOpenBtn] = useState(false)
 
-
-  const openEstimateFun = () =>{
-    setEstimateOpenBtn((prev) => !(prev))
+  const openEstimateFun = () => {
+    setEstimateOpenBtn((prev) => !prev)
   }
-
 
   // console.log("client contact", clientsContact)
   // console.log("selected", selectedProduct)
@@ -108,9 +107,14 @@ const LeadDetailsPage = () => {
     getAllOportunities()
   }, [])
 
-  useEffect(()=>{
-    getAllUserData();
-  },[])
+  useEffect(() => {
+    getAllUserData()
+  }, [])
+
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
+  const adminRole = currentUserRoles.includes("ADMIN")
 
   //  useEffect calls End
 
@@ -191,9 +195,9 @@ const LeadDetailsPage = () => {
         `/leadService/api/v1/product/getAllProducts`
       )
       setAllProductData(allProductResponse.data)
-      console.warn("Product Data");
-        console.log("i am product datae", allProductResponse.data);
-            // console.log("");
+      console.warn("Product Data")
+      console.log("i am product datae", allProductResponse.data)
+      // console.log("");
     } catch (err) {
       console.log(err)
     }
@@ -234,7 +238,6 @@ const LeadDetailsPage = () => {
   // (ProductUrl, depandent);
   // console.warn("i am Product Data");
   // console.log("product data here", productData);
-
 
   // END
 
@@ -342,9 +345,9 @@ const LeadDetailsPage = () => {
   // Create New Notes or Remarks
   const createRemarkfun = (e) => {
     e.preventDefault()
-    if(NotesRef.current.value === ""){
+    if (NotesRef.current.value === "") {
       toast.error("Notes Can't be Blank")
-      return;
+      return
     }
     const createNewRemark = async () => {
       setNotesLoading(true)
@@ -493,15 +496,17 @@ const LeadDetailsPage = () => {
     TaskCreateNew()
   }
 
-  const getAllUserData = async () =>{
-    const allUserResponse = await getQuery(`/leadService/api/v1/users/getAllUser`);
-    console.log("response user data", allUserResponse.data);
+  const getAllUserData = async () => {
+    const allUserResponse = await getQuery(
+      `/leadService/api/v1/users/getAllUser`
+    )
+    console.log("response user data", allUserResponse.data)
     setUserDataResponse(allUserResponse.data)
-  } 
-  
-  const changeLeadAssignee = async (id) =>{
-    try{
-      const updatePerson =  await axios.put(
+  }
+
+  const changeLeadAssignee = async (id) => {
+    try {
+      const updatePerson = await axios.put(
         `/leadService/api/v1/lead/updateAssignee?leadId=${leadPathId}&userId=${id}`,
         {
           headers: {
@@ -510,20 +515,21 @@ const LeadDetailsPage = () => {
           },
         }
       )
-      console.log("assignee update", updatePerson);
-
-    }catch(err){
-      console.log("err", err);
+      console.log("assignee update", updatePerson)
+    } catch (err) {
+      console.log("err", err)
     }
- 
   }
 
   console.log("i am state data", singleLeadResponseData)
 
   return (
     <div className="lead-details cm-padding-one">
-            {estimateOpenBtn ? 
-                  <EstimateDesignPage setEstimateOpenBtn = {setEstimateOpenBtn}/> : "" }
+      {estimateOpenBtn ? (
+        <EstimateDesignPage setEstimateOpenBtn={setEstimateOpenBtn} />
+      ) : (
+        ""
+      )}
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
@@ -551,7 +557,10 @@ const LeadDetailsPage = () => {
                 >
                   Save
                 </button> */}
-                <i  onClick={(e) => updateLeadNameSinglePage(e)} class=" fa-solid green-cl disk-size fa-floppy-disk"></i>
+                <i
+                  onClick={(e) => updateLeadNameSinglePage(e)}
+                  class=" fa-solid green-cl disk-size fa-floppy-disk"
+                ></i>
               </>
             )}
             <p className="lead-location">
@@ -657,9 +666,10 @@ const LeadDetailsPage = () => {
                         </select>
                       </div>
                       <div className="lead-btn-box">
-                        <button 
-                        type="reset"
-                        className="lead-cm-btn lead-cancel-btn">
+                        <button
+                          type="reset"
+                          className="lead-cm-btn lead-cancel-btn"
+                        >
                           Reset
                         </button>
                         <button
@@ -683,15 +693,18 @@ const LeadDetailsPage = () => {
                             {service?.serviceName}
                           </h6>
                         </div>
-
-                        <div className="lead-heading">
-                          <i
-                            className="fa-solid fa-trash"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Product Delete"
-                          ></i>
-                        </div>
+                        {adminRole ? (
+                          <div className="lead-heading">
+                            <i
+                              className="fa-solid fa-trash"
+                              data-toggle="tooltip"
+                              data-placement="top"
+                              title="Product Delete"
+                            ></i>
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     ))
                   )}
@@ -762,21 +775,23 @@ const LeadDetailsPage = () => {
                     </form> */}
                   </div>
                   {/* all leads save */}
-                  
+
                   {/* Estimate Create API */}
                   <div className="save-lead-data">
                     <div>
                       <p className="lead-heading">BIS Registration</p>
-                      <h6 className="lead-sm-heading">
-                        lead Estimate Create
-                      </h6>
+                      <h6 className="lead-sm-heading">lead Estimate Create</h6>
                     </div>
                     <div className="lead-heading">
-                      <button onClick={() => openEstimateFun()} className="create-btn padding-two mr-2"><i className="fa-solid fa-eye"></i></button>
-                      <i className="fa-solid fa-trash"></i>
+                      <button
+                        onClick={() => openEstimateFun()}
+                        className="create-btn padding-two mr-2"
+                      >
+                        <i className="fa-solid fa-eye"></i>
+                      </button>
+                      {adminRole ? <i className="fa-solid fa-trash"></i> : ""}
                     </div>
                   </div>
-              
 
                   {/* all leads save */}
                 </div>
@@ -898,7 +913,7 @@ const LeadDetailsPage = () => {
                           onChange={(e) => setTasksDataFun(e)}
                           id="select-product"
                         >
-                           <option>Select Status</option>
+                          <option>Select Status</option>
                           {allTaskStatusData.map((status, index) => (
                             <option key={index} value={status?.id}>
                               {status?.name}
@@ -912,7 +927,10 @@ const LeadDetailsPage = () => {
                         </select>
                       </div>
                       <div className="lead-btn-box">
-                        <button type="reset" className="lead-cm-btn lead-cancel-btn">
+                        <button
+                          type="reset"
+                          className="lead-cm-btn lead-cancel-btn"
+                        >
                           Reset
                         </button>
                         <button
@@ -931,10 +949,13 @@ const LeadDetailsPage = () => {
                         <p className="lead-heading">{task?.name}</p>
                         <h6 className="lead-sm-heading">{task?.description}</h6>
                       </div>
-
-                      <div className="lead-heading">
-                        <i className="fa-solid fa-trash"></i>
-                      </div>
+                      {adminRole ? (
+                        <div className="lead-heading">
+                          <i className="fa-solid fa-trash"></i>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   ))}
 
@@ -1023,7 +1044,10 @@ const LeadDetailsPage = () => {
                       </div>
 
                       <div className="lead-btn-box">
-                        <button type="reset" className="lead-cm-btn lead-cancel-btn">
+                        <button
+                          type="reset"
+                          className="lead-cm-btn lead-cancel-btn"
+                        >
                           Reset
                         </button>
                         <button className="lead-cm-btn lead-save-btn">
@@ -1149,7 +1173,10 @@ const LeadDetailsPage = () => {
                       </div> */}
 
                       <div className="lead-btn-box">
-                        <button type="reset" className="lead-cm-btn lead-cancel-btn">
+                        <button
+                          type="reset"
+                          className="lead-cm-btn lead-cancel-btn"
+                        >
                           Reset
                         </button>
                         <button
@@ -1173,11 +1200,14 @@ const LeadDetailsPage = () => {
                           {client.contactNo ? client.contactNo : "NA"}
                         </h6>
                       </div>
-
-                      <div className="lead-heading">
-                        <i className="fa-solid fa-pen mr-3"></i>
-                        <i className="fa-solid fa-trash"></i>
-                      </div>
+                      {adminRole ? (
+                        <div className="lead-heading">
+                          <i className="fa-solid fa-pen mr-3"></i>
+                          <i className="fa-solid fa-trash"></i>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   ))}
 
@@ -1213,8 +1243,9 @@ const LeadDetailsPage = () => {
                 data={email}
                 setData={setEmail}
               />
-              <Link to={`history`} className="filter-btn-design" ><i className="fa-regular mr-1 fa-clipboard"></i>History
-               {/* <FilterButton
+              <Link to={`history`} className="filter-btn-design">
+                <i className="fa-regular mr-1 fa-clipboard"></i>History
+                {/* <FilterButton
                 name={"History"}
                 icon={<i className="fa-regular fa-envelope"></i>}
                 data={"History"}
@@ -1223,10 +1254,17 @@ const LeadDetailsPage = () => {
               </Link>
             </div>
             <div className="filter-box mt-3">
-              <select className="user-assign-tab" onChange={(e)=> changeLeadAssignee(e.target.value)} name="user" id="user">
-               {userDataResponse.map((user, index)=>(
-                 <option key={index} value={user?.id}>{user?.fullName}</option>
-               ))}
+              <select
+                className="user-assign-tab"
+                onChange={(e) => changeLeadAssignee(e.target.value)}
+                name="user"
+                id="user"
+              >
+                {userDataResponse.map((user, index) => (
+                  <option key={index} value={user?.id}>
+                    {user?.fullName}
+                  </option>
+                ))}
               </select>
             </div>
 

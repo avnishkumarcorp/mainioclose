@@ -29,6 +29,9 @@ const SignUp = () => {
     email: "",
   })
 
+
+  console.log("i am generetae ", generateOtpData);
+
   const [loading, setLoading] = useState(false)
   // Errors
   const [fullNameErr, setFullNameErr] = useState(false)
@@ -113,7 +116,7 @@ const SignUp = () => {
           "/securityService/api/auth/otp",
           generateOtpData
         )
-        console.log("generate otp data", getNewOtp.data)
+        console.log("generate otp data hhhh", getNewOtp.data)
         setLoading(false)
         navigate("/erp/otp")
       } catch (err) {

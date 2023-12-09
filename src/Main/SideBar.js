@@ -5,6 +5,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import corpseedLogo from "../Images/corpseed-logo.png"
 import { useSelector } from "react-redux"
 
+
 const SideBar = () => {
   const location = useLocation()
   const [logoutBtnStatus, setLogoutBtnStatus] = useState(false);
@@ -21,12 +22,9 @@ const SideBar = () => {
   } 
 
   const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
+ 
   const currentUserRoles = useSelector((prev) => prev.AuthReducer.currentUser.roles)
-
-  console.log(currentUserProfile)
-  console.log("user roles", currentUserRoles)
-
-  const adminRole = currentUserRoles.includes('USER');
+  const adminRole = currentUserRoles.includes('ADMIN');
 
 
 
@@ -46,7 +44,7 @@ const SideBar = () => {
               : "UserName"}
           </h4>
           <h6>
-            {currentUserProfile?.email ? currentUserProfile?.email : "Email"}
+            {currentUserProfile?.email ? `${currentUserProfile?.email.slice(0,13)}...` : "Email"}
           </h6>
         </div>
         <div className="profile-image" onClick={()=> setLogoutBtnStatus((prev)=> !(prev))}>
@@ -75,7 +73,7 @@ const SideBar = () => {
             aria-controls="collapseDashboardModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> Dashboard
+            <i class="fa-solid fa-house"></i> Dashboard
           </NavLink>
           <div
             id={`collapseDashboardModule`}
