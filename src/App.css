@@ -73,7 +73,7 @@ button:focus {
 }
 
 .nav-heading:hover {
-  color: #fff;
+  color: var(--white);
   text-decoration: none;
 }
 
@@ -119,7 +119,7 @@ button:focus {
 
 .login-button:hover {
   text-decoration: none;
-  color: #fff;
+  color: var(--white);
 }
 
 /* common in inbox  */
@@ -200,7 +200,7 @@ button:focus {
   padding: 4px 8px;
   border: none;
   background-color: #093252;
-  color: #fff;
+  color: var(--white);
   border-radius: 4px;
   margin-left: 10px;
 }
@@ -273,7 +273,7 @@ button:focus {
   font-size: 12px;
   color: #000;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #fff;
+  background-color: var(--white);
   font-weight: 500;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 }
@@ -284,13 +284,13 @@ button:focus {
 
 .estimate-btn {
   background-color: var(--mainBlue);
-  color: #fff;
+  color: var(--white);
   border: 1px solid var(--mainBlue);
 }
 
 .action-btn {
   padding: 6px 12px;
-  color: #fff;
+  color: var(--white);
   background-color: var(--mainBlue);
   border: 1px solid var(--mainBlue);
   border-radius: 4px;
@@ -374,13 +374,13 @@ button:focus {
   border: none;
   outline: none;
   background-color: #28a745;
-  color: #fff;
+  color: var(--white);
   padding: 6px 12px;
   border-radius: 4px;
 }
 
 .create-btn:hover {
-  color: #fff;
+  color: var(--white);
   text-decoration: none;
   background-color: #1f8637;
 }
@@ -430,7 +430,7 @@ button:focus {
   line-height: 30px;
   text-align: center;
   letter-spacing: 0.84px;
-  color: #fff;
+  color: var(--white);
   outline: none;
   cursor: pointer;
 }
@@ -455,7 +455,7 @@ $lightBlue: #1a73e8;
     outline: none;
     font-size: 14px;
     background: transparent;
-    color: #fff;
+    color: var(--white);
 
 }
 
