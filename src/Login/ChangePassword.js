@@ -23,32 +23,20 @@ const ChangePassword = () => {
   const forgetPasswordResponse = useSelector(
     (auth) => auth.AuthReducer.forgetPassword
   )
-  console.log("response input", newPassword)
-  console.log("repeat pass", repeatPassword)
-  console.log("forget password response ", forgetPasswordResponse)
-
-  // {
-  //   "email": "string",
-  //   "password": "string",
-  //   "otp": "string"
-  // }
-
+  
   const updateUserPassword = (e) => {
     e.preventDefault()
 
-    // const {mobile, otp, }
-
+   
     const { email, otp } = { ...forgetPasswordResponse }
 
-    console.log("email is ", email, "otp is", otp)
     const updateUserData = {
       email: email,
       password: newPassword,
       otp: otp,
     }
 
-    console.log("update user", updateUserData)
-
+   
     if (newPassword !== repeatPassword) {
       setPasswordErr(true)
       return
@@ -66,12 +54,10 @@ const ChangePassword = () => {
             },
           }
         )
-        console.log("password update", checkUser)
         setLoading(false)
         toast.success("Password Update Succesfully")
         navigate("/erp/login")
       } catch (err) {
-        console.log("error", err)
         if (err.response.status === 500) {
           toast.error("Something Went wrong")
           setLoading(false)

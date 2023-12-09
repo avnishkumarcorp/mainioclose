@@ -22,7 +22,6 @@ const SetNewPasswordPage = () => {
 
 
     const navigate = useNavigate();
-    console.log("id is", currentuserId);
 
 
   const setNewPassword = (e) =>{
@@ -38,7 +37,6 @@ const SetNewPasswordPage = () => {
       try{
       const passwordData = await putQuery(`/securityService/api/auth/setNewPassword`, newPassword);
 
-      console.log(passwordData);
       setBtnLoading(false)
       navigate(`/erp/setpassword/${currentuserId}/thankyou`)  
 
@@ -47,7 +45,6 @@ const SetNewPasswordPage = () => {
           toast.error("You have already set Your password Please login or Forget Password Option")
           setBtnLoading(false)
         }
-        console.log(err);
         setBtnLoading(false)
       }
     }
@@ -57,9 +54,6 @@ const SetNewPasswordPage = () => {
 
   }
 
-
-  console.log("new", newPassword);
-  console.log("confirm", confirmPassword);
 
 
 

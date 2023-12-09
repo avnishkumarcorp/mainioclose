@@ -26,28 +26,20 @@ const OtpPage = () => {
   const fiveRef = useRef()
   const sixRef = useRef()
 
-  console.log("redux data", signUpRedux)
   let one = Object.values(otpData)
   const finalOtp = one.join("")
-  // console.log(finalOtp)
   const finalApiData = { ...signUpRedux, otp: finalOtp }
-  // console.log("i mam final data", finalApiData)
-
+  
   const userRegistration = (e) => {
     e.preventDefault()
 
-    console.log("before api call")
     const createUserApi = async () => {
       try {
-        console.log("final data for api", finalApiData)
         const signupResponse = await postQuery(
           "/securityService/api/auth/createNewUser",
           finalApiData
         )
-        console.log("signup aryan response data", signupResponse)
-        console.log("signup aryan response data", signupResponse.data.data)
         const { id } = signupResponse.data.data
-        console.log("id is response ", id)
         const leadUserData = {
           ...finalApiData,
           id: id,
@@ -59,33 +51,23 @@ const OtpPage = () => {
         delete leadUserData.companyName
         delete leadUserData.password
         delete leadUserData.mobile
-        // leadUserData.designation = "NA",
-        // leadUserData.department = "NA",
-
-        console.log("final lead user data", leadUserData)
-
+  
         const createLeadResponse = await postQuery(
           `/leadService/api/v1/users/createUsser`,
           leadUserData
         )
-        console.log("create lead user  user response", createLeadResponse)
 
         navigate("/erp/login")
         toast.success("User SignUp Sucessfully")
       } catch (err) {
-        console.log(err)
       }
     }
 
     createUserApi()
   }
 
-  console.log("my api state data", leadUserInfo)
-
-  // console.log("create id data aryan", createApiId);
-  // console.log("final api data", finalApiData);
-  // console.log();
-
+  
+  
   const sendTimer = () => {
     return (
       <>

@@ -50,7 +50,6 @@ const Login = () => {
 
   const CurrentuserData = useSelector((prev) => prev.AuthReducer)
 
-  console.log("current user", CurrentuserData)
 
   const userSignIn = (e) => {
     e.preventDefault()
@@ -70,8 +69,6 @@ const Login = () => {
           `/securityService/api/auth/signin`,
           userLoginData
         )
-        console.log("api data", collectUserData.data.jwt)
-        console.log("api data", collectUserData.data)
         dispatch(currentUserAction(collectUserData.data))
         dispatch(userTokenAction(collectUserData.data.jwt))
         setLoadingBtn(false)
@@ -93,7 +90,6 @@ const Login = () => {
     loginUser()
   }
 
-  console.log("user data", userLoginData)
 
   return (
     <div className="cm-box container">

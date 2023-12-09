@@ -30,7 +30,6 @@ const SignUp = () => {
   })
 
 
-  console.log("i am generetae ", generateOtpData);
 
   const [loading, setLoading] = useState(false)
   // Errors
@@ -105,22 +104,18 @@ const SignUp = () => {
     const { username, password, mobile, email } = { ...createUserData }
     const otpNewData = { name: username, password: password, mobile: mobile, email: email }
 
-    console.log("OTP data kdjld", otpNewData)
 
     dispatch(SignupDataAction(createUserData))
     setLoading(true)
     const generateNewOtpFun = async () => {
-      console.log("before api call data is", otpNewData)
       try {
         const getNewOtp = await postQuery(
           "/securityService/api/auth/otp",
           generateOtpData
         )
-        console.log("generate otp data hhhh", getNewOtp.data)
         setLoading(false)
         navigate("/erp/otp")
       } catch (err) {
-        console.log(err)
         if (err.response.status === 500) {
           toast.error("Something went wrong")
           setLoading(false)
@@ -131,8 +126,6 @@ const SignUp = () => {
     generateNewOtpFun()
   }
 
-  console.log("create data", createUserData)
-  console.log("generate Otp Data", generateOtpData)
 
   return (
     <div className="login-page">

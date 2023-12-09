@@ -8,7 +8,6 @@ const MainLoginRouter = () => {
   return (
     <div>
       <div className="container logo-header">
-        {/* <h1 className="logo-icon">Logo</h1> */}
         <div className="logo">
           <div className="erp-image">
             <img className="main-logo-image" src={logoImage}  />
