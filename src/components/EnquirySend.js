@@ -34,6 +34,13 @@ const EnquirySend = () => {
     }))
   }
 
+  // window.addEventListener('click', () =>{
+  //   if(openTab === true){
+  //     setOpenTab(false);
+  //   }
+  // })
+
+
   const submitTicketFun = (e) => {
     e.preventDefault()
 

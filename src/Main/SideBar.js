@@ -5,35 +5,33 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import corpseedLogo from "../Images/corpseed-logo.png"
 import { useSelector } from "react-redux"
 
-
 const SideBar = () => {
   const location = useLocation()
-  const [logoutBtnStatus, setLogoutBtnStatus] = useState(false);
+  const [logoutBtnStatus, setLogoutBtnStatus] = useState(false)
 
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const logoutUser = () =>{
-    const token = localStorage.removeItem("Access Token");
+  const logoutUser = () => {
+    const token = localStorage.removeItem("Access Token")
     navigate("/erp/login")
-  } 
+  }
 
   const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
- 
-  const currentUserRoles = useSelector((prev) => prev.AuthReducer.currentUser.roles)
-  const adminRole = currentUserRoles.includes('ADMIN');
 
-
-
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
+  const adminRole = currentUserRoles.includes("ADMIN")
 
   return (
     <div className="sideTab">
       {/* Dashboard links start */}
 
-      <div className="user-profile" >
+      <div className="user-profile">
         {/* <button className="btn btn-primary" >Logout</button> */}
         <div className="profile-info">
           <h4>
@@ -42,15 +40,26 @@ const SideBar = () => {
               : "UserName"}
           </h4>
           <h6>
-            {currentUserProfile?.email ? `${currentUserProfile?.email.slice(0,13)}...` : "Email"}
+            {currentUserProfile?.email
+              ? `${currentUserProfile?.email.slice(0, 13)}...`
+              : "Email"}
           </h6>
         </div>
-        <div className="profile-image" onClick={()=> setLogoutBtnStatus((prev)=> !(prev))}>
+        <div
+          className="profile-image"
+          onClick={() => setLogoutBtnStatus((prev) => !prev)}
+        >
           <img
             src={`https://images.pexels.com/photos/17739178/pexels-photo-17739178.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`}
           />
         </div>
-          {logoutBtnStatus ? <button onClick={()=> logoutUser()} className="logout-btn">Logout</button> : ""}
+        {logoutBtnStatus ? (
+          <button onClick={() => logoutUser()} className="logout-btn">
+            Logout
+          </button>
+        ) : (
+          ""
+        )}
       </div>
       {/*       
       <div className="corpseed-logo">
@@ -60,33 +69,34 @@ const SideBar = () => {
       </div> */}
 
       <div className="pt-4">
-        {adminRole ? <div className="side-tabs">
-          <NavLink
-            to={`/erp/${currentUserId}`}
-            className={`nav-heading ${({ isActive }) =>
-              isActive ? "linkactive" : ""}`}
-            data-toggle="collapse"
-            data-target={`#collapseDashboardModule`}
-            aria-expanded="true"
-            aria-controls="collapseDashboardModule"
-          >
-            <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i class="fa-solid fa-house"></i> Dashboard
-          </NavLink>
-          <div
-            id={`collapseDashboardModule`}
-            className="collapse"
-            aria-labelledby="headingOne"
-            data-parent="#accordion"
-          >
-            <div className="link-child">
-              <NavLink className="link-itemss" to={`${currentUserId}/users`}>
-                users
-              </NavLink>
-              {/* <NavLink className="link-itemss" to={`${currentUserId}/muiuser`}>
+        {adminRole ? (
+          <div className="side-tabs">
+            <NavLink
+              to={`/erp/${currentUserId}`}
+              className={`nav-heading ${({ isActive }) =>
+                isActive ? "linkactive" : ""}`}
+              data-toggle="collapse"
+              data-target={`#collapseDashboardModule`}
+              aria-expanded="true"
+              aria-controls="collapseDashboardModule"
+            >
+              <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+              <i class="fa-solid fa-house"></i> Dashboard
+            </NavLink>
+            <div
+              id={`collapseDashboardModule`}
+              className="collapse"
+              aria-labelledby="headingOne"
+              data-parent="#accordion"
+            >
+              <div className="link-child">
+                <NavLink className="link-itemss" to={`${currentUserId}/users`}>
+                  users
+                </NavLink>
+                {/* <NavLink className="link-itemss" to={`${currentUserId}/muiuser`}>
               mui users
             </NavLink> */}
-              {/* <NavLink className="link-itemss" to="hr/hrlinktwo">
+                {/* <NavLink className="link-itemss" to="hr/hrlinktwo">
               HR Second
             </NavLink>
             <NavLink className="link-itemss" to="hr/hrlinkthree">
@@ -101,12 +111,12 @@ const SideBar = () => {
             <NavLink className="link-itemss" to="hr/hrlinksix">
               HR Six
             </NavLink> */}
+              </div>
             </div>
           </div>
-        </div> : ""}
-        
-
-          
+        ) : (
+          ""
+        )}
 
         {/*  */}
 
@@ -190,7 +200,7 @@ const SideBar = () => {
             data-parent="#accordion"
           >
             <div className="link-child">
-            <NavLink
+              <NavLink
                 className="link-itemss"
                 to={`${currentUserId}/sales/leads`}
               >
@@ -211,7 +221,7 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="sales/contacts">
                 <i class="fa-solid mr-1 fa-user"></i> Contacts
               </NavLink>
-              
+
               <NavLink className="link-itemss" to={`${currentUserId}/sales`}>
                 <i class="fa-solid mr-1 fa-inbox"></i>Inbox
               </NavLink>
@@ -440,6 +450,18 @@ const SideBar = () => {
             </div> */}
           </div>
         </div>
+
+        <div className="side-tabs">
+          <NavLink
+            to={`/erp/${currentUserId}/setting`}
+            className={`nav-heading ${({ isActive }) =>
+              isActive ? "linkactive" : ""}`}
+          >
+          <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+            <i className="fa-regular mr-2 fa-user"></i>  Setting
+          </NavLink>
+        </div>
+
         {/* end */}
 
         {/* Profile links start */}
