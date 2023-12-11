@@ -73,7 +73,7 @@ const EnquirySend = () => {
                 Get in touch by filling out the form below
               </p>
               <FirstInput
-                className="enq-subject hide-design-box my-2"
+                className="enq-subject hide-design-box font-changer my-2"
                 type="text"
                 placeholder="Write subject Here..."
                 name="subject"
@@ -81,7 +81,7 @@ const EnquirySend = () => {
                 onChange={(e) => ticketInfo(e)}
               />
               <textarea
-                className="enq-message  hide-design-box my-2"
+                className="enq-message  hide-design-box font-changer "
                 placeholder="Write Message here..."
                 name="description"
                 ref={descriptionRef}
