@@ -37,6 +37,7 @@ import LeadHistory from "./Main/Sales/Leads/LeadHistory"
 import NewGetFile from "./Routes/NewGetFile"
 import PaswordUpdateMessage from "./Login/PaswordUpdateMessage"
 import ComingSoonPage from "./Home/ComingSoonPage"
+import SettingMainPage from "./Main/Setting/SettingMainPage"
 
 function App() {
   return (
@@ -44,7 +45,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/newfile" element={<NewGetFile />}></Route>
-        <Route path="*" element={<div>not found</div>} />
+          <Route path="*" element={<div>not found</div>} />
           <Route path="/" element={<HomePage />}>
             <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />
@@ -52,7 +53,10 @@ function App() {
           <Route path="/counter" element={<CounterExample />} />
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
-            <Route path="setpassword/:id/thankyou" element={<PaswordUpdateMessage />} />
+            <Route
+              path="setpassword/:id/thankyou"
+              element={<PaswordUpdateMessage />}
+            />
             <Route path="signup" element={<SignUp />} />
             <Route path="otp" element={<OtpPage />} />
             <Route path="forgetotp" element={<ForgetOtpPage />} />
@@ -62,7 +66,7 @@ function App() {
           </Route>
 
           <Route path="/erp" element={<MainPage />}>
-            <Route path=":id" element={<DashBoard />} >
+            <Route path=":id" element={<DashBoard />}>
               <Route path="users" element={<DisplayDashboardUser />} />
               <Route path="muiuser" element={<DisplayUserTwo />} />
             </Route>
@@ -86,7 +90,10 @@ function App() {
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
               <Route path="leads/:id" element={<LeadDetailsPage />} />
-              <Route path="leads/:id/estimate" element={<EstimateCreatePage />} />
+              <Route
+                path="leads/:id/estimate"
+                element={<EstimateCreatePage />}
+              />
               <Route path="contacts" element={<ContactModule />} />
               <Route path="leads/:id/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
@@ -208,6 +215,8 @@ function App() {
               />
             </Route>
             {/* end */}
+            <Route path="/erp/:id/setting" element={<SettingMainPage />} />
+
             {/* profile routes */}
             <Route path="/erp/:id/profile" element={<ComingSoonPage />}>
               <Route path="" element={<div>Profile Number One</div>} />

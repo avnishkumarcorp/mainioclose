@@ -15,6 +15,7 @@ import { useSelector } from "react-redux"
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import TableScalaton from "../../../components/TableScalaton"
+import { getQuery } from "../../../API/GetQuery"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -22,14 +23,21 @@ const LeadsModule = () => {
   const [leadUserNew, setLeadUserNew] = useState([])
   const [updateActive, setUpdateActive] = useState(false);
   const [leadScalatonCall, setLeadScalatonCall] = useState(true);
+  const [getAllStatus, setGetAllStatus] = useState([]);
+  const [statusDataId, setStatusDataId] = useState([]);
 
   useEffect(() => {
     getAllLead()
-  }, [updateActive])
+  }, [updateActive, statusDataId])
 
   useEffect(() => {
     getAllLeadUser()
   }, [])
+
+  useEffect(()=>{
+    getAllStatusData()
+  },[])
+
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -44,15 +52,7 @@ const LeadsModule = () => {
   const adminRole = currentUserRoles.includes('ADMIN');
 
 
-
-
-
-
-
-
-
   const columns = [
-    { field: "id", headerName: "ID", width: 60 },
     {
       field: "leadName",
       headerName: "Name",
@@ -78,7 +78,7 @@ const LeadsModule = () => {
       let date = new Date(props.row.createDate);
       let dateNew =  date.toLocaleDateString()
       return(
-        <p className="mb-0">{dateNew.toString()}</p>
+        <p className="mb-0">{dateNew}</p>
       )
     } },
     {
@@ -104,11 +104,7 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "leadDescription", headerName: "lead Description", width: 200, renderCell: (props) =>{
-      (
-        <p className="mb-0">{props?.row?.leadDescription.slice(0,2)}</p>
-      )
-    } },
+   
     { field: "status", headerName: "Status", width: 150, renderCell: (props) =>{
       const leadStatus = props.row.status?.name
       return(
@@ -126,16 +122,6 @@ const LeadsModule = () => {
   ]
 
 
-  const getUserId =  (id) =>{
-      // console.log("id is ", id)
-  }
-
-
-  const changeUserAssignee = (user) => {
-    // console.log("user is selectd", user)
-  }
-
-
   const leadDeleteResponse = async (id) =>{
     // confirm("Are you sure ?")
     try{
@@ -145,7 +131,6 @@ const LeadsModule = () => {
         "Content-Type": "application/json",
       },
     })
-    // console.log("delete", leadResponse)
   }catch(err){
     console.log(
       "err", err
@@ -189,7 +174,8 @@ const LeadsModule = () => {
   const getAllLead = async () => {
     try {
       const allLead = await axios.get(
-        `/leadService/api/v1/lead/getAllLead?userId=${currentUserId}`,
+        // /leadService/api/v1/lead/getAllLead?userId=1&statusId=2
+        `/leadService/api/v1/lead/getAllLead?userId=${currentUserId}&statusId=${statusDataId}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -197,13 +183,31 @@ const LeadsModule = () => {
           },
         }
       )
-      setAllLeadData(allLead.data)
+      const leadData = allLead.data.reverse();
+      setAllLeadData(leadData)
       setLeadScalatonCall(false)
+      console.log("all lead data", leadData);
     } catch (err) {
       console.log(err)
       setLeadScalatonCall(true)
     }
   }
+
+
+  const getAllStatusData = async () => {
+    try {
+      const allStatus = await getQuery(
+        `/leadService/api/v1/status/getAllStatus`
+      )
+      setGetAllStatus(allStatus.data)
+    } catch (err) {
+      if (err.response.status === 500) {
+        console.log("Something Went Wrong")
+      }
+    }
+  }
+
+  console.log("all status",getAllStatus);
 
  
   return (
@@ -213,6 +217,25 @@ const LeadsModule = () => {
         {adminRole ? <LeadCreateModel /> :""}
         
       </div>
+
+      <p className="my-2">
+                <select
+                  className="status-select"
+                  name="status"
+                  onChange={(e) => setStatusDataId(e.target.value)}
+                  id="status"
+                  form="statusChange"
+                >
+                  <option>Change Lead Status</option>
+                  {getAllStatus.map((status, index) => (
+                    <option value={status.id} key={index}>
+                      {status.name}
+                    </option>
+                  ))}
+                </select>
+              </p>
+
+
       {leadScalatonCall ? <TableScalaton /> : <UserLeadComponent
         tableName={""}
         columns={columns}
@@ -224,129 +247,3 @@ const LeadsModule = () => {
 }
 
 export default LeadsModule
-
-{
-  /* <div className="inbox-top-btn">
-        <button to="/sales" className={`tab-btn `}>
-          Inbox
-        </button>
-        <button to="/sales2" className={`tab-btn `}>
-          Done (25)
-        </button>
-        <button to="/sales3" className={`tab-btn `}>
-          Failure (454545)
-        </button>
-      </div> */
-}
-
-{
-  /* {<DataTableFirst tabletitle={"Leads"} allleaddata = {fakeRow} leadColumns= {fakecolumn} />} */
-}
-{
-  /* <LeadCreateModel /> */
-}
-
-{
-  /* <div className="table-responsive mt-5">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Mobile Numberfff</th>
-              <th scope="col">Email</th>
-              <th scope="col">Assignee</th>
-              <th scope="col">update Assignee</th>
-              <th scope="col">Description</th>
-              <th scope="col">Source</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allLeadData.map((lead, i) => (
-              <tr key={i}>
-                <td>{lead.id}</td>
-                <td>
-                  <Link to={`/erp/${currentUserId}/sales/${lead.id}`}>
-                    {lead.name}
-                  </Link>
-                </td>
-                <td>{lead.mobileNo}</td>
-                <td>{lead.email}</td>
-                <td>{lead.assignee.fullName}</td>
-                <td>
-                  <select className="assignee-button" onChange={(id)=> changeLeadAssignee(lead.id)} name="cars" id="cars">
-                    {leadUserNew.map((user, index) => (
-                        <option key={index} value={user.fullName} >{user.fullName}</option>
-                      
-                    ))}
-                  </select>
-                  
-                </td>
-                <td>{lead.assignee.email}</td>
-                <td>{lead.leadDescription}</td>
-                <td>{lead.source}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> */
-}
-
-// const columns = [
-//   {
-//     name: "id",
-//     label: "ID",
-//     options: {
-//       filter: true,
-//       sort: true,
-//     },
-//   },
-//   {
-//     name: "name",
-//     label: "Name",
-//     options: {
-//       filter: true,
-//       sort: true,
-//     },
-//   },
-//   {
-//     name: "mobileNo",
-//     label: "Mobile",
-//     options: {
-//       filter: true,
-//       sort: true,
-//     },
-//   },
-//   {
-//     name: "email",
-//     label: "Email",
-//     options: {
-//       filter: true,
-//       sort: true,
-//     },
-//   },
-//   {
-//     name: "createDate",
-//     label: "create Date",
-//     options: {
-//       filter: true,
-//       sort: true,
-//     },
-//   },
-//   {
-//     name: "leadDescription",
-//     label: "Description",
-//     options: {
-//       filter: true,
-//       sort: true,
-//     },
-//   },
-//   {
-//     name: "source",
-//     label: "Source",
-//     options: {
-//       filter: true,
-//       sort: true,
-//     },
-//   },
-// ]
