@@ -385,6 +385,13 @@ button:focus {
   background-color: #1f8637;
 }
 
+.font-changer{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+
 /* mui table */
 
 .create-user-box {
