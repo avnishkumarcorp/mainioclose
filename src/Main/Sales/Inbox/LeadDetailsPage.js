@@ -61,7 +61,7 @@ const LeadDetailsPage = () => {
   const [userDataResponse, setUserDataResponse] = useState([])
   const [estimateOpenBtn, setEstimateOpenBtn] = useState(false)
 
-  const [productDepandence, setProductDepandence] = useState(false);
+  const [productDepandence, setProductDepandence] = useState(false)
 
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
@@ -81,7 +81,7 @@ const LeadDetailsPage = () => {
     leadNameReload,
     productDisplayToggle,
     clientContactToggle,
-    productDepandence
+    productDepandence,
   ])
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const LeadDetailsPage = () => {
 
   //  useEffect calls End
 
-    console.log("all product list", allProductsList);
+  console.log("all product list", allProductsList)
 
   const getAllOportunities = async () => {
     const getOportunities = await getQuery(
@@ -233,6 +233,8 @@ const LeadDetailsPage = () => {
   // const {productData, loading, error } = useCustomRoute
   // (ProductUrl, depandent);
   // console.warn("i am Product Data");
+
+  console.log("category data", categoryData);
 
   // END
 
@@ -362,6 +364,18 @@ const LeadDetailsPage = () => {
     createNewRemark()
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
   // GET All Products With Category
   const getAllProductWithCattegory = async () => {
     try {
@@ -378,15 +392,14 @@ const LeadDetailsPage = () => {
   }
 
   const deleteProductFun = async (e, serviceId) => {
-   
     // console.log("servive id is ", serviceId);
     try {
       const productDelete = await axios.put(
         `/leadService/api/v1/lead/deleteProductInLead?leadId=${leadPathId}&serviceId=${serviceId}&userId=${currentUserId}`
       )
-      console.log("delete product succesfully", productDelete);
+      console.log("delete product succesfully", productDelete)
       toast.success("product Deleted Sucessfully")
-      setProductDepandence((prev) => !(prev))
+      setProductDepandence((prev) => !prev)
     } catch (err) {
       console.log(err)
     }
@@ -657,11 +670,11 @@ const LeadDetailsPage = () => {
                           onChange={(e) => getProductInputData(e.target.value)}
                         >
                           <option>Select Product</option>
-                          {allProductData.map((product, index) => (
+                          {/* {categoryData.map((product, index) => (
                             <option key={index} value={product?.id}>
                               {product?.productName}
                             </option>
-                          ))}
+                          ))} */}
                         </select>
                       </div>
                       <div className="lead-btn-box">

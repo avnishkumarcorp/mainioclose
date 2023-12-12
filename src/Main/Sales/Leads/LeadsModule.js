@@ -12,8 +12,8 @@ import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import LeadCreateModel from "../../../Model/LeadCreateModel"
 import { useSelector } from "react-redux"
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import TextField from "@mui/material/TextField"
+import Autocomplete from "@mui/material/Autocomplete"
 import TableScalaton from "../../../components/TableScalaton"
 import { getQuery } from "../../../API/GetQuery"
 
@@ -21,23 +21,24 @@ const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
   const [allLeadData, setAllLeadData] = useState([])
   const [leadUserNew, setLeadUserNew] = useState([])
-  const [updateActive, setUpdateActive] = useState(false);
-  const [leadScalatonCall, setLeadScalatonCall] = useState(true);
-  const [getAllStatus, setGetAllStatus] = useState([]);
-  const [statusDataId, setStatusDataId] = useState([]);
+  const [updateActive, setUpdateActive] = useState(false)
+  const [leadScalatonCall, setLeadScalatonCall] = useState(true)
+  const [getAllStatus, setGetAllStatus] = useState([])
+  const [statusDataId, setStatusDataId] = useState([])
+
+  const [leadStatusD, setLeadStatusD] = useState(false);
 
   useEffect(() => {
     getAllLead()
-  }, [updateActive, statusDataId])
+  }, [updateActive, statusDataId, leadStatusD])
 
   useEffect(() => {
     getAllLeadUser()
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllStatusData()
-  },[])
-
+  }, [])
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -45,12 +46,13 @@ const LeadsModule = () => {
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
 
-  console.warn("dsnskjdndjk");
-  console.log("path is", splitPath);
-  
-  const currentUserRoles = useSelector((prev) => prev.AuthReducer.currentUser.roles)
-  const adminRole = currentUserRoles.includes('ADMIN');
+  console.warn("dsnskjdndjk")
+  console.log("path is", splitPath)
 
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
+  const adminRole = currentUserRoles.includes("ADMIN")
 
   const columns = [
     {
@@ -65,22 +67,26 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "assigneeName", headerName: "Assignee", width: 150, renderCell: (props)=>{
-      return(
-        <p className="mb-0">
-          {props?.row?.assignee?.fullName}
-        </p>
-      )
-    } },
+    {
+      field: "assigneeName",
+      headerName: "Assignee",
+      width: 150,
+      renderCell: (props) => {
+        return <p className="mb-0">{props?.row?.assignee?.fullName}</p>
+      },
+    },
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
-    { field: "createDate", headerName: "Date", width: 150, renderCell: (props) =>{
-      let date = new Date(props.row.createDate);
-      let dateNew =  date.toLocaleDateString()
-      return(
-        <p className="mb-0">{dateNew}</p>
-      )
-    } },
+    {
+      field: "createDate",
+      headerName: "Date",
+      width: 150,
+      renderCell: (props) => {
+        let date = new Date(props.row.createDate)
+        let dateNew = date.toLocaleDateString()
+        return <p className="mb-0">{dateNew}</p>
+      },
+    },
     {
       field: "assignee",
       headerName: "Assignee",
@@ -94,7 +100,7 @@ const LeadsModule = () => {
             name="lead"
             id="lead"
           >
-             <option>Select Assignee</option>
+            <option>Select Assignee</option>
             {leadUserNew.map((user, index) => (
               <option key={index} value={user.id}>
                 {user?.fullName}
@@ -104,44 +110,55 @@ const LeadsModule = () => {
         )
       },
     },
-   
-    { field: "status", headerName: "Status", width: 150, renderCell: (props) =>{
-      const leadStatus = props.row.status?.name
-      return(
-        <p>{leadStatus ? leadStatus : "NA"}</p>
-      )
-    }},
+
+    {
+      field: "status",
+      headerName: "Status",
+      width: 150,
+      renderCell: (props) => {
+        const leadStatus = props.row.status?.name
+        return <p>{leadStatus ? leadStatus : "NA"}</p>
+      },
+    },
     { field: "source", headerName: "Source", width: 150 },
-    { field: "action", headerName: "Action", width: 150, renderCell: (props) =>{
-      return(
-         adminRole ?
-      <p onClick={() => leadDeleteResponse(props.row.id)}><i className="fa-solid fa-trash"></i></p>
-        : ""
-      )
-    } },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (props) => {
+        return adminRole ? (
+          <p onClick={() => leadDeleteResponse(props.row.id)}>
+            <i className="fa-solid fa-trash"></i>
+          </p>
+        ) : (
+          ""
+        )
+      },
+    },
   ]
 
-
-  const leadDeleteResponse = async (id) =>{
-    
-    try{
-    const leadResponse = await axios.delete(`/leadService/api/v1/lead/deleteLead?leadId=${id}`,{
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-    })
-  }catch(err){
-    console.log(
-      "err", err
-    )
-  }
+  const leadDeleteResponse = async (id) => {
+    window.confirm('Are you sure to delete this record?')
+    console.log("function call");
+    try {
+      const leadResponse = await axios.delete(
+        `/leadService/api/v1/lead/deleteLead?leadId=${id}&userId=${currentUserId}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      setLeadStatusD((prev) => !(prev))
+    } catch (err) {
+      console.log("err", err)
+    }
   }
 
   const changeLeadAssignee = async (id, leadId) => {
-  
     try {
-     const updatePerson =  await axios.put(
+      const updatePerson = await axios.put(
         `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}`,
         {
           headers: {
@@ -150,12 +167,12 @@ const LeadsModule = () => {
           },
         }
       )
-      setUpdateActive((prev)=> !(prev))
+      setUpdateActive((prev) => !prev)
     } catch (err) {
-      if(err.response.status === 500){
+      if (err.response.status === 500) {
         console.log("Something Went Wrong")
       }
-        
+
       console.log(err)
     }
   }
@@ -183,16 +200,15 @@ const LeadsModule = () => {
           },
         }
       )
-      const leadData = allLead.data.reverse();
+      const leadData = allLead.data.reverse()
       setAllLeadData(leadData)
       setLeadScalatonCall(false)
-      console.log("all lead data", leadData);
+      console.log("all lead data", leadData)
     } catch (err) {
       console.log(err)
       setLeadScalatonCall(true)
     }
   }
-
 
   const getAllStatusData = async () => {
     try {
@@ -207,41 +223,37 @@ const LeadsModule = () => {
     }
   }
 
-  console.log("all status",getAllStatus);
+  console.log("all status", getAllStatus)
 
- 
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
         <h1 className="table-heading">Leads</h1>
-        {adminRole ? <LeadCreateModel /> :""}
-        
+        {adminRole ? <LeadCreateModel /> : ""}
       </div>
 
       <p className="my-2">
-                <select
-                  className="status-select"
-                  name="status"
-                  onChange={(e) => setStatusDataId(e.target.value)}
-                  id="status"
-                  form="statusChange"
-                >
-                  <option>Change Lead Status</option>
-                  {getAllStatus.map((status, index) => (
-                    <option value={status.id} key={index}>
-                      {status.name}
-                    </option>
-                  ))}
-                </select>
-              </p>
+        <select
+          className="status-select"
+          name="status"
+          onChange={(e) => setStatusDataId(e.target.value)}
+          id="status"
+          form="statusChange"
+        >
+          <option>Change Lead Status</option>
+          {getAllStatus.map((status, index) => (
+            <option value={status.id} key={index}>
+              {status.name}
+            </option>
+          ))}
+        </select>
+      </p>
 
-
-      {leadScalatonCall ? <TableScalaton /> : <UserLeadComponent
-        tableName={""}
-        columns={columns}
-        row={allLeadData}
-      /> }
-      
+      {leadScalatonCall ? (
+        <TableScalaton />
+      ) : (
+        <UserLeadComponent tableName={""} columns={columns} row={allLeadData} />
+      )}
     </div>
   )
 }
