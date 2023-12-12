@@ -14,7 +14,6 @@ const LeadCreateModel = () => {
     leadDescription: "",
     mobileNo: "",
     urls: "",
-    createDate: "",
     lastUpdated: "",
     latestStatusChangeDate: "",
     source: "",
