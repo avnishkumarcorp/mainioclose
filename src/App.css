@@ -391,6 +391,11 @@ button:focus {
   line-height: 20px;
 }
 
+.lead-new{
+  font-size: 16px;
+  color: green;
+}
+
 
 /* mui table */
 
