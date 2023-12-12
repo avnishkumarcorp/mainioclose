@@ -26,7 +26,7 @@ const LeadsModule = () => {
   const [getAllStatus, setGetAllStatus] = useState([])
   const [statusDataId, setStatusDataId] = useState([])
 
-  const [leadStatusD, setLeadStatusD] = useState(false);
+  const [leadStatusD, setLeadStatusD] = useState(false)
 
   useEffect(() => {
     getAllLead()
@@ -117,7 +117,7 @@ const LeadsModule = () => {
       width: 150,
       renderCell: (props) => {
         const leadStatus = props.row.status?.name
-        return <p>{leadStatus ? leadStatus : "NA"}</p>
+        return <p className={leadStatus === "New" ? "lead-new": ""}>{leadStatus ? leadStatus : "NA"}</p>
       },
     },
     { field: "source", headerName: "Source", width: 150 },
@@ -138,21 +138,23 @@ const LeadsModule = () => {
   ]
 
   const leadDeleteResponse = async (id) => {
-    window.confirm('Are you sure to delete this record?')
-    console.log("function call");
-    try {
-      const leadResponse = await axios.delete(
-        `/leadService/api/v1/lead/deleteLead?leadId=${id}&userId=${currentUserId}`,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      setLeadStatusD((prev) => !(prev))
-    } catch (err) {
-      console.log("err", err)
+    if (window.confirm("Are you sure to delete this record?") == true) {
+      try {
+        const leadResponse = await axios.delete(
+          `/leadService/api/v1/lead/deleteLead?leadId=${id}&userId=${currentUserId}`,
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        setLeadStatusD((prev) => !prev)
+      } catch (err) {
+        console.log("err", err)
+      }
+    } else {
+      console.log("You cancel")
     }
   }
 
