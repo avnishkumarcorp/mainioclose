@@ -61,6 +61,8 @@ const LeadDetailsPage = () => {
   const [userDataResponse, setUserDataResponse] = useState([])
   const [estimateOpenBtn, setEstimateOpenBtn] = useState(false)
 
+  const [productDepandence, setProductDepandence] = useState(false);
+
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
@@ -79,6 +81,7 @@ const LeadDetailsPage = () => {
     leadNameReload,
     productDisplayToggle,
     clientContactToggle,
+    productDepandence
   ])
 
   useEffect(() => {
@@ -112,9 +115,12 @@ const LeadDetailsPage = () => {
   const currentUserRoles = useSelector(
     (prev) => prev.AuthReducer.currentUser.roles
   )
+  // const currentUserId = useSelector()
   const adminRole = currentUserRoles.includes("ADMIN")
 
   //  useEffect calls End
+
+    console.log("all product list", allProductsList);
 
   const getAllOportunities = async () => {
     const getOportunities = await getQuery(
@@ -168,7 +174,6 @@ const LeadDetailsPage = () => {
     expectedDate: "",
     statusId: 0,
   })
-
 
   // GET All tasks Status
   const getAllTaskStatus = async () => {
@@ -364,7 +369,7 @@ const LeadDetailsPage = () => {
         "/leadService/api/v1/category/getAllCategories"
       )
       setCategoryData(getCategory.data)
-      console.log("all product data", getCategory);
+      console.log("all product data", getCategory)
     } catch (err) {
       if (err.response.status === 500) {
         console.log("Something Went Wrong")
@@ -372,6 +377,20 @@ const LeadDetailsPage = () => {
     }
   }
 
+  const deleteProductFun = async (e, serviceId) => {
+   
+    // console.log("servive id is ", serviceId);
+    try {
+      const productDelete = await axios.put(
+        `/leadService/api/v1/lead/deleteProductInLead?leadId=${leadPathId}&serviceId=${serviceId}&userId=${currentUserId}`
+      )
+      console.log("delete product succesfully", productDelete);
+      toast.success("product Deleted Sucessfully")
+      setProductDepandence((prev) => !(prev))
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   // GET All Status data
   const getAllStatusData = async () => {
@@ -502,7 +521,6 @@ const LeadDetailsPage = () => {
       console.log("err", err)
     }
   }
-
 
   return (
     <div className="lead-details cm-padding-one">
@@ -681,6 +699,7 @@ const LeadDetailsPage = () => {
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Product Delete"
+                              onClick={(e) => deleteProductFun(e, service.id)}
                             ></i>
                           </div>
                         ) : (
@@ -1173,12 +1192,20 @@ const LeadDetailsPage = () => {
                   {clientsContact.map((client, index) => (
                     <div className="save-lead-data" key={index}>
                       <div>
-                        <p className="lead-heading">{client?.clientName ? `${client?.clientName.slice(0, 30)}...` : "NA"}</p>
+                        <p className="lead-heading">
+                          {client?.clientName
+                            ? `${client?.clientName.slice(0, 30)}...`
+                            : "NA"}
+                        </p>
                         <h6 className="lead-sm-heading mb-0">
-                          {client?.email ? `${client?.email.slice(0,30)}...`: "NA"}
+                          {client?.email
+                            ? `${client?.email.slice(0, 30)}...`
+                            : "NA"}
                         </h6>
                         <h6 className="lead-sm-heading ">
-                          {client.contactNo ? `${client.contactNo.slice(0,20)}...` : "NA"}
+                          {client.contactNo
+                            ? `${client.contactNo.slice(0, 20)}...`
+                            : "NA"}
                         </h6>
                       </div>
                       {adminRole ? (
