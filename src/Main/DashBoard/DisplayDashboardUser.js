@@ -25,6 +25,7 @@ const DisplayDashboardUser = () => {
         },
       })
       setDisplayAllUser(userData.data)
+      console.log("list of user", userData.data);
         setLoading(false);
       
     } catch (err) {
@@ -33,11 +34,12 @@ const DisplayDashboardUser = () => {
 
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150 }, 
+    { field: "id", headerName: "ID", width: 60 }, 
     { field: "fullName", headerName: "Full Name", width: 150 },
-    { field: "email", headerName: "Email", width: 150, hideable: false  },
+    { field: "email", headerName: "Email", width: 240, hideable: false  },
     { field: "designation", headerName: "Designation", width: 150 },
     { field: "department", headerName: "Department", width: 150 },
+    { field: "role", headerName: "Role", width: 150 },
     { field: "Edit", headerName: "Edit", width: 150, renderCell: (params)=>{
         return <button className="table-edit-btn" onClick={(id)=> handleEdit(params.row.id) }><i className="fa-solid fa-pencil"></i></button> 
     }}, 

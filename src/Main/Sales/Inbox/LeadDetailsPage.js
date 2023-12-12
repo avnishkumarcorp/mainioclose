@@ -364,6 +364,7 @@ const LeadDetailsPage = () => {
         "/leadService/api/v1/category/getAllCategories"
       )
       setCategoryData(getCategory.data)
+      console.log("all product data", getCategory);
     } catch (err) {
       if (err.response.status === 500) {
         console.log("Something Went Wrong")
@@ -1172,12 +1173,12 @@ const LeadDetailsPage = () => {
                   {clientsContact.map((client, index) => (
                     <div className="save-lead-data" key={index}>
                       <div>
-                        <p className="lead-heading">{client?.clientName}</p>
+                        <p className="lead-heading">{client?.clientName ? `${client?.clientName.slice(0, 30)}...` : "NA"}</p>
                         <h6 className="lead-sm-heading mb-0">
-                          {client?.email}
+                          {client?.email ? `${client?.email.slice(0,30)}...`: "NA"}
                         </h6>
                         <h6 className="lead-sm-heading ">
-                          {client.contactNo ? client.contactNo : "NA"}
+                          {client.contactNo ? `${client.contactNo.slice(0,20)}...` : "NA"}
                         </h6>
                       </div>
                       {adminRole ? (

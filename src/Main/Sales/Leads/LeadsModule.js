@@ -123,7 +123,7 @@ const LeadsModule = () => {
 
 
   const leadDeleteResponse = async (id) =>{
-    // confirm("Are you sure ?")
+    
     try{
     const leadResponse = await axios.delete(`/leadService/api/v1/lead/deleteLead?leadId=${id}`,{
       headers: {
