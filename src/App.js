@@ -38,6 +38,8 @@ import NewGetFile from "./Routes/NewGetFile"
 import PaswordUpdateMessage from "./Login/PaswordUpdateMessage"
 import ComingSoonPage from "./Home/ComingSoonPage"
 import SettingMainPage from "./Main/Setting/SettingMainPage"
+import LeadStatusPage from "./Main/Setting/LeadStatus/LeadStatusPage"
+import ProductsChange from "./Main/Setting/Products/ProductsChange"
 
 function App() {
   return (
@@ -215,7 +217,10 @@ function App() {
               />
             </Route>
             {/* end */}
-            <Route path="/erp/:id/setting" element={<SettingMainPage />} />
+            <Route path="/erp/:id/setting" element={<SettingMainPage />} >
+              <Route path="" element={<LeadStatusPage />} />
+              <Route path="products" element={<ProductsChange />} />
+            </Route>
 
             {/* profile routes */}
             <Route path="/erp/:id/profile" element={<ComingSoonPage />}>
