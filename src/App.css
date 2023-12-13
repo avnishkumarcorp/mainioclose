@@ -43,6 +43,10 @@ a:hover{
   font-size: 22px;
 } 
 
+.gray-cl{
+  color: #767373;
+}
+
 
 button:focus {
   outline: none;
@@ -322,6 +326,14 @@ button:focus {
 }
 
 
+.setting-table{
+  padding: 20px 0px;
+  font-size: 14px;
+}
+
+
+
+
 
 /* estimate */
 
@@ -394,6 +406,16 @@ button:focus {
 .lead-new{
   font-size: 16px;
   color: green;
+}
+
+.heading-four{
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.link-four{
+  font-size: 14px;
 }
 
 
