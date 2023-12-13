@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const SettingMainPage = () => {
   return (
@@ -7,11 +7,10 @@ const SettingMainPage = () => {
         <p>Side Links</p>
       </div>
       <div className="side-data">
-      <p>Side Data</p>
-    
+        <p>Side Data</p>
       </div>
     </div>
   )
-};
+}
 
-export default SettingMainPage;
+export default SettingMainPage
