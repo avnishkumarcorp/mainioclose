@@ -81,7 +81,7 @@ const LeadStatusPage = () => {
       <h1 className="table-heading">Lead Status</h1>
       <div className="lead-box">
         <form>
-          <label className="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" htmlFor="statusCreate">
             Enter Lead Name
           </label>
           <br />
@@ -94,7 +94,7 @@ const LeadStatusPage = () => {
           />
           {nameError ? <InputErrorComponent value="Name can't be Blank" /> : ""}
           <br />
-          <label className="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" htmlFor="statusCreate">
             Enter Lead Description
           </label>
           <textarea
