@@ -212,6 +212,8 @@ const LeadDetailsPage = () => {
     }
   }
 
+  
+
   // set Inputs data
   const setTasksDataFun = (e) => {
     setAddNewTask((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -227,13 +229,12 @@ const LeadDetailsPage = () => {
 
   // get All Products
 
-  // const ProductUrl = `/leadService/api/v1/product/getAllProducts`;
-  // const depandent = [];
+  const ProductUrl = `/leadService/api/v1/product/getAllProducts`;
+  const depandent = [];
 
-  // const {productData, loading, error } = useCustomRoute
-  // (ProductUrl, depandent);
-  // console.warn("i am Product Data");
-
+  const {productData, loading, error } = useCustomRoute
+  (ProductUrl, depandent);
+  
   // END
 
   const getCatgegoryInputData = (categorySelect) => {
@@ -642,6 +643,7 @@ const LeadDetailsPage = () => {
                           }
                         >
                           <option>Select Product Category</option>
+                          
                           {categoryData.map((cat, index) => (
                             <option key={index} value={cat.categoryName}>
                               {cat.categoryName}
@@ -670,6 +672,11 @@ const LeadDetailsPage = () => {
                               {product?.productName}
                             </option>
                           ))} */}
+                          {productData.map((product, index) => (
+                            <option key={index} value={product?.id}>
+                              {product?.productName}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div className="lead-btn-box">
