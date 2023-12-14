@@ -15,6 +15,7 @@ import DataShowScalaton from "../../../components/Scalaton/DataShowScalaton"
 import EstimateDesignPage from "../Leads/EstimateDesignPage"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { useSelector } from "react-redux"
+import PopUpButton from "../../../components/button/PopUpButton"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -232,7 +233,6 @@ const LeadDetailsPage = () => {
   // const {productData, loading, error } = useCustomRoute
   // (ProductUrl, depandent);
   // console.warn("i am Product Data");
-
 
   // END
 
@@ -745,9 +745,10 @@ const LeadDetailsPage = () => {
                 >
                   <div className="my-card-content">
                     <div className="all-center">
-                      <Link to={"estimate"} className="create-btn">
+                      {/* <Link to={"estimate"} className="create-btn">
                         Create New Estimate
-                      </Link>
+                      </Link> */}
+                      <PopUpButton className="create-btn" name="Create New Estimate" />
                     </div>
                     {/* <form>
                       <div className="product-box">
@@ -791,12 +792,13 @@ const LeadDetailsPage = () => {
                       <h6 className="lead-sm-heading">lead Estimate Create</h6>
                     </div>
                     <div className="lead-heading">
-                      <button
+                      {/* <button
                         onClick={() => openEstimateFun()}
                         className="create-btn padding-two mr-2"
                       >
                         <i className="fa-solid fa-eye"></i>
-                      </button>
+                      </button> */}
+                      {/* <PopUpButton   className="create-btn padding-two" name={<i className="fa-solid fa-eye"></i>} /> */}
                       {adminRole ? <i className="fa-solid fa-trash"></i> : ""}
                     </div>
                   </div>
@@ -1247,18 +1249,26 @@ const LeadDetailsPage = () => {
                 data={notes}
                 setData={setNotes}
               />
-              <FilterButton
+              <PopUpButton  name={"SMS"}
+                icon={<i className="fa-regular fa-message"></i>}
+                className="filter-btn-design"
+                data={sms}  />
+              {/* <FilterButton
                 name={"SMS"}
                 icon={<i className="fa-regular fa-message"></i>}
                 data={sms}
                 setData={setSms}
-              />
-              <FilterButton
+              /> */}
+               <PopUpButton   name={"Email"}
+                icon={<i className="fa-regular fa-envelope"></i>}
+                className="filter-btn-design"
+                data={sms}  />
+              {/* <FilterButton
                 name={"Email"}
                 icon={<i className="fa-regular fa-envelope"></i>}
                 data={email}
                 setData={setEmail}
-              />
+              /> */}
               <Link to={`history`} className="filter-btn-design">
                 <i className="fa-regular mr-1 fa-clipboard"></i>History
                 {/* <FilterButton

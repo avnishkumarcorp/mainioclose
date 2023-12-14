@@ -238,7 +238,7 @@ const LeadsModule = () => {
           id="status"
           form="statusChange"
         >
-          <option>Change Lead Status</option>
+          <option>Filter Status</option>
           {getAllStatus.map((status, index) => (
             <option value={status.id} key={index}>
               {status.name}
