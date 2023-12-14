@@ -3,7 +3,6 @@ import "./Model.css"
 import { postQuery } from "../API/PostQuery"
 import InputErrorComponent from "../components/InputErrorComponent"
 import { useCustomRoute } from "../Routes/GetCustomRoutes"
-// import InputComponent from "../components/InputComponent";
 
 const LeadCreateModel = () => {
   const [leadData, setLeadData] = useState({
@@ -37,8 +36,6 @@ const LeadCreateModel = () => {
   const [sourceError, setSourceError] = useState(false)
   const [leadDescriptionError, setLeadDescriptionError] = useState(false)
 
-  console.log("i am lead Data", leadData)
-
   const nameRef = useRef()
   const emailRef = useRef()
   const leadDescriptionRef = useRef()
@@ -54,29 +51,9 @@ const LeadCreateModel = () => {
   const leadRowData = (e) => {
     setLeadData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
 
-    // if (nameRef.current.value !== "") {
-    //   setNameError(false)
-
-    // }
-
-    // if (emailRef.current.value !== "") {
-    //   setEmailError(false)
-    // }
     if (mobileNoRef.current.value !== "") {
       setMobileNoError(false)
     }
-    // if (cityRef.current.value !== "") {
-    //   setCityError(false)
-    // }
-    // if (ipAddressRef.current.value !== "") {
-    //   setIpAddressError(false)
-    // }
-    // if (sourceRef.current.value !== "") {
-    //   setSourceError(false)
-    // }
-    // if (leadDescriptionRef.current.value !== "") {
-    //   setLeadDescriptionError(false)
-    // }
   }
 
   const newLeadCreate = (e) => {
@@ -89,19 +66,6 @@ const LeadCreateModel = () => {
       setMobileNoError(true)
       return
     }
-    // if (cityRef.current.value === "") {
-    //   setCityError(true)
-    // }
-    // if (ipAddressRef.current.value === "") {
-    //   setIpAddressError(true)
-    // }
-    // if (sourceRef.current.value === "") {
-    //   setSourceError(true)
-    // }
-    // if (leadDescriptionRef.current.value === "") {
-    //   setLeadDescriptionError(true)
-    //   return
-    // }
 
     const leadCreateFun = async () => {
       try {
@@ -109,7 +73,6 @@ const LeadCreateModel = () => {
           `/leadService/api/v1/lead/createLead`,
           leadData
         )
-        console.log("lead crteated ", createNewLeadData)
         window.location.reload()
       } catch (err) {
         console.log(err)
@@ -122,10 +85,6 @@ const LeadCreateModel = () => {
   const leadUserData = []
 
   const { productData: allLeadUser } = useCustomRoute(leadUserUrl, leadUserData)
-
-  console.log("user by hook", allLeadUser)
-
-  console.log("row data is ", leadData)
 
   return (
     <nav>

@@ -35,8 +35,7 @@ const CreateuserDashboard = () => {
   }
 
 
-  console.log("row datta", userRowData);
-
+ 
   const userRowDataFetch = (e) => {
     setUserRowData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
@@ -52,22 +51,18 @@ const CreateuserDashboard = () => {
 
  const {productData: allDataRole} = useCustomRoute(roleUrl, roleData);
 
-//  console.warn("data by hook");
-//  console.log("role data", allDataRole);
 
   const getAllRole = async () => {
     try {
       const allRoleResponse = await getQuery(
         `/securityService/api/v1/roles/getRole`
       )
-      // console.log("all roles", allRoleResponse.data);
       setAllRoles(allRoleResponse.data)
     } catch (err) {
       console.log("err", err)
     }
   }
 
-  // console.log("i am role response", userRowData)
 
   const createuserData = (e) => {
     e.preventDefault()
@@ -94,18 +89,9 @@ const CreateuserDashboard = () => {
           `/securityService/api/auth/createNewUserByEmail`,
           userRowData
         )
-        console.warn("user crate data");
-        console.log("user data user is created ", createNewUserData)
-        console.log(
-          createNewUserData.data.data.name,
-          createNewUserData.data.data.email,
-          createNewUserData.data.data.role,
-          createNewUserData.data.data.userId
-        )
 
         let roleData = createNewUserData.data.data.role.map((role)=> (role.name));
 
-        console.log("all role name", roleData);
 
 
         const newLeadObject = {
@@ -116,10 +102,8 @@ const CreateuserDashboard = () => {
           userName: createNewUserData.data.data.name,
         }
 
-        console.log("New Lead ", newLeadObject)
 
         const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, newLeadObject);
-        console.log("user created done", createLeadUserByEmail);
         setBtnLoading(false);
         roleRef.current.value = "" 
         emailRef.current.value = "" 

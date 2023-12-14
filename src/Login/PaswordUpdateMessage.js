@@ -6,10 +6,10 @@ const PaswordUpdateMessage = () => {
   return (
     <div className="main-boxes">
       <div className="circle-tik">
-      <i class="fa-solid check-icon fa-check"></i>
+      <i className="fa-solid check-icon fa-check"></i>
       </div>
-      <p class="update-message">Password Update Sucessfully</p>
-      <p class="update-message">Please Login</p>
+      <p className="update-message">Password Update Sucessfully</p>
+      <p className="update-message">Please Login</p>
       <Link to="/erp/login" className="first-button ">Go to Login Page</Link>
     </div>
   )
