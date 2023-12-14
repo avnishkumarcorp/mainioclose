@@ -25,7 +25,6 @@ const DisplayDashboardUser = () => {
         },
       })
       setDisplayAllUser(userData.data)
-      console.log("list of user", userData.data);
         setLoading(false);
       
     } catch (err) {

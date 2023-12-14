@@ -120,7 +120,6 @@ const LeadDetailsPage = () => {
 
   //  useEffect calls End
 
-  console.log("all product list", allProductsList)
 
   const getAllOportunities = async () => {
     const getOportunities = await getQuery(
@@ -234,7 +233,6 @@ const LeadDetailsPage = () => {
   // (ProductUrl, depandent);
   // console.warn("i am Product Data");
 
-  console.log("category data", categoryData);
 
   // END
 
@@ -383,7 +381,6 @@ const LeadDetailsPage = () => {
         "/leadService/api/v1/category/getAllCategories"
       )
       setCategoryData(getCategory.data)
-      console.log("all product data", getCategory)
     } catch (err) {
       if (err.response.status === 500) {
         console.log("Something Went Wrong")
@@ -392,12 +389,10 @@ const LeadDetailsPage = () => {
   }
 
   const deleteProductFun = async (e, serviceId) => {
-    // console.log("servive id is ", serviceId);
     try {
       const productDelete = await axios.put(
         `/leadService/api/v1/lead/deleteProductInLead?leadId=${leadPathId}&serviceId=${serviceId}&userId=${currentUserId}`
       )
-      console.log("delete product succesfully", productDelete)
       toast.success("product Deleted Sucessfully")
       setProductDepandence((prev) => !prev)
     } catch (err) {
@@ -571,7 +566,7 @@ const LeadDetailsPage = () => {
                 </button> */}
                 <i
                   onClick={(e) => updateLeadNameSinglePage(e)}
-                  class=" fa-solid green-cl disk-size fa-floppy-disk"
+                  className=" fa-solid green-cl disk-size fa-floppy-disk"
                 ></i>
               </>
             )}

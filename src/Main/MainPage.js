@@ -11,17 +11,20 @@ import { useId } from "react"
 import { customLocation } from "../Hooks/LocationCustomHook"
 toast.configure()
 
-
 const MainPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const paramId = customLocation(2, location); 
+  const paramId = customLocation(2, location)
 
   const currentUserToken = useSelector((state) => state.AuthReducer.token)
   const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
   useEffect(() => {
     let UserToken = localStorage.getItem("Access-token")
-    if (!UserToken || currentUserToken !== UserToken || currentUserId !== paramId) {
+    if (
+      !UserToken ||
+      currentUserToken !== UserToken ||
+      currentUserId !== paramId
+    ) {
       localStorage.removeItem("Access-token")
       navigate("/erp/login")
       toast.error("your Session has Expired Please Login again")

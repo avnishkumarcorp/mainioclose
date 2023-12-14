@@ -81,7 +81,7 @@ const SideBar = () => {
               aria-controls="collapseDashboardModule"
             >
               <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-              <i class="fa-solid fa-house"></i> Dashboard
+              <i className="fa-solid fa-house"></i> Dashboard
             </NavLink>
             <div
               id={`collapseDashboardModule`}
@@ -191,7 +191,7 @@ const SideBar = () => {
             aria-controls="collapseSalesModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i class="fa-regular mr-2 fa-rectangle-list"></i> Sales
+            <i className="fa-regular mr-2 fa-rectangle-list"></i> Sales
           </NavLink>
           <div
             id={`collapseSalesModule`}
@@ -204,26 +204,26 @@ const SideBar = () => {
                 className="link-itemss"
                 to={`${currentUserId}/sales/leads`}
               >
-                <i class="fa-solid mr-1 fa-calculator"></i> Leads
+                <i className="fa-solid mr-1 fa-calculator"></i> Leads
               </NavLink>
               <NavLink
                 className="link-itemss"
                 to={`${currentUserId}/sales/oppurtities`}
               >
-                <i class="fa-solid mr-1 fa-trophy"></i>Oppurtities
+                <i className="fa-solid mr-1 fa-trophy"></i>Oppurtities
               </NavLink>
               <NavLink className="link-itemss" to="sales/estimate">
-                <i class="fa-solid mr-1 fa-file-lines"></i>Estimate
+                <i className="fa-solid mr-1 fa-file-lines"></i>Estimate
               </NavLink>
               <NavLink className="link-itemss" to="sales/orders">
-                <i class="fa-solid mr-1 fa-box"></i> Orders
+                <i className="fa-solid mr-1 fa-box"></i> Orders
               </NavLink>
               <NavLink className="link-itemss" to="sales/contacts">
-                <i class="fa-solid mr-1 fa-user"></i> Contacts
+                <i className="fa-solid mr-1 fa-user"></i> Contacts
               </NavLink>
 
               <NavLink className="link-itemss" to={`${currentUserId}/sales`}>
-                <i class="fa-solid mr-1 fa-inbox"></i>Inbox
+                <i className="fa-solid mr-1 fa-inbox"></i>Inbox
               </NavLink>
             </div>
           </div>
@@ -242,7 +242,7 @@ const SideBar = () => {
             aria-controls="collapseAccountModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i class="fa-solid fa-money-check-dollar"></i> Accounts
+            <i className="fa-solid fa-money-check-dollar"></i> Accounts
           </NavLink>
           <div
             id={`collapseAccountModule`}
@@ -286,7 +286,7 @@ const SideBar = () => {
             aria-controls="collapseOperationModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i class="fa-solid fa-gears"></i> Operations
+            <i className="fa-solid fa-gears"></i> Operations
           </NavLink>
           <div
             id={`collapseOperationModule`}
@@ -330,7 +330,7 @@ const SideBar = () => {
             aria-controls="collapseManageClientModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i class="fa-solid fa-people-arrows"></i> Manage Clients
+            <i className="fa-solid fa-people-arrows"></i> Manage Clients
           </NavLink>
           <div
             id={`collapseManageClientModule`}
@@ -419,7 +419,7 @@ const SideBar = () => {
             aria-controls="collapseQualityModule"
           >
             <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i class="fa-solid fa-filter"></i> Quality
+            <i className="fa-solid fa-filter"></i> Quality
           </NavLink>
           <div
             id={`collapseQualityModule`}
@@ -457,8 +457,8 @@ const SideBar = () => {
             className={`nav-heading ${({ isActive }) =>
               isActive ? "linkactive" : ""}`}
           >
-          <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-regular mr-2 fa-user"></i>  Setting
+            <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+            <i className="fa-regular mr-2 fa-user"></i> Setting
           </NavLink>
         </div>
 

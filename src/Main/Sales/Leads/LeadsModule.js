@@ -46,8 +46,6 @@ const LeadsModule = () => {
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
 
-  console.warn("dsnskjdndjk")
-  console.log("path is", splitPath)
 
   const currentUserRoles = useSelector(
     (prev) => prev.AuthReducer.currentUser.roles
@@ -205,7 +203,6 @@ const LeadsModule = () => {
       const leadData = allLead.data.reverse()
       setAllLeadData(leadData)
       setLeadScalatonCall(false)
-      console.log("all lead data", leadData)
     } catch (err) {
       console.log(err)
       setLeadScalatonCall(true)
@@ -225,8 +222,7 @@ const LeadsModule = () => {
     }
   }
 
-  console.log("all status", getAllStatus)
-
+ 
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">

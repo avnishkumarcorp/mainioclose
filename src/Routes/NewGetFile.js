@@ -16,9 +16,7 @@ const NewGetFile = () => {
 
   const {productData, loading, error} = useCustomRoute(url, dataOne);
 
-  console.log(productData);
-  console.log(loading);
-
+  
   return (
     <div>
         <h2>Data</h2>

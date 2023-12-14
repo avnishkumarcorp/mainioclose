@@ -25,8 +25,6 @@ const LeadStatusPage = () => {
     setCreateStatus((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  // console.log("craete status", createStatus);
-
   const leadStatusCreateFun = (e) => {
     e.preventDefault()
 
@@ -42,7 +40,6 @@ const LeadStatusPage = () => {
           `/leadService/api/v1/status/CreateLeadStatus`,
           createStatus
         )
-        console.log("data is", createNewStatus)
         setLeadCreateDep((prev) => !prev)
         nameRef.current.value = ""
         descriptionRef.current.value = ""
@@ -84,7 +81,7 @@ const LeadStatusPage = () => {
       <h1 className="table-heading">Lead Status</h1>
       <div className="lead-box">
         <form>
-          <label class="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" for="statusCreate">
             Enter Lead Name
           </label>
           <br />
@@ -97,7 +94,7 @@ const LeadStatusPage = () => {
           />
           {nameError ? <InputErrorComponent value="Name can't be Blank" /> : ""}
           <br />
-          <label class="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" for="statusCreate">
             Enter Lead Description
           </label>
           <textarea
@@ -116,7 +113,7 @@ const LeadStatusPage = () => {
 
         <div className="mt-4 setting-table">
           <div className="table-responsive">
-            <table class="table">
+            <table className="table">
               <thead>
                 <tr>
                   <th scope="col">id</th>
@@ -136,12 +133,12 @@ const LeadStatusPage = () => {
                       <td>{status.name}</td>
                       <td>{status.description}</td>
                       <td>
-                        <i class="fa-solid gray-cl fa-pencil"></i>
+                        <i className="fa-solid gray-cl fa-pencil"></i>
                       </td>
                       <td>
                         <i
                           onClick={() => deleteStatusFun(status.id)}
-                          class="fa-solid gray-cl fa-trash"
+                          className="fa-solid gray-cl fa-trash"
                         ></i>{" "}
                       </td>
                     </tr>
