@@ -12,9 +12,7 @@ const DisplayDashboardUser = () => {
     displayUser()
   }, [])
 
-  const handleEdit = (id) =>{
-    console.log("Selected row id is ", id);
-  }
+
 
   const displayUser = async () => {
     try {
@@ -39,9 +37,6 @@ const DisplayDashboardUser = () => {
     { field: "designation", headerName: "Designation", width: 150 },
     { field: "department", headerName: "Department", width: 150 },
     { field: "role", headerName: "Role", width: 150 },
-    { field: "Edit", headerName: "Edit", width: 150, renderCell: (params)=>{
-        return <button className="table-edit-btn" onClick={(id)=> handleEdit(params.row.id) }><i className="fa-solid fa-pencil"></i></button> 
-    }}, 
   ]
 
   // /leadService/api/v1/users/getAllUser
