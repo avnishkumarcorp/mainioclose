@@ -119,7 +119,6 @@ const LeadStatusPage = () => {
                   <th scope="col">id</th>
                   <th scope="col">Name</th>
                   <th scope="col">Description</th>
-                  <th scope="col">Edit</th>
                   <th scope="col">Delete</th>
                 </tr>
               </thead>
@@ -132,9 +131,6 @@ const LeadStatusPage = () => {
                       <th>{status.id}</th>
                       <td>{status.name}</td>
                       <td>{status.description}</td>
-                      <td>
-                        <i className="fa-solid gray-cl fa-pencil"></i>
-                      </td>
                       <td>
                         <i
                           onClick={() => deleteStatusFun(status.id)}

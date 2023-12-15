@@ -451,6 +451,8 @@ const SideBar = () => {
           </div>
         </div>
 
+        { adminRole &&
+
         <div className="side-tabs">
           <NavLink
             to={`/erp/${currentUserId}/setting`}
@@ -461,6 +463,8 @@ const SideBar = () => {
             <i className="fa-regular mr-2 fa-user"></i> Setting
           </NavLink>
         </div>
+
+       }
 
         {/* end */}
 

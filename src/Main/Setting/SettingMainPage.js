@@ -14,13 +14,7 @@ const SettingMainPage = () => {
           <Link className="link-four" to={`/erp/${currentUserId}/setting`}>
             Lead Status
           </Link>
-          <br />
-          <Link
-            className="link-four"
-            to={`/erp/${currentUserId}/setting/products`}
-          >
-            Lead test
-          </Link>
+          
         </div>
       </div>
       <div className="side-data">

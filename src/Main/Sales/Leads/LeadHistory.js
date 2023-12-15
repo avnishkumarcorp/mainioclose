@@ -44,7 +44,8 @@ const LeadHistory = () => {
       const leadHistory = await getQuery(
         `/leadService/api/v1/leadHistory/getAllLeadHistory?leadId=${leadId}`
       )
-      setLeadHistoryData(leadHistory.data)
+
+      setLeadHistoryData(leadHistory.data.reverse())
       setHistoryScalaton(false);
     } catch (err) {
         if(err.response.status === 500){

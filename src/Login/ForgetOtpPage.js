@@ -9,7 +9,7 @@ import InputErrorComponent from "../components/InputErrorComponent"
 
 const ForgetOtpPage = () => {
   const [otpData, setOtpData] = useState({})
-  const [validOtpErr, setValidOtpErr] = useState(false);
+  const [validOtpErr, setValidOtpErr] = useState(false)
 
   const forgetOtpResponse = useSelector(
     (auth) => auth.AuthReducer.forgetPassword
@@ -17,7 +17,6 @@ const ForgetOtpPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
- 
   const firstRef = useRef()
   const secondRef = useRef()
   const thirdRef = useRef()
@@ -25,38 +24,43 @@ const ForgetOtpPage = () => {
   const fiveRef = useRef()
   const sixRef = useRef()
 
-
-
   const userOtpValidate = (e) => {
     e.preventDefault()
-    let one = Object.values(otpData)
-    const finalOtp = one.join("")
+    // let one = Object.values(otpData)
+    // const finalOtp = one.join("")
 
-    if(forgetOtpResponse.otp !== finalOtp ){
-      setValidOtpErr(true)
-      return
-    }
+    // if(forgetOtpResponse.otp !== finalOtp ){
+    //   setValidOtpErr(true)
+    //   return
+    // }
 
-    let { mobile , otp } = {...forgetOtpResponse};
+    navigate("/erp/change")
 
-    const validateuserData = async () => {
-      try {
-        const validateUser = await axios.get(`/securityService/api/auth/validateOtp?mobile=${mobile}&otpNo=${otp}`,{
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        })
-        if(validateUser.data.status === 200 && validateUser.data.isSuccess === true){
-          navigate("/erp/change");
-        } 
+    let { mobile, otp } = { ...forgetOtpResponse }
 
-      } catch (err) {
-        setValidOtpErr(true);
-      }
-    }
+    // const validateuserData = async () => {
+    //   try {
+    //     const validateUser = await axios.get(
+    //       `/securityService/api/auth/validateOtp?mobile=${mobile}&otpNo=${otp}`,
+    //       {
+    //         headers: {
+    //           "Access-Control-Allow-Origin": "*",
+    //           "Content-Type": "application/json",
+    //         },
+    //       }
+    //     )
+    //     if (
+    //       validateUser.data.status === 200 &&
+    //       validateUser.data.isSuccess === true
+    //     ) {
+    //       navigate("/erp/change")
+    //     }
+    //   } catch (err) {
+    //     setValidOtpErr(true)
+    //   }
+    // }
 
-    validateuserData()
+    // validateuserData()
   }
 
   const sendTimer = () => {
@@ -105,11 +109,6 @@ const ForgetOtpPage = () => {
       sixRef.current.focus()
     }
   }
-
-
-
-  
-
 
   return (
     <div className="container otp-page">
@@ -190,13 +189,18 @@ const ForgetOtpPage = () => {
           onKeyUp={(e) => handleKeyUp(e)}
         />
       </div>
-      {validOtpErr ? 
-       <InputErrorComponent value="Otp not match please Enter a valid Otp" /> : ""}
-       
+      {validOtpErr ? (
+        <InputErrorComponent value="Otp not match please Enter a valid Otp" />
+      ) : (
+        ""
+      )}
+
       <div className="resend-timer">
         <OtpTimer seconds={30} minutes={1} resend={sendTimer} />
       </div>
-      <button onClick={(e) => userOtpValidate(e)} className="login-button">
+      <button 
+      onClick={(e) => userOtpValidate(e)}
+       className="login-button">
         Continue
       </button>
     </div>
