@@ -58,7 +58,6 @@ const ForgetPassword = () => {
         )
         dispatch(forgetPasswordAction(passwordOtp.data))
         setLoading(false)
-        console.log(passwordOtp.data);
         navigate("/erp/forgetotp")
       } catch (err) {
         if (err.response.status === 500) {
