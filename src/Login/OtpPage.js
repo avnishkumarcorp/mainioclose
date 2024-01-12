@@ -118,8 +118,8 @@ const OtpPage = () => {
   return (
     <div className="container otp-page">
       <h2 className="otp-heading">Enter confirmation code</h2>
-      <p className="otp-number">A 4-digit code was sent to</p>
-      <p className="otp-number">+91 99* * * * * * 18</p>
+      <p className="otp-number">A 6-digit code was sent to your <b>Mail ID</b></p>
+      <p className="otp-number">*****@gmail.com</p>
       <div className="input-boxes">
         <input
           className="single-input"
