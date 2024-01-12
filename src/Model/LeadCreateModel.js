@@ -73,7 +73,7 @@ const LeadCreateModel = () => {
           `/leadService/api/v1/lead/createLead`,
           leadData
         )
-        window.location.reload()
+        // window.location.reload()
       } catch (err) {
         console.log(err)
       }

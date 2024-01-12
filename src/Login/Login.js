@@ -157,12 +157,12 @@ const Login = () => {
         onClick={(e) => userSignIn(e)}
         className={`my-3`}
       />
-      <p className="note-user">
+      {/* <p className="note-user">
         Not a User{" "}
         <Link className="ml-1 out-none" to="/erp/signup">
           Signup
         </Link>
-      </p>
+      </p> */}
     </div>
   )
 }

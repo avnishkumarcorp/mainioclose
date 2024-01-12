@@ -40,6 +40,7 @@ import ComingSoonPage from "./Home/ComingSoonPage"
 import SettingMainPage from "./Main/Setting/SettingMainPage"
 import LeadStatusPage from "./Main/Setting/LeadStatus/LeadStatusPage"
 import ProductsChange from "./Main/Setting/Products/ProductsChange"
+import NotFoundPage from "./components/NotFoundPage"
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/newfile" element={<NewGetFile />}></Route>
-          <Route path="*" element={<div>not found</div>} />
+          <Route path="*" element={<NotFoundPage />} />
           <Route path="/" element={<HomePage />}>
             <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />
@@ -68,8 +69,8 @@ function App() {
           </Route>
 
           <Route path="/erp" element={<MainPage />}>
-            <Route path=":id" element={<DashBoard />}>
-              <Route path="users" element={<DisplayDashboardUser />} />
+            <Route path=":id/users" element={<DashBoard />}>
+              <Route path="" element={<DisplayDashboardUser />} />
               <Route path="muiuser" element={<DisplayUserTwo />} />
             </Route>
             {/* hr module routes */}
