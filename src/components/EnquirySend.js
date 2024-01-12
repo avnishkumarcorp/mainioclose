@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import FirstInput from "./Inputs/FirstInput"
 import SecondInput from "./Inputs/SecondInput"
+import InputErrorComponent from "./InputErrorComponent"
 toast.configure()
 
 const EnquirySend = () => {
@@ -23,6 +24,8 @@ const EnquirySend = () => {
     description: "",
     subject: "",
   })
+
+  const [subError, setSubError] = useState(false);
 
   const subjectRef = useRef()
   const descriptionRef = useRef()
@@ -43,9 +46,18 @@ const EnquirySend = () => {
 
   const submitTicketFun = (e) => {
     e.preventDefault()
+    if(subjectRef.current.value === ""){
+      setSubError(true);
+      return
+    }
 
     const submitTicketData = async () => {
+      
+     
+
       setLoading(true)
+
+
       try {
         const ticket = await postQuery(
           `/leadService/api/v1/createTicket`,
@@ -94,6 +106,7 @@ const EnquirySend = () => {
                 ref={descriptionRef}
                 onChange={(e) => ticketInfo(e)}
               ></textarea>
+             {subError ? <InputErrorComponent value="Subject Can't be Blank" /> : "" } 
               <button
                 className="action-btn"
                 onClick={(e) => submitTicketFun(e)}

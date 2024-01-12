@@ -67,7 +67,7 @@ const LeadsModule = () => {
     },
     {
       field: "assigneeName",
-      headerName: "Assignee",
+      headerName: "Assignee Person",
       width: 150,
       renderCell: (props) => {
         return <p className="mb-0">{props?.row?.assignee?.fullName}</p>
@@ -87,7 +87,7 @@ const LeadsModule = () => {
     },
     {
       field: "assignee",
-      headerName: "Assignee",
+      headerName: "Change Assignee",
       width: 170,
       renderCell: (props) => {
         return (

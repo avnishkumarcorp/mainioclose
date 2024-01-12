@@ -72,7 +72,7 @@ const SideBar = () => {
         {adminRole ? (
           <div className="side-tabs">
             <NavLink
-              to={`/erp/${currentUserId}`}
+              to={`/erp/${currentUserId}/users`}
               className={`nav-heading ${({ isActive }) =>
                 isActive ? "linkactive" : ""}`}
               data-toggle="collapse"
@@ -135,49 +135,7 @@ const SideBar = () => {
       </div> */}
         {/* end */}
 
-        {/* hr links start */}
-        <div className="side-tabs">
-          <NavLink
-            to={`/erp/${currentUserId}/hr`}
-            className={`nav-heading ${({ isActive }) =>
-              isActive ? "linkactive" : ""}`}
-            data-toggle="collapse"
-            data-target={`#collapseHrModule`}
-            aria-expanded="true"
-            aria-controls="collapseHrModule"
-          >
-            <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> HR
-          </NavLink>
-          <div
-            id={`collapseHrModule`}
-            className="collapse"
-            aria-labelledby="headingOne"
-            data-parent="#accordion"
-          >
-            {/* <div className="link-child">
-              <NavLink className="link-itemss" to="hr">
-                HR First
-              </NavLink>
-              <NavLink className="link-itemss" to="hr/hrlinktwo">
-                HR Second
-              </NavLink>
-              <NavLink className="link-itemss" to="hr/hrlinkthree">
-                HR Third
-              </NavLink>
-              <NavLink className="link-itemss" to="hr/hrlinkfour">
-                HR Forth
-              </NavLink>
-              <NavLink className="link-itemss" to="hr/hrlinkfive">
-                HR Fifth
-              </NavLink>
-              <NavLink className="link-itemss" to="hr/hrlinksix">
-                HR Six
-              </NavLink>
-            </div> */}
-          </div>
-        </div>
-        {/* end */}
+   
 
         {/* sales links start */}
         <div className="side-tabs">
@@ -229,6 +187,52 @@ const SideBar = () => {
           </div>
         </div>
         {/* end */}
+
+           {/* hr links start */}
+           <div className="side-tabs">
+          <NavLink
+            to={`/erp/${currentUserId}/hr`}
+            className={`nav-heading ${({ isActive }) =>
+              isActive ? "linkactive" : ""}`}
+            data-toggle="collapse"
+            data-target={`#collapseHrModule`}
+            aria-expanded="true"
+            aria-controls="collapseHrModule"
+          >
+            <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+            <i className="fa-solid mr-2 fa-gear"></i> HR
+          </NavLink>
+          <div
+            id={`collapseHrModule`}
+            className="collapse"
+            aria-labelledby="headingOne"
+            data-parent="#accordion"
+          >
+            {/* <div className="link-child">
+              <NavLink className="link-itemss" to="hr">
+                HR First
+              </NavLink>
+              <NavLink className="link-itemss" to="hr/hrlinktwo">
+                HR Second
+              </NavLink>
+              <NavLink className="link-itemss" to="hr/hrlinkthree">
+                HR Third
+              </NavLink>
+              <NavLink className="link-itemss" to="hr/hrlinkfour">
+                HR Forth
+              </NavLink>
+              <NavLink className="link-itemss" to="hr/hrlinkfive">
+                HR Fifth
+              </NavLink>
+              <NavLink className="link-itemss" to="hr/hrlinksix">
+                HR Six
+              </NavLink>
+            </div> */}
+          </div>
+        </div>
+        {/* end */}
+
+
 
         {/* accounts links start */}
         <div className="side-tabs">
