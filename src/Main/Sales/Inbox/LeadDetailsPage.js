@@ -754,10 +754,10 @@ const LeadDetailsPage = () => {
                 >
                   <div className="my-card-content">
                     <div className="all-center">
-                      {/* <Link to={"estimate"} className="create-btn">
+                      <Link to={"estimate"} className="create-btn">
                         Create New Estimate
-                      </Link> */}
-                      <PopUpButton className="create-btn" name="Create New Estimate" />
+                      </Link>
+                      {/* <PopUpButton className="create-btn" name="Create New Estimate" /> */}
                     </div>
                     {/* <form>
                       <div className="product-box">

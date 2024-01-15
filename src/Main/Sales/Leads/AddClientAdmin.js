@@ -14,6 +14,7 @@ const AddClientAdmin = () => {
         contactNo: "",
         email: ""
     });
+    const [clientLoading, setClientLoading] = useState(false);
 
     const nameRef = useRef();
     const emailRef = useRef();
@@ -27,16 +28,20 @@ const AddClientAdmin = () => {
  
     const submitClientFun = (e) => {
         e.preventDefault();
+        setClientLoading(true)
         const submitData = async () =>{
             try{
             const clientResponseData = await postQuery(`/leadService/api/v1/client/createClient`,createClientData);
             nameRef.current.value = ""
             emailRef.current.value = ""
             mobileRef.current.value = ""
+            window.location.reload();
+            setClientLoading(false)
             toast.success("Client Added Sucessfully")
 
             }catch(err){
                 console.log(err)
+                setClientLoading(false)
             }
         }
 
@@ -140,7 +145,7 @@ const AddClientAdmin = () => {
               >
                 Close
               </button>
-              <ButtonTwo  type="button" onClick={(e)=> submitClientFun(e)} className="action-btn" data="Save Client" /> 
+              <ButtonTwo type="button" onClick={(e)=> submitClientFun(e)} className="action-btn" data={clientLoading ? "Loading..." : "Save Client"} /> 
             </div>
           </div>
         </div>
