@@ -754,10 +754,10 @@ const LeadDetailsPage = () => {
                 >
                   <div className="my-card-content">
                     <div className="all-center">
-                      {/* <Link to={"estimate"} className="create-btn">
+                      <Link to={"estimate"} className="create-btn">
                         Create New Estimate
-                      </Link> */}
-                      <PopUpButton className="create-btn" name="Create New Estimate" />
+                      </Link>
+                      {/* <PopUpButton className="create-btn" name="Create New Estimate" /> */}
                     </div>
                     {/* <form>
                       <div className="product-box">
@@ -801,12 +801,12 @@ const LeadDetailsPage = () => {
                       <h6 className="lead-sm-heading">lead Estimate Create</h6>
                     </div>
                     <div className="lead-heading">
-                      {/* <button
+                      <button
                         onClick={() => openEstimateFun()}
                         className="create-btn padding-two mr-2"
                       >
                         <i className="fa-solid fa-eye"></i>
-                      </button> */}
+                      </button>
                       {/* <PopUpButton   className="create-btn padding-two" name={<i className="fa-solid fa-eye"></i>} /> */}
                       {adminRole ? <i className="fa-solid fa-trash"></i> : ""}
                     </div>
