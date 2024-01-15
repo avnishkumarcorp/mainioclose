@@ -35,6 +35,7 @@ const LeadCreateModel = () => {
   const [ipAddressError, setIpAddressError] = useState(false)
   const [sourceError, setSourceError] = useState(false)
   const [leadDescriptionError, setLeadDescriptionError] = useState(false)
+  const [leadLoading, setLeadLoading] = useState();
 
   const nameRef = useRef()
   const emailRef = useRef()
@@ -66,6 +67,7 @@ const LeadCreateModel = () => {
       setMobileNoError(true)
       return
     }
+    setLeadLoading(true)
 
     const leadCreateFun = async () => {
       try {
@@ -73,9 +75,11 @@ const LeadCreateModel = () => {
           `/leadService/api/v1/lead/createLead`,
           leadData
         )
-        // window.location.reload()
+        window.location.reload()
+        setLeadLoading(false)
       } catch (err) {
         console.log(err)
+        setLeadLoading(false)
       }
     }
     leadCreateFun()
@@ -434,7 +438,7 @@ const LeadCreateModel = () => {
                             onClick={(e) => newLeadCreate(e)}
                             className="first-button form-prev-btn"
                           >
-                            Submit
+                           {leadLoading ? "Loading...":  "Submit"} 
                           </button>
                         </div>
                       </div>
