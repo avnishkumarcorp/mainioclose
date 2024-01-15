@@ -6,6 +6,7 @@ import { getQuery } from "../../../API/GetQuery"
 import { useEffect } from "react"
 import AddNewCompany from "./AddNewCompany"
 import AddContact from "./AddContact"
+import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 
 const EstimateCreatePage = () => {
   const [allClient, setAllClient] = useState([])
@@ -14,6 +15,21 @@ const EstimateCreatePage = () => {
   useEffect(() => {
     getAllClient()
   }, [])
+
+  const getAllCompUrl  = `/leadService/api/v1/company/getAllCompany`
+  const getAllCompDep = [];
+
+  const { productData: allCompanyData, loading: compnayLoading, error: companyError} = useCustomRoute(getAllCompUrl, getAllCompDep);
+
+  console.log("all company data", allCompanyData);
+
+  const allClientUrl = `/leadService/api/v1/client/getAllClientInfo`
+  const allClientDep = []
+
+  const { productData: allClientInfo, loading: clientLoading, error: clientError} = useCustomRoute(allClientUrl, allClientDep);
+
+  console.log("all client Info", allClientInfo);
+
 
   const getAllClient = async () => {
     try {

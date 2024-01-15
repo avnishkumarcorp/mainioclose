@@ -10,7 +10,7 @@ toast.configure()
 
 const LeadHistory = () => {
   const [leadHistoryData, setLeadHistoryData] = useState([])
-  const [historyScalaton, setHistoryScalaton] = useState(true);
+  const [historyScalaton, setHistoryScalaton] = useState(true)
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -46,14 +46,14 @@ const LeadHistory = () => {
       )
 
       setLeadHistoryData(leadHistory.data.reverse())
-      setHistoryScalaton(false);
+      setHistoryScalaton(false)
     } catch (err) {
-        if(err.response.status === 500){
-            toast.error("Something Went Wrong")
-        }
-        if(err.response.status === 401){
-            toast.error("Something Went Wrong")
-        }
+      if (err.response.status === 500) {
+        toast.error("Something Went Wrong")
+      }
+      if (err.response.status === 401) {
+        toast.error("Something Went Wrong")
+      }
       console.log("Err", err)
     }
   }
@@ -61,8 +61,11 @@ const LeadHistory = () => {
   return (
     <div className="p-3">
       <h3 className="big-heading">Lead History</h3>
-      {historyScalaton ? <TableScalaton /> : <UserLeadComponent row={leadHistoryData} columns={columns} />}
-      
+      {historyScalaton ? (
+        <TableScalaton />
+      ) : (
+        <UserLeadComponent row={leadHistoryData} columns={columns} />
+      )}
     </div>
   )
 }
