@@ -8,14 +8,17 @@ import { store2 } from "./Redux/store"
 import { Persistor } from "./Redux/store"
 // import { PersistorGate } from "redux-persist/es/integration/react"
 import { PersistGate } from 'redux-persist/es/integration/react'
+import { store } from "./Toolkit/store"
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <>
+  <Provider store={store}>
     <Provider store={store2}>
       <PersistGate Loading={null} persistor = {Persistor}>
       <App />
       </PersistGate>
+    </Provider>
     </Provider>
   </>
 )

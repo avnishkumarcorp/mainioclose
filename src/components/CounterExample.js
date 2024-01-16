@@ -1,18 +1,21 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Decrement, Increment } from "../Redux/Action/CounterAction"
+import { getCurrentUser } from "../Toolkit/Slices/AuthSlice"
 
 const CounterExample = () => {
-  // const counterValue = useSelector((state) => state.counterReducer)
-  // const dispatch = useDispatch()
+  const counterValue = useSelector((state) => state.auth)
+  console.log("counter is", counterValue);
+  
+  const dispatch = useDispatch()
 
   return (
     <div>
       <button
-        // onClick={() => dispatch(Increment(1))}
+        onClick={() => dispatch(getCurrentUser({email: "aryan1@gmail.com", password: "password"}))}
         className="btn btn-primary"
       >
-        Increment
+        Add user
       </button>
       {/* <h1>{counterValue}</h1> */}
       <button
