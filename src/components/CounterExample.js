@@ -3,20 +3,20 @@ import { useDispatch, useSelector } from "react-redux"
 import { Decrement, Increment } from "../Redux/Action/CounterAction"
 
 const CounterExample = () => {
-  const counterValue = useSelector((state) => state.counterReducer)
-  const dispatch = useDispatch()
+  // const counterValue = useSelector((state) => state.counterReducer)
+  // const dispatch = useDispatch()
 
   return (
     <div>
       <button
-        onClick={() => dispatch(Increment(1))}
+        // onClick={() => dispatch(Increment(1))}
         className="btn btn-primary"
       >
         Increment
       </button>
-      <h1>{counterValue}</h1>
+      {/* <h1>{counterValue}</h1> */}
       <button
-        onClick={() => dispatch(Decrement(1))}
+        // onClick={() => dispatch(Decrement(1))}
         className="btn btn-primary"
       >
         Decrement
