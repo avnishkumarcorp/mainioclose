@@ -16,6 +16,7 @@ import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 import TableScalaton from "../../../components/TableScalaton"
 import { getQuery } from "../../../API/GetQuery"
+import { putQuery } from "../../../API/PutQuery"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -45,6 +46,15 @@ const LeadsModule = () => {
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
 
+  const viewHistory = async (leadId) => {
+    try{
+    const singlePage = await putQuery(`/leadService/api/v1/lead/viewHistoryCreate?userId=${currentUserId}&leadId=${leadId}`)
+    console.log(singlePage);
+    }catch(err){
+      console.log(err);
+    }
+  }
+
 
   const currentUserRoles = useSelector(
     (prev) => prev.AuthReducer.currentUser.roles
@@ -58,7 +68,7 @@ const LeadsModule = () => {
       width: 150,
       renderCell: (props) => {
         return (
-          <Link to={`/erp/${currentUserId}/sales/leads/${props.row.id}`}>
+          <Link to={`/erp/${currentUserId}/sales/leads/${props.row.id}`} onClick={() => viewHistory(props.row.id) }>
             {props?.row?.leadName}
           </Link>
         )
