@@ -92,6 +92,9 @@ const InboxPage = () => {
 
   return (
     <div className="inbox-page cm-padding-one">
+     <div className="pb-3">
+      <h1 className="table-heading">Inbox</h1>
+      </div>
       <div className="inbox-top-btn">
         <button to="/sales" className={`tab-btn `}>
           Inbox
@@ -103,6 +106,7 @@ const InboxPage = () => {
           Failure (45)
         </button>
       </div>
+
 
       {/* <LeadsModule */}
 

@@ -62,6 +62,20 @@ button:focus {
   align-items: center;
 }
 
+.one-line{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.common-btn-one{
+  color: #ffffff;
+  background-color: #093252;
+  border: 1px solid #093252;
+  padding: 0px 16px;
+  border-radius: 4px;
+}
+
 .all-between {
   display: flex;
   justify-content: space-between;

@@ -206,7 +206,7 @@ const LeadDetailsPage = () => {
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
-        `/leadService/api/v1/users/getAllUser`
+        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
       )
       setGetAllLeadUserData(allLeadUser.data)
     } catch (err) {
