@@ -897,7 +897,7 @@ const LeadDetailsPage = () => {
                         />
                       </div>
 
-                      <div className="product-box">
+                      {/* <div className="product-box">
                         <label
                           className="lead-heading"
                           htmlFor="select-product"
@@ -916,14 +916,14 @@ const LeadDetailsPage = () => {
                             <option key={index} value={user?.id}>
                               {user?.fullName}
                             </option>
-                          ))}
+                          ))} */}
 
                           {/* <option value="volvo">Volvo</option>
                           <option value="saab">Saab</option>
                           <option value="mercedes">Mercedes</option>
                           <option value="audi">Audi</option> */}
-                        </select>
-                      </div>
+                        {/* </select> */}
+                      {/* </div> */}
                       <div className="product-box">
                         <label
                           className="lead-heading"
@@ -1259,25 +1259,25 @@ const LeadDetailsPage = () => {
           <div className="lead-filter-above">
             <div className="filter-box">
               <FilterButton
-                name={"Note"}
+                name={"Notes"}
                 icon={<i className="fa-regular  fa-note-sticky"></i>}
                 data={notes}
                 setData={setNotes}
               />
-              <PopUpButton  name={"SMS"}
+              {/* <PopUpButton  name={"SMS"}
                 icon={<i className="fa-regular fa-message"></i>}
                 className="filter-btn-design"
-                data={sms}  />
+                data={sms}  /> */}
               {/* <FilterButton
                 name={"SMS"}
                 icon={<i className="fa-regular fa-message"></i>}
                 data={sms}
                 setData={setSms}
               /> */}
-               <PopUpButton   name={"Email"}
+               {/* <PopUpButton   name={"Email"}
                 icon={<i className="fa-regular fa-envelope"></i>}
                 className="filter-btn-design"
-                data={sms}  />
+                data={sms}  /> */}
               {/* <FilterButton
                 name={"Email"}
                 icon={<i className="fa-regular fa-envelope"></i>}
