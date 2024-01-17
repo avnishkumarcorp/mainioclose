@@ -122,7 +122,8 @@ const LeadDetailsPage = () => {
 
   //  useEffect calls End
 
-
+  console.log(notesApiData);
+    
   const getAllOportunities = async () => {
     const getOportunities = await getQuery(
       `/leadService/api/v1/leadOpportunity/getAllOpportunity`
@@ -255,8 +256,8 @@ const LeadDetailsPage = () => {
       const allTaskData = await getQuery(
         `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
       )
-      const singlePage = await putQuery(`/leadService/api/v1/lead/viewHistoryCreate?userId=${currentUserId}&leadId=${leadPathId}`)
-        console.log(singlePage);
+      // const singlePage = await putQuery(`/leadService/api/v1/lead/viewHistoryCreate?userId=${currentUserId}&leadId=${leadPathId}`)
+      //   console.log(singlePage);
       setGetSingleLeadTask(allTaskData.data)
     } catch (err) {
       console.log("err", err)
@@ -1425,6 +1426,7 @@ const LeadDetailsPage = () => {
                   <div className="side-notes">
                     <div className="comment-above">
                       <h2 className="write-heading">Notes</h2>
+                      <p className="mb-0 write-heading"><span className="mr-2">{new Date(note?.latestUpdated).toDateString()}</span><span className="mr-2">{new Date(note?.latestUpdated).toLocaleTimeString('en-US')}</span>{note?.updatedBy?.fullName}</p>
                     </div>
                     <div className="text-display-box">
                       <pre>{note.message}</pre>

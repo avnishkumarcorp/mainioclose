@@ -6,6 +6,7 @@ import { getQuery } from "../API/GetQuery"
 import InputErrorComponent from "../components/InputErrorComponent"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { userDepartment } from "../data/FakeData"
 toast.configure()
 
 const CreateuserDashboard = () => {
@@ -266,6 +267,33 @@ const CreateuserDashboard = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
+                             Department*
+                          </label>
+
+                          <select
+                            className="form-control input-focus"
+                            name="department"
+                            id="select-product"
+                            ref={roleRef}
+                            onChange={(e) => userRowDataFetch(e)}
+                          >
+                            <option>Select Department</option>
+                            {userDepartment.map((dep, index) => (
+                              <option key={index} value={dep}>
+                                {dep}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                       
+                      </div>
+
+                      {/* <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
                             Department
                           </label>
                           <input
@@ -278,7 +306,7 @@ const CreateuserDashboard = () => {
                             onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
-                      </div>
+                      </div> */}
 
                       <div className="all-between-items">
                         <div className="all-center"></div>
