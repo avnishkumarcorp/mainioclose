@@ -76,6 +76,18 @@ button:focus {
   border-radius: 4px;
 }
 
+.circle-image{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color:  #FAD6A5;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2px;
+}
+
 .all-between {
   display: flex;
   justify-content: space-between;
