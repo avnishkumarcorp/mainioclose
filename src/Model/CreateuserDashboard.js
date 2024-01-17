@@ -16,6 +16,7 @@ const CreateuserDashboard = () => {
     email: "",
     role: [],
     designation: "",
+    department: "",
   })
   const [btnLoading, setBtnLoading] = useState(false);
   const [allRoles, setAllRoles] = useState([]);
@@ -33,7 +34,7 @@ const CreateuserDashboard = () => {
   const GetRoleFun = (e) => {
     setUserRowData((prev) => ({...prev, role: [e.target.value] }));
   }
-
+  
 
  
   const userRowDataFetch = (e) => {
@@ -99,8 +100,11 @@ const CreateuserDashboard = () => {
           email: createNewUserData.data.data.email,
           role: roleData,
           designation: createNewUserData.data.data.designation,
+          department: createNewUserData.data.data.department,
           userName: createNewUserData.data.data.name,
         }
+
+        console.log(newLeadObject);
 
 
         const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, newLeadObject);
@@ -251,6 +255,26 @@ const CreateuserDashboard = () => {
                             ref={designationRef}
                             placeholder="Enter Designation"
                             name="designation"
+                            onChange={(e) => userRowDataFetch(e)}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            Department
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control input-focus"
+                            id="mobileNo"
+                            // ref={designationRef}
+                            placeholder="Enter Department"
+                            name="department"
                             onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
