@@ -19,8 +19,6 @@ const DisplayDashboardUser = () => {
 
   const currentUserId = Number(splitPath[2])
 
-
-
   const displayUser = async () => {
     try {
       const userData = await axios.get(`/leadService/api/v1/users/getAllUser`, {
@@ -30,54 +28,69 @@ const DisplayDashboardUser = () => {
         },
       })
       setDisplayAllUser(userData.data)
-        setLoading(false);
-      
-    } catch (err) {
-    }
+      setLoading(false)
+    } catch (err) {}
   }
 
   // /leadService/api/v1/users/deleteUser?id=10
 
   const deleteUser = async (id) => {
-    if (window.confirm("Are you sure to delete this record?") == true){
-    try{
-
-    const deleteUser = await deleteQuery(`/leadService/api/v1/users/deleteUser?id=${id}`);
-    window.location.reload();
-
-    }catch(err){
-      console.log(err);
+    if (window.confirm("Are you sure to delete this record?") == true) {
+      try {
+        const deleteUser = await deleteQuery(
+          `/leadService/api/v1/users/deleteUser?id=${id}`
+        )
+        window.location.reload()
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
-  }
-
-
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150,  renderCell: (props) => {
-      return <p className="mb-0">CORP00{props.row.id}</p>
-    } }, 
+    {
+      field: "id",
+      headerName: "ID",
+      width: 150,
+      renderCell: (props) => {
+        return <p className="mb-0">CORP00{props.row.id}</p>
+      },
+    },
     { field: "fullName", headerName: "Full Name", width: 150 },
-    { field: "email", headerName: "Email", width: 240, hideable: false  },
+    { field: "email", headerName: "Email", width: 240, hideable: false },
     { field: "designation", headerName: "Designation", width: 150 },
     { field: "department", headerName: "Department", width: 150 },
     { field: "role", headerName: "Role", width: 150 },
-    {field: "Action", headerName: "Action", width: 150, renderCell: (props) => {
-      return <button className="btn btn-info" onClick={() => deleteUser(props.row.id)}>Suspand</button>
-    }}
+    {
+      field: "Action",
+      headerName: "Action",
+      width: 150,
+      renderCell: (props) => {
+        return (
+          <button
+            className="btn btn-info"
+            onClick={() => deleteUser(props.row.id)}
+          >
+            Suspand
+          </button>
+        )
+      },
+    },
   ]
-
 
   return (
     <div className="small-box-padding">
-        <div className="create-user-box">
+      <div className="create-user-box">
         <h1 className="table-heading">User List</h1>
-          <CreateuserDashboard />
+        <CreateuserDashboard />
         {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
-        </div>
+      </div>
 
-
-      <UserListComponent tableName={""} columns={columns} row = {displayAlluser} />
+      <UserListComponent
+        tableName={""}
+        columns={columns}
+        row={displayAlluser}
+      />
 
       {/* <div className="table-responsive mt-5">
         <table className="table">
