@@ -210,6 +210,7 @@ const LeadDetailsPage = () => {
       const allLeadUser = await axios.get(
         `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
       )
+      console.log("all lead user", allLeadUser );
       setGetAllLeadUserData(allLeadUser.data)
     } catch (err) {
       console.log(err)
@@ -518,7 +519,7 @@ const LeadDetailsPage = () => {
 
   const getAllUserData = async () => {
     const allUserResponse = await getQuery(
-      `/leadService/api/v1/users/getAllUser`
+      `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
     )
     setUserDataResponse(allUserResponse.data)
   }
