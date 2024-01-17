@@ -1424,12 +1424,13 @@ const LeadDetailsPage = () => {
                   </div>
 
                   <div className="side-notes">
+                  <p className="mb-0 write-heading text-center pb-2"><span className="mr-2">{new Date(note?.latestUpdated).toDateString()}</span><span className="mr-2">{new Date(note?.latestUpdated).toLocaleTimeString('en-US')}</span></p>
                     <div className="comment-above">
+                      
                       <div>
                       <h2 className="write-heading">Notes</h2>
                       </div>
                       <div className="d-flex">
-                      <p className="mb-0 write-heading"><span className="mr-2">{new Date(note?.latestUpdated).toDateString()}</span><span className="mr-2">{new Date(note?.latestUpdated).toLocaleTimeString('en-US')}</span></p>
                       <div className="circle-image">{note?.updatedBy?.fullName.slice(0,1)}</div><span className="ml-1 write-heading">{note?.updatedBy?.fullName}</span>
                       </div>
                     </div>
