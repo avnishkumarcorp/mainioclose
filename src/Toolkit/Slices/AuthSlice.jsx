@@ -13,17 +13,18 @@ export const getCurrentUser = createAsyncThunk("currentUser", async (data) => {
 export const AuthSlice = createSlice({
   name: "auth",
   initialState: {
-    loading: false,
+    loginLoading: false,
     currentUser: {},
-
-    token: "",
+    jwt: "",
   },
   extraReducers: (builder) => {
     builder.addCase(getCurrentUser.pending, (state, action) => {
-        state.loading = true
+        state.loginLoading = true
       })
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
-      state.currentUser = { ...state, currentUser: action.payload }
+      state.currentUser = action.payload 
+      state.jwt = action.payload.jwt
+      state.loginLoading = false
     })
     builder.addCase(getCurrentUser.rejected, (state, action) => {
         console.log("Err", action.payload, state);
