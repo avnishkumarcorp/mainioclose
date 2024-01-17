@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import "./LeadDetailsPage.scss"
 import FilterButton from "../../../components/FilterButton"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import axios from "axios"
 import { getQuery } from "../../../API/GetQuery"
 import { postQuery } from "../../../API/PostQuery"
@@ -16,6 +16,7 @@ import EstimateDesignPage from "../Leads/EstimateDesignPage"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { useSelector } from "react-redux"
 import PopUpButton from "../../../components/button/PopUpButton"
+import { putQuery } from "../../../API/PutQuery"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -247,14 +248,15 @@ const LeadDetailsPage = () => {
   }
 
 
-  
-
+  // const {id} = useParams();
   // GET All Tasks Data
   const getAllTaskData = async () => {
     try {
       const allTaskData = await getQuery(
         `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
       )
+      const singlePage = await putQuery(`/leadService/api/v1/lead/viewHistoryCreate?userId=${currentUserId}&leadId=${leadPathId}`)
+        console.log(singlePage);
       setGetSingleLeadTask(allTaskData.data)
     } catch (err) {
       console.log("err", err)
