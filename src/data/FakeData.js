@@ -1,1 +1,1 @@
-export const leadSource = ["Corpseed Website", "IVR", "Person Refernce", "whatsapp", "Facebook", "insta", "Law Zoom website", "Other"]
+export const leadSource = ["Corpseed Website", "Facebook", "Instagram", "IVR", "Person Reference", "Whatsapp", "Law Zoom website", "Other"]
