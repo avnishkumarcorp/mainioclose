@@ -3,8 +3,16 @@ import "./Model.css"
 import { postQuery } from "../API/PostQuery"
 import InputErrorComponent from "../components/InputErrorComponent"
 import { useCustomRoute } from "../Routes/GetCustomRoutes"
+import { leadSource } from "../data/FakeData"
+import { useLocation } from "react-router"
 
 const LeadCreateModel = () => {
+
+  const location = useLocation()
+  const currentPath = location.pathname.split()
+  const splitPath = currentPath[0].split("/")
+
+  const currentUserId = Number(splitPath[2])
   const [leadData, setLeadData] = useState({
     uuid: "",
     name: "",
@@ -18,6 +26,7 @@ const LeadCreateModel = () => {
     source: "",
     city: "",
     categoryId: "1",
+    createdById: currentUserId,
     serviceId: "1",
     industryId: "1",
     ipAddress: "",
@@ -34,7 +43,7 @@ const LeadCreateModel = () => {
   const [cityError, setCityError] = useState(false)
   const [ipAddressError, setIpAddressError] = useState(false)
   const [sourceError, setSourceError] = useState(false)
-  const [leadDescriptionError, setLeadDescriptionError] = useState(false)
+  // const [leadDescriptionError, setLeadDescriptionError] = useState(false)
   const [leadLoading, setLeadLoading] = useState();
 
   const nameRef = useRef()
@@ -359,6 +368,32 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
+                             Source
+                          </label>
+                          <select
+                            className="form-control input-focus"
+                            name="assigneeId"
+                            id="Source"
+                            ref={sourceRef}
+                            onChange={(e) => leadRowData(e)}
+                          >
+                            <option>Select Source</option>
+                            {leadSource.map((client, index) => (
+                              <option key={index} value={client}>
+                                {client}
+                              </option>
+                            ))}
+                          </select>
+
+                          
+                        </div>
+                      </div>
+                      {/* <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
                             Source
                           </label>
                           <input
@@ -376,7 +411,7 @@ const LeadCreateModel = () => {
                         ) : (
                           ""
                         )} */}
-                      </div>
+                      {/* </div> */} 
 
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -384,7 +419,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            Primary Address*
+                            Primary Address
                           </label>
                           <textarea
                             className="form-control input-focus"
@@ -407,7 +442,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                            Lead Description*
+                            Lead Description
                           </label>
                           <textarea
                             className="form-control input-focus"
@@ -422,13 +457,13 @@ const LeadCreateModel = () => {
                             required
                           ></textarea>
                         </div>
-                        {leadDescriptionError ? (
+                        {/* {leadDescriptionError ? (
                           <InputErrorComponent
                             value={"lead Description can't be Blank!"}
                           />
                         ) : (
                           ""
-                        )}
+                        )} */}
                       </div>
 
                       <div className="all-between-items">

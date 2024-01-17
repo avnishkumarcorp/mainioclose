@@ -1,0 +1,1 @@
+export const leadSource = ["Corpseed Website", "IVR", "Person Refernce", "whatsapp", "Facebook", "insta", "Law Zoom website", "Other"]

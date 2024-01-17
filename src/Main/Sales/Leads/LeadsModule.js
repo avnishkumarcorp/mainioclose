@@ -25,7 +25,6 @@ const LeadsModule = () => {
   const [leadScalatonCall, setLeadScalatonCall] = useState(true)
   const [getAllStatus, setGetAllStatus] = useState([])
   const [statusDataId, setStatusDataId] = useState([])
-
   const [leadStatusD, setLeadStatusD] = useState(false)
 
   useEffect(() => {
@@ -73,6 +72,9 @@ const LeadsModule = () => {
         return <p className="mb-0">{props?.row?.assignee?.fullName}</p>
       },
     },
+    { field: "createdBy", headerName: "Created By", width: 150, renderCell: (props) => {
+      return <p className="mb-0">{props?.row?.createdBy?.fullName ? props?.row?.createdBy?.fullName : "NA" }</p> 
+    }  },
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
     {
@@ -180,7 +182,7 @@ const LeadsModule = () => {
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
-        `/leadService/api/v1/users/getAllUser`
+        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
       )
       setLeadUserNew(allLeadUser.data)
     } catch (err) {
@@ -200,6 +202,7 @@ const LeadsModule = () => {
           },
         }
       )
+      console.log("all lead", allLead);
       const leadData = allLead.data.reverse()
       setAllLeadData(leadData)
       setLeadScalatonCall(false)
@@ -230,6 +233,7 @@ const LeadsModule = () => {
         {adminRole ? <LeadCreateModel /> : ""}
       </div>
 
+    <div className="one-line">
       <p className="my-2">
         <select
           className="status-select"
@@ -246,6 +250,9 @@ const LeadsModule = () => {
           ))}
         </select>
       </p>
+
+      <button className="common-btn-one" onClick={()=> window.location.reload()}>Remove Filter</button>
+      </div>
 
       {leadScalatonCall ? (
         <TableScalaton />
