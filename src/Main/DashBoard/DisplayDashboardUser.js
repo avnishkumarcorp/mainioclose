@@ -1,8 +1,9 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import UserListComponent from "../../Tables/UserListComponent"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import CreateuserDashboard from "../../Model/CreateuserDashboard"
+import { deleteQuery } from "../../API/DeleteQuery"
 
 const DisplayDashboardUser = () => {
   const [displayAlluser, setDisplayAllUser] = useState([])
@@ -11,6 +12,12 @@ const DisplayDashboardUser = () => {
   useEffect(() => {
     displayUser()
   }, [])
+
+  const location = useLocation()
+  const currentPath = location.pathname.split()
+  const splitPath = currentPath[0].split("/")
+
+  const currentUserId = Number(splitPath[2])
 
 
 
@@ -29,6 +36,22 @@ const DisplayDashboardUser = () => {
     }
   }
 
+  // /leadService/api/v1/users/deleteUser?id=10
+
+  const deleteUser = async (id) => {
+    if (window.confirm("Are you sure to delete this record?") == true){
+    try{
+
+    const deleteUser = await deleteQuery(`/leadService/api/v1/users/deleteUser?id=${id}`);
+    window.location.reload();
+
+    }catch(err){
+      console.log(err);
+    }
+  }
+  }
+
+
 
   const columns = [
     { field: "id", headerName: "ID", width: 150,  renderCell: (props) => {
@@ -39,6 +62,9 @@ const DisplayDashboardUser = () => {
     { field: "designation", headerName: "Designation", width: 150 },
     { field: "department", headerName: "Department", width: 150 },
     { field: "role", headerName: "Role", width: 150 },
+    {field: "Action", headerName: "Action", width: 150, renderCell: (props) => {
+      return <button className="btn btn-info" onClick={() => deleteUser(props.row.id)}>Suspand</button>
+    }}
   ]
 
 
