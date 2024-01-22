@@ -18,6 +18,7 @@ const MainPage = () => {
 
   const currentUserToken = useSelector((state) => state.AuthReducer.token)
   const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
+  console.log("i am current user id", currentUserId);
   useEffect(() => {
     let UserToken = localStorage.getItem("Access-token")
     if (

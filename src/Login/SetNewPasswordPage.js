@@ -1,16 +1,16 @@
 import React from "react"
 import { useState } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import InputErrorComponent from "../components/InputErrorComponent";
-import { customLocation } from "../Hooks/LocationCustomHook";
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { putQuery } from "../API/PutQuery";
+import { useSelector } from "react-redux";
 toast.configure()
 
 const SetNewPasswordPage = () => {
-  const location = useLocation();
-  const currentuserId  = customLocation(3, location);
+  const currentuserId = useSelector((state) => state.AuthReducer.currentUser.id)
+ 
     const [newPassword, setnewPassword]  = useState({
       id:currentuserId,
       password: ""

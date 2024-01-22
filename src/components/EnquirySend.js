@@ -1,24 +1,22 @@
 import React, { useRef } from "react"
 import "./EnquirySend.scss"
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
 import { postQuery } from "../API/PostQuery"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import FirstInput from "./Inputs/FirstInput"
 import SecondInput from "./Inputs/SecondInput"
 import InputErrorComponent from "./InputErrorComponent"
+import { useSelector } from "react-redux"
 toast.configure()
 
 const EnquirySend = () => {
   const [openTab, setOpenTab] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const location = useLocation()
-  const currentPath = location.pathname.split()
-  const splitPath = currentPath[0].split("/")
-  const currentUserId = Number(splitPath[2])
-
+  
+  const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
+  
   const [EnquiryTicketData, setEnquiryTicketData] = useState({
     userId: currentUserId,
     description: "",
