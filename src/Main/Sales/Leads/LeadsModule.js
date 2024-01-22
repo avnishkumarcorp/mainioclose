@@ -27,10 +27,16 @@ const LeadsModule = () => {
   const [getAllStatus, setGetAllStatus] = useState([])
   const [statusDataId, setStatusDataId] = useState([])
   const [leadStatusD, setLeadStatusD] = useState(false)
+  const [toDate, setToDate] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [dateFilter, setDateFilter] = useState(false);
+
+  console.log("data data", toDate);
+  console.log("from date", fromDate);
 
   useEffect(() => {
     getAllLead()
-  }, [updateActive, statusDataId, leadStatusD])
+  }, [updateActive, statusDataId, leadStatusD, dateFilter])
 
   useEffect(() => {
     getAllLeadUser()
@@ -60,6 +66,7 @@ const LeadsModule = () => {
     (prev) => prev.AuthReducer.currentUser.roles
   )
   const adminRole = currentUserRoles.includes("ADMIN")
+  const newRole = currentUserRoles.includes("NEW") 
 
   const columns = [
     {
@@ -131,7 +138,7 @@ const LeadsModule = () => {
       },
     },
     { field: "source", headerName: "Source", width: 150 },
-    {
+     {
       field: "action",
       headerName: "Action",
       width: 150,
@@ -204,7 +211,11 @@ const LeadsModule = () => {
     try {
       const allLead = await axios.get(
         // /leadService/api/v1/lead/getAllLead?userId=1&statusId=2
-        `/leadService/api/v1/lead/getAllLead?userId=${currentUserId}&statusId=${statusDataId}`,
+        // /leadService/api/v1/lead/getAllLead?userId=1&statusId=1&toDate=23&fromDate=23
+        // console.log("data data", toDate);
+        // console.log("from date", fromDate);
+
+        `/leadService/api/v1/lead/getAllLead?userId=${currentUserId}&statusId=${statusDataId}&toDate=${toDate}&fromDate=${fromDate}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -243,10 +254,11 @@ const LeadsModule = () => {
         {adminRole ? <LeadCreateModel /> : ""}
       </div>
 
-    <div className="one-line">
+    <div className="all-between">
+      <div className="one-line">
       <p className="my-2">
         <select
-          className="status-select"
+          className="p-1 status-select"
           name="status"
           onChange={(e) => setStatusDataId(e.target.value)}
           id="status"
@@ -263,6 +275,14 @@ const LeadsModule = () => {
 
       <button className="common-btn-one" onClick={()=> window.location.reload()}>Remove Filter</button>
       </div>
+      <div>
+        <input className="mr-2"  onChange={(e)=> setToDate(e.target.value)} type="date" />
+        <input className="mr-2" onChange={(e)=> setFromDate(e.target.value)} type="date" />
+        <button className="common-btn-one" onClick={()=> setDateFilter((prev) => !(prev))}>Apply</button>
+   
+      </div>
+      </div>
+      
 
       {leadScalatonCall ? (
         <TableScalaton />
