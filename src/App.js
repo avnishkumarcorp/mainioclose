@@ -57,7 +57,7 @@ function App() {
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
             <Route
-              path="setpassword/:id/thankyou"
+              path="setpassword/:userid/thankyou"
               element={<PaswordUpdateMessage />}
             />
             <Route path="signup" element={<SignUp />} />
@@ -65,16 +65,16 @@ function App() {
             <Route path="forgetotp" element={<ForgetOtpPage />} />
             <Route path="forgetpassword" element={<ForgetPassword />} />
             <Route path="change" element={<ChangePassword />} />
-            <Route path="setpassword/:id" element={<SetNewPasswordPage />} />
+            <Route path="setpassword/:userid" element={<SetNewPasswordPage />} />
           </Route>
 
           <Route path="/erp" element={<MainPage />}>
-            <Route path=":id/users" element={<DashBoard />}>
+            <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
               <Route path="muiuser" element={<DisplayUserTwo />} />
             </Route>
             {/* hr module routes */}
-            <Route path="/erp/:id/hr" element={<ComingSoonPage />}>
+            <Route path="/erp/:userid/hr" element={<ComingSoonPage />}>
               <Route path="" element={<div>hrlinkone</div>} />
               <Route path="hrlinktwo" element={<div>hrlinktwo</div>} />
               <Route path="hrlinkthree" element={<div>hrlinkthree</div>} />
@@ -84,7 +84,7 @@ function App() {
             </Route>
             {/* end */}
             {/* slaes module routes */}
-            <Route path="/erp/:id/sales" element={<SalesMod />}>
+            <Route path="/erp/:userid/sales" element={<SalesMod />}>
               <Route path="" element={<InboxPage />} />
               <Route path="scalaton" element={<TableScalaton />} />
               {/* <Route path=":id" element={<LeadDetailsPage />} /> */}
@@ -92,18 +92,18 @@ function App() {
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
-              <Route path="leads/:id" element={<LeadDetailsPage />} />
+              <Route path="leads/:leadid" element={<LeadDetailsPage />} />
               <Route
-                path="leads/:id/estimate"
+                path="leads/:leadid/estimate"
                 element={<EstimateCreatePage />}
               />
               <Route path="contacts" element={<ContactModule />} />
-              <Route path="leads/:id/history" element={<LeadHistory />} />
+              <Route path="leads/:leadid/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
             </Route>
             {/* end */}
             {/* accounts module routes */}
-            <Route path="/erp/:id/account" element={<ComingSoonPage />}>
+            <Route path="/erp/:userid/account" element={<ComingSoonPage />}>
               <Route path="" element={<div>accounts first page</div>} />
               <Route
                 path="accounttwo"
@@ -125,7 +125,7 @@ function App() {
             </Route>
             {/* end */}
             {/* operation module Routes */}
-            <Route path="/erp/:id/operation" element={<ComingSoonPage />}>
+            <Route path="/erp/:userid/operation" element={<ComingSoonPage />}>
               <Route path="" element={<div>Operation Number one </div>} />
               <Route
                 path="operationtwo"
@@ -150,7 +150,7 @@ function App() {
             </Route>
             {/* end */}
             {/* manage client module route */}
-            <Route path="/erp/:id/manageclient" element={<ComingSoonPage />}>
+            <Route path="/erp/:userid/manageclient" element={<ComingSoonPage />}>
               <Route path="" element={<div>Client Number One</div>} />
               <Route path="clienttwo" element={<div>Client Number Two</div>} />
               <Route
@@ -169,7 +169,7 @@ function App() {
             </Route>
             {/* end */}
             {/* Activity Master module routes */}
-            <Route path="/erp/:id/activity" element={<ComingSoonPage />}>
+            <Route path="/erp/:userid/activity" element={<ComingSoonPage />}>
               <Route path="" element={<div>Activity Number One</div>} />
               <Route
                 path="activitytwo"
@@ -194,7 +194,7 @@ function App() {
             </Route>
             {/* end */}
             {/* quality module routes */}
-            <Route path="/erp/:id/quality" element={<ComingSoonPage />}>
+            <Route path="/erp/:userid/quality" element={<ComingSoonPage />}>
               <Route path="" element={<div>Quality Number One</div>} />
               <Route
                 path="qualitytwo"
@@ -218,13 +218,13 @@ function App() {
               />
             </Route>
             {/* end */}
-            <Route path="/erp/:id/setting" element={<SettingMainPage />} >
+            <Route path="/erp/:userid/setting" element={<SettingMainPage />} >
               <Route path="" element={<LeadStatusPage />} />
               <Route path="products" element={<ProductsChange />} />
             </Route>
 
             {/* profile routes */}
-            <Route path="/erp/:id/profile" element={<ComingSoonPage />}>
+            <Route path="/erp/:userid/profile" element={<ComingSoonPage />}>
               <Route path="" element={<div>Profile Number One</div>} />
               <Route
                 path="profiletwo"
