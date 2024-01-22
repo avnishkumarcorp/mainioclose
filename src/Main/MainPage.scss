@@ -12,6 +12,9 @@
     overflow: auto;
     padding: 0px;
     background-color: #093252;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   .right-data {
     background-color: $white;

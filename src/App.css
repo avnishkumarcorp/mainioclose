@@ -278,6 +278,10 @@ button:focus {
   font-size: 12px;
 }
 
+.example::-webkit-scrollbar {
+  display: none;
+}
+
 /* table data */
 
 .table-main-heading {
