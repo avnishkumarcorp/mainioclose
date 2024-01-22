@@ -69,6 +69,13 @@ const LeadsModule = () => {
   const newRole = currentUserRoles.includes("NEW") 
 
   const columns = [
+    { field: "id", headerName: "S.No", width: 150, filterable: false, renderCell: (props) =>{
+      console.log(props.api.getColumnIndexRelativeToVisibleColumns(props.row.index));
+
+      return (
+        <p>{props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}</p>
+      )
+    } },
     {
       field: "leadName",
       headerName: "Name",
@@ -144,7 +151,7 @@ const LeadsModule = () => {
       width: 150,
       renderCell: (props) => {
         return adminRole ? (
-          <p onClick={() => leadDeleteResponse(props.row.id)}>
+          <p className="m-0" onClick={() => leadDeleteResponse(props.row.id)}>
             <i className="fa-solid fa-trash"></i>
           </p>
         ) : (
@@ -287,7 +294,7 @@ const LeadsModule = () => {
       {leadScalatonCall ? (
         <TableScalaton />
       ) : (
-        <UserLeadComponent tableName={""} columns={columns} row={allLeadData} />
+        <UserLeadComponent tableName={""} columns={columns} row={allLeadData} getRowId= {(row) => row.id} />
       )}
     </div>
   )
