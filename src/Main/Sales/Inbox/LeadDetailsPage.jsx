@@ -325,7 +325,7 @@ const LeadDetailsPage = () => {
     const statusChange = async () => {
       try {
         const statusData = await axios.put(
-          `/leadService/api/v1/status/updateLeadStatus?leadId=${leadPathId}&statusId=${catId}`,
+          `/leadService/api/v1/status/updateLeadStatus?leadId=${leadPathId}&statusId=${catId}&currentUserId=${currentUserId}`,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
