@@ -185,7 +185,8 @@ const LeadsModule = () => {
   const changeLeadAssignee = async (id, leadId) => {
     try {
       const updatePerson = await axios.put(
-        `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}`,
+        
+        `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}&updatedById=${currentUserId}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
