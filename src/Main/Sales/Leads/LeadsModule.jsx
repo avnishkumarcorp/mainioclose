@@ -71,10 +71,7 @@ const LeadsModule = () => {
     setMultiLeadData((prev) => ({ ...prev, leadIds: selectedRows }))
   }, [handleSelectAllClick])
 
-  console.log("i amdjdjkk", multiLeadData)
-
-  console.log("selected Rowscvcfvfv", selectedRows)
-
+  
   useEffect(() => {
     getAllLead()
   }, [updateActive, statusDataId, leadStatusD, dateFilter])
