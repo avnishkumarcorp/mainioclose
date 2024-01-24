@@ -16,6 +16,11 @@ const UserLeadComponent = ({ row, columns, tableName, getRowId }) => {
         checkboxSelection
         rows={row}
         getRowId={getRowId}
+        sx={{
+          "& .MuiDataGrid-virtualScroller": {
+            overflow: "scroll"
+          }
+        }}
         columns={columns}
         slots={ adminRole ? { toolbar: GridToolbar } : ""}
         slotProps={{

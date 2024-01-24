@@ -17,6 +17,7 @@ import Autocomplete from "@mui/material/Autocomplete"
 import TableScalaton from "../../../components/TableScalaton"
 import { getQuery } from "../../../API/GetQuery"
 import { putQuery } from "../../../API/PutQuery"
+import ArrowComponent from "../../../components/ArrowComponent"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -253,6 +254,7 @@ const LeadsModule = () => {
       }
     }
   }
+  // MuiDataGrid-main css-204u17-MuiDataGrid-main
 
  
   return (
@@ -291,12 +293,15 @@ const LeadsModule = () => {
       </div>
       </div>
       
-
+      <div className="table-arrow">
+         <ArrowComponent />
       {leadScalatonCall ? (
         <TableScalaton />
       ) : (
         <UserLeadComponent tableName={""} columns={columns} row={allLeadData} getRowId= {(row) => row.id} />
       )}
+
+  </div>
     </div>
   )
 }
