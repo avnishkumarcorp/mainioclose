@@ -9,8 +9,8 @@ const ArrowComponent = () => {
 
   return (
     <>
-      <div onClick={()=> RightSlide()}  className="cm-arrow left-arrow"><i class="fa-solid fa-chevron-left"></i></div>
-      <div onClick={()=> RightSlide()} className="cm-arrow right-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+      <div onClick={()=> RightSlide()}  className="cm-arrow left-arrow"><i className="fa-solid fa-chevron-left"></i></div>
+      <div onClick={()=> RightSlide()} className="cm-arrow right-arrow"><i className="fa-solid fa-chevron-right"></i></div>
     </>
   )
 }

@@ -13,7 +13,8 @@ const UserLeadComponent = ({ row, columns, tableName, getRowId }) => {
     <div>
       <h1 className="table-main-heading">{tableName}</h1>
       <DataGrid
-        checkboxSelection
+        // checkboxSelection
+        disableRowSelectionOnClick
         rows={row}
         getRowId={getRowId}
         sx={{
@@ -22,6 +23,7 @@ const UserLeadComponent = ({ row, columns, tableName, getRowId }) => {
           }
         }}
         columns={columns}
+       
         slots={ adminRole ? { toolbar: GridToolbar } : ""}
         slotProps={{
           toolbar: {
