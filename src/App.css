@@ -348,6 +348,25 @@ button:focus {
 
 /* table data */
 
+.table-arrow{
+  position: relative;
+}
+
+.table-arrow:hover .cm-arrow{
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiDataGrid-main .css-204u17-MuiDataGrid-main{
+  overflow: scroll;
+}
+
+
+
+
+
 
 /* mui table changes */
 
