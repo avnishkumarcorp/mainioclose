@@ -17,6 +17,8 @@ import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { useSelector } from "react-redux"
 import PopUpButton from "../../../components/button/PopUpButton"
 import { putQuery } from "../../../API/PutQuery"
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -539,6 +541,12 @@ const LeadDetailsPage = () => {
       console.log("err", err)
     }
   }
+
+  const [content, setContent] = useState('');
+
+  const handleChange = (value) => {
+    setContent(value);
+  };
 
   return (
     <div className="lead-details cm-padding-one">
@@ -1312,6 +1320,11 @@ const LeadDetailsPage = () => {
 
             <div></div>
             {/* <FilterButton name={"note"} icon={<i className="fa-solid fa-note-sticky"></i>} data={notes1} setData={setNotes1}/> */}
+
+                  <div>
+                  <ReactQuill value={content} onChange={handleChange} />
+                  </div>
+
 
             <div className={`notes-box mt-4 ${notes === true ? "d-none" : ""}`}>
               <div className="comment-icon">
