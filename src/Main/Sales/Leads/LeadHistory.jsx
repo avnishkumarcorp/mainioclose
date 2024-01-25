@@ -22,7 +22,17 @@ const LeadHistory = () => {
   }, [])
 
   const columns = [
-    { field: "id", headerName: "ID", width: 150 },
+    {
+      field: "id",
+      headerName: "S.No",
+      width: 60,
+      filterable: false,
+      renderCell: (props) => {
+        return (
+          <p className="mb-0">{props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}</p>
+        )
+      },
+    },
     {
       field: "createdDate",
       headerName: "Date",
