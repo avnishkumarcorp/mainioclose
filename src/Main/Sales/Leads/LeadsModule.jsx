@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import "./LeadsModule.scss"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
@@ -20,6 +20,7 @@ import { putQuery } from "../../../API/PutQuery"
 import ArrowComponent from "../../../components/ArrowComponent"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Checkbox from "@mui/material/Checkbox"
+import InputErrorComponent from "../../../components/InputErrorComponent"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -33,12 +34,19 @@ const LeadsModule = () => {
   const [toDate, setToDate] = useState("")
   const [fromDate, setFromDate] = useState("")
   const [dateFilter, setDateFilter] = useState(false)
+  const [multibtn, setMultibtn] = useState(false)
+
+  const [multiLeadError, setMultiLeadError] = useState(false);
+  const [selectLeadError, setSelectLeadError] = useState(false);
 
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
+
+  const multiStatusRef = useRef();
+  const multiAssigneeRef = useRef();
 
   const [selectedRows, setSelectedRows] = useState([])
 
@@ -63,7 +71,7 @@ const LeadsModule = () => {
   const [multiLeadData, setMultiLeadData] = useState({
     leadIds: selectedRows,
     statusId: null,
-    assigneId: 0,
+    assigneId: null,
     updatedById: currentUserId,
   })
 
@@ -94,6 +102,7 @@ const LeadsModule = () => {
       console.log(err)
     }
   }
+
 
   const currentUserRoles = useSelector(
     (prev) => prev.AuthReducer.currentUser.roles
@@ -134,7 +143,7 @@ const LeadsModule = () => {
     },
     {
       field: "leadName",
-      headerName: "Name",
+      headerName: "Lead Name",
       width: 200,
       renderCell: (props) => {
         return (
@@ -147,6 +156,26 @@ const LeadsModule = () => {
         )
       },
     },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 120,
+      renderCell: (props) => {
+        const leadStatus = props.row.status?.name
+        return (
+          <p className={`mb-0 ${leadStatus === "New" ? "lead-new" : ""}`}>
+            {leadStatus ? leadStatus : "NA"}
+          </p>
+        )
+      },
+    },
+    { field: "client", headerName: "Client Name", width: 150, renderCell: (props) => {
+      // console.log("client name", clients[0]?.name)
+      return (
+        <p>{props.row.clients[0]?.name ? props.row.clients[0]?.name : "NA"}</p>
+      )
+    } },
+
     {
       field: "assigneeName",
       headerName: "Assignee Person",
@@ -169,8 +198,6 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "mobileNo", headerName: "Mobile No", width: 150 },
-    { field: "email", headerName: "Email", width: 150 },
     {
       field: "createDate",
       headerName: "Date",
@@ -181,6 +208,9 @@ const LeadsModule = () => {
         return <p className="mb-0">{dateNew}</p>
       },
     },
+    { field: "mobileNo", headerName: "Mobile No", width: 150 },
+    { field: "email", headerName: "Email", width: 150 },
+   
     {
       field: "assignee",
       headerName: "Change Assignee",
@@ -204,20 +234,6 @@ const LeadsModule = () => {
         )
       },
     },
-
-    {
-      field: "status",
-      headerName: "Status",
-      width: 150,
-      renderCell: (props) => {
-        const leadStatus = props.row.status?.name
-        return (
-          <p className={`mb-0 ${leadStatus === "New" ? "lead-new" : ""}`}>
-            {leadStatus ? leadStatus : "NA"}
-          </p>
-        )
-      },
-    },
     { field: "source", headerName: "Source", width: 150 },
     {
       field: "action",
@@ -234,6 +250,8 @@ const LeadsModule = () => {
       },
     },
   ]
+
+
 
   const leadDeleteResponse = async (id) => {
     if (window.confirm("Are you sure to delete this record?") == true) {
@@ -322,14 +340,27 @@ const LeadsModule = () => {
   }
 
   const multiAssignee = async () => {
+    setMultibtn(true)
+    if(multiLeadData.statusId === null && multiLeadData.assigneId === null ){
+      console.log("Error Generate");
+      setMultiLeadError(true)
+      return;
+    }
+    if(multiLeadData.leadIds.length === 0){
+      setSelectLeadError(true);
+      return 
+    }
+
     try {
       const multiAssigneeCol = await putQuery(
         "/leadService/api/v1/lead/updateMultiLeadAssigne",
         multiLeadData
       )
+      setMultibtn(false)
       console.log("multidata", multiAssigneeCol)
     } catch (err) {
       console.log(err)
+      setMultibtn(false)
     }
   }
 
@@ -429,6 +460,7 @@ const LeadsModule = () => {
             <select
               className="p-1 status-select"
               name="status"
+              ref={multiStatusRef}
               onChange={(e) =>
                 setMultiLeadData((prev) => ({
                   ...prev,
@@ -449,6 +481,7 @@ const LeadsModule = () => {
           <div>
             <select
               className="p-1 status-select"
+              ref={multiAssigneeRef}
               onChange={(e) =>
                 setMultiLeadData((prev) => ({
                   ...prev,
@@ -469,10 +502,12 @@ const LeadsModule = () => {
           </div>
           <div>
             <button onClick={() => multiAssignee()} className="common-btn-one">
-              Assign
+            {multibtn ? "Loading" : "Send"}
             </button>
           </div>
         </div>
+        {multiLeadError ? <InputErrorComponent value="Please Select At Least One Status ya Assignee column" /> : ""}
+        {selectLeadError ? <InputErrorComponent value="Please Select At Least 2 Leads" /> : ""}
       </div>
     </div>
   )
