@@ -455,7 +455,7 @@ const LeadsModule = () => {
           />
         )}
 
-        <div className="bottom-line">
+        <div className={`bottom-line ${multiLeadData.leadIds.length > 0 ? 'pos-fix' : ""}`}>
           <div>
             <select
               className="p-1 status-select"
