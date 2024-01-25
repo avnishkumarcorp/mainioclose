@@ -109,7 +109,7 @@ const LeadsModule = () => {
     {
       field: "select",
       headerName: "Select",
-      width: 100,
+      width: 60,
       renderCell: (params) => (
         <FormControlLabel
           control={
@@ -124,18 +124,18 @@ const LeadsModule = () => {
     {
       field: "id",
       headerName: "S.No",
-      width: 150,
+      width: 60,
       filterable: false,
       renderCell: (props) => {
         return (
-          <p>{props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}</p>
+          <p className="mb-0">{props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}</p>
         )
       },
     },
     {
       field: "leadName",
       headerName: "Name",
-      width: 150,
+      width: 200,
       renderCell: (props) => {
         return (
           <Link
@@ -212,7 +212,7 @@ const LeadsModule = () => {
       renderCell: (props) => {
         const leadStatus = props.row.status?.name
         return (
-          <p className={leadStatus === "New" ? "lead-new" : ""}>
+          <p className={`mb-0 ${leadStatus === "New" ? "lead-new" : ""}`}>
             {leadStatus ? leadStatus : "NA"}
           </p>
         )
