@@ -6,9 +6,15 @@ import { getCurrentUser } from "../Toolkit/Slices/AuthSlice"
 const CounterExample = () => {
   const currentRoles = useSelector((state) => state?.auth?.roles)
   const currentUserID = useSelector((state) => state?.auth?.currentUser?.id)
+  const userToken = useSelector((state) => state?.auth?.jwt)
+
+  const currentUser = useSelector((state) => state?.auth)
+  
   
 
-  console.log("counter is", currentRoles, currentUserID)
+  console.log("counter is", currentRoles, currentUserID, userToken)
+
+  console.log("i am currentUser", currentUser);
 
   const adminRole = currentRoles.includes("ADMIN")
   const userRole = currentRoles.includes("USER")

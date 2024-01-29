@@ -16,20 +16,29 @@ const MainPage = () => {
   const location = useLocation()
   const paramId = customLocation(2, location)
 
-  const currentUserToken = useSelector((state) => state.AuthReducer.token)
-  const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
-  useEffect(() => {
-    let UserToken = localStorage.getItem("Access-token")
-    if (
-      !UserToken ||
-      currentUserToken !== UserToken ||
-      currentUserId !== paramId
-    ) {
-      localStorage.removeItem("Access-token")
-      navigate("/erp/login")
-      toast.error("your Session has Expired Please Login again")
-    }
-  })
+  // const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  // const currentUserToken = useSelector((state) => state?.auth?.jwt)
+
+  // const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  // const currentUserToken = useSelector((state) => state?.auth?.jwt)
+
+  // console.log("i am token", currentUserToken);
+
+
+  // const currentUserToken = useSelector((state) => state.AuthReducer.token)
+  // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
+  // useEffect(() => {
+  //   let UserToken = localStorage.getItem("Access-token")
+  //   if (
+  //     !UserToken ||
+  //     currentUserToken !== UserToken ||
+  //     currentUserId !== paramId
+  //   ) {
+  //     localStorage.removeItem("Access-token")
+  //     navigate("/erp/login")
+  //     toast.error("your Session has Expired Please Login again")
+  //   }
+  // })
 
   return (
     <div className="main-page">

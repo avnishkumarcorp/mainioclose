@@ -46,10 +46,12 @@ const LeadsModule = () => {
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
 
+  const currentUserRoles = useSelector((state) => state?.auth?.roles)
+  
 
-  const currentUserRoles = useSelector(
-    (prev) => prev.AuthReducer.currentUser.roles
-  )
+  // const currentUserRoles = useSelector(
+  //   (prev) => prev.AuthReducer.currentUser.roles
+  // )
   const adminRole = currentUserRoles.includes("ADMIN")
 
   const columns = [

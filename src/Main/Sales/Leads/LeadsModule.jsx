@@ -106,10 +106,12 @@ const LeadsModule = () => {
     }
   }
 
+  const currentUserRoles = useSelector((state) => state?.auth?.roles)
+  
 
-  const currentUserRoles = useSelector(
-    (prev) => prev.AuthReducer.currentUser.roles
-  )
+  // const currentUserRoles = useSelector(
+  //   (prev) => prev.AuthReducer.currentUser.roles
+  // )
   const adminRole = currentUserRoles.includes("ADMIN")
   const newRole = currentUserRoles.includes("NEW")
 

@@ -113,9 +113,11 @@ const LeadDetailsPage = () => {
     getAllUserData()
   }, [])
 
-  const currentUserRoles = useSelector(
-    (prev) => prev.AuthReducer.currentUser.roles
-  )
+  const currentUserRoles = useSelector((state) => state?.auth?.roles)
+  
+  // const currentUserRoles = useSelector(
+  //   (prev) => prev.AuthReducer.currentUser.roles
+  // )
   // const currentUserId = useSelector()
   const adminRole = currentUserRoles.includes("ADMIN")
 

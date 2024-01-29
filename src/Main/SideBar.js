@@ -20,7 +20,8 @@ const SideBar = () => {
     navigate("/erp/login")
   }
 
-  const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
+  // const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
+  const currentUserProfile = useSelector((state) => state?.auth?.currentUser)
 // ++++++++++ replace
   // const currentUserRoles = useSelector(
   //   (prev) => prev.AuthReducer.currentUser.roles
