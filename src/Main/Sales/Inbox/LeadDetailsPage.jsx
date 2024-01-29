@@ -120,10 +120,11 @@ const LeadDetailsPage = () => {
   // const currentUserId = useSelector()
   const adminRole = currentUserRoles.includes("ADMIN")
 
+  console.log(getSingleLeadTask)
   //  useEffect calls End
 
-  console.log(notesApiData);
-    
+  console.log(notesApiData)
+
   const getAllOportunities = async () => {
     const getOportunities = await getQuery(
       `/leadService/api/v1/leadOpportunity/getAllOpportunity`
@@ -190,8 +191,6 @@ const LeadDetailsPage = () => {
     }
   }
 
-  
-
   // GET All Product Data
   const getAllProductData = async () => {
     try {
@@ -210,14 +209,12 @@ const LeadDetailsPage = () => {
       const allLeadUser = await axios.get(
         `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
       )
-      console.log("all lead user", allLeadUser );
+      console.log("all lead user", allLeadUser)
       setGetAllLeadUserData(allLeadUser.data)
     } catch (err) {
       console.log(err)
     }
   }
-
-  
 
   // set Inputs data
   const setTasksDataFun = (e) => {
@@ -234,12 +231,11 @@ const LeadDetailsPage = () => {
 
   // get All Products
 
-  const ProductUrl = `/leadService/api/v1/product/getAllProducts`;
-  const depandent = [];
+  const ProductUrl = `/leadService/api/v1/product/getAllProducts`
+  const depandent = []
 
-  const {productData, loading, error } = useCustomRoute
-  (ProductUrl, depandent);
-  
+  const { productData, loading, error } = useCustomRoute(ProductUrl, depandent)
+
   // END
 
   const getCatgegoryInputData = (categorySelect) => {
@@ -248,7 +244,6 @@ const LeadDetailsPage = () => {
       serviceName: categorySelect,
     }))
   }
-
 
   // const {id} = useParams();
   // GET All Tasks Data
@@ -371,18 +366,6 @@ const LeadDetailsPage = () => {
     }
     createNewRemark()
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   // GET All Products With Category
   const getAllProductWithCattegory = async () => {
@@ -652,7 +635,7 @@ const LeadDetailsPage = () => {
                           }
                         >
                           <option>Select Product Category</option>
-                          
+
                           {categoryData.map((cat, index) => (
                             <option key={index} value={cat.categoryName}>
                               {cat.categoryName}
@@ -919,11 +902,11 @@ const LeadDetailsPage = () => {
                             </option>
                           ))} */}
 
-                          {/* <option value="volvo">Volvo</option>
+                      {/* <option value="volvo">Volvo</option>
                           <option value="saab">Saab</option>
                           <option value="mercedes">Mercedes</option>
                           <option value="audi">Audi</option> */}
-                        {/* </select> */}
+                      {/* </select> */}
                       {/* </div> */}
                       <div className="product-box">
                         <label
@@ -973,7 +956,14 @@ const LeadDetailsPage = () => {
                     <div key={index} className="save-lead-data">
                       <div>
                         <p className="lead-heading">{task?.name}</p>
-                        <h6 className="lead-sm-heading">{task?.description}</h6>
+                        <h6 className="lead-sm-heading mb-1">
+                          {task?.description}
+                        </h6>
+                        <h6 className="lead-sm-heading mb-1">
+                          {new Date(task.expectedDate).toLocaleDateString()} -{" "}
+                          {new Date(task.expectedDate).getHours()}:
+                          {new Date(task.expectedDate).getMinutes()}
+                        </h6>
                       </div>
                       {adminRole ? (
                         <div className="lead-heading">
@@ -1275,7 +1265,7 @@ const LeadDetailsPage = () => {
                 data={sms}
                 setData={setSms}
               /> */}
-               {/* <PopUpButton   name={"Email"}
+              {/* <PopUpButton   name={"Email"}
                 icon={<i className="fa-regular fa-envelope"></i>}
                 className="filter-btn-design"
                 data={sms}  /> */}
@@ -1425,14 +1415,27 @@ const LeadDetailsPage = () => {
                   </div>
 
                   <div className="side-notes">
-                  <p className="mb-0 write-heading text-center pb-2"><span className="mr-2">{new Date(note?.latestUpdated).toDateString()}</span><span className="mr-2">{new Date(note?.latestUpdated).toLocaleTimeString('en-US')}</span></p>
+                    <p className="mb-0 write-heading text-center pb-2">
+                      <span className="mr-2">
+                        {new Date(note?.latestUpdated).toDateString()}
+                      </span>
+                      <span className="mr-2">
+                        {new Date(note?.latestUpdated).toLocaleTimeString(
+                          "en-US"
+                        )}
+                      </span>
+                    </p>
                     <div className="comment-above">
-                      
                       <div>
-                      <h2 className="write-heading">Notes</h2>
+                        <h2 className="write-heading">Notes</h2>
                       </div>
                       <div className="d-flex">
-                      <div className="circle-image">{note?.updatedBy?.fullName.slice(0,1)}</div><span className="ml-1 write-heading">{note?.updatedBy?.fullName}</span>
+                        <div className="circle-image">
+                          {note?.updatedBy?.fullName.slice(0, 1)}
+                        </div>
+                        <span className="ml-1 write-heading">
+                          {note?.updatedBy?.fullName}
+                        </span>
                       </div>
                     </div>
                     <div className="text-display-box">
