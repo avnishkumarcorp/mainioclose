@@ -35,6 +35,7 @@ const LeadsModule = () => {
   const [fromDate, setFromDate] = useState("")
   const [dateFilter, setDateFilter] = useState(false)
   const [multibtn, setMultibtn] = useState(false)
+  const [leadMultiDep, setLeadMultiDep] = useState(false);
 
   const [multiLeadError, setMultiLeadError] = useState(false);
   const [selectLeadError, setSelectLeadError] = useState(false);
@@ -68,6 +69,8 @@ const LeadsModule = () => {
     }
   }
 
+  console.log(allLeadData);
+
   const [multiLeadData, setMultiLeadData] = useState({
     leadIds: selectedRows,
     statusId: null,
@@ -82,7 +85,7 @@ const LeadsModule = () => {
   
   useEffect(() => {
     getAllLead()
-  }, [updateActive, statusDataId, leadStatusD, dateFilter])
+  }, [updateActive, statusDataId, leadStatusD, dateFilter, leadMultiDep])
 
   useEffect(() => {
     getAllLeadUser()
@@ -155,6 +158,16 @@ const LeadsModule = () => {
           </Link>
         )
       },
+    },
+    {
+      field: "missedTask",
+      headerName: "Missed Task",
+      width: 150,
+      // renderCell: (props) => {
+      //   return(
+      //     <p className="mb-0">{props?.row?.missedTask}</p>
+      //   )
+      // } 
     },
     {
       field: "status",
@@ -319,6 +332,7 @@ const LeadsModule = () => {
       )
       const leadData = allLead.data.reverse()
       setAllLeadData(leadData)
+      
       setLeadScalatonCall(false)
     } catch (err) {
       console.log(err)
@@ -357,6 +371,7 @@ const LeadsModule = () => {
         multiLeadData
       )
       setMultibtn(false)
+      setLeadMultiDep((prev) => !(prev))
       console.log("multidata", multiAssigneeCol)
     } catch (err) {
       console.log(err)
