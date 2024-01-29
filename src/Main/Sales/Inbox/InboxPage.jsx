@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./InboxPage.scss"
-import { Link, useLocation } from "react-router-dom"
+import {  useLocation } from "react-router-dom"
 import axios from "axios"
 import MUIDataTable from "mui-datatables"
 import DataGridTables from "../../../components/DataGridTables"

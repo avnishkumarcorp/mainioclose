@@ -80,7 +80,7 @@ const LeadsModule = () => {
 
   useEffect(() => {
     setMultiLeadData((prev) => ({ ...prev, leadIds: selectedRows }))
-  }, [handleSelectAllClick])
+  }, [multiLeadData])
 
   
   useEffect(() => {
@@ -357,6 +357,7 @@ const LeadsModule = () => {
     setMultibtn(true)
     if(multiLeadData.statusId === null && multiLeadData.assigneId === null ){
       console.log("Error Generate");
+      
       setMultiLeadError(true)
       return;
     }
@@ -372,6 +373,7 @@ const LeadsModule = () => {
       )
       setMultibtn(false)
       setLeadMultiDep((prev) => !(prev))
+      window.location.reload();
       console.log("multidata", multiAssigneeCol)
     } catch (err) {
       console.log(err)
