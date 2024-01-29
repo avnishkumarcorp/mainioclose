@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import "./FilterButton.scss"
 
 const FilterButton = ({name, icon, data, setData}) => {

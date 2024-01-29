@@ -1,6 +1,6 @@
 import React from "react"
 import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import {  useNavigate } from "react-router-dom"
 import InputErrorComponent from "../components/InputErrorComponent";
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -27,7 +27,7 @@ const SetNewPasswordPage = () => {
   const setNewPassword = (e) =>{
     e.preventDefault();
 
-    if(newPassword.password != confirmPassword){
+    if(newPassword.password !== confirmPassword){
       setSamePasswordError(true);
       return;
     }

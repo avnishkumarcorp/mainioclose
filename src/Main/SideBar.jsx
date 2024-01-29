@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
-import corpseedLogo from "../Images/corpseed-logo.png"
 import { useSelector } from "react-redux"
 
 const SideBar = () => {

@@ -1,7 +1,6 @@
 import React from "react"
 import { useState } from "react"
 import "./PopUpButton.scss"
-import { FALSE } from "sass"
 
 const PopUpButton = ({ name = "", icon, className = "", ...props }) => {
   const [activePop, setActivePop] = useState(false)

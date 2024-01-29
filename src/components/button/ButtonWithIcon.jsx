@@ -1,4 +1,3 @@
-import { useProps } from "@mui/x-data-grid/internals";
 import React from "react";
 import "./ButtonWithIcon.scss"
 
