@@ -3,7 +3,7 @@ import { postQuery } from "../../API/PostQuery"
 
 export const getCurrentUser = createAsyncThunk("currentUser", async (data) => {
   const userData = await postQuery(`/securityService/api/auth/signin`, data)
-//   console.log("i am user Data", userData);
+  console.log("i am user Data", userData);
   return userData.data
 })
 
@@ -15,6 +15,7 @@ export const AuthSlice = createSlice({
   initialState: {
     loginLoading: false,
     currentUser: {},
+    roles: [],
     jwt: "",
   },
   extraReducers: (builder) => {
@@ -24,6 +25,7 @@ export const AuthSlice = createSlice({
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
       state.currentUser = action.payload 
       state.jwt = action.payload.jwt
+      state.roles = action.payload.roles
       state.loginLoading = false
     })
     builder.addCase(getCurrentUser.rejected, (state, action) => {

@@ -69,8 +69,8 @@ const Login = () => {
           `/securityService/api/auth/signin`,
           userLoginData
         )
-        dispatch(currentUserAction(collectUserData.data))
-        dispatch(userTokenAction(collectUserData.data.jwt))
+        // dispatch(currentUserAction(collectUserData.data))
+        // dispatch(userTokenAction(collectUserData.data.jwt))
         setLoadingBtn(false)
         localStorage.setItem("Access-token", collectUserData.data.jwt)
         navigate(`/erp/${collectUserData.data.id}/sales`)
