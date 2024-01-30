@@ -41,6 +41,7 @@ import SettingMainPage from "./Main/Setting/SettingMainPage"
 import LeadStatusPage from "./Main/Setting/LeadStatus/LeadStatusPage"
 import ProductsChange from "./Main/Setting/Products/ProductsChange"
 import NotFoundPage from "./components/NotFoundPage"
+import LeadCategory from "./Main/Setting/Category/LeadCategory"
 
 function App() {
   return (
@@ -221,6 +222,7 @@ function App() {
             <Route path="/erp/:userid/setting" element={<SettingMainPage />} >
               <Route path="" element={<LeadStatusPage />} />
               <Route path="products" element={<ProductsChange />} />
+              <Route path="category" element={<LeadCategory />} />
             </Route>
 
             {/* profile routes */}
