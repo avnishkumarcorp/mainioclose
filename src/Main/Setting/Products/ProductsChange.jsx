@@ -79,7 +79,7 @@ const ProductsChange = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadProductDel = await deleteQuery(
-          `  /leadService/api/v1/product?id=${statusId}`
+          `/leadService/api/v1/product/delete?id=${statusId}`
         )
         setDeleteCategoryDep((prev) => !prev)
         console.log("delete call0, ", leadProductDel)
