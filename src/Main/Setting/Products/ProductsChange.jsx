@@ -17,7 +17,7 @@ const ProductsChange = () => {
 
   const [nameError, setNameError] = useState(false)
   const [catError, setcatError] = useState(false)
-  const [addProductDep, setAddProductDep] = useState(false);
+  const [addProductDep, setAddProductDep] = useState(false)
   const [deleteCategoryDep, setDeleteCategoryDep] = useState(false)
 
   const nameRef = useRef()
@@ -51,7 +51,7 @@ const ProductsChange = () => {
         `/leadService/api/v1/product/createProduct`,
         addNewProduct
       )
-      setAddProductDep((prev) => !(prev))
+      setAddProductDep((prev) => !prev)
       console.log(productData)
     } catch (err) {
       console.log(err)
@@ -66,31 +66,30 @@ const ProductsChange = () => {
   const { productData: categoryData, loading: categoryLoading } =
     useCustomRoute(categoryUrl, categoryDep)
 
-    const productUrl = `/leadService/api/v1/product/getAllProducts`
-    const productDep = [addProductDep, deleteCategoryDep]
-  
-    const { productData: productData, loading: productLoading } =
-      useCustomRoute(productUrl, productDep)
+  const productUrl = `/leadService/api/v1/product/getAllProducts`
+  const productDep = [addProductDep, deleteCategoryDep]
 
-      const deleteProductFun = async (statusId) => {
-        console.log("cat id", statusId)
-        if (window.confirm("Are you sure to delete this record?") == true) {
-          try {
-            const leadProductDel = await deleteQuery(
-              `  /leadService/api/v1/product?id=${statusId}`
-            )
-            setDeleteCategoryDep((prev) => !prev)
-            console.log("delete call0, ", leadProductDel)
-          } catch (err) {
-            console.log(err)
-          }
-        }
+  const { productData: productData, loading: productLoading } = useCustomRoute(
+    productUrl,
+    productDep
+  )
+
+  const deleteProductFun = async (statusId) => {
+    console.log("cat id", statusId)
+    if (window.confirm("Are you sure to delete this record?") == true) {
+      try {
+        const leadProductDel = await deleteQuery(
+          `  /leadService/api/v1/product?id=${statusId}`
+        )
+        setDeleteCategoryDep((prev) => !prev)
+        console.log("delete call0, ", leadProductDel)
+      } catch (err) {
+        console.log(err)
       }
+    }
+  }
 
-    
-    
-
-  console.log("product",productData)
+  console.log("product", productData)
 
   return (
     <div>
@@ -180,7 +179,6 @@ const ProductsChange = () => {
           </table>
         </div>
       </div>
-
     </div>
   )
 }
