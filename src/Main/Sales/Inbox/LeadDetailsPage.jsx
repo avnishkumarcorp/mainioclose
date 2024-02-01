@@ -1277,13 +1277,11 @@ const LeadDetailsPage = () => {
               /> */}
               <Link to={`history`} className="filter-btn-design">
                 <i className="fa-regular mr-1 fa-clipboard"></i>History
-                {/* <FilterButton
-                name={"History"}
-                icon={<i className="fa-regular fa-envelope"></i>}
-                data={"History"}
-                // setData={setEmail}
-              /> */}
               </Link>
+              <Link to={`/erp/${currentUserId}/sales/leads`} className="filter-btn-design">
+              <i class="fa-solid mr-1 fa-backward-step"></i>Back
+              </Link>
+
             </div>
             <div className="filter-box mt-3">
               <select
