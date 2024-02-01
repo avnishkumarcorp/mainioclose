@@ -21,6 +21,8 @@ import ArrowComponent from "../../../components/ArrowComponent"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Checkbox from "@mui/material/Checkbox"
 import InputErrorComponent from "../../../components/InputErrorComponent"
+import { getRowEl } from "@mui/x-data-grid/utils/domUtils"
+import { deleteQuery } from "../../../API/DeleteQuery"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -35,10 +37,13 @@ const LeadsModule = () => {
   const [fromDate, setFromDate] = useState("")
   const [dateFilter, setDateFilter] = useState(false)
   const [multibtn, setMultibtn] = useState(false)
-  const [leadMultiDep, setLeadMultiDep] = useState(false);
+  const [leadMultiDep, setLeadMultiDep] = useState(false)
+  const [leadDeleteErr, setLeadDeleteErr] = useState(false);
+  const [leadDelLoading, setLeadDelLoading] = useState(false);
+  const [rerefreshLead, setRerefreshLead] = useState(false);
 
-  const [multiLeadError, setMultiLeadError] = useState(false);
-  const [selectLeadError, setSelectLeadError] = useState(false);
+  const [multiLeadError, setMultiLeadError] = useState(false)
+  const [selectLeadError, setSelectLeadError] = useState(false)
 
   const location = useLocation()
   const currentPath = location.pathname.split()
@@ -46,8 +51,8 @@ const LeadsModule = () => {
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
 
-  const multiStatusRef = useRef();
-  const multiAssigneeRef = useRef();
+  const multiStatusRef = useRef()
+  const multiAssigneeRef = useRef()
 
   const [selectedRows, setSelectedRows] = useState([])
 
@@ -69,7 +74,7 @@ const LeadsModule = () => {
     }
   }
 
-  console.log(allLeadData);
+  // console.log(allLeadData);
 
   const [multiLeadData, setMultiLeadData] = useState({
     leadIds: selectedRows,
@@ -78,14 +83,22 @@ const LeadsModule = () => {
     updatedById: currentUserId,
   })
 
+  const [deleteMultiLead, setDeleteMultiLead] = useState({
+    leadId: selectedRows,
+    updatedById: currentUserId,
+  })
+
   useEffect(() => {
     setMultiLeadData((prev) => ({ ...prev, leadIds: selectedRows }))
   }, [multiLeadData])
 
-  
+  useEffect(() => {
+    setDeleteMultiLead((prev) => ({ ...prev, leadId: selectedRows }))
+  }, [deleteMultiLead])
+
   useEffect(() => {
     getAllLead()
-  }, [updateActive, statusDataId, leadStatusD, dateFilter, leadMultiDep])
+  }, [updateActive, statusDataId, rerefreshLead, leadStatusD, dateFilter, leadMultiDep])
 
   useEffect(() => {
     getAllLeadUser()
@@ -106,6 +119,41 @@ const LeadsModule = () => {
     }
   }
 
+  const deleteMultiLeadFun = async () => {
+    
+    console.log("del calal")
+    console.log("data is ", deleteMultiLead)
+    if(deleteMultiLead.leadId.length === 0){
+      setLeadDeleteErr(true)
+      return
+    }
+    setLeadDelLoading(true)
+    if (window.confirm("Are you sure to delete this record?") == true) {
+        
+    
+  
+
+    try {
+      const delMulLead = await axios.delete(
+        `/leadService/api/v1/lead/deleteMultiLead`,
+        {
+          'data': deleteMultiLead,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      console.log("respomnse", delMulLead)
+      setRerefreshLead((prev) => !(prev))
+      setLeadDelLoading(false)
+    } catch (err) {
+      console.log(err)
+      setLeadDelLoading(false)
+    }
+    console.log(deleteMultiLead);
+  }
+}
 
   const currentUserRoles = useSelector(
     (prev) => prev.AuthReducer.currentUser.roles
@@ -140,7 +188,9 @@ const LeadsModule = () => {
       filterable: false,
       renderCell: (props) => {
         return (
-          <p className="mb-0">{props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}</p>
+          <p className="mb-0">
+            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+          </p>
         )
       },
     },
@@ -167,7 +217,7 @@ const LeadsModule = () => {
       //   return(
       //     <p className="mb-0">{props?.row?.missedTask}</p>
       //   )
-      // } 
+      // }
     },
     {
       field: "status",
@@ -182,12 +232,19 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "client", headerName: "Client Name", width: 150, renderCell: (props) => {
-      // console.log("client name", clients[0]?.name)
-      return (
-        <p>{props.row.clients[0]?.name ? props.row.clients[0]?.name : "NA"}</p>
-      )
-    } },
+    {
+      field: "client",
+      headerName: "Client Name",
+      width: 150,
+      renderCell: (props) => {
+        // console.log("client name", clients[0]?.name)
+        return (
+          <p>
+            {props.row.clients[0]?.name ? props.row.clients[0]?.name : "NA"}
+          </p>
+        )
+      },
+    },
 
     {
       field: "assigneeName",
@@ -223,7 +280,7 @@ const LeadsModule = () => {
     },
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
-   
+
     {
       field: "assignee",
       headerName: "Change Assignee",
@@ -263,8 +320,6 @@ const LeadsModule = () => {
       },
     },
   ]
-
-
 
   const leadDeleteResponse = async (id) => {
     if (window.confirm("Are you sure to delete this record?") == true) {
@@ -332,7 +387,7 @@ const LeadsModule = () => {
       )
       const leadData = allLead.data.reverse()
       setAllLeadData(leadData)
-      
+
       setLeadScalatonCall(false)
     } catch (err) {
       console.log(err)
@@ -355,15 +410,15 @@ const LeadsModule = () => {
 
   const multiAssignee = async () => {
     setMultibtn(true)
-    if(multiLeadData.statusId === null && multiLeadData.assigneId === null ){
-      console.log("Error Generate");
-      
+    if (multiLeadData.statusId === null && multiLeadData.assigneId === null) {
+      console.log("Error Generate")
+
       setMultiLeadError(true)
-      return;
+      return
     }
-    if(multiLeadData.leadIds.length === 0){
-      setSelectLeadError(true);
-      return 
+    if (multiLeadData.leadIds.length === 0) {
+      setSelectLeadError(true)
+      return
     }
 
     try {
@@ -372,8 +427,8 @@ const LeadsModule = () => {
         multiLeadData
       )
       setMultibtn(false)
-      setLeadMultiDep((prev) => !(prev))
-      window.location.reload();
+      setLeadMultiDep((prev) => !prev)
+      window.location.reload()
       console.log("multidata", multiAssigneeCol)
     } catch (err) {
       console.log(err)
@@ -472,8 +527,13 @@ const LeadsModule = () => {
           />
         )}
 
-        <div className={`bottom-line ${multiLeadData.leadIds.length > 0 ? 'pos-fix' : ""}`}>
+        <div
+          className={`bottom-line ${
+            multiLeadData.leadIds.length > 0 ? "pos-fix" : ""
+          }`}
+        >
           <div>
+            <button className="common-btn-one mr-2" onClick={() => deleteMultiLeadFun()}>{leadDelLoading ? "Please Wait..." : "Delete"}</button>
             <select
               className="p-1 status-select"
               name="status"
@@ -519,12 +579,25 @@ const LeadsModule = () => {
           </div>
           <div>
             <button onClick={() => multiAssignee()} className="common-btn-one">
-            {multibtn ? "Loading" : "Send"}
+              {multibtn ? "Loading" : "Send"}
             </button>
           </div>
         </div>
-        {multiLeadError ? <InputErrorComponent value="Please Select At Least One Status ya Assignee column" /> : ""}
-        {selectLeadError ? <InputErrorComponent value="Please Select At Least 2 Leads" /> : ""}
+        {multiLeadError ? (
+          <InputErrorComponent value="Please Select At Least One Status ya Assignee column" />
+        ) : (
+          ""
+        )}
+        {selectLeadError ? (
+          <InputErrorComponent value="Please Select At Least 2 Leads" />
+        ) : (
+          ""
+        )}
+        {leadDeleteErr ? (
+          <InputErrorComponent value="Please Select At Least one Lead " />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   )
