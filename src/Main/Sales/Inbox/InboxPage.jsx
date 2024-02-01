@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./InboxPage.scss"
-import {  useLocation } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import axios from "axios"
 import MUIDataTable from "mui-datatables"
 import DataGridTables from "../../../components/DataGridTables"
@@ -24,7 +24,6 @@ const InboxPage = () => {
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
-
 
   const leadColumns = [
     {
@@ -54,7 +53,6 @@ const InboxPage = () => {
   ]
 
   const inboxColumn = [
-
     { field: "name", headerName: "Name", width: 250 },
     { field: "comment", headerName: "Comment", width: 550 },
     { field: "count", headerName: "Count", width: 150 },
@@ -92,8 +90,8 @@ const InboxPage = () => {
 
   return (
     <div className="inbox-page cm-padding-one">
-     <div className="pb-3">
-      <h1 className="table-heading">Inbox</h1>
+      <div className="pb-3">
+        <h1 className="table-heading">Inbox</h1>
       </div>
       <div className="inbox-top-btn">
         <button to="/sales" className={`tab-btn `}>
@@ -107,54 +105,18 @@ const InboxPage = () => {
         </button>
       </div>
 
-
       {/* <LeadsModule */}
 
       {/* <DataGridTables /> */}
       {inboxScalaton ? (
         <TableScalaton />
       ) : (
-        <UserLeadComponent columns={inboxColumn} getRowId={(row) => row.leadId} row={allLeadData} />
-      )}
-
-      {/* <UserLeadComponent columns={inboxColumn} getRowId={(row) => row.leadId} row={allLeadData} /> */}
-
-      {/* <UserListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData} /> */}
-      {/* // <InboxListComponent tableName={"Inbox"} columns={columns} row ={setAllLeadData}  />  */}
-      {/* <div className="mt-5">
-        <MUIDataTable
-          title={"Inbox"}
-          data={allLeadData}
-          columns={leadColumns}
-          options={filterOptions}
+        <UserLeadComponent
+          columns={inboxColumn}
+          getRowId={(row) => row.leadId}
+          row={allLeadData}
         />
-      </div> */}
-
-      {/* data table */}
-      {/* <div className="table-responsive mt-5">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">Name</th>
-              <th scope="col">Comment</th>
-              <th scope="col">Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allLeadData.map((lead, i) => (
-              <tr key={i}>
-                <td>{lead.leadId}</td>
-                <td>
-                  <Link to={`/erp/${currentUserId}/sales/${lead.leadId}`}>{lead.name}</Link>
-                </td>
-                <td>{lead.comment}</td>
-                <td>{lead.count===0 ? lead.count : <div className="lead-count">{lead.count}</div>}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div> */}
+      )}
     </div>
   )
 }
