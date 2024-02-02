@@ -50,10 +50,7 @@ const LeadsModule = () => {
 
   const [filterBtnNew, setFilterBtnNew] = useState(false)
 
-  console.warn("data")
-  // console.log(allStatusMulti)
-  // console.log(allUserMulti)
-
+  
   const [multiLeadError, setMultiLeadError] = useState(false)
   const [selectLeadError, setSelectLeadError] = useState(false)
 
@@ -86,8 +83,7 @@ const LeadsModule = () => {
 
   // }
 
-  console.log("multi Filter data", allMultiFilterData)
-
+ 
   const multiStatusRef = useRef()
   const multiAssigneeRef = useRef()
 
@@ -111,8 +107,7 @@ const LeadsModule = () => {
     }
   }
 
-  // console.log(allLeadData);
-
+  
   const [multiLeadData, setMultiLeadData] = useState({
     leadIds: selectedRows,
     statusId: null,
@@ -164,9 +159,8 @@ const LeadsModule = () => {
     }
   }
 
+ 
   const deleteMultiLeadFun = async () => {
-    console.log("del calal")
-    console.log("data is ", deleteMultiLead)
     if (deleteMultiLead.leadId.length === 0) {
       setLeadDeleteErr(true)
       return
@@ -184,14 +178,12 @@ const LeadsModule = () => {
             },
           }
         )
-        console.log("respomnse", delMulLead)
         setRerefreshLead((prev) => !prev)
         setLeadDelLoading(false)
       } catch (err) {
         console.log(err)
         setLeadDelLoading(false)
       }
-      console.log(deleteMultiLead)
     }
   }
 
@@ -201,9 +193,7 @@ const LeadsModule = () => {
   const adminRole = currentUserRoles.includes("ADMIN")
   const newRole = currentUserRoles.includes("NEW")
 
-  const getDataId = () => {
-    console.log("i am click")
-  }
+
 
   const columns = [
     {
@@ -259,7 +249,7 @@ const LeadsModule = () => {
       //   )
       // }
     },
-    {
+    { 
       field: "status",
       headerName: "Status",
       width: 120,
