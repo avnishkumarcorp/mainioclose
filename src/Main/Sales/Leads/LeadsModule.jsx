@@ -281,7 +281,7 @@ const LeadsModule = () => {
       renderCell: (props) => {
         // console.log("client name", clients[0]?.name)
         return (
-          <p>
+          <p className="mb-0">
             {props.row.clients[0]?.name ? props.row.clients[0]?.name : "NA"}
           </p>
         )
