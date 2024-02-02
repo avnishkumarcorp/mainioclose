@@ -24,6 +24,7 @@ import InputErrorComponent from "../../../components/InputErrorComponent"
 import { getRowEl } from "@mui/x-data-grid/utils/domUtils"
 import { deleteQuery } from "../../../API/DeleteQuery"
 import { MultiSelect } from "primereact/multiselect"
+import { postQuery } from "../../../API/PostQuery"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -46,6 +47,9 @@ const LeadsModule = () => {
 
   const [allStatusMulti, setAllStatusMulti] = useState([])
   const [allUserMulti, setAllUserMulti] = useState([])
+
+  const [filterBtnNew, setFilterBtnNew] = useState(false);
+
   console.warn("data")
   // console.log(allStatusMulti)
   // console.log(allUserMulti)
@@ -78,9 +82,9 @@ const LeadsModule = () => {
 
 
 
-  const multiFilterFun = () => {
+  // const multiFilterFun = () => {
 
-  }
+  // }
   
 
 
@@ -140,6 +144,7 @@ const LeadsModule = () => {
     leadStatusD,
     dateFilter,
     leadMultiDep,
+    filterBtnNew
   ])
 
   useEffect(() => {
@@ -413,14 +418,8 @@ const LeadsModule = () => {
 
   const getAllLead = async () => {
     try {
-      const allLead = await axios.get(
-        `/leadService/api/v1/lead/getAllLead?userId=${currentUserId}&statusId=${statusDataId}&toDate=${toDate}&fromDate=${fromDate}`,
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
+      const allLead = await postQuery(
+        `/leadService/api/v1/lead/getAllLead`, allMultiFilterData
       )
       const leadData = allLead.data.reverse()
       setAllLeadData(leadData)
@@ -466,7 +465,7 @@ const LeadsModule = () => {
         multiLeadData
       )
       setMultibtn(false)
-      setLeadMultiDep((prev) => !prev)
+      setLeadMultiDep((prev) => !(prev))
       window.location.reload()
       console.log("multidata", multiAssigneeCol)
     } catch (err) {
@@ -532,7 +531,7 @@ const LeadsModule = () => {
           />
           <button
             className="common-btn-one"
-            // onClick={() => setDateFilter((prev) => !prev)}
+            onClick={() => setFilterBtnNew((prev) => !prev)}
           >
             MF Apply
           </button>
