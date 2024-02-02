@@ -266,7 +266,7 @@ const LeadsModule = () => {
       headerName: "Status",
       width: 120,
       renderCell: (props) => {
-        const leadStatus = props.row.status?.name
+        let leadStatus = props.row.status?.name
         return (
           <p className={`mb-0 ${leadStatus === "New" ? "lead-new" : ""}`}>
             {leadStatus ? leadStatus : "NA"}
