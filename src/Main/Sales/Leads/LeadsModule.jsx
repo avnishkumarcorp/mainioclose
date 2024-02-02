@@ -23,6 +23,7 @@ import Checkbox from "@mui/material/Checkbox"
 import InputErrorComponent from "../../../components/InputErrorComponent"
 import { getRowEl } from "@mui/x-data-grid/utils/domUtils"
 import { deleteQuery } from "../../../API/DeleteQuery"
+import { MultiSelect } from "primereact/multiselect"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -38,9 +39,16 @@ const LeadsModule = () => {
   const [dateFilter, setDateFilter] = useState(false)
   const [multibtn, setMultibtn] = useState(false)
   const [leadMultiDep, setLeadMultiDep] = useState(false)
-  const [leadDeleteErr, setLeadDeleteErr] = useState(false);
-  const [leadDelLoading, setLeadDelLoading] = useState(false);
-  const [rerefreshLead, setRerefreshLead] = useState(false);
+  const [leadDeleteErr, setLeadDeleteErr] = useState(false)
+  const [leadDelLoading, setLeadDelLoading] = useState(false)
+  const [rerefreshLead, setRerefreshLead] = useState(false)
+  const [hideMUltiFilter, setHideMUltiFilter] = useState(false)
+
+  const [allStatusMulti, setAllStatusMulti] = useState([])
+  const [allUserMulti, setAllUserMulti] = useState([])
+  console.warn("data")
+  // console.log(allStatusMulti)
+  // console.log(allUserMulti)
 
   const [multiLeadError, setMultiLeadError] = useState(false)
   const [selectLeadError, setSelectLeadError] = useState(false)
@@ -50,6 +58,33 @@ const LeadsModule = () => {
   const splitPath = currentPath[0].split("/")
   const currentUserId = Number(splitPath[2])
   const currentLeadId = Number(splitPath[4])
+
+  const [allMultiFilterData, setAllMultiFilterData] = useState({
+    userId: currentUserId,
+    userIdFilter: allUserMulti,
+    statusId: allStatusMulti,
+    toDate: toDate,
+    fromDate: fromDate,
+  })
+
+  useEffect(()=>{
+    setAllMultiFilterData((prev) => ({...prev, userId: currentUserId,
+    userIdFilter: allUserMulti,
+    statusId: allStatusMulti,
+    toDate: toDate,
+    fromDate: fromDate,}))
+  }, [allUserMulti, allStatusMulti, toDate, fromDate])
+
+
+
+
+  const multiFilterFun = () => {
+
+  }
+  
+
+
+  console.log("multi Filter data", allMultiFilterData);
 
   const multiStatusRef = useRef()
   const multiAssigneeRef = useRef()
@@ -98,7 +133,14 @@ const LeadsModule = () => {
 
   useEffect(() => {
     getAllLead()
-  }, [updateActive, statusDataId, rerefreshLead, leadStatusD, dateFilter, leadMultiDep])
+  }, [
+    updateActive,
+    statusDataId,
+    rerefreshLead,
+    leadStatusD,
+    dateFilter,
+    leadMultiDep,
+  ])
 
   useEffect(() => {
     getAllLeadUser()
@@ -120,40 +162,35 @@ const LeadsModule = () => {
   }
 
   const deleteMultiLeadFun = async () => {
-    
     console.log("del calal")
     console.log("data is ", deleteMultiLead)
-    if(deleteMultiLead.leadId.length === 0){
+    if (deleteMultiLead.leadId.length === 0) {
       setLeadDeleteErr(true)
       return
     }
     setLeadDelLoading(true)
     if (window.confirm("Are you sure to delete this record?") == true) {
-        
-    
-  
-
-    try {
-      const delMulLead = await axios.delete(
-        `/leadService/api/v1/lead/deleteMultiLead`,
-        {
-          'data': deleteMultiLead,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      console.log("respomnse", delMulLead)
-      setRerefreshLead((prev) => !(prev))
-      setLeadDelLoading(false)
-    } catch (err) {
-      console.log(err)
-      setLeadDelLoading(false)
+      try {
+        const delMulLead = await axios.delete(
+          `/leadService/api/v1/lead/deleteMultiLead`,
+          {
+            data: deleteMultiLead,
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        console.log("respomnse", delMulLead)
+        setRerefreshLead((prev) => !prev)
+        setLeadDelLoading(false)
+      } catch (err) {
+        console.log(err)
+        setLeadDelLoading(false)
+      }
+      console.log(deleteMultiLead)
     }
-    console.log(deleteMultiLead);
   }
-}
 
   const currentUserRoles = useSelector(
     (prev) => prev.AuthReducer.currentUser.roles
@@ -395,6 +432,8 @@ const LeadsModule = () => {
     }
   }
 
+  
+
   const getAllStatusData = async () => {
     try {
       const allStatus = await getQuery(
@@ -442,7 +481,62 @@ const LeadsModule = () => {
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
         <h1 className="table-heading">Leads</h1>
-        {adminRole ? <LeadCreateModel /> : ""}
+        <div className="all-center">
+          <button
+            onClick={() => setHideMUltiFilter((prev) => !prev)}
+            className="common-btn-one mr-2"
+          >
+            Multi Filter
+          </button>
+          {adminRole ? <LeadCreateModel /> : ""}
+        </div>
+      </div>
+
+      <div className={`${hideMUltiFilter ? "" : "d-none"} all-between py-2`}>
+        <div className="one">
+          <MultiSelect
+            style={{ dropdown: { backgroundColor: "#000" } }}
+            value={allUserMulti}
+            onChange={(e) => setAllUserMulti(e.value)}
+            options={leadUserNew}
+            optionLabel="fullName"
+            placeholder="Select Users"
+            optionValue="id"
+            maxSelectedLabels={3}
+            className="multi-select-boxx"
+          />
+        </div>
+        <div className="two">
+          <MultiSelect
+            style={{ dropdown: { backgroundColor: "#000" } }}
+            value={allStatusMulti}
+            onChange={(e) => setAllStatusMulti(e.value)}
+            options={getAllStatus}
+            optionLabel="name"
+            optionValue="id"
+            placeholder="Select States"
+            maxSelectedLabels={3}
+            className="multi-select-boxx"
+          />
+        </div>
+        <div className="three">
+          <input
+            className="mr-2"
+            onChange={(e) => setToDate(e.target.value)}
+            type="date"
+          />
+          <input
+            className="mr-2"
+            onChange={(e) => setFromDate(e.target.value)}
+            type="date"
+          />
+          <button
+            className="common-btn-one"
+            // onClick={() => setDateFilter((prev) => !prev)}
+          >
+            MF Apply
+          </button>
+        </div>
       </div>
 
       <div className="all-between">
@@ -533,7 +627,12 @@ const LeadsModule = () => {
           }`}
         >
           <div>
-            <button className="common-btn-one mr-2" onClick={() => deleteMultiLeadFun()}>{leadDelLoading ? "Please Wait..." : "Delete"}</button>
+            <button
+              className="common-btn-one mr-2"
+              onClick={() => deleteMultiLeadFun()}
+            >
+              {leadDelLoading ? "Please Wait..." : "Delete"}
+            </button>
             <select
               className="p-1 status-select"
               name="status"

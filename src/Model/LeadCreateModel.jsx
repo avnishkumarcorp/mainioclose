@@ -124,7 +124,7 @@ const LeadCreateModel = () => {
             className="modal-dialog mod-center modal-dialog-centered"
             role="document"
           >
-            <div className="modal-content all-center">
+            <div className="modal-content all-center-2">
               <div className="add-team-body">
                 {/* START */}
                 <div className="personal-info container">
@@ -467,7 +467,7 @@ const LeadCreateModel = () => {
                       </div>
 
                       <div className="all-between-items">
-                        <div className="all-center"></div>
+                        <div className="all-center-2"></div>
                         <div>
                           <button
                             onClick={(e) => newLeadCreate(e)}
