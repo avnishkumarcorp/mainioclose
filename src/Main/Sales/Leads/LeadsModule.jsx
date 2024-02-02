@@ -48,7 +48,7 @@ const LeadsModule = () => {
   const [allStatusMulti, setAllStatusMulti] = useState([])
   const [allUserMulti, setAllUserMulti] = useState([])
 
-  const [filterBtnNew, setFilterBtnNew] = useState(false);
+  const [filterBtnNew, setFilterBtnNew] = useState(false)
 
   console.warn("data")
   // console.log(allStatusMulti)
@@ -71,24 +71,22 @@ const LeadsModule = () => {
     fromDate: fromDate,
   })
 
-  useEffect(()=>{
-    setAllMultiFilterData((prev) => ({...prev, userId: currentUserId,
-    userIdFilter: allUserMulti,
-    statusId: allStatusMulti,
-    toDate: toDate,
-    fromDate: fromDate,}))
+  useEffect(() => {
+    setAllMultiFilterData((prev) => ({
+      ...prev,
+      userId: currentUserId,
+      userIdFilter: allUserMulti,
+      statusId: allStatusMulti,
+      toDate: toDate,
+      fromDate: fromDate,
+    }))
   }, [allUserMulti, allStatusMulti, toDate, fromDate])
-
-
-
 
   // const multiFilterFun = () => {
 
   // }
-  
 
-
-  console.log("multi Filter data", allMultiFilterData);
+  console.log("multi Filter data", allMultiFilterData)
 
   const multiStatusRef = useRef()
   const multiAssigneeRef = useRef()
@@ -144,7 +142,7 @@ const LeadsModule = () => {
     leadStatusD,
     dateFilter,
     leadMultiDep,
-    filterBtnNew
+    filterBtnNew,
   ])
 
   useEffect(() => {
@@ -419,7 +417,8 @@ const LeadsModule = () => {
   const getAllLead = async () => {
     try {
       const allLead = await postQuery(
-        `/leadService/api/v1/lead/getAllLead`, allMultiFilterData
+        `/leadService/api/v1/lead/getAllLead`,
+        allMultiFilterData
       )
       const leadData = allLead.data.reverse()
       setAllLeadData(leadData)
@@ -430,8 +429,6 @@ const LeadsModule = () => {
       setLeadScalatonCall(true)
     }
   }
-
-  
 
   const getAllStatusData = async () => {
     try {
@@ -465,7 +462,7 @@ const LeadsModule = () => {
         multiLeadData
       )
       setMultibtn(false)
-      setLeadMultiDep((prev) => !(prev))
+      setLeadMultiDep((prev) => !prev)
       window.location.reload()
       console.log("multidata", multiAssigneeCol)
     } catch (err) {
@@ -485,7 +482,7 @@ const LeadsModule = () => {
             onClick={() => setHideMUltiFilter((prev) => !prev)}
             className="common-btn-one mr-2"
           >
-            Multi Filter
+            Filter Data
           </button>
           {adminRole ? <LeadCreateModel /> : ""}
         </div>
@@ -513,7 +510,7 @@ const LeadsModule = () => {
             options={getAllStatus}
             optionLabel="name"
             optionValue="id"
-            placeholder="Select States"
+            placeholder="Select Status"
             maxSelectedLabels={3}
             className="multi-select-boxx"
           />
@@ -530,15 +527,21 @@ const LeadsModule = () => {
             type="date"
           />
           <button
-            className="common-btn-one"
+            className="common-btn-one mr-2"
             onClick={() => setFilterBtnNew((prev) => !prev)}
           >
-            MF Apply
+            Apply
+          </button>
+          <button
+            className="common-btn-one"
+            onClick={() => window.location.reload()}
+          >
+            Remove
           </button>
         </div>
       </div>
 
-      <div className="all-between">
+      {/* <div className="all-between">
         <div className="one-line">
           <p className="my-2">
             <select
@@ -582,7 +585,7 @@ const LeadsModule = () => {
             Apply
           </button>
         </div>
-      </div>
+      </div> */}
 
       <div className="table-arrow">
         {/* <ArrowComponent /> */}
