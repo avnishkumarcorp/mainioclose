@@ -589,6 +589,150 @@ const LeadDetailsPage = () => {
             )}
             <div></div>
             <div className="lead-product">
+
+            <div className="card mt-2">
+                <div className="" id="headingThree">
+                  <div
+                    className="card-btn collapsed"
+                    data-toggle="collapse"
+                    data-target="#contactCollapse"
+                    aria-expanded="false"
+                    aria-controls="contactCollapse"
+                  >
+                    <h3 className="lead-heading lead-bold">Contacts</h3>
+                    <p className="lead-heading">
+                      <i className="fa-solid fa-plus"></i>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="contactCollapse"
+                  className="collapse"
+                  aria-labelledby="headingThree"
+                  data-parent="#accordion"
+                >
+                  <div className="my-card-content">
+                    <form>
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Name
+                        </label>
+
+                        <input
+                          name="name"
+                          onChange={(e) => setContactDataFun(e)}
+                          className="lead-cm-input"
+                          ref={contactNameRef}
+                          type="text"
+                        />
+                      </div>
+                      {/* <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Title
+                        </label>
+
+                        <input className="lead-cm-input" type="text" />
+                      </div> */}
+
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Contact Detail
+                        </label>
+                        <div className="my-details">
+                          <i className="fa-solid fa-envelope"></i>
+                          <input
+                            name="email"
+                            onChange={(e) => setContactDataFun(e)}
+                            className="lead-cm-input"
+                            ref={contactEmailRef}
+                            type="email"
+                          />
+                        </div>
+                        <div className="my-details">
+                          <i className="fa-solid fa-phone"></i>
+                          <input
+                            name="contactNo"
+                            onChange={(e) => setContactDataFun(e)}
+                            className="lead-cm-input"
+                            ref={contactContactNoRef}
+                            type="text"
+                          />
+                        </div>
+                      </div>
+
+                      {/* <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Contact Role
+                        </label>
+
+                        <input className="lead-cm-input" type="text" />
+                      </div> */}
+
+                      <div className="lead-btn-box">
+                        <button
+                          type="reset"
+                          className="lead-cm-btn lead-cancel-btn"
+                        >
+                          Reset
+                        </button>
+                        <button
+                          onClick={(e) => createLeadContact(e)}
+                          className="lead-cm-btn lead-save-btn"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  {/* all leads save */}
+                  {clientsContact.map((client, index) => (
+                    <div className="save-lead-data" key={index}>
+                      <div>
+                        <p className="lead-heading">
+                          {client?.clientName
+                            ? `${client?.clientName.slice(0, 30)}...`
+                            : "NA"}
+                        </p>
+                        <h6 className="lead-sm-heading mb-0">
+                          {client?.email
+                            ? `${client?.email.slice(0, 30)}...`
+                            : "NA"}
+                        </h6>
+                        <h6 className="lead-sm-heading ">
+                          {client.contactNo
+                            ? `${client.contactNo.slice(0, 20)}...`
+                            : "NA"}
+                        </h6>
+                      </div>
+                      {adminRole ? (
+                        <div className="lead-heading">
+                          <i className="fa-solid fa-pen mr-3"></i>
+                          <i className="fa-solid fa-trash"></i>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  ))}
+
+                  {/* all leads save */}
+                </div>
+              </div>
+
+
+
               <div className="card mt-2">
                 <div className="" id="headingThree">
                   <div
@@ -1095,146 +1239,7 @@ const LeadDetailsPage = () => {
               {/* end  opportunities */}
 
               {/* contact */}
-              <div className="card mt-2">
-                <div className="" id="headingThree">
-                  <div
-                    className="card-btn collapsed"
-                    data-toggle="collapse"
-                    data-target="#contactCollapse"
-                    aria-expanded="false"
-                    aria-controls="contactCollapse"
-                  >
-                    <h3 className="lead-heading lead-bold">Contacts</h3>
-                    <p className="lead-heading">
-                      <i className="fa-solid fa-plus"></i>
-                    </p>
-                  </div>
-                </div>
-                <div
-                  id="contactCollapse"
-                  className="collapse"
-                  aria-labelledby="headingThree"
-                  data-parent="#accordion"
-                >
-                  <div className="my-card-content">
-                    <form>
-                      <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Name
-                        </label>
-
-                        <input
-                          name="name"
-                          onChange={(e) => setContactDataFun(e)}
-                          className="lead-cm-input"
-                          ref={contactNameRef}
-                          type="text"
-                        />
-                      </div>
-                      {/* <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Title
-                        </label>
-
-                        <input className="lead-cm-input" type="text" />
-                      </div> */}
-
-                      <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Contact Detail
-                        </label>
-                        <div className="my-details">
-                          <i className="fa-solid fa-envelope"></i>
-                          <input
-                            name="email"
-                            onChange={(e) => setContactDataFun(e)}
-                            className="lead-cm-input"
-                            ref={contactEmailRef}
-                            type="email"
-                          />
-                        </div>
-                        <div className="my-details">
-                          <i className="fa-solid fa-phone"></i>
-                          <input
-                            name="contactNo"
-                            onChange={(e) => setContactDataFun(e)}
-                            className="lead-cm-input"
-                            ref={contactContactNoRef}
-                            type="text"
-                          />
-                        </div>
-                      </div>
-
-                      {/* <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Contact Role
-                        </label>
-
-                        <input className="lead-cm-input" type="text" />
-                      </div> */}
-
-                      <div className="lead-btn-box">
-                        <button
-                          type="reset"
-                          className="lead-cm-btn lead-cancel-btn"
-                        >
-                          Reset
-                        </button>
-                        <button
-                          onClick={(e) => createLeadContact(e)}
-                          className="lead-cm-btn lead-save-btn"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  {/* all leads save */}
-                  {clientsContact.map((client, index) => (
-                    <div className="save-lead-data" key={index}>
-                      <div>
-                        <p className="lead-heading">
-                          {client?.clientName
-                            ? `${client?.clientName.slice(0, 30)}...`
-                            : "NA"}
-                        </p>
-                        <h6 className="lead-sm-heading mb-0">
-                          {client?.email
-                            ? `${client?.email.slice(0, 30)}...`
-                            : "NA"}
-                        </h6>
-                        <h6 className="lead-sm-heading ">
-                          {client.contactNo
-                            ? `${client.contactNo.slice(0, 20)}...`
-                            : "NA"}
-                        </h6>
-                      </div>
-                      {adminRole ? (
-                        <div className="lead-heading">
-                          <i className="fa-solid fa-pen mr-3"></i>
-                          <i className="fa-solid fa-trash"></i>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  ))}
-
-                  {/* all leads save */}
-                </div>
-              </div>
+            
 
               {/* end  contact */}
 
