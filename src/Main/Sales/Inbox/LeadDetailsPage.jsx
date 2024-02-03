@@ -1286,6 +1286,7 @@ const LeadDetailsPage = () => {
                 name="user"
                 id="user"
               >
+                <option>Change Assignee</option>
                 {userDataResponse.map((user, index) => (
                   <option key={index} value={user?.id}>
                     {user?.fullName}
