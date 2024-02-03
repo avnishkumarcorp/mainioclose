@@ -69,6 +69,8 @@ const LeadDetailsPage = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
 
+  const {userid, leadid} = useParams()
+
   // //  useEffect calls Start
   useEffect(() => {
     editViewData()
@@ -117,7 +119,6 @@ const LeadDetailsPage = () => {
   const currentUserRoles = useSelector(
     (prev) => prev.AuthReducer.currentUser.roles
   )
-  // const currentUserId = useSelector()
   const adminRole = currentUserRoles.includes("ADMIN")
 
   //  useEffect calls End
@@ -139,39 +140,34 @@ const LeadDetailsPage = () => {
   const taskDescription = useRef()
   const taskDate = useRef()
   const location = useLocation()
-  const currentPath = location.pathname.split()
-  const splitPath = currentPath[0].split("/")
-
-  const leadPathId = Number(splitPath[5])
-  const currentUserId = Number(splitPath[2])
-
+ 
   const categorySelectRef = useRef()
 
   const [remarkMessage, setRemarkMessage] = useState({
-    leadId: leadPathId,
-    userId: currentUserId,
+    leadId: leadid,
+    userId: userid,
     message: messageData,
   })
 
   const [addProductData, setAddProductData] = useState({
     productId: "",
-    leadId: leadPathId,
+    leadId: leadid,
     serviceName: "",
   })
 
   const [createContact, setCreateContact] = useState({
-    leadId: leadPathId,
+    leadId: leadid,
     name: "",
     contactNo: "",
     email: "",
   })
 
   const [addNewTask, setAddNewTask] = useState({
-    leadId: leadPathId,
+    leadId: leadid,
     name: "",
     description: "",
     assigneeId: 0,
-    assignedById: currentUserId,
+    assignedById: userid,
     expectedDate: "",
     statusId: 0,
   })
@@ -205,7 +201,7 @@ const LeadDetailsPage = () => {
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
-        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
+        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
       )
       setGetAllLeadUserData(allLeadUser.data)
     } catch (err) {
@@ -247,10 +243,8 @@ const LeadDetailsPage = () => {
   const getAllTaskData = async () => {
     try {
       const allTaskData = await getQuery(
-        `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadPathId}`
+        `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadid}`
       )
-      // const singlePage = await putQuery(`/leadService/api/v1/lead/viewHistoryCreate?userId=${currentUserId}&leadId=${leadPathId}`)
-      //   console.log(singlePage);
       setGetSingleLeadTask(allTaskData.data)
     } catch (err) {
       console.log("err", err)
@@ -265,7 +259,7 @@ const LeadDetailsPage = () => {
   const leadNotesData = async (id) => {
     try {
       const getAllLeadNotes = await getQuery(
-        `/leadService/api/v1/getAllRemarks?leadId=${leadPathId}`
+        `/leadService/api/v1/getAllRemarks?leadId=${leadid}`
       )
       const newData = getAllLeadNotes.data.reverse()
       setNotesApiData(newData)
@@ -279,7 +273,7 @@ const LeadDetailsPage = () => {
   const editViewData = async () => {
     try {
       const viewData = await axios.get(
-        `/leadService/api/v1/inbox/editView?leadId=${leadPathId}`,
+        `/leadService/api/v1/inbox/editView?leadId=${leadid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -296,7 +290,7 @@ const LeadDetailsPage = () => {
   const getSingleLeadData = async () => {
     try {
       const singleLeadApiData = await getQuery(
-        `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadPathId}`
+        `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadid}`
       )
       setSingleLeadResponseData(singleLeadApiData.data)
       setAllProductsList(singleLeadApiData.data.serviceDetails)
@@ -317,7 +311,7 @@ const LeadDetailsPage = () => {
     const statusChange = async () => {
       try {
         const statusData = await axios.put(
-          `/leadService/api/v1/status/updateLeadStatus?leadId=${leadPathId}&statusId=${catId}&currentUserId=${currentUserId}`,
+          `/leadService/api/v1/status/updateLeadStatus?leadId=${leadid}&statusId=${catId}&currentUserId=${userid}`,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -381,7 +375,7 @@ const LeadDetailsPage = () => {
   const deleteProductFun = async (e, serviceId) => {
     try {
       const productDelete = await axios.put(
-        `/leadService/api/v1/lead/deleteProductInLead?leadId=${leadPathId}&serviceId=${serviceId}&userId=${currentUserId}`
+        `/leadService/api/v1/lead/deleteProductInLead?leadId=${leadid}&serviceId=${serviceId}&userId=${userid}`
       )
       toast.success("product Deleted Sucessfully")
       setProductDepandence((prev) => !prev)
@@ -433,7 +427,7 @@ const LeadDetailsPage = () => {
   const updateLeadNameSinglePage = async (e) => {
     try {
       const leadNameUpdate = await axios.put(
-        `/leadService/api/v1/lead/updateLeadName?leadName=${updateLeadName}&leadId=${leadPathId}&userId=${currentUserId}`,
+        `/leadService/api/v1/lead/updateLeadName?leadName=${updateLeadName}&leadId=${leadid}&userId=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -499,7 +493,7 @@ const LeadDetailsPage = () => {
 
   const getAllUserData = async () => {
     const allUserResponse = await getQuery(
-      `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
+      `/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
     )
     setUserDataResponse(allUserResponse.data)
   }
@@ -507,7 +501,7 @@ const LeadDetailsPage = () => {
   const changeLeadAssignee = async (id) => {
     try {
       const updatePerson = await axios.put(
-        `/leadService/api/v1/lead/updateAssignee?leadId=${leadPathId}&userId=${id}&updatedById=${currentUserId}`,
+        `/leadService/api/v1/lead/updateAssignee?leadId=${leadid}&userId=${id}&updatedById=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -1280,7 +1274,7 @@ const LeadDetailsPage = () => {
               <Link to={`history`} className="filter-btn-design">
                 <i className="fa-regular mr-1 fa-clipboard"></i>History
               </Link>
-              <Link to={`/erp/${currentUserId}/sales/leads`} className="filter-btn-design">
+              <Link to={`/erp/${userid}/sales/leads`} className="filter-btn-design">
               <i className="fa-solid mr-1 fa-backward-step"></i>Back
               </Link>
 

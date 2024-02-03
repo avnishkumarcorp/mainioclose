@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import "./LeadHistory.scss"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import { getQuery } from "../../../API/GetQuery"
-import { useLocation } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import TableScalaton from "../../../components/TableScalaton"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -12,10 +12,9 @@ const LeadHistory = () => {
   const [leadHistoryData, setLeadHistoryData] = useState([])
   const [historyScalaton, setHistoryScalaton] = useState(true)
 
-  const location = useLocation()
-  const currentPath = location.pathname.split()
-  const splitPath = currentPath[0].split("/")
-  const leadId = Number(splitPath[5])
+
+  const { leadid } = useParams()
+  console.log(leadid)
 
   useEffect(() => {
     leadHistoryFun()
@@ -29,7 +28,9 @@ const LeadHistory = () => {
       filterable: false,
       renderCell: (props) => {
         return (
-          <p className="mb-0">{props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}</p>
+          <p className="mb-0">
+            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+          </p>
         )
       },
     },
@@ -52,7 +53,7 @@ const LeadHistory = () => {
   const leadHistoryFun = async () => {
     try {
       const leadHistory = await getQuery(
-        `/leadService/api/v1/leadHistory/getAllLeadHistory?leadId=${leadId}`
+        `/leadService/api/v1/leadHistory/getAllLeadHistory?leadId=${leadid}`
       )
 
       setLeadHistoryData(leadHistory.data.reverse())
