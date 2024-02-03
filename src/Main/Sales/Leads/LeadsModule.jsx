@@ -50,7 +50,6 @@ const LeadsModule = () => {
 
   const [filterBtnNew, setFilterBtnNew] = useState(false)
 
-  
   const [multiLeadError, setMultiLeadError] = useState(false)
   const [selectLeadError, setSelectLeadError] = useState(false)
 
@@ -83,7 +82,6 @@ const LeadsModule = () => {
 
   // }
 
- 
   const multiStatusRef = useRef()
   const multiAssigneeRef = useRef()
 
@@ -107,7 +105,6 @@ const LeadsModule = () => {
     }
   }
 
-  
   const [multiLeadData, setMultiLeadData] = useState({
     leadIds: selectedRows,
     statusId: null,
@@ -159,7 +156,6 @@ const LeadsModule = () => {
     }
   }
 
- 
   const deleteMultiLeadFun = async () => {
     if (deleteMultiLead.leadId.length === 0) {
       setLeadDeleteErr(true)
@@ -192,8 +188,6 @@ const LeadsModule = () => {
   )
   const adminRole = currentUserRoles.includes("ADMIN")
   const newRole = currentUserRoles.includes("NEW")
-
-
 
   const columns = [
     {
@@ -242,14 +236,27 @@ const LeadsModule = () => {
     {
       field: "missedTask",
       headerName: "Missed Task",
-      width: 150,
-      // renderCell: (props) => {
-      //   return(
-      //     <p className="mb-0">{props?.row?.missedTask}</p>
-      //   )
-      // }
+      width: 220,
+      renderCell: (props) => {
+        const taskmissed = props?.row
+        const taskStatus = props?.row?.missedTaskStatus
+        const taskName = props?.row?.missedTaskName
+        const taskDate = new Date(
+          props?.row?.missedTaskDate
+        ).toLocaleDateString()
+        const taskCreated = props?.row?.missedTaskCretedBy
+        return taskName !== null ? (
+          <p className={`mb-0 ${taskName !== null ? "text-danger" : ""}`}>
+            {taskCreated} - {taskName}
+            <br />
+            {taskStatus} - {taskDate}
+          </p>
+        ) : (
+          <p>NA</p>
+        )
+      },
     },
-    { 
+    {
       field: "status",
       headerName: "Status",
       width: 120,
@@ -334,7 +341,18 @@ const LeadsModule = () => {
         )
       },
     },
-    { field: "source", headerName: "Source", width: 150 },
+    {
+      field: "source",
+      headerName: "Source",
+      width: 150,
+      renderCell: (props) => {
+        return (
+          <p className="mb-0">
+            {props?.row?.source ? props?.row?.source : "NA"}
+          </p>
+        )
+      },
+    },
     {
       field: "action",
       headerName: "Action",
