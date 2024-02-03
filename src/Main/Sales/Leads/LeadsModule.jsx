@@ -521,12 +521,12 @@ const LeadsModule = () => {
         </div>
         <div className="three">
           <input
-            className="mr-2"
+            className="mr-2 date-input"
             onChange={(e) => setToDate(e.target.value)}
             type="date"
           />
           <input
-            className="mr-2"
+            className="mr-2 date-input"
             onChange={(e) => setFromDate(e.target.value)}
             type="date"
           />
@@ -640,7 +640,7 @@ const LeadsModule = () => {
               {leadDelLoading ? "Please Wait..." : "Delete"}
             </button>
             <select
-              className="p-1 status-select"
+              className="p-1 date-input"
               name="status"
               ref={multiStatusRef}
               onChange={(e) =>
@@ -662,7 +662,7 @@ const LeadsModule = () => {
           </div>
           <div>
             <select
-              className="p-1 status-select"
+              className="p-1 date-input"
               ref={multiAssigneeRef}
               onChange={(e) =>
                 setMultiLeadData((prev) => ({
