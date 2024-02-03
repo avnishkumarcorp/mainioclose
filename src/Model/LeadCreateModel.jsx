@@ -31,11 +31,13 @@ const LeadCreateModel = () => {
     industryId: "1",
     ipAddress: "",
     displayStatus: "string",
-    assigneeId: 1,
+    assigneeId: currentUserId,
     whatsAppStatus: 0,
     deleted: false,
     primaryAddress: "",
   })
+
+  console.log("Lead Data", leadData);
 
   const [nameError, setNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
