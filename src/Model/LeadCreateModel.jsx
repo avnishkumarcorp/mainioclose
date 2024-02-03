@@ -4,15 +4,13 @@ import { postQuery } from "../API/PostQuery"
 import InputErrorComponent from "../components/InputErrorComponent"
 import { useCustomRoute } from "../Routes/GetCustomRoutes"
 import { leadSource } from "../data/FakeData"
-import { useLocation } from "react-router"
+import { useLocation, useParams } from "react-router"
 
 const LeadCreateModel = () => {
-
   const location = useLocation()
-  const currentPath = location.pathname.split()
-  const splitPath = currentPath[0].split("/")
 
-  const currentUserId = Number(splitPath[2])
+  const { userid } = useParams()
+
   const [leadData, setLeadData] = useState({
     uuid: "",
     name: "",
@@ -26,27 +24,25 @@ const LeadCreateModel = () => {
     source: "",
     city: "",
     categoryId: "1",
-    createdById: currentUserId,
+    createdById: userid,
     serviceId: "1",
     industryId: "1",
     ipAddress: "",
     displayStatus: "string",
-    assigneeId: currentUserId,
+    assigneeId: userid,
     whatsAppStatus: 0,
     deleted: false,
     primaryAddress: "",
   })
 
-  console.log("Lead Data", leadData);
-
+  
   const [nameError, setNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [mobileNoError, setMobileNoError] = useState(false)
   const [cityError, setCityError] = useState(false)
   const [ipAddressError, setIpAddressError] = useState(false)
   const [sourceError, setSourceError] = useState(false)
-  // const [leadDescriptionError, setLeadDescriptionError] = useState(false)
-  const [leadLoading, setLeadLoading] = useState();
+  const [leadLoading, setLeadLoading] = useState()
 
   const nameRef = useRef()
   const emailRef = useRef()
@@ -370,7 +366,7 @@ const LeadCreateModel = () => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                             Source
+                            Source
                           </label>
                           <select
                             className="form-control input-focus"
@@ -386,8 +382,6 @@ const LeadCreateModel = () => {
                               </option>
                             ))}
                           </select>
-
-                          
                         </div>
                       </div>
                       {/* <div className="form-group col-md-6">
@@ -413,7 +407,7 @@ const LeadCreateModel = () => {
                         ) : (
                           ""
                         )} */}
-                      {/* </div> */} 
+                      {/* </div> */}
 
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
@@ -475,7 +469,7 @@ const LeadCreateModel = () => {
                             onClick={(e) => newLeadCreate(e)}
                             className="first-button form-prev-btn"
                           >
-                           {leadLoading ? "Loading...":  "Submit"} 
+                            {leadLoading ? "Loading..." : "Submit"}
                           </button>
                         </div>
                       </div>

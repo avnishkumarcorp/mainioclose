@@ -3,10 +3,9 @@ import "./LeadsModule.scss"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import AllLeadsDisplay from "./AllLeadsDisplay"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import axios from "axios"
 import DataTableFirst from "../../../components/DataTableFirst"
-// import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { DataGrid } from "@mui/x-data-grid"
 import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
@@ -53,14 +52,11 @@ const LeadsModule = () => {
   const [multiLeadError, setMultiLeadError] = useState(false)
   const [selectLeadError, setSelectLeadError] = useState(false)
 
+  const { userid, leadid } = useParams()
   const location = useLocation()
-  const currentPath = location.pathname.split()
-  const splitPath = currentPath[0].split("/")
-  const currentUserId = Number(splitPath[2])
-  const currentLeadId = Number(splitPath[4])
 
   const [allMultiFilterData, setAllMultiFilterData] = useState({
-    userId: currentUserId,
+    userId: userid,
     userIdFilter: allUserMulti,
     statusId: allStatusMulti,
     toDate: toDate,
@@ -70,7 +66,7 @@ const LeadsModule = () => {
   useEffect(() => {
     setAllMultiFilterData((prev) => ({
       ...prev,
-      userId: currentUserId,
+      userId: userid,
       userIdFilter: allUserMulti,
       statusId: allStatusMulti,
       toDate: toDate,
@@ -109,12 +105,12 @@ const LeadsModule = () => {
     leadIds: selectedRows,
     statusId: null,
     assigneId: null,
-    updatedById: currentUserId,
+    updatedById: userid,
   })
 
   const [deleteMultiLead, setDeleteMultiLead] = useState({
     leadId: selectedRows,
-    updatedById: currentUserId,
+    updatedById: userid,
   })
 
   useEffect(() => {
@@ -148,7 +144,7 @@ const LeadsModule = () => {
   const viewHistory = async (leadId) => {
     try {
       const singlePage = await putQuery(
-        `/leadService/api/v1/lead/viewHistoryCreate?userId=${currentUserId}&leadId=${leadId}`
+        `/leadService/api/v1/lead/viewHistoryCreate?userId=${userid}&leadId=${leadId}`
       )
       console.log(singlePage)
     } catch (err) {
@@ -225,7 +221,7 @@ const LeadsModule = () => {
       renderCell: (props) => {
         return (
           <Link
-            to={`/erp/${currentUserId}/sales/leads/${props.row.id}`}
+            to={`/erp/${userid}/sales/leads/${props.row.id}`}
             onClick={() => viewHistory(props.row.id)}
           >
             {props?.row?.leadName}
@@ -373,7 +369,7 @@ const LeadsModule = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadResponse = await axios.delete(
-          `/leadService/api/v1/lead/deleteLead?leadId=${id}&userId=${currentUserId}`,
+          `/leadService/api/v1/lead/deleteLead?leadId=${id}&userId=${userid}`,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -393,7 +389,7 @@ const LeadsModule = () => {
   const changeLeadAssignee = async (id, leadId) => {
     try {
       const updatePerson = await axios.put(
-        `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}&updatedById=${currentUserId}`,
+        `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}&updatedById=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -414,7 +410,7 @@ const LeadsModule = () => {
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
-        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${currentUserId}`
+        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
       )
       setLeadUserNew(allLeadUser.data)
     } catch (err) {

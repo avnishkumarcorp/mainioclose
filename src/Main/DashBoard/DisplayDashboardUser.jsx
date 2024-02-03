@@ -1,7 +1,7 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
 import UserListComponent from "../../Tables/UserListComponent"
-import { Link, useLocation } from "react-router-dom"
+import { Link } from "react-router-dom"
 import CreateuserDashboard from "../../Model/CreateuserDashboard"
 import { deleteQuery } from "../../API/DeleteQuery"
 
@@ -13,12 +13,7 @@ const DisplayDashboardUser = () => {
     displayUser()
   }, [])
 
-  const location = useLocation()
-  const currentPath = location.pathname.split()
-  const splitPath = currentPath[0].split("/")
-
-  const currentUserId = Number(splitPath[2])
-
+  
   const displayUser = async () => {
     try {
       const userData = await axios.get(`/leadService/api/v1/users/getAllUser`, {
