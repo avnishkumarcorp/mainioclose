@@ -84,6 +84,13 @@ button:focus {
   font-weight: 600;
 }
 
+.d-end{
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+
 .circle-image{
   height: 20px;
   width: 20px;
