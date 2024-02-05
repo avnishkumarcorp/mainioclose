@@ -496,8 +496,7 @@ const LeadsModule = () => {
     loading: bellLoading,
     error,
   } = useCustomRoute(bellCountUrl, bellCountDep)
-  console.log("bell data", bellData)
-
+ 
   // const viewNotyFun = async () => {
   //   console.log("fun call");
   //   try{
