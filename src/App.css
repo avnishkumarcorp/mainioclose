@@ -77,6 +77,11 @@ button:focus {
   border: 1px solid #093252;
   padding: 2px 16px;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+.noti-view{
+  font-weight: 600;
 }
 
 .circle-image{
@@ -385,6 +390,26 @@ button:focus {
   outline: none;
   padding: 3px;
   
+}
+
+.bell-box{
+  position: relative;
+  cursor: pointer;
+}
+
+.bell-box .bell-count{
+  /* background-color: yellow; */
+  color: #000;
+  position: absolute;
+  top: -2px;
+  right: 0px;
+  font-weight: 700;
+}
+
+.bell-box .bell-icon{
+  font-size: 25px;
+  margin-left: 10px;
+  color: #CA8136;
 }
 
 .multi-select-boxx .p-multiselect-header{
