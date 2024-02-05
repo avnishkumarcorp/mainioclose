@@ -17,6 +17,8 @@ import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { useSelector } from "react-redux"
 import PopUpButton from "../../../components/button/PopUpButton"
 import { putQuery } from "../../../API/PutQuery"
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -48,7 +50,7 @@ const LeadDetailsPage = () => {
   const [allProductData, setAllProductData] = useState([])
   const [selectedProduct, setSelectedProduct] = useState("")
   const [productDisplayToggle, setProductDisplayToggle] = useState(false)
-
+  const [value, setValue] = useState("")
   const [clientsContact, setClientsContact] = useState([])
 
   const [clientContactToggle, setClientContactToggle] = useState(false)
@@ -332,16 +334,16 @@ const LeadDetailsPage = () => {
   // Create New Notes or Remarks
   const createRemarkfun = (e) => {
     e.preventDefault()
-    if (NotesRef.current.value === "") {
-      toast.error("Notes Can't be Blank")
-      return
-    }
+    // if (NotesRef.current.value === "") {
+    //   toast.error("Notes Can't be Blank")
+    //   return
+    // }
     const createNewRemark = async () => {
       setNotesLoading(true)
       try {
         const remarkData = await postQuery(
           `/leadService/api/v1/createRemarks`,
-          remarkMessage
+          value
         )
         setNotesUpdateToggle((prev) => !prev)
         NotesRef.current.value = ""
@@ -1310,6 +1312,7 @@ const LeadDetailsPage = () => {
                 {/* <div className="comment-above">
                   <h2 className="write-heading">Write a Notes</h2>
                 </div> */}
+                <ReactQuill theme="snow" name="message" value={value} onChange={setValue} />
                 <textarea
                   className="text-area-box"
                   id="notes"
