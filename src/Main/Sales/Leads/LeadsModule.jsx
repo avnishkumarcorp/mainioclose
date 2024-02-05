@@ -3,7 +3,13 @@ import "./LeadsModule.scss"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import AllLeadsDisplay from "./AllLeadsDisplay"
-import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router-dom"
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom"
 import axios from "axios"
 import DataTableFirst from "../../../components/DataTableFirst"
 import { DataGrid } from "@mui/x-data-grid"
@@ -26,6 +32,7 @@ import { MultiSelect } from "primereact/multiselect"
 import { postQuery } from "../../../API/PostQuery"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { putQueryNoData } from "../../../API/PutQueryWithoutData"
+import { CSVLink } from "react-csv"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -56,7 +63,7 @@ const LeadsModule = () => {
 
   const { userid, leadid } = useParams()
   const location = useLocation()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [allMultiFilterData, setAllMultiFilterData] = useState({
     userId: userid,
@@ -188,6 +195,21 @@ const LeadsModule = () => {
   const adminRole = currentUserRoles.includes("ADMIN")
   const newRole = currentUserRoles.includes("NEW")
 
+  const exportData = allLeadData.map((row) => ({
+    "S.No": row?.id,
+    "Lead Name": row?.leadName,
+    "Missed Task": row?.missedTaskName,
+    Status: row?.status?.name,
+    "Client Name": row?.clients[0]?.name,
+    "Assignee Person": row?.assignee?.fullName,
+    "Created By": row?.createdBy?.fullName,
+    Date: row?.createDate,
+    "Mobile No": row?.mobileNo,
+    Email: row?.email,
+    Source: row?.source,
+    // age: row.age,
+  }))
+
   const columns = [
     {
       field: "select",
@@ -221,16 +243,14 @@ const LeadsModule = () => {
       field: "leadName",
       headerName: "Lead Name",
       width: 200,
-      renderCell: (props) => {
-        return (
-          <Link
-            to={`/erp/${userid}/sales/leads/${props.row.id}`}
-            onClick={() => viewHistory(props.row.id)}
-          >
-            {props?.row?.leadName}
-          </Link>
-        )
-      },
+      renderCell: (props) => (
+        <Link
+          to={`/erp/${userid}/sales/leads/${props.row.id}`}
+          onClick={() => viewHistory(props.row.id)}
+        >
+          {props?.row?.leadName}
+        </Link>
+      ),
     },
     {
       field: "missedTask",
@@ -259,60 +279,56 @@ const LeadsModule = () => {
       field: "status",
       headerName: "Status",
       width: 120,
-      renderCell: (props) => {
-        let leadStatus = props.row.status?.name
-        return (
-          <p className={`mb-0 ${leadStatus === "New" ? "lead-new" : ""}`}>
-            {leadStatus ? leadStatus : "NA"}
-          </p>
-        )
-      },
+      renderCell: (props) => (
+        <p
+          className={`mb-0 ${
+            props.row.status?.name === "New" ? "lead-new" : ""
+          }`}
+        >
+          {props.row.status?.name ? props.row.status?.name : "NA"}
+        </p>
+      ),
     },
     {
       field: "client",
       headerName: "Client Name",
       width: 150,
-      renderCell: (props) => {
-        // console.log("client name", clients[0]?.name)
-        return (
-          <p className="mb-0">
-            {props.row.clients[0]?.name ? props.row.clients[0]?.name : "NA"}
-          </p>
-        )
-      },
+      renderCell: (props) => (
+        <p className="mb-0">
+          {props.row.clients[0]?.name ? props.row.clients[0]?.name : "NA"}
+        </p>
+      ),
     },
 
     {
       field: "assigneeName",
       headerName: "Assignee Person",
       width: 150,
-      renderCell: (props) => {
-        return <p className="mb-0">{props?.row?.assignee?.fullName}</p>
-      },
+      renderCell: (props) => (
+        <p className="mb-0">{props?.row?.assignee?.fullName}</p>
+      ),
     },
     {
       field: "createdBy",
       headerName: "Created By",
       width: 150,
-      renderCell: (props) => {
-        return (
-          <p className="mb-0">
-            {props?.row?.createdBy?.fullName
-              ? props?.row?.createdBy?.fullName
-              : "NA"}
-          </p>
-        )
-      },
+      renderCell: (props) => (
+        <p className="mb-0">
+          {props?.row?.createdBy?.fullName
+            ? props?.row?.createdBy?.fullName
+            : "NA"}
+        </p>
+      ),
     },
     {
       field: "createDate",
       headerName: "Date",
       width: 150,
-      renderCell: (props) => {
-        let date = new Date(props.row.createDate)
-        let dateNew = date.toLocaleDateString()
-        return <p className="mb-0">{dateNew}</p>
-      },
+      renderCell: (props) => (
+        <p className="mb-0">
+          {new Date(props.row.createDate).toLocaleDateString()}
+        </p>
+      ),
     },
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
@@ -344,27 +360,19 @@ const LeadsModule = () => {
       field: "source",
       headerName: "Source",
       width: 150,
-      renderCell: (props) => {
-        return (
-          <p className="mb-0">
-            {props?.row?.source ? props?.row?.source : "NA"}
-          </p>
-        )
-      },
+      renderCell: (props) => (
+        <p className="mb-0">{props?.row?.source ? props?.row?.source : "NA"}</p>
+      ),
     },
-    {
+    adminRole && {
       field: "action",
       headerName: "Action",
       width: 150,
-      renderCell: (props) => {
-        return adminRole ? (
-          <p className="m-0" onClick={() => leadDeleteResponse(props.row.id)}>
-            <i className="fa-solid fa-trash"></i>
-          </p>
-        ) : (
-          ""
-        )
-      },
+      renderCell: (props) => (
+        <p className="m-0" onClick={() => leadDeleteResponse(props.row.id)}>
+          <i className="fa-solid fa-trash"></i>
+        </p>
+      ),
     },
   ]
 
@@ -478,15 +486,17 @@ const LeadsModule = () => {
     }
   }
 
-
   // bell icon
 
-  const bellCountUrl = `/leadService/api/v1/notification/getUnseenCount?userId=${userid}`;
-  const bellCountDep = [];
+  const bellCountUrl = `/leadService/api/v1/notification/getUnseenCount?userId=${userid}`
+  const bellCountDep = []
 
-  
-  const { productData: bellData, loading: bellLoading, error } = useCustomRoute(bellCountUrl, bellCountDep)
-  console.log("bell data", bellData);
+  const {
+    productData: bellData,
+    loading: bellLoading,
+    error,
+  } = useCustomRoute(bellCountUrl, bellCountDep)
+  console.log("bell data", bellData)
 
   // const viewNotyFun = async () => {
   //   console.log("fun call");
@@ -513,14 +523,16 @@ const LeadsModule = () => {
             Filter Data
           </button>
           {adminRole ? <LeadCreateModel /> : ""}
-        <Link to={`notification`}>
-          <div className="bell-box" 
-          // onClick={()=> viewNotyFun()}
-          >
-
-            <span className="bell-count">{bellData}</span>
-          <span className="bell-icon"><i className="fa-solid fa-bell"></i></span>
-          </div>
+          <Link to={`notification`}>
+            <div
+              className="bell-box"
+              // onClick={()=> viewNotyFun()}
+            >
+              <span className="bell-count">{bellData}</span>
+              <span className="bell-icon">
+                <i className="fa-solid fa-bell"></i>
+              </span>
+            </div>
           </Link>
         </div>
       </div>
@@ -623,7 +635,17 @@ const LeadsModule = () => {
           </button>
         </div>
       </div> */}
-
+      {adminRole && (
+        <div className="d-end">
+          <CSVLink
+            data={exportData}
+            headers={columns.map((column) => column.headerName)}
+            filename={"exported_data.csv"}
+          >
+            Export to CSV
+          </CSVLink>
+        </div>
+      )}
       <div className="table-arrow">
         {/* <ArrowComponent /> */}
         {leadScalatonCall ? (
