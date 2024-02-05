@@ -17,6 +17,7 @@ import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { useSelector } from "react-redux"
 import PopUpButton from "../../../components/button/PopUpButton"
 import { putQuery } from "../../../API/PutQuery"
+import { deleteQuery } from "../../../API/DeleteQuery"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -63,6 +64,7 @@ const LeadDetailsPage = () => {
   const [userDataResponse, setUserDataResponse] = useState([])
   const [estimateOpenBtn, setEstimateOpenBtn] = useState(false)
 
+  const [taskReferesh, setTaskReferesh] = useState(false)
   const [productDepandence, setProductDepandence] = useState(false)
 
   const openEstimateFun = () => {
@@ -106,7 +108,7 @@ const LeadDetailsPage = () => {
 
   useEffect(() => {
     getAllTaskData()
-  }, [taskUpdateToggle])
+  }, [taskUpdateToggle, taskReferesh])
 
   useEffect(() => {
     getAllOportunities()
@@ -513,6 +515,21 @@ const LeadDetailsPage = () => {
       console.log("err", err)
     }
   }
+
+  const deleteTaskFun = async (id) => {
+    if (window.confirm("Are you sure to delete this record?") == true) {
+     console.log(id);
+      try {
+        const deleteTaskData = await deleteQuery(
+          `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
+        )
+        setTaskReferesh((prev) => !(prev));
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
+
 
   return (
     <div className="lead-details cm-padding-one">
@@ -1101,7 +1118,7 @@ const LeadDetailsPage = () => {
                         </h6>
                       </div>
                       {adminRole ? (
-                        <div className="lead-heading">
+                        <div className="lead-heading" onClick={()=> deleteTaskFun(task.id)}>
                           <i className="fa-solid fa-trash"></i>
                         </div>
                       ) : (
