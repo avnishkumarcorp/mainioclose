@@ -173,7 +173,6 @@ const LeadDetailsPage = () => {
     expectedDate: "",
     statusId: 0,
   })
-
   // GET All tasks Status
   const getAllTaskStatus = async () => {
     try {
@@ -488,7 +487,12 @@ const LeadDetailsPage = () => {
         if (err.response.status === 500) {
           toast.error("Something Went Wrong")
         }
+        return
       }
+     addNewTask.name = ""
+     addNewTask.description = ""
+     addNewTask.expectedDate = ""
+     addNewTask.statusId = 0
     }
     TaskCreateNew()
   }
