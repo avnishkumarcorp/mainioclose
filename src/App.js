@@ -42,6 +42,7 @@ import LeadStatusPage from "./Main/Setting/LeadStatus/LeadStatusPage"
 import ProductsChange from "./Main/Setting/Products/ProductsChange"
 import NotFoundPage from "./components/NotFoundPage"
 import LeadCategory from "./Main/Setting/Category/LeadCategory"
+import AllNotificationPage from "./Main/Sales/Leads/AllNotificationPage"
 
 function App() {
   return (
@@ -101,6 +102,8 @@ function App() {
               <Route path="contacts" element={<ContactModule />} />
               <Route path="leads/:leadid/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
+              <Route path="leads/notification" element={<AllNotificationPage />} />
+              
             </Route>
             {/* end */}
             {/* accounts module routes */}

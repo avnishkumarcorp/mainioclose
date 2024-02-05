@@ -3,7 +3,7 @@ import "./LeadsModule.scss"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import AllLeadsDisplay from "./AllLeadsDisplay"
-import { Link, useLocation, useParams } from "react-router-dom"
+import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
 import DataTableFirst from "../../../components/DataTableFirst"
 import { DataGrid } from "@mui/x-data-grid"
@@ -24,6 +24,8 @@ import { getRowEl } from "@mui/x-data-grid/utils/domUtils"
 import { deleteQuery } from "../../../API/DeleteQuery"
 import { MultiSelect } from "primereact/multiselect"
 import { postQuery } from "../../../API/PostQuery"
+import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
+import { putQueryNoData } from "../../../API/PutQueryWithoutData"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -54,6 +56,7 @@ const LeadsModule = () => {
 
   const { userid, leadid } = useParams()
   const location = useLocation()
+  const navigate = useNavigate();
 
   const [allMultiFilterData, setAllMultiFilterData] = useState({
     userId: userid,
@@ -475,6 +478,27 @@ const LeadsModule = () => {
     }
   }
 
+
+  // bell icon
+
+  const bellCountUrl = `/leadService/api/v1/notification/getUnseenCount?userId=${userid}`;
+  const bellCountDep = [];
+
+  
+  const { productData: bellData, loading: bellLoading, error } = useCustomRoute(bellCountUrl, bellCountDep)
+  console.log("bell data", bellData);
+
+  // const viewNotyFun = async () => {
+  //   console.log("fun call");
+  //   try{
+  //     const updateNoty = await putQueryNoData(`/leadService/api/v1/notification/viewNotification?userId=${userid}`)
+  //     console.log("notify me", updateNoty);
+  //     navigate(`notification`)
+  //   }catch(err){
+  //     console.log(err);
+  //   }
+  // }
+
   // MuiDataGrid-main css-204u17-MuiDataGrid-main
 
   return (
@@ -489,6 +513,15 @@ const LeadsModule = () => {
             Filter Data
           </button>
           {adminRole ? <LeadCreateModel /> : ""}
+        <Link to={`notification`}>
+          <div className="bell-box" 
+          // onClick={()=> viewNotyFun()}
+          >
+
+            <span className="bell-count">{bellData}</span>
+          <span className="bell-icon"><i className="fa-solid fa-bell"></i></span>
+          </div>
+          </Link>
         </div>
       </div>
 
