@@ -622,7 +622,7 @@ const LeadDetailsPage = () => {
                 </div>
                 <div
                   id="contactCollapse"
-                  className="collapse"
+                  className="collapse show"
                   aria-labelledby="headingThree"
                   data-parent="#accordion"
                 >
@@ -745,6 +745,180 @@ const LeadDetailsPage = () => {
                   {/* all leads save */}
                 </div>
               </div>
+
+
+
+              <div className="card mt-2">
+                <div className="" id="headingThree">
+                  <div
+                    className="card-btn collapsed"
+                    data-toggle="collapse"
+                    data-target="#TasksCollapse"
+                    aria-expanded="false"
+                    aria-controls="TasksCollapse"
+                  >
+                    <h3 className="lead-heading lead-bold">Tasks</h3>
+                    <p className="lead-heading">
+                      <i className="fa-solid fa-plus"></i>
+                    </p>
+                  </div>
+                </div>
+                <div
+                  id="TasksCollapse"
+                  className="collapse show"
+                  aria-labelledby="headingThree"
+                  data-parent="#accordion"
+                >
+                  <div className="my-card-content">
+                    <form>
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Title
+                        </label>
+                        <input
+                          className="lead-cm-input"
+                          name="name"
+                          ref={taskTitle}
+                          onChange={(e) => setTasksDataFun(e)}
+                          type="text"
+                        />
+                      </div>
+
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Description
+                        </label>
+
+                        <textarea
+                          className="lead-cm-input min-height-one"
+                          onChange={(e) => setTasksDataFun(e)}
+                          name="description"
+                          ref={taskDescription}
+                          type="text"
+                        ></textarea>
+                      </div>
+
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          date
+                        </label>
+
+                        <input
+                          className="lead-cm-input"
+                          type="datetime-local"
+                          name="expectedDate"
+                          ref={taskDate}
+                          onChange={(e) => setTasksDataFun(e)}
+                        />
+                      </div>
+
+                      {/* <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Assign user
+                        </label>
+
+                        <select
+                          className="lead-cm-input"
+                          name="assigneeId"
+                          onChange={(e) => setTasksDataFun(e)}
+                          id="select-product"
+                        >
+                          <option>Select User</option>
+                          {getAllLeadUserData.map((user, index) => (
+                            <option key={index} value={user?.id}>
+                              {user?.fullName}
+                            </option>
+                          ))} */}
+
+                      {/* <option value="volvo">Volvo</option>
+                          <option value="saab">Saab</option>
+                          <option value="mercedes">Mercedes</option>
+                          <option value="audi">Audi</option> */}
+                      {/* </select> */}
+                      {/* </div> */}
+                      <div className="product-box">
+                        <label
+                          className="lead-heading"
+                          htmlFor="select-product"
+                        >
+                          Status
+                        </label>
+
+                        <select
+                          className="lead-cm-input"
+                          name="statusId"
+                          onChange={(e) => setTasksDataFun(e)}
+                          id="select-product"
+                        >
+                          <option>Select Status</option>
+                          {allTaskStatusData.map((status, index) => (
+                            <option key={index} value={status?.id}>
+                              {status?.name}
+                            </option>
+                          ))}
+
+                          {/* <option value="volvo">Volvo</option>
+                          <option value="saab">Saab</option>
+                          <option value="mercedes">Mercedes</option>
+                          <option value="audi">Audi</option> */}
+                        </select>
+                      </div>
+                      <div className="lead-btn-box">
+                        <button
+                          type="reset"
+                          className="lead-cm-btn lead-cancel-btn"
+                        >
+                          Reset
+                        </button>
+                        <button
+                          onClick={(e) => createTaskFun(e)}
+                          className="lead-cm-btn lead-save-btn"
+                        >
+                          Save
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  {/* all leads save */}
+                  {getSingleLeadTask.map((task, index) => (
+                    <div key={index} className="save-lead-data">
+                      <div>
+                        <p className="lead-heading">{task?.name}</p>
+                        <h6 className="lead-sm-heading mb-1">
+                          {task?.description}
+                        </h6>
+                        <h6 className="lead-sm-heading mb-1">
+                          {new Date(task.expectedDate).toLocaleDateString()} -{" "}
+                          {new Date(task.expectedDate).getHours()}:
+                          {new Date(task.expectedDate).getMinutes()}
+                        </h6>
+                      </div>
+                      {adminRole ? (
+                        <div className="lead-heading" onClick={()=> deleteTaskFun(task.id)}>
+                          <i className="fa-solid fa-trash"></i>
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  ))}
+
+                  {/* all leads save */}
+                </div>
+              </div>
+
 
 
 
@@ -964,177 +1138,7 @@ const LeadDetailsPage = () => {
               {/* end estimate */}
 
               {/* tasks */}
-              <div className="card mt-2">
-                <div className="" id="headingThree">
-                  <div
-                    className="card-btn collapsed"
-                    data-toggle="collapse"
-                    data-target="#TasksCollapse"
-                    aria-expanded="false"
-                    aria-controls="TasksCollapse"
-                  >
-                    <h3 className="lead-heading lead-bold">Tasks</h3>
-                    <p className="lead-heading">
-                      <i className="fa-solid fa-plus"></i>
-                    </p>
-                  </div>
-                </div>
-                <div
-                  id="TasksCollapse"
-                  className="collapse"
-                  aria-labelledby="headingThree"
-                  data-parent="#accordion"
-                >
-                  <div className="my-card-content">
-                    <form>
-                      <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Title
-                        </label>
-                        <input
-                          className="lead-cm-input"
-                          name="name"
-                          ref={taskTitle}
-                          onChange={(e) => setTasksDataFun(e)}
-                          type="text"
-                        />
-                      </div>
-
-                      <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Description
-                        </label>
-
-                        <textarea
-                          className="lead-cm-input min-height-one"
-                          onChange={(e) => setTasksDataFun(e)}
-                          name="description"
-                          ref={taskDescription}
-                          type="text"
-                        ></textarea>
-                      </div>
-
-                      <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          date
-                        </label>
-
-                        <input
-                          className="lead-cm-input"
-                          type="datetime-local"
-                          name="expectedDate"
-                          ref={taskDate}
-                          onChange={(e) => setTasksDataFun(e)}
-                        />
-                      </div>
-
-                      {/* <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Assign user
-                        </label>
-
-                        <select
-                          className="lead-cm-input"
-                          name="assigneeId"
-                          onChange={(e) => setTasksDataFun(e)}
-                          id="select-product"
-                        >
-                          <option>Select User</option>
-                          {getAllLeadUserData.map((user, index) => (
-                            <option key={index} value={user?.id}>
-                              {user?.fullName}
-                            </option>
-                          ))} */}
-
-                      {/* <option value="volvo">Volvo</option>
-                          <option value="saab">Saab</option>
-                          <option value="mercedes">Mercedes</option>
-                          <option value="audi">Audi</option> */}
-                      {/* </select> */}
-                      {/* </div> */}
-                      <div className="product-box">
-                        <label
-                          className="lead-heading"
-                          htmlFor="select-product"
-                        >
-                          Status
-                        </label>
-
-                        <select
-                          className="lead-cm-input"
-                          name="statusId"
-                          onChange={(e) => setTasksDataFun(e)}
-                          id="select-product"
-                        >
-                          <option>Select Status</option>
-                          {allTaskStatusData.map((status, index) => (
-                            <option key={index} value={status?.id}>
-                              {status?.name}
-                            </option>
-                          ))}
-
-                          {/* <option value="volvo">Volvo</option>
-                          <option value="saab">Saab</option>
-                          <option value="mercedes">Mercedes</option>
-                          <option value="audi">Audi</option> */}
-                        </select>
-                      </div>
-                      <div className="lead-btn-box">
-                        <button
-                          type="reset"
-                          className="lead-cm-btn lead-cancel-btn"
-                        >
-                          Reset
-                        </button>
-                        <button
-                          onClick={(e) => createTaskFun(e)}
-                          className="lead-cm-btn lead-save-btn"
-                        >
-                          Save
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  {/* all leads save */}
-                  {getSingleLeadTask.map((task, index) => (
-                    <div key={index} className="save-lead-data">
-                      <div>
-                        <p className="lead-heading">{task?.name}</p>
-                        <h6 className="lead-sm-heading mb-1">
-                          {task?.description}
-                        </h6>
-                        <h6 className="lead-sm-heading mb-1">
-                          {new Date(task.expectedDate).toLocaleDateString()} -{" "}
-                          {new Date(task.expectedDate).getHours()}:
-                          {new Date(task.expectedDate).getMinutes()}
-                        </h6>
-                      </div>
-                      {adminRole ? (
-                        <div className="lead-heading" onClick={()=> deleteTaskFun(task.id)}>
-                          <i className="fa-solid fa-trash"></i>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  ))}
-
-                  {/* all leads save */}
-                </div>
-              </div>
-
+          
               {/* end  tasks */}
 
               {/* opportunities */}
