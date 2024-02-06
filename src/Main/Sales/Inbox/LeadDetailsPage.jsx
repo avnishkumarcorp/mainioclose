@@ -190,6 +190,7 @@ const LeadDetailsPage = () => {
     setEditTaskBool(true)
      setAddNewTask((prev) => ({
       ...prev,
+      currentUserId: userid,
       taskId : task.id,
       name: task.name,
       description: task.description,
