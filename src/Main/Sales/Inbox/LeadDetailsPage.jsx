@@ -956,6 +956,7 @@ const LeadDetailsPage = () => {
                     </form>
                   </div>
                   {/* all leads save */}
+                  <div className="min-box">
                   {getSingleLeadTask.map((task, index) => (
                     <div key={index} className="save-lead-data">
                       <div>
@@ -989,6 +990,7 @@ const LeadDetailsPage = () => {
                       )}
                     </div>
                   ))}
+                  </div>
 
                   {/* all leads save */}
                 </div>
