@@ -89,6 +89,17 @@ button:focus {
   justify-content: flex-end;
 }
 
+.min-box{
+  height: 250px;
+  overflow-y: auto;
+}
+
+.min-box::-webkit-scrollbar {
+  width: 2px;
+  background-color: rgb(180, 171, 171);
+  height: 10px;
+}
+
 
 
 .circle-image{
