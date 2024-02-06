@@ -67,6 +67,9 @@ const LeadDetailsPage = () => {
   const [taskReferesh, setTaskReferesh] = useState(false)
   const [productDepandence, setProductDepandence] = useState(false)
 
+
+  console.log(getSingleLeadTask);
+
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
@@ -173,6 +176,7 @@ const LeadDetailsPage = () => {
     expectedDate: "",
     statusId: 0,
   })
+
   // GET All tasks Status
   const getAllTaskStatus = async () => {
     try {
@@ -492,7 +496,6 @@ const LeadDetailsPage = () => {
      addNewTask.name = ""
      addNewTask.description = ""
      addNewTask.expectedDate = ""
-     addNewTask.statusId = 0
     }
     TaskCreateNew()
   }
@@ -898,6 +901,9 @@ const LeadDetailsPage = () => {
                         <p className="lead-heading">{task?.name}</p>
                         <h6 className="lead-sm-heading mb-1">
                           {task?.description}
+                        </h6>
+                        <h6 className="lead-sm-heading mb-1">
+                          {task?.taskStatus?.name} - {task?.assignedBy?.fullName}
                         </h6>
                         <h6 className="lead-sm-heading mb-1">
                           {new Date(task.expectedDate).toLocaleDateString()} -{" "}
