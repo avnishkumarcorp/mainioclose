@@ -66,15 +66,17 @@ const LeadDetailsPage = () => {
 
   const [taskReferesh, setTaskReferesh] = useState(false)
   const [productDepandence, setProductDepandence] = useState(false)
+  const [editTaskDep, setEditTaskDep] = useState(false);
 
-
-  console.log(getSingleLeadTask);
+  // const [updateTaskDataState, setUpdateTaskDataState] = useState()
+  // const [EditTaskStatus, setEditTaskStatus] = useState(false)
+  console.log(getSingleLeadTask)
 
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
 
-  const {userid, leadid} = useParams()
+  const { userid, leadid } = useParams()
 
   // //  useEffect calls Start
   useEffect(() => {
@@ -111,7 +113,7 @@ const LeadDetailsPage = () => {
 
   useEffect(() => {
     getAllTaskData()
-  }, [taskUpdateToggle, taskReferesh])
+  }, [taskUpdateToggle, taskReferesh, editTaskDep])
 
   useEffect(() => {
     getAllOportunities()
@@ -128,7 +130,6 @@ const LeadDetailsPage = () => {
 
   //  useEffect calls End
 
- 
   const getAllOportunities = async () => {
     const getOportunities = await getQuery(
       `/leadService/api/v1/leadOpportunity/getAllOpportunity`
@@ -145,7 +146,7 @@ const LeadDetailsPage = () => {
   const taskDescription = useRef()
   const taskDate = useRef()
   const location = useLocation()
- 
+
   const categorySelectRef = useRef()
 
   const [remarkMessage, setRemarkMessage] = useState({
@@ -176,6 +177,57 @@ const LeadDetailsPage = () => {
     expectedDate: "",
     statusId: 0,
   })
+
+  const [EditNewTask, setEditNewTask] = useState({})
+
+  console.log("Edit task ",addNewTask);
+
+  const [editTaskBool, setEditTaskBool] = useState(false)
+  const [editTaskValue, setEditTaskValue] = useState({})
+
+  const updateTaskData = (task) => {
+    console.warn(task);
+    setEditTaskBool(true)
+     setAddNewTask((prev) => ({
+      ...prev,
+      taskId : task.id,
+      name: task.name,
+      description: task.description,
+      expectedDate: new Date(task.expectedDate).toISOString().slice(0, 16),
+      statusId: task.statusId
+    }))
+  }
+
+  {
+    // "taskId": 0,
+    // "leadId": 0,
+    // "name": "string",
+    // "description": "string",
+    // "assignedById": 0,
+    // "expectedDate": "2024-02-06T06:38:00.296Z",
+    // "statusId": 0
+  }
+
+  console.log("edit task", editTaskValue);
+  const editTaskFun = async (e) => {
+    e.preventDefault()
+
+    try{
+      const EditData = await postQuery(`/leadService/api/v1/task/updateTaskData`, addNewTask) 
+      console.log("Edit task", EditData);
+      addNewTask.name = ""
+      addNewTask.description = ""
+      addNewTask.expectedDate = ""
+      setEditTaskDep((prev) => !(prev))
+      // window.location.reload();
+    }catch(err){
+      console.log(err);
+    }
+    setEditTaskBool(false)
+    setEditTaskValue(addNewTask)
+  }
+
+  
 
   // GET All tasks Status
   const getAllTaskStatus = async () => {
@@ -493,9 +545,9 @@ const LeadDetailsPage = () => {
         }
         return
       }
-     addNewTask.name = ""
-     addNewTask.description = ""
-     addNewTask.expectedDate = ""
+      addNewTask.name = ""
+      addNewTask.description = ""
+      addNewTask.expectedDate = ""
     }
     TaskCreateNew()
   }
@@ -525,18 +577,17 @@ const LeadDetailsPage = () => {
 
   const deleteTaskFun = async (id) => {
     if (window.confirm("Are you sure to delete this record?") == true) {
-     console.log(id);
+      console.log(id)
       try {
         const deleteTaskData = await deleteQuery(
           `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
         )
-        setTaskReferesh((prev) => !(prev));
+        setTaskReferesh((prev) => !prev)
       } catch (err) {
         console.log(err)
       }
     }
   }
-
 
   return (
     <div className="lead-details cm-padding-one">
@@ -607,8 +658,7 @@ const LeadDetailsPage = () => {
             )}
             <div></div>
             <div className="lead-product">
-
-            <div className="card mt-2">
+              <div className="card mt-2">
                 <div className="" id="headingThree">
                   <div
                     className="card-btn collapsed"
@@ -749,8 +799,6 @@ const LeadDetailsPage = () => {
                 </div>
               </div>
 
-
-
               <div className="card mt-2">
                 <div className="" id="headingThree">
                   <div
@@ -784,6 +832,7 @@ const LeadDetailsPage = () => {
                         <input
                           className="lead-cm-input"
                           name="name"
+                          value={editTaskBool ? addNewTask?.name : addNewTask?.name}
                           ref={taskTitle}
                           onChange={(e) => setTasksDataFun(e)}
                           type="text"
@@ -801,6 +850,7 @@ const LeadDetailsPage = () => {
                         <textarea
                           className="lead-cm-input min-height-one"
                           onChange={(e) => setTasksDataFun(e)}
+                          value={editTaskBool ? addNewTask?.description : addNewTask?.description}
                           name="description"
                           ref={taskDescription}
                           type="text"
@@ -818,6 +868,7 @@ const LeadDetailsPage = () => {
                         <input
                           className="lead-cm-input"
                           type="datetime-local"
+                          value={editTaskBool ? addNewTask?.expectedDate : addNewTask?.expectedDate}
                           name="expectedDate"
                           ref={taskDate}
                           onChange={(e) => setTasksDataFun(e)}
@@ -867,7 +918,8 @@ const LeadDetailsPage = () => {
                         >
                           <option>Select Status</option>
                           {allTaskStatusData.map((status, index) => (
-                            <option key={index} value={status?.id}>
+                            <option key={index}
+                            value={`${status?.id}`}>
                               {status?.name}
                             </option>
                           ))}
@@ -885,12 +937,21 @@ const LeadDetailsPage = () => {
                         >
                           Reset
                         </button>
+                        {editTaskBool ? 
                         <button
-                          onClick={(e) => createTaskFun(e)}
+                          onClick={(e) => editTaskFun(e)}
                           className="lead-cm-btn lead-save-btn"
                         >
-                          Save
+                          Edit
                         </button>
+                        : <button
+                        onClick={(e) => createTaskFun(e)}
+                        className="lead-cm-btn lead-save-btn"
+                      >
+                        Save
+                      </button>
+                          }
+
                       </div>
                     </form>
                   </div>
@@ -903,7 +964,8 @@ const LeadDetailsPage = () => {
                           {task?.description}
                         </h6>
                         <h6 className="lead-sm-heading mb-1">
-                          {task?.taskStatus?.name} - {task?.assignedBy?.fullName}
+                          {task?.taskStatus?.name} -{" "}
+                          {task?.assignedBy?.fullName}
                         </h6>
                         <h6 className="lead-sm-heading mb-1">
                           {new Date(task.expectedDate).toLocaleDateString()} -{" "}
@@ -912,8 +974,15 @@ const LeadDetailsPage = () => {
                         </h6>
                       </div>
                       {adminRole ? (
-                        <div className="lead-heading" onClick={()=> deleteTaskFun(task.id)}>
-                          <i className="fa-solid fa-trash"></i>
+                        <div className="lead-heading">
+                          <i
+                            onClick={() => updateTaskData(task)}
+                            className="fa-solid fa-pen mr-3"
+                          ></i>
+                          <i
+                            onClick={() => deleteTaskFun(task.id)}
+                            className="fa-solid fa-trash"
+                          ></i>
                         </div>
                       ) : (
                         ""
@@ -924,9 +993,6 @@ const LeadDetailsPage = () => {
                   {/* all leads save */}
                 </div>
               </div>
-
-
-
 
               <div className="card mt-2">
                 <div className="" id="headingThree">
@@ -1144,7 +1210,7 @@ const LeadDetailsPage = () => {
               {/* end estimate */}
 
               {/* tasks */}
-          
+
               {/* end  tasks */}
 
               {/* opportunities */}
@@ -1264,7 +1330,6 @@ const LeadDetailsPage = () => {
               {/* end  opportunities */}
 
               {/* contact */}
-            
 
               {/* end  contact */}
 
@@ -1305,10 +1370,12 @@ const LeadDetailsPage = () => {
               <Link to={`history`} className="filter-btn-design">
                 <i className="fa-regular mr-1 fa-clipboard"></i>History
               </Link>
-              <Link to={`/erp/${userid}/sales/leads`} className="filter-btn-design">
-              <i className="fa-solid mr-1 fa-backward-step"></i>Back
+              <Link
+                to={`/erp/${userid}/sales/leads`}
+                className="filter-btn-design"
+              >
+                <i className="fa-solid mr-1 fa-backward-step"></i>Back
               </Link>
-
             </div>
             <div className="filter-box mt-3">
               <select
