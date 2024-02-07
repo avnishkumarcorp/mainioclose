@@ -43,8 +43,16 @@ import ProductsChange from "./Main/Setting/Products/ProductsChange"
 import NotFoundPage from "./components/NotFoundPage"
 import LeadCategory from "./Main/Setting/Category/LeadCategory"
 import AllNotificationPage from "./Main/Sales/Leads/AllNotificationPage"
+import { useSelector } from "react-redux"
 
 function App() {
+
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
+  const adminRole = currentUserRoles.includes("ADMIN")
+  
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -62,7 +70,7 @@ function App() {
               path="setpassword/:userid/thankyou"
               element={<PaswordUpdateMessage />}
             />
-            <Route path="signup" element={<SignUp />} />
+            {adminRole ? <Route path="signup" element={<SignUp />} /> : <Route path="/" element={<HomePage />} /> }
             <Route path="otp" element={<OtpPage />} />
             <Route path="forgetotp" element={<ForgetOtpPage />} />
             <Route path="forgetpassword" element={<ForgetPassword />} />
