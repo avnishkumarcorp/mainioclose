@@ -19,12 +19,10 @@ const AllNotificationPage = () => {
         `/leadService/api/v1/notification/getAllNotification?userId=${userid}`
       )
       //    getAllNoty.data.reverse()
-      console.log(getAllNoty)
       setAllNotificationData(getAllNoty.data.reverse())
       const updateNoty = await putQueryNoData(
         `/leadService/api/v1/notification/viewNotification?userId=${userid}`
       )
-      console.log(updateNoty)
     } catch (err) {
       console.log(err)
     }
@@ -43,7 +41,6 @@ const AllNotificationPage = () => {
       headerName: "Message",
       width: 700,
       renderCell: (props) => {
-        console.log(props.row)
         const notify = props?.row?.view
         return (
           <p className={`mb-0 ${!notify ? "noti-view" : ""}`}>

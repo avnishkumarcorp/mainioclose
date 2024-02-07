@@ -14,7 +14,7 @@ const DisplayUserTwo = () => {
 
 
   const handleEdit = (id) =>{
-    console.log("Selected row id is ", id);
+    console.log("Selected row id is ");
   }
  
   const columns = [

@@ -105,8 +105,7 @@ const CreateuserDashboard = () => {
           userName: createNewUserData.data.data.name,
         }
 
-        console.log(newLeadObject);
-
+      
 
         const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, newLeadObject);
         setBtnLoading(false);

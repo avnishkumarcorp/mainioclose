@@ -74,7 +74,6 @@ const LeadStatusPage = () => {
     }
   }
 
-  console.log(statusData)
 
   return (
     <div>

@@ -156,7 +156,6 @@ const LeadsModule = () => {
       const singlePage = await putQuery(
         `/leadService/api/v1/lead/viewHistoryCreate?userId=${userid}&leadId=${leadId}`
       )
-      console.log(singlePage)
     } catch (err) {
       console.log(err)
     }
@@ -479,7 +478,6 @@ const LeadsModule = () => {
       setMultibtn(false)
       setLeadMultiDep((prev) => !prev)
       window.location.reload()
-      console.log("multidata", multiAssigneeCol)
     } catch (err) {
       console.log(err)
       setMultibtn(false)

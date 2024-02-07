@@ -37,7 +37,6 @@ const LeadCategory = () => {
         `/leadService/api/v1/category/createCategory`,
         leadCategory
       )
-      console.log(catDataRes)
       setCreateCategoryDep((prev) => !prev)
       setBtnLoading(false)
       nameRef.current.value = ""
@@ -53,17 +52,14 @@ const LeadCategory = () => {
   const { productData: categoryData, loading: categoryLoading } =
     useCustomRoute(categoryUrl, categoryDep)
 
-  console.log(categoryData)
-
+ 
   const deleteCategoryFun = async (statusId) => {
-    console.log("cat id", statusId)
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadCategoryDel = await deleteQuery(
           `/leadService/api/v1/category/deleteCategory?categoryId=${statusId}`
         )
         setDeleteCategoryDep((prev) => !prev)
-        console.log("delete call0, ", leadCategoryDel)
       } catch (err) {
         console.log(err)
       }

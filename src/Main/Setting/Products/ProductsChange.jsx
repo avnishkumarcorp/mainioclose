@@ -29,7 +29,6 @@ const ProductsChange = () => {
     setAddNewProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  console.log(addNewProduct)
 
   const createNewProduct = async (e) => {
     e.preventDefault()
@@ -52,7 +51,6 @@ const ProductsChange = () => {
         addNewProduct
       )
       setAddProductDep((prev) => !prev)
-      console.log(productData)
     } catch (err) {
       console.log(err)
     }
@@ -75,21 +73,18 @@ const ProductsChange = () => {
   )
 
   const deleteProductFun = async (statusId) => {
-    console.log("cat id", statusId)
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadProductDel = await deleteQuery(
           `/leadService/api/v1/product/delete?id=${statusId}`
         )
         setDeleteCategoryDep((prev) => !prev)
-        console.log("delete call0, ", leadProductDel)
       } catch (err) {
         console.log(err)
       }
     }
   }
 
-  console.log("product", productData)
 
   return (
     <div>
