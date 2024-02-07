@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./InboxPage.scss"
-import { useLocation } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import axios from "axios"
 import MUIDataTable from "mui-datatables"
 import DataGridTables from "../../../components/DataGridTables"
@@ -20,6 +20,8 @@ const InboxPage = () => {
     getAllLead()
   }, [])
 
+  const {userid} = useParams()
+  
   const location = useLocation()
   const currentPath = location.pathname.split()
   const splitPath = currentPath[0].split("/")
@@ -72,7 +74,7 @@ const InboxPage = () => {
   const getAllLead = async () => {
     try {
       const allLead = await axios.get(
-        `/leadService/api/v1/inbox/getAllInboxData?userId=${1}`,
+        `/leadService/api/v1/inbox/getAllInboxData?userId=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",

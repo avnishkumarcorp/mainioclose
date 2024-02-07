@@ -72,8 +72,7 @@ const LeadDetailsPage = () => {
 
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
-  console.log(getSingleLeadTask)
-
+ 
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
@@ -200,18 +199,7 @@ const LeadDetailsPage = () => {
     }))
   }
 
-  console.log("create contact data", createContact)
-  {
-    // "taskId": 0,
-    // "leadId": 0,
-    // "name": "string",
-    // "description": "string",
-    // "assignedById": 0,
-    // "expectedDate": "2024-02-06T06:38:00.296Z",
-    // "statusId": 0
-  }
-
-  console.log("edit task", editTaskValue)
+ 
   const editTaskFun = async (e) => {
     e.preventDefault()
 
@@ -220,7 +208,6 @@ const LeadDetailsPage = () => {
         `/leadService/api/v1/task/updateTaskData`,
         addNewTask
       )
-      console.log("Edit task", EditData)
       addNewTask.name = ""
       addNewTask.description = ""
       addNewTask.expectedDate = ""
@@ -584,7 +571,6 @@ const LeadDetailsPage = () => {
 
   const deleteTaskFun = async (id) => {
     if (window.confirm("Are you sure to delete this record?") == true) {
-      console.log(id)
       try {
         const deleteTaskData = await deleteQuery(
           `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
@@ -599,7 +585,6 @@ const LeadDetailsPage = () => {
   const [editContactState, setEditContactState] = useState(false)
 
   const editContactData = (contact) => {
-    console.log("contact is", contact)
     setEditContactState(true)
     setCreateContact((prev) => ({
       id: contact.clientId,
@@ -616,7 +601,6 @@ const LeadDetailsPage = () => {
         `/leadService/api/v1/client/updateClientInfo`,
         createContact
       )
-      console.warn("edit data", editContactDetails)
       setEditContactState(false)
       setEditContactDep((prev) => !prev)
       createContact.name = ""
