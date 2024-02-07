@@ -606,7 +606,6 @@ const LeadDetailsPage = () => {
       createContact.name = ""
       createContact.email = ""
       createContact.contactNo = ""
-      console.log("data")
     } catch (err) {
       console.log(err)
     }
@@ -614,7 +613,6 @@ const LeadDetailsPage = () => {
 
   const deleteContactFun = async (id) => {
     if (window.confirm("Are you sure to delete this record?") == true) {
-      console.log(id)
       try {
         const deleteContactData = await deleteQuery(
           // `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`

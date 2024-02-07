@@ -56,8 +56,7 @@ const Login = () => {
 
     setUserLoginData((data) => ({...data, password: data.password.trim()}))
 
-    console.log("i am data",userLoginData);
-
+   
     if (emailRef.current.value === "") {
       emailRef.current.style.border = "1px solid red"
       setEmailErr(true)

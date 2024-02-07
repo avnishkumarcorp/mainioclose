@@ -14,7 +14,6 @@ const LeadHistory = () => {
 
 
   const { leadid } = useParams()
-  console.log(leadid)
 
   useEffect(() => {
     leadHistoryFun()

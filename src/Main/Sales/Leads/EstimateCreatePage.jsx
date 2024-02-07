@@ -21,15 +21,13 @@ const EstimateCreatePage = () => {
 
   const { productData: allCompanyData, loading: compnayLoading, error: companyError} = useCustomRoute(getAllCompUrl, getAllCompDep);
 
-  console.log("all company data", allCompanyData);
-
+ 
   const allClientUrl = `/leadService/api/v1/client/getAllClientInfo`
   const allClientDep = []
 
   const { productData: allClientInfo, loading: clientLoading, error: clientError} = useCustomRoute(allClientUrl, allClientDep);
 
-  console.log("all client Info", allClientInfo);
-
+ 
 
   const getAllClient = async () => {
     try {
