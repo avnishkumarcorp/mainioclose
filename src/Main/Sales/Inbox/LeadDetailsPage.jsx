@@ -42,6 +42,7 @@ const LeadDetailsPage = () => {
   const [taskUpdateToggle, setTaskUpdateToggle] = useState(false)
   const [updateLeadName, setUpdateLeadName] = useState("")
   const [notesLoading, setNotesLoading] = useState(false)
+  const [contactDelDep, setContactDelDep] = useState(false)
 
   const [productDataScaleaton, setProductDataScaleaton] = useState(true)
   const [leadNameReload, setLeadNameReload] = useState(false)
@@ -94,7 +95,8 @@ const LeadDetailsPage = () => {
     productDisplayToggle,
     clientContactToggle,
     productDepandence,
-    editContactDep
+    editContactDep,
+    contactDelDep,
   ])
 
   useEffect(() => {
@@ -222,7 +224,7 @@ const LeadDetailsPage = () => {
       addNewTask.name = ""
       addNewTask.description = ""
       addNewTask.expectedDate = ""
-      setEditTaskDep((prev) => !(prev))
+      setEditTaskDep((prev) => !prev)
       // window.location.reload();
     } catch (err) {
       console.log(err)
@@ -616,13 +618,29 @@ const LeadDetailsPage = () => {
       )
       console.warn("edit data", editContactDetails)
       setEditContactState(false)
-      setEditContactDep((prev) => !(prev))
+      setEditContactDep((prev) => !prev)
       createContact.name = ""
       createContact.email = ""
       createContact.contactNo = ""
       console.log("data")
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  const deleteContactFun = async (id) => {
+    if (window.confirm("Are you sure to delete this record?") == true) {
+      console.log(id)
+      try {
+        const deleteContactData = await deleteQuery(
+          // `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
+          `/leadService/api/v1/client/deleteClient?leadId=${leadid}&clientId=${id}`
+        )
+        setContactDelDep((prev) => !prev)
+        // setTaskReferesh((prev) => !prev)
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
@@ -828,38 +846,41 @@ const LeadDetailsPage = () => {
                   </div>
                   {/* all leads save */}
                   <div className="min-box">
-                  {clientsContact.map((client, index) => (
-                    <div className="save-lead-data" key={index}>
-                      <div>
-                        <p className="lead-heading">
-                          {client?.clientName
-                            ? `${client?.clientName.slice(0, 30)}...`
-                            : "NA"}
-                        </p>
-                        <h6 className="lead-sm-heading mb-0">
-                          {client?.email
-                            ? `${client?.email.slice(0, 30)}...`
-                            : "NA"}
-                        </h6>
-                        <h6 className="lead-sm-heading ">
-                          {client.contactNo
-                            ? `${client.contactNo.slice(0, 20)}...`
-                            : "NA"}
-                        </h6>
-                      </div>
-                      {adminRole ? (
-                        <div className="lead-heading">
-                          <i
-                            className="fa-solid fa-pen mr-3"
-                            onClick={() => editContactData(client)}
-                          ></i>
-                          <i className="fa-solid fa-trash"></i>
+                    {clientsContact.map((client, index) => (
+                      <div className="save-lead-data" key={index}>
+                        <div>
+                          <p className="lead-heading">
+                            {client?.clientName
+                              ? `${client?.clientName.slice(0, 30)}...`
+                              : "NA"}
+                          </p>
+                          <h6 className="lead-sm-heading mb-0">
+                            {client?.email
+                              ? `${client?.email.slice(0, 30)}...`
+                              : "NA"}
+                          </h6>
+                          <h6 className="lead-sm-heading ">
+                            {client.contactNo
+                              ? `${client.contactNo.slice(0, 20)}...`
+                              : "NA"}
+                          </h6>
                         </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  ))}
+                        {adminRole ? (
+                          <div className="lead-heading">
+                            <i
+                              className="fa-solid fa-pen mr-3"
+                              onClick={() => editContactData(client)}
+                            ></i>
+                            <i
+                              className="fa-solid fa-trash"
+                              onClick={() => deleteContactFun(client.clientId)}
+                            ></i>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    ))}
                   </div>
 
                   {/* all leads save */}
