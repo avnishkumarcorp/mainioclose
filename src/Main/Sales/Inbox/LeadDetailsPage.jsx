@@ -66,7 +66,8 @@ const LeadDetailsPage = () => {
 
   const [taskReferesh, setTaskReferesh] = useState(false)
   const [productDepandence, setProductDepandence] = useState(false)
-  const [editTaskDep, setEditTaskDep] = useState(false);
+  const [editTaskDep, setEditTaskDep] = useState(false)
+  const [editContactDep, setEditContactDep] = useState(false)
 
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
@@ -93,6 +94,7 @@ const LeadDetailsPage = () => {
     productDisplayToggle,
     clientContactToggle,
     productDepandence,
+    editContactDep
   ])
 
   useEffect(() => {
@@ -180,25 +182,23 @@ const LeadDetailsPage = () => {
 
   const [EditNewTask, setEditNewTask] = useState({})
 
-  console.log("Edit task ",addNewTask);
-
   const [editTaskBool, setEditTaskBool] = useState(false)
   const [editTaskValue, setEditTaskValue] = useState({})
 
   const updateTaskData = (task) => {
-    console.warn(task);
     setEditTaskBool(true)
-     setAddNewTask((prev) => ({
+    setAddNewTask((prev) => ({
       ...prev,
       currentUserId: userid,
-      taskId : task.id,
+      taskId: task.id,
       name: task.name,
       description: task.description,
       expectedDate: new Date(task.expectedDate).toISOString().slice(0, 16),
-      statusId: task.statusId
+      statusId: task.statusId,
     }))
   }
 
+  console.log("create contact data", createContact)
   {
     // "taskId": 0,
     // "leadId": 0,
@@ -209,26 +209,27 @@ const LeadDetailsPage = () => {
     // "statusId": 0
   }
 
-  console.log("edit task", editTaskValue);
+  console.log("edit task", editTaskValue)
   const editTaskFun = async (e) => {
     e.preventDefault()
 
-    try{
-      const EditData = await postQuery(`/leadService/api/v1/task/updateTaskData`, addNewTask) 
-      console.log("Edit task", EditData);
+    try {
+      const EditData = await postQuery(
+        `/leadService/api/v1/task/updateTaskData`,
+        addNewTask
+      )
+      console.log("Edit task", EditData)
       addNewTask.name = ""
       addNewTask.description = ""
       addNewTask.expectedDate = ""
       setEditTaskDep((prev) => !(prev))
       // window.location.reload();
-    }catch(err){
-      console.log(err);
+    } catch (err) {
+      console.log(err)
     }
     setEditTaskBool(false)
     setEditTaskValue(addNewTask)
   }
-
-  
 
   // GET All tasks Status
   const getAllTaskStatus = async () => {
@@ -516,6 +517,9 @@ const LeadDetailsPage = () => {
         contactNameRef.current.value = ""
         contactEmailRef.current.value = ""
         contactContactNoRef.current.value = ""
+        createContact.name = ""
+        createContact.email = ""
+        createContact.contactNo = ""
       } catch (err) {
         console.log("err", err)
         if (err.response.status === 500) {
@@ -587,6 +591,38 @@ const LeadDetailsPage = () => {
       } catch (err) {
         console.log(err)
       }
+    }
+  }
+
+  const [editContactState, setEditContactState] = useState(false)
+
+  const editContactData = (contact) => {
+    console.log("contact is", contact)
+    setEditContactState(true)
+    setCreateContact((prev) => ({
+      id: contact.clientId,
+      contactNo: contact.contactNo,
+      email: contact.email,
+      name: contact.clientName,
+    }))
+  }
+
+  const editExistContact = async (e) => {
+    e.preventDefault()
+    try {
+      const editContactDetails = await putQuery(
+        `/leadService/api/v1/client/updateClientInfo`,
+        createContact
+      )
+      console.warn("edit data", editContactDetails)
+      setEditContactState(false)
+      setEditContactDep((prev) => !(prev))
+      createContact.name = ""
+      createContact.email = ""
+      createContact.contactNo = ""
+      console.log("data")
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -692,6 +728,11 @@ const LeadDetailsPage = () => {
 
                         <input
                           name="name"
+                          value={
+                            editContactState
+                              ? createContact.name
+                              : createContact.name
+                          }
                           onChange={(e) => setContactDataFun(e)}
                           className="lead-cm-input"
                           ref={contactNameRef}
@@ -720,6 +761,11 @@ const LeadDetailsPage = () => {
                           <i className="fa-solid fa-envelope"></i>
                           <input
                             name="email"
+                            value={
+                              editContactState
+                                ? createContact.email
+                                : createContact.email
+                            }
                             onChange={(e) => setContactDataFun(e)}
                             className="lead-cm-input"
                             ref={contactEmailRef}
@@ -730,6 +776,11 @@ const LeadDetailsPage = () => {
                           <i className="fa-solid fa-phone"></i>
                           <input
                             name="contactNo"
+                            value={
+                              editContactState
+                                ? createContact.contactNo
+                                : createContact.contactNo
+                            }
                             onChange={(e) => setContactDataFun(e)}
                             className="lead-cm-input"
                             ref={contactContactNoRef}
@@ -756,16 +807,27 @@ const LeadDetailsPage = () => {
                         >
                           Reset
                         </button>
-                        <button
-                          onClick={(e) => createLeadContact(e)}
-                          className="lead-cm-btn lead-save-btn"
-                        >
-                          Save
-                        </button>
+
+                        {editContactState ? (
+                          <button
+                            onClick={(e) => editExistContact(e)}
+                            className="lead-cm-btn lead-save-btn"
+                          >
+                            Edit
+                          </button>
+                        ) : (
+                          <button
+                            onClick={(e) => createLeadContact(e)}
+                            className="lead-cm-btn lead-save-btn"
+                          >
+                            Save
+                          </button>
+                        )}
                       </div>
                     </form>
                   </div>
                   {/* all leads save */}
+                  <div className="min-box">
                   {clientsContact.map((client, index) => (
                     <div className="save-lead-data" key={index}>
                       <div>
@@ -787,7 +849,10 @@ const LeadDetailsPage = () => {
                       </div>
                       {adminRole ? (
                         <div className="lead-heading">
-                          <i className="fa-solid fa-pen mr-3"></i>
+                          <i
+                            className="fa-solid fa-pen mr-3"
+                            onClick={() => editContactData(client)}
+                          ></i>
                           <i className="fa-solid fa-trash"></i>
                         </div>
                       ) : (
@@ -795,6 +860,7 @@ const LeadDetailsPage = () => {
                       )}
                     </div>
                   ))}
+                  </div>
 
                   {/* all leads save */}
                 </div>
@@ -833,7 +899,9 @@ const LeadDetailsPage = () => {
                         <input
                           className="lead-cm-input"
                           name="name"
-                          value={editTaskBool ? addNewTask?.name : addNewTask?.name}
+                          value={
+                            editTaskBool ? addNewTask?.name : addNewTask?.name
+                          }
                           ref={taskTitle}
                           onChange={(e) => setTasksDataFun(e)}
                           type="text"
@@ -851,7 +919,11 @@ const LeadDetailsPage = () => {
                         <textarea
                           className="lead-cm-input min-height-one"
                           onChange={(e) => setTasksDataFun(e)}
-                          value={editTaskBool ? addNewTask?.description : addNewTask?.description}
+                          value={
+                            editTaskBool
+                              ? addNewTask?.description
+                              : addNewTask?.description
+                          }
                           name="description"
                           ref={taskDescription}
                           type="text"
@@ -869,7 +941,11 @@ const LeadDetailsPage = () => {
                         <input
                           className="lead-cm-input"
                           type="datetime-local"
-                          value={editTaskBool ? addNewTask?.expectedDate : addNewTask?.expectedDate}
+                          value={
+                            editTaskBool
+                              ? addNewTask?.expectedDate
+                              : addNewTask?.expectedDate
+                          }
                           name="expectedDate"
                           ref={taskDate}
                           onChange={(e) => setTasksDataFun(e)}
@@ -919,8 +995,7 @@ const LeadDetailsPage = () => {
                         >
                           <option>Select Status</option>
                           {allTaskStatusData.map((status, index) => (
-                            <option key={index}
-                            value={`${status?.id}`}>
+                            <option key={index} value={`${status?.id}`}>
                               {status?.name}
                             </option>
                           ))}
@@ -938,59 +1013,59 @@ const LeadDetailsPage = () => {
                         >
                           Reset
                         </button>
-                        {editTaskBool ? 
-                        <button
-                          onClick={(e) => editTaskFun(e)}
-                          className="lead-cm-btn lead-save-btn"
-                        >
-                          Edit
-                        </button>
-                        : <button
-                        onClick={(e) => createTaskFun(e)}
-                        className="lead-cm-btn lead-save-btn"
-                      >
-                        Save
-                      </button>
-                          }
-
+                        {editTaskBool ? (
+                          <button
+                            onClick={(e) => editTaskFun(e)}
+                            className="lead-cm-btn lead-save-btn"
+                          >
+                            Edit
+                          </button>
+                        ) : (
+                          <button
+                            onClick={(e) => createTaskFun(e)}
+                            className="lead-cm-btn lead-save-btn"
+                          >
+                            Save
+                          </button>
+                        )}
                       </div>
                     </form>
                   </div>
                   {/* all leads save */}
                   <div className="min-box">
-                  {getSingleLeadTask.map((task, index) => (
-                    <div key={index} className="save-lead-data">
-                      <div>
-                        <p className="lead-heading">{task?.name}</p>
-                        <h6 className="lead-sm-heading mb-1">
-                          {task?.description}
-                        </h6>
-                        <h6 className="lead-sm-heading mb-1">
-                          {task?.taskStatus?.name} -{" "}
-                          {task?.assignedBy?.fullName}
-                        </h6>
-                        <h6 className="lead-sm-heading mb-1">
-                          {new Date(task.expectedDate).toLocaleDateString()} -{" "}
-                          {new Date(task.expectedDate).getHours()}:
-                          {new Date(task.expectedDate).getMinutes()}
-                        </h6>
-                      </div>
-                      {adminRole ? (
-                        <div className="lead-heading">
-                          <i
-                            onClick={() => updateTaskData(task)}
-                            className="fa-solid fa-pen mr-3"
-                          ></i>
-                          <i
-                            onClick={() => deleteTaskFun(task.id)}
-                            className="fa-solid fa-trash"
-                          ></i>
+                    {getSingleLeadTask.map((task, index) => (
+                      <div key={index} className="save-lead-data">
+                        <div>
+                          <p className="lead-heading">{task?.name}</p>
+                          <h6 className="lead-sm-heading mb-1">
+                            {task?.description}
+                          </h6>
+                          <h6 className="lead-sm-heading mb-1">
+                            {task?.taskStatus?.name} -{" "}
+                            {task?.assignedBy?.fullName}
+                          </h6>
+                          <h6 className="lead-sm-heading mb-1">
+                            {new Date(task.expectedDate).toLocaleDateString()} -{" "}
+                            {new Date(task.expectedDate).getHours()}:
+                            {new Date(task.expectedDate).getMinutes()}
+                          </h6>
                         </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  ))}
+                        {adminRole ? (
+                          <div className="lead-heading">
+                            <i
+                              onClick={() => updateTaskData(task)}
+                              className="fa-solid fa-pen mr-3"
+                            ></i>
+                            <i
+                              onClick={() => deleteTaskFun(task.id)}
+                              className="fa-solid fa-trash"
+                            ></i>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    ))}
                   </div>
 
                   {/* all leads save */}

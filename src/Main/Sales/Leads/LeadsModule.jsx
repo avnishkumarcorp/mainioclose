@@ -242,7 +242,7 @@ const LeadsModule = () => {
     {
       field: "leadName",
       headerName: "Lead Name",
-      width: 200,
+      width: 300,
       renderCell: (props) => (
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
