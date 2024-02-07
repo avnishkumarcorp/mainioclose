@@ -33,8 +33,16 @@ const AllNotificationPage = () => {
   const columns = [
     {
       field: "id",
-      headerName: "ID",
-      width: 100,
+      headerName: "S.No",
+      width: 60,
+      filterable: false,
+      renderCell: (props) => {
+        return (
+          <p className="mb-0">
+            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+          </p>
+        )
+      },
     },
     {
       field: "message",
@@ -50,11 +58,26 @@ const AllNotificationPage = () => {
       },
     },
     {
-      field: "view",
-      headerName: "View",
-      width: 60,
+      field: "notifyDate",
+      headerName: "Date",
+      width: 200,
+      renderCell: (props) => {
+        const data = props.row.notifyDate
+        console.log(data)
+        return data === null ? (
+          "NA"
+        ) : (
+          <p>
+            {new Date(props.row.notifyDate).toLocaleDateString()} -{" "}
+            {new Date(props.row.notifyDate).getHours()}:
+            {new Date(props.row.notifyDate).getMinutes()}
+          </p>
+        )
+      },
     },
   ]
+
+  console.log(allNotificationData)
 
   return (
     <div className="small-box-padding">
