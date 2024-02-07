@@ -48,6 +48,11 @@ const Login = () => {
     setUserLoginData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
+
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
+  const adminRole = currentUserRoles.includes("ADMIN")
   const CurrentuserData = useSelector((prev) => prev.AuthReducer)
 
 
@@ -161,12 +166,12 @@ const Login = () => {
         onClick={(e) => userSignIn(e)}
         className={`my-3`}
       />
-      {/* <p className="note-user">
+    {adminRole ?  <p className="note-user">
         Not a User{" "}
         <Link className="ml-1 out-none" to="/erp/signup">
           Signup
         </Link>
-      </p> */}
+      </p> : "" }
     </div>
   )
 }
