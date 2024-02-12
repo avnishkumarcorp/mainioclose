@@ -12,7 +12,7 @@ const AllDeactivateUser = () => {
   const { productData: allDeactivateUsers, loading: userLoading } =
     useCustomRoute(allDeactivateUser, deactivateUserDep)
 
-  console.log("cfrf", allDeactivateUsers)
+ 
 
   const activateUserFun = async (id) => {
     if (window.confirm("Are you sure to Activate this User?") == true) {
@@ -24,8 +24,7 @@ const AllDeactivateUser = () => {
           `/leadService/api/v1/users/activateUser?id=${id}`
         )
 
-        console.log(activeLogin)
-        console.log(activeLead)
+       
         setDeactiveDep((prev) => !prev)
       } catch (err) {
         console.log(err)
