@@ -43,6 +43,7 @@ import ProductsChange from "./Main/Setting/Products/ProductsChange"
 import NotFoundPage from "./components/NotFoundPage"
 import LeadCategory from "./Main/Setting/Category/LeadCategory"
 import AllNotificationPage from "./Main/Sales/Leads/AllNotificationPage"
+import AllDeactivateUser from "./Main/DashBoard/AllDeactivateUser"
 
 function App() {
   return (
@@ -74,6 +75,8 @@ function App() {
             <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
               <Route path="muiuser" element={<DisplayUserTwo />} />
+              <Route path="deactivateUser" element={<AllDeactivateUser />} />
+              
             </Route>
             {/* hr module routes */}
             <Route path="/erp/:userid/hr" element={<ComingSoonPage />}>

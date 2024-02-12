@@ -7,6 +7,7 @@ import InputErrorComponent from "../components/InputErrorComponent"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { userDepartment } from "../data/FakeData"
+import { Link } from "react-router-dom"
 toast.configure()
 
 const CreateuserDashboard = () => {
@@ -125,7 +126,8 @@ const CreateuserDashboard = () => {
   }
 
   return (
-    <nav>
+    <nav className="all-center">
+      <Link to={`deactivateuser`} className="common-btn-one mr-2">Deactivate Users</Link>
       <div className="team-model">
         <button
           type="button"
