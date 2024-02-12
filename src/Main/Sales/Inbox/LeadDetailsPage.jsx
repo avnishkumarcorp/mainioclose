@@ -70,9 +70,12 @@ const LeadDetailsPage = () => {
   const [editTaskDep, setEditTaskDep] = useState(false)
   const [editContactDep, setEditContactDep] = useState(false)
 
+  const [updateAssignee, setUpdateAssignee] = useState(false)
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
  
+
+
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
@@ -96,6 +99,7 @@ const LeadDetailsPage = () => {
     productDepandence,
     editContactDep,
     contactDelDep,
+    updateAssignee
   ])
 
   useEffect(() => {
@@ -564,6 +568,7 @@ const LeadDetailsPage = () => {
           },
         }
       )
+      setUpdateAssignee((prev) => !(prev))
     } catch (err) {
       console.log("err", err)
     }
@@ -670,8 +675,12 @@ const LeadDetailsPage = () => {
               <i className="fa-solid mr-1 fa-location-dot"></i>
               {singleLeadResponseData?.city}
             </p>
+            
             <p className="lead-blue-head">
-              {singleLeadResponseData?.status?.name}
+             Assignee Person - {singleLeadResponseData?.assigne?.fullName}
+            </p>
+            <p className="lead-blue-head">
+              Status  - {singleLeadResponseData?.status?.name}
             </p>
             {leadStatusScale ? (
               <p className="my-2">
