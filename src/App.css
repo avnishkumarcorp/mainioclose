@@ -80,6 +80,10 @@ button:focus {
   cursor: pointer;
 }
 
+.common-btn-one:hover{
+  color: #fff;
+}
+
 .noti-view{
   font-weight: 600;
 }
