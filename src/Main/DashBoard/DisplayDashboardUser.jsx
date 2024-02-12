@@ -8,10 +8,11 @@ import { deleteQuery } from "../../API/DeleteQuery"
 const DisplayDashboardUser = () => {
   const [displayAlluser, setDisplayAllUser] = useState([])
   const [loading, setLoading] = useState(true)
+  const [userSuspand, setUserSuspand] = useState(false);
 
   useEffect(() => {
     displayUser()
-  }, [])
+  }, [userSuspand])
 
   
   const displayUser = async () => {
@@ -30,12 +31,16 @@ const DisplayDashboardUser = () => {
   // /leadService/api/v1/users/deleteUser?id=10
 
   const deleteUser = async (id) => {
-    if (window.confirm("Are you sure to delete this record?") == true) {
+    if (window.confirm("Are you sure to deActivate this User?") == true) {
       try {
+        const suspandUser = await deleteQuery(`/securityService/api/auth/deleteUser?userId=${id}`)
         const deleteUser = await deleteQuery(
           `/leadService/api/v1/users/deleteUser?id=${id}`
         )
-        window.location.reload()
+          console.log(suspandUser);
+          console.log(deleteUser);
+          setUserSuspand((prev) => !(prev))
+        // window.location.reload()
       } catch (err) {
         console.log(err)
       }
@@ -77,6 +82,7 @@ const DisplayDashboardUser = () => {
     <div className="small-box-padding">
       <div className="create-user-box">
         <h1 className="table-heading">User List</h1>
+        
         <CreateuserDashboard />
         {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
       </div>
