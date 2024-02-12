@@ -54,6 +54,10 @@ const Login = () => {
   const userSignIn = (e) => {
     e.preventDefault()
 
+    if(loadingBtn === true){
+      return 
+    }
+
     setUserLoginData((data) => ({...data, password: data.password.trim()}))
 
    

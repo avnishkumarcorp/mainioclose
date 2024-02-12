@@ -62,6 +62,8 @@ const SignUp = () => {
   const userSignUp = (e) => {
     e.preventDefault()
 
+    return;
+
     if (fullNameRef.current.value === "") {
       fullNameRef.current.style.border = "1px solid red"
       setFullNameErr(true)
