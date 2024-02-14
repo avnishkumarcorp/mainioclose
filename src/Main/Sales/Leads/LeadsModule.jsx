@@ -209,6 +209,115 @@ const LeadsModule = () => {
     // age: row.age,
   }))
 
+  const column2 = [
+    {
+      field: "id",
+      headerName: "S.No",
+      width: 60,
+      filterable: false,
+      renderCell: (props) => {
+        return (
+          <p className="mb-0">
+            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+          </p>
+        )
+      },
+    },
+    {
+      field: "leadName",
+      headerName: "Lead Name",
+      width: 280,
+      renderCell: (props) => (
+        <Link
+          to={`/erp/${userid}/sales/leads/${props.row.id}`}
+          onClick={() => viewHistory(props.row.id)}
+        >
+          {props?.row?.leadName}
+        </Link>
+      ),
+    },
+    { field: "mobileNo", headerName: "Mobile No", width: 150 },
+    { field: "email", headerName: "Email", width: 150 },
+    {
+      field: "missedTask",
+      headerName: "Missed Task",
+      width: 220,
+      renderCell: (props) => {
+        const taskmissed = props?.row
+        const taskStatus = props?.row?.missedTaskStatus
+        const taskName = props?.row?.missedTaskName
+        const taskDate = new Date(
+          props?.row?.missedTaskDate
+        ).toLocaleDateString()
+        const taskCreated = props?.row?.missedTaskCretedBy
+        return taskName !== null ? (
+          <p className={`mb-0 ${taskName !== null ? "text-danger" : ""}`}>
+            {taskCreated} - {taskName}
+            <br />
+            {taskStatus} - {taskDate}
+          </p>
+        ) : (
+          <p className="mb-0">NA</p>
+        )
+      },
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 120,
+      renderCell: (props) => (
+        <p
+          className={`mb-0 ${
+            props.row.status?.name === "New" ? "lead-new" : ""
+          }`}
+        >
+          {props.row.status?.name ? props.row.status?.name : "NA"}
+        </p>
+      ),
+    },
+    {
+      field: "assigneeName",
+      headerName: "Assignee Person",
+      width: 150,
+      renderCell: (props) => (
+        <p className="mb-0">{props?.row?.assignee?.fullName}</p>
+      ),
+    },
+    {
+      field: "createDate",
+      headerName: "Date",
+      width: 150,
+      renderCell: (props) => (
+        <p className="mb-0">
+          {new Date(props.row.createDate).toLocaleDateString()}
+        </p>
+      ),
+    },
+    {
+      field: "assignee",
+      headerName: "Change Assignee",
+      width: 170,
+      renderCell: (props) => {
+        return (
+          <select
+            className="assignee-button"
+            onChange={(e) => changeLeadAssignee(e.target.value, props.row.id)}
+            // onSelect={(e)=> }
+            name="lead"
+            id="lead"
+          >
+            <option>Select Assignee</option>
+            {leadUserNew.map((user, index) => (
+              <option key={index} value={user.id}>
+                {user?.fullName}
+              </option>
+            ))}
+          </select>
+        )
+      },
+    },
+  ]
+
   const columns = [
     {
       field: "select",
@@ -270,7 +379,7 @@ const LeadsModule = () => {
             {taskStatus} - {taskDate}
           </p>
         ) : (
-          <p>NA</p>
+          <p className="mb-0">NA</p>
         )
       },
     },
@@ -494,7 +603,7 @@ const LeadsModule = () => {
     loading: bellLoading,
     error,
   } = useCustomRoute(bellCountUrl, bellCountDep)
- 
+
   // const viewNotyFun = async () => {
   //   console.log("fun call");
   //   try{
@@ -650,7 +759,7 @@ const LeadsModule = () => {
         ) : (
           <UserLeadComponent
             tableName={""}
-            columns={columns}
+            columns={adminRole ? columns : column2}
             row={allLeadData}
             getRowId={(row) => row.id}
             onSelectionModelChange={(newSelection) =>
@@ -679,67 +788,74 @@ const LeadsModule = () => {
           />
         )}
 
-        <div
-          className={`bottom-line ${
-            multiLeadData.leadIds.length > 0 ? "pos-fix" : ""
-          }`}
-        >
-          <div>
-            <button
-              className="common-btn-one mr-2"
-              onClick={() => deleteMultiLeadFun()}
-            >
-              {leadDelLoading ? "Please Wait..." : "Delete"}
-            </button>
-            <select
-              className="p-1 date-input"
-              name="status"
-              ref={multiStatusRef}
-              onChange={(e) =>
-                setMultiLeadData((prev) => ({
-                  ...prev,
-                  statusId: e.target.value,
-                }))
-              }
-              id="status"
-              form="statusChange"
-            >
-              <option>Select Status</option>
-              {getAllStatus.map((status, index) => (
-                <option value={status.id} key={index}>
-                  {status.name}
-                </option>
-              ))}
-            </select>
+        {adminRole ? (
+          <div
+            className={`bottom-line ${
+              multiLeadData.leadIds.length > 0 ? "pos-fix" : ""
+            }`}
+          >
+            <div>
+              <button
+                className="common-btn-one mr-2"
+                onClick={() => deleteMultiLeadFun()}
+              >
+                {leadDelLoading ? "Please Wait..." : "Delete"}
+              </button>
+              <select
+                className="p-1 date-input"
+                name="status"
+                ref={multiStatusRef}
+                onChange={(e) =>
+                  setMultiLeadData((prev) => ({
+                    ...prev,
+                    statusId: e.target.value,
+                  }))
+                }
+                id="status"
+                form="statusChange"
+              >
+                <option>Select Status</option>
+                {getAllStatus.map((status, index) => (
+                  <option value={status.id} key={index}>
+                    {status.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <select
+                className="p-1 date-input"
+                ref={multiAssigneeRef}
+                onChange={(e) =>
+                  setMultiLeadData((prev) => ({
+                    ...prev,
+                    assigneId: e.target.value,
+                  }))
+                }
+                // onSelect={(e)=> }
+                name="lead"
+                id="lead"
+              >
+                <option>Select User</option>
+                {leadUserNew.map((user, index) => (
+                  <option key={index} value={user.id}>
+                    {user?.fullName}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <button
+                onClick={() => multiAssignee()}
+                className="common-btn-one"
+              >
+                {multibtn ? "Loading" : "Send"}
+              </button>
+            </div>
           </div>
-          <div>
-            <select
-              className="p-1 date-input"
-              ref={multiAssigneeRef}
-              onChange={(e) =>
-                setMultiLeadData((prev) => ({
-                  ...prev,
-                  assigneId: e.target.value,
-                }))
-              }
-              // onSelect={(e)=> }
-              name="lead"
-              id="lead"
-            >
-              <option>Select User</option>
-              {leadUserNew.map((user, index) => (
-                <option key={index} value={user.id}>
-                  {user?.fullName}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <button onClick={() => multiAssignee()} className="common-btn-one">
-              {multibtn ? "Loading" : "Send"}
-            </button>
-          </div>
-        </div>
+        ) : (
+          ""
+        )}
         {multiLeadError ? (
           <InputErrorComponent value="Please Select At Least One Status ya Assignee column" />
         ) : (
