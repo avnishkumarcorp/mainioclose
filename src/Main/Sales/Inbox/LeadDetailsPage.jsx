@@ -73,8 +73,6 @@ const LeadDetailsPage = () => {
   const [updateAssignee, setUpdateAssignee] = useState(false)
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
- 
-
 
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
@@ -99,7 +97,7 @@ const LeadDetailsPage = () => {
     productDepandence,
     editContactDep,
     contactDelDep,
-    updateAssignee
+    updateAssignee,
   ])
 
   useEffect(() => {
@@ -203,7 +201,6 @@ const LeadDetailsPage = () => {
     }))
   }
 
- 
   const editTaskFun = async (e) => {
     e.preventDefault()
 
@@ -568,7 +565,7 @@ const LeadDetailsPage = () => {
           },
         }
       )
-      setUpdateAssignee((prev) => !(prev))
+      setUpdateAssignee((prev) => !prev)
     } catch (err) {
       console.log("err", err)
     }
@@ -675,12 +672,12 @@ const LeadDetailsPage = () => {
               <i className="fa-solid mr-1 fa-location-dot"></i>
               {singleLeadResponseData?.city}
             </p>
-            
+
             <p className="lead-blue-head">
-             Assignee Person - {singleLeadResponseData?.assigne?.fullName}
+              Assignee Person - {singleLeadResponseData?.assigne?.fullName}
             </p>
             <p className="lead-blue-head">
-              Status  - {singleLeadResponseData?.status?.name}
+              Status - {singleLeadResponseData?.status?.name}
             </p>
             {leadStatusScale ? (
               <p className="my-2">
@@ -856,20 +853,20 @@ const LeadDetailsPage = () => {
                               : "NA"}
                           </h6>
                         </div>
-                        {adminRole ? (
-                          <div className="lead-heading">
-                            <i
-                              className="fa-solid fa-pen mr-3"
-                              onClick={() => editContactData(client)}
-                            ></i>
+                        <div className="lead-heading">
+                          <i
+                            className="fa-solid fa-pen mr-3"
+                            onClick={() => editContactData(client)}
+                          ></i>
+                          {adminRole ? (
                             <i
                               className="fa-solid fa-trash"
                               onClick={() => deleteContactFun(client.clientId)}
                             ></i>
-                          </div>
-                        ) : (
-                          ""
-                        )}
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -1062,20 +1059,20 @@ const LeadDetailsPage = () => {
                             {new Date(task.expectedDate).getMinutes()}
                           </h6>
                         </div>
-                        {adminRole ? (
-                          <div className="lead-heading">
-                            <i
-                              onClick={() => updateTaskData(task)}
-                              className="fa-solid fa-pen mr-3"
-                            ></i>
+                        <div className="lead-heading">
+                          <i
+                            onClick={() => updateTaskData(task)}
+                            className="fa-solid fa-pen mr-3"
+                          ></i>
+                          {adminRole ? (
                             <i
                               onClick={() => deleteTaskFun(task.id)}
                               className="fa-solid fa-trash"
                             ></i>
-                          </div>
-                        ) : (
-                          ""
-                        )}
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </div>
                     ))}
                   </div>
