@@ -744,13 +744,16 @@ const LeadsModule = () => {
       </div> */}
       {adminRole && (
         <div className="d-end">
+          <button className="common-btn-one">
           <CSVLink
+          className="text-white"
             data={exportData}
             headers={columns.map((column) => column.headerName)}
             filename={"exported_data.csv"}
           >
-            Export to CSV
+            Export
           </CSVLink>
+          </button>
         </div>
       )}
       <div className="table-arrow">

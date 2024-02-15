@@ -71,11 +71,13 @@ const LeadHistory = () => {
   return (
     <div className="p-3">
       <h3 className="big-heading">Lead History</h3>
+      <div className="mt-3">
       {historyScalaton ? (
         <TableScalaton />
       ) : (
         <UserLeadComponent row={leadHistoryData} columns={columns} />
       )}
+      </div>
     </div>
   )
 }
