@@ -22,12 +22,20 @@ const UserLeadComponent = ({ row, columns, tableName, getRowId }) => {
           },
         }}
         columns={columns}
-        slots={adminRole ? { toolbar: GridToolbar } : ""}
-        slotProps={{
+        slots={ { toolbar: GridToolbar }}
+        slotProps={adminRole ? 
+          {
           toolbar: {
             showQuickFilter: true,
+          
           },
-        }}
+        } :{ toolbar: {
+          showQuickFilter: true,
+          printOptions: {disableToolbarButton: true},
+          csvOptions: {disableToolbarButton: true}
+        },}
+      
+      }
       />
     </div>
   )
