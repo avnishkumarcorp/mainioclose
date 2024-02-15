@@ -408,6 +408,9 @@ const LeadsModule = () => {
       ),
     },
 
+    { field: "mobileNo", headerName: "Mobile No", width: 150 },
+    { field: "email", headerName: "Email", width: 150 },
+
     {
       field: "assigneeName",
       headerName: "Assignee Person",
@@ -438,8 +441,6 @@ const LeadsModule = () => {
         </p>
       ),
     },
-    { field: "mobileNo", headerName: "Mobile No", width: 150 },
-    { field: "email", headerName: "Email", width: 150 },
 
     {
       field: "assignee",
