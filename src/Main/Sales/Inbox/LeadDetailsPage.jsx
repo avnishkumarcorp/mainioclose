@@ -183,6 +183,8 @@ const LeadDetailsPage = () => {
     statusId: 0,
   })
 
+  console.log("contact", createContact)
+
   const [EditNewTask, setEditNewTask] = useState({})
 
   const [editTaskBool, setEditTaskBool] = useState(false)
@@ -593,6 +595,8 @@ const LeadDetailsPage = () => {
       contactNo: contact.contactNo,
       email: contact.email,
       name: contact.clientName,
+      userId: userid,
+      leadId: leadid
     }))
   }
 
