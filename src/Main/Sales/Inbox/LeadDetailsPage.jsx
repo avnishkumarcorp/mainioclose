@@ -167,6 +167,7 @@ const LeadDetailsPage = () => {
   })
 
   const [createContact, setCreateContact] = useState({
+    currentUserId: userid,
     leadId: leadid,
     name: "",
     contactNo: "",
