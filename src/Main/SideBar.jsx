@@ -174,9 +174,9 @@ const SideBar = () => {
               <NavLink className="link-itemss" to="sales/orders">
                 <i className="fa-solid mr-1 fa-box"></i> Orders
               </NavLink>
-              <NavLink className="link-itemss" to="sales/contacts">
+              {adminRole ? <NavLink className="link-itemss" to={`${userid}/sales/contacts`}>
                 <i className="fa-solid mr-1 fa-user"></i> Contacts
-              </NavLink>
+              </NavLink> : ""}
 
               <NavLink className="link-itemss" to={`${userid}/sales`}>
                 <i className="fa-solid mr-1 fa-inbox"></i>Inbox
