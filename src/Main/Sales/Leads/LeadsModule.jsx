@@ -16,7 +16,7 @@ import { DataGrid } from "@mui/x-data-grid"
 import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import LeadCreateModel from "../../../Model/LeadCreateModel"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 import TableScalaton from "../../../components/TableScalaton"
@@ -33,6 +33,7 @@ import { postQuery } from "../../../API/PostQuery"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { putQueryNoData } from "../../../API/PutQueryWithoutData"
 import { CSVLink } from "react-csv"
+import { getAllLeads } from "../../../Toolkit/Slices/LeadSlice"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -64,6 +65,7 @@ const LeadsModule = () => {
   const { userid, leadid } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
+  const dispatch = useDispatch();
 
   const [allMultiFilterData, setAllMultiFilterData] = useState({
     userId: userid,
@@ -144,12 +146,18 @@ const LeadsModule = () => {
   ])
 
   useEffect(() => {
+    dispatch(getAllLeads(allMultiFilterData))
+  },[])
+
+  useEffect(() => {
     getAllLeadUser()
   }, [])
 
   useEffect(() => {
     getAllStatusData()
   }, [])
+
+  const leadDataDispatch = useSelector((state) => state)
 
   const viewHistory = async (leadId) => {
     try {

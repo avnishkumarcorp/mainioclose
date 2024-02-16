@@ -16,6 +16,10 @@ const MainPage = () => {
   const location = useLocation()
   const paramId = customLocation(2, location)
 
+  const currentUser = useSelector((state) => state)
+  console.log("current data", currentUser);
+  
+
   // const currentUserToken = useSelector((state) => state.AuthReducer.token)
   // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
   // useEffect(() => {

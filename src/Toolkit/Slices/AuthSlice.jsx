@@ -2,17 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { postQuery } from "../../API/PostQuery"
 
 export const getCurrentUser = createAsyncThunk("currentUser", async (data) => {
-  try {
-    const userData = await postQuery(`/securityService/api/auth/signin`, data)
-    console.log("i am user Data", userData)
-    return userData?.data
-  } catch (err) {
-    console.log(err)
-  }
-  // } finally{
-
-  // }
-
+  const userData = await postQuery(`/securityService/api/auth/signin`, data)
+  return userData.data
 })
 
 export const AuthSlice = createSlice({
@@ -22,7 +13,9 @@ export const AuthSlice = createSlice({
     currentUser: {},
     roles: [],
     jwt: "",
+    userLogin: false,
   },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getCurrentUser.pending, (state, action) => {
       state.loginLoading = true
@@ -32,6 +25,7 @@ export const AuthSlice = createSlice({
       state.jwt = action.payload.jwt
       state.roles = action.payload.roles
       state.loginLoading = false
+      state.userLogin = true
     })
     builder.addCase(getCurrentUser.rejected, (state, action) => {
       console.log("Err", action.payload, state)

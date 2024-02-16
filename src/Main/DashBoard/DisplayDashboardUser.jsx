@@ -4,43 +4,36 @@ import UserListComponent from "../../Tables/UserListComponent"
 import { Link } from "react-router-dom"
 import CreateuserDashboard from "../../Model/CreateuserDashboard"
 import { deleteQuery } from "../../API/DeleteQuery"
+import { getAllUsers } from "../../Toolkit/Slices/UsersSlice"
+import { useSelect } from "@mui/base"
+import { useDispatch, useSelector } from "react-redux"
 
 const DisplayDashboardUser = () => {
-  const [displayAlluser, setDisplayAllUser] = useState([])
   const [loading, setLoading] = useState(true)
-  const [userSuspand, setUserSuspand] = useState(false);
+  const [userSuspand, setUserSuspand] = useState(false)
+  const dispatch = useDispatch()
+  const allMainUser = useSelector((prev) => prev.user.allUsers)
+
+  // useEffect(() => {
+  //   displayUser()
+  // }, [userSuspand])
 
   useEffect(() => {
-    displayUser()
+    dispatch(getAllUsers())
   }, [userSuspand])
-
-  
-  const displayUser = async () => {
-    try {
-      const userData = await axios.get(`/leadService/api/v1/users/getAllUser`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
-      })
-      setDisplayAllUser(userData.data)
-      setLoading(false)
-    } catch (err) {}
-  }
-
-  // /leadService/api/v1/users/deleteUser?id=10
 
   const deleteUser = async (id) => {
     if (window.confirm("Are you sure to deActivate this User?") == true) {
       try {
-        const suspandUser = await deleteQuery(`/securityService/api/auth/deleteUser?userId=${id}`)
+        const suspandUser = await deleteQuery(
+          `/securityService/api/auth/deleteUser?userId=${id}`
+        )
         const deleteUser = await deleteQuery(
           `/leadService/api/v1/users/deleteUser?id=${id}`
         )
-          console.log(suspandUser);
-          console.log(deleteUser);
-          setUserSuspand((prev) => !(prev))
-        // window.location.reload()
+        console.log(suspandUser)
+        console.log(deleteUser)
+        setUserSuspand((prev) => !prev)
       } catch (err) {
         console.log(err)
       }
@@ -82,49 +75,10 @@ const DisplayDashboardUser = () => {
     <div className="small-box-padding">
       <div className="create-user-box">
         <h1 className="table-heading">User List</h1>
-        
         <CreateuserDashboard />
         {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
       </div>
-
-      <UserListComponent
-        tableName={""}
-        columns={columns}
-        row={displayAlluser}
-      />
-
-      {/* <div className="table-responsive mt-5">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">id</th>
-              <th scope="col">first Name</th>
-              <th scope="col">last Name</th>
-              <th scope="col">Name</th>
-              <th scope="col">Designation</th>
-              <th scope="col">Email</th>
-              <th scope="col">Department</th>
-            </tr>
-          </thead>
-          {loading ? (
-            <div>Loading</div>
-          ) : (
-            <tbody>
-              {displayAlluser.map((user, index) => (
-                <tr key={index}>
-                  <td>{user.id}</td>
-                  <td>{user.firstName}</td>
-                  <td>{user.lastName}</td>
-                  <td>{user.fullName}</td>
-                  <td>{user.designation}</td>
-                  <td>{user.email}</td>
-                  <td>{user.department}</td>
-                </tr>
-              ))}
-            </tbody>
-          )}
-        </table>
-      </div> */}
+      <UserListComponent tableName={""} columns={columns} row={allMainUser} />
     </div>
   )
 }
