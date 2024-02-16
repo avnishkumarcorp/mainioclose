@@ -11,6 +11,7 @@ export const UsersSlice = createSlice({
   initialState: {
     allUsers: [],
     userLoading: false,
+    userError: true,
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, (state, action) => {
@@ -18,6 +19,10 @@ export const UsersSlice = createSlice({
     })
     builder.addCase(getAllUsers.fulfilled, (state, action) => {
       state.allUsers = action.payload
+      state.userLoading = false
+    })
+    builder.addCase(getAllUsers.rejected, (state, action) => {
+      state.userError = action.payload
       state.userLoading = false
     })
   },

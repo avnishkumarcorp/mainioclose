@@ -12,6 +12,7 @@ export const LeadSlice = createSlice({
   initialState: {
     allLeads: [],
     leadsLoading: false,
+    leadsError: false
   },
   extraReducers: (builder) => {
     builder.addCase(getAllLeads.pending, (state, action) => {
@@ -21,6 +22,10 @@ export const LeadSlice = createSlice({
       state.allLeads = action.payload
       state.leadsLoading = false
     })
+    builder.addCase(getAllLeads.rejected, (state, action) => {
+        state.leadsError = true
+        state.leadsLoading = false
+      })
   },
 })
 

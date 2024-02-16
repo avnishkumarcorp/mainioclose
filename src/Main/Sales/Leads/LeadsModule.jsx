@@ -157,7 +157,11 @@ const LeadsModule = () => {
     getAllStatusData()
   }, [])
 
-  const leadDataDispatch = useSelector((state) => state)
+  const allLeadsData = useSelector((state) => state.leads.allLeads)
+
+  const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
+  
+  // console.log("lead data dispatch", leadDataDispatch);
 
   const viewHistory = async (leadId) => {
     try {
@@ -767,13 +771,13 @@ const LeadsModule = () => {
       )}
       <div className="table-arrow">
         {/* <ArrowComponent /> */}
-        {leadScalatonCall ? (
+        {allLeadsLoading ? (
           <TableScalaton />
         ) : (
           <UserLeadComponent
             tableName={""}
             columns={adminRole ? columns : column2}
-            row={allLeadData}
+            row={allLeadsData}
             getRowId={(row) => row.id}
             onSelectionModelChange={(newSelection) =>
               setSelectedRows(newSelection)

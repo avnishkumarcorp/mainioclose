@@ -7,12 +7,17 @@ import { deleteQuery } from "../../API/DeleteQuery"
 import { getAllUsers } from "../../Toolkit/Slices/UsersSlice"
 import { useSelect } from "@mui/base"
 import { useDispatch, useSelector } from "react-redux"
+import TableScalaton from "../../components/TableScalaton"
 
 const DisplayDashboardUser = () => {
   const [loading, setLoading] = useState(true)
   const [userSuspand, setUserSuspand] = useState(false)
   const dispatch = useDispatch()
   const allMainUser = useSelector((prev) => prev.user.allUsers)
+  const allUserLoading = useSelector((prev) => prev.user.userLoading)
+  const allUserError = useSelector((prev) => prev.user.userError)
+
+  // userError
 
   // useEffect(() => {
   //   displayUser()
@@ -78,7 +83,13 @@ const DisplayDashboardUser = () => {
         <CreateuserDashboard />
         {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
       </div>
-      <UserListComponent tableName={""} columns={columns} row={allMainUser} />
+      {allUserLoading ? (
+        <TableScalaton />
+      ) : allUserError ? (
+        <p>Something Went Wrong</p>
+      ) : (
+        <UserListComponent tableName={""} columns={columns} row={allMainUser} />
+      )}
     </div>
   )
 }
