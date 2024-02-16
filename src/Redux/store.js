@@ -12,7 +12,7 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  counterReducer,
+  // counterReducer,
   AuthReducer,
   SignUpDataReducer,
 })
@@ -21,6 +21,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 
-export const store = createStore(persistedReducer, applyMiddleware())
-const Persistor = persistStore(store);
+export const store2 = createStore(persistedReducer, applyMiddleware())
+const Persistor = persistStore(store2);
 export {Persistor};

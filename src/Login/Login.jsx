@@ -17,6 +17,7 @@ import { postQuery } from "../API/PostQuery"
 import ButtonTwo from "../components/button/ButtonTwo"
 import LongButton from "../components/button/LongButton"
 import InputErrorComponent from "../components/InputErrorComponent"
+import { getCurrentUser } from "../Toolkit/Slices/AuthSlice"
 toast.configure()
 
 const Login = () => {
@@ -48,6 +49,7 @@ const Login = () => {
     setUserLoginData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
+  const currentUserID = useSelector((state) => state?.auth?.currentUser?.id)
   const CurrentuserData = useSelector((prev) => prev.AuthReducer)
 
 
@@ -70,16 +72,26 @@ const Login = () => {
       setPasswordErr(true)
     }
     setLoadingBtn(true)
+
+    const loginMyUser = async () => {
+       const loginUser =  await dispatch(getCurrentUser(userLoginData))
+       console.log("i am login user", loginUser);
+       navigate(`/erp/${loginUser?.payload?.id}/sales`)
+    }
+
+    loginMyUser();
+
+
     const loginUser = async () => {
       try {
         const collectUserData = await postQuery(
           `/securityService/api/auth/signin`,
           userLoginData
         )
-        dispatch(currentUserAction(collectUserData.data))
-        dispatch(userTokenAction(collectUserData.data.jwt))
+        // dispatch(currentUserAction(collectUserData.data))
+        // dispatch(userTokenAction(collectUserData.data.jwt))
         setLoadingBtn(false)
-        localStorage.setItem("Access-token", collectUserData.data.jwt)
+        localStorage.setItem("Access-token", collectUserData?.data?.jwt)
         navigate(`/erp/${collectUserData.data.id}/sales`)
       } catch (err) {
         if (err.response.status === 401) {
@@ -94,7 +106,7 @@ const Login = () => {
       }
     }
 
-    loginUser()
+    //  loginUser()
   }
 
 
