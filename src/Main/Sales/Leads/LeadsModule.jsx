@@ -147,7 +147,13 @@ const LeadsModule = () => {
 
   useEffect(() => {
     dispatch(getAllLeads(allMultiFilterData))
-  },[])
+  },[updateActive,
+    statusDataId,
+    rerefreshLead,
+    leadStatusD,
+    dateFilter,
+    leadMultiDep,
+    filterBtnNew,])
 
   useEffect(() => {
     getAllLeadUser()

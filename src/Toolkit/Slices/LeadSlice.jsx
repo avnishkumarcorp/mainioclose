@@ -8,7 +8,7 @@ export const getAllLeads = createAsyncThunk("allLeadsData", async (data) => {
 })
 
 export const LeadSlice = createSlice({
-  name: "auth",
+  name: "lead",
   initialState: {
     allLeads: [],
     leadsLoading: false,

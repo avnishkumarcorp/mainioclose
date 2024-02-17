@@ -17,6 +17,8 @@ const DisplayDashboardUser = () => {
   const allUserLoading = useSelector((prev) => prev.user.userLoading)
   const allUserError = useSelector((prev) => prev.user.userError)
 
+  console.log("all mian user", allMainUser);
+
   // userError
 
   // useEffect(() => {
@@ -85,9 +87,7 @@ const DisplayDashboardUser = () => {
       </div>
       {allUserLoading ? (
         <TableScalaton />
-      ) : allUserError ? (
-        <p>Something Went Wrong</p>
-      ) : (
+      ) :  (
         <UserListComponent tableName={""} columns={columns} row={allMainUser} />
       )}
     </div>

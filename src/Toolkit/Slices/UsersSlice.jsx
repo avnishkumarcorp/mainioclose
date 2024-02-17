@@ -7,11 +7,11 @@ export const getAllUsers = createAsyncThunk("allUsers", async () => {
 })
 
 export const UsersSlice = createSlice({
-  name: "auth",
+  name: "user",
   initialState: {
     allUsers: [],
     userLoading: false,
-    userError: true,
+    userError: false,
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, (state, action) => {
@@ -22,7 +22,7 @@ export const UsersSlice = createSlice({
       state.userLoading = false
     })
     builder.addCase(getAllUsers.rejected, (state, action) => {
-      state.userError = action.payload
+      state.userError = true
       state.userLoading = false
     })
   },
