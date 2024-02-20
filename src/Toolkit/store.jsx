@@ -6,11 +6,13 @@ import persistReducer from "redux-persist/es/persistReducer"
 import storage from "redux-persist/lib/storage"
 import persistStore from "redux-persist/es/persistStore"
 import LeadSlice from "./Slices/LeadSlice"
+import NotificationSlice from "./Slices/NotificationSlice"
 
 const reducers = combineReducers({
   auth: AuthSlice,
   user: UsersSlice,
   leads: LeadSlice,
+  notify: NotificationSlice
 })
 
 const persistConfig = {

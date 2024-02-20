@@ -4,29 +4,43 @@ import { useParams } from "react-router-dom"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import { getQuery } from "../../../API/GetQuery"
 import { putQueryNoData } from "../../../API/PutQueryWithoutData"
+import { useDispatch, useSelector } from "react-redux"
+import { getNotificationFun } from "../../../Toolkit/Slices/NotificationSlice"
 
 const AllNotificationPage = () => {
-  const [allNotificationData, setAllNotificationData] = useState([])
+  // const [allNotificationData, setAllNotificationData] = useState([])
   const { userid } = useParams()
 
+  const allNotifications = useSelector((state) => state.notify.allNotifications)
+
+  const SingleNotification = allNotifications[0]
+
+  console.log("single Notifications", SingleNotification)
+
+  const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   getNotiFun()
+  // }, [])
+
   useEffect(() => {
-    getNotiFun()
+    dispatch(getNotificationFun(userid))
   }, [])
 
-  const getNotiFun = async () => {
-    try {
-      const getAllNoty = await getQuery(
-        `/leadService/api/v1/notification/getAllNotification?userId=${userid}`
-      )
-      //    getAllNoty.data.reverse()
-      setAllNotificationData(getAllNoty.data.reverse())
-      const updateNoty = await putQueryNoData(
-        `/leadService/api/v1/notification/viewNotification?userId=${userid}`
-      )
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // const getNotiFun = async () => {
+  //   try {
+  //     const getAllNoty = await getQuery(
+  //       `/leadService/api/v1/notification/getAllNotification?userId=${userid}`
+  //     )
+  //     //    getAllNoty.data.reverse()
+  //     setAllNotificationData(getAllNoty.data.reverse())
+  //     const updateNoty = await putQueryNoData(
+  //       `/leadService/api/v1/notification/viewNotification?userId=${userid}`
+  //     )
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   //   console.log("notification Data", NotificationData)
 
@@ -63,7 +77,7 @@ const AllNotificationPage = () => {
       width: 200,
       renderCell: (props) => {
         const data = props.row.notifyDate
-        console.log(data)
+        // console.log(data)
         return data === null ? (
           "NA"
         ) : (
@@ -77,14 +91,14 @@ const AllNotificationPage = () => {
     },
   ]
 
-  console.log(allNotificationData)
+  // console.log(allNotificationData)
 
   return (
     <div className="small-box-padding">
       <>
         <h1 className="table-heading">All Notification</h1>
         <div>
-          <UserLeadComponent row={allNotificationData} columns={columns} />
+          <UserLeadComponent row={allNotifications} columns={columns} />
         </div>
       </>
     </div>
