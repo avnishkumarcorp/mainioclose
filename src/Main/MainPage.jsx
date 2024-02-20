@@ -1,23 +1,53 @@
 import React, { useEffect } from "react"
 import "./MainPage.scss"
 import SideBar from "./SideBar"
-import { Outlet, useNavigate } from "react-router"
+import { Outlet, useNavigate, useParams } from "react-router"
 import { useLocation } from "react-router-dom"
 import TopNav from "../components/TopNav"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useId } from "react"
 import { customLocation } from "../Hooks/LocationCustomHook"
+import { getNotificationFun } from "../Toolkit/Slices/NotificationSlice"
 toast.configure()
 
 const MainPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const paramId = customLocation(2, location)
+  const {userid} = useParams()
 
   const currentUser = useSelector((state) => state)
   console.log("current data", currentUser);
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getNotificationFun(userid))
+  }, [])
+
+  const allNotifications = useSelector((state) => state.notify.allNotifications)
+
+  useEffect(()=> {
+    const SingleNotification = allNotifications[0]
+    const start = Date.now();
+    let apiDate = new Date(SingleNotification.notifyDate).getTime();
+    setTimeout(()=> {
+      if(start <= apiDate){
+        console.log("function Calling");
+      }
+  
+    },1000)
+
+    console.log("function not calling");
+    // console.log(start, apiDate);
+    // console.log("miliSecond",);
+    // console.log("single Notifications", SingleNotification)
+
+  },[5000])
+
+
   
 
   // const currentUserToken = useSelector((state) => state.AuthReducer.token)

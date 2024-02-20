@@ -13,9 +13,9 @@ const AllNotificationPage = () => {
 
   const allNotifications = useSelector((state) => state.notify.allNotifications)
 
-  const SingleNotification = allNotifications[0]
+  // const SingleNotification = allNotifications[0]
 
-  console.log("single Notifications", SingleNotification)
+  // console.log("single Notifications", SingleNotification)
 
   const dispatch = useDispatch()
 
@@ -23,9 +23,9 @@ const AllNotificationPage = () => {
   //   getNotiFun()
   // }, [])
 
-  useEffect(() => {
-    dispatch(getNotificationFun(userid))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getNotificationFun(userid))
+  // }, [])
 
   // const getNotiFun = async () => {
   //   try {
