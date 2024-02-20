@@ -73,9 +73,23 @@ const LeadDetailsPage = () => {
   const [updateAssignee, setUpdateAssignee] = useState(false)
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
+  const [fileValue, setFileValue] = useState({
+    files: "",
+  });
 
+  console.log("file values", fileValue);
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
+  }
+
+  const submitImage = async  (e) => {
+    e.preventDefault()
+    try{
+    const imageData = await postQuery(`/uploadimageToFileSystem`,fileValue);
+    console.log("image added", imageData);
+    }catch(err){
+      console.log(err);
+    }
   }
 
   const { userid, leadid } = useParams()
@@ -274,6 +288,8 @@ const LeadDetailsPage = () => {
   const remarkMessageFunction = (e) => {
     setRemarkMessage((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
+
+
 
   // get All Products
 
@@ -1512,6 +1528,10 @@ const LeadDetailsPage = () => {
                   onChange={(e) => remarkMessageFunction(e)}
                 ></textarea>
                 <div className="comment-below">
+                <div>
+                  <input type="file"  name="files" onChange={(e) => setFileValue((prev)=> ({...prev, [e.target.name]: e.target.value}))} accept="image/*" />
+                  <button onClick={(e)=> submitImage(e)}>submit image</button>
+                  </div>
                   <button
                     className="comment-btn"
                     onClick={(e) => createRemarkfun(e)}
