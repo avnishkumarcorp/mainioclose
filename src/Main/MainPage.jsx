@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "./MainPage.scss"
 import SideBar from "./SideBar"
 import { Outlet, useNavigate, useParams } from "react-router"
@@ -13,42 +13,43 @@ import { getNotificationFun } from "../Toolkit/Slices/NotificationSlice"
 toast.configure()
 
 const MainPage = () => {
+  const [toasterData, setToasterData] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
   const paramId = customLocation(2, location)
-  const {userid} = useParams()
+  const { userid } = useParams()
 
   const currentUser = useSelector((state) => state)
-  console.log("current data", currentUser);
+  console.log("current data", currentUser)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getNotificationFun(userid))
+    setInterval(() => {
+      dispatch(getNotificationFun(userid))
+      setToasterData((prev) => !prev)
+    }, 600000)
   }, [])
 
   const allNotifications = useSelector((state) => state.notify.allNotifications)
+  console.warn("before")
+  console.log("all Noti", allNotifications)
+  console.log("all Noti", allNotifications[0])
 
-  useEffect(()=> {
+  useEffect(() => {
     const SingleNotification = allNotifications[0]
-    const start = Date.now();
-    let apiDate = new Date(SingleNotification.notifyDate).getTime();
-    setTimeout(()=> {
-      if(start <= apiDate){
-        console.log("function Calling");
-      }
-  
-    },1000)
-
-    console.log("function not calling");
-    // console.log(start, apiDate);
-    // console.log("miliSecond",);
-    // console.log("single Notifications", SingleNotification)
-
-  },[5000])
-
-
-  
+    const start = Date.now()
+    let startPoint = Date.now() + 120000
+    let anotherDate = start - 10000
+    let bool = true
+    let apiDate = new Date(SingleNotification.notifyDate).getTime()
+      setTimeout(() => {
+        if (start >= apiDate) {
+          console.log("function Calling hhdhdhfhhf")
+          toast.success(SingleNotification.message)
+        }
+      }, 1000)
+  }, [toasterData])
 
   // const currentUserToken = useSelector((state) => state.AuthReducer.token)
   // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
@@ -65,8 +66,7 @@ const MainPage = () => {
   //   }
   // })
 
-
-   // const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  // const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
   // const currentUserToken = useSelector((state) => state?.auth?.jwt)
 
   // const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
@@ -74,7 +74,6 @@ const MainPage = () => {
 
   // console.log("i am token", currentUserToken);
 
-
   // const currentUserToken = useSelector((state) => state.AuthReducer.token)
   // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
   // useEffect(() => {
@@ -89,9 +88,6 @@ const MainPage = () => {
   //     toast.error("your Session has Expired Please Login again")
   //   }
   // })
-
-
-
 
   return (
     <div className="main-page">
