@@ -65,7 +65,7 @@ const LeadsModule = () => {
   const { userid, leadid } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const [allMultiFilterData, setAllMultiFilterData] = useState({
     userId: userid,
@@ -147,13 +147,15 @@ const LeadsModule = () => {
 
   useEffect(() => {
     dispatch(getAllLeads(allMultiFilterData))
-  },[updateActive,
+  }, [
+    updateActive,
     statusDataId,
     rerefreshLead,
     leadStatusD,
     dateFilter,
     leadMultiDep,
-    filterBtnNew,])
+    filterBtnNew,
+  ])
 
   useEffect(() => {
     getAllLeadUser()
@@ -166,7 +168,7 @@ const LeadsModule = () => {
   const allLeadsData = useSelector((state) => state.leads.allLeads)
 
   const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
-  
+
   // console.log("lead data dispatch", leadDataDispatch);
 
   const viewHistory = async (leadId) => {
@@ -237,7 +239,7 @@ const LeadsModule = () => {
       renderCell: (props) => {
         return (
           <p className="mb-0">
-            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+            {props.api.getRowIndexRelativeToVisibleRows(props?.row?.id) + 1}
           </p>
         )
       },
@@ -642,6 +644,20 @@ const LeadsModule = () => {
       <div className="create-user-box">
         <h1 className="table-heading">Leads</h1>
         <div className="all-center">
+          {adminRole && (
+            <div className="d-end mr-2">
+              <button className="common-btn-one">
+                <CSVLink
+                  className="text-white"
+                  data={exportData}
+                  headers={columns.map((column) => column.headerName)}
+                  filename={"exported_data.csv"}
+                >
+                  Export
+                </CSVLink>
+              </button>
+            </div>
+          )}
           <button
             onClick={() => setHideMUltiFilter((prev) => !prev)}
             className="common-btn-one mr-2"
@@ -656,7 +672,7 @@ const LeadsModule = () => {
             >
               <span className="bell-count">{bellData}</span>
               <span className="bell-icon">
-                <i className="fa-solid fa-bell"></i>
+                <i class="fa-regular fa-bell"></i>
               </span>
             </div>
           </Link>
@@ -761,20 +777,7 @@ const LeadsModule = () => {
           </button>
         </div>
       </div> */}
-      {adminRole && (
-        <div className="d-end">
-          <button className="common-btn-one">
-          <CSVLink
-          className="text-white"
-            data={exportData}
-            headers={columns.map((column) => column.headerName)}
-            filename={"exported_data.csv"}
-          >
-            Export
-          </CSVLink>
-          </button>
-        </div>
-      )}
+
       <div className="table-arrow">
         {/* <ArrowComponent /> */}
         {allLeadsLoading ? (

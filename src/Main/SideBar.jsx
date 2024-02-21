@@ -166,26 +166,26 @@ const SideBar = () => {
                 className="link-itemss"
                 to={`${userid}/sales/leads`}
               >
-                <i className="fa-solid mr-1 fa-calculator"></i> Leads
+                <i className="fa-solid mr-1 fa-calculator"></i><span>Leads</span>
               </NavLink>
               <NavLink
                 className="link-itemss"
                 to={`${userid}/sales/oppurtities`}
               >
-                <i className="fa-solid mr-1 fa-trophy"></i>Oppurtities
+                <i className="fa-solid mr-1 fa-trophy"></i><span>Oppurtities</span>
               </NavLink>
               <NavLink className="link-itemss" to="sales/estimate">
-                <i className="fa-solid mr-1 fa-file-lines"></i>Estimate
+                <i className="fa-solid mr-1 fa-file-lines"></i><span>Estimate</span>
               </NavLink>
               <NavLink className="link-itemss" to="sales/orders">
-                <i className="fa-solid mr-1 fa-box"></i> Orders
+                <i className="fa-solid mr-1 fa-box"></i>Orders
               </NavLink>
               {adminRole ? <NavLink className="link-itemss" to={`${userid}/sales/contacts`}>
-                <i className="fa-solid mr-1 fa-user"></i> Contacts
+                <i className="fa-solid mr-1 fa-user"></i><span>Contacts</span>
               </NavLink> : ""}
 
               <NavLink className="link-itemss" to={`${userid}/sales`}>
-                <i className="fa-solid mr-1 fa-inbox"></i>Inbox
+                <i className="fa-solid mr-1 fa-inbox"></i><span>Inbox</span>
               </NavLink>
             </div>
           </div>

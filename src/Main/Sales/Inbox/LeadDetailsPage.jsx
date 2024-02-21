@@ -73,9 +73,107 @@ const LeadDetailsPage = () => {
   const [updateAssignee, setUpdateAssignee] = useState(false)
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
+  const [fileValue, setFileValue] = useState(null)
+
+  const [file, setFile] = useState()
+  const [imageResponse, setImageResponse] = useState("");
+
+
+  console.log("image", imageResponse);
+  function handleChange(event) {
+    setFile(event.target.files[0])
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault()
+    const url = "/leadService/api/v1/upload/uploadimageToFileSystem"
+    const formData = new FormData()
+    formData.append("file", file)
+    
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "content-type": "multipart/form-data",
+      },
+    }
+    axios.post(url, formData, config).then((response) => {
+      console.log(response.data)
+      setImageResponse(response.data)
+    })
+  }
+
+  // const [selectedFile, setSelectedFile] = useState(null)
+
+  // const handleFileChange = (e) => {
+  //   setSelectedFile(e.target.files[0])
+  // }
+
+  // const handleUpload = () => {
+  //   if (selectedFile) {
+  //     const formData = new FormData()
+  //     formData.append('file', selectedFile);
+  //     // formData.append("file", selectedFile)
+  //     console.log("form.........", formData)
+  //     console.log(selectedFile)
+  //     // You can perform upload operations here, such as sending the file to a server
+  //     // Example: sending formData to a server using fetch
+  //     fetch("/uploadimageToFileSystem", {
+  //       method: "POST",
+  //       body: formData,
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //         "content-type": "multipart/form-data",
+  //       },
+  //     })
+  //       .then((response) => {
+  //         // Handle response from server
+  //         console.log("Upload successful")
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error uploading file:", error)
+  //       })
+  //   } else {
+  //     alert("Please select a file to upload.")
+  //   }
+  // }
 
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
+  }
+
+  const submitImage = async (e) => {
+    e.preventDefault()
+
+    const fd = new FormData()
+    console.log("before append", fd)
+    fd.append("file", fileValue)
+    console.log("after append", fd)
+
+    console.log("i am datra", fileValue)
+    // console.log("file values", fileValue.name);
+    let dataFile = fileValue.name
+    try {
+      const imageData = await axios.post(`/uploadimageToFileSystem`, fd, {
+        onUploadProgress: (ProgressEvent) => {
+          console.log(ProgressEvent.progress)
+        },
+
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "content-type": "multipart/form-data",
+        },
+      })
+
+      // postQuery(`/uploadimageToFileSystem`,fileValue,{
+      //   headers: {
+      //     'content-type': 'multipart/form-data',
+      //   },
+
+      // });
+      console.log("image added", imageData)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const { userid, leadid } = useParams()
@@ -598,7 +696,7 @@ const LeadDetailsPage = () => {
       email: contact.email,
       name: contact.clientName,
       userId: userid,
-      leadId: leadid
+      leadId: leadid,
     }))
   }
 
@@ -624,7 +722,7 @@ const LeadDetailsPage = () => {
       try {
         const deleteContactData = await deleteQuery(
           // `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
-          `/leadService/api/v1/client/deleteClient?leadId=${leadid}&clientId=${id}`
+          `/leadService/api/v1/client/deleteClient?leadId=${leadid}&clientId=${id}&currentUserId=${userid}`
         )
         setContactDelDep((prev) => !prev)
         // setTaskReferesh((prev) => !prev)
@@ -1512,6 +1610,19 @@ const LeadDetailsPage = () => {
                   onChange={(e) => remarkMessageFunction(e)}
                 ></textarea>
                 <div className="comment-below">
+                  <div>
+                    {/* <form  onSubmit={(e)=> submitImage(e)}>
+                  <input type="file"  name="files" onChange={(e) => setFileValue(e.target.files[0])} accept="image/*" />
+                  <button type="submit">submit image</button>
+
+                  </form> */}
+                    <form onSubmit={handleSubmit}>
+                      <input type="file" onChange={handleChange} />
+                      <button className="comment-btn" type="submit">Upload</button>
+                    </form>
+                    {/* <input type="file" onChange={handleFileChange} />
+                    <button onClick={handleUpload}>Upload</button> */}
+                  </div>
                   <button
                     className="comment-btn"
                     onClick={(e) => createRemarkfun(e)}
