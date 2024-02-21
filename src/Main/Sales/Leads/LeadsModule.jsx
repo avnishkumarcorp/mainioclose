@@ -239,7 +239,7 @@ const LeadsModule = () => {
       renderCell: (props) => {
         return (
           <p className="mb-0">
-            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+            {props.api.getRowIndexRelativeToVisibleRows(props?.row?.id) + 1}
           </p>
         )
       },

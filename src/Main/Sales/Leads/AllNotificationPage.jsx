@@ -53,7 +53,7 @@ const AllNotificationPage = () => {
       renderCell: (props) => {
         return (
           <p className="mb-0">
-            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+            {props.api.getRowIndexRelativeToVisibleRows(props?.row?.id) + 1}
           </p>
         )
       },
@@ -76,15 +76,15 @@ const AllNotificationPage = () => {
       headerName: "Date",
       width: 200,
       renderCell: (props) => {
-        const data = props.row.notifyDate
+        const data = props?.row?.notifyDate
         // console.log(data)
         return data === null ? (
           "NA"
         ) : (
           <p>
-            {new Date(props.row.notifyDate).toLocaleDateString()} -{" "}
-            {new Date(props.row.notifyDate).getHours()}:
-            {new Date(props.row.notifyDate).getMinutes()}
+            {new Date(props?.row?.notifyDate).toLocaleDateString()} -{" "}
+            {new Date(props?.row?.notifyDate).getHours()}:
+            {new Date(props?.row?.notifyDate).getMinutes()}
           </p>
         )
       },

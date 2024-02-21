@@ -722,7 +722,7 @@ const LeadDetailsPage = () => {
       try {
         const deleteContactData = await deleteQuery(
           // `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
-          `/leadService/api/v1/client/deleteClient?leadId=${leadid}&clientId=${id}`
+          `/leadService/api/v1/client/deleteClient?leadId=${leadid}&clientId=${id}&currentUserId=${userid}`
         )
         setContactDelDep((prev) => !prev)
         // setTaskReferesh((prev) => !prev)
@@ -1618,7 +1618,7 @@ const LeadDetailsPage = () => {
                   </form> */}
                     <form onSubmit={handleSubmit}>
                       <input type="file" onChange={handleChange} />
-                      <button type="submit">Upload</button>
+                      <button className="comment-btn" type="submit">Upload</button>
                     </form>
                     {/* <input type="file" onChange={handleFileChange} />
                     <button onClick={handleUpload}>Upload</button> */}
