@@ -20,8 +20,7 @@ const MainPage = () => {
   const { userid } = useParams()
 
   const currentUser = useSelector((state) => state)
-  console.log("current data", currentUser)
-
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -32,10 +31,7 @@ const MainPage = () => {
   }, [])
 
   const allNotifications = useSelector((state) => state.notify.allNotifications)
-  console.warn("before")
-  console.log("all Noti", allNotifications)
-  console.log("all Noti", allNotifications[0])
-
+  
   useEffect(() => {
     const SingleNotification = allNotifications[0]
     const start = Date.now()
@@ -45,7 +41,6 @@ const MainPage = () => {
     let apiDate = new Date(SingleNotification.notifyDate).getTime()
       setTimeout(() => {
         if (start >= apiDate && start <= apiDate + 30000) {
-          console.log("function Calling hhdhdhfhhf")
           toast.success(SingleNotification.message)
         }
       }, 1000)

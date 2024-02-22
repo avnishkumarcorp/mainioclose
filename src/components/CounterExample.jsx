@@ -12,25 +12,27 @@ const CounterExample = () => {
   function handleChange(event) {
     setFile(event.target.files[0])
   }
-  
+
   function handleSubmit(event) {
     event.preventDefault()
-    const url = '/uploadimageToFileSystem';
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('fileName', file.name);
+    const url = "/uploadimageToFileSystem"
+    const formData = new FormData()
+    formData.append("file", file)
+    formData.append("fileName", file.name)
     const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        'content-type': 'multipart/form-data',
+        "content-type": "multipart/form-data",
       },
-    };
-    axios.post(url, formData, config).then((response) => {
-      console.log(response.data);
-    }).catch((err) => {
-      console.log(err);
-    });
-
+    }
+    axios
+      .post(url, formData, config)
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   return (
@@ -49,10 +51,10 @@ const CounterExample = () => {
         Decrement
       </button>
       <form onSubmit={handleSubmit}>
-          <h1>React File Upload</h1>
-          <input type="file" onChange={handleChange}/>
-          <button type="submit">Upload</button>
-        </form>
+        <h1>React File Upload</h1>
+        <input type="file" onChange={handleChange} />
+        <button type="submit">Upload</button>
+      </form>
     </div>
   )
 }

@@ -81,7 +81,6 @@ const LeadDetailsPage = () => {
   const [uploadLoading, setUploadLoading] = useState(false);
 
 
-  console.log("image", imageResponse);
   function handleChange(event) {
     setFile(event.target.files[0])
   }
@@ -150,12 +149,6 @@ const LeadDetailsPage = () => {
     e.preventDefault()
 
     const fd = new FormData()
-    console.log("before append", fd)
-    fd.append("file", fileValue)
-    console.log("after append", fd)
-
-    console.log("i am datra", fileValue)
-    // console.log("file values", fileValue.name);
     let dataFile = fileValue.name
     try {
       const imageData = await axios.post(`/uploadimageToFileSystem`, fd, {
@@ -175,7 +168,6 @@ const LeadDetailsPage = () => {
       //   },
 
       // });
-      console.log("image added", imageData)
     } catch (err) {
       console.log(err)
     }
@@ -289,8 +281,6 @@ const LeadDetailsPage = () => {
     statusId: 0,
   })
 
-  console.log("contact", createContact)
-  console.log("remark message", remarkMessage);
 
   const [EditNewTask, setEditNewTask] = useState({})
 
@@ -1627,7 +1617,7 @@ const LeadDetailsPage = () => {
                       <input type="file" onChange={handleChange} />
                       <button className="comment-btn" type="submit">{uploadLoading ? "Please Wait..": "Upload"}</button>
                     </form>
-                    {uploadSucess ?  <p className="mb-0 ml-2 font-13"><i class="fa-solid fa-check"></i> file Upload Sucesfully</p> : ""}
+                    {uploadSucess ?  <p className="mb-0 ml-2 font-13"><i className="fa-solid fa-check"></i> file Upload Sucesfully</p> : ""}
                      
                     {/* <input type="file" onChange={handleFileChange} />
                     <button onClick={handleUpload}>Upload</button> */}

@@ -672,7 +672,7 @@ const LeadsModule = () => {
             >
               <span className="bell-count">{bellData}</span>
               <span className="bell-icon">
-                <i class="fa-regular fa-bell"></i>
+                <i className="fa-regular fa-bell"></i>
               </span>
             </div>
           </Link>
