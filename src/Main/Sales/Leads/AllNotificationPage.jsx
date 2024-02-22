@@ -82,9 +82,9 @@ const AllNotificationPage = () => {
           "NA"
         ) : (
           <p>
-            {new Date(props?.row?.notifyDate).toLocaleDateString()} -{" "}
-            {new Date(props?.row?.notifyDate).getHours()}:
-            {new Date(props?.row?.notifyDate).getMinutes()}
+            {new Date(props.row.notifyDate).toLocaleDateString()} -{" "}
+            {new Date(props.row.notifyDate).getHours()}:
+            {new Date(props.row.notifyDate).getMinutes()}
           </p>
         )
       },

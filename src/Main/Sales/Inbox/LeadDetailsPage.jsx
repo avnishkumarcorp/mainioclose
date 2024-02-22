@@ -77,6 +77,8 @@ const LeadDetailsPage = () => {
 
   const [file, setFile] = useState()
   const [imageResponse, setImageResponse] = useState("");
+  const [uploadSucess, setUploadSucess] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false);
 
 
   console.log("image", imageResponse);
@@ -86,10 +88,10 @@ const LeadDetailsPage = () => {
 
   function handleSubmit(event) {
     event.preventDefault()
+    setUploadLoading(true);
     const url = "/leadService/api/v1/upload/uploadimageToFileSystem"
     const formData = new FormData()
     formData.append("file", file)
-    
     const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -97,9 +99,12 @@ const LeadDetailsPage = () => {
       },
     }
     axios.post(url, formData, config).then((response) => {
-      console.log(response.data)
+      setUploadLoading(false);
+      setRemarkMessage((prev) => ({...prev, file: response.data}) )
       setImageResponse(response.data)
+      setUploadSucess(true)
     })
+   
   }
 
   // const [selectedFile, setSelectedFile] = useState(null)
@@ -257,6 +262,7 @@ const LeadDetailsPage = () => {
     leadId: leadid,
     userId: userid,
     message: messageData,
+    file: imageResponse,
   })
 
   const [addProductData, setAddProductData] = useState({
@@ -284,6 +290,7 @@ const LeadDetailsPage = () => {
   })
 
   console.log("contact", createContact)
+  console.log("remark message", remarkMessage);
 
   const [EditNewTask, setEditNewTask] = useState({})
 
@@ -1610,7 +1617,7 @@ const LeadDetailsPage = () => {
                   onChange={(e) => remarkMessageFunction(e)}
                 ></textarea>
                 <div className="comment-below">
-                  <div>
+                  <div className="all-center">
                     {/* <form  onSubmit={(e)=> submitImage(e)}>
                   <input type="file"  name="files" onChange={(e) => setFileValue(e.target.files[0])} accept="image/*" />
                   <button type="submit">submit image</button>
@@ -1618,8 +1625,10 @@ const LeadDetailsPage = () => {
                   </form> */}
                     <form onSubmit={handleSubmit}>
                       <input type="file" onChange={handleChange} />
-                      <button className="comment-btn" type="submit">Upload</button>
+                      <button className="comment-btn" type="submit">{uploadLoading ? "Please Wait..": "Upload"}</button>
                     </form>
+                    {uploadSucess ?  <p className="mb-0 ml-2 font-13"><i class="fa-solid fa-check"></i> file Upload Sucesfully</p> : ""}
+                     
                     {/* <input type="file" onChange={handleFileChange} />
                     <button onClick={handleUpload}>Upload</button> */}
                   </div>

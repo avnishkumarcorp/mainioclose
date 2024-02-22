@@ -28,7 +28,7 @@ const MainPage = () => {
     setInterval(() => {
       dispatch(getNotificationFun(userid))
       setToasterData((prev) => !prev)
-    }, 600000)
+    }, 10000)
   }, [])
 
   const allNotifications = useSelector((state) => state.notify.allNotifications)
@@ -44,7 +44,7 @@ const MainPage = () => {
     let bool = true
     let apiDate = new Date(SingleNotification.notifyDate).getTime()
       setTimeout(() => {
-        if (start >= apiDate) {
+        if (start >= apiDate && start <= apiDate + 30000) {
           console.log("function Calling hhdhdhfhhf")
           toast.success(SingleNotification.message)
         }
