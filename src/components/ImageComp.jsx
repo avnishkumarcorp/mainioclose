@@ -1,7 +1,6 @@
 import React from "react"
 
 const ImageComp = ({ data }) => {
-  console.log(data)
   return (
     <div className="team-model">
       <button
@@ -10,7 +9,7 @@ const ImageComp = ({ data }) => {
         data-toggle="modal"
         data-target="#createLead"
       >
-        <i class="fa-regular fa-image"></i>
+        <i className="fa-regular fa-image"></i>
       </button>
 
       {/* MODAL */}

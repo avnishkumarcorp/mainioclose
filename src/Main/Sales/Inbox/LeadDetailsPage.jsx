@@ -395,7 +395,7 @@ const LeadDetailsPage = () => {
       const allTaskData = await getQuery(
         `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadid}`
       )
-      setGetSingleLeadTask(allTaskData.data)
+      setGetSingleLeadTask(allTaskData.data.reverse())
     } catch (err) {
       console.log("err", err)
     }
@@ -445,7 +445,7 @@ const LeadDetailsPage = () => {
       setSingleLeadResponseData(singleLeadApiData.data)
       setAllProductsList(singleLeadApiData.data.serviceDetails)
       setUpdateLeadName(singleLeadApiData.data.leadName)
-      setClientsContact(singleLeadApiData.data.clients)
+      setClientsContact(singleLeadApiData.data.clients.reverse())
       setProductDataScaleaton(false)
     } catch (err) {
       if (err.response.status === 500) {
