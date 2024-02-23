@@ -185,7 +185,7 @@ button:focus {
 
 /* common in inbox  */
 .lead-heading {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   color: #262e39;
@@ -471,6 +471,24 @@ button:focus {
 .font-13{
   font-size: 13px;
   color: #093252;
+}
+
+.btn-trans{
+  border: none;
+  outline: none;
+  color: #fff;
+  background: transparent;
+}
+
+.model-image{
+  height: 100%;
+  width: 100%;
+}
+
+.model-image img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 

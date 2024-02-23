@@ -18,6 +18,7 @@ import { useSelector } from "react-redux"
 import PopUpButton from "../../../components/button/PopUpButton"
 import { putQuery } from "../../../API/PutQuery"
 import { deleteQuery } from "../../../API/DeleteQuery"
+import ImageComp from "../../../components/ImageComp"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -76,21 +77,20 @@ const LeadDetailsPage = () => {
   const [fileValue, setFileValue] = useState(null)
 
   const [file, setFile] = useState()
-  const [imageResponse, setImageResponse] = useState("");
-  const [uploadSucess, setUploadSucess] = useState(false);
-  const [uploadLoading, setUploadLoading] = useState(false);
+  const [imageResponse, setImageResponse] = useState("")
+  const [uploadSucess, setUploadSucess] = useState(false)
+  const [uploadLoading, setUploadLoading] = useState(false)
 
   const fileRef = useRef()
 
- 
   function handleChange(event) {
     setFile(event.target.files[0])
   }
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(fileRef.current.value);
-    setUploadLoading(true);
+    console.log(fileRef.current.value)
+    setUploadLoading(true)
     const url = "/leadService/api/v1/upload/uploadimageToFileSystem"
     const formData = new FormData()
     formData.append("file", file)
@@ -101,13 +101,12 @@ const LeadDetailsPage = () => {
       },
     }
     axios.post(url, formData, config).then((response) => {
-      setUploadLoading(false);
-      setRemarkMessage((prev) => ({...prev, file: response.data}) )
+      setUploadLoading(false)
+      setRemarkMessage((prev) => ({ ...prev, file: response.data }))
       setImageResponse(response.data)
-      
+
       setUploadSucess(true)
     })
-   
   }
 
   // const [selectedFile, setSelectedFile] = useState(null)
@@ -284,7 +283,6 @@ const LeadDetailsPage = () => {
     expectedDate: "",
     statusId: 0,
   })
-
 
   const [EditNewTask, setEditNewTask] = useState({})
 
@@ -1621,11 +1619,24 @@ const LeadDetailsPage = () => {
 
                   </form> */}
                     <form onSubmit={handleSubmit}>
-                      <input ref={fileRef} type="file" onChange={handleChange} />
-                      <button className="comment-btn" type="submit">{uploadLoading ? "Please Wait..": "Upload"}</button>
+                      <input
+                        ref={fileRef}
+                        type="file"
+                        onChange={handleChange}
+                      />
+                      <button className="comment-btn" type="submit">
+                        {uploadLoading ? "Please Wait.." : "Upload"}
+                      </button>
                     </form>
-                    {uploadSucess ?  <p className="mb-0 ml-2 font-13"><i className="fa-solid fa-check"></i> file Upload Sucesfully</p> : ""}
-                     
+                    {uploadSucess ? (
+                      <p className="mb-0 ml-2 font-13">
+                        <i className="fa-solid fa-check"></i> file Upload
+                        Sucesfully
+                      </p>
+                    ) : (
+                      ""
+                    )}
+
                     {/* <input type="file" onChange={handleFileChange} />
                     <button onClick={handleUpload}>Upload</button> */}
                   </div>
@@ -1719,10 +1730,10 @@ const LeadDetailsPage = () => {
 
                   <div className="side-notes">
                     <p className="mb-0 write-heading text-center pb-2">
-                      <span className="mr-2">
+                      <span className="mr-2 font-13">
                         {new Date(note?.latestUpdated).toDateString()}
                       </span>
-                      <span className="mr-2">
+                      <span className="mr-2 font-13">
                         {new Date(note?.latestUpdated).toLocaleTimeString(
                           "en-US"
                         )}
@@ -1731,6 +1742,12 @@ const LeadDetailsPage = () => {
                     <div className="comment-above">
                       <div>
                         <h2 className="write-heading">Notes</h2>
+                      </div>
+                      <div>
+                        {/* < /> */}
+                        <ImageComp data={note?.images} />
+
+                        {/* <Link target="blank" to={note?.images}>show</Link> */}
                       </div>
                       <div className="d-flex">
                         <div className="circle-image">
