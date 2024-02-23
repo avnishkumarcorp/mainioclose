@@ -80,13 +80,16 @@ const LeadDetailsPage = () => {
   const [uploadSucess, setUploadSucess] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
 
+  const fileRef = useRef()
 
+ 
   function handleChange(event) {
     setFile(event.target.files[0])
   }
 
   function handleSubmit(event) {
     event.preventDefault()
+    console.log(fileRef.current.value);
     setUploadLoading(true);
     const url = "/leadService/api/v1/upload/uploadimageToFileSystem"
     const formData = new FormData()
@@ -101,6 +104,7 @@ const LeadDetailsPage = () => {
       setUploadLoading(false);
       setRemarkMessage((prev) => ({...prev, file: response.data}) )
       setImageResponse(response.data)
+      
       setUploadSucess(true)
     })
    
@@ -493,7 +497,10 @@ const LeadDetailsPage = () => {
         )
         setNotesUpdateToggle((prev) => !prev)
         NotesRef.current.value = ""
+        fileRef.current.value = ""
+        setUploadSucess(false)
         setNotesLoading(false)
+        window.location.reload()
       } catch (err) {
         console.log(err)
         if (err.response.status === 500) {
@@ -635,7 +642,7 @@ const LeadDetailsPage = () => {
       } catch (err) {
         console.log("err", err)
         if (err.response.status === 500) {
-          toast.error("Something Went Wrong")
+          toast.error(err.response.data.message)
         }
         return
       }
@@ -1614,7 +1621,7 @@ const LeadDetailsPage = () => {
 
                   </form> */}
                     <form onSubmit={handleSubmit}>
-                      <input type="file" onChange={handleChange} />
+                      <input ref={fileRef} type="file" onChange={handleChange} />
                       <button className="comment-btn" type="submit">{uploadLoading ? "Please Wait..": "Upload"}</button>
                     </form>
                     {uploadSucess ?  <p className="mb-0 ml-2 font-13"><i className="fa-solid fa-check"></i> file Upload Sucesfully</p> : ""}
