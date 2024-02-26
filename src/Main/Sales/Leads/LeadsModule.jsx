@@ -260,10 +260,9 @@ const LeadsModule = () => {
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
     {
-      field: "missedTask",
+      field: "missedTaskDate",
       headerName: "Missed Task",
       width: 220,
-      sortable: true,
       renderCell: (props) => {
         const taskmissed = props?.row
         const taskStatus = props?.row?.missedTaskStatus
@@ -271,12 +270,14 @@ const LeadsModule = () => {
         const taskDate = new Date(
           props?.row?.missedTaskDate
         ).toLocaleDateString()
+        const hours = new Date(props?.row?.missedTaskDate).getHours()
+        const minutes = new Date(props?.row?.missedTaskDate).getMinutes()
         const taskCreated = props?.row?.missedTaskCretedBy
         return taskName !== null ? (
           <p className={`mb-0 ${taskName !== null ? "text-danger" : ""}`}>
-            {taskCreated} - {taskName}
+            {taskStatus} - {taskCreated} - {taskName}
             <br />
-            {taskStatus} - {taskDate}
+            {taskDate} {hours}:{minutes}
           </p>
         ) : (
           <p className="mb-0">NA</p>
@@ -384,10 +385,9 @@ const LeadsModule = () => {
       ),
     },
     {
-      field: "missedTask",
+      field: "missedTaskDate",
       headerName: "Missed Task",
       width: 220,
-      sortComparator: (v1, v2) => row1?.missedTaskDate?.getTime() - row2?.missedTaskDate?.getTime(),
       renderCell: (props) => {
         const taskmissed = props?.row
         const taskStatus = props?.row?.missedTaskStatus
@@ -395,12 +395,14 @@ const LeadsModule = () => {
         const taskDate = new Date(
           props?.row?.missedTaskDate
         ).toLocaleDateString()
+        const hours = new Date(props?.row?.missedTaskDate).getHours()
+        const minutes = new Date(props?.row?.missedTaskDate).getMinutes()
         const taskCreated = props?.row?.missedTaskCretedBy
         return taskName !== null ? (
           <p className={`mb-0 ${taskName !== null ? "text-danger" : ""}`}>
-            {taskCreated} - {taskName}
+            {taskStatus} - {taskCreated} - {taskName}
             <br />
-            {taskStatus} - {taskDate}
+            {taskDate} {hours}:{minutes}
           </p>
         ) : (
           <p className="mb-0">NA</p>
