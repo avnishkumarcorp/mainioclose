@@ -1151,13 +1151,13 @@ const LeadDetailsPage = () => {
                     {getSingleLeadTask.map((task, index) => (
                       <div key={index} className="save-lead-data">
                         <div>
-                          <p className="lead-heading">{task?.name}</p>
+                          <p className={`lead-heading ${new Date(task.expectedDate).getTime() < Date.now() && task?.taskStatus?.name !== "Done" ? "text-danger" : ""  }`}>{task?.name}</p>
                           <h6 className="lead-sm-heading mb-1">
                             {task?.description}
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
-                            {task?.taskStatus?.name} -{" "}
-                            {task?.assignedBy?.fullName}
+                           <span className={`task-pending ${task?.taskStatus?.name === "Done" ?  "task-done":" " }`}> {task?.taskStatus?.name} </span> 
+                            <span className="ml-2">{task?.assignedBy?.fullName}</span>
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
                             {new Date(task.expectedDate).toLocaleDateString()} -{" "}

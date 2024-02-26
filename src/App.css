@@ -453,6 +453,23 @@ button:focus {
 }
 
 
+.task-pending{
+  color: #f0ad4e;
+  border: 1px solid #f0ad4e;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+
+.task-done{
+  color: #5cb85c;
+  border: 1px solid #5cb85c;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+
+
 
 
 
