@@ -45,6 +45,7 @@ import LeadCategory from "./Main/Setting/Category/LeadCategory"
 import AllNotificationPage from "./Main/Sales/Leads/AllNotificationPage"
 import AllDeactivateUser from "./Main/DashBoard/AllDeactivateUser"
 import { useSelector } from "react-redux"
+import GetAllTaskList from "./Main/Sales/Leads/GetAllTaskList"
 
 function App() {
 
@@ -109,6 +110,7 @@ function App() {
               <Route path="contacts" element={<ContactModule />} />
               <Route path="leads/:leadid/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
+              <Route path="leads/allTask" element={<GetAllTaskList />} />
               <Route path="leads/notification" element={<AllNotificationPage />} />
               
             </Route>
