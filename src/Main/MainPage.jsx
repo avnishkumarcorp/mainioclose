@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { useId } from "react"
 import { customLocation } from "../Hooks/LocationCustomHook"
 import { getNotificationFun } from "../Toolkit/Slices/NotificationSlice"
+import { logoutFun } from "../Toolkit/Slices/AuthSlice"
 toast.configure()
 
 const MainPage = () => {
@@ -38,7 +39,7 @@ const MainPage = () => {
     let startPoint = Date.now() + 120000
     let anotherDate = start - 10000
     let bool = true
-    let apiDate = new Date(SingleNotification.notifyDate).getTime()
+    let apiDate = new Date(SingleNotification?.notifyDate).getTime()
       setTimeout(() => {
         if (start >= apiDate && start <= apiDate + 30000) {
           toast.success(SingleNotification.message)
@@ -46,7 +47,14 @@ const MainPage = () => {
       }, 1000)
   }, [toasterData])
 
-  // const currentUserToken = useSelector((state) => state.AuthReducer.token)
+
+
+  const authStatus = useSelector((state) => state.auth.isAuth)
+
+  console.log("i am auth status", authStatus);
+
+  
+  // dispatch()
   // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
   // useEffect(() => {
   //   let UserToken = localStorage.getItem("Access-token")

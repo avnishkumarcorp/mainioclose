@@ -2,19 +2,23 @@ import React, { useState } from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { logoutFun } from "../Toolkit/Slices/AuthSlice"
 
 const SideBar = () => {
   const [logoutBtnStatus, setLogoutBtnStatus] = useState(false)
   const location = useLocation()
-
+  const dispatch = useDispatch()
 
   const {userid} = useParams()
 
   const navigate = useNavigate()
 
   const logoutUser = () => {
-    const token = localStorage.removeItem("Access Token")
+    const key = localStorage.getItem("persist:root")
+    dispatch(logoutFun())
+    // console.log(key);
+    const token = localStorage.removeItem(key)
     navigate("/erp/login")
   }
 
