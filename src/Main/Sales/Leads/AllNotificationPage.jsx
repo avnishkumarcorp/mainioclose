@@ -78,7 +78,7 @@ const AllNotificationPage = () => {
       renderCell: (props) => {
         const data = props?.row?.notifyDate
         // console.log(data)
-        return data === null ? (
+        return data === null || undefined ? (
           "NA"
         ) : (
           <p>

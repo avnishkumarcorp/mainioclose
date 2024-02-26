@@ -263,6 +263,7 @@ const LeadsModule = () => {
       field: "missedTask",
       headerName: "Missed Task",
       width: 220,
+      sortable: true,
       renderCell: (props) => {
         const taskmissed = props?.row
         const taskStatus = props?.row?.missedTaskStatus
@@ -372,6 +373,7 @@ const LeadsModule = () => {
       field: "leadName",
       headerName: "Lead Name",
       width: 300,
+      sortable: true,
       renderCell: (props) => (
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
@@ -385,6 +387,7 @@ const LeadsModule = () => {
       field: "missedTask",
       headerName: "Missed Task",
       width: 220,
+      sortComparator: (v1, v2) => row1?.missedTaskDate?.getTime() - row2?.missedTaskDate?.getTime(),
       renderCell: (props) => {
         const taskmissed = props?.row
         const taskStatus = props?.row?.missedTaskStatus
