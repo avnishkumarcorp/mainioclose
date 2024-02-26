@@ -51,6 +51,7 @@ const Login = () => {
 
   const currentUserID = useSelector((state) => state?.auth?.currentUser?.id)
   const CurrentuserData = useSelector((prev) => prev.AuthReducer)
+  const loginErr = useSelector((state) => state?.auth?.loginError) 
 
 
   const userSignIn = (e) => {
@@ -82,29 +83,29 @@ const Login = () => {
     loginMyUser();
 
 
-    const loginUser = async () => {
-      try {
-        const collectUserData = await postQuery(
-          `/securityService/api/auth/signin`,
-          userLoginData
-        )
-        // dispatch(currentUserAction(collectUserData.data))
-        // dispatch(userTokenAction(collectUserData.data.jwt))
-        setLoadingBtn(false)
-        localStorage.setItem("Access-token", collectUserData?.data?.jwt)
-        navigate(`/erp/${collectUserData.data.id}/sales`)
-      } catch (err) {
-        if (err.response.status === 401) {
-          toast.error("Enter a valid username or password")
-          setLoadingBtn(false)
-        }
-        if (err.response.status === 500) {
-          toast.error("please Referesh this page or try again later")
-          setLoadingBtn(false)
-        }
-        setLoadingBtn(false)
-      }
-    }
+    // const loginUser = async () => {
+    //   try {
+    //     const collectUserData = await postQuery(
+    //       `/securityService/api/auth/signin`,
+    //       userLoginData
+    //     )
+    //     // dispatch(currentUserAction(collectUserData.data))
+    //     // dispatch(userTokenAction(collectUserData.data.jwt))
+    //     setLoadingBtn(false)
+    //     localStorage.setItem("Access-token", collectUserData?.data?.jwt)
+    //     navigate(`/erp/${collectUserData.data.id}/sales`)
+    //   } catch (err) {
+    //     if (err.response.status === 401) {
+    //       toast.error("Enter a valid username or password")
+    //       setLoadingBtn(false)
+    //     }
+    //     if (err.response.status === 500) {
+    //       toast.error("please Referesh this page or try again later")
+    //       setLoadingBtn(false)
+    //     }
+    //     setLoadingBtn(false)
+    //   }
+    // }
 
     //  loginUser()
   }
@@ -159,6 +160,9 @@ const Login = () => {
         ) : (
           ""
         )}
+        <div className="mt-2">
+        {loginErr ? <InputErrorComponent value="Enter correct Username or Password" /> : "" }
+        </div>
       </div>
       <div className="remember">
         <div className="agree-text">

@@ -11,6 +11,7 @@ export const AuthSlice = createSlice({
   initialState: {
     loginLoading: false,
     currentUser: {},
+    loginError: false,
     roles: [],
     jwt: "",
     isAuth: false,
@@ -23,7 +24,7 @@ export const AuthSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getCurrentUser.pending, (state, action) => {
-      state.loginLoading = true
+      state.loginLoading = true 
     })
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
       state.currentUser = action.payload
@@ -34,6 +35,7 @@ export const AuthSlice = createSlice({
     })
     builder.addCase(getCurrentUser.rejected, (state, action) => {
       console.log("Err", action.payload, state)
+      state.loginError = true
     })
   },
 })
