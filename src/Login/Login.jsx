@@ -77,7 +77,7 @@ const Login = () => {
     const loginMyUser = async () => {
        const loginUser =  await dispatch(getCurrentUser(userLoginData))
        console.log("i am login user", loginUser);
-       navigate(`/erp/${loginUser?.payload?.id}/sales`)
+       navigate(`/erp/${loginUser?.payload?.id}/sales/leads`)
     }
 
     loginMyUser();

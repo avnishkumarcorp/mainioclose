@@ -68,7 +68,7 @@ const DisplayDashboardUser = () => {
       renderCell: (props) => {
         return (
           <button
-            className="btn btn-info"
+            className="common-btn-one"
             onClick={() => deleteUser(props?.row?.id)}
           >
             Suspand

@@ -468,6 +468,24 @@ button:focus {
   border-radius: 4px;
 }
 
+.label-heading{
+  font-size: 13px;
+}
+
+.form-control.input-focus{
+  padding: 3px 6px;
+  font-size: 13px;
+}
+
+.form-control.input-focus::placeholder{ 
+  font-size: 13px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+
 
 
 
@@ -632,12 +650,11 @@ button:focus {
 
 .first-button {
   padding: 0px 60px;
-  padding-bottom: 2px;
   background: var(--mainBlue);
   border: 1px solid var(--mainBlue);
   border-radius: 4px;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 30px;
   text-align: center;
   letter-spacing: 0.84px;
@@ -658,6 +675,10 @@ $lightBlue: #1a73e8;
 
 .first-button:focus {
   outline: none;
+}
+
+select.form-control:not([size]):not([multiple]) {
+  height: auto;
 }
 
 .logout-btn{

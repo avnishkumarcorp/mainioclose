@@ -56,7 +56,7 @@ const AllDeactivateUser = () => {
       renderCell: (props) => {
         return (
           <button
-            className="btn btn-success"
+            className="common-btn-one"
             onClick={() => activateUserFun(props?.row?.id)}
           >
             Activate
