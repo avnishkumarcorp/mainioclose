@@ -649,9 +649,9 @@ const LeadsModule = () => {
       <div className="create-user-box">
         <h1 className="table-heading">Leads</h1>
         <div className="all-center">
-          {/* <Link to={`allTask`}>
+          <Link to={`allTask`}>
             <div className="common-btn-one mr-2">All Tasks</div>
-          </Link> */}
+          </Link>
           {adminRole && (
             <div className="d-end mr-2">
               <button className="common-btn-one">
