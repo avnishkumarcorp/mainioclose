@@ -26,9 +26,9 @@ const ForgetPassword = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const forgetOtpResponse = useSelector(
-    (auth) => auth.AuthReducer.forgetPassword
-  )
+  // const forgetOtpResponse = useSelector(
+  //   (auth) => auth.AuthReducer.forgetPassword
+  // )
   const isUserData = useSelector((user) => user.AuthReducer)
 
   

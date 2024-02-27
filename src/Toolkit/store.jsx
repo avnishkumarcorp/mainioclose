@@ -7,6 +7,7 @@ import storage from "redux-persist/lib/storage"
 import persistStore from "redux-persist/es/persistStore"
 import LeadSlice from "./Slices/LeadSlice"
 import NotificationSlice from "./Slices/NotificationSlice"
+import { getDefaultMiddleware } from '@reduxjs/toolkit';
 
 const reducers = combineReducers({
   auth: AuthSlice,
@@ -24,6 +25,7 @@ const persistedReducer = persistReducer(persistConfig, reducers)
 
 export const store = configureStore({
   reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })
 
 export const persistor = persistStore(store)

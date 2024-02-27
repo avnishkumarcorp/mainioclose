@@ -645,7 +645,7 @@ button:focus {
   color: #dc3545;
   margin-top: 2px;
   margin-bottom: 2px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .first-button {
@@ -688,7 +688,6 @@ select.form-control:not([size]):not([multiple]) {
     font-size: 14px;
     background: transparent;
     color: var(--white);
-
 }
 
 

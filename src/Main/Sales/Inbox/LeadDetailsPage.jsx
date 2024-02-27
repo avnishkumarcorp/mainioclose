@@ -19,6 +19,7 @@ import PopUpButton from "../../../components/button/PopUpButton"
 import { putQuery } from "../../../API/PutQuery"
 import { deleteQuery } from "../../../API/DeleteQuery"
 import ImageComp from "../../../components/ImageComp"
+import InputErrorComponent from "../../../components/InputErrorComponent"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -75,6 +76,7 @@ const LeadDetailsPage = () => {
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
   const [fileValue, setFileValue] = useState(null)
+  const [mobNumberError, setMobNumberError] = useState(false);
 
   const [file, setFile] = useState()
   const [imageResponse, setImageResponse] = useState("")
@@ -601,6 +603,14 @@ const LeadDetailsPage = () => {
   // Create New Contact For Lead
   const createLeadContact = (e) => {
     e.preventDefault()
+
+    if(contactContactNoRef.current.value.length !== 10){
+      setMobNumberError(true);
+      console.log("Enter 10 digit NUmber", contactContactNoRef.current.value.length);
+      return
+    }
+    setMobNumberError(false);
+
     const leadContact = async () => {
       try {
         const apiContactRes = await postQuery(
@@ -899,6 +909,7 @@ const LeadDetailsPage = () => {
                             type="text"
                           />
                         </div>
+                        {mobNumberError ? <InputErrorComponent value="Mobile Number Should be 10 Digit" /> : ""}
                       </div>
 
                       {/* <div className="product-box">

@@ -5,19 +5,24 @@ import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import { getQuery } from "../../../API/GetQuery"
 import { putQueryNoData } from "../../../API/PutQueryWithoutData"
 import { useDispatch, useSelector } from "react-redux"
-import { getNotificationFun } from "../../../Toolkit/Slices/NotificationSlice"
+import {
+  getNotificationFun,
+  updateNotification,
+} from "../../../Toolkit/Slices/NotificationSlice"
 
 const AllNotificationPage = () => {
   // const [allNotificationData, setAllNotificationData] = useState([])
   const { userid } = useParams()
 
   const allNotifications = useSelector((state) => state.notify.allNotifications)
+  const dispatch = useDispatch()
 
+  useEffect(() => {
+    dispatch(updateNotification(userid))
+  }, [])
   // const SingleNotification = allNotifications[0]
 
   // console.log("single Notifications", SingleNotification)
-
-  const dispatch = useDispatch()
 
   // useEffect(() => {
   //   getNotiFun()
