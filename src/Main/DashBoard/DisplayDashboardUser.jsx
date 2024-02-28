@@ -17,8 +17,11 @@ const DisplayDashboardUser = () => {
   const allUserLoading = useSelector((prev) => prev.user.userLoading)
   const allUserError = useSelector((prev) => prev.user.userError)
 
-  console.log("all mian user", allMainUser);
+  const [getId, setGetId] = useState('');
+  const [editType, setEditType] = useState(false);
 
+  // console.log("all mian user", allMainUser);
+ 
   // userError
 
   // useEffect(() => {
@@ -47,6 +50,11 @@ const DisplayDashboardUser = () => {
     }
   }
 
+  const myNewId = (id) => {
+    setGetId(id)
+    setEditType(true)
+  }
+
   const columns = [
     {
       field: "id",
@@ -64,15 +72,24 @@ const DisplayDashboardUser = () => {
     {
       field: "Action",
       headerName: "Action",
-      width: 150,
+      width: 180,
       renderCell: (props) => {
         return (
+          <>
+          <button className="common-btn-one mr-2"
+              data-toggle="modal"
+              data-target="#createuserdashboard"
+              onClick={() => myNewId(props?.row)}
+          >
+            Edit
+          </button>
           <button
             className="common-btn-one"
             onClick={() => deleteUser(props?.row?.id)}
           >
             Suspand
           </button>
+          </>
         )
       },
     },
@@ -82,7 +99,10 @@ const DisplayDashboardUser = () => {
     <div className="small-box-padding">
       <div className="create-user-box">
         <h1 className="table-heading">User List</h1>
-        <CreateuserDashboard />
+        <div className="all-center">
+        <Link to={`deactivateuser`} className="common-btn-one mr-2">Deactivate Users</Link>
+        <CreateuserDashboard data={getId} type={editType} />
+        </div>
         {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
       </div>
       {allUserLoading ? (

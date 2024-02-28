@@ -51,8 +51,7 @@ const MainPage = () => {
 
   const authStatus = useSelector((state) => state.auth.isAuth)
 
-  console.log("i am auth status", authStatus);
-
+  
   
   // dispatch()
   // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)

@@ -1,6 +1,6 @@
 import React from "react"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 
 const GetAllTaskList = () => {
@@ -66,11 +66,24 @@ const GetAllTaskList = () => {
       field: "name",
       headerName: "Name",
       width: 200,
+      renderCell: (props) => {
+        return <Link to={`/erp/4/sales/leads/${props.row.leadId}`}>{props?.row?.name}</Link>
+      },
     },
     {
       field: "description",
       headerName: "Description",
-      width: 500,
+      width: 400,
+    },
+    {
+     field: "statusName",
+     headerName: "Status",
+     width: 100,
+     renderCell: (props) => {
+      return (
+        <p className={`task-pending mb-0 ${props?.row?.taskStatus === "Done" ?  "task-done":" " }`}>{props?.row?.statusName}</p>
+      )
+     }
     },
     {
       field: "expectedDate",
@@ -95,15 +108,20 @@ const GetAllTaskList = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
-      <h1 className="table-heading">All Tasks</h1>
-      <div>
-      <button className="common-btn-one" onClick={todayTaskData}>
-        today task
-      </button>
-      <button className="common-btn-one ml-2" onClick={() => {window.location.reload()}}>
-        Remove filter
-      </button>
-      </div>
+        <h1 className="table-heading">All Tasks</h1>
+        <div>
+          <button className="common-btn-one" onClick={todayTaskData}>
+            today task
+          </button>
+          <button
+            className="common-btn-one ml-2"
+            onClick={() => {
+              window.location.reload()
+            }}
+          >
+            Remove filter
+          </button>
+        </div>
       </div>
       <div className="mt-3">
         <UserLeadComponent row={taskData} columns={columns} />
