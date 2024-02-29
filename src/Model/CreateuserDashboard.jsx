@@ -10,9 +10,8 @@ import { userDepartment } from "../data/FakeData"
 import { Link } from "react-router-dom"
 toast.configure()
 
-const CreateuserDashboard = ({data, type}) => {
+const CreateuserDashboard = () => {
   // /securityService/api/auth/createNewUserByEmail
-  const {id, fullName, } = data;
   const [roleGetRole, setRoleGetRole] = useState([]);
   const [userRowData, setUserRowData] = useState({
     userName: "",
@@ -21,9 +20,6 @@ const CreateuserDashboard = ({data, type}) => {
     designation: "",
     department: "",
   })
-
- 
-  // console.log(id, type);
   const [btnLoading, setBtnLoading] = useState(false);
   const [allRoles, setAllRoles] = useState([]);
   
@@ -40,21 +36,11 @@ const CreateuserDashboard = ({data, type}) => {
   const GetRoleFun = (e) => {
     setUserRowData((prev) => ({...prev, role: [e.target.value] }));
   }
+  
 
-  useEffect(()=>{
-      setUserRowData(()=> ({
-        userName: fullName,
-        email: "",
-        role: [],
-        designation: "",
-        department: "",
-      }))
- },[type])
-  
-  
+ 
   const userRowDataFetch = (e) => {
     setUserRowData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-   
   }
 
  useEffect(()=>{
@@ -141,6 +127,7 @@ const CreateuserDashboard = ({data, type}) => {
 
   return (
     <nav className="all-center">
+      <Link to={`deactivateuser`} className="common-btn-one mr-2">Deactivate Users</Link>
       <div className="team-model">
         <button
           type="button"
@@ -168,7 +155,7 @@ const CreateuserDashboard = ({data, type}) => {
               <div className="add-team-body">
                 {/* START */}
                 <div className="personal-info container">
-                  <h4 className="info-text model-heading">{type ? "Edit New user" : "Create New User"}</h4>
+                  <h4 className="info-text model-heading">Create New user</h4>
                   <div className="cross-icon">
                     <i
                       data-dismiss="modal"
@@ -189,7 +176,6 @@ const CreateuserDashboard = ({data, type}) => {
                             type="text"
                             className="form-control input-focus"
                             id="teamName"
-                            value ={userRowData.fullName}
                             ref={nameRef}
                             placeholder="Enter Username"
                             name="userName"

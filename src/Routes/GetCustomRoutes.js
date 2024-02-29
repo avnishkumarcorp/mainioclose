@@ -24,5 +24,5 @@ export const useCustomRoute = (link, data) => {
       setLoading(false)
     }
   }
-  return { productData, setProductData, loading, error}
+  return { productData, loading, error}
 }

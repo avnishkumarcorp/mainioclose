@@ -16,7 +16,7 @@ import { DataGrid } from "@mui/x-data-grid"
 import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import LeadCreateModel from "../../../Model/LeadCreateModel"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import TextField from "@mui/material/TextField"
 import Autocomplete from "@mui/material/Autocomplete"
 import TableScalaton from "../../../components/TableScalaton"
@@ -33,7 +33,6 @@ import { postQuery } from "../../../API/PostQuery"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { putQueryNoData } from "../../../API/PutQueryWithoutData"
 import { CSVLink } from "react-csv"
-import { getAllLeads } from "../../../Toolkit/Slices/LeadSlice"
 
 const LeadsModule = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -65,7 +64,6 @@ const LeadsModule = () => {
   const { userid, leadid } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const [allMultiFilterData, setAllMultiFilterData] = useState({
     userId: userid,
@@ -146,30 +144,12 @@ const LeadsModule = () => {
   ])
 
   useEffect(() => {
-    dispatch(getAllLeads(allMultiFilterData))
-  }, [
-    updateActive,
-    statusDataId,
-    rerefreshLead,
-    leadStatusD,
-    dateFilter,
-    leadMultiDep,
-    filterBtnNew,
-  ])
-
-  useEffect(() => {
     getAllLeadUser()
   }, [])
 
   useEffect(() => {
     getAllStatusData()
   }, [])
-
-  const allLeadsData = useSelector((state) => state.leads.allLeads)
-
-  const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
-
-  // console.log("lead data dispatch", leadDataDispatch);
 
   const viewHistory = async (leadId) => {
     try {
@@ -208,10 +188,9 @@ const LeadsModule = () => {
     }
   }
 
-  // const currentUserRoles = useSelector(
-  //   (prev) => prev.AuthReducer.currentUser.roles
-  // )
-  const currentUserRoles = useSelector((state) => state?.auth?.roles)
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
   const adminRole = currentUserRoles.includes("ADMIN")
   const newRole = currentUserRoles.includes("NEW")
 
@@ -239,7 +218,7 @@ const LeadsModule = () => {
       renderCell: (props) => {
         return (
           <p className="mb-0">
-            {props.api.getRowIndexRelativeToVisibleRows(props?.row?.id) + 1}
+            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
           </p>
         )
       },
@@ -260,7 +239,7 @@ const LeadsModule = () => {
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
     {
-      field: "missedTaskDate",
+      field: "missedTask",
       headerName: "Missed Task",
       width: 220,
       renderCell: (props) => {
@@ -270,14 +249,12 @@ const LeadsModule = () => {
         const taskDate = new Date(
           props?.row?.missedTaskDate
         ).toLocaleDateString()
-        const hours = new Date(props?.row?.missedTaskDate).getHours()
-        const minutes = new Date(props?.row?.missedTaskDate).getMinutes()
         const taskCreated = props?.row?.missedTaskCretedBy
         return taskName !== null ? (
           <p className={`mb-0 ${taskName !== null ? "text-danger" : ""}`}>
-            {taskStatus} - {taskCreated} - {taskName}
+            {taskCreated} - {taskName}
             <br />
-            {taskDate} {hours}:{minutes}
+            {taskStatus} - {taskDate}
           </p>
         ) : (
           <p className="mb-0">NA</p>
@@ -374,7 +351,6 @@ const LeadsModule = () => {
       field: "leadName",
       headerName: "Lead Name",
       width: 300,
-      sortable: true,
       renderCell: (props) => (
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
@@ -385,7 +361,7 @@ const LeadsModule = () => {
       ),
     },
     {
-      field: "missedTaskDate",
+      field: "missedTask",
       headerName: "Missed Task",
       width: 220,
       renderCell: (props) => {
@@ -395,14 +371,12 @@ const LeadsModule = () => {
         const taskDate = new Date(
           props?.row?.missedTaskDate
         ).toLocaleDateString()
-        const hours = new Date(props?.row?.missedTaskDate).getHours()
-        const minutes = new Date(props?.row?.missedTaskDate).getMinutes()
         const taskCreated = props?.row?.missedTaskCretedBy
         return taskName !== null ? (
           <p className={`mb-0 ${taskName !== null ? "text-danger" : ""}`}>
-            {taskStatus} - {taskCreated} - {taskName}
+            {taskCreated} - {taskName}
             <br />
-            {taskDate} {hours}:{minutes}
+            {taskStatus} - {taskDate}
           </p>
         ) : (
           <p className="mb-0">NA</p>
@@ -631,7 +605,6 @@ const LeadsModule = () => {
     error,
   } = useCustomRoute(bellCountUrl, bellCountDep)
 
- 
   // const viewNotyFun = async () => {
   //   console.log("fun call");
   //   try{
@@ -650,23 +623,6 @@ const LeadsModule = () => {
       <div className="create-user-box">
         <h1 className="table-heading">Leads</h1>
         <div className="all-center">
-          <Link to={`allTask`}>
-            <div className="common-btn-one mr-2">All Tasks</div>
-          </Link>
-          {adminRole && (
-            <div className="d-end mr-2">
-              <button className="common-btn-one">
-                <CSVLink
-                  className="text-white"
-                  data={exportData}
-                  headers={columns.map((column) => column.headerName)}
-                  filename={"exported_data.csv"}
-                >
-                  Export
-                </CSVLink>
-              </button>
-            </div>
-          )}
           <button
             onClick={() => setHideMUltiFilter((prev) => !prev)}
             className="common-btn-one mr-2"
@@ -681,7 +637,7 @@ const LeadsModule = () => {
             >
               <span className="bell-count">{bellData}</span>
               <span className="bell-icon">
-                <i className="fa-regular fa-bell"></i>
+                <i className="fa-solid fa-bell"></i>
               </span>
             </div>
           </Link>
@@ -786,16 +742,29 @@ const LeadsModule = () => {
           </button>
         </div>
       </div> */}
-
+      {adminRole && (
+        <div className="d-end">
+          <button className="common-btn-one">
+          <CSVLink
+          className="text-white"
+            data={exportData}
+            headers={columns.map((column) => column.headerName)}
+            filename={"exported_data.csv"}
+          >
+            Export
+          </CSVLink>
+          </button>
+        </div>
+      )}
       <div className="table-arrow">
         {/* <ArrowComponent /> */}
-        {allLeadsLoading ? (
+        {leadScalatonCall ? (
           <TableScalaton />
         ) : (
           <UserLeadComponent
             tableName={""}
             columns={adminRole ? columns : column2}
-            row={allLeadsData}
+            row={allLeadData}
             getRowId={(row) => row.id}
             onSelectionModelChange={(newSelection) =>
               setSelectedRows(newSelection)

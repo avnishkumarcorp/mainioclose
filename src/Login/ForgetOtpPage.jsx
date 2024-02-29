@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import "./OtpPage.scss"
 import OtpTimer from "otp-timer"
 import { useState } from "react"
-import {  useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import InputErrorComponent from "../components/InputErrorComponent"
@@ -14,6 +14,7 @@ const ForgetOtpPage = () => {
   const forgetOtpResponse = useSelector(
     (auth) => auth.AuthReducer.forgetPassword
   )
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const firstRef = useRef()
