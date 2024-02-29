@@ -1,13 +1,16 @@
-import React from "react"
+import React, { useState } from "react"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { Link, useParams } from "react-router-dom"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 
 const GetAllTaskList = () => {
   const { userid } = useParams()
+  const [dateInput, setDateInput] = useState("")
+
+  console.log("date input", dateInput)
 
   const allTasksByUser = `/leadService/api/v1/task/getAllTaskByAssignee?assigneeId=${userid}`
-  const allTaskDep = []
+  const allTaskDep = [dateInput]
 
   const {
     productData: taskData,
@@ -18,35 +21,36 @@ const GetAllTaskList = () => {
 
   console.log("task data ", taskData)
 
-  let beforeDate = Date.now()
-  let endDate = Date.now() + 86400000
+  let beforeDate = new Date().getTime()
+  let endDate = beforeDate + 86400000
+
+  const todayTaskData2 = () => {
+    let taskData2 = taskData
+    const data = taskData.filter((task) => {
+      let taskD = new Date(task.expectedDate).getTime()
+      return taskD >= beforeDate && taskD <= endDate
+    })
+    const newData = data.sort(
+      (a, b) =>
+        new Date(b.expectedDate).getTime() - new Date(a.expectedDate).getTime()
+    )
+    console.log("new data", newData)
+    setProductData(newData.reverse())
+  }
 
   const todayTaskData = () => {
     let taskData2 = taskData
-
-    // const data = taskData.filter((task) => { return new Date(task.expectedDate).getTime()})
+    let inputDataBefore = new Date(dateInput).getTime()
     const data = taskData.filter((task) => {
       let taskD = new Date(task.expectedDate).getTime()
-      return taskD >= beforeDate
+      return taskD >= inputDataBefore
     })
-    setProductData(data)
+    const newData = data.sort(
+      (a, b) =>
+        new Date(b.expectedDate).getTime() - new Date(a.expectedDate).getTime()
+    )
+    setProductData(newData.reverse())
   }
-
-  // const todayTaskData = () => {
-  //   let taskData2 = taskData
-
-  //   // const data = taskData.filter((task) => { return new Date(task.expectedDate).getTime()})
-  //   const data = taskData2.filter((task) => {
-  //     let beforeDate = Date.now()
-  //     let endDate = Date.now() + 86400000
-  //     let taskD = new Date(task.expectedDate).getTime()
-
-  //     if (taskD >= beforeDate && taskD <= endDate) {
-  //       return taskData2
-  //     }
-
-  //   })
-  // }
 
   const columns = [
     {
@@ -67,7 +71,11 @@ const GetAllTaskList = () => {
       headerName: "Name",
       width: 200,
       renderCell: (props) => {
-        return <Link to={`/erp/4/sales/leads/${props.row.leadId}`}>{props?.row?.name}</Link>
+        return (
+          <Link to={`/erp/4/sales/leads/${props.row.leadId}`}>
+            {props?.row?.name}
+          </Link>
+        )
       },
     },
     {
@@ -76,14 +84,20 @@ const GetAllTaskList = () => {
       width: 350,
     },
     {
-     field: "statusName",
-     headerName: "Status",
-     width: 150,
-     renderCell: (props) => {
-      return (
-        <p className={`task-pending mb-0 ${props?.row?.taskStatus === "Done" ?  "task-done":" " }`}>{props?.row?.statusName}</p>
-      )
-     }
+      field: "statusName",
+      headerName: "Status",
+      width: 150,
+      renderCell: (props) => {
+        return (
+          <p
+            className={`task-pending mb-0 ${
+              props?.row?.taskStatus === "Done" ? "task-done" : " "
+            }`}
+          >
+            {props?.row?.statusName}
+          </p>
+        )
+      },
     },
     {
       field: "expectedDate",
@@ -110,16 +124,16 @@ const GetAllTaskList = () => {
       <div className="create-user-box">
         <h1 className="table-heading">All Tasks</h1>
         <div>
-          <button className="common-btn-one" onClick={todayTaskData}>
-            today task
+          <input
+            type="date"
+            className="mr-2 date-input"
+            onChange={(e) => setDateInput(e.target.value)}
+          />
+          <button className="common-btn-one mr-2" onClick={todayTaskData}>
+            Filter Task
           </button>
-          <button
-            className="common-btn-one ml-2"
-            onClick={() => {
-              window.location.reload()
-            }}
-          >
-            Remove filter
+          <button className="common-btn-one" onClick={todayTaskData2}>
+            Today Task
           </button>
         </div>
       </div>
