@@ -73,12 +73,12 @@ const GetAllTaskList = () => {
     {
       field: "description",
       headerName: "Description",
-      width: 400,
+      width: 350,
     },
     {
      field: "statusName",
      headerName: "Status",
-     width: 100,
+     width: 150,
      renderCell: (props) => {
       return (
         <p className={`task-pending mb-0 ${props?.row?.taskStatus === "Done" ?  "task-done":" " }`}>{props?.row?.statusName}</p>
