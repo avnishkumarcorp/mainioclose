@@ -4,55 +4,47 @@ import UserListComponent from "../../Tables/UserListComponent"
 import { Link } from "react-router-dom"
 import CreateuserDashboard from "../../Model/CreateuserDashboard"
 import { deleteQuery } from "../../API/DeleteQuery"
-import { getAllUsers } from "../../Toolkit/Slices/UsersSlice"
-import { useSelect } from "@mui/base"
-import { useDispatch, useSelector } from "react-redux"
-import TableScalaton from "../../components/TableScalaton"
 
 const DisplayDashboardUser = () => {
+  const [displayAlluser, setDisplayAllUser] = useState([])
   const [loading, setLoading] = useState(true)
-  const [userSuspand, setUserSuspand] = useState(false)
-  const dispatch = useDispatch()
-  const allMainUser = useSelector((prev) => prev.user.allUsers)
-  const allUserLoading = useSelector((prev) => prev.user.userLoading)
-  const allUserError = useSelector((prev) => prev.user.userError)
-
-  const [getId, setGetId] = useState('');
-  const [editType, setEditType] = useState(false);
-
-  // console.log("all mian user", allMainUser);
- 
-  // userError
-
-  // useEffect(() => {
-  //   displayUser()
-  // }, [userSuspand])
+  const [userSuspand, setUserSuspand] = useState(false);
 
   useEffect(() => {
-    dispatch(getAllUsers())
+    displayUser()
   }, [userSuspand])
+
+  
+  const displayUser = async () => {
+    try {
+      const userData = await axios.get(`/leadService/api/v1/users/getAllUser`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      })
+      setDisplayAllUser(userData.data)
+      setLoading(false)
+    } catch (err) {}
+  }
+
+  // /leadService/api/v1/users/deleteUser?id=10
 
   const deleteUser = async (id) => {
     if (window.confirm("Are you sure to deActivate this User?") == true) {
       try {
-        const suspandUser = await deleteQuery(
-          `/securityService/api/auth/deleteUser?userId=${id}`
-        )
+        const suspandUser = await deleteQuery(`/securityService/api/auth/deleteUser?userId=${id}`)
         const deleteUser = await deleteQuery(
           `/leadService/api/v1/users/deleteUser?id=${id}`
         )
-        console.log(suspandUser)
-        console.log(deleteUser)
-        setUserSuspand((prev) => !prev)
+          console.log(suspandUser);
+          console.log(deleteUser);
+          setUserSuspand((prev) => !(prev))
+        // window.location.reload()
       } catch (err) {
         console.log(err)
       }
     }
-  }
-
-  const myNewId = (id) => {
-    setGetId(id)
-    setEditType(true)
   }
 
   const columns = [
@@ -61,7 +53,7 @@ const DisplayDashboardUser = () => {
       headerName: "ID",
       width: 150,
       renderCell: (props) => {
-        return <p className="mb-0">CORP00{props?.row?.id}</p>
+        return <p className="mb-0">CORP00{props.row.id}</p>
       },
     },
     { field: "fullName", headerName: "Full Name", width: 150 },
@@ -72,24 +64,15 @@ const DisplayDashboardUser = () => {
     {
       field: "Action",
       headerName: "Action",
-      width: 180,
+      width: 150,
       renderCell: (props) => {
         return (
-          <>
-          <button className="common-btn-one mr-2"
-              data-toggle="modal"
-              data-target="#createuserdashboard"
-              onClick={() => myNewId(props?.row)}
-          >
-            Edit
-          </button>
           <button
-            className="common-btn-one"
-            onClick={() => deleteUser(props?.row?.id)}
+            className="btn btn-info"
+            onClick={() => deleteUser(props.row.id)}
           >
             Suspand
           </button>
-          </>
         )
       },
     },
@@ -99,17 +82,49 @@ const DisplayDashboardUser = () => {
     <div className="small-box-padding">
       <div className="create-user-box">
         <h1 className="table-heading">User List</h1>
-        <div className="all-center">
-        <Link to={`deactivateuser`} className="common-btn-one mr-2">Deactivate Users</Link>
-        <CreateuserDashboard data={getId} type={editType} />
-        </div>
+        
+        <CreateuserDashboard />
         {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
       </div>
-      {allUserLoading ? (
-        <TableScalaton />
-      ) :  (
-        <UserListComponent tableName={""} columns={columns} row={allMainUser} />
-      )}
+
+      <UserListComponent
+        tableName={""}
+        columns={columns}
+        row={displayAlluser}
+      />
+
+      {/* <div className="table-responsive mt-5">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">first Name</th>
+              <th scope="col">last Name</th>
+              <th scope="col">Name</th>
+              <th scope="col">Designation</th>
+              <th scope="col">Email</th>
+              <th scope="col">Department</th>
+            </tr>
+          </thead>
+          {loading ? (
+            <div>Loading</div>
+          ) : (
+            <tbody>
+              {displayAlluser.map((user, index) => (
+                <tr key={index}>
+                  <td>{user.id}</td>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.fullName}</td>
+                  <td>{user.designation}</td>
+                  <td>{user.email}</td>
+                  <td>{user.department}</td>
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+      </div> */}
     </div>
   )
 }

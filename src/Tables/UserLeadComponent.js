@@ -3,12 +3,9 @@ import React from "react"
 import { useSelector } from "react-redux"
 
 const UserLeadComponent = ({ row, columns, tableName, getRowId }) => {
-  // const currentUserRoles = useSelector(
-  //   (prev) => prev.AuthReducer.currentUser.roles
-  // )
-
-  const currentUserRoles = useSelector((state) => state?.auth?.roles)
-
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
   const adminRole = currentUserRoles.includes("ADMIN")
 
   return (

@@ -2,45 +2,28 @@ import React, { useState } from "react"
 import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
 import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { logoutFun } from "../Toolkit/Slices/AuthSlice"
-import { toast } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
-toast.configure()
+import { useSelector } from "react-redux"
 
 const SideBar = () => {
   const [logoutBtnStatus, setLogoutBtnStatus] = useState(false)
   const location = useLocation()
-  const dispatch = useDispatch()
+
 
   const {userid} = useParams()
 
   const navigate = useNavigate()
 
   const logoutUser = () => {
-    if (window.confirm("Are you sure for Logout?") == true) {
-    const key = localStorage.getItem("persist:root")
-    dispatch(logoutFun())
-    // console.log(key);
-    const token = localStorage.removeItem(key)
+    const token = localStorage.removeItem("Access Token")
     navigate("/erp/login")
-    toast.success("Logout Succesfully")
-
-    }
   }
 
-  // const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
-  const currentUserProfile = useSelector((state) => state?.auth?.currentUser)
+  const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
 
-  // const currentUserRoles = useSelector(
-  //   (prev) => prev.AuthReducer.currentUser.roles
-  // )
-  // const adminRole = currentUserRoles.includes("ADMIN")
-
-  const currentRoles = useSelector((state) => state?.auth?.roles)
-
-  const adminRole = currentRoles?.includes("ADMIN")
-
+  const currentUserRoles = useSelector(
+    (prev) => prev.AuthReducer.currentUser.roles
+  )
+  const adminRole = currentUserRoles.includes("ADMIN")
 
   return (
     <div className="sideTab">
@@ -106,10 +89,7 @@ const SideBar = () => {
             >
               <div className="link-child">
                 <NavLink className="link-itemss" to={`${userid}/users`}>
-                  Users
-                </NavLink>
-                <NavLink className="link-itemss" to={`${userid}/users/tickets`}>
-                  Tickets
+                  users
                 </NavLink>
                 {/* <NavLink className="link-itemss" to={`${userid}/muiuser`}>
               mui users
@@ -158,7 +138,7 @@ const SideBar = () => {
         {/* sales links start */}
         <div className="side-tabs">
           <NavLink
-            to={`/erp/${userid}/sales/leads`}
+            to={`/erp/${userid}/sales`}
             className={`nav-heading ${({ isActive }) =>
               isActive ? "linkactive" : ""}`}
             data-toggle="collapse"
@@ -180,26 +160,26 @@ const SideBar = () => {
                 className="link-itemss"
                 to={`${userid}/sales/leads`}
               >
-                <i className="fa-solid mr-1 fa-calculator"></i><span>Leads</span>
+                <i className="fa-solid mr-1 fa-calculator"></i> Leads
               </NavLink>
-              {/* <NavLink
+              <NavLink
                 className="link-itemss"
                 to={`${userid}/sales/oppurtities`}
               >
-                <i className="fa-solid mr-1 fa-trophy"></i><span>Oppurtities</span>
-              </NavLink> */}
-              {/* <NavLink className="link-itemss" to="sales/estimate">
-                <i className="fa-solid mr-1 fa-file-lines"></i><span>Estimate</span>
-              </NavLink> */}
-              {/* <NavLink className="link-itemss" to="sales/orders">
-                <i className="fa-solid mr-1 fa-box"></i>Orders
-              </NavLink> */}
+                <i className="fa-solid mr-1 fa-trophy"></i>Oppurtities
+              </NavLink>
+              <NavLink className="link-itemss" to="sales/estimate">
+                <i className="fa-solid mr-1 fa-file-lines"></i>Estimate
+              </NavLink>
+              <NavLink className="link-itemss" to="sales/orders">
+                <i className="fa-solid mr-1 fa-box"></i> Orders
+              </NavLink>
               {adminRole ? <NavLink className="link-itemss" to={`${userid}/sales/contacts`}>
-                <i className="fa-solid mr-1 fa-user"></i><span>Contacts</span>
+                <i className="fa-solid mr-1 fa-user"></i> Contacts
               </NavLink> : ""}
 
               <NavLink className="link-itemss" to={`${userid}/sales`}>
-                <i className="fa-solid mr-1 fa-inbox"></i><span>Inbox</span>
+                <i className="fa-solid mr-1 fa-inbox"></i>Inbox
               </NavLink>
             </div>
           </div>

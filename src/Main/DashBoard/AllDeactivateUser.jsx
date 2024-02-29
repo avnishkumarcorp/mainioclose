@@ -41,7 +41,7 @@ const AllDeactivateUser = () => {
       headerName: "ID",
       width: 150,
       renderCell: (props) => {
-        return <p className="mb-0">CORP00{props?.row?.id}</p>
+        return <p className="mb-0">CORP00{props.row.id}</p>
       },
     },
     { field: "fullName", headerName: "Full Name", width: 150 },
@@ -56,8 +56,8 @@ const AllDeactivateUser = () => {
       renderCell: (props) => {
         return (
           <button
-            className="common-btn-one"
-            onClick={() => activateUserFun(props?.row?.id)}
+            className="btn btn-success"
+            onClick={() => activateUserFun(props.row.id)}
           >
             Activate
           </button>

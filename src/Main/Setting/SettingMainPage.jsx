@@ -4,8 +4,7 @@ import { Link, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
 
 const SettingMainPage = () => {
-  // const currentUserId = useSelector((auth) => auth.AuthReducer.currentUser.id)
-  const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  const currentUserId = useSelector((auth) => auth.AuthReducer.currentUser.id)
 
   return (
     <div className="setting">

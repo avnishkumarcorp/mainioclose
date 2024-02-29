@@ -15,7 +15,7 @@ const EnquirySend = () => {
   const [loading, setLoading] = useState(false)
 
   
-  const currentUserId = useSelector((state) => state?.AuthReducer?.currentUser?.id)
+  const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
   
   const [EnquiryTicketData, setEnquiryTicketData] = useState({
     userId: currentUserId,

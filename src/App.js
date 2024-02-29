@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
 import "./App.css"
 import MainPage from "./Main/MainPage"
 import DashBoard from "./Main/DashBoard/DashBoard"
@@ -44,14 +44,8 @@ import NotFoundPage from "./components/NotFoundPage"
 import LeadCategory from "./Main/Setting/Category/LeadCategory"
 import AllNotificationPage from "./Main/Sales/Leads/AllNotificationPage"
 import AllDeactivateUser from "./Main/DashBoard/AllDeactivateUser"
-import { useSelector } from "react-redux"
-import GetAllTaskList from "./Main/Sales/Leads/GetAllTaskList"
-import AllTickets from "./Main/DashBoard/AllTickets"
 
 function App() {
-
-  const authStatus = useSelector((state) => state.auth.isAuth)
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -62,7 +56,7 @@ function App() {
             <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />
           </Route>
-          <Route path="/counter" element={authStatus ?  <CounterExample /> : <Navigate to="/erp/login" />} />   
+          <Route path="/counter" element={<CounterExample />} />
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
             <Route
@@ -77,11 +71,10 @@ function App() {
             <Route path="setpassword/:userid" element={<SetNewPasswordPage />} />
           </Route>
 
-          <Route path="/erp" element={authStatus ? <MainPage /> : <Navigate to="/erp/login" />}>
+          <Route path="/erp" element={<MainPage />}>
             <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
-              <Route path="tickets" element={<AllTickets />} />
-               <Route path="muiuser" element={<DisplayUserTwo />} />
+              <Route path="muiuser" element={<DisplayUserTwo />} />
               <Route path="deactivateUser" element={<AllDeactivateUser />} />
               
             </Route>
@@ -112,7 +105,6 @@ function App() {
               <Route path="contacts" element={<ContactModule />} />
               <Route path="leads/:leadid/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
-              <Route path="leads/allTask" element={<GetAllTaskList />} />
               <Route path="leads/notification" element={<AllNotificationPage />} />
               
             </Route>
