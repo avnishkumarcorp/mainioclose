@@ -18,3 +18,4 @@ const DataGridExample = ({ rows, columns }) => {
 }
 
 export default DataGridExample
+

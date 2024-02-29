@@ -28,7 +28,7 @@ const LeadHistory = () => {
       renderCell: (props) => {
         return (
           <p className="mb-0">
-            {props.api.getRowIndexRelativeToVisibleRows(props.row.id) + 1}
+            {props.api.getRowIndexRelativeToVisibleRows(props?.row?.id) + 1}
           </p>
         )
       },
@@ -38,7 +38,7 @@ const LeadHistory = () => {
       headerName: "Date",
       width: 150,
       renderCell: (props) => {
-        let date = new Date(props.row.createdDate)
+        let date = new Date(props?.row?.createdDate)
         let dateNew = date.toLocaleDateString()
         return <p className="mb-0">{dateNew.toString()}</p>
       },

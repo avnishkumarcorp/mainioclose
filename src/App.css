@@ -78,6 +78,7 @@ button:focus {
   padding: 2px 16px;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 13px;
 }
 
 .common-btn-one:hover{
@@ -184,7 +185,7 @@ button:focus {
 
 /* common in inbox  */
 .lead-heading {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   color: #262e39;
@@ -395,7 +396,7 @@ button:focus {
 
 
 .multi-select-boxx{
-  font-size: 16px;
+  font-size: 13px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
@@ -406,7 +407,7 @@ button:focus {
 }
 
 .date-input{
-  font-size: 16px;
+  font-size: 13px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
@@ -420,18 +421,25 @@ button:focus {
 }
 
 .bell-box .bell-count{
-  /* background-color: yellow; */
-  color: #000;
+  color: #fff;
+  font-size: 13px;
+  background-color: red;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
   position: absolute;
   top: -2px;
-  right: 0px;
-  font-weight: 700;
+  right: -5px;
+  /* font-weight: 700; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bell-box .bell-icon{
   font-size: 25px;
   margin-left: 10px;
-  color: #CA8136;
+  color: #0f0f0f;
 }
 
 .multi-select-boxx .p-multiselect-header{
@@ -443,6 +451,41 @@ button:focus {
   background-color: #fff;
   padding: 10px;
 }
+
+
+.task-pending{
+  color: #f0ad4e;
+  border: 1px solid #f0ad4e;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+
+.task-done{
+  color: #5cb85c;
+  border: 1px solid #5cb85c;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.label-heading{
+  font-size: 13px;
+}
+
+.form-control.input-focus{
+  padding: 3px 6px;
+  font-size: 13px;
+}
+
+.form-control.input-focus::placeholder{ 
+  font-size: 13px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+
 
 
 
@@ -458,6 +501,29 @@ button:focus {
 .setting-table{
   padding: 20px 0px;
   font-size: 14px;
+}
+
+.font-13{
+  font-size: 13px;
+  color: #093252;
+}
+
+.btn-trans{
+  border: none;
+  outline: none;
+  color: #fff;
+  background: transparent;
+}
+
+.model-image{
+  height: 100%;
+  width: 100%;
+}
+
+.model-image img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
 }
 
 
@@ -533,7 +599,6 @@ button:focus {
 }
 
 .lead-new{
-  font-size: 16px;
   color: green;
 }
 
@@ -559,7 +624,7 @@ button:focus {
 }
 
 .table-heading {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   margin-bottom: 0px;
 }
@@ -568,7 +633,7 @@ button:focus {
   border: none;
   outline: none;
   background: transparent;
-  font-size: 36px;
+  font-size: 30px;
   cursor: pointer;
 }
 
@@ -580,17 +645,16 @@ button:focus {
   color: #dc3545;
   margin-top: 2px;
   margin-bottom: 2px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .first-button {
   padding: 0px 60px;
-  padding-bottom: 2px;
   background: var(--mainBlue);
   border: 1px solid var(--mainBlue);
   border-radius: 4px;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 30px;
   text-align: center;
   letter-spacing: 0.84px;
@@ -613,6 +677,10 @@ $lightBlue: #1a73e8;
   outline: none;
 }
 
+select.form-control:not([size]):not([multiple]) {
+  height: auto;
+}
+
 .logout-btn{
   width: 100%;
     border: none;
@@ -620,7 +688,6 @@ $lightBlue: #1a73e8;
     font-size: 14px;
     background: transparent;
     color: var(--white);
-
 }
 
 

@@ -70,7 +70,7 @@ const LeadCreateModel = () => {
       setNameError(true)
     }
 
-    if (mobileNoRef.current.value === "") {
+    if (mobileNoRef.current.value === "" || mobileNoRef.current.value.length !== 10) {
       setMobileNoError(true)
       return
     }
@@ -228,7 +228,7 @@ const LeadCreateModel = () => {
                         </div>
                         {mobileNoError ? (
                           <InputErrorComponent
-                            value={"Mobile can't be Blank!"}
+                            value={"Mobile Number should be 10 Digit only!"}
                           />
                         ) : (
                           ""

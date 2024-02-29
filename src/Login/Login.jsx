@@ -17,6 +17,7 @@ import { postQuery } from "../API/PostQuery"
 import ButtonTwo from "../components/button/ButtonTwo"
 import LongButton from "../components/button/LongButton"
 import InputErrorComponent from "../components/InputErrorComponent"
+import { getCurrentUser } from "../Toolkit/Slices/AuthSlice"
 toast.configure()
 
 const Login = () => {
@@ -48,7 +49,9 @@ const Login = () => {
     setUserLoginData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
+  const currentUserID = useSelector((state) => state?.auth?.currentUser?.id)
   const CurrentuserData = useSelector((prev) => prev.AuthReducer)
+  const loginErr = useSelector((state) => state?.auth?.loginError) 
 
 
   const userSignIn = (e) => {
@@ -70,31 +73,41 @@ const Login = () => {
       setPasswordErr(true)
     }
     setLoadingBtn(true)
-    const loginUser = async () => {
-      try {
-        const collectUserData = await postQuery(
-          `/securityService/api/auth/signin`,
-          userLoginData
-        )
-        dispatch(currentUserAction(collectUserData.data))
-        dispatch(userTokenAction(collectUserData.data.jwt))
-        setLoadingBtn(false)
-        localStorage.setItem("Access-token", collectUserData.data.jwt)
-        navigate(`/erp/${collectUserData.data.id}/sales`)
-      } catch (err) {
-        if (err.response.status === 401) {
-          toast.error("Enter a valid username or password")
-          setLoadingBtn(false)
-        }
-        if (err.response.status === 500) {
-          toast.error("please Referesh this page or try again later")
-          setLoadingBtn(false)
-        }
-        setLoadingBtn(false)
-      }
+
+    const loginMyUser = async () => {
+       const loginUser =  await dispatch(getCurrentUser(userLoginData))
+       console.log("i am login user", loginUser);
+       navigate(`/erp/${loginUser?.payload?.id}/sales/leads`)
     }
 
-    loginUser()
+    loginMyUser();
+
+
+    // const loginUser = async () => {
+    //   try {
+    //     const collectUserData = await postQuery(
+    //       `/securityService/api/auth/signin`,
+    //       userLoginData
+    //     )
+    //     // dispatch(currentUserAction(collectUserData.data))
+    //     // dispatch(userTokenAction(collectUserData.data.jwt))
+    //     setLoadingBtn(false)
+    //     localStorage.setItem("Access-token", collectUserData?.data?.jwt)
+    //     navigate(`/erp/${collectUserData.data.id}/sales`)
+    //   } catch (err) {
+    //     if (err.response.status === 401) {
+    //       toast.error("Enter a valid username or password")
+    //       setLoadingBtn(false)
+    //     }
+    //     if (err.response.status === 500) {
+    //       toast.error("please Referesh this page or try again later")
+    //       setLoadingBtn(false)
+    //     }
+    //     setLoadingBtn(false)
+    //   }
+    // }
+
+    //  loginUser()
   }
 
 
@@ -147,6 +160,9 @@ const Login = () => {
         ) : (
           ""
         )}
+        <div className="mt-2">
+        {loginErr ? <InputErrorComponent value="Enter correct Username or Password" /> : "" }
+        </div>
       </div>
       <div className="remember">
         <div className="agree-text">

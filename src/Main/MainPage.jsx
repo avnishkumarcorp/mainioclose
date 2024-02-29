@@ -1,35 +1,95 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "./MainPage.scss"
 import SideBar from "./SideBar"
-import { Outlet, useNavigate } from "react-router"
+import { Outlet, useNavigate, useParams } from "react-router"
 import { useLocation } from "react-router-dom"
 import TopNav from "../components/TopNav"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { useId } from "react"
 import { customLocation } from "../Hooks/LocationCustomHook"
+import { getNotificationFun } from "../Toolkit/Slices/NotificationSlice"
+import { logoutFun } from "../Toolkit/Slices/AuthSlice"
 toast.configure()
 
 const MainPage = () => {
+  const [toasterData, setToasterData] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
   const paramId = customLocation(2, location)
+  const { userid } = useParams()
 
-  const currentUserToken = useSelector((state) => state.AuthReducer.token)
-  const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
+  const currentUser = useSelector((state) => state)
+  
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    let UserToken = localStorage.getItem("Access-token")
-    if (
-      !UserToken ||
-      currentUserToken !== UserToken ||
-      currentUserId !== paramId
-    ) {
-      localStorage.removeItem("Access-token")
-      navigate("/erp/login")
-      toast.error("your Session has Expired Please Login again")
-    }
-  })
+    setInterval(() => {
+      dispatch(getNotificationFun(userid))
+      setToasterData((prev) => !prev)
+    }, 10000)
+  }, [])
+
+  const allNotifications = useSelector((state) => state.notify.allNotifications)
+  
+  useEffect(() => {
+    const SingleNotification = allNotifications[0]
+    const start = Date.now()
+    let startPoint = Date.now() + 120000
+    let anotherDate = start - 10000
+    let bool = true
+    let apiDate = new Date(SingleNotification?.notifyDate).getTime()
+      setTimeout(() => {
+        if (start >= apiDate && start <= apiDate + 30000) {
+          toast.success(SingleNotification.message)
+        }
+      }, 1000)
+  }, [toasterData])
+
+
+
+  const authStatus = useSelector((state) => state.auth.isAuth)
+
+  
+  
+  // dispatch()
+  // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
+  // useEffect(() => {
+  //   let UserToken = localStorage.getItem("Access-token")
+  //   if (
+  //     !UserToken ||
+  //     currentUserToken !== UserToken ||
+  //     currentUserId !== paramId
+  //   ) {
+  //     localStorage.removeItem("Access-token")
+  //     navigate("/erp/login")
+  //     toast.error("your Session has Expired Please Login again")
+  //   }
+  // })
+
+  // const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  // const currentUserToken = useSelector((state) => state?.auth?.jwt)
+
+  // const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  // const currentUserToken = useSelector((state) => state?.auth?.jwt)
+
+  // console.log("i am token", currentUserToken);
+
+  // const currentUserToken = useSelector((state) => state.AuthReducer.token)
+  // const currentUserId = useSelector((state) => state.AuthReducer.currentUser.id)
+  // useEffect(() => {
+  //   let UserToken = localStorage.getItem("Access-token")
+  //   if (
+  //     !UserToken ||
+  //     currentUserToken !== UserToken ||
+  //     currentUserId !== paramId
+  //   ) {
+  //     localStorage.removeItem("Access-token")
+  //     navigate("/erp/login")
+  //     toast.error("your Session has Expired Please Login again")
+  //   }
+  // })
 
   return (
     <div className="main-page">
