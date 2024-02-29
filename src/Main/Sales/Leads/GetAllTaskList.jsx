@@ -20,8 +20,19 @@ const GetAllTaskList = () => {
   } = useCustomRoute(allTasksByUser, allTaskDep)
 
   console.log("task data ", taskData)
+  // let inputDataBefore = new Date(dateInput).getTime()
 
-  let beforeDate = new Date().getTime()
+  let currentDateNew = new Date(new Date().toJSON().slice(0, 10)).getTime()
+
+  let currentDate = Date.now()
+  let currentDate2 = new Date().getTime()
+  console.log(
+    "i am current date",
+    currentDate,
+    currentDate2,
+    currentDate - currentDate2
+  )
+  let beforeDate = currentDateNew
   let endDate = beforeDate + 86400000
 
   const todayTaskData2 = () => {
