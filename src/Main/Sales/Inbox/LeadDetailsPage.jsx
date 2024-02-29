@@ -956,17 +956,17 @@ const LeadDetailsPage = () => {
                         <div>
                           <p className="lead-heading">
                             {client?.clientName
-                              ? `${client?.clientName.slice(0, 30)}...`
+                              ? `${client?.clientName.slice(0, 30)}${client.clientName.length > 30 ? `...` : "" }`
                               : "NA"}
                           </p>
                           <h6 className="lead-sm-heading mb-0">
                             {client?.email
-                              ? `${client?.email.slice(0, 30)}...`
+                              ? `${client?.email.slice(0, 30)}${client.email.length > 30 ? `...` : "" }`
                               : "NA"}
                           </h6>
                           <h6 className="lead-sm-heading ">
                             {client.contactNo
-                              ? `${client.contactNo.slice(0, 20)}...`
+                              ? `${client.contactNo.slice(0, 20)} ${client.contactNo.length > 20 ? `...` : "" }`
                               : "NA"}
                           </h6>
                         </div>

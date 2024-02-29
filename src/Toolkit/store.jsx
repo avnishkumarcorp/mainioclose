@@ -8,12 +8,14 @@ import persistStore from "redux-persist/es/persistStore"
 import LeadSlice from "./Slices/LeadSlice"
 import NotificationSlice from "./Slices/NotificationSlice"
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
+import TicketSlice from "./Slices/TicketSlice"
 
 const reducers = combineReducers({
   auth: AuthSlice,
   user: UsersSlice,
   leads: LeadSlice,
-  notify: NotificationSlice
+  notify: NotificationSlice,
+  tickets: TicketSlice,
 })
 
 const persistConfig = {
