@@ -553,6 +553,30 @@ button:focus {
   color: #262e39;
 }
 
+.fw-600{
+  font-weight: 600;
+}
+
+.count-data{
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #093252;
+  position: relative;
+  font-size: 13px;
+}
+
+.head-count{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
 .estimate-bold {
   font-size: 13px;
   font-weight: 500;

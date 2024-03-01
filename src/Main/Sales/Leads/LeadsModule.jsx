@@ -167,6 +167,9 @@ const LeadsModule = () => {
 
   const allLeadsData = useSelector((state) => state.leads.allLeads)
 
+  const leadCount = allLeadsData.length;
+  console.log("lead count is", leadCount);
+
   const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
 
   // console.log("lead data dispatch", leadDataDispatch);
@@ -252,6 +255,7 @@ const LeadsModule = () => {
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
           onClick={() => viewHistory(props.row.id)}
+          className={`${props.row.view ? '': 'fw-600'}`}
         >
           {props?.row?.leadName}
         </Link>
@@ -379,6 +383,7 @@ const LeadsModule = () => {
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
           onClick={() => viewHistory(props.row.id)}
+          className={`${props.row.view ? '': 'fw-600'}`}
         >
           {props?.row?.leadName}
         </Link>
@@ -424,7 +429,7 @@ const LeadsModule = () => {
       ),
     },
     {
-      field: "client",
+      field: "name",
       headerName: "Client Name",
       width: 150,
       renderCell: (props) => (
@@ -648,7 +653,7 @@ const LeadsModule = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading">Leads</h1>
+        <h1 className="table-heading head-count">Leads<sup className="count-data">{leadCount}</sup></h1>
         <div className="all-center">
           <Link to={`allTask`}>
             <div className="common-btn-one mr-2">All Tasks</div>

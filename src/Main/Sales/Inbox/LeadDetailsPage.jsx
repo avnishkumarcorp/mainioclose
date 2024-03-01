@@ -77,6 +77,8 @@ const LeadDetailsPage = () => {
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
   const [fileValue, setFileValue] = useState(null)
   const [mobNumberError, setMobNumberError] = useState(false);
+  const [contactNameErr, setContactNameErr] = useState(false);
+
 
   const [file, setFile] = useState()
   const [imageResponse, setImageResponse] = useState("")
@@ -604,12 +606,18 @@ const LeadDetailsPage = () => {
   const createLeadContact = (e) => {
     e.preventDefault()
 
+    if(contactNameRef.current.value === ""){
+      setContactNameErr(true)
+      return
+    }
+
     if(contactContactNoRef.current.value.length !== 10){
       setMobNumberError(true);
       console.log("Enter 10 digit NUmber", contactContactNoRef.current.value.length);
       return
     }
     setMobNumberError(false);
+    setContactNameErr(false)
 
     const leadContact = async () => {
       try {
@@ -633,10 +641,29 @@ const LeadDetailsPage = () => {
     }
     leadContact()
   }
-
+  const statusRef = useRef();
+  const [taskTitleError, setTaskTitleError] = useState(false);
+  const [taskDateError, setTaskDateError] = useState(false);
+  const [taskStatusError, setTaskStatusError] = useState(false);
+  
   // Create New Tasks for Lead Function
   const createTaskFun = (e) => {
     e.preventDefault()
+
+    if(taskTitle.current.value === ""){
+      setTaskTitleError(true)
+      return
+    }
+    if(taskDate.current.value === ""){
+      setTaskDateError(true)
+      return
+    }
+    if(statusRef.current.value === undefined){
+      setTaskStatusError(true)
+      return
+    }
+
+
     const TaskCreateNew = async () => {
       try {
         const taskCreateData = await postQuery(
@@ -647,11 +674,15 @@ const LeadDetailsPage = () => {
         taskTitle.current.value = ""
         taskDescription.current.value = ""
         taskDate.current.value = ""
+        setTaskTitleError(false)
+        setTaskDateError(false)
       } catch (err) {
         console.log("err", err)
         if (err.response.status === 500) {
-          toast.error(err.response.data.message)
+          toast.error("Reminder already in the queue.Kindly check 10 minutes after set-reminder")
         }
+        setTaskTitleError(false)
+        setTaskDateError(false)
         return
       }
       addNewTask.name = ""
@@ -860,6 +891,7 @@ const LeadDetailsPage = () => {
                           ref={contactNameRef}
                           type="text"
                         />
+                        {contactNameErr ? <InputErrorComponent value="Name can't be Blank!" /> : ""}
                       </div>
                       {/* <div className="product-box">
                         <label
@@ -1032,6 +1064,7 @@ const LeadDetailsPage = () => {
                           onChange={(e) => setTasksDataFun(e)}
                           type="text"
                         />
+                         {taskTitleError ? <InputErrorComponent value="Title Can't Be Blank" /> : ""}
                       </div>
 
                       <div className="product-box">
@@ -1076,6 +1109,7 @@ const LeadDetailsPage = () => {
                           ref={taskDate}
                           onChange={(e) => setTasksDataFun(e)}
                         />
+                         {taskDateError ? <InputErrorComponent value="Date Can't Be Blank" /> : ""}
                       </div>
 
                       {/* <div className="product-box">
@@ -1116,6 +1150,7 @@ const LeadDetailsPage = () => {
                         <select
                           className="lead-cm-input"
                           name="statusId"
+                          ref={statusRef}
                           onChange={(e) => setTasksDataFun(e)}
                           id="select-product"
                         >
@@ -1131,6 +1166,8 @@ const LeadDetailsPage = () => {
                           <option value="mercedes">Mercedes</option>
                           <option value="audi">Audi</option> */}
                         </select>
+                        {taskStatusError ? <InputErrorComponent value="Status Can't Be Blank" /> : ""}
+             
                       </div>
                       <div className="lead-btn-box">
                         <button
