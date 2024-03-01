@@ -20,6 +20,7 @@ import { putQuery } from "../../../API/PutQuery"
 import { deleteQuery } from "../../../API/DeleteQuery"
 import ImageComp from "../../../components/ImageComp"
 import InputErrorComponent from "../../../components/InputErrorComponent"
+import AllTasksPage from "./AllTasksPage"
 toast.configure()
 
 // data-toggle="tooltip" data-placement="top" title="Tooltip on top"
@@ -45,6 +46,7 @@ const LeadDetailsPage = () => {
   const [updateLeadName, setUpdateLeadName] = useState("")
   const [notesLoading, setNotesLoading] = useState(false)
   const [contactDelDep, setContactDelDep] = useState(false)
+  const [openAllTask, setOpenAllTask] = useState(false);
 
   const [productDataScaleaton, setProductDataScaleaton] = useState(true)
   const [leadNameReload, setLeadNameReload] = useState(false)
@@ -150,6 +152,10 @@ const LeadDetailsPage = () => {
 
   const openEstimateFun = () => {
     setEstimateOpenBtn((prev) => !prev)
+  }
+  const openTasksFun = () => {
+    console.log("open");
+    setOpenAllTask((prev) => !prev)
   }
 
   const submitImage = async (e) => {
@@ -782,6 +788,12 @@ const LeadDetailsPage = () => {
       ) : (
         ""
       )}
+
+      {openAllTask ? (
+        <AllTasksPage setOpenAllTask={setOpenAllTask} />
+      ) : (
+        ""
+      )}
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
@@ -817,7 +829,7 @@ const LeadDetailsPage = () => {
             )}
             <p className="lead-location">
               <i className="fa-solid mr-1 fa-location-dot"></i>
-              {singleLeadResponseData?.city}
+              {singleLeadResponseData?.city ? singleLeadResponseData?.city : "Address" }
             </p>
 
             <p className="lead-blue-head">
@@ -1617,6 +1629,7 @@ const LeadDetailsPage = () => {
               >
                 <i className="fa-solid mr-1 fa-backward-step"></i>Back
               </Link>
+              <button  className="filter-btn-design" onClick={() => openTasksFun()} >All Tasks</button>
             </div>
             <div className="filter-box mt-3">
               <select

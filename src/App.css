@@ -20,17 +20,17 @@ body {
 
 /* common classes */
 
-a{
+a {
   color: var(--mainBlue);
   text-decoration: none;
 }
 
-a:hover{
+a:hover {
   color: var(--black);
   text-decoration: none;
 }
 
-.blur-cl{
+.blur-cl {
   color: var(--mainBlue);
 }
 
@@ -39,15 +39,15 @@ a:hover{
 }
 */
 
-.disk-size{
+.disk-size {
   font-size: 22px;
-} 
+}
 
-.gray-cl{
+.gray-cl {
   color: #767373;
 }
 
-.pos-fix{
+.pos-fix {
   position: fixed;
 }
 
@@ -65,13 +65,13 @@ button:focus {
   align-items: center;
 }
 
-.one-line{
+.one-line {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.common-btn-one{
+.common-btn-one {
   color: #ffffff;
   background-color: #093252;
   border: 1px solid #093252;
@@ -81,20 +81,20 @@ button:focus {
   font-size: 13px;
 }
 
-.common-btn-one:hover{
+.common-btn-one:hover {
   color: #fff;
 }
 
-.noti-view{
+.noti-view {
   font-weight: 600;
 }
 
-.d-end{
+.d-end {
   display: flex;
   justify-content: flex-end;
 }
 
-.min-box{
+.min-box {
   max-height: 250px;
   overflow-y: auto;
 }
@@ -105,13 +105,11 @@ button:focus {
   height: 10px;
 }
 
-
-
-.circle-image{
+.circle-image {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background-color:  #FAD6A5;
+  background-color: #fad6a5;
   color: #000;
   display: flex;
   justify-content: center;
@@ -379,23 +377,22 @@ button:focus {
 
 /* table data */
 
-.table-arrow{
+.table-arrow {
   position: relative;
 }
 
-.table-arrow:hover .cm-arrow{
+.table-arrow:hover .cm-arrow {
   display: block;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.MuiDataGrid-main .css-204u17-MuiDataGrid-main{
+.MuiDataGrid-main .css-204u17-MuiDataGrid-main {
   overflow: scroll;
 }
 
-
-.multi-select-boxx{
+.multi-select-boxx {
   font-size: 13px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -406,21 +403,20 @@ button:focus {
   padding: 3px;
 }
 
-.date-input{
+.date-input {
   font-size: 13px;
   border-radius: 4px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
   padding: 3px;
-  
 }
 
-.bell-box{
+.bell-box {
   position: relative;
   cursor: pointer;
 }
 
-.bell-box .bell-count{
+.bell-box .bell-count {
   color: #fff;
   font-size: 13px;
   background-color: red;
@@ -436,48 +432,46 @@ button:focus {
   align-items: center;
 }
 
-.bell-box .bell-icon{
+.bell-box .bell-icon {
   font-size: 25px;
   margin-left: 10px;
   color: #0f0f0f;
 }
 
-.multi-select-boxx .p-multiselect-header{
+.multi-select-boxx .p-multiselect-header {
   background-color: #000;
   color: #fff;
 }
 
-.p-multiselect-items.p-component{
+.p-multiselect-items.p-component {
   background-color: #fff;
   padding: 10px;
 }
 
-
-.task-pending{
+.task-pending {
   color: #f0ad4e;
   border: 1px solid #f0ad4e;
   padding: 2px 4px;
   border-radius: 4px;
 }
 
-
-.task-done{
+.task-done {
   color: #5cb85c;
   border: 1px solid #5cb85c;
   padding: 2px 4px;
   border-radius: 4px;
 }
 
-.label-heading{
+.label-heading {
   font-size: 13px;
 }
 
-.form-control.input-focus{
+.form-control.input-focus {
   padding: 3px 6px;
   font-size: 13px;
 }
 
-.form-control.input-focus::placeholder{ 
+.form-control.input-focus::placeholder {
   font-size: 13px;
 }
 
@@ -485,50 +479,39 @@ button:focus {
   margin-bottom: 10px;
 }
 
-
-
-
-
-
-
 /* mui table changes */
 
-.css-1knaqv7-MuiButtonBase-root-MuiButton-root{
+.css-1knaqv7-MuiButtonBase-root-MuiButton-root {
   color: var(--mainBlue) !important;
 }
 
-
-.setting-table{
+.setting-table {
   padding: 20px 0px;
   font-size: 14px;
 }
 
-.font-13{
+.font-13 {
   font-size: 13px;
   color: #093252;
 }
 
-.btn-trans{
+.btn-trans {
   border: none;
   outline: none;
   color: #fff;
   background: transparent;
 }
 
-.model-image{
+.model-image {
   height: 100%;
   width: 100%;
 }
 
-.model-image img{
+.model-image img {
   height: 100%;
   width: 100%;
   object-fit: contain;
 }
-
-
-
-
 
 /* estimate */
 
@@ -553,11 +536,11 @@ button:focus {
   color: #262e39;
 }
 
-.fw-600{
+.fw-600 {
   font-weight: 600;
 }
 
-.count-data{
+.count-data {
   height: 25px;
   width: 25px;
   border-radius: 50%;
@@ -570,11 +553,11 @@ button:focus {
   font-size: 13px;
 }
 
-.head-count{
+.head-count {
   display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
 }
 
 .estimate-bold {
@@ -616,27 +599,31 @@ button:focus {
   background-color: #1f8637;
 }
 
-.font-changer{
+.font-changer {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
 }
 
-.lead-new{
+.lead-new {
   color: green;
 }
 
-.heading-four{
+.heading-four {
   margin-bottom: 5px;
   font-size: 16px;
   font-weight: 500;
 }
 
-.link-four{
+.link-four {
   font-size: 14px;
   display: block;
 }
 
+.custom-box {
+  width: 1050px !important;
+  overflow: auto;
+}
 
 /* mui table */
 
@@ -705,17 +692,14 @@ select.form-control:not([size]):not([multiple]) {
   height: auto;
 }
 
-.logout-btn{
+.logout-btn {
   width: 100%;
-    border: none;
-    outline: none;
-    font-size: 14px;
-    background: transparent;
-    color: var(--white);
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  color: var(--white);
 }
-
-
-
 
 @media only screen and (max-width: 992px) {
 }
