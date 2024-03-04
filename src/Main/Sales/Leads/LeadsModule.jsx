@@ -250,7 +250,7 @@ const LeadsModule = () => {
     {
       field: "leadName",
       headerName: "Lead Name",
-      width: 280,
+      width: 250,
       renderCell: (props) => (
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
@@ -261,12 +261,22 @@ const LeadsModule = () => {
         </Link>
       ),
     },
+    {
+      field: "name",
+      headerName: "Client Name",
+      width: 130,
+      renderCell: (props) => (
+        <p className="mb-0">
+          {props.row.clients[0]?.name ? props.row.clients[0]?.name : "NA"}
+        </p>
+      ),
+    },
     { field: "mobileNo", headerName: "Mobile No", width: 150 },
     { field: "email", headerName: "Email", width: 150 },
     {
       field: "missedTaskDate",
       headerName: "Missed Task",
-      width: 220,
+      width: 200,
       renderCell: (props) => {
         const taskmissed = props?.row
         const taskStatus = props?.row?.missedTaskStatus
@@ -653,7 +663,7 @@ const LeadsModule = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading head-count">Leads<sup className="count-data">{leadCount}</sup></h1>
+        <h1 className="table-heading head-count">Leads ({leadCount})</h1>
         <div className="all-center">
           <Link to={`allTask`}>
             <div className="common-btn-one mr-2">All Tasks</div>

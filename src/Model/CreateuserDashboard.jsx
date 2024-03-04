@@ -8,12 +8,13 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { userDepartment } from "../data/FakeData"
 import { Link } from "react-router-dom"
+import { putQuery } from "../API/PutQuery"
 toast.configure()
 
-const CreateuserDashboard = ({data, type}) => {
+const CreateuserDashboard = ({ data, type }) => {
   // /securityService/api/auth/createNewUserByEmail
-  const {id, fullName, } = data;
-  const [roleGetRole, setRoleGetRole] = useState([]);
+
+  const [roleGetRole, setRoleGetRole] = useState([])
   const [userRowData, setUserRowData] = useState({
     userName: "",
     email: "",
@@ -22,52 +23,60 @@ const CreateuserDashboard = ({data, type}) => {
     department: "",
   })
 
- 
+  
   // console.log(id, type);
-  const [btnLoading, setBtnLoading] = useState(false);
-  const [allRoles, setAllRoles] = useState([]);
-  
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [roleError, setRoleError] = useState(false);
+  const [btnLoading, setBtnLoading] = useState(false)
+  const [allRoles, setAllRoles] = useState([])
 
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const roleRef = useRef();
-  const designationRef = useRef();
+  const [nameError, setNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [roleError, setRoleError] = useState(false)
+  const [editUserLoading, setEditUserLoading] = useState(false)
 
-  
+  const nameRef = useRef()
+  const emailRef = useRef()
+  const roleRef = useRef()
+  const designationRef = useRef()
+
   const GetRoleFun = (e) => {
-    setUserRowData((prev) => ({...prev, role: [e.target.value] }));
+    setUserRowData((prev) => ({ ...prev, role: [e.target.value] }))
   }
 
-  useEffect(()=>{
-      setUserRowData(()=> ({
-        userName: fullName,
-        email: "",
-        role: [],
-        designation: "",
-        department: "",
-      }))
- },[type])
-  
-  
+  //   useEffect(()=>{
+  //       setUserRowData(()=> ({
+  //         userName: data.fullName,
+  //         email: "",
+  //         role: [],
+  //         designation: "",
+  //         department: "",
+  //       }))
+  //  },[type])
+
+  useEffect(() => {
+    userRowDataFetch()
+  }, [type])
+
   const userRowDataFetch = (e) => {
-    setUserRowData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
-   
+    if (type) {
+      setUserRowData((prev) => ({ ...prev, ...data }))
+      setUserRowData((prev) => ({ ...prev, [e?.target.name]: e?.target.value }))
+    } else {
+      setUserRowData((prev) => ({ ...prev, [e?.target.name]: e?.target.value }))
+    }
   }
 
- useEffect(()=>{
-  getAllRole();
- }, [])
+  // const editUserData = () =>{
+  //   setUserRowData((prev) => ({...prev, ...data}))
+  // }
 
+  useEffect(() => {
+    getAllRole()
+  }, [])
 
- const roleUrl = `/securityService/api/v1/roles/getRole`;
- const roleData  = [];
+  const roleUrl = `/securityService/api/v1/roles/getRole`
+  const roleData = []
 
-
- const {productData: allDataRole} = useCustomRoute(roleUrl, roleData);
-
+  const { productData: allDataRole } = useCustomRoute(roleUrl, roleData)
 
   const getAllRole = async () => {
     try {
@@ -80,24 +89,24 @@ const CreateuserDashboard = ({data, type}) => {
     }
   }
 
-
   const createuserData = (e) => {
     e.preventDefault()
-    if(nameRef.current.value === ""){
+    if (nameRef.current.value === "") {
       setNameError(true)
     }
-    if(emailRef.current.value === ""){
+    if (emailRef.current.value === "") {
       setEmailError(true)
     }
-    if(roleRef.current.value.length === 0){
+    if (roleRef.current.value.length === 0) {
       setRoleError(true)
-      
     }
-    if(roleRef.current.value === "" || emailRef.current.value === "" || nameRef.current.value === ""){
-      return;   
+    if (
+      roleRef.current.value === "" ||
+      emailRef.current.value === "" ||
+      nameRef.current.value === ""
+    ) {
+      return
     }
-
-
 
     setBtnLoading(true)
     const userCreateFun = async () => {
@@ -107,9 +116,7 @@ const CreateuserDashboard = ({data, type}) => {
           userRowData
         )
 
-        let roleData = createNewUserData.data.data.role.map((role)=> (role.name));
-
-
+        let roleData = createNewUserData.data.data.role.map((role) => role.name)
 
         const newLeadObject = {
           id: createNewUserData.data.data.userId,
@@ -120,12 +127,13 @@ const CreateuserDashboard = ({data, type}) => {
           userName: createNewUserData.data.data.name,
         }
 
-      
-
-        const createLeadUserByEmail = await postQuery(`/leadService/api/v1/users/createUserByEmail`, newLeadObject);
-        setBtnLoading(false);
-        roleRef.current.value = "" 
-        emailRef.current.value = "" 
+        const createLeadUserByEmail = await postQuery(
+          `/leadService/api/v1/users/createUserByEmail`,
+          newLeadObject
+        )
+        setBtnLoading(false)
+        roleRef.current.value = ""
+        emailRef.current.value = ""
         nameRef.current.value = ""
         designationRef.current.value = ""
 
@@ -137,6 +145,54 @@ const CreateuserDashboard = ({data, type}) => {
       }
     }
     userCreateFun()
+  }
+
+
+  const editUserData = async (e) => {
+    e.preventDefault()
+    console.log("edit data", userRowData);
+    setEditUserLoading(true)
+    // const updateUser = putQuery()
+    const upadtedData = {
+      id: userRowData.id,
+      name: userRowData.fullName,
+      email: userRowData.email,
+      designation: userRowData.designation,
+      roles: userRowData.role,
+    }
+
+    const updateLeadData = {
+      id: userRowData.id,
+      firstName: "",
+      lastName: "",
+      fullName: userRowData.fullName,
+      email: userRowData.email,
+      designation: userRowData.designation,
+      department: userRowData.department,
+      role: userRowData.role
+    }
+
+    console.log("user lead adaa", updateLeadData);
+
+   
+
+
+
+
+    console.log("upadtedData", upadtedData);
+    try{
+    const updateUserData = await putQuery(`/securityService/api/auth/updateUserData`, upadtedData);
+    const updateLeadUserData = await putQuery(`/leadService/api/v1/users/updateUserData`,updateLeadData )
+    console.log(updateUserData);
+    console.log(updateLeadUserData);
+    window.location.reload();
+    toast.success("User Edit Succesfully")
+  }catch(err){
+      console.log(err);
+      setEditUserLoading(false)
+    }
+    
+
   }
 
   return (
@@ -168,7 +224,9 @@ const CreateuserDashboard = ({data, type}) => {
               <div className="add-team-body">
                 {/* START */}
                 <div className="personal-info container">
-                  <h4 className="info-text model-heading">{type ? "Edit New user" : "Create New User"}</h4>
+                  <h4 className="info-text model-heading">
+                    {type ? "Edit New user" : "Create New User"}
+                  </h4>
                   <div className="cross-icon">
                     <i
                       data-dismiss="modal"
@@ -189,10 +247,12 @@ const CreateuserDashboard = ({data, type}) => {
                             type="text"
                             className="form-control input-focus"
                             id="teamName"
-                            value ={userRowData.fullName}
+                            value={
+                              type ? userRowData.fullName : userRowData.fullName
+                            }
                             ref={nameRef}
                             placeholder="Enter Username"
-                            name="userName"
+                            name={type ? "fullName" : "userName"}
                             onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
@@ -216,12 +276,15 @@ const CreateuserDashboard = ({data, type}) => {
                             id="teamLeadName"
                             placeholder="Enter Email"
                             name="email"
+                            value={type ? userRowData.email : userRowData.email}
                             ref={emailRef}
                             onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
                         {emailError ? (
-                          <InputErrorComponent value={"Email can't be Blank!"} />
+                          <InputErrorComponent
+                            value={"Email can't be Blank!"}
+                          />
                         ) : (
                           ""
                         )}
@@ -239,6 +302,7 @@ const CreateuserDashboard = ({data, type}) => {
                             className="form-control input-focus"
                             name="role"
                             id="select-product"
+                            value={type ? userRowData.role : userRowData.role}
                             ref={roleRef}
                             onChange={(e) => GetRoleFun(e)}
                           >
@@ -268,6 +332,11 @@ const CreateuserDashboard = ({data, type}) => {
                             type="text"
                             className="form-control input-focus"
                             id="mobileNo"
+                            value={
+                              type
+                                ? userRowData.designation
+                                : userRowData.designation
+                            }
                             ref={designationRef}
                             placeholder="Enter Designation"
                             name="designation"
@@ -282,13 +351,18 @@ const CreateuserDashboard = ({data, type}) => {
                             className="label-heading mb-1"
                             htmlFor="mobileNo"
                           >
-                             Department*
+                            Department*
                           </label>
 
                           <select
                             className="form-control input-focus"
                             name="department"
                             id="select-product"
+                            value={
+                              type
+                                ? userRowData.department
+                                : userRowData.department
+                            }
                             ref={roleRef}
                             onChange={(e) => userRowDataFetch(e)}
                           >
@@ -300,7 +374,6 @@ const CreateuserDashboard = ({data, type}) => {
                             ))}
                           </select>
                         </div>
-                       
                       </div>
 
                       {/* <div className="form-group col-md-6">
@@ -326,12 +399,19 @@ const CreateuserDashboard = ({data, type}) => {
                       <div className="all-between-items">
                         <div className="all-center"></div>
                         <div>
-                          <button
+                          {type ? (
+                             <button onClick={(e) => editUserData(e)} className="first-button form-prev-btn">
+                             {editUserLoading ? "Please wait...": "Edit User"}
+                           </button>
+                            
+                          ) : (
+                            <button
                             onClick={(e) => createuserData(e)}
                             className="first-button form-prev-btn"
                           >
-                          { btnLoading ? "Loading" :  "Submit" }
+                            {btnLoading ? "Loading" : "Submit"}
                           </button>
+                          )}
                         </div>
                       </div>
                     </div>
