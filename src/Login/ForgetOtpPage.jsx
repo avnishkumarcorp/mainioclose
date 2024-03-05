@@ -12,8 +12,10 @@ const ForgetOtpPage = () => {
   const [validOtpErr, setValidOtpErr] = useState(false)
 
   const forgetOtpResponse = useSelector(
-    (auth) => auth.AuthReducer.forgetPassword
+    (auth) => auth.password.forgetData
   )
+
+  console.log(forgetOtpResponse);
   const navigate = useNavigate()
 
   const firstRef = useRef()

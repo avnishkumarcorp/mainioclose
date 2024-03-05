@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css"
 import InputErrorComponent from "../components/InputErrorComponent"
 import ButtonTwo from "../components/button/ButtonTwo"
 import LongButton from "../components/button/LongButton"
+import { forgetPasswordApi } from "../Toolkit/Slices/ForgetPasswordSlice"
 toast.configure()
 
 const ForgetPassword = () => {
@@ -45,6 +46,19 @@ const ForgetPassword = () => {
       setEmailErr(false)
     }
     setLoading(true)
+
+    const forgetData = async () => {
+      try{
+      const data = await dispatch(forgetPasswordApi(emailData))
+      navigate("/erp/forgetotp")
+      }catch(err){
+        console.log(err);
+      }
+    }
+
+    forgetData();
+
+
     const forgetPass = async () => {
       try {
         const passwordOtp = await axios.post(
@@ -72,7 +86,7 @@ const ForgetPassword = () => {
       }
     }
 
-    forgetPass()
+    // forgetPass()
   }
 
  

@@ -9,6 +9,7 @@ import LeadSlice from "./Slices/LeadSlice"
 import NotificationSlice from "./Slices/NotificationSlice"
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
 import TicketSlice from "./Slices/TicketSlice"
+import ForgetPasswordSlice from "./Slices/ForgetPasswordSlice"
 
 const reducers = combineReducers({
   auth: AuthSlice,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   leads: LeadSlice,
   notify: NotificationSlice,
   tickets: TicketSlice,
+  password: ForgetPasswordSlice
 })
 
 const persistConfig = {

@@ -20,9 +20,15 @@ const ChangePassword = () => {
   const confirmPasswordRef = useRef()
   const navigate = useNavigate();
 
+  // const forgetPasswordResponse = useSelector(
+  //   (auth) => auth.AuthReducer.forgetPassword
+  // )
+
   const forgetPasswordResponse = useSelector(
-    (auth) => auth.AuthReducer.forgetPassword
+    (auth) =>  auth.password.forgetData
   )
+
+  
   
   const updateUserPassword = (e) => {
     e.preventDefault()
