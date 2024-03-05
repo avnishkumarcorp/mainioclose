@@ -1250,6 +1250,16 @@ const LeadDetailsPage = () => {
                             {task?.description}
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
+                          <span
+                            className={`task-pending mr-1 ${
+                              task?.taskStatus?.name === "Done"
+                                ? "task-done"
+                                : " "
+                            }`}
+                          >
+                            {" "}
+                            {task?.taskStatus?.name}{" "}
+                          </span>
                             <span>
                               {task?.assignedBy?.fullName}
                             </span>
@@ -1267,16 +1277,7 @@ const LeadDetailsPage = () => {
                           {/* lastUpdateDate */}
                         </div>
                         <div className="lead-heading">
-                          <span
-                            className={`task-pending mr-1 ${
-                              task?.taskStatus?.name === "Done"
-                                ? "task-done"
-                                : " "
-                            }`}
-                          >
-                            {" "}
-                            {task?.taskStatus?.name}{" "}
-                          </span>
+                         
                           <i
                             onClick={() => updateTaskData(task)}
                             className="fa-solid fa-pen mr-3"
