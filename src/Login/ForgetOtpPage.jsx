@@ -15,7 +15,6 @@ const ForgetOtpPage = () => {
     (auth) => auth.password.forgetData
   )
 
-  console.log(forgetOtpResponse);
   const navigate = useNavigate()
 
   const firstRef = useRef()

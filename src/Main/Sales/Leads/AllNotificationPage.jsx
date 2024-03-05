@@ -22,7 +22,6 @@ const AllNotificationPage = () => {
   }, [])
   // const SingleNotification = allNotifications[0]
 
-  // console.log("single Notifications", SingleNotification)
 
   // useEffect(() => {
   //   getNotiFun()
@@ -47,7 +46,6 @@ const AllNotificationPage = () => {
   //   }
   // }
 
-  //   console.log("notification Data", NotificationData)
 
   const columns = [
     {
@@ -82,7 +80,6 @@ const AllNotificationPage = () => {
       width: 200,
       renderCell: (props) => {
         const data = props?.row?.notifyDate
-        // console.log(data)
         return data === null || undefined ? (
           "NA"
         ) : (
@@ -96,7 +93,6 @@ const AllNotificationPage = () => {
     },
   ]
 
-  // console.log(allNotificationData)
 
   return (
     <div className="small-box-padding">

@@ -50,21 +50,16 @@ const Login = () => {
 
   const currentUserID = useSelector((state) => state?.auth?.currentUser?.id)
   const CurrentuserData = useSelector((prev) => prev.AuthReducer)
-  // const loginErr = useSelector((state) => state?.auth?.loginError) 
-
-  // console.log(loginErr);
-
 
   const userSignIn = (e) => {
     e.preventDefault()
 
-    if(loadingBtn === true){
-      return 
+    if (loadingBtn === true) {
+      return
     }
 
-    setUserLoginData((data) => ({...data, password: data.password.trim()}))
+    setUserLoginData((data) => ({ ...data, password: data.password.trim() }))
 
-   
     if (emailRef.current.value === "") {
       emailRef.current.style.border = "1px solid red"
       setEmailErr(true)
@@ -78,59 +73,26 @@ const Login = () => {
     setLoadingBtn(true)
 
     const loginMyUser = async () => {
-      console.log("login user////");
-      // if(loginErr === true){
-      //   navigate('/erp/login')
-      //   return
-      // }
-      try{
-       const loginUser =  await dispatch(getCurrentUser(userLoginData))
-       console.log("i am login user", loginUser);
-       if(loginUser.type === "currentUser/fulfilled"){
+      try {
+        const loginUser = await dispatch(getCurrentUser(userLoginData))
+        console.log("i am login user", loginUser)
+        if (loginUser.type === "currentUser/fulfilled") {
           navigate(`/erp/${loginUser?.payload?.id}/sales/leads`)
-       }else{
-        navigate(`/erp/login`)  
-       }
-      }catch(err){
-        console.log(err);
+        } else {
+          navigate(`/erp/login`)
+        }
+      } catch (err) {
+        console.log(err)
         setLoginDataError(true)
-        
-      }finally{
+      } finally {
         setEmailErr(false)
         setPasswordErr(false)
       }
     }
 
-    loginMyUser();
+    loginMyUser()
 
-
-    // const loginUser = async () => {
-    //   try {
-    //     const collectUserData = await postQuery(
-    //       `/securityService/api/auth/signin`,
-    //       userLoginData
-    //     )
-    //     // dispatch(currentUserAction(collectUserData.data))
-    //     // dispatch(userTokenAction(collectUserData.data.jwt))
-    //     setLoadingBtn(false)
-    //     localStorage.setItem("Access-token", collectUserData?.data?.jwt)
-    //     navigate(`/erp/${collectUserData.data.id}/sales`)
-    //   } catch (err) {
-    //     if (err.response.status === 401) {
-    //       toast.error("Enter a valid username or password")
-    //       setLoadingBtn(false)
-    //     }
-    //     if (err.response.status === 500) {
-    //       toast.error("please Referesh this page or try again later")
-    //       setLoadingBtn(false)
-    //     }
-    //     setLoadingBtn(false)
-    //   }
-    // }
-
-    //  loginUser()
   }
-
 
   return (
     <div className="cm-box container">
@@ -182,7 +144,11 @@ const Login = () => {
           ""
         )}
         <div className="mt-2">
-        {loginDataError ? <InputErrorComponent value="Enter correct Username or Password" /> : "" }
+          {loginDataError ? (
+            <InputErrorComponent value="Enter correct Username or Password" />
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="remember">

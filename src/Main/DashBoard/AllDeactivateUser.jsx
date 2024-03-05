@@ -34,9 +34,6 @@ const AllDeactivateUser = () => {
     }
   }
 
-  //   /securityService/api/auth/activateUser?userId=11
-  //   /leadService/api/v1/users/activateUser?id=11
-
   const columns = [
     {
       field: "id",

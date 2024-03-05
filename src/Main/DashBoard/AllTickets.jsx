@@ -12,11 +12,9 @@ const AllTickets = () => {
 
   const ticketCount = ticketsData.length;
 
-  console.log(ticketsLoading)
-
+ 
   const dispatch = useDispatch()
-  console.log(currentUserId)
-
+ 
   useEffect(() => {
     dispatch(getAllTickets(currentUserId))
   }, [])

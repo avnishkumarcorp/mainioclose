@@ -3,7 +3,6 @@ import { getQuery } from "../../API/GetQuery"
 
 export const getAllTickets = createAsyncThunk("allTickets", async (id) => {
   const allTickets = await getQuery(`/leadService/api/v1/getAllTicket?userId=${id}`)
-  console.log("all tickets", allTickets);
   return allTickets.data
 })
 

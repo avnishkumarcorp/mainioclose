@@ -29,18 +29,9 @@ const SideBar = () => {
     }
   }
 
-  // const currentUserProfile = useSelector((prev) => prev.AuthReducer.currentUser)
   const currentUserProfile = useSelector((state) => state?.auth?.currentUser)
-
-  // const currentUserRoles = useSelector(
-  //   (prev) => prev.AuthReducer.currentUser.roles
-  // )
-  // const adminRole = currentUserRoles.includes("ADMIN")
-
   const currentRoles = useSelector((state) => state?.auth?.roles)
-
   const adminRole = currentRoles?.includes("ADMIN")
-
 
   return (
     <div className="sideTab">

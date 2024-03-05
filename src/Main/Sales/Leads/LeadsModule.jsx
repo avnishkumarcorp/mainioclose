@@ -133,17 +133,7 @@ const LeadsModule = () => {
     setDeleteMultiLead((prev) => ({ ...prev, leadId: selectedRows }))
   }, [deleteMultiLead])
 
-  useEffect(() => {
-    getAllLead()
-  }, [
-    updateActive,
-    statusDataId,
-    rerefreshLead,
-    leadStatusD,
-    dateFilter,
-    leadMultiDep,
-    filterBtnNew,
-  ])
+
 
   useEffect(() => {
     dispatch(getAllLeads(allMultiFilterData))
@@ -172,7 +162,7 @@ const LeadsModule = () => {
 
   const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
 
-  // console.log("lead data dispatch", leadDataDispatch);
+ 
 
   const viewHistory = async (leadId) => {
     try {
@@ -211,9 +201,6 @@ const LeadsModule = () => {
     }
   }
 
-  // const currentUserRoles = useSelector(
-  //   (prev) => prev.AuthReducer.currentUser.roles
-  // )
   const currentUserRoles = useSelector((state) => state?.auth?.roles)
   const adminRole = currentUserRoles.includes("ADMIN")
   const newRole = currentUserRoles.includes("NEW")
@@ -579,21 +566,6 @@ const LeadsModule = () => {
     }
   }
 
-  const getAllLead = async () => {
-    try {
-      const allLead = await postQuery(
-        `/leadService/api/v1/lead/getAllLead`,
-        allMultiFilterData
-      )
-      const leadData = allLead.data.reverse()
-      setAllLeadData(leadData)
-
-      setLeadScalatonCall(false)
-    } catch (err) {
-      console.log(err)
-      setLeadScalatonCall(true)
-    }
-  }
 
   const getAllStatusData = async () => {
     try {

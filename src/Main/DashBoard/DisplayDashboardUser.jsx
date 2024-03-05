@@ -22,13 +22,6 @@ const DisplayDashboardUser = () => {
 
   const userCount = allMainUser.length
 
-  // console.log("all mian user", allMainUser);
- 
-  // userError
-
-  // useEffect(() => {
-  //   displayUser()
-  // }, [userSuspand])
 
   useEffect(() => {
     dispatch(getAllUsers())
@@ -43,8 +36,6 @@ const DisplayDashboardUser = () => {
         const deleteUser = await deleteQuery(
           `/leadService/api/v1/users/deleteUser?id=${id}`
         )
-        console.log(suspandUser)
-        console.log(deleteUser)
         setUserSuspand((prev) => !prev)
       } catch (err) {
         console.log(err)

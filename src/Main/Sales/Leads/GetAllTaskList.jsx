@@ -7,7 +7,6 @@ const GetAllTaskList = () => {
   const { userid } = useParams()
   const [dateInput, setDateInput] = useState("")
 
-  console.log("date input", dateInput)
 
   const allTasksByUser = `/leadService/api/v1/task/getAllTaskByAssignee?assigneeId=${userid}`
   const allTaskDep = [dateInput]
@@ -19,7 +18,6 @@ const GetAllTaskList = () => {
     error,
   } = useCustomRoute(allTasksByUser, allTaskDep)
 
-  console.log("task data ", taskData)
   const taskCount = taskData.length;
   // let inputDataBefore = new Date(dateInput).getTime()
 
@@ -27,12 +25,7 @@ const GetAllTaskList = () => {
 
   let currentDate = Date.now()
   let currentDate2 = new Date().getTime()
-  console.log(
-    "i am current date",
-    currentDate,
-    currentDate2,
-    currentDate - currentDate2
-  )
+ 
   let beforeDate = currentDateNew
   let endDate = beforeDate + 86400000
 
@@ -46,7 +39,6 @@ const GetAllTaskList = () => {
       (a, b) =>
         new Date(b.expectedDate).getTime() - new Date(a.expectedDate).getTime()
     )
-    console.log("new data", newData)
     setProductData(newData.reverse())
   }
 
@@ -117,7 +109,6 @@ const GetAllTaskList = () => {
       width: 200,
       renderCell: (props) => {
         const data = props?.row?.expectedDate
-        // console.log(data)
         return data === null || undefined ? (
           "NA"
         ) : (

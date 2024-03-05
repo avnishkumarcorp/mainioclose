@@ -24,7 +24,6 @@ const CreateuserDashboard = ({ data, type }) => {
   })
 
   
-  // console.log(id, type);
   const [btnLoading, setBtnLoading] = useState(false)
   const [allRoles, setAllRoles] = useState([])
 
@@ -150,7 +149,6 @@ const CreateuserDashboard = ({ data, type }) => {
 
   const editUserData = async (e) => {
     e.preventDefault()
-    console.log("edit data", userRowData);
     setEditUserLoading(true)
     // const updateUser = putQuery()
     const upadtedData = {
@@ -172,19 +170,15 @@ const CreateuserDashboard = ({ data, type }) => {
       role: userRowData.role
     }
 
-    console.log("user lead adaa", updateLeadData);
 
    
 
 
 
 
-    console.log("upadtedData", upadtedData);
     try{
     const updateUserData = await putQuery(`/securityService/api/auth/updateUserData`, upadtedData);
     const updateLeadUserData = await putQuery(`/leadService/api/v1/users/updateUserData`,updateLeadData )
-    console.log(updateUserData);
-    console.log(updateLeadUserData);
     window.location.reload();
     toast.success("User Edit Succesfully")
   }catch(err){

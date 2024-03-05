@@ -153,7 +153,6 @@ const LeadDetailsPage = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
   const openTasksFun = () => {
-    console.log("open")
     setOpenAllTask((prev) => !prev)
   }
 
