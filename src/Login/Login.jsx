@@ -36,6 +36,7 @@ const Login = () => {
   const [passwordErr, setPasswordErr] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [loadingBtn, setLoadingBtn] = useState(false)
+  const [loginDataError, setLoginDataError] = useState(false)
 
   const emailRef = useRef()
   const passwordRef = useRef()
@@ -49,9 +50,9 @@ const Login = () => {
 
   const currentUserID = useSelector((state) => state?.auth?.currentUser?.id)
   const CurrentuserData = useSelector((prev) => prev.AuthReducer)
-  const loginErr = useSelector((state) => state?.auth?.loginError) 
+  // const loginErr = useSelector((state) => state?.auth?.loginError) 
 
-  console.log(loginErr);
+  // console.log(loginErr);
 
 
   const userSignIn = (e) => {
@@ -78,15 +79,21 @@ const Login = () => {
 
     const loginMyUser = async () => {
       console.log("login user////");
-      if(loginErr === true){
-        navigate('erp/login')
-      }
+      // if(loginErr === true){
+      //   navigate('/erp/login')
+      //   return
+      // }
       try{
        const loginUser =  await dispatch(getCurrentUser(userLoginData))
        console.log("i am login user", loginUser);
-       navigate(`/erp/${loginUser?.payload?.id}/sales/leads`)
+       if(loginUser.type === "currentUser/fulfilled"){
+          navigate(`/erp/${loginUser?.payload?.id}/sales/leads`)
+       }else{
+        navigate(`/erp/login`)  
+       }
       }catch(err){
         console.log(err);
+        setLoginDataError(true)
         
       }finally{
         setEmailErr(false)
@@ -175,7 +182,7 @@ const Login = () => {
           ""
         )}
         <div className="mt-2">
-        {loginErr ? <InputErrorComponent value="Enter correct Username or Password" /> : "" }
+        {loginDataError ? <InputErrorComponent value="Enter correct Username or Password" /> : "" }
         </div>
       </div>
       <div className="remember">

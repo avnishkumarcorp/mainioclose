@@ -25,6 +25,7 @@ export const AuthSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getCurrentUser.pending, (state, action) => {
       state.loginLoading = true 
+      state.loginError = false
     })
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
       state.currentUser = action.payload
@@ -32,10 +33,12 @@ export const AuthSlice = createSlice({
       state.roles = action.payload.roles
       state.loginLoading = false
       state.isAuth = true
+      state.loginError = false
     })
     builder.addCase(getCurrentUser.rejected, (state, action) => {
       console.log("Err", action.payload, state)
       state.loginError = true
+      state.loginLoading = false
     })
   },
 })
