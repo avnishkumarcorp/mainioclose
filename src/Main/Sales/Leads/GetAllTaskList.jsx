@@ -20,6 +20,7 @@ const GetAllTaskList = () => {
   } = useCustomRoute(allTasksByUser, allTaskDep)
 
   console.log("task data ", taskData)
+  const taskCount = taskData.length;
   // let inputDataBefore = new Date(dateInput).getTime()
 
   let currentDateNew = new Date(new Date().toJSON().slice(0, 10)).getTime()
@@ -133,7 +134,7 @@ const GetAllTaskList = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading">All Tasks</h1>
+        <h1 className="table-heading">All Tasks ({taskCount})</h1>
         <div>
           <input
             type="date"

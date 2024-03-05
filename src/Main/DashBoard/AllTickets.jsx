@@ -10,6 +10,8 @@ const AllTickets = () => {
   const ticketsData = useSelector((state) => state.tickets.allTickets)
   const ticketsLoading = useSelector((state) => state.tickets.TicketsLoading)
 
+  const ticketCount = ticketsData.length;
+
   console.log(ticketsLoading)
 
   const dispatch = useDispatch()
@@ -49,7 +51,7 @@ const AllTickets = () => {
   return (
     <div className="small-box-padding">
       <div className="py-3">
-        <h1 className="table-heading">All Tickets</h1>
+        <h1 className="table-heading">All Tickets ({ticketCount})</h1>
         <div className="py-2">
           {ticketsLoading ? (
             <TableScalaton />

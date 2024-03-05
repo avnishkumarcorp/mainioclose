@@ -20,6 +20,8 @@ const DisplayDashboardUser = () => {
   const [getId, setGetId] = useState('');
   const [editType, setEditType] = useState(false);
 
+  const userCount = allMainUser.length
+
   // console.log("all mian user", allMainUser);
  
   // userError
@@ -98,7 +100,7 @@ const DisplayDashboardUser = () => {
   return (
     <div className="small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading">User List</h1>
+        <h1 className="table-heading">User List ({userCount})</h1>
         <div className="all-center">
         <Link to={`deactivateuser`} className="common-btn-one mr-2">Deactivate Users</Link>
         <CreateuserDashboard data={getId} type={editType} />

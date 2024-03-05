@@ -46,7 +46,7 @@ const LeadDetailsPage = () => {
   const [updateLeadName, setUpdateLeadName] = useState("")
   const [notesLoading, setNotesLoading] = useState(false)
   const [contactDelDep, setContactDelDep] = useState(false)
-  const [openAllTask, setOpenAllTask] = useState(false);
+  const [openAllTask, setOpenAllTask] = useState(false)
 
   const [productDataScaleaton, setProductDataScaleaton] = useState(true)
   const [leadNameReload, setLeadNameReload] = useState(false)
@@ -78,9 +78,8 @@ const LeadDetailsPage = () => {
   // const [updateTaskDataState, setUpdateTaskDataState] = useState()
   // const [EditTaskStatus, setEditTaskStatus] = useState(false)
   const [fileValue, setFileValue] = useState(null)
-  const [mobNumberError, setMobNumberError] = useState(false);
-  const [contactNameErr, setContactNameErr] = useState(false);
-
+  const [mobNumberError, setMobNumberError] = useState(false)
+  const [contactNameErr, setContactNameErr] = useState(false)
 
   const [file, setFile] = useState()
   const [imageResponse, setImageResponse] = useState("")
@@ -154,7 +153,7 @@ const LeadDetailsPage = () => {
     setEstimateOpenBtn((prev) => !prev)
   }
   const openTasksFun = () => {
-    console.log("open");
+    console.log("open")
     setOpenAllTask((prev) => !prev)
   }
 
@@ -612,17 +611,20 @@ const LeadDetailsPage = () => {
   const createLeadContact = (e) => {
     e.preventDefault()
 
-    if(contactNameRef.current.value === ""){
+    if (contactNameRef.current.value === "") {
       setContactNameErr(true)
       return
     }
 
-    if(contactContactNoRef.current.value.length !== 10){
-      setMobNumberError(true);
-      console.log("Enter 10 digit NUmber", contactContactNoRef.current.value.length);
+    if (contactContactNoRef.current.value.length !== 10) {
+      setMobNumberError(true)
+      console.log(
+        "Enter 10 digit NUmber",
+        contactContactNoRef.current.value.length
+      )
       return
     }
-    setMobNumberError(false);
+    setMobNumberError(false)
     setContactNameErr(false)
 
     const leadContact = async () => {
@@ -647,28 +649,27 @@ const LeadDetailsPage = () => {
     }
     leadContact()
   }
-  const statusRef = useRef();
-  const [taskTitleError, setTaskTitleError] = useState(false);
-  const [taskDateError, setTaskDateError] = useState(false);
-  const [taskStatusError, setTaskStatusError] = useState(false);
-  
+  const statusRef = useRef()
+  const [taskTitleError, setTaskTitleError] = useState(false)
+  const [taskDateError, setTaskDateError] = useState(false)
+  const [taskStatusError, setTaskStatusError] = useState(false)
+
   // Create New Tasks for Lead Function
   const createTaskFun = (e) => {
     e.preventDefault()
 
-    if(taskTitle.current.value === ""){
+    if (taskTitle.current.value === "") {
       setTaskTitleError(true)
       return
     }
-    if(taskDate.current.value === ""){
+    if (taskDate.current.value === "") {
       setTaskDateError(true)
       return
     }
-    if(statusRef.current.value === undefined){
+    if (statusRef.current.value === undefined) {
       setTaskStatusError(true)
       return
     }
-
 
     const TaskCreateNew = async () => {
       try {
@@ -685,7 +686,9 @@ const LeadDetailsPage = () => {
       } catch (err) {
         console.log("err", err)
         if (err.response.status === 500) {
-          toast.error("Reminder already in the queue.Kindly check 10 minutes after set-reminder")
+          toast.error(
+            "Reminder already in the queue.Kindly check 10 minutes after set-reminder"
+          )
         }
         setTaskTitleError(false)
         setTaskDateError(false)
@@ -789,11 +792,7 @@ const LeadDetailsPage = () => {
         ""
       )}
 
-      {openAllTask ? (
-        <AllTasksPage setOpenAllTask={setOpenAllTask} />
-      ) : (
-        ""
-      )}
+      {openAllTask ? <AllTasksPage setOpenAllTask={setOpenAllTask} /> : ""}
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
@@ -829,7 +828,9 @@ const LeadDetailsPage = () => {
             )}
             <p className="lead-location">
               <i className="fa-solid mr-1 fa-location-dot"></i>
-              {singleLeadResponseData?.city ? singleLeadResponseData?.city : "Address" }
+              {singleLeadResponseData?.city
+                ? singleLeadResponseData?.city
+                : "Address"}
             </p>
 
             <p className="lead-blue-head">
@@ -903,7 +904,11 @@ const LeadDetailsPage = () => {
                           ref={contactNameRef}
                           type="text"
                         />
-                        {contactNameErr ? <InputErrorComponent value="Name can't be Blank!" /> : ""}
+                        {contactNameErr ? (
+                          <InputErrorComponent value="Name can't be Blank!" />
+                        ) : (
+                          ""
+                        )}
                       </div>
                       {/* <div className="product-box">
                         <label
@@ -953,7 +958,11 @@ const LeadDetailsPage = () => {
                             type="text"
                           />
                         </div>
-                        {mobNumberError ? <InputErrorComponent value="Mobile Number Should be 10 Digit" /> : ""}
+                        {mobNumberError ? (
+                          <InputErrorComponent value="Mobile Number Should be 10 Digit" />
+                        ) : (
+                          ""
+                        )}
                       </div>
 
                       {/* <div className="product-box">
@@ -1000,17 +1009,23 @@ const LeadDetailsPage = () => {
                         <div>
                           <p className="lead-heading">
                             {client?.clientName
-                              ? `${client?.clientName.slice(0, 30)}${client.clientName.length > 30 ? `...` : "" }`
+                              ? `${client?.clientName.slice(0, 30)}${
+                                  client.clientName.length > 30 ? `...` : ""
+                                }`
                               : "NA"}
                           </p>
                           <h6 className="lead-sm-heading mb-0">
                             {client?.email
-                              ? `${client?.email.slice(0, 30)}${client.email.length > 30 ? `...` : "" }`
+                              ? `${client?.email.slice(0, 30)}${
+                                  client.email.length > 30 ? `...` : ""
+                                }`
                               : "NA"}
                           </h6>
                           <h6 className="lead-sm-heading ">
                             {client.contactNo
-                              ? `${client.contactNo.slice(0, 20)} ${client.contactNo.length > 20 ? `...` : "" }`
+                              ? `${client.contactNo.slice(0, 20)} ${
+                                  client.contactNo.length > 20 ? `...` : ""
+                                }`
                               : "NA"}
                           </h6>
                         </div>
@@ -1076,7 +1091,11 @@ const LeadDetailsPage = () => {
                           onChange={(e) => setTasksDataFun(e)}
                           type="text"
                         />
-                         {taskTitleError ? <InputErrorComponent value="Title Can't Be Blank" /> : ""}
+                        {taskTitleError ? (
+                          <InputErrorComponent value="Title Can't Be Blank" />
+                        ) : (
+                          ""
+                        )}
                       </div>
 
                       <div className="product-box">
@@ -1121,7 +1140,11 @@ const LeadDetailsPage = () => {
                           ref={taskDate}
                           onChange={(e) => setTasksDataFun(e)}
                         />
-                         {taskDateError ? <InputErrorComponent value="Date Can't Be Blank" /> : ""}
+                        {taskDateError ? (
+                          <InputErrorComponent value="Date Can't Be Blank" />
+                        ) : (
+                          ""
+                        )}
                       </div>
 
                       {/* <div className="product-box">
@@ -1178,8 +1201,11 @@ const LeadDetailsPage = () => {
                           <option value="mercedes">Mercedes</option>
                           <option value="audi">Audi</option> */}
                         </select>
-                        {taskStatusError ? <InputErrorComponent value="Status Can't Be Blank" /> : ""}
-             
+                        {taskStatusError ? (
+                          <InputErrorComponent value="Status Can't Be Blank" />
+                        ) : (
+                          ""
+                        )}
                       </div>
                       <div className="lead-btn-box">
                         <button
@@ -1211,21 +1237,47 @@ const LeadDetailsPage = () => {
                     {getSingleLeadTask.map((task, index) => (
                       <div key={index} className="save-lead-data">
                         <div>
-                          <p className={`lead-heading ${new Date(task.expectedDate).getTime() < Date.now() && task?.taskStatus?.name !== "Done" ? "text-danger" : ""  }`}>{task?.name}</p>
+                          <p
+                            className={`lead-heading ${
+                              new Date(task.expectedDate).getTime() <
+                                Date.now() && task?.taskStatus?.name !== "Done"
+                                ? "text-danger"
+                                : ""
+                            }`}
+                          >
+                            {task?.name}
+                          </p>
                           <h6 className="lead-sm-heading mb-1">
                             {task?.description}
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
-                           <span className={`task-pending ${task?.taskStatus?.name === "Done" ?  "task-done":" " }`}> {task?.taskStatus?.name} </span> 
-                            <span className="ml-2">{task?.assignedBy?.fullName}</span>
+                            <span>
+                              {task?.assignedBy?.fullName}
+                            </span>
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
                             {new Date(task.expectedDate).toLocaleDateString()} -{" "}
                             {new Date(task.expectedDate).getHours()}:
                             {new Date(task.expectedDate).getMinutes()}
                           </h6>
+                          <h6 className="lead-sm-heading mb-1">
+                            {new Date(task.lastUpdateDate).toLocaleDateString()}{" "}
+                            - {new Date(task.lastUpdateDate).getHours()}:
+                            {new Date(task.lastUpdateDate).getMinutes()}
+                          </h6>
+                          {/* lastUpdateDate */}
                         </div>
                         <div className="lead-heading">
+                          <span
+                            className={`task-pending mr-1 ${
+                              task?.taskStatus?.name === "Done"
+                                ? "task-done"
+                                : " "
+                            }`}
+                          >
+                            {" "}
+                            {task?.taskStatus?.name}{" "}
+                          </span>
                           <i
                             onClick={() => updateTaskData(task)}
                             className="fa-solid fa-pen mr-3"
@@ -1629,7 +1681,12 @@ const LeadDetailsPage = () => {
               >
                 <i className="fa-solid mr-1 fa-backward-step"></i>Back
               </Link>
-              <button  className="filter-btn-design" onClick={() => openTasksFun()} >All Tasks</button>
+              <button
+                className="filter-btn-design"
+                onClick={() => openTasksFun()}
+              >
+                All Tasks
+              </button>
             </div>
             <div className="filter-box mt-3">
               <select

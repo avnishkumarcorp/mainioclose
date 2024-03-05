@@ -12,6 +12,8 @@ const AllDeactivateUser = () => {
   const { productData: allDeactivateUsers, loading: userLoading } =
     useCustomRoute(allDeactivateUser, deactivateUserDep)
 
+    const userCount = allDeactivateUsers.length;
+
  
 
   const activateUserFun = async (id) => {
@@ -69,7 +71,7 @@ const AllDeactivateUser = () => {
   return (
     <div className="small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading">Deactivate Users</h1>
+        <h1 className="table-heading">Deactivate Users ({userCount})</h1>
       </div>
       <div className="mt-3">
         <UserListComponent

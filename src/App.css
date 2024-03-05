@@ -453,6 +453,7 @@ button:focus {
   border: 1px solid #f0ad4e;
   padding: 2px 4px;
   border-radius: 4px;
+  font-size: 12px;
 }
 
 .task-done {
