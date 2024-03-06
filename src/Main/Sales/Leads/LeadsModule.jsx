@@ -1,42 +1,22 @@
 import React, { useEffect, useRef, useState } from "react"
 import "./LeadsModule.scss"
-import Calendar from "react-calendar"
-import "react-calendar/dist/Calendar.css"
-import AllLeadsDisplay from "./AllLeadsDisplay"
-import {
-  Link,
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom"
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
-import DataTableFirst from "../../../components/DataTableFirst"
-import { DataGrid } from "@mui/x-data-grid"
-import DataGridNewTable from "../../../components/DataGridNewTable"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import LeadCreateModel from "../../../Model/LeadCreateModel"
 import { useDispatch, useSelector } from "react-redux"
-import TextField from "@mui/material/TextField"
-import Autocomplete from "@mui/material/Autocomplete"
 import TableScalaton from "../../../components/TableScalaton"
 import { getQuery } from "../../../API/GetQuery"
 import { putQuery } from "../../../API/PutQuery"
-import ArrowComponent from "../../../components/ArrowComponent"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import Checkbox from "@mui/material/Checkbox"
 import InputErrorComponent from "../../../components/InputErrorComponent"
-import { getRowEl } from "@mui/x-data-grid/utils/domUtils"
-import { deleteQuery } from "../../../API/DeleteQuery"
 import { MultiSelect } from "primereact/multiselect"
-import { postQuery } from "../../../API/PostQuery"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
-import { putQueryNoData } from "../../../API/PutQueryWithoutData"
 import { CSVLink } from "react-csv"
 import { getAllLeads } from "../../../Toolkit/Slices/LeadSlice"
 
 const LeadsModule = () => {
-  const [activeTab, setActiveTab] = useState(false)
   const [allLeadData, setAllLeadData] = useState([])
   const [leadUserNew, setLeadUserNew] = useState([])
   const [updateActive, setUpdateActive] = useState(false)
@@ -46,7 +26,6 @@ const LeadsModule = () => {
   const [leadStatusD, setLeadStatusD] = useState(false)
   const [toDate, setToDate] = useState("")
   const [fromDate, setFromDate] = useState("")
-  const [dateFilter, setDateFilter] = useState(false)
   const [multibtn, setMultibtn] = useState(false)
   const [leadMultiDep, setLeadMultiDep] = useState(false)
   const [leadDeleteErr, setLeadDeleteErr] = useState(false)
@@ -86,10 +65,6 @@ const LeadsModule = () => {
     }))
   }, [allUserMulti, allStatusMulti, toDate, fromDate])
 
-  // const multiFilterFun = () => {
-
-  // }
-
   const multiStatusRef = useRef()
   const multiAssigneeRef = useRef()
 
@@ -97,7 +72,7 @@ const LeadsModule = () => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      setSelectedRows(allLeadData.map((row) => row.id))
+      setSelectedRows(allLeadsData.map((row) => row.id))
     } else {
       setSelectedRows([])
     }
@@ -133,8 +108,6 @@ const LeadsModule = () => {
     setDeleteMultiLead((prev) => ({ ...prev, leadId: selectedRows }))
   }, [deleteMultiLead])
 
-
-
   useEffect(() => {
     dispatch(getAllLeads(allMultiFilterData))
   }, [
@@ -142,7 +115,6 @@ const LeadsModule = () => {
     statusDataId,
     rerefreshLead,
     leadStatusD,
-    dateFilter,
     leadMultiDep,
     filterBtnNew,
   ])
@@ -157,11 +129,9 @@ const LeadsModule = () => {
 
   const allLeadsData = useSelector((state) => state.leads.allLeads)
 
-  const leadCount = allLeadsData.length;
-  
-  const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
+  const leadCount = allLeadsData.length
 
- 
+  const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
 
   const viewHistory = async (leadId) => {
     try {
@@ -204,7 +174,7 @@ const LeadsModule = () => {
   const adminRole = currentUserRoles.includes("ADMIN")
   const newRole = currentUserRoles.includes("NEW")
 
-  const exportData = allLeadData.map((row) => ({
+  const exportData = allLeadsData.map((row) => ({
     "S.No": row?.id,
     "Lead Name": row?.leadName,
     "Missed Task": row?.missedTaskName,
@@ -216,7 +186,6 @@ const LeadsModule = () => {
     "Mobile No": row?.mobileNo,
     Email: row?.email,
     Source: row?.source,
-    // age: row.age,
   }))
 
   const column2 = [
@@ -241,7 +210,7 @@ const LeadsModule = () => {
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
           onClick={() => viewHistory(props.row.id)}
-          className={`${props.row.view ? '': 'fw-600'}`}
+          className={`${props.row.view ? "" : "fw-600"}`}
         >
           {props?.row?.leadName}
         </Link>
@@ -379,7 +348,7 @@ const LeadsModule = () => {
         <Link
           to={`/erp/${userid}/sales/leads/${props.row.id}`}
           onClick={() => viewHistory(props.row.id)}
-          className={`${props.row.view ? '': 'fw-600'}`}
+          className={`${props.row.view ? "" : "fw-600"}`}
         >
           {props?.row?.leadName}
         </Link>
@@ -565,7 +534,6 @@ const LeadsModule = () => {
     }
   }
 
-
   const getAllStatusData = async () => {
     try {
       const allStatus = await getQuery(
@@ -611,25 +579,7 @@ const LeadsModule = () => {
   const bellCountUrl = `/leadService/api/v1/notification/getUnseenCount?userId=${userid}`
   const bellCountDep = []
 
-  const {
-    productData: bellData,
-    loading: bellLoading,
-    error,
-  } = useCustomRoute(bellCountUrl, bellCountDep)
-
- 
-  // const viewNotyFun = async () => {
-  //   console.log("fun call");
-  //   try{
-  //     const updateNoty = await putQueryNoData(`/leadService/api/v1/notification/viewNotification?userId=${userid}`)
-  //     console.log("notify me", updateNoty);
-  //     navigate(`notification`)
-  //   }catch(err){
-  //     console.log(err);
-  //   }
-  // }
-
-  // MuiDataGrid-main css-204u17-MuiDataGrid-main
+  const { productData: bellData } = useCustomRoute(bellCountUrl, bellCountDep)
 
   return (
     <div className="lead-module small-box-padding">
@@ -661,10 +611,7 @@ const LeadsModule = () => {
           </button>
           {adminRole ? <LeadCreateModel /> : ""}
           <Link to={`notification`}>
-            <div
-              className="bell-box"
-              // onClick={()=> viewNotyFun()}
-            >
+            <div className="bell-box">
               <span className="bell-count">{bellData}</span>
               <span className="bell-icon">
                 <i className="fa-regular fa-bell"></i>
@@ -774,7 +721,6 @@ const LeadsModule = () => {
       </div> */}
 
       <div className="table-arrow">
-        {/* <ArrowComponent /> */}
         {allLeadsLoading ? (
           <TableScalaton />
         ) : (
@@ -795,9 +741,9 @@ const LeadsModule = () => {
                       <Checkbox
                         indeterminate={
                           selectedRows.length > 0 &&
-                          selectedRows.length < allLeadData.length
+                          selectedRows.length < allLeadsData.length
                         }
-                        checked={selectedRows.length === allLeadData.length}
+                        checked={selectedRows.length === allLeadsData.length}
                         onChange={handleSelectAllClick}
                       />
                     }

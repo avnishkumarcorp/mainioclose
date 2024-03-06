@@ -2,12 +2,6 @@ import React, { useEffect, useState } from "react"
 import "./InboxPage.scss"
 import { useLocation, useParams } from "react-router-dom"
 import axios from "axios"
-import MUIDataTable from "mui-datatables"
-import DataGridTables from "../../../components/DataGridTables"
-import LeadsModule from "../Leads/LeadsModule"
-import DataTableFirst from "../../../components/DataTableFirst"
-import UserListComponent from "../../../Tables/UserListComponent"
-import InboxListComponent from "../../../Tables/InboxListComponent"
 import TableScalaton from "../../../components/TableScalaton"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 
@@ -107,9 +101,7 @@ const InboxPage = () => {
         </button>
       </div>
 
-      {/* <LeadsModule */}
-
-      {/* <DataGridTables /> */}
+    
       {inboxScalaton ? (
         <TableScalaton />
       ) : (

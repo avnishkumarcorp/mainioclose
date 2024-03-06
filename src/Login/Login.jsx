@@ -1,18 +1,9 @@
 import React, { useRef, useState } from "react"
 import "./Login.scss"
-import { image1 } from "../Images/imageFile"
 import { Link, useNavigate } from "react-router-dom"
-import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  currentUserAction,
-  userInformation,
-  userToken,
-  userTokenAction,
-} from "../Redux/Action/AuthAction"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import ButtonTwo from "../components/button/ButtonTwo"
 import LongButton from "../components/button/LongButton"
 import InputErrorComponent from "../components/InputErrorComponent"
 import { getCurrentUser } from "../Toolkit/Slices/AuthSlice"
