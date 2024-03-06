@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { postQuery } from "../API/PostQuery"
 import InputErrorComponent from "../components/InputErrorComponent"
 import LongButton from "../components/button/LongButton"
+import { signUpData } from "../Toolkit/Slices/SignUpSlice"
 toast.configure()
 
 const SignUp = () => {
@@ -29,6 +30,10 @@ const SignUp = () => {
     email: "",
   })
 
+
+  const selectData = useSelector((prev) => prev?.signup?.userSignUp);
+
+  console.log("select data is", selectData);
 
 
   const [loading, setLoading] = useState(false)
@@ -52,7 +57,6 @@ const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
 
   const UserInfoData = (e) => {
     setCreateUserData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -62,7 +66,7 @@ const SignUp = () => {
   const userSignUp = (e) => {
     e.preventDefault()
 
-    return;
+  
 
     if (fullNameRef.current.value === "") {
       fullNameRef.current.style.border = "1px solid red"
@@ -107,7 +111,7 @@ const SignUp = () => {
     const otpNewData = { name: username, password: password, mobile: mobile, email: email }
 
 
-    dispatch(SignupDataAction(createUserData))
+    dispatch(signUpData(createUserData))
     setLoading(true)
     const generateNewOtpFun = async () => {
       try {
@@ -115,6 +119,7 @@ const SignUp = () => {
           "/securityService/api/auth/otp",
           generateOtpData
         )
+        console.log("otp is", getNewOtp);
         setLoading(false)
         navigate("/erp/otp")
       } catch (err) {

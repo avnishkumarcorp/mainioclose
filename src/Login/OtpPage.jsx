@@ -14,7 +14,11 @@ toast.configure()
 const OtpPage = () => {
   const [otpData, setOtpData] = useState({})
 
-  const signUpRedux = useSelector((state) => state.SignUpDataReducer.data)
+  const signUpRedux = useSelector((prev) => prev.signup.userSignup);
+
+
+
+  console.log("signup data", signUpRedux);
   const [leadUserInfo, setLeadUserInfo] = useState({})
   const navigate = useNavigate()
 
@@ -28,6 +32,8 @@ const OtpPage = () => {
   let one = Object.values(otpData)
   const finalOtp = one.join("")
   const finalApiData = { ...signUpRedux, otp: finalOtp }
+
+  console.log("final api data", finalApiData);
   
   const userRegistration = (e) => {
     e.preventDefault()

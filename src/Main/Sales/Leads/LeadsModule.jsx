@@ -158,8 +158,7 @@ const LeadsModule = () => {
   const allLeadsData = useSelector((state) => state.leads.allLeads)
 
   const leadCount = allLeadsData.length;
-  console.log("lead count is", leadCount);
-
+  
   const allLeadsLoading = useSelector((state) => state.leads.leadsLoading)
 
  
