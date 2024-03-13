@@ -781,8 +781,61 @@ const LeadDetailsPage = () => {
     }
   }
 
+  // buttons code
+
+  // const applyClassToAllButtons = (index, event, catId) => {
+  //   const statusChange = async () => {
+  //     try {
+  //       const statusData = await axios.put(
+  //         `/leadService/api/v1/status/updateLeadStatus?leadId=${leadid}&statusId=${catId}&currentUserId=${userid}`,
+  //         {
+  //           headers: {
+  //             "Access-Control-Allow-Origin": "*",
+  //             "Content-Type": "application/json",
+  //           },
+  //         }
+  //       )
+  //       setChangeStatusToggle((prev) => !prev)
+  //     } catch (err) {
+  //       if (err.response.status === 500) {
+  //         toast.error("Something Went Wrong")
+  //       }
+  //     }
+  //   }
+  //   statusChange()
+
+  //   console.log(index)
+  //   const buttons = document.querySelectorAll("#buttonContainer button")
+  //   console.log(buttons)
+  //   for (let i = 0; i < buttons.length; i++) {
+  //     if (buttons[i] === buttons[index]) {
+  //       buttons[i].classList.add("btn-cl")
+  //       const buttonData = event
+  //       console.log("i am event", buttonData)
+  //       break
+  //     }
+  //     buttons[i].classList.add("btn-cl")
+  //   }
+  // }
+
+
+//   <div className="btn-status pb-3" id="buttonContainer">
+//   {getAllStatus.map((status, index) => (
+//     <button
+//       onClick={(event) => applyClassToAllButtons(index, event, status.id)}
+//       className={`status-btns filter-btn-design mr-2`}
+//       key={index}
+//     >
+//       {status.name}
+//     </button>
+//   ))}
+// </div>
+
+// end Buttons code
+
   return (
     <div className="lead-details cm-padding-one">
+   
       {estimateOpenBtn ? (
         <EstimateDesignPage setEstimateOpenBtn={setEstimateOpenBtn} />
       ) : (
@@ -1248,19 +1301,17 @@ const LeadDetailsPage = () => {
                             {task?.description}
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
-                          <span
-                            className={`task-pending mr-1 ${
-                              task?.taskStatus?.name === "Done"
-                                ? "task-done"
-                                : " "
-                            }`}
-                          >
-                            {" "}
-                            {task?.taskStatus?.name}{" "}
-                          </span>
-                            <span>
-                              {task?.assignedBy?.fullName}
+                            <span
+                              className={`task-pending mr-1 ${
+                                task?.taskStatus?.name === "Done"
+                                  ? "task-done"
+                                  : " "
+                              }`}
+                            >
+                              {" "}
+                              {task?.taskStatus?.name}{" "}
                             </span>
+                            <span>{task?.assignedBy?.fullName}</span>
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
                             {new Date(task.expectedDate).toLocaleDateString()} -{" "}
@@ -1275,7 +1326,6 @@ const LeadDetailsPage = () => {
                           {/* lastUpdateDate */}
                         </div>
                         <div className="lead-heading">
-                         
                           <i
                             onClick={() => updateTaskData(task)}
                             className="fa-solid fa-pen mr-3"

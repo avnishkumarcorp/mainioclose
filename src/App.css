@@ -85,6 +85,12 @@ button:focus {
   color: #fff;
 }
 
+/* 
+.btn-cl{
+  background-color: #093252 !important;
+  color: #fff !important; 
+} */
+
 .noti-view {
   font-weight: 600;
 }
