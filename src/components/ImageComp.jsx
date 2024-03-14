@@ -1,6 +1,7 @@
 import React from "react"
 
-const ImageComp = ({ data }) => {
+const ImageComp = ({data, index}) => {
+  console.log("My Data is ", data);
   return (
     <div className="team-model">
       <button
@@ -38,7 +39,7 @@ const ImageComp = ({ data }) => {
                 </div>
                 <div className="model-image">
                   {" "}
-                  <img src="https://images.pexels.com/photos/2221314/pexels-photo-2221314.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                  <img key={index} src={data.images} alt="image" />
                 </div>
               </div>
             </div>

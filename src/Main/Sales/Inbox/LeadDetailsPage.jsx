@@ -781,6 +781,14 @@ const LeadDetailsPage = () => {
     }
   }
 
+  const openImageInNewTab = (imageUrl) => {
+    window.open(imageUrl, '_blank');
+  };
+
+  const imageRef = useRef();
+
+ 
+
   return (
     <div className="lead-details cm-padding-one">
       {estimateOpenBtn ? (
@@ -1861,8 +1869,9 @@ const LeadDetailsPage = () => {
                       </div>
                       <div>
                         {/* < /> */}
-                        <ImageComp data={note?.images} />
-
+                        {/* <ImageComp data={note} index={index} /> */}
+                        <button className="image-btn" onClick={() => openImageInNewTab(note?.images)}> <i className="fa-regular fa-image"></i></button>
+                      
                         {/* <Link target="blank" to={note?.images}>show</Link> */}
                       </div>
                       <div className="d-flex">

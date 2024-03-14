@@ -36,11 +36,14 @@ const LeadHistory = () => {
     {
       field: "createdDate",
       headerName: "Date",
-      width: 150,
+      width: 200,
       renderCell: (props) => {
         let date = new Date(props?.row?.createdDate)
         let dateNew = date.toLocaleDateString()
-        return <p className="mb-0">{dateNew.toString()}</p>
+        return <p className="mb-0">{dateNew.toString()} <span> - </span>
+         {new Date(props.row.createdDate).getHours()}:
+            {new Date(props.row.createdDate).getMinutes()}
+        </p>
       },
     },
 
