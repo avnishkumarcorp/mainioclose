@@ -782,10 +782,12 @@ const LeadDetailsPage = () => {
   }
 
   const openImageInNewTab = (imageUrl) => {
-    window.open(imageUrl, "_blank")
-  }
+    window.open(imageUrl, '_blank');
+  };
 
-  const imageRef = useRef()
+  const imageRef = useRef();
+
+ 
 
   return (
     <div className="lead-details cm-padding-one">
@@ -1254,17 +1256,19 @@ const LeadDetailsPage = () => {
                             {task?.description}
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
-                            <span
-                              className={`task-pending mr-1 ${
-                                task?.taskStatus?.name === "Done"
-                                  ? "task-done"
-                                  : " "
-                              }`}
-                            >
-                              {" "}
-                              {task?.taskStatus?.name}{" "}
+                          <span
+                            className={`task-pending mr-1 ${
+                              task?.taskStatus?.name === "Done"
+                                ? "task-done"
+                                : " "
+                            }`}
+                          >
+                            {" "}
+                            {task?.taskStatus?.name}{" "}
+                          </span>
+                            <span>
+                              {task?.assignedBy?.fullName}
                             </span>
-                            <span>{task?.assignedBy?.fullName}</span>
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
                             {new Date(task.expectedDate).toLocaleDateString()} -{" "}
@@ -1279,6 +1283,7 @@ const LeadDetailsPage = () => {
                           {/* lastUpdateDate */}
                         </div>
                         <div className="lead-heading">
+                         
                           <i
                             onClick={() => updateTaskData(task)}
                             className="fa-solid fa-pen mr-3"
@@ -1865,15 +1870,8 @@ const LeadDetailsPage = () => {
                       <div>
                         {/* < /> */}
                         {/* <ImageComp data={note} index={index} /> */}
-                        {note?.images && (
-                          <button
-                            className="image-btn"
-                            onClick={() => openImageInNewTab(note?.images)}
-                          >
-                            {" "}
-                            <i className="fa-regular fa-image"></i>
-                          </button>
-                        )}
+                      {note?.images &&   <button className="image-btn" onClick={() => openImageInNewTab(note?.images)}> <i className="fa-regular fa-image"></i></button>
+}
                         {/* <Link target="blank" to={note?.images}>show</Link> */}
                       </div>
                       <div className="d-flex">

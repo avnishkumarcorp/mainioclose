@@ -66,7 +66,6 @@ const Login = () => {
     const loginMyUser = async () => {
       try {
         const loginUser = await dispatch(getCurrentUser(userLoginData))
-        console.log("i am login user", loginUser)
         if (loginUser.type === "currentUser/fulfilled") {
           navigate(`/erp/${loginUser?.payload?.id}/sales/leads`)
         } else {

@@ -37,14 +37,14 @@ const CounterExample = () => {
   return (
     <div>
       <button
-        onClick={() => dispatch(Increment(1))}
+       
         className="btn btn-primary"
       >
         Increment
       </button>
       <h1>{counterValue}</h1>
       <button
-        onClick={() => dispatch(Decrement(1))}
+       
         className="btn btn-primary"
       >
         Decrement
