@@ -664,6 +664,20 @@ button:focus {
   cursor: pointer;
 }
 
+.img-display{
+  height: 500px;
+  width: 100%;
+  overflow: hidden;
+  padding: 15px 0px;
+}
+
+.img-display img{
+  height: 100%;
+  width: 100%;
+object-fit: contain;
+}
+
+
 .create-user-box .create-user-btn i {
   color: green;
 }

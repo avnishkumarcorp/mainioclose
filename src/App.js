@@ -83,7 +83,7 @@ function App() {
               <Route path="tickets" element={<AllTickets />} />
                <Route path="muiuser" element={<DisplayUserTwo />} />
               <Route path="deactivateUser" element={<AllDeactivateUser />} />
-              
+               
             </Route>
             {/* hr module routes */}
             <Route path="/erp/:userid/hr" element={<ComingSoonPage />}>
