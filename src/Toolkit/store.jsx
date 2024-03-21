@@ -25,13 +25,17 @@ const reducers = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
+  whitelist: ["auth"]  
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
 
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  middleware: (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: false, // Disable serialization check
+  }),
 })
 
 export const persistor = persistStore(store)

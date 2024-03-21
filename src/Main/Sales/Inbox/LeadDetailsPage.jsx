@@ -1879,7 +1879,7 @@ const LeadDetailsPage = () => {
                             onClick={() => openImageInNewTab(note?.images)}
                           >
                             {" "}
-                            <i class="fa-solid fa-download"></i>
+                            <i className="fa-solid fa-download"></i>
                           </button>
                         )}
                         {/* <Link target="blank" to={note?.images}>show</Link> */}
