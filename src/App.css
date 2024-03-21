@@ -665,7 +665,7 @@ button:focus {
 }
 
 .img-display{
-  height: 500px;
+  height: 100px;
   width: 100%;
   overflow: hidden;
   padding: 15px 0px;
@@ -675,6 +675,10 @@ button:focus {
   height: 100%;
   width: 100%;
 object-fit: contain;
+}
+
+.img-display:hover{
+  height: 600px;
 }
 
 
