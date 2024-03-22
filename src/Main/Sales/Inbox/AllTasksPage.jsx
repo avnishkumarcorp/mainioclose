@@ -15,7 +15,7 @@ const AllTasksPage = ({ setOpenAllTask }) => {
       </div>
       <div>
         <div  onClick={() => closeEstimate()}>
-        <i class="fa-regular disk-size fa-circle-xmark"></i>
+        <i className="fa-regular disk-size fa-circle-xmark"></i>
         
         </div>
       </div>

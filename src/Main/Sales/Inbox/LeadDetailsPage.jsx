@@ -86,6 +86,14 @@ const LeadDetailsPage = () => {
 
   const fileRef = useRef()
 
+  const imageRefrence = useRef()
+
+  const handleImageSize = () => {
+    if (imageRefrence.current) {
+      imageRefrence.current.classList.add("img-increase")
+    }
+  }
+
   function handleChange(event) {
     setFile(event.target.files[0])
   }
@@ -782,12 +790,10 @@ const LeadDetailsPage = () => {
   }
 
   const openImageInNewTab = (imageUrl) => {
-    window.open(imageUrl, '_blank');
-  };
+    window.open(imageUrl, "_blank")
+  }
 
-  const imageRef = useRef();
-
- 
+  const imageRef = useRef()
 
   return (
     <div className="lead-details cm-padding-one">
@@ -1256,19 +1262,17 @@ const LeadDetailsPage = () => {
                             {task?.description}
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
-                          <span
-                            className={`task-pending mr-1 ${
-                              task?.taskStatus?.name === "Done"
-                                ? "task-done"
-                                : " "
-                            }`}
-                          >
-                            {" "}
-                            {task?.taskStatus?.name}{" "}
-                          </span>
-                            <span>
-                              {task?.assignedBy?.fullName}
+                            <span
+                              className={`task-pending mr-1 ${
+                                task?.taskStatus?.name === "Done"
+                                  ? "task-done"
+                                  : " "
+                              }`}
+                            >
+                              {" "}
+                              {task?.taskStatus?.name}{" "}
                             </span>
+                            <span>{task?.assignedBy?.fullName}</span>
                           </h6>
                           <h6 className="lead-sm-heading mb-1">
                             {new Date(task.expectedDate).toLocaleDateString()} -{" "}
@@ -1283,7 +1287,6 @@ const LeadDetailsPage = () => {
                           {/* lastUpdateDate */}
                         </div>
                         <div className="lead-heading">
-                         
                           <i
                             onClick={() => updateTaskData(task)}
                             className="fa-solid fa-pen mr-3"
@@ -1870,8 +1873,15 @@ const LeadDetailsPage = () => {
                       <div>
                         {/* < /> */}
                         {/* <ImageComp data={note} index={index} /> */}
-                      {note?.images &&   <button className="image-btn" onClick={() => openImageInNewTab(note?.images)}> <i className="fa-regular fa-image"></i></button>
-}
+                        {note?.images && (
+                          <button
+                            className="image-btn"
+                            onClick={() => openImageInNewTab(note?.images)}
+                          >
+                            {" "}
+                            <i className="fa-solid fa-download"></i>
+                          </button>
+                        )}
                         {/* <Link target="blank" to={note?.images}>show</Link> */}
                       </div>
                       <div className="d-flex">
@@ -1886,6 +1896,15 @@ const LeadDetailsPage = () => {
                     <div className="text-display-box">
                       <pre>{note.message}</pre>
                     </div>
+                    {note.images && (
+                      <div
+                        className="img-display"
+                        onClick={handleImageSize()}
+                        ref={imageRefrence}
+                      >
+                        <img src={note?.images} />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
