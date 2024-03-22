@@ -1,6 +1,5 @@
 import React from "react"
 import "./Opportunities.scss"
-import LeadsModule from "../Leads/LeadsModule"
 import AllLeadsDisplay from "../Leads/AllLeadsDisplay"
 
 const Opportunities = () => {
