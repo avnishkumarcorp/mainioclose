@@ -20,7 +20,6 @@ const LeadsModule = () => {
   const [allLeadData, setAllLeadData] = useState([])
   const [leadUserNew, setLeadUserNew] = useState([])
   const [updateActive, setUpdateActive] = useState(false)
-  const [leadScalatonCall, setLeadScalatonCall] = useState(true)
   const [getAllStatus, setGetAllStatus] = useState([])
   const [statusDataId, setStatusDataId] = useState([])
   const [leadStatusD, setLeadStatusD] = useState(false)

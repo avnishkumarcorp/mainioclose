@@ -9,30 +9,18 @@ toast.configure()
 
 const ChangePassword = () => {
   const [passwordErr, setPasswordErr] = useState(false)
-  const [confirmPasswordErr, setConfirmPasswordErr] = useState(false)
   const [newPassword, setNewPassword] = useState("")
   const [repeatPassword, setRepeatPassword] = useState("")
-  const [loading, setLoading] = useState(false);
-  // const [passwordErr, setPasswordErr] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  // const forgetPasswordResponse = useSelector(
-  //   (auth) => auth.AuthReducer.forgetPassword
-  // )
+  const forgetPasswordResponse = useSelector((auth) => auth.password.forgetData)
 
-  const forgetPasswordResponse = useSelector(
-    (auth) =>  auth.password.forgetData
-  )
-
-  
-  
   const updateUserPassword = (e) => {
     e.preventDefault()
-
-   
     const { email, otp } = { ...forgetPasswordResponse }
 
     const updateUserData = {
@@ -41,7 +29,6 @@ const ChangePassword = () => {
       otp: otp,
     }
 
-   
     if (newPassword !== repeatPassword) {
       setPasswordErr(true)
       return
@@ -75,7 +62,7 @@ const ChangePassword = () => {
       }
     }
 
-    updateExistUserPassword();
+    updateExistUserPassword()
   }
 
   return (
@@ -102,7 +89,11 @@ const ChangePassword = () => {
         />
       </div>
       {/* {passwordErr ? <p>Error</p>: ""} */}
-      {passwordErr ? <InputErrorComponent value="Password Should be Same" /> : ""}
+      {passwordErr ? (
+        <InputErrorComponent value="Password Should be Same" />
+      ) : (
+        ""
+      )}
       <button onClick={(e) => updateUserPassword(e)} className="login-button">
         {loading ? "Loading..." : "Set Password"}
       </button>

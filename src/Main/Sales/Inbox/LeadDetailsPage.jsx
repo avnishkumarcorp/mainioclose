@@ -21,7 +21,6 @@ import InputErrorComponent from "../../../components/InputErrorComponent"
 import AllTasksPage from "./AllTasksPage"
 toast.configure()
 
-// data-toggle="tooltip" data-placement="top" title="Tooltip on top"
 
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
@@ -50,7 +49,6 @@ const LeadDetailsPage = () => {
   const [leadNameReload, setLeadNameReload] = useState(false)
 
   const [allProductData, setAllProductData] = useState([])
-  const [selectedProduct, setSelectedProduct] = useState("")
   const [productDisplayToggle, setProductDisplayToggle] = useState(false)
 
   const [clientsContact, setClientsContact] = useState([])

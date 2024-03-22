@@ -1,7 +1,6 @@
 import React, { useState } from "react"
-import SideNavTabs from "../components/SideNavTabs"
 import "./SideBar.scss"
-import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom"
+import { NavLink, useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { logoutFun } from "../Toolkit/Slices/AuthSlice"
 import { toast } from "react-toastify"
@@ -10,22 +9,19 @@ toast.configure()
 
 const SideBar = () => {
   const [logoutBtnStatus, setLogoutBtnStatus] = useState(false)
-  const location = useLocation()
   const dispatch = useDispatch()
 
-  const {userid} = useParams()
+  const { userid } = useParams()
 
   const navigate = useNavigate()
 
   const logoutUser = () => {
     if (window.confirm("Are you sure for Logout?") == true) {
-    const key = localStorage.getItem("persist:root")
-    dispatch(logoutFun())
-    // console.log(key);
-    const token = localStorage.removeItem(key)
-    navigate("/erp/login")
-    toast.success("Logout Succesfully")
-
+      const key = localStorage.getItem("persist:root")
+      dispatch(logoutFun())
+      const token = localStorage.removeItem(key)
+      navigate("/erp/login")
+      toast.success("Logout Succesfully")
     }
   }
 
@@ -67,12 +63,6 @@ const SideBar = () => {
           ""
         )}
       </div>
-      {/*       
-      <div className="corpseed-logo">
-        <div className="logo-image">
-          <img src={corpseedLogo} alt="corpseed-logo" />
-        </div>
-      </div> */}
 
       <div className="pt-4">
         {adminRole ? (
@@ -144,8 +134,6 @@ const SideBar = () => {
       </div> */}
         {/* end */}
 
-   
-
         {/* sales links start */}
         <div className="side-tabs">
           <NavLink
@@ -167,11 +155,9 @@ const SideBar = () => {
             data-parent="#accordion"
           >
             <div className="link-child">
-              <NavLink
-                className="link-itemss"
-                to={`${userid}/sales/leads`}
-              >
-                <i className="fa-solid mr-1 fa-calculator"></i><span>Leads</span>
+              <NavLink className="link-itemss" to={`${userid}/sales/leads`}>
+                <i className="fa-solid mr-1 fa-calculator"></i>
+                <span>Leads</span>
               </NavLink>
               {/* <NavLink
                 className="link-itemss"
@@ -185,20 +171,29 @@ const SideBar = () => {
               {/* <NavLink className="link-itemss" to="sales/orders">
                 <i className="fa-solid mr-1 fa-box"></i>Orders
               </NavLink> */}
-              {adminRole ? <NavLink className="link-itemss" to={`${userid}/sales/contacts`}>
-                <i className="fa-solid mr-1 fa-user"></i><span>Contacts</span>
-              </NavLink> : ""}
+              {adminRole ? (
+                <NavLink
+                  className="link-itemss"
+                  to={`${userid}/sales/contacts`}
+                >
+                  <i className="fa-solid mr-1 fa-user"></i>
+                  <span>Contacts</span>
+                </NavLink>
+              ) : (
+                ""
+              )}
 
               <NavLink className="link-itemss" to={`${userid}/sales`}>
-                <i className="fa-solid mr-1 fa-inbox"></i><span>Inbox</span>
+                <i className="fa-solid mr-1 fa-inbox"></i>
+                <span>Inbox</span>
               </NavLink>
             </div>
           </div>
         </div>
         {/* end */}
 
-           {/* hr links start */}
-           <div className="side-tabs">
+        {/* hr links start */}
+        <div className="side-tabs">
           <NavLink
             to={`/erp/${userid}/hr`}
             className={`nav-heading ${({ isActive }) =>
@@ -240,8 +235,6 @@ const SideBar = () => {
           </div>
         </div>
         {/* end */}
-
-
 
         {/* accounts links start */}
         <div className="side-tabs">
@@ -464,20 +457,18 @@ const SideBar = () => {
           </div>
         </div>
 
-        { adminRole &&
-
-        <div className="side-tabs">
-          <NavLink
-            to={`/erp/${userid}/setting`}
-            className={`nav-heading ${({ isActive }) =>
-              isActive ? "linkactive" : ""}`}
-          >
-            <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-regular mr-2 fa-user"></i> Setting
-          </NavLink>
-        </div>
-
-       }
+        {adminRole && (
+          <div className="side-tabs">
+            <NavLink
+              to={`/erp/${userid}/setting`}
+              className={`nav-heading ${({ isActive }) =>
+                isActive ? "linkactive" : ""}`}
+            >
+              <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+              <i className="fa-regular mr-2 fa-user"></i> Setting
+            </NavLink>
+          </div>
+        )}
 
         {/* end */}
 
