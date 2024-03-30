@@ -1,8 +1,11 @@
 {
   "name": "mainioclose",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=18.19.0"
+  },
   "private": true,
-  "proxy": "http://localhost:9004",
+  "proxy": "https://apigatewayerpcorpseed.azurewebsites.net",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
