@@ -21,7 +21,6 @@ import InputErrorComponent from "../../../components/InputErrorComponent"
 import AllTasksPage from "./AllTasksPage"
 toast.configure()
 
-
 const LeadDetailsPage = () => {
   const [notes, setNotes] = useState(false)
   const [email, setEmail] = useState(true)
@@ -117,6 +116,8 @@ const LeadDetailsPage = () => {
       setUploadSucess(true)
     })
   }
+
+  console.log("category data", categoryData)
 
   // const [selectedFile, setSelectedFile] = useState(null)
 
@@ -314,6 +315,14 @@ const LeadDetailsPage = () => {
     }))
   }
 
+  let categoryName = addProductData.serviceName
+  console.log("i am category name", categoryName, categoryData)
+
+  const categoryProducts = categoryData.filter(
+    (cat) => cat.categoryName === categoryName && cat.products
+  )
+  const allFilterProducts = categoryProducts[0]?.products
+
   const editTaskFun = async (e) => {
     e.preventDefault()
 
@@ -393,7 +402,8 @@ const LeadDetailsPage = () => {
 
   // END
 
-  const getCatgegoryInputData = (categorySelect) => {
+  const getCatgegoryInputData = (e) => {
+    let categorySelect = e.target.value
     setAddProductData((product) => ({
       ...product,
       serviceName: categorySelect,
@@ -413,7 +423,8 @@ const LeadDetailsPage = () => {
     }
   }
 
-  const getProductInputData = (productIdSelect) => {
+  const getProductInputData = (e) => {
+    let productIdSelect = e.target.value
     setAddProductData((product) => ({ ...product, productId: productIdSelect }))
   }
 
@@ -1339,14 +1350,10 @@ const LeadDetailsPage = () => {
 
                         <select
                           className="lead-cm-input"
-                          // name="select-product-category"
                           id="select-product-category"
                           ref={categorySelectRef}
                           value={categoryData.categoryName}
-                          // name="categoryName"
-                          onChange={(e) =>
-                            getCatgegoryInputData(e.target.value)
-                          }
+                          onChange={getCatgegoryInputData}
                         >
                           <option>Select Product Category</option>
 
@@ -1370,15 +1377,10 @@ const LeadDetailsPage = () => {
                           className="lead-cm-input"
                           name="select-product"
                           id="select-product"
-                          onChange={(e) => getProductInputData(e.target.value)}
+                          onChange={getProductInputData}
                         >
                           <option>Select Product</option>
-                          {/* {categoryData.map((product, index) => (
-                            <option key={index} value={product?.id}>
-                              {product?.productName}
-                            </option>
-                          ))} */}
-                          {productData.map((product, index) => (
+                          {allFilterProducts?.map((product, index) => (
                             <option key={index} value={product?.id}>
                               {product?.productName}
                             </option>
@@ -1393,7 +1395,7 @@ const LeadDetailsPage = () => {
                           Reset
                         </button>
                         <button
-                          onClick={(e) => createProductInLeadFun(e)}
+                          onClick={createProductInLeadFun}
                           className="lead-cm-btn lead-save-btn"
                         >
                           Save
