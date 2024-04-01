@@ -5,6 +5,9 @@ import { postQuery } from "../../../API/PostQuery"
 import InputErrorComponent from "../../../components/InputErrorComponent"
 import SmallTableScalaton from "../../../components/Scalaton/SmallTableScalaton"
 import { deleteQuery } from "../../../API/DeleteQuery"
+import FirstInput from "../../../components/Inputs/FirstInput"
+import LongInput from "../../../components/Inputs/LongInput"
+import UserLeadComponent from "../../../Tables/UserLeadComponent"
 
 const ProductsChange = () => {
   const { userid } = useParams()
@@ -13,6 +16,18 @@ const ProductsChange = () => {
     name: "",
     categoryId: null,
     userId: userid,
+    govermentfees: "",
+    govermentCode: "",
+    govermentGst: "",
+    professionalFees: "",
+    professionalCode: "",
+    profesionalGst: "",
+    serviceCharge: "",
+    serviceCode: "",
+    serviceGst: "",
+    otherFees: "",
+    otherCode: "",
+    otherGst: "",
   })
 
   const [nameError, setNameError] = useState(false)
@@ -22,13 +37,16 @@ const ProductsChange = () => {
 
   const nameRef = useRef()
   const catRef = useRef()
+  const govermentfeesRef = useRef()
+  const govermentGstRef = useRef()
+
+  console.log(addNewProduct)
 
   const [btnLoading, setBtnLoading] = useState(false)
 
   const getProductData = (e) => {
     setAddNewProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
-
 
   const createNewProduct = async (e) => {
     e.preventDefault()
@@ -51,11 +69,28 @@ const ProductsChange = () => {
         addNewProduct
       )
       setAddProductDep((prev) => !prev)
+      setAddNewProduct({
+        name: "",
+        categoryId: null,
+        userId: userid,
+        govermentfees: 0,
+        govermentCode: "",
+        govermentGst: 0,
+        professionalFees: 0,
+        professionalCode: "",
+        profesionalGst: 0,
+        serviceCharge: 0,
+        serviceCode: "",
+        serviceGst: 0,
+        otherFees: 0,
+        otherCode: "",
+        otherGst: 0,
+      })
+      console.log("Product created !!")
     } catch (err) {
       console.log(err)
     }
-    addNewProduct.name = ""
-    addNewProduct.categoryId = null
+    
   }
 
   const categoryUrl = `/leadService/api/v1/category/getAllCategories`
@@ -72,6 +107,35 @@ const ProductsChange = () => {
     productDep
   )
 
+  const ProductCol = [
+    { field: "id", headerName: "ID", width: 80 },
+    { field: "productName", headerName: "Product name", width: 150 },
+    { field: "govermentfees", headerName: "Goverment fees", width: 150 },
+    { field: "govermentCode", headerName: "Goverment Code", width: 150 },
+    { field: "govermentGst", headerName: "Goverment GST (%)", width: 150 },
+    { field: "professionalFees", headerName: "Professional Fees", width: 150 },
+    { field: "professionalCode", headerName: "Professional Code", width: 150 },
+    { field: "profesionalGst", headerName: "Profesional GST (%)", width: 150 },
+
+    { field: "serviceCharge", headerName: "Service Charge", width: 150 },
+    { field: "serviceCode", headerName: "Service Code", width: 150 },
+    { field: "serviceGst", headerName: "Service GST (%)", width: 150 },
+    { field: "otherFees", headerName: "Other Fees", width: 150 },
+    { field: "otherCode", headerName: "Other Code", width: 150 },
+    { field: "otherGst", headerName: "Other GST (%)", width: 150 },
+    {
+      field: "Action",
+      headerName: "Delete",
+      width: 150,
+      renderCell: (props) => (
+        <i
+          onClick={() => deleteProductFun(props.row.id)}
+          className="fa-solid gray-cl fa-trash"
+        ></i>
+      ),
+    },
+  ]
+
   const deleteProductFun = async (statusId) => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
@@ -84,7 +148,6 @@ const ProductsChange = () => {
       }
     }
   }
-
 
   return (
     <div>
@@ -100,6 +163,7 @@ const ProductsChange = () => {
             ref={nameRef}
             onChange={(e) => getProductData(e)}
             name="name"
+            value={addNewProduct.name}
             className="form-control input-focus"
           />
           {nameError ? (
@@ -115,6 +179,7 @@ const ProductsChange = () => {
             className="form-control input-focus"
             name="categoryId"
             ref={catRef}
+            value={addNewProduct.categoryId}
             onChange={(e) => getProductData(e)}
             id="select-product"
           >
@@ -130,6 +195,93 @@ const ProductsChange = () => {
           ) : (
             ""
           )}
+          <LongInput
+            label="Goverment fees"
+            type="text"
+            ref={govermentfeesRef}
+            value={addNewProduct.govermentfees}
+            onChange={(e) => getProductData(e)}
+            name="govermentfees"
+          />
+          <LongInput
+            label="Goverment Code"
+            type="text"
+            // ref={nameRef}
+            value={addNewProduct.govermentCode}
+            onChange={(e) => getProductData(e)}
+            name="govermentCode"
+          />
+          <LongInput
+            label="Goverment GST (%)"
+            type="text"
+            ref={govermentGstRef}
+            onChange={(e) => getProductData(e)}
+            name="govermentGst"
+          />
+          <LongInput
+            label="Professional Fees"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="professionalFees"
+          />
+          <LongInput
+            label="Professional Code"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="professionalCode"
+          />
+          <LongInput
+            label="Profesional GST (%)"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="profesionalGst"
+          />
+          <LongInput
+            label="Service Charge"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="serviceCharge"
+          />
+          <LongInput
+            label="Service Code"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="serviceCode"
+          />
+          <LongInput
+            label="Service GST (%)"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="serviceGst"
+          />
+          <LongInput
+            label="Other Fees"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="otherFees"
+          />
+          <LongInput
+            label="Other Code"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="otherCode"
+          />
+          <LongInput
+            label="Other GST (%)"
+            type="text"
+            // ref={nameRef}
+            onChange={(e) => getProductData(e)}
+            name="otherGst"
+          />
+
           <button
             onClick={(e) => createNewProduct(e)}
             className="action-btn my-2"
@@ -140,7 +292,13 @@ const ProductsChange = () => {
       </div>
 
       <div className="mt-4 setting-table">
-        <div className="table-responsive">
+        {productLoading ? (
+          <SmallTableScalaton />
+        ) : (
+          <UserLeadComponent columns={ProductCol} row={productData} />
+        )}
+
+        {/* <div className="table-responsive">
           <table className="table">
             <thead>
               <tr>
@@ -172,7 +330,7 @@ const ProductsChange = () => {
               )}
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     </div>
   )

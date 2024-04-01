@@ -489,6 +489,11 @@ button:focus {
 .setting-table {
   padding: 20px 0px;
   font-size: 14px;
+  width: 65vw;
+}
+
+.css-t89xny-MuiDataGrid-columnHeaderTitle{
+  font-weight: 600 !important;
 }
 
 .font-13 {

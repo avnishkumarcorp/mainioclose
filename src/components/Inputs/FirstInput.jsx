@@ -1,10 +1,10 @@
 import React from "react"
 
 const FirstInput = React.forwardRef(
-  ({ label, type = "", className = "", ...props }, ref) => (
+  ({ label, type = "", className = "", labelClass = '', ...props }, ref) => (
     <div>
       {label && (
-        <label className="m-1" htmlFor={props.id}>
+        <label className={` mt-1 ${labelClass}`} htmlFor={props.id}>
           {label}
         </label>
       )}
