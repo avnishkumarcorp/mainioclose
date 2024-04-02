@@ -47,6 +47,7 @@ import AllDeactivateUser from "./Main/DashBoard/AllDeactivateUser"
 import { useSelector } from "react-redux"
 import GetAllTaskList from "./Main/Sales/Leads/GetAllTaskList"
 import AllTickets from "./Main/DashBoard/AllTickets"
+import HrUserList from "./Main/HR/HrUserList"
 
 function App() {
 
@@ -86,8 +87,8 @@ function App() {
                
             </Route>
             {/* hr module routes */}
-            <Route path="/erp/:userid/hr" element={<ComingSoonPage />}>
-              <Route path="" element={<div>hrlinkone</div>} />
+            <Route path="/erp/:userid/hr" element={<HrUserList />}>
+              <Route path="" element={<h1>test</h1>} />
               <Route path="hrlinktwo" element={<div>hrlinktwo</div>} />
               <Route path="hrlinkthree" element={<div>hrlinkthree</div>} />
               <Route path="hrlinkfour" element={<div>hrlinkfour</div>} />

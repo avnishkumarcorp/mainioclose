@@ -28,6 +28,7 @@ const SideBar = () => {
   const currentUserProfile = useSelector((state) => state?.auth?.currentUser)
   const currentRoles = useSelector((state) => state?.auth?.roles)
   const adminRole = currentRoles?.includes("ADMIN")
+  const hrRole = currentRoles?.includes("HR")
 
   return (
     <div className="sideTab">
@@ -135,6 +136,7 @@ const SideBar = () => {
         {/* end */}
 
         {/* sales links start */}
+        {!(hrRole) ? (
         <div className="side-tabs">
           <NavLink
             to={`/erp/${userid}/sales/leads`}
@@ -190,9 +192,11 @@ const SideBar = () => {
             </div>
           </div>
         </div>
+        ): "" }
         {/* end */}
 
         {/* hr links start */}
+        {hrRole || adminRole ? (
         <div className="side-tabs">
           <NavLink
             to={`/erp/${userid}/hr`}
@@ -212,6 +216,11 @@ const SideBar = () => {
             aria-labelledby="headingOne"
             data-parent="#accordion"
           >
+            <div className="link-child">
+              <NavLink className="link-itemss" to={`/erp/${userid}/hr`}>
+                User List
+              </NavLink>
+              </div>
             {/* <div className="link-child">
               <NavLink className="link-itemss" to="hr">
                 HR First
@@ -234,6 +243,7 @@ const SideBar = () => {
             </div> */}
           </div>
         </div>
+        ): ""}
         {/* end */}
 
         {/* accounts links start */}
@@ -251,7 +261,7 @@ const SideBar = () => {
             <i className="fa-solid fa-money-check-dollar"></i> Accounts
           </NavLink>
           <div
-            id={`collapseAccountModule`}
+            id={`collapseAccountModule`} 
             className="collapse"
             aria-labelledby="headingOne"
             data-parent="#accordion"
