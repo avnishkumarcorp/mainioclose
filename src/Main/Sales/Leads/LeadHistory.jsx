@@ -55,7 +55,7 @@ const LeadHistory = () => {
   const leadHistoryFun = async () => {
     try {
       const leadHistory = await getQuery(
-        `/leadService/api/v1/leadHistory/getAllLeadHistory?leadId=${leadid}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/leadHistory/getAllLeadHistory?leadId=${leadid}`
       )
 
       setLeadHistoryData(leadHistory.data.reverse())

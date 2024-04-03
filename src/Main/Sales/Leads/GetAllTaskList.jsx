@@ -8,7 +8,7 @@ const GetAllTaskList = () => {
   const [dateInput, setDateInput] = useState("")
 
 
-  const allTasksByUser = `/leadService/api/v1/task/getAllTaskByAssignee?assigneeId=${userid}`
+  const allTasksByUser = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/task/getAllTaskByAssignee?assigneeId=${userid}`
   const allTaskDep = [dateInput]
 
   const {

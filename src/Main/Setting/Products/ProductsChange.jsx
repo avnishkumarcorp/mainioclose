@@ -65,7 +65,7 @@ const ProductsChange = () => {
 
     try {
       const productData = await postQuery(
-        `/leadService/api/v1/product/createProduct`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/product/createProduct`,
         addNewProduct
       )
       setAddProductDep((prev) => !prev)
@@ -93,13 +93,13 @@ const ProductsChange = () => {
     
   }
 
-  const categoryUrl = `/leadService/api/v1/category/getAllCategories`
+  const categoryUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/category/getAllCategories`
   const categoryDep = []
 
   const { productData: categoryData, loading: categoryLoading } =
     useCustomRoute(categoryUrl, categoryDep)
 
-  const productUrl = `/leadService/api/v1/product/getAllProducts`
+  const productUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/product/getAllProducts`
   const productDep = [addProductDep, deleteCategoryDep]
 
   const { productData: productData, loading: productLoading } = useCustomRoute(
@@ -140,7 +140,7 @@ const ProductsChange = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadProductDel = await deleteQuery(
-          `/leadService/api/v1/product/delete?id=${statusId}`
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/product/delete?id=${statusId}`
         )
         setDeleteCategoryDep((prev) => !prev)
       } catch (err) {

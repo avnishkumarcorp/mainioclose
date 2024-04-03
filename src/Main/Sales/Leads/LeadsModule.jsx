@@ -135,7 +135,7 @@ const LeadsModule = () => {
   const viewHistory = async (leadId) => {
     try {
       const singlePage = await putQuery(
-        `/leadService/api/v1/lead/viewHistoryCreate?userId=${userid}&leadId=${leadId}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/viewHistoryCreate?userId=${userid}&leadId=${leadId}`
       )
     } catch (err) {
       console.log(err)
@@ -151,7 +151,7 @@ const LeadsModule = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const delMulLead = await axios.delete(
-          `/leadService/api/v1/lead/deleteMultiLead`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/deleteMultiLead`,
           {
             data: deleteMultiLead,
             headers: {
@@ -484,7 +484,7 @@ const LeadsModule = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadResponse = await axios.delete(
-          `/leadService/api/v1/lead/deleteLead?leadId=${id}&userId=${userid}`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/deleteLead?leadId=${id}&userId=${userid}`,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -504,7 +504,7 @@ const LeadsModule = () => {
   const changeLeadAssignee = async (id, leadId) => {
     try {
       const updatePerson = await axios.put(
-        `/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}&updatedById=${userid}`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/updateAssignee?leadId=${leadId}&userId=${id}&updatedById=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -525,7 +525,7 @@ const LeadsModule = () => {
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
-        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
       )
       setLeadUserNew(allLeadUser.data)
     } catch (err) {
@@ -536,7 +536,7 @@ const LeadsModule = () => {
   const getAllStatusData = async () => {
     try {
       const allStatus = await getQuery(
-        `/leadService/api/v1/status/getAllStatus`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/status/getAllStatus`
       )
       setGetAllStatus(allStatus.data)
     } catch (err) {
@@ -561,7 +561,7 @@ const LeadsModule = () => {
 
     try {
       const multiAssigneeCol = await putQuery(
-        "/leadService/api/v1/lead/updateMultiLeadAssigne",
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/updateMultiLeadAssigne`,
         multiLeadData
       )
       setMultibtn(false)
@@ -575,10 +575,13 @@ const LeadsModule = () => {
 
   // bell icon
 
-  const bellCountUrl = `/leadService/api/v1/notification/getUnseenCount?userId=${userid}`
+  const bellCountUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/notification/getUnseenCount?userId=${userid}`
   const bellCountDep = []
 
-  const { productData: bellData } = useCustomRoute(bellCountUrl, bellCountDep)
+  const { productData: bellData, error } = useCustomRoute(
+    bellCountUrl,
+    bellCountDep
+  )
 
   return (
     <div className="lead-module small-box-padding">

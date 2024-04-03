@@ -31,10 +31,10 @@ const DisplayDashboardUser = () => {
     if (window.confirm("Are you sure to deActivate this User?") == true) {
       try {
         const suspandUser = await deleteQuery(
-          `/securityService/api/auth/deleteUser?userId=${id}`
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/deleteUser?userId=${id}`
         )
         const deleteUser = await deleteQuery(
-          `/leadService/api/v1/users/deleteUser?id=${id}`
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/deleteUser?id=${id}`
         )
         setUserSuspand((prev) => !prev)
       } catch (err) {

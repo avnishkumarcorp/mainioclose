@@ -35,7 +35,7 @@ const DisplayUserTwo = () => {
   
   const displayUser = async () => {
     try {
-      const userData = await axios.get(`/leadService/api/v1/users/getAllUser`, {
+      const userData = await axios.get(`${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/getAllUser`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",

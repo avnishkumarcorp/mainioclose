@@ -37,7 +37,7 @@ const LeadStatusPage = () => {
     const leadStatusCraete = async () => {
       try {
         const createNewStatus = await postQuery(
-          `/leadService/api/v1/status/CreateLeadStatus`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/status/CreateLeadStatus`,
           createStatus
         )
         setLeadCreateDep((prev) => !prev)
@@ -53,7 +53,7 @@ const LeadStatusPage = () => {
     leadStatusCraete()
   }
 
-  const statusUrl = `/leadService/api/v1/status/getAllStatus`
+  const statusUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/status/getAllStatus`
   const statusDep = [leadCreateDep, deleteStatusDep]
 
   const { productData: statusData, loading: statusLoading } = useCustomRoute(
@@ -65,7 +65,7 @@ const LeadStatusPage = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadStatusDel = await deleteQuery(
-          `/leadService/api/v1/status/deleteStaus?id=${statusId}`
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/status/deleteStaus?id=${statusId}`
         )
         setDeleteStatusDep((prev) => !prev)
       } catch (err) {

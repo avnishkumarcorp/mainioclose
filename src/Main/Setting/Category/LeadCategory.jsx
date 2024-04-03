@@ -34,7 +34,7 @@ const LeadCategory = () => {
     setBtnLoading(true)
     try {
       const catDataRes = await postQuery(
-        `/leadService/api/v1/category/createCategory`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/category/createCategory`,
         leadCategory
       )
       setCreateCategoryDep((prev) => !prev)
@@ -46,7 +46,7 @@ const LeadCategory = () => {
     }
   }
 
-  const categoryUrl = `/leadService/api/v1/category/getAllCategories`
+  const categoryUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/category/getAllCategories`
   const categoryDep = [createCategoryDep, deleteCategoryDep]
 
   const { productData: categoryData, loading: categoryLoading } =
@@ -57,7 +57,7 @@ const LeadCategory = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const leadCategoryDel = await deleteQuery(
-          `/leadService/api/v1/category/deleteCategory?categoryId=${statusId}`
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/category/deleteCategory?categoryId=${statusId}`
         )
         setDeleteCategoryDep((prev) => !prev)
       } catch (err) {

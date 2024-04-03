@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getQuery } from "../../API/GetQuery"
 
 export const getAllTickets = createAsyncThunk("allTickets", async (id) => {
-  const allTickets = await getQuery(`/leadService/api/v1/getAllTicket?userId=${id}`)
+  const allTickets = await getQuery(`${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/getAllTicket?userId=${id}`)
   return allTickets.data
 })
 

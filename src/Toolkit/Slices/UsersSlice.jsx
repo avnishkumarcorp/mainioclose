@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getQuery } from "../../API/GetQuery"
 
 export const getAllUsers = createAsyncThunk("allUsers", async () => {
-  const allUser = await getQuery(`/leadService/api/v1/users/getAllUser`)
+  const allUser = await getQuery(`${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/getAllUser`)
   return allUser.data
 })
 

@@ -3,12 +3,17 @@ import "./HeroSection.scss"
 import sideImage from "../Images/homePic.png"
 
 const HeroSection = () => {
+
+  const url = process.env.REACT_APP_BASE_URL;
+  console.log("url", url);
+
   return (
     <div className="container hero-section home-section-padding">
       <div className="right-section">
         <div className="hero-text">
           <h3 className="small-head">Your Trusted ERP Partner</h3>
           <h2 className="big-head">
+            
             Transforming <br /> CA & CS <br /> Management
           </h2>
         </div>

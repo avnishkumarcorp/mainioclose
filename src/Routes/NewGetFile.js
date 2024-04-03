@@ -4,7 +4,7 @@ import { useCustomRoute } from "./GetCustomRoutes";
 
 const NewGetFile = () => {
 
-  const url =  `/leadService/api/v1/product/getProduct?id=${1}`
+  const url =  `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/product/getProduct?id=${1}`
   const [btnOne, setBtnOne] = useState(false);
 
   const handleClickOne = () =>{

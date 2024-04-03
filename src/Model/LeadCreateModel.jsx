@@ -79,7 +79,7 @@ const LeadCreateModel = () => {
     const leadCreateFun = async () => {
       try {
         const createNewLeadData = await postQuery(
-          `/leadService/api/v1/lead/createLead`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/createLead`,
           leadData
         )
         window.location.reload()
@@ -92,7 +92,7 @@ const LeadCreateModel = () => {
     leadCreateFun()
   }
 
-  const leadUserUrl = `/leadService/api/v1/users/getAllUser`
+  const leadUserUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/getAllUser`
   const leadUserData = []
 
   const { productData: allLeadUser } = useCustomRoute(leadUserUrl, leadUserData)

@@ -16,13 +16,13 @@ const EstimateCreatePage = () => {
     getAllClient()
   }, [])
 
-  const getAllCompUrl  = `/leadService/api/v1/company/getAllCompany`
+  const getAllCompUrl  = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/company/getAllCompany`
   const getAllCompDep = [];
 
   const { productData: allCompanyData, loading: compnayLoading, error: companyError} = useCustomRoute(getAllCompUrl, getAllCompDep);
 
  
-  const allClientUrl = `/leadService/api/v1/client/getAllClientInfo`
+  const allClientUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/client/getAllClientInfo`
   const allClientDep = []
 
   const { productData: allClientInfo, loading: clientLoading, error: clientError} = useCustomRoute(allClientUrl, allClientDep);
@@ -32,7 +32,7 @@ const EstimateCreatePage = () => {
   const getAllClient = async () => {
     try {
       const clientResponse = await getQuery(
-        `/leadService/api/v1/client/getAllClientInfo`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/client/getAllClientInfo`
       )
       setLoadingClient(false)
       setAllClient(clientResponse.data)

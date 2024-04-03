@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { postQuery } from "../../API/PostQuery"
 
 export const getCurrentUser = createAsyncThunk("currentUser", async (data) => {
-  const userData = await postQuery(`/securityService/api/auth/signin`, data)
+  const userData = await postQuery(`${process.env.REACT_APP_SECURITY_URL}/${process.env.REACT_APP_SIGN_IN}`, data)
   return userData.data
 })
 

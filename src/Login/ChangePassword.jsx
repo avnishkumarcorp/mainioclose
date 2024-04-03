@@ -37,7 +37,7 @@ const ChangePassword = () => {
     const updateExistUserPassword = async () => {
       try {
         const checkUser = await axios.put(
-          `/securityService/api/auth/updateUser`,
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/updateUser`,
           {
             ...updateUserData,
             headers: {

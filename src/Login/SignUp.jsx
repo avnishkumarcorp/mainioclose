@@ -116,7 +116,7 @@ const SignUp = () => {
     const generateNewOtpFun = async () => {
       try {
         const getNewOtp = await postQuery(
-          "/securityService/api/auth/otp",
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/otp`,
           generateOtpData
         )
         console.log("otp is", getNewOtp);

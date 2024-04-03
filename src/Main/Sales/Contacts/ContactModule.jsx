@@ -5,7 +5,7 @@ import UserListComponent from "../../../Tables/UserListComponent"
 
 const ContactModule = () => {
 
-  const contactUrl = `/leadService/api/v1/client/getAllClientInfo`
+  const contactUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/client/getAllClientInfo`
   const contactDep = []
 
   const { productData: allContact } = useCustomRoute(contactUrl, contactDep)

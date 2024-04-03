@@ -58,7 +58,7 @@ const EnquirySend = () => {
 
       try {
         const ticket = await postQuery(
-          `/leadService/api/v1/createTicket`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/createTicket`,
           EnquiryTicketData
         )
         toast.success("Message Submit Sucessfully...")

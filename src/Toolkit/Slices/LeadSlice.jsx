@@ -3,7 +3,7 @@ import { getQuery } from "../../API/GetQuery"
 import { postQuery } from "../../API/PostQuery"
 
 export const getAllLeads = createAsyncThunk("allLeadsData", async (data) => {
-  const allLeads = await postQuery(`/leadService/api/v1/lead/getAllLead`, data)
+  const allLeads = await postQuery(`${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/getAllLead`, data)
   return allLeads?.data?.reverse()
 })
 

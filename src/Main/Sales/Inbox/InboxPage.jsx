@@ -68,7 +68,7 @@ const InboxPage = () => {
   const getAllLead = async () => {
     try {
       const allLead = await axios.get(
-        `/leadService/api/v1/inbox/getAllInboxData?userId=${userid}`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/inbox/getAllInboxData?userId=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",

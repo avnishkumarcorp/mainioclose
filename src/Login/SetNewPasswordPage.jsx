@@ -32,7 +32,7 @@ const SetNewPasswordPage = () => {
       setBtnLoading(true)
       try {
         const passwordData = await putQuery(
-          `/securityService/api/auth/setNewPassword`,
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/setNewPassword`,
           newPassword
         )
 

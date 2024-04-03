@@ -6,7 +6,7 @@ import { putQueryNoData } from "../../API/PutQueryWithoutData"
 const AllDeactivateUser = () => {
   const [deactiveDep, setDeactiveDep] = useState(false)
 
-  const allDeactivateUser = `/leadService/api/v1/users/getAllDeactivateUser`
+  const allDeactivateUser = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/getAllDeactivateUser`
   const deactivateUserDep = [deactiveDep]
 
   const { productData: allDeactivateUsers, loading: userLoading } =
@@ -20,10 +20,10 @@ const AllDeactivateUser = () => {
     if (window.confirm("Are you sure to Activate this User?") == true) {
       try {
         const activeLogin = await putQueryNoData(
-          `/securityService/api/auth/activateUser?userId=${id}`
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/activateUser?userId=${id}`
         )
         const activeLead = await putQueryNoData(
-          `/leadService/api/v1/users/activateUser?id=${id}`
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/activateUser?id=${id}`
         )
 
        

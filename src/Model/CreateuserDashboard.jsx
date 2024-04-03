@@ -72,7 +72,7 @@ const CreateuserDashboard = ({ data, type }) => {
     getAllRole()
   }, [])
 
-  const roleUrl = `/securityService/api/v1/roles/getRole`
+  const roleUrl = `${process.env.REACT_APP_SECURITY_URL}/securityService/api/v1/roles/getRole`
   const roleData = []
 
   const { productData: allDataRole } = useCustomRoute(roleUrl, roleData)
@@ -80,7 +80,7 @@ const CreateuserDashboard = ({ data, type }) => {
   const getAllRole = async () => {
     try {
       const allRoleResponse = await getQuery(
-        `/securityService/api/v1/roles/getRole`
+        `${process.env.REACT_APP_SECURITY_URL}/securityService/api/v1/roles/getRole`
       )
       setAllRoles(allRoleResponse.data)
     } catch (err) {
@@ -111,7 +111,7 @@ const CreateuserDashboard = ({ data, type }) => {
     const userCreateFun = async () => {
       try {
         const createNewUserData = await postQuery(
-          `/securityService/api/auth/createNewUserByEmail`,
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/createNewUserByEmail`,
           userRowData
         )
 
@@ -127,7 +127,7 @@ const CreateuserDashboard = ({ data, type }) => {
         }
 
         const createLeadUserByEmail = await postQuery(
-          `/leadService/api/v1/users/createUserByEmail`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/createUserByEmail`,
           newLeadObject
         )
         setBtnLoading(false)
@@ -178,7 +178,7 @@ const CreateuserDashboard = ({ data, type }) => {
 
     try{
     const updateUserData = await putQuery(`/securityService/api/auth/updateUserData`, upadtedData);
-    const updateLeadUserData = await putQuery(`/leadService/api/v1/users/updateUserData`,updateLeadData )
+    const updateLeadUserData = await putQuery(`${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/updateUserData`,updateLeadData )
     window.location.reload();
     toast.success("User Edit Succesfully")
   }catch(err){

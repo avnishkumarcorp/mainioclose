@@ -99,7 +99,7 @@ const LeadDetailsPage = () => {
     event.preventDefault()
     console.log(fileRef.current.value)
     setUploadLoading(true)
-    const url = "/leadService/api/v1/upload/uploadimageToFileSystem"
+    const url = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/upload/uploadimageToFileSystem`
     const formData = new FormData()
     formData.append("file", file)
     const config = {
@@ -248,10 +248,10 @@ const LeadDetailsPage = () => {
   //  useEffect calls End
 
   const getAllOportunities = async () => {
-    const getOportunities = await getQuery(
-      `/leadService/api/v1/leadOpportunity/getAllOpportunity`
-    )
-    setAllOportunities(getOportunities.data)
+    // const getOportunities = await getQuery(
+    //   `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/leadOpportunity/getAllOpportunity`
+    // )
+    // setAllOportunities(getOportunities.data)
   }
 
   const NotesRef = useRef()
@@ -328,7 +328,7 @@ const LeadDetailsPage = () => {
 
     try {
       const EditData = await postQuery(
-        `/leadService/api/v1/task/updateTaskData`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/task/updateTaskData`,
         addNewTask
       )
       addNewTask.name = ""
@@ -347,7 +347,7 @@ const LeadDetailsPage = () => {
   const getAllTaskStatus = async () => {
     try {
       const allTaskStatus = await axios.get(
-        `/leadService/api/v1/getAllTaskStatus`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/getAllTaskStatus`
       )
       setAllTaskStatusData(allTaskStatus.data)
       setLeadStatusScale(true)
@@ -360,7 +360,7 @@ const LeadDetailsPage = () => {
   const getAllProductData = async () => {
     try {
       const allProductResponse = await getQuery(
-        `/leadService/api/v1/product/getAllProducts`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/product/getAllProducts`
       )
       setAllProductData(allProductResponse.data)
     } catch (err) {
@@ -372,7 +372,7 @@ const LeadDetailsPage = () => {
   const getAllLeadUser = async () => {
     try {
       const allLeadUser = await axios.get(
-        `/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
       )
       setGetAllLeadUserData(allLeadUser.data)
     } catch (err) {
@@ -395,7 +395,7 @@ const LeadDetailsPage = () => {
 
   // get All Products
 
-  const ProductUrl = `/leadService/api/v1/product/getAllProducts`
+  const ProductUrl = `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/product/getAllProducts`
   const depandent = []
 
   const { productData, loading, error } = useCustomRoute(ProductUrl, depandent)
@@ -415,7 +415,7 @@ const LeadDetailsPage = () => {
   const getAllTaskData = async () => {
     try {
       const allTaskData = await getQuery(
-        `/leadService/api/v1/task/getAllTaskByLead?leadId=${leadid}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/task/getAllTaskByLead?leadId=${leadid}`
       )
       setGetSingleLeadTask(allTaskData.data.reverse())
     } catch (err) {
@@ -432,7 +432,7 @@ const LeadDetailsPage = () => {
   const leadNotesData = async (id) => {
     try {
       const getAllLeadNotes = await getQuery(
-        `/leadService/api/v1/getAllRemarks?leadId=${leadid}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/getAllRemarks?leadId=${leadid}`
       )
       const newData = getAllLeadNotes.data.reverse()
       setNotesApiData(newData)
@@ -446,7 +446,7 @@ const LeadDetailsPage = () => {
   const editViewData = async () => {
     try {
       const viewData = await axios.get(
-        `/leadService/api/v1/inbox/editView?leadId=${leadid}`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/inbox/editView?leadId=${leadid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -463,7 +463,7 @@ const LeadDetailsPage = () => {
   const getSingleLeadData = async () => {
     try {
       const singleLeadApiData = await getQuery(
-        `/leadService/api/v1/lead/getSingleLeadData?leadId=${leadid}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/getSingleLeadData?leadId=${leadid}`
       )
       setSingleLeadResponseData(singleLeadApiData.data)
       setAllProductsList(singleLeadApiData.data.serviceDetails)
@@ -484,7 +484,7 @@ const LeadDetailsPage = () => {
     const statusChange = async () => {
       try {
         const statusData = await axios.put(
-          `/leadService/api/v1/status/updateLeadStatus?leadId=${leadid}&statusId=${catId}&currentUserId=${userid}`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/status/updateLeadStatus?leadId=${leadid}&statusId=${catId}&currentUserId=${userid}`,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -513,7 +513,7 @@ const LeadDetailsPage = () => {
       setNotesLoading(true)
       try {
         const remarkData = await postQuery(
-          `/leadService/api/v1/createRemarks`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/createRemarks`,
           remarkMessage
         )
         setNotesUpdateToggle((prev) => !prev)
@@ -538,7 +538,7 @@ const LeadDetailsPage = () => {
   const getAllProductWithCattegory = async () => {
     try {
       const getCategory = await getQuery(
-        "/leadService/api/v1/category/getAllCategories"
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/category/getAllCategories`
       )
       setCategoryData(getCategory.data)
     } catch (err) {
@@ -551,7 +551,7 @@ const LeadDetailsPage = () => {
   const deleteProductFun = async (e, serviceId) => {
     try {
       const productDelete = await axios.put(
-        `/leadService/api/v1/lead/deleteProductInLead?leadId=${leadid}&serviceId=${serviceId}&userId=${userid}`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/deleteProductInLead?leadId=${leadid}&serviceId=${serviceId}&userId=${userid}`
       )
       toast.success("product Deleted Sucessfully")
       setProductDepandence((prev) => !prev)
@@ -564,7 +564,7 @@ const LeadDetailsPage = () => {
   const getAllStatusData = async () => {
     try {
       const allStatus = await getQuery(
-        `/leadService/api/v1/status/getAllStatus`
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/status/getAllStatus`
       )
       setGetAllStatus(allStatus.data)
     } catch (err) {
@@ -579,7 +579,7 @@ const LeadDetailsPage = () => {
     e.preventDefault()
     try {
       const updateLeadProducts = await axios.put(
-        `/leadService/api/v1/lead/createProductInLead`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/createProductInLead`,
         {
           ...addProductData,
           headers: {
@@ -603,7 +603,7 @@ const LeadDetailsPage = () => {
   const updateLeadNameSinglePage = async (e) => {
     try {
       const leadNameUpdate = await axios.put(
-        `/leadService/api/v1/lead/updateLeadName?leadName=${updateLeadName}&leadId=${leadid}&userId=${userid}`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/updateLeadName?leadName=${updateLeadName}&leadId=${leadid}&userId=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -644,7 +644,7 @@ const LeadDetailsPage = () => {
     const leadContact = async () => {
       try {
         const apiContactRes = await postQuery(
-          `/leadService/api/v1/client/createClient`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/client/createClient`,
           createContact
         )
         setClientContactToggle((prev) => !prev)
@@ -688,7 +688,7 @@ const LeadDetailsPage = () => {
     const TaskCreateNew = async () => {
       try {
         const taskCreateData = await postQuery(
-          `/leadService/api/v1/task/createTask`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/task/createTask`,
           addNewTask
         )
         setTaskUpdateToggle((prev) => !prev)
@@ -717,7 +717,7 @@ const LeadDetailsPage = () => {
 
   const getAllUserData = async () => {
     const allUserResponse = await getQuery(
-      `/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
+      `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/getAllUserByHierarchy?userId=${userid}`
     )
     setUserDataResponse(allUserResponse.data)
   }
@@ -725,7 +725,7 @@ const LeadDetailsPage = () => {
   const changeLeadAssignee = async (id) => {
     try {
       const updatePerson = await axios.put(
-        `/leadService/api/v1/lead/updateAssignee?leadId=${leadid}&userId=${id}&updatedById=${userid}`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/lead/updateAssignee?leadId=${leadid}&userId=${id}&updatedById=${userid}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -743,7 +743,7 @@ const LeadDetailsPage = () => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
         const deleteTaskData = await deleteQuery(
-          `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
         )
         setTaskReferesh((prev) => !prev)
       } catch (err) {
@@ -770,7 +770,7 @@ const LeadDetailsPage = () => {
     e.preventDefault()
     try {
       const editContactDetails = await putQuery(
-        `/leadService/api/v1/client/updateClientInfo`,
+        `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/client/updateClientInfo`,
         createContact
       )
       setEditContactState(false)
@@ -788,7 +788,7 @@ const LeadDetailsPage = () => {
       try {
         const deleteContactData = await deleteQuery(
           // `/leadService/api/v1/task/deleteTaskById?taskId=${id}&currentUserId=${userid}`
-          `/leadService/api/v1/client/deleteClient?leadId=${leadid}&clientId=${id}&currentUserId=${userid}`
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/client/deleteClient?leadId=${leadid}&clientId=${id}&currentUserId=${userid}`
         )
         setContactDelDep((prev) => !prev)
         // setTaskReferesh((prev) => !prev)

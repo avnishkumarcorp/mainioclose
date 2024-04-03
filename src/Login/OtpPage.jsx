@@ -41,7 +41,7 @@ const OtpPage = () => {
     const createUserApi = async () => {
       try {
         const signupResponse = await postQuery(
-          "/securityService/api/auth/createNewUser",
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/createNewUser`,
           finalApiData
         )
         const { id } = signupResponse.data.data
@@ -58,7 +58,7 @@ const OtpPage = () => {
         delete leadUserData.mobile
   
         const createLeadResponse = await postQuery(
-          `/leadService/api/v1/users/createUsser`,
+          `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/users/createUsser`,
           leadUserData
         )
 

@@ -62,7 +62,7 @@ const ForgetPassword = () => {
     const forgetPass = async () => {
       try {
         const passwordOtp = await axios.post(
-          `/securityService/api/auth/forgetOtp?email=${emailData}`,
+          `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/forgetOtp?email=${emailData}`,
           {
             headers: {
               "Access-Control-Allow-Origin": "*",

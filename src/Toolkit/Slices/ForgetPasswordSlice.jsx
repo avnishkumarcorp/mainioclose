@@ -5,7 +5,7 @@ export const forgetPasswordApi = createAsyncThunk(
   "forgetPassword",
   async (data) => {
     const passData = await axios.post(
-      `/securityService/api/auth/forgetOtp?email=${data}`
+      `${process.env.REACT_APP_SECURITY_URL}/securityService/api/auth/forgetOtp?email=${data}`
     )
     return passData.data
   }

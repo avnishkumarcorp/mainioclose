@@ -6,7 +6,7 @@ export const getNotificationFun = createAsyncThunk(
   "allNotificatons",
   async (userid) => {
     const allNotification = await getQuery(
-      `/leadService/api/v1/notification/getAllNotification?userId=${userid}`
+      `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/notification/getAllNotification?userId=${userid}`
     )
     return allNotification.data.reverse()
   }
@@ -15,7 +15,7 @@ export const getNotificationFun = createAsyncThunk(
 
 export const updateNotification = createAsyncThunk("updateNotifications", async (userid) => {
   const markNotification = await putQueryNoData(
-    `/leadService/api/v1/notification/viewNotification?userId=${userid}`
+    `${process.env.REACT_APP_LEAD_URL}/leadService/api/v1/notification/viewNotification?userId=${userid}`
   )
   return markNotification
 })
