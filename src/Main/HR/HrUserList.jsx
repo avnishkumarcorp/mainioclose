@@ -5,6 +5,7 @@ import UserListComponent from "../../Tables/UserListComponent"
 import CreateuserDashboard from "../../Model/CreateuserDashboard"
 import { getAllUsers } from "../../Toolkit/Slices/UsersSlice"
 import TableScalaton from "../../components/TableScalaton"
+import CreateHrDashBoard from "../../Model/CreateHrDashBoard"
 
 const HrUserList = () => {
   const dispatch = useDispatch()
@@ -49,7 +50,7 @@ const HrUserList = () => {
             <button
               className="common-btn-one mr-2"
               data-toggle="modal"
-              data-target="#createuserdashboard"
+              data-target="#createhrdashboard"
               onClick={() => myNewId(props?.row)}
             >
               Edit
@@ -65,7 +66,7 @@ const HrUserList = () => {
       <div className="create-user-box">
         <h1 className="table-heading">User List ({userCount})</h1>
         <div className="all-center">
-          <CreateuserDashboard data={getId} type={editType} />
+          <CreateHrDashBoard data={getId} type={editType} />
         </div>
       </div>
       {allUserLoading ? (

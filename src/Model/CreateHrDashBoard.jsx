@@ -9,25 +9,50 @@ import "react-toastify/dist/ReactToastify.css"
 import { userDepartment } from "../data/FakeData"
 import { Link } from "react-router-dom"
 import { putQuery } from "../API/PutQuery"
+import ModelInput from "../components/Inputs/ModelInput"
 toast.configure()
 
-const CreateuserDashboard = ({ data, type }) => {
-  // /securityService/api/auth/createNewUserByEmail
-
+const CreateHrDashBoard = ({ data, type }) => {
   const [roleGetRole, setRoleGetRole] = useState([])
-  const [userRowData, setUserRowData] = useState({
+  const [userSecurityData, setUserSecurityData] = useState({
     userName: "",
     email: "",
     role: [],
     designation: "",
     department: "",
   })
+  const [userRowData, setUserRowData] = useState({
+    userName: "",
+    email: "",
+    role: [],
+    designation: "",
+    department: "",
+    // "id": 0,
+    epfNo: "",
+    aadharCard: "",
+    employeeId: "",
+    managerId: 0,
+    expInMonth: 0,
+    expInYear: 0,
+    dateOfJoining: "",
+    type: "",
+    fatherName: "",
+    fatherOccupation: "",
+    fatherContactNo: "",
+    motherName: "",
+    motherOccupation: "",
+    motherContactNo: "",
+    spouseName: "",
+    spouseContactNo: "",
+    nationality: "",
+    language: "",
+    emergencyNumber: "",
+    panNumber: "",
+    permanentAddress: "",
+    residentialAddress: "",
+    manager: true,
+  })
 
-  useEffect(()=> {
-    userRowDataFetch();
-    
-  },[])
-  
   const [btnLoading, setBtnLoading] = useState(false)
   const [allRoles, setAllRoles] = useState([])
 
@@ -41,10 +66,12 @@ const CreateuserDashboard = ({ data, type }) => {
   const roleRef = useRef()
   const designationRef = useRef()
 
+ 
   const GetRoleFun = (e) => {
     setUserRowData((prev) => ({ ...prev, role: [e.target.value] }))
   }
 
+ 
   //   useEffect(()=>{
   //       setUserRowData(()=> ({
   //         userName: data.fullName,
@@ -55,9 +82,7 @@ const CreateuserDashboard = ({ data, type }) => {
   //       }))
   //  },[type])
 
-  useEffect(() => {
-    userRowDataFetch()
-  }, [type])
+ 
 
   const userRowDataFetch = (e) => {
     if (type) {
@@ -112,24 +137,62 @@ const CreateuserDashboard = ({ data, type }) => {
     }
 
     setBtnLoading(true)
+
+    const userData = {
+        userName: userRowData.userName,
+        email: userRowData.email,
+        role: userRowData.role,
+        designation: userRowData.designation,
+        department: userRowData.department,
+    }
+
+
+
     const userCreateFun = async () => {
       try {
         const createNewUserData = await postQuery(
           `/securityService/api/auth/createNewUserByEmail`,
-          userRowData
+          userData
         )
 
         let roleData = createNewUserData.data.data.role.map((role) => role.name)
+            console.warn("user data", createNewUserData);
+         
 
         const newLeadObject = {
-          id: createNewUserData.data.data.userId,
-          email: createNewUserData.data.data.email,
+          id: createNewUserData?.data?.data?.userId,
+          email: createNewUserData?.data?.data?.email,
           role: roleData,
-          designation: createNewUserData.data.data.designation,
-          department: createNewUserData.data.data.department,
-          userName: createNewUserData.data.data.name,
+          designation: createNewUserData?.data?.data?.designation,
+          department: createNewUserData?.data?.data?.department,
+          userName: createNewUserData?.data?.data?.name,
+          epfNo: userRowData?.epfNo,
+          aadharCard: userRowData?.aadharCard,
+          employeeId: userRowData?.employeeId,
+          managerId: userRowData?.managerId,
+          expInMonth: userRowData?.expInMonth,
+          expInYear : userRowData?.expInYear,
+          dateOfJoining: userRowData?.dateOfJoining,
+          type: userRowData?.type,
+          fatherName: userRowData?.fatherName,
+          fatherOccupation: userRowData?.a?.fatherOccupation,
+          fatherContactNo:  userRowData?.fatherContactNo,
+          motherName:  userRowData?.motherName,
+          motherOccupation:  userRowData?.motherOccupation,
+          motherContactNo:  userRowData?.motherContactNo,
+          spouseName:  userRowData?.spouseName,
+          spouseContactNo:  userRowData?.spouseContactNo,
+          nationality:  userRowData?.nationality,
+          language:  userRowData?.language,
+          emergencyNumber:  userRowData?.emergencyNumber,
+          panNumber:  userRowData?.panNumber,
+          permanentAddress: userRowData?.permanentAddress,
+          residentialAddress:  userRowData?.residentialAddress,
+          manager: true,
         }
 
+        console.warn("after api calling ", newLeadObject);
+      
         const createLeadUserByEmail = await postQuery(
           `/leadService/api/v1/users/createUserByEmail`,
           newLeadObject
@@ -149,7 +212,6 @@ const CreateuserDashboard = ({ data, type }) => {
     }
     userCreateFun()
   }
-
 
   const editUserData = async (e) => {
     e.preventDefault()
@@ -171,26 +233,24 @@ const CreateuserDashboard = ({ data, type }) => {
       email: userRowData.email,
       designation: userRowData.designation,
       department: userRowData.department,
-      role: userRowData.role
+      role: userRowData.role,
     }
 
-
-   
-
-
-
-
-    try{
-    const updateUserData = await putQuery(`/securityService/api/auth/updateUserData`, upadtedData);
-    const updateLeadUserData = await putQuery(`/leadService/api/v1/users/updateUserData`,updateLeadData )
-    window.location.reload();
-    toast.success("User Edit Succesfully")
-  }catch(err){
-      console.log(err);
+    try {
+      const updateUserData = await putQuery(
+        `/securityService/api/auth/updateUserData`,
+        upadtedData
+      )
+      const updateLeadUserData = await putQuery(
+        `/leadService/api/v1/users/updateUserData`,
+        updateLeadData
+      )
+      window.location.reload()
+      toast.success("User Edit Succesfully")
+    } catch (err) {
+      console.log(err)
       setEditUserLoading(false)
     }
-    
-
   }
 
   return (
@@ -200,7 +260,7 @@ const CreateuserDashboard = ({ data, type }) => {
           type="button"
           className="team-edit-button create-user-btn"
           data-toggle="modal"
-          data-target="#createuserdashboard"
+          data-target="#createhrdashboard"
         >
           <i className="fa-solid mr-1 fa-circle-plus"></i>
         </button>
@@ -208,7 +268,7 @@ const CreateuserDashboard = ({ data, type }) => {
         {/* MODAL */}
         <div
           className="modal fade"
-          id="createuserdashboard"
+          id="createhrdashboard"
           tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
@@ -251,7 +311,7 @@ const CreateuserDashboard = ({ data, type }) => {
                             ref={nameRef}
                             placeholder="Enter Username"
                             name={type ? "fullName" : "userName"}
-                            onChange={userRowDataFetch}
+                            onChange={(e) => userRowDataFetch(e)}
                           />
                         </div>
                         {nameError ? (
@@ -375,40 +435,223 @@ const CreateuserDashboard = ({ data, type }) => {
                       </div>
 
                       {/* <div className="form-group col-md-6">
-                        <div className="pr-ten">
-                          <label
-                            className="label-heading mb-1"
-                            htmlFor="mobileNo"
-                          >
-                            Department
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control input-focus"
-                            id="mobileNo"
-                            // ref={designationRef}
-                            placeholder="Enter Department"
-                            name="department"
-                            onChange={(e) => userRowDataFetch(e)}
-                          />
-                        </div>
-                      </div> */}
+                          <div className="pr-ten">
+                            <label
+                              className="label-heading mb-1"
+                              htmlFor="mobileNo"
+                            >
+                              Department
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control input-focus"
+                              id="mobileNo"
+                              // ref={designationRef}
+                              placeholder="Enter Department"
+                              name="department"
+                              onChange={(e) => userRowDataFetch(e)}
+                            />
+                          </div>
+                        </div> */}
+
+                      <ModelInput
+                        label="EPFO Number"
+                        type="text"
+                        placeholder="Enter EPFO Number"
+                        name="epfNo"
+                        value={
+                          type
+                            ? userRowData.epfNo
+                            : userRowData.epfNo
+                        }
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Aadhar Card"
+                        type="text"
+                        placeholder="Enter Aadhar Card"
+                        name="aadharCard"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Employee Name"
+                        type="text"
+                        placeholder="Enter Employee Name"
+                        name="employeeId"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Manager Name"
+                        type="text"
+                        placeholder="Enter Manager Name"
+                        name="managerId"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Experience In Months"
+                        type="text"
+                        placeholder="Enter Experience In Months"
+                        name="expInMonth"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Experience in Years"
+                        type="text"
+                        placeholder="Enter Experience in Years"
+                        name="expInYear"
+                        onChange={(e) => userRowDataFetch(e)}
+                     />
+
+                      <ModelInput
+                        label="Date of Joining"
+                        type="date"
+                        placeholder="Enter Date of Joinning"
+                        name="dateOfJoining"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Type"
+                        type="text"
+                        placeholder="Enter Type"
+                        name="type"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Father Name"
+                        type="text"
+                        placeholder="Enter Father Name"
+                        name="fatherName"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Father Occupation"
+                        type="text"
+                        placeholder="Enter Father Occupation"
+                        name="fatherOccupation"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Father Contact No"
+                        type="text"
+                        placeholder="Enter Father Contact No"
+                        name="fatherContactNo"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Mother Name"
+                        type="text"
+                        placeholder="Enter Mother Name"
+                        name="motherName"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Mother Occupation"
+                        type="text"
+                        placeholder="Enter Mother Occupation"
+                        name="motherOccupation"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Mother Contact No."
+                        type="text"
+                        placeholder="Enter Mother Contact No."
+                        name="motherContactNo"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Spouse Name"
+                        type="text"
+                        placeholder="Enter Spouse Name"
+                        name="spouseName"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Spouse Contact Number"
+                        type="text"
+                        placeholder="Enter Spouse Contact Number"
+                        name="spouseContactNo"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Nationality"
+                        type="text"
+                        placeholder="Enter Nationality"
+                        name="nationality"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Language"
+                        type="text"
+                        placeholder="Enter Language"
+                        name="language"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Emergency Contact"
+                        type="text"
+                        placeholder="Enter Emergency Contact"
+                        name="emergencyNumber"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Permanenet Address"
+                        type="text"
+                        placeholder="Enter Permanenet Address"
+                        name="permanentAddress"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Residential Address"
+                        type="text"
+                        placeholder="Enter Residential Address"
+                        name="residentialAddress"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <ModelInput
+                        label="Manager Name"
+                        type="text"
+                        placeholder="Enter Manager Name"
+                        name="manager"
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
 
                       <div className="all-between-items">
                         <div className="all-center"></div>
                         <div>
                           {type ? (
-                             <button onClick={(e) => editUserData(e)} className="first-button form-prev-btn">
-                             {editUserLoading ? "Please wait...": "Edit User"}
-                           </button>
-                            
+                            <button
+                              onClick={(e) => editUserData(e)}
+                              className="first-button form-prev-btn"
+                            >
+                              {editUserLoading ? "Please wait..." : "Edit User"}
+                            </button>
                           ) : (
                             <button
-                            onClick={(e) => createuserData(e)}
-                            className="first-button form-prev-btn"
-                          >
-                            {btnLoading ? "Loading" : "Submit"}
-                          </button>
+                              onClick={(e) => createuserData(e)}
+                              className="first-button form-prev-btn"
+                            >
+                              {btnLoading ? "Loading" : "Submit"}
+                            </button>
                           )}
                         </div>
                       </div>
@@ -424,4 +667,4 @@ const CreateuserDashboard = ({ data, type }) => {
   )
 }
 
-export default CreateuserDashboard
+export default CreateHrDashBoard
