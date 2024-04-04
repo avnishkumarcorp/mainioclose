@@ -10,6 +10,8 @@ import { userDepartment } from "../data/FakeData"
 import { Link } from "react-router-dom"
 import { putQuery } from "../API/PutQuery"
 import ModelInput from "../components/Inputs/ModelInput"
+import TextFieldInput from "../components/Inputs/TextFieldInput"
+import { useSelector } from "react-redux"
 toast.configure()
 
 const CreateHrDashBoard = ({ data, type }) => {
@@ -53,6 +55,8 @@ const CreateHrDashBoard = ({ data, type }) => {
     manager: true,
   })
 
+  console.log("i am data", data)
+
   const [btnLoading, setBtnLoading] = useState(false)
   const [allRoles, setAllRoles] = useState([])
 
@@ -61,17 +65,17 @@ const CreateHrDashBoard = ({ data, type }) => {
   const [roleError, setRoleError] = useState(false)
   const [editUserLoading, setEditUserLoading] = useState(false)
 
+  const allUserList = useSelector((prev) => prev.user.allUsers)
+
   const nameRef = useRef()
   const emailRef = useRef()
   const roleRef = useRef()
   const designationRef = useRef()
 
- 
   const GetRoleFun = (e) => {
     setUserRowData((prev) => ({ ...prev, role: [e.target.value] }))
   }
 
- 
   //   useEffect(()=>{
   //       setUserRowData(()=> ({
   //         userName: data.fullName,
@@ -81,8 +85,6 @@ const CreateHrDashBoard = ({ data, type }) => {
   //         department: "",
   //       }))
   //  },[type])
-
- 
 
   const userRowDataFetch = (e) => {
     if (type) {
@@ -139,14 +141,12 @@ const CreateHrDashBoard = ({ data, type }) => {
     setBtnLoading(true)
 
     const userData = {
-        userName: userRowData.userName,
-        email: userRowData.email,
-        role: userRowData.role,
-        designation: userRowData.designation,
-        department: userRowData.department,
+      userName: userRowData.userName,
+      email: userRowData.email,
+      role: userRowData.role,
+      designation: userRowData.designation,
+      department: userRowData.department,
     }
-
-
 
     const userCreateFun = async () => {
       try {
@@ -156,8 +156,7 @@ const CreateHrDashBoard = ({ data, type }) => {
         )
 
         let roleData = createNewUserData.data.data.role.map((role) => role.name)
-            console.warn("user data", createNewUserData);
-         
+        console.warn("user data", createNewUserData)
 
         const newLeadObject = {
           id: createNewUserData?.data?.data?.userId,
@@ -171,30 +170,30 @@ const CreateHrDashBoard = ({ data, type }) => {
           employeeId: userRowData?.employeeId,
           managerId: userRowData?.managerId,
           expInMonth: userRowData?.expInMonth,
-          expInYear : userRowData?.expInYear,
+          expInYear: userRowData?.expInYear,
           dateOfJoining: userRowData?.dateOfJoining,
           type: userRowData?.type,
           fatherName: userRowData?.fatherName,
           fatherOccupation: userRowData?.a?.fatherOccupation,
-          fatherContactNo:  userRowData?.fatherContactNo,
-          motherName:  userRowData?.motherName,
-          motherOccupation:  userRowData?.motherOccupation,
-          motherContactNo:  userRowData?.motherContactNo,
-          spouseName:  userRowData?.spouseName,
-          spouseContactNo:  userRowData?.spouseContactNo,
-          nationality:  userRowData?.nationality,
-          language:  userRowData?.language,
-          emergencyNumber:  userRowData?.emergencyNumber,
-          panNumber:  userRowData?.panNumber,
+          fatherContactNo: userRowData?.fatherContactNo,
+          motherName: userRowData?.motherName,
+          motherOccupation: userRowData?.motherOccupation,
+          motherContactNo: userRowData?.motherContactNo,
+          spouseName: userRowData?.spouseName,
+          spouseContactNo: userRowData?.spouseContactNo,
+          nationality: userRowData?.nationality,
+          language: userRowData?.language,
+          emergencyNumber: userRowData?.emergencyNumber,
+          panNumber: userRowData?.panNumber,
           permanentAddress: userRowData?.permanentAddress,
-          residentialAddress:  userRowData?.residentialAddress,
+          residentialAddress: userRowData?.residentialAddress,
           manager: true,
         }
 
-        console.warn("after api calling ", newLeadObject);
-      
+        console.warn("after api calling ", newLeadObject)
+
         const createLeadUserByEmail = await postQuery(
-          `/leadService/api/v1/users/createUserByEmail`,
+          `/leadService/api/v1/users/createUserByHr`,
           newLeadObject
         )
         setBtnLoading(false)
@@ -234,6 +233,29 @@ const CreateHrDashBoard = ({ data, type }) => {
       designation: userRowData.designation,
       department: userRowData.department,
       role: userRowData.role,
+      epfNo: userRowData?.epfNo,
+      aadharCard: userRowData?.aadharCard,
+      employeeId: userRowData?.employeeId,
+      managerId: userRowData?.managerId,
+      expInMonth: userRowData?.expInMonth,
+      expInYear: userRowData?.expInYear,
+      dateOfJoining: userRowData?.dateOfJoining,
+      type: userRowData?.type,
+      fatherName: userRowData?.fatherName,
+      fatherOccupation: userRowData?.a?.fatherOccupation,
+      fatherContactNo: userRowData?.fatherContactNo,
+      motherName: userRowData?.motherName,
+      motherOccupation: userRowData?.motherOccupation,
+      motherContactNo: userRowData?.motherContactNo,
+      spouseName: userRowData?.spouseName,
+      spouseContactNo: userRowData?.spouseContactNo,
+      nationality: userRowData?.nationality,
+      language: userRowData?.language,
+      emergencyNumber: userRowData?.emergencyNumber,
+      panNumber: userRowData?.panNumber,
+      permanentAddress: userRowData?.permanentAddress,
+      residentialAddress: userRowData?.residentialAddress,
+      manager: true,
     }
 
     try {
@@ -242,7 +264,7 @@ const CreateHrDashBoard = ({ data, type }) => {
         upadtedData
       )
       const updateLeadUserData = await putQuery(
-        `/leadService/api/v1/users/updateUserData`,
+        `/leadService/api/v1/users/editUserByHr`,
         updateLeadData
       )
       window.location.reload()
@@ -434,36 +456,14 @@ const CreateHrDashBoard = ({ data, type }) => {
                         </div>
                       </div>
 
-                      {/* <div className="form-group col-md-6">
-                          <div className="pr-ten">
-                            <label
-                              className="label-heading mb-1"
-                              htmlFor="mobileNo"
-                            >
-                              Department
-                            </label>
-                            <input
-                              type="text"
-                              className="form-control input-focus"
-                              id="mobileNo"
-                              // ref={designationRef}
-                              placeholder="Enter Department"
-                              name="department"
-                              onChange={(e) => userRowDataFetch(e)}
-                            />
-                          </div>
-                        </div> */}
+                    
 
                       <ModelInput
                         label="EPFO Number"
                         type="text"
                         placeholder="Enter EPFO Number"
                         name="epfNo"
-                        value={
-                          type
-                            ? userRowData.epfNo
-                            : userRowData.epfNo
-                        }
+                        value={type ? userRowData.epfNo : userRowData.epfNo}
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -472,30 +472,64 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Aadhar Card"
                         name="aadharCard"
+                        value={
+                          type ? userRowData.aadharCard : userRowData.aadharCard
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
                       <ModelInput
-                        label="Employee Name"
+                        label="Employee ID"
                         type="text"
-                        placeholder="Enter Employee Name"
+                        placeholder="Enter Employee ID"
                         name="employeeId"
+                        value={
+                          type ? userRowData.employeeId : userRowData.employeeId
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
-                      <ModelInput
-                        label="Manager Name"
-                        type="text"
-                        placeholder="Enter Manager Name"
-                        name="managerId"
-                        onChange={(e) => userRowDataFetch(e)}
-                      />
+                      <div className="form-group col-md-6">
+                        <div className="pr-ten">
+                          <label
+                            className="label-heading mb-1"
+                            htmlFor="mobileNo"
+                          >
+                            Manager Name*
+                          </label>
+
+                          <select
+                            className="form-control input-focus"
+                            name="department"
+                            id="select-product"
+                            value={
+                              type
+                                ? userRowData.managerId
+                                : userRowData.managerId
+                            }
+                            // ref={roleRef}
+                            onChange={(e) => userRowDataFetch(e)}
+                          >
+                            <option>Select Manager</option>
+                            {allUserList.map((dep, index) => (
+                              <option key={index} value={dep?.id}>
+                                {dep?.fullName}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+
+                   
 
                       <ModelInput
                         label="Experience In Months"
                         type="text"
                         placeholder="Enter Experience In Months"
                         name="expInMonth"
+                        value={
+                          type ? userRowData.expInMonth : userRowData.expInMonth
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -504,14 +538,22 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Experience in Years"
                         name="expInYear"
+                        value={
+                          type ? userRowData.expInYear : userRowData.expInYear
+                        }
                         onChange={(e) => userRowDataFetch(e)}
-                     />
+                      />
 
                       <ModelInput
                         label="Date of Joining"
                         type="date"
                         placeholder="Enter Date of Joinning"
                         name="dateOfJoining"
+                        value={
+                          type
+                            ? userRowData.dateOfJoining
+                            : userRowData.dateOfJoining
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -520,6 +562,7 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Type"
                         name="type"
+                        value={type ? userRowData.type : userRowData.type}
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -528,6 +571,9 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Father Name"
                         name="fatherName"
+                        value={
+                          type ? userRowData.fatherName : userRowData.fatherName
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -536,6 +582,11 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Father Occupation"
                         name="fatherOccupation"
+                        value={
+                          type
+                            ? userRowData.fatherOccupation
+                            : userRowData.fatherOccupation
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -544,6 +595,11 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Father Contact No"
                         name="fatherContactNo"
+                        value={
+                          type
+                            ? userRowData.fatherContactNo
+                            : userRowData.fatherContactNo
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -552,6 +608,9 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Mother Name"
                         name="motherName"
+                        value={
+                          type ? userRowData.motherName : userRowData.motherName
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -560,6 +619,11 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Mother Occupation"
                         name="motherOccupation"
+                        value={
+                          type
+                            ? userRowData.motherOccupation
+                            : userRowData.motherOccupation
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -568,6 +632,11 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Mother Contact No."
                         name="motherContactNo"
+                        value={
+                          type
+                            ? userRowData.motherContactNo
+                            : userRowData.motherContactNo
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -576,6 +645,9 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Spouse Name"
                         name="spouseName"
+                        value={
+                          type ? userRowData.spouseName : userRowData.spouseName
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -584,6 +656,11 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Spouse Contact Number"
                         name="spouseContactNo"
+                        value={
+                          type
+                            ? userRowData.spouseContactNo
+                            : userRowData.spouseContactNo
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -592,6 +669,11 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Nationality"
                         name="nationality"
+                        value={
+                          type
+                            ? userRowData.nationality
+                            : userRowData.nationality
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -600,6 +682,9 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Language"
                         name="language"
+                        value={
+                          type ? userRowData.language : userRowData.language
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -608,14 +693,37 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Emergency Contact"
                         name="emergencyNumber"
+                        value={
+                          type
+                            ? userRowData.emergencyNumber
+                            : userRowData.emergencyNumber
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
-                      <ModelInput
+                      <TextFieldInput
                         label="Permanenet Address"
                         type="text"
                         placeholder="Enter Permanenet Address"
                         name="permanentAddress"
+                        value={
+                          type
+                            ? userRowData.permanentAddress
+                            : userRowData.permanentAddress
+                        }
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      <TextFieldInput
+                        label="Residential Address"
+                        type="text"
+                        placeholder="Enter Residential Address"
+                        name="residentialAddress"
+                        value={
+                          type
+                            ? userRowData.residentialAddress
+                            : userRowData.residentialAddress
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
@@ -624,16 +732,34 @@ const CreateHrDashBoard = ({ data, type }) => {
                         type="text"
                         placeholder="Enter Residential Address"
                         name="residentialAddress"
+                        value={
+                          type
+                            ? userRowData.residentialAddress
+                            : userRowData.residentialAddress
+                        }
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
                       <ModelInput
+                        label="Residential Address"
+                        type="text"
+                        placeholder="Enter Residential Address"
+                        name="residentialAddress"
+                        value={
+                          type
+                            ? userRowData.residentialAddress
+                            : userRowData.residentialAddress
+                        }
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      {/* <ModelInput
                         label="Manager Name"
                         type="text"
                         placeholder="Enter Manager Name"
                         name="manager"
                         onChange={(e) => userRowDataFetch(e)}
-                      />
+                      /> */}
 
                       <div className="all-between-items">
                         <div className="all-center"></div>
