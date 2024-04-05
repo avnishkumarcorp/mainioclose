@@ -49,9 +49,9 @@ import GetAllTaskList from "./Main/Sales/Leads/GetAllTaskList"
 import AllTickets from "./Main/DashBoard/AllTickets"
 import HrUserList from "./Main/HR/HrUserList"
 import AllManagerApprovals from "./Main/DashBoard/AllManagerApprovals"
+import HRApprovalList from "./Main/HR/HRApprovalList"
 
 function App() {
-
   const authStatus = useSelector((state) => state.auth.isAuth)
 
   return (
@@ -64,7 +64,12 @@ function App() {
             <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />
           </Route>
-          <Route path="/counter" element={authStatus ?  <CounterExample /> : <Navigate to="/erp/login" />} />   
+          <Route
+            path="/counter"
+            element={
+              authStatus ? <CounterExample /> : <Navigate to="/erp/login" />
+            }
+          />
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
             <Route
@@ -76,22 +81,27 @@ function App() {
             <Route path="forgetotp" element={<ForgetOtpPage />} />
             <Route path="forgetpassword" element={<ForgetPassword />} />
             <Route path="change" element={<ChangePassword />} />
-            <Route path="setpassword/:userid" element={<SetNewPasswordPage />} />
+            <Route
+              path="setpassword/:userid"
+              element={<SetNewPasswordPage />}
+            />
           </Route>
 
-          <Route path="/erp" element={authStatus ? <MainPage /> : <Navigate to="/erp/login" />}>
+          <Route
+            path="/erp"
+            element={authStatus ? <MainPage /> : <Navigate to="/erp/login" />}
+          >
             <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
-             
+
               <Route path="manager" element={<AllManagerApprovals />} />
-               <Route path="muiuser" element={<DisplayUserTwo />} />
+              <Route path="muiuser" element={<DisplayUserTwo />} />
               <Route path="deactivateUser" element={<AllDeactivateUser />} />
-               
             </Route>
             {/* hr module routes */}
-            <Route path="/erp/:userid/hr" element={<HrUserList />}>
-              <Route path="" element={<h1>test</h1>} />
-              <Route path="hrlinktwo" element={<div>hrlinktwo</div>} />
+            <Route path="/erp/:userid/hr" element={<HRMod />}>
+              <Route path="" element={<HrUserList />} />
+              <Route path="approveUser" element={<HRApprovalList />} />
               <Route path="hrlinkthree" element={<div>hrlinkthree</div>} />
               <Route path="hrlinkfour" element={<div>hrlinkfour</div>} />
               <Route path="hrlinkfive" element={<div>hrlinkfive</div>} />
@@ -116,8 +126,10 @@ function App() {
               <Route path="leads/:leadid/history" element={<LeadHistory />} />
               <Route path="leads" element={<LeadsModule />} />
               <Route path="leads/allTask" element={<GetAllTaskList />} />
-              <Route path="leads/notification" element={<AllNotificationPage />} />
-              
+              <Route
+                path="leads/notification"
+                element={<AllNotificationPage />}
+              />
             </Route>
             {/* end */}
             {/* accounts module routes */}
@@ -168,7 +180,10 @@ function App() {
             </Route>
             {/* end */}
             {/* manage client module route */}
-            <Route path="/erp/:userid/manageclient" element={<ComingSoonPage />}>
+            <Route
+              path="/erp/:userid/manageclient"
+              element={<ComingSoonPage />}
+            >
               <Route path="" element={<div>Client Number One</div>} />
               <Route path="clienttwo" element={<div>Client Number Two</div>} />
               <Route
@@ -236,7 +251,7 @@ function App() {
               />
             </Route>
             {/* end */}
-            <Route path="/erp/:userid/setting" element={<SettingMainPage />} >
+            <Route path="/erp/:userid/setting" element={<SettingMainPage />}>
               <Route path="" element={<LeadStatusPage />} />
               <Route path="products" element={<ProductsChange />} />
               <Route path="category" element={<LeadCategory />} />
