@@ -5,6 +5,8 @@ import UserListComponent from "../../Tables/UserListComponent"
 import { useDispatch, useSelector } from "react-redux"
 import { headHrUser } from "../../Toolkit/Slices/UsersSlice"
 import ColComp from "../../components/small/ColComp"
+import TableScalaton from "../../components/TableScalaton"
+import SomethingWrong from "../../components/usefulThings/SomethingWrong"
 
 const HRApprovalList = () => {
   const dispatch = useDispatch()
@@ -216,8 +218,8 @@ const HRApprovalList = () => {
       <MainHeading data={"Approval List"} />
 
       <div className="mt-3">
-        {userHRLoading && <h2>Loading...</h2>}
-        {userHRError && <h2>Something went wrong...</h2>}
+        {userHRLoading && <TableScalaton />}
+        {userHRError && <SomethingWrong />}
 
         {hrApprovalUser && !userHRLoading && !userHRError && (
           <UserListComponent

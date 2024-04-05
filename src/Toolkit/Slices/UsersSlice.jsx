@@ -11,6 +11,15 @@ export const headHrUser = createAsyncThunk('allhrUserApprovalList', async (id) =
   return allDataUser.data
 })
 
+export const allManagerUser = createAsyncThunk('allManagerUserApprovalList', async (id) => {
+  const managerUserData = await getQuery(`/leadService/api/v1/users/getUserForManager?id=${id}`)
+  return managerUserData.data
+})
+
+
+
+
+
 export const UsersSlice = createSlice({
   name: "user",
   initialState: {
@@ -20,7 +29,9 @@ export const UsersSlice = createSlice({
     allHRUsers: [],
     userHRLoading: false,
     userHRError: false,
-    
+    allManagerUsers: [],
+    userManagerLoading: false,
+    userManagerError: false,   
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, (state, action) => {
@@ -45,6 +56,18 @@ export const UsersSlice = createSlice({
     builder.addCase(headHrUser.rejected, (state, action) => {
       state.userHRError = true
       state.userHRLoading = false
+    })
+
+    builder.addCase(allManagerUser.pending, (state, action) => {
+      state.userManagerLoading = true
+    })
+    builder.addCase(allManagerUser.fulfilled, (state, action) => {
+      state.allManagerUsers = action.payload
+      state.userManagerLoading = false
+    })
+    builder.addCase(allManagerUser.rejected, (state, action) => {
+      state.userManagerError = true
+      state.userManagerLoading = false
     })
   },
 })

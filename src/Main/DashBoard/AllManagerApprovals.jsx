@@ -1,65 +1,230 @@
-import React from "react"
+import React, { useEffect } from "react"
 import TableOutlet from "../../components/design/TableOutlet"
 import UserListComponent from "../../Tables/UserListComponent"
+import MainHeading from "../../components/design/MainHeading"
+import TableCMPadding from "../../components/design/TableCMPadding"
+import { headHrUser } from "../../Toolkit/Slices/UsersSlice"
+import { useDispatch, useSelector } from "react-redux"
+import ColComp from "../../components/small/ColComp"
+import ModelButton from "../../components/button/ModelButton"
+import LoadingData from "../../components/usefulThings/LoadingData"
+import TableScalaton from "../../components/TableScalaton"
+import SomethingWrong from "../../components/usefulThings/SomethingWrong"
 
 const AllManagerApprovals = () => {
+  const dispatch = useDispatch()
+  const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
 
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        {
-          field: 'firstName',
-          headerName: 'First name',
-          width: 150,
-          editable: true,
-        },
-        {
-          field: 'lastName',
-          headerName: 'Last name',
-          width: 150,
-          editable: true,
-        },
-       
-        {
-            field: 'approval',
-            headerName: 'Approvals',
-            width: 200,
-            editable: true,
-            renderCell: () => (
-                <button className="btn btn-success">Approved</button>
-            )
-          },
-          {
-            field: 'rejected',
-            headerName: 'Rejected',
-            width: 200,
-            editable: true,
-            renderCell: () => (
-                <button className="btn btn-danger">Rejected</button>
-            )
-          },
-      
-      ];
+  const {
+    allHRUsers: hrApprovalUser,
+    userHRLoading,
+    userHRError,
+  } = useSelector((state) => state?.user)
 
-      const rows = [
-        { id: 1, lastName: 'Snow', firstName: 'Jon', age: 14 },
-        { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 31 },
-        { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 31 },
-        { id: 4, lastName: 'Stark', firstName: 'Arya', age: 11 },
-        { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-        { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-        { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-        { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-        { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-      ];
-      
+  console.log(hrApprovalUser)
 
+  useEffect(() => {
+    dispatch(headHrUser(currentUserId))
+  }, [dispatch])
+
+  const columns = [
+    {
+      field: "id",
+      headerName: "ID",
+      width: 150,
+      renderCell: (props) => {
+        return <p className="mb-0">CORP00{props?.row?.id}</p>
+      },
+    },
+    { field: "fullName", headerName: "Full Name", width: 150 },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 200,
+      renderCell: (props) => <ColComp data={props?.row?.email} />,
+    },
+    {
+      field: "designation",
+      headerName: "Designation",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.designation} />,
+    },
+    {
+      field: "department",
+      headerName: "Department",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.department} />,
+    },
+
+    {
+      field: "role",
+      headerName: "Role",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.role} />,
+    },
+    {
+      field: "aadharCard",
+      headerName: "Aadhar card",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.aadharCard} />,
+    },
+    {
+      field: "dateOfJoining",
+      headerName: "Joining Date",
+      width: 150,
+      renderCell: (props) => (
+        <p className="m-0">
+          {props?.row?.dateOfJoining
+            ? new Date(props?.row?.dateOfJoining)?.toLocaleDateString()
+            : "NA"}
+        </p>
+      ),
+    },
+    {
+      field: "employeeId",
+      headerName: "Employee ID",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.employeeId} />,
+    },
+    {
+      field: "epfNo",
+      headerName: "Employee ID",
+      width: 150,
+
+      renderCell: (props) => <ColComp data={props?.row?.epfNo} />,
+    },
+    {
+      field: "experience",
+      headerName: "Experience",
+      width: 180,
+      renderCell: (props) => (
+        <p className="m-0">
+          {props?.row?.expInYear ? props?.row?.expInYear + " years" : "NA"} and{" "}
+          {props?.row?.expInMonth ? props?.row?.expInMonth + " months" : "NA"}
+        </p>
+      ),
+    },
+    {
+      field: "managers",
+      headerName: "Manager",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.managers?.fullName} />,
+    },
+    {
+      field: "panNumber",
+      headerName: "pan Number",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.panNumber} />,
+    },
+    {
+      field: "nationality",
+      headerName: "Nationality",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.nationality} />,
+    },
+    {
+      field: "permanentAddress",
+      headerName: "Permanent Address",
+      width: 250,
+      renderCell: (props) => <ColComp data={props?.row?.permanentAddress} />,
+    },
+    {
+      field: "residentialAddress",
+      headerName: "Residential Address",
+      width: 250,
+      renderCell: (props) => <ColComp data={props?.row?.residentialAddress} />,
+    },
+    {
+      field: "fatherName",
+      headerName: "Father Name",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.fatherName} />,
+    },
+    {
+      field: "fatherContactNo",
+      headerName: "Father Contact No",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.fatherContactNo} />,
+    },
+    {
+      field: "fatherOccupation",
+      headerName: "Father Occupation",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.fatherOccupation} />,
+    },
+    {
+      field: "motherName",
+      headerName: "Mother Name",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.motherName} />,
+    },
+    {
+      field: "motherContactNo",
+      headerName: "Mother Contact No",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.motherContactNo} />,
+    },
+    {
+      field: "motherOccupation",
+      headerName: "Mother Occupation",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.motherOccupation} />,
+    },
+    {
+      field: "spouseName",
+      headerName: "Spouse Name",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.spouseName} />,
+    },
+    {
+      field: "spouseContactNo",
+      headerName: "Spouse Contact No",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.spouseContactNo} />,
+    },
+    {
+      field: "language",
+      headerName: "Language",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.language} />,
+    },
+    {
+      field: "emergencyNumber",
+      headerName: "Emergency Number",
+      width: 150,
+      renderCell: (props) => <ColComp data={props?.row?.emergencyNumber} />,
+    },
+
+    {
+      field: "Action",
+      headerName: "Action",
+      width: 260,
+      renderCell: (props) => {
+        return (
+          <>
+            <ModelButton name="Approved" />
+            <ModelButton name="Rejected" />
+          </>
+        )
+      },
+    },
+  ]
 
   return (
     <TableOutlet>
-      <h1 className="table-heading">All Users For Approvals</h1>
-      <div className="py-2">
-        <UserListComponent tableName={""} columns={columns} row={rows} />
-      </div>
+      <MainHeading data={`All users for Approvals`} />
+      <TableCMPadding>
+        {userHRLoading && <TableScalaton />}
+        {userHRError && <SomethingWrong />}
+
+        {hrApprovalUser && !userHRLoading && !userHRError && (
+          <UserListComponent
+            tableName={""}
+            columns={columns}
+            row={hrApprovalUser}
+          />
+        )}
+      </TableCMPadding>
     </TableOutlet>
   )
 }
