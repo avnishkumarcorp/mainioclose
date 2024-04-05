@@ -1,7 +1,7 @@
 import React from "react"
 
 const LongInput = React.forwardRef(
-  ({ label, type = "", className = "", labelClass = "", ...props }, ref) => (
+  ({ label, type = "",  className = "", labelClass = "", ...props }, ref) => (
     <div>
       {label && (
         <label

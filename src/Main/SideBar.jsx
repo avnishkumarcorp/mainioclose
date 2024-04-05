@@ -93,6 +93,9 @@ const SideBar = () => {
                 <NavLink className="link-itemss" to={`${userid}/users/tickets`}>
                   Tickets
                 </NavLink>
+                <NavLink className="link-itemss" to={`${userid}/users/manager`}>
+                  Approval
+                </NavLink>
                 {/* <NavLink className="link-itemss" to={`${userid}/muiuser`}>
               mui users
             </NavLink> */}

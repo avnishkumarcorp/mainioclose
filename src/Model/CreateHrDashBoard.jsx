@@ -55,6 +55,28 @@ const CreateHrDashBoard = ({ data, type }) => {
     manager: true,
   })
 
+  console.log("user data", userRowData);
+
+  const [aadharCardError, setAadharCardError] = useState(false);
+
+
+ const aadharCardRef = useRef()
+ const employeeIdRef = useRef()
+ const managerIdRef = useRef()
+ const expInMonthRef = useRef()
+ const expInYearRef = useRef()
+ const dateOfJoiningRef = useRef()
+ const fatherNameRef = useRef()
+ const fatherOccupationRef = useRef()
+ const motherNameRef = useRef()
+ const motherOccupationRef = useRef()
+ const nationalityRef = useRef()
+ const languageRef = useRef()
+ const emergencyNumberRef = useRef()
+ const panNumberRef = useRef()
+ const permanentAddressRef = useRef()
+ const residentialAddressRef = useRef()
+ 
   console.log("i am data", data)
 
   const [btnLoading, setBtnLoading] = useState(false)
@@ -306,6 +328,7 @@ const CreateHrDashBoard = ({ data, type }) => {
                 <div className="personal-info container">
                   <h4 className="info-text model-heading">
                     {type ? "Edit New user" : "Create New User"}
+                    {type ? <span className="pencil-ui" onClick={userRowDataFetch}><i class="fa-solid fa-pencil"></i></span> : ""}
                   </h4>
                   <div className="cross-icon">
                     <i
@@ -456,8 +479,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         </div>
                       </div>
 
-                    
-
                       <ModelInput
                         label="EPFO Number"
                         type="text"
@@ -466,12 +487,15 @@ const CreateHrDashBoard = ({ data, type }) => {
                         value={type ? userRowData.epfNo : userRowData.epfNo}
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
+                
                       <ModelInput
                         label="Aadhar Card"
                         type="text"
                         placeholder="Enter Aadhar Card"
+                        ref= {aadharCardRef}
                         name="aadharCard"
+                        error = {aadharCardError}
+                        errorData= {"Aadhar Card Number Can't be Blank"}
                         value={
                           type ? userRowData.aadharCard : userRowData.aadharCard
                         }
@@ -500,7 +524,7 @@ const CreateHrDashBoard = ({ data, type }) => {
 
                           <select
                             className="form-control input-focus"
-                            name="department"
+                            name="managerId"
                             id="select-product"
                             value={
                               type
@@ -519,8 +543,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                           </select>
                         </div>
                       </div>
-
-                   
 
                       <ModelInput
                         label="Experience In Months"
@@ -715,32 +737,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                       />
 
                       <TextFieldInput
-                        label="Residential Address"
-                        type="text"
-                        placeholder="Enter Residential Address"
-                        name="residentialAddress"
-                        value={
-                          type
-                            ? userRowData.residentialAddress
-                            : userRowData.residentialAddress
-                        }
-                        onChange={(e) => userRowDataFetch(e)}
-                      />
-
-                      <ModelInput
-                        label="Residential Address"
-                        type="text"
-                        placeholder="Enter Residential Address"
-                        name="residentialAddress"
-                        value={
-                          type
-                            ? userRowData.residentialAddress
-                            : userRowData.residentialAddress
-                        }
-                        onChange={(e) => userRowDataFetch(e)}
-                      />
-
-                      <ModelInput
                         label="Residential Address"
                         type="text"
                         placeholder="Enter Residential Address"

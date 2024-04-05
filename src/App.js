@@ -48,6 +48,7 @@ import { useSelector } from "react-redux"
 import GetAllTaskList from "./Main/Sales/Leads/GetAllTaskList"
 import AllTickets from "./Main/DashBoard/AllTickets"
 import HrUserList from "./Main/HR/HrUserList"
+import AllManagerApprovals from "./Main/DashBoard/AllManagerApprovals"
 
 function App() {
 
@@ -81,7 +82,8 @@ function App() {
           <Route path="/erp" element={authStatus ? <MainPage /> : <Navigate to="/erp/login" />}>
             <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
-              <Route path="tickets" element={<AllTickets />} />
+             
+              <Route path="manager" element={<AllManagerApprovals />} />
                <Route path="muiuser" element={<DisplayUserTwo />} />
               <Route path="deactivateUser" element={<AllDeactivateUser />} />
                

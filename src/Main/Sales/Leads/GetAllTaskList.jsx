@@ -15,7 +15,7 @@ const GetAllTaskList = () => {
     productData: taskData,
     setProductData,
     loading: taskLoading,
-    error,
+    error: taskError,
   } = useCustomRoute(allTasksByUser, allTaskDep)
 
   const taskCount = taskData.length;
@@ -141,7 +141,9 @@ const GetAllTaskList = () => {
         </div>
       </div>
       <div className="mt-3">
-        <UserLeadComponent row={taskData} columns={columns} />
+        {taskLoading && <h1>Loading...</h1>}
+        {taskError &&  <h1>Something Went Wrong</h1> }
+       {taskData && !taskLoading && !taskError && <UserLeadComponent row={taskData} columns={columns} />  }
       </div>
     </div>
   )

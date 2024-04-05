@@ -43,6 +43,8 @@ const DisplayDashboardUser = () => {
     }
   }
 
+  console.log(allMainUser);
+
   const myNewId = (id) => {
     setGetId(id)
     setEditType(true)
