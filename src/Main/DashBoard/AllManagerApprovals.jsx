@@ -3,7 +3,7 @@ import TableOutlet from "../../components/design/TableOutlet"
 import UserListComponent from "../../Tables/UserListComponent"
 import MainHeading from "../../components/design/MainHeading"
 import TableCMPadding from "../../components/design/TableCMPadding"
-import { headHrUser } from "../../Toolkit/Slices/UsersSlice"
+import { allManagerUser, headHrUser } from "../../Toolkit/Slices/UsersSlice"
 import { useDispatch, useSelector } from "react-redux"
 import ColComp from "../../components/small/ColComp"
 import ModelButton from "../../components/button/ModelButton"
@@ -16,15 +16,15 @@ const AllManagerApprovals = () => {
   const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
 
   const {
-    allHRUsers: hrApprovalUser,
-    userHRLoading,
-    userHRError,
+    allManagerUsers: hrApprovalUser,
+    userManagerLoading,
+    userManagerError,
   } = useSelector((state) => state?.user)
 
   console.log(hrApprovalUser)
 
   useEffect(() => {
-    dispatch(headHrUser(currentUserId))
+    dispatch(allManagerUser(currentUserId))
   }, [dispatch])
 
   const columns = [
@@ -214,10 +214,11 @@ const AllManagerApprovals = () => {
     <TableOutlet>
       <MainHeading data={`All users for Approvals`} />
       <TableCMPadding>
-        {userHRLoading && <TableScalaton />}
-        {userHRError && <SomethingWrong />}
+        
+        {userManagerLoading && <TableScalaton />}
+        {userManagerError && <SomethingWrong />}
 
-        {hrApprovalUser && !userHRLoading && !userHRError && (
+        {hrApprovalUser && !userManagerLoading && !userManagerError && (
           <UserListComponent
             tableName={""}
             columns={columns}

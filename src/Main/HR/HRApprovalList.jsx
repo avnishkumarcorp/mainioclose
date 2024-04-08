@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import TableOutlet from "../../components/design/TableOutlet"
 import MainHeading from "../../components/design/MainHeading"
 import UserListComponent from "../../Tables/UserListComponent"
@@ -7,10 +7,16 @@ import { headHrUser } from "../../Toolkit/Slices/UsersSlice"
 import ColComp from "../../components/small/ColComp"
 import TableScalaton from "../../components/TableScalaton"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"
+import ButtonWithIcon from "../../components/button/ButtonWithIcon"
+import ApprovedBtn from "../../components/button/ApprovedBtn"
+import { putQueryNoData } from "../../API/PutQueryWithoutData"
+import { ApproveduserByHr } from "../../Toolkit/Slices/ApprovedStatus"
 
 const HRApprovalList = () => {
   const dispatch = useDispatch()
   const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  const [flagDataT, setFlagDataT] = useState(true)
+  const [approvedUserDep, setApprovedUserDep] = useState(true)
 
   const {
     allHRUsers: hrApprovalUser,
@@ -18,11 +24,11 @@ const HRApprovalList = () => {
     userHRError,
   } = useSelector((state) => state?.user)
 
-  console.log(hrApprovalUser)
+  const { Hrflag, hrLoading, hrError } = useSelector((data) => data.approved)
 
   useEffect(() => {
     dispatch(headHrUser(currentUserId))
-  }, [dispatch])
+  }, [dispatch, approvedUserDep])
 
   const columns = [
     {
@@ -195,7 +201,7 @@ const HRApprovalList = () => {
     {
       field: "Action",
       headerName: "Action",
-      width: 180,
+      width: 100,
       renderCell: (props) => {
         return (
           <>
@@ -203,7 +209,7 @@ const HRApprovalList = () => {
               className="common-btn-one mr-2"
               data-toggle="modal"
               data-target="#createhrdashboard"
-              //   onClick={() => myNewId(props?.row)}
+              onClick={() => approvedUserFun("data")}
             >
               Edit
             </button>
@@ -211,7 +217,44 @@ const HRApprovalList = () => {
         )
       },
     },
+
+    {
+      field: "Approved",
+      headerName: "Appproved",
+      width: 150,
+      renderCell: (props) => {
+        return (
+          <button
+            className="common-btn-one mr-2"
+            onClick={() => approvedUserFun(props.row.id)}
+          >
+            {hrLoading ? "Please Wait..." : "Approved"}{" "}
+            <i className="fa-solid mr-2 fa-check"></i>
+          </button>
+        )
+      },
+    },
   ]
+
+  const approvedUserFun = (id) => {
+    const userId = { ids: id }
+    console.log("function call", currentUserId, flagDataT)
+    const getApproval = dispatch(
+      ApproveduserByHr({ currid: currentUserId, userid: userId.ids })
+    )
+    setApprovedUserDep((prev) => !prev)
+    console.log(getApproval)
+  }
+
+  // const disapprovedUserFun = (id) => {
+  //   const userId = { ids: id }
+  //   console.log("function call", currentUserId, flagDataT)
+  //   const getApproval = dispatch(
+  //     ApproveduserByHr({ currid: currentUserId, userid: userId.ids })
+  //   )
+  //   setApprovedUserDep((prev) => !prev)
+  //   console.log(getApproval)
+  // }
 
   return (
     <TableOutlet>

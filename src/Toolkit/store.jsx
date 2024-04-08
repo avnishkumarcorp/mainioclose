@@ -11,6 +11,7 @@ import { getDefaultMiddleware } from "@reduxjs/toolkit"
 import TicketSlice from "./Slices/TicketSlice"
 import ForgetPasswordSlice from "./Slices/ForgetPasswordSlice"
 import SignUpSlice from "./Slices/SignUpSlice"
+import  ApprovedStatusSlice  from "./Slices/ApprovedStatus"
 
 const reducers = combineReducers({
   auth: AuthSlice,
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   tickets: TicketSlice,
   password: ForgetPasswordSlice,
   signup: SignUpSlice,
+  approved: ApprovedStatusSlice,
 })
 
 const persistConfig = {

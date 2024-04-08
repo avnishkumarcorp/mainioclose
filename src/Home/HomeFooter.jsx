@@ -13,12 +13,12 @@ const HomeFooter = () => {
         </div> */}
           <h2 className="footer-heading">Corpseed</h2>
           <div className="footer-links-flex">
-            <p className="footer-links">Finleit Financial Advisors Pvt Ltd.</p>
+            <p className="footer-links">Corpseed ITES Pvt Ltd.</p>
             <p className="footer-links">
               2nd Floor, A-154A, A Block, Sector 63, Noida, Uttar Pradesh, India
               - 201301
             </p>
-            <p className="footer-links">Email: Info@tradbee.com</p>
+            <p className="footer-links">Email: Info@corpseed.com</p>
           </div>
         </div>
         <div className="product-part">
@@ -53,7 +53,7 @@ const HomeFooter = () => {
       <div className="below-footer">
         <h3 className="below-text">
           <span className="mr-2">©</span>
-          <span className="mr-2">2023</span>Finleit Financial Advisors Private
+          <span className="mr-2">2024</span>Corpseed ITES Private
           Limited
         </h3>
         <div className="right-links">
