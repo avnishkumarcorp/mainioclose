@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import TableOutlet from "../../components/design/TableOutlet"
 import UserListComponent from "../../Tables/UserListComponent"
 import MainHeading from "../../components/design/MainHeading"
@@ -10,10 +10,12 @@ import ModelButton from "../../components/button/ModelButton"
 import LoadingData from "../../components/usefulThings/LoadingData"
 import TableScalaton from "../../components/TableScalaton"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"
+import { ApproveduserByManager } from "../../Toolkit/Slices/ApprovedStatus"
 
 const AllManagerApprovals = () => {
   const dispatch = useDispatch()
   const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  const [approverdUserDep, setApproverdUserDep] = useState(false)
 
   const {
     allManagerUsers: hrApprovalUser,
@@ -25,7 +27,7 @@ const AllManagerApprovals = () => {
 
   useEffect(() => {
     dispatch(allManagerUser(currentUserId))
-  }, [dispatch])
+  }, [dispatch, approverdUserDep])
 
   const columns = [
     {
@@ -202,19 +204,53 @@ const AllManagerApprovals = () => {
       renderCell: (props) => {
         return (
           <>
-            <ModelButton name="Approved" />
-            <ModelButton name="Rejected" />
+            <button
+              className="common-btn-one mr-2"
+              onClick={() => approvedUserManagerFun(props.row.id)}
+            >
+              Approved
+              <i className="fa-solid ml-2 fa-check"></i>
+            </button>
+            <button
+              className="common-btn-one mr-2"
+              onClick={() => rejectedUserManagerFun(props.row.id)}
+            >
+              Rejected
+              <i className="fa-solid ml-2 fa-check"></i>
+            </button>
           </>
         )
       },
     },
   ]
 
+  const approvedUserManagerFun = (id) => {
+    const userId = { ids: id }
+    console.log("function call", currentUserId)
+    if (window.confirm("Are you sure you want to Approved This User")) {
+      const getApprovalManager = dispatch(
+        ApproveduserByManager({ currid: currentUserId, userid: userId.ids })
+      )
+      setApproverdUserDep((prev) => !prev)
+      console.log(getApprovalManager)
+    }
+  }
+
+  const rejectedUserManagerFun = (id) => {
+    const userId = { ids: id }
+    console.log("function call", currentUserId)
+    if (window.confirm("Are you sure you want to Rejected This User")) {
+      const rejectedUsers = dispatch(
+        ApproveduserByManager({ currid: currentUserId, userid: userId.ids })
+      )
+      setApproverdUserDep((prev) => !prev)
+    }
+  }
+
   return (
     <TableOutlet>
       <MainHeading data={`All users for Approvals`} />
       <TableCMPadding>
-        
         {userManagerLoading && <TableScalaton />}
         {userManagerError && <SomethingWrong />}
 

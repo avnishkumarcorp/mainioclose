@@ -8,14 +8,22 @@ import { getAllUsers } from "../../Toolkit/Slices/UsersSlice"
 import { useSelect } from "@mui/base"
 import { useDispatch, useSelector } from "react-redux"
 import TableScalaton from "../../components/TableScalaton"
+import MainHeading from "../../components/design/MainHeading"
+import SomethingWrong from "../../components/usefulThings/SomethingWrong"
 
 const DisplayDashboardUser = () => {
   const [loading, setLoading] = useState(true)
   const [userSuspand, setUserSuspand] = useState(false)
   const dispatch = useDispatch()
-  const allMainUser = useSelector((prev) => prev.user.allUsers)
-  const allUserLoading = useSelector((prev) => prev.user.userLoading)
-  const allUserError = useSelector((prev) => prev.user.userError)
+
+  const {
+    allUsers: allMainUser,
+    userLoading,
+    userError,
+  } = useSelector((prev) => prev.user)
+  // const allMainUser = useSelector((prev) => prev.user.allUsers)
+  // const allUserLoading = useSelector((prev) => prev.user.userLoading)
+  // const allUserError = useSelector((prev) => prev.user.userError)
 
   const [getId, setGetId] = useState('');
   const [editType, setEditType] = useState(false);
@@ -93,16 +101,15 @@ const DisplayDashboardUser = () => {
   return (
     <div className="small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading">User List ({userCount})</h1>
+        <MainHeading data={`User List (${userCount})`} />
         <div className="all-center">
         <Link to={`deactivateuser`} className="common-btn-one mr-2">Deactivate Users</Link>
         <CreateuserDashboard data={getId} type={editType} />
         </div>
-        {/* <button className="create-user-btn"><i className="fa-solid mr-1 fa-circle-plus"></i></button> */}
       </div>
-      {allUserLoading ? (
-        <TableScalaton />
-      ) :  (
+      {userLoading && <TableScalaton />}
+      {userError && <SomethingWrong />}
+      {allMainUser && !userLoading && !userError && (
         <UserListComponent tableName={""} columns={columns} row={allMainUser} />
       )}
     </div>

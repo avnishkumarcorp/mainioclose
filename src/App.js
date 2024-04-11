@@ -93,7 +93,7 @@ function App() {
           >
             <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
-
+              <Route parh="tickets" element={<AllTickets />} />
               <Route path="manager" element={<AllManagerApprovals />} />
               <Route path="muiuser" element={<DisplayUserTwo />} />
               <Route path="deactivateUser" element={<AllDeactivateUser />} />

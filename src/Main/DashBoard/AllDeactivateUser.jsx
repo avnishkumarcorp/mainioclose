@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { useCustomRoute } from "../../Routes/GetCustomRoutes"
 import UserListComponent from "../../Tables/UserListComponent"
 import { putQueryNoData } from "../../API/PutQueryWithoutData"
+import TableOutlet from "../../components/design/TableOutlet"
+import MainHeading from "../../components/design/MainHeading"
 
 const AllDeactivateUser = () => {
   const [deactiveDep, setDeactiveDep] = useState(false)
@@ -66,9 +68,9 @@ const AllDeactivateUser = () => {
   ]
 
   return (
-    <div className="small-box-padding">
+    <TableOutlet>
       <div className="create-user-box">
-        <h1 className="table-heading">Deactivate Users ({userCount})</h1>
+        <MainHeading data={`Deactivate Users (${userCount})`} />
       </div>
       <div className="mt-3">
         <UserListComponent
@@ -77,7 +79,7 @@ const AllDeactivateUser = () => {
           row={allDeactivateUsers}
         />
       </div>
-    </div>
+    </TableOutlet>
   )
 }
 

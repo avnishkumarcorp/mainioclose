@@ -259,11 +259,9 @@ const HRApprovalList = () => {
   return (
     <TableOutlet>
       <MainHeading data={"Approval List"} />
-
       <div className="mt-3">
         {userHRLoading && <TableScalaton />}
         {userHRError && <SomethingWrong />}
-
         {hrApprovalUser && !userHRLoading && !userHRError && (
           <UserListComponent
             tableName={""}
