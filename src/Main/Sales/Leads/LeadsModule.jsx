@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { Suspense, useEffect, useRef, useState } from "react"
 import "./LeadsModule.scss"
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
 import axios from "axios"
-import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import LeadCreateModel from "../../../Model/LeadCreateModel"
 import { useDispatch, useSelector } from "react-redux"
 import TableScalaton from "../../../components/TableScalaton"
@@ -15,6 +14,9 @@ import { MultiSelect } from "primereact/multiselect"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { CSVLink } from "react-csv"
 import { getAllLeads } from "../../../Toolkit/Slices/LeadSlice"
+import MainHeading from "../../../components/design/MainHeading"
+
+const UserLeadComponent = React.lazy(() => import(`../../../Tables/UserLeadComponent`))
 
 const LeadsModule = () => {
   const [allLeadData, setAllLeadData] = useState([])
@@ -583,7 +585,7 @@ const LeadsModule = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading head-count">Leads ({leadCount})</h1>
+        <MainHeading data={`Leads (${leadCount})`} />
         <div className="all-center">
           <Link to={`allTask`}>
             <div className="common-btn-one mr-2">All Tasks</div>
@@ -720,39 +722,39 @@ const LeadsModule = () => {
       </div> */}
 
       <div className="table-arrow">
-        {allLeadsLoading ? (
-          <TableScalaton />
-        ) : (
-          <UserLeadComponent
-            tableName={""}
-            columns={adminRole ? columns : column2}
-            row={allLeadsData}
-            getRowId={(row) => row.id}
-            onSelectionModelChange={(newSelection) =>
-              setSelectedRows(newSelection)
-            }
-            selectionModel={selectedRows}
-            components={{
-              Toolbar: () => (
-                <>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        indeterminate={
-                          selectedRows.length > 0 &&
-                          selectedRows.length < allLeadsData.length
-                        }
-                        checked={selectedRows.length === allLeadsData.length}
-                        onChange={handleSelectAllClick}
-                      />
-                    }
-                    label="Select All"
-                  />
-                </>
-              ),
-            }}
-          />
-        )}
+      
+          <Suspense fallback={<TableScalaton />}>
+            <UserLeadComponent
+              tableName={""}
+              columns={adminRole ? columns : column2}
+              row={allLeadsData}
+              getRowId={(row) => row.id}
+              onSelectionModelChange={(newSelection) =>
+                setSelectedRows(newSelection)
+              }
+              selectionModel={selectedRows}
+              components={{
+                Toolbar: () => (
+                  <>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          indeterminate={
+                            selectedRows.length > 0 &&
+                            selectedRows.length < allLeadsData.length
+                          }
+                          checked={selectedRows.length === allLeadsData.length}
+                          onChange={handleSelectAllClick}
+                        />
+                      }
+                      label="Select All"
+                    />
+                  </>
+                ),
+              }}
+            />
+          </Suspense>
+     
 
         {adminRole ? (
           <div
