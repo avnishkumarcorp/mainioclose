@@ -5,15 +5,16 @@ import { Link } from "react-router-dom"
 import CreateuserDashboard from "../../Model/CreateuserDashboard"
 import { deleteQuery } from "../../API/DeleteQuery"
 import { getAllUsers } from "../../Toolkit/Slices/UsersSlice"
-import { useSelect } from "@mui/base"
 import { useDispatch, useSelector } from "react-redux"
 import TableScalaton from "../../components/TableScalaton"
 import MainHeading from "../../components/design/MainHeading"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"
+import { allUserdataCol } from "../../data/Userdata"
 
 const DisplayDashboardUser = () => {
-  const [loading, setLoading] = useState(true)
   const [userSuspand, setUserSuspand] = useState(false)
+  const [getId, setGetId] = useState("")
+  const [editType, setEditType] = useState(false)
   const dispatch = useDispatch()
 
   const {
@@ -21,19 +22,12 @@ const DisplayDashboardUser = () => {
     userLoading,
     userError,
   } = useSelector((prev) => prev.user)
-  // const allMainUser = useSelector((prev) => prev.user.allUsers)
-  // const allUserLoading = useSelector((prev) => prev.user.userLoading)
-  // const allUserError = useSelector((prev) => prev.user.userError)
-
-  const [getId, setGetId] = useState('');
-  const [editType, setEditType] = useState(false);
 
   const userCount = allMainUser.length
 
-
   useEffect(() => {
     dispatch(getAllUsers())
-  }, [userSuspand])
+  }, [dispatch, userSuspand])
 
   const deleteUser = async (id) => {
     if (window.confirm("Are you sure to deActivate this User?") == true) {
@@ -51,27 +45,13 @@ const DisplayDashboardUser = () => {
     }
   }
 
-  console.log(allMainUser);
-
   const myNewId = (id) => {
     setGetId(id)
     setEditType(true)
   }
 
   const columns = [
-    {
-      field: "id",
-      headerName: "ID",
-      width: 150,
-      renderCell: (props) => {
-        return <p className="mb-0">CORP00{props?.row?.id}</p>
-      },
-    },
-    { field: "fullName", headerName: "Full Name", width: 150 },
-    { field: "email", headerName: "Email", width: 240, hideable: false },
-    { field: "designation", headerName: "Designation", width: 150 },
-    { field: "department", headerName: "Department", width: 150 },
-    { field: "role", headerName: "Role", width: 150 },
+    ...allUserdataCol,
     {
       field: "Action",
       headerName: "Action",
@@ -79,19 +59,20 @@ const DisplayDashboardUser = () => {
       renderCell: (props) => {
         return (
           <>
-          <button className="common-btn-one mr-2"
+            <button
+              className="common-btn-one mr-2"
               data-toggle="modal"
               data-target="#createuserdashboard"
               onClick={() => myNewId(props?.row)}
-          >
-            Edit
-          </button>
-          <button
-            className="common-btn-one"
-            onClick={() => deleteUser(props?.row?.id)}
-          >
-            Suspand
-          </button>
+            >
+              Edit
+            </button>
+            <button
+              className="common-btn-one"
+              onClick={() => deleteUser(props?.row?.id)}
+            >
+              Suspand
+            </button>
           </>
         )
       },
@@ -103,8 +84,10 @@ const DisplayDashboardUser = () => {
       <div className="create-user-box">
         <MainHeading data={`User List (${userCount})`} />
         <div className="all-center">
-        <Link to={`deactivateuser`} className="common-btn-one mr-2">Deactivate Users</Link>
-        <CreateuserDashboard data={getId} type={editType} />
+          <Link to={`deactivateuser`} className="common-btn-one mr-2">
+            Deactivate Users
+          </Link>
+          <CreateuserDashboard data={getId} type={editType} />
         </div>
       </div>
       {userLoading && <TableScalaton />}

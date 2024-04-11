@@ -6,19 +6,35 @@ export const getAllUsers = createAsyncThunk("allUsers", async () => {
   return allUser.data
 })
 
-export const headHrUser = createAsyncThunk('allhrUserApprovalList', async (id) => {
-  const allDataUser = await getQuery(`/leadService/api/v1/hrManagment/getUserApprovalHr?userId=${id}`)
-  return allDataUser.data
-})
+export const headHrUser = createAsyncThunk(
+  "allhrUserApprovalList",
+  async (id) => {
+    const allDataUser = await getQuery(
+      `/leadService/api/v1/hrManagment/getUserApprovalHr?userId=${id}`
+    )
+    return allDataUser.data
+  }
+)
 
-export const allManagerUser = createAsyncThunk('allManagerUserApprovalList', async (id) => {
-  const managerUserData = await getQuery(`/leadService/api/v1/users/getUserForManager?id=${id}`)
-  return managerUserData.data
-})
+export const allManagerUser = createAsyncThunk(
+  "allManagerUserApprovalList",
+  async (id) => {
+    const managerUserData = await getQuery(
+      `/leadService/api/v1/users/getUserForManager?id=${id}`
+    )
+    return managerUserData.data
+  }
+)
 
-
-
-
+export const allDeactivateUserFun = createAsyncThunk(
+  "allDeactivateUserApprovalList",
+  async () => {
+    const deactivateUserData = await getQuery(
+      `/leadService/api/v1/users/getAllDeactivateUser`
+    )
+    return deactivateUserData.data
+  }
+)
 
 export const UsersSlice = createSlice({
   name: "user",
@@ -31,7 +47,10 @@ export const UsersSlice = createSlice({
     userHRError: false,
     allManagerUsers: [],
     userManagerLoading: false,
-    userManagerError: false,   
+    userManagerError: false,
+    allDeactivateUsers: [],
+    userDeactivateLoading: false,
+    userDeactivateError: false,
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, (state, action) => {
@@ -68,6 +87,18 @@ export const UsersSlice = createSlice({
     builder.addCase(allManagerUser.rejected, (state, action) => {
       state.userManagerError = true
       state.userManagerLoading = false
+    })
+
+    builder.addCase(allDeactivateUserFun.pending, (state, action) => {
+      state.userDeactivateLoading = true
+    })
+    builder.addCase(allDeactivateUserFun.fulfilled, (state, action) => {
+      state.allDeactivateUsers = action.payload
+      state.userDeactivateLoading = false
+    })
+    builder.addCase(allDeactivateUserFun.rejected, (state, action) => {
+      state.userDeactivateError = true
+      state.userDeactivateLoading = false
     })
   },
 })

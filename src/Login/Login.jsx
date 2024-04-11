@@ -86,92 +86,97 @@ const Login = () => {
 
   return (
     <div className="grid-two">
-{/* background-color: #f4f6f9; */}
+      {/* background-color: #f4f6f9; */}
       <div className="cm-box bg-g-light container">
-        <h2 className="cm-heading">Login</h2>
-        <div className="sm-box">
-        <div className="w-100">
-          <div className="cm-input-box">
-            <i className="cm-icon fa-solid fa-user"></i>
-            <input
-              className="input2-design w-100"
-              type="text"
-              ref={emailRef}
-              name="email"
-              onChange={(e) => userInfo(e)}
-              placeholder="Enter Your Email"
-            />
-          </div>
-          {emailErr ? (
-            <p className="errors-new">Email ID can't be Blank</p>
-          ) : (
-            ""
-          )}
-          {emailProperErr ? (
-            <InputErrorComponent value="Email not in Proper Format" />
-          ) : (
-            ""
-          )}
+        <div>
+          <img src="https://www.corpseed.com/assets/img/brands/CORPSEED.webp" />
         </div>
-        <div className="w-100">
-          <div className="cm-input-box">
-            {showPassword ? (
-              <i
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="fa-solid cm-icon fa-eye"
-              ></i>
+        {/* <h2 className="cm-heading">Login</h2> */}
+        <div className="sm-box">
+          <div className="w-100">
+            <div className="cm-input-box">
+              <i className="cm-icon fa-solid fa-user"></i>
+              <input
+                className="input2-design w-100"
+                type="text"
+                ref={emailRef}
+                name="email"
+                onChange={(e) => userInfo(e)}
+                placeholder="Enter Your Email"
+              />
+            </div>
+            {emailErr ? (
+              <p className="errors-new">Email ID can't be Blank</p>
             ) : (
-              <i
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="fa-regular cm-icon fa-eye-slash"
-              ></i>
+              ""
             )}
-            
-            <input
-              className="input2-design w-100"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter Your password"
-              ref={passwordRef}
-              name="password"
-              onChange={(e) => userInfo(e)}
-            />
-          </div>
-          {passwordErr ? (
-            <InputErrorComponent value="Password can't be Blank" />
-          ) : (
-            ""
-          )}
-          <div className="mt-2">
-            {loginDataError ? (
-              <InputErrorComponent value="Enter correct Username or Password" />
+            {emailProperErr ? (
+              <InputErrorComponent value="Email not in Proper Format" />
             ) : (
               ""
             )}
           </div>
-        </div>
-        <div className="remember">
-          <div className="agree-text">
-            <input className="box-input" type="checkbox" id="terms" />
-            <label className="box-label m-0" htmlFor="terms">
-              Remember me
-            </label>
+          <div className="w-100">
+            <div className="cm-input-box">
+              {showPassword ? (
+                <i
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="fa-solid cm-icon fa-eye"
+                ></i>
+              ) : (
+                <i
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="fa-regular cm-icon fa-eye-slash"
+                ></i>
+              )}
+
+              <input
+                className="input2-design w-100"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter Your password"
+                ref={passwordRef}
+                name="password"
+                onChange={(e) => userInfo(e)}
+              />
+            </div>
+            {passwordErr ? (
+              <InputErrorComponent value="Password can't be Blank" />
+            ) : (
+              ""
+            )}
+            <div className="mt-2">
+              {loginDataError ? (
+                <InputErrorComponent value="Enter correct Username or Password" />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
-          <div>
-            <Link className="bl-clr" to="/erp/forgetpassword">Forget Password ?</Link>
+          <div className="remember">
+            <div className="agree-text">
+              <input className="box-input" type="checkbox" id="terms" />
+              <label className="box-label m-0" htmlFor="terms">
+                Remember me
+              </label>
+            </div>
+            <div>
+              <Link className="bl-clr" to="/erp/forgetpassword">
+                Forget Password ?
+              </Link>
+            </div>
           </div>
-        </div>
-        <LongButton
-          data={loadingBtn ? "Loading..." : "Login"}
-          onClick={(e) => userSignIn(e)}
-          className={`my-3 w-100`}
-        />
-        {/* <p className="note-user">
+          <LongButton
+            data={loadingBtn ? "Loading..." : "Login"}
+            onClick={(e) => userSignIn(e)}
+            className={`mt-3 w-100`}
+          />
+          {/* <p className="note-user">
         Not a User{" "}
         <Link className="ml-1 out-none" to="/erp/signup">
           Signup
         </Link>
       </p> */}
-      </div>
+        </div>
       </div>
       <div>
         <LoginSidebarArea />

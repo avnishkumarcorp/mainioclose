@@ -1,22 +1,28 @@
-import React, { useState } from "react"
-import { useCustomRoute } from "../../Routes/GetCustomRoutes"
-import UserListComponent from "../../Tables/UserListComponent"
+import React, { Suspense, useEffect, useState } from "react"
 import { putQueryNoData } from "../../API/PutQueryWithoutData"
-import TableOutlet from "../../components/design/TableOutlet"
 import MainHeading from "../../components/design/MainHeading"
+import { deactivateUserListCol } from "../../data/Userdata"
+import { useDispatch, useSelector } from "react-redux"
+import { allDeactivateUserFun } from "../../Toolkit/Slices/UsersSlice"
+import SomethingWrong from "../../components/usefulThings/SomethingWrong"
+import TableScalaton from "../../components/TableScalaton"
+
+const UserListComponent = React.lazy(() =>
+  import(`../../Tables/UserListComponent`)
+)
 
 const AllDeactivateUser = () => {
   const [deactiveDep, setDeactiveDep] = useState(false)
+  const dispatch = useDispatch()
 
-  const allDeactivateUser = `/leadService/api/v1/users/getAllDeactivateUser`
-  const deactivateUserDep = [deactiveDep]
+  const { allDeactivateUsers, userDeactivateLoading, userDeactivateError } =
+    useSelector((state) => state?.user)
 
-  const { productData: allDeactivateUsers, loading: userLoading } =
-    useCustomRoute(allDeactivateUser, deactivateUserDep)
+  const userCount = allDeactivateUsers.length
 
-    const userCount = allDeactivateUsers.length;
-
- 
+  useEffect(() => {
+    dispatch(allDeactivateUserFun())
+  }, [dispatch, deactiveDep])
 
   const activateUserFun = async (id) => {
     if (window.confirm("Are you sure to Activate this User?") == true) {
@@ -28,7 +34,6 @@ const AllDeactivateUser = () => {
           `/leadService/api/v1/users/activateUser?id=${id}`
         )
 
-       
         setDeactiveDep((prev) => !prev)
       } catch (err) {
         console.log(err)
@@ -37,19 +42,7 @@ const AllDeactivateUser = () => {
   }
 
   const columns = [
-    {
-      field: "id",
-      headerName: "ID",
-      width: 150,
-      renderCell: (props) => {
-        return <p className="mb-0">CORP00{props?.row?.id}</p>
-      },
-    },
-    { field: "fullName", headerName: "Full Name", width: 150 },
-    { field: "email", headerName: "Email", width: 240, hideable: false },
-    { field: "designation", headerName: "Designation", width: 150 },
-    { field: "department", headerName: "Department", width: 150 },
-    { field: "role", headerName: "Role", width: 150 },
+    ...deactivateUserListCol,
     {
       field: "Action",
       headerName: "Action",
@@ -73,12 +66,16 @@ const AllDeactivateUser = () => {
         <MainHeading data={`Deactivate Users (${userCount})`} />
       </div>
       <div className="mt-3">
-        
-        <UserListComponent
-          tableName={""}
-          columns={columns}
-          row={allDeactivateUsers}
-        />
+        {userDeactivateError && <SomethingWrong />}
+        {!userDeactivateError && (
+          <Suspense fallback={<TableScalaton />}>
+            <UserListComponent
+              tableName={""}
+              columns={columns}
+              row={allDeactivateUsers}
+            />
+          </Suspense>
+        )}
       </div>
     </>
   )
