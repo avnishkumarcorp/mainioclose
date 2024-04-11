@@ -4,7 +4,7 @@ import MainPage from "./Main/MainPage"
 import DashBoard from "./Main/DashBoard/DashBoard"
 import HRMod from "./Main/HR/HRMod"
 import SalesMod from "./Main/Sales/SalesMod"
-import InboxPage from "./Main/Sales/Inbox/InboxPage"
+import InboxPage from "./Main/Sales/Inbox/InboxPage"  
 import Accounts from "./Main/Accounts/Accounts"
 import Operations from "./Main/Operations/Operations"
 import ManageClientModule from "./Main/ManageClients/ManageClientModule"
@@ -64,12 +64,12 @@ function App() {
             <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />
           </Route>
-          <Route
+          {/* <Route
             path="/counter"
             element={
               authStatus ? <CounterExample /> : <Navigate to="/erp/login" />
             }
-          />
+          /> */}
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
             <Route
@@ -93,7 +93,7 @@ function App() {
           >
             <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
-              <Route parh="tickets" element={<AllTickets />} />
+              <Route path="tickets" element={<AllTickets />} />
               <Route path="manager" element={<AllManagerApprovals />} />
               <Route path="muiuser" element={<DisplayUserTwo />} />
               <Route path="deactivateUser" element={<AllDeactivateUser />} />

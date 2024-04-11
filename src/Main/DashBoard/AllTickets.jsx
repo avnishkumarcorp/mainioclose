@@ -1,67 +1,49 @@
-import React, { useEffect } from "react"
-import UserListComponent from "../../Tables/UserListComponent"
+import React, { Suspense, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllTickets } from "../../Toolkit/Slices/TicketSlice"
 import TableScalaton from "../../components/TableScalaton"
-import { getQueriesForElement } from "@testing-library/react"
 import TableOutlet from "../../components/design/TableOutlet"
+import MainHeading from "../../components/design/MainHeading"
+import { ticketsColumns } from "../../data/TicketData"
+import SomethingWrong from "../../components/usefulThings/SomethingWrong"
+
+const UserListComponent = React.lazy(() =>
+  import(`../../Tables/UserListComponent`)
+)
 
 const AllTickets = () => {
-  const currentUserId = useSelector((state) => state.auth.currentUser.id)
-
-  const ticketsData = useSelector((state) => state.tickets.allTickets)
-  const ticketsLoading = useSelector((state) => state.tickets.TicketsLoading)
-
-  const ticketCount = ticketsData.length
-
-  const dispatch = useDispatch()
+  const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
 
   useEffect(() => {
     dispatch(getAllTickets(currentUserId))
   }, [])
 
-  // const allMainUser = []
-  const columns = [
-    {
-      field: "id",
-      headerName: "S.No",
-      width: 80,
-      filterable: false,
-      renderCell: (props) => {
-        return (
-          <p className="mb-0">
-            {props.api.getRowIndexRelativeToVisibleRows(props?.row?.id) + 1}
-          </p>
-        )
-      },
-    },
-    {
-      field: "subject",
-      headerName: "Subject",
-      width: 250,
-    },
-    {
-      field: "description",
-      headerName: "Description",
-      width: 400,
-    },
-  ]
+  const {
+    allTickets: ticketsData,
+    TicketsLoading: ticketsLoading,
+    TicketsError,
+  } = useSelector((state) => state?.tickets)
+
+  const ticketCount = ticketsData.length
+
+  const dispatch = useDispatch()
 
   return (
-    <TableOutlet>
-      <h1 className="table-heading">All Tickets ({ticketCount})</h1>
+    <>
+      <MainHeading data={`All Tickets (${ticketCount})`} />
       <div className="py-2">
-        {ticketsLoading ? (
-          <TableScalaton />
-        ) : (
-          <UserListComponent
-            tableName={""}
-            columns={columns}
-            row={ticketsData}
-          />
+        {TicketsError && <SomethingWrong />}
+        {!TicketsError && (
+          <Suspense fallback={<TableScalaton />}>
+            <UserListComponent
+              tableName={""}
+              columns={ticketsColumns}
+              row={ticketsData}
+            />
+          </Suspense>
         )}
       </div>
-    </TableOutlet>
+    </>
   )
 }
 

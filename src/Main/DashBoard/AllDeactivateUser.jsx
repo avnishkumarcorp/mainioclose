@@ -68,18 +68,19 @@ const AllDeactivateUser = () => {
   ]
 
   return (
-    <TableOutlet>
+    <>
       <div className="create-user-box">
         <MainHeading data={`Deactivate Users (${userCount})`} />
       </div>
       <div className="mt-3">
+        
         <UserListComponent
           tableName={""}
           columns={columns}
           row={allDeactivateUsers}
         />
       </div>
-    </TableOutlet>
+    </>
   )
 }
 

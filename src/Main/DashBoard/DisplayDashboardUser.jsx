@@ -99,7 +99,7 @@ const DisplayDashboardUser = () => {
   ]
 
   return (
-    <div className="small-box-padding">
+    <>
       <div className="create-user-box">
         <MainHeading data={`User List (${userCount})`} />
         <div className="all-center">
@@ -112,7 +112,7 @@ const DisplayDashboardUser = () => {
       {allMainUser && !userLoading && !userError && (
         <UserListComponent tableName={""} columns={columns} row={allMainUser} />
       )}
-    </div>
+    </>
   )
 }
 

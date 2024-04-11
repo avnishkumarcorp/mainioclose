@@ -248,7 +248,7 @@ const AllManagerApprovals = () => {
   }
 
   return (
-    <TableOutlet>
+    <>
       <MainHeading data={`All users for Approvals`} />
       <TableCMPadding>
         {userManagerLoading && <TableScalaton />}
@@ -262,7 +262,7 @@ const AllManagerApprovals = () => {
           />
         )}
       </TableCMPadding>
-    </TableOutlet>
+    </>
   )
 }
 
