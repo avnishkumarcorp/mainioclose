@@ -7,14 +7,6 @@ import "./MainLoginRoute.scss"
 const MainLoginRouter = () => {
   return (
     <div>
-      <div className="container logo-header">
-        <div className="logo">
-          <div className="erp-image">
-            <img className="main-logo-image" src={logoImage}  />
-          </div>
-        <h2 className="erp-text">ERP</h2>
-        </div>
-      </div>
       <Outlet />
     </div>
   )

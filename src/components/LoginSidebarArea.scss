@@ -1,0 +1,24 @@
+.bg-image-logo {
+  background-image: url("https://www.salesforce.com/content/dam/web/en_au/www/images/loginpromo/prospect-login-promo-apac.png");
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  .h-one {
+    font-size: 24px;
+    font-weight: 600;
+    span {
+      color: #0d9dda;
+    }
+  }
+  .side-paraa {
+    color: #032d60;
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .bg-image-logo {
+    display: none;
+  }
+}
