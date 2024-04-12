@@ -14,6 +14,7 @@ import InputErrorComponent from "../components/InputErrorComponent"
 import ButtonTwo from "../components/button/ButtonTwo"
 import LongButton from "../components/button/LongButton"
 import { forgetPasswordApi } from "../Toolkit/Slices/ForgetPasswordSlice"
+import LoginSidebarArea from "../components/LoginSidebarArea"
 toast.configure()
 
 const ForgetPassword = () => {
@@ -21,7 +22,7 @@ const ForgetPassword = () => {
   const [emailErr, setEmailErr] = useState(false)
   const [emailFormat, setEmailFormat] = useState(false)
   const [emailNotExist, setEmailNotExist] = useState(false)
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const emailRef = useRef()
   const navigate = useNavigate()
@@ -32,7 +33,6 @@ const ForgetPassword = () => {
   // )
   const isUserData = useSelector((user) => user.AuthReducer)
 
-  
   const handleSubmit = (e) => {
     e.preventDefault()
     if (emailRef.current.value === "") {
@@ -48,16 +48,15 @@ const ForgetPassword = () => {
     setLoading(true)
 
     const forgetData = async () => {
-      try{
-      const data = await dispatch(forgetPasswordApi(emailData))
-      navigate("/erp/forgetotp")
-      }catch(err){
-        console.log(err);
+      try {
+        const data = await dispatch(forgetPasswordApi(emailData))
+        navigate("/erp/forgetotp")
+      } catch (err) {
+        console.log(err)
       }
     }
 
-    forgetData();
-
+    forgetData()
 
     const forgetPass = async () => {
       try {
@@ -89,35 +88,51 @@ const ForgetPassword = () => {
     // forgetPass()
   }
 
- 
   return (
-    <form>
-      <div className="cm-box container">
-        <h2 className="cm-heading">Forget Password</h2>
-        <div className="cm-input-box">
-          <i className="fa-regular cm-icon fa-envelope"></i>
-          <input
-            className="cm-input"
-            ref={emailRef}
-            type="text"
-            onChange={(e) => setEmailData(e.target.value)}
-            placeholder="Enter Your Email"
-          />
+    <div className="grid-two">
+      <form>
+        <div className="cm-box bg-g-light container">
+          <div>
+            <img src="https://www.corpseed.com/assets/img/brands/CORPSEED.webp" />
+          </div>
+          <div className="sm-box">
+            <div className="w-100">
+              <h2 className="cm-heading text-center">Forget Password</h2>
+              <div className="cm-input-box my-3">
+                <i className="fa-regular cm-icon fa-envelope"></i>
+                <input
+                  className="input2-design  w-100"
+                  ref={emailRef}
+                  type="text"
+                  onChange={(e) => setEmailData(e.target.value)}
+                  placeholder="Enter Your Email"
+                />
+              </div>
+
+              {emailErr ? (
+                <p className="errors-new">Email can't be blank</p>
+              ) : (
+                ""
+              )}
+              {emailFormat ? (
+                <InputErrorComponent value="Email Not in Proper Format" />
+              ) : (
+                ""
+              )}
+              {emailNotExist ? (
+                <InputErrorComponent value="Email Not Found in System" />
+              ) : (
+                ""
+              )}
+              <LongButton onClick={(e) => handleSubmit(e)} data="Continue" />
+            </div>
+          </div>
         </div>
-        {emailErr ? <p className="errors-new">Email can't be blank</p> : ""}
-        {emailFormat ? (
-          <InputErrorComponent  value="Email Not in Proper Format"/>
-        ) : (
-          ""
-        )}
-        {emailNotExist ? (
-           <InputErrorComponent value="Email Not Found in System" />
-        ) : (
-          ""
-        )}
-        <LongButton onClick={(e) => handleSubmit(e)}  data="Continue" />
+      </form>
+      <div>
+        <LoginSidebarArea />
       </div>
-    </form>
+    </div>
   )
 }
 
