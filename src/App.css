@@ -74,10 +74,25 @@ button:focus {
   text-decoration: none;
 }
 
+.height-75{
+  height: 75vh;
+}
+
+.large-font{
+  font-size: 60px;
+}
+
 .all-center {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.all-dir-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;  
 }
 
 .one-line {
@@ -242,6 +257,11 @@ button:focus {
   font-weight: 400;
   line-height: 16px;
   color: #464a55;
+}
+
+.section-cm-padding{
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .bl-clr{
@@ -487,6 +507,9 @@ button:focus {
   border-radius: 4px;
   font-size: 12px;
 }
+
+
+
 
 .task-done {
   color: #5cb85c;

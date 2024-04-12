@@ -51,15 +51,15 @@ const HomeFooter = () => {
       </div>
 
       <div className="below-footer">
-        <h3 className="below-text">
-          <span className="mr-2">©</span>
-          <span className="mr-2">2024</span>Corpseed ITES Private
-          Limited
-        </h3>
         <div className="right-links">
           <Link className="below-text">Privacy</Link>
           <Link className="below-text">Terms</Link>
         </div>
+        <h3 className="below-text">
+          <span className="mr-2">©</span>
+          <span className="mr-0">2024,</span>Corpseed ITES Private Limited. All
+          Right Reserved.
+        </h3>
       </div>
     </footer>
   )

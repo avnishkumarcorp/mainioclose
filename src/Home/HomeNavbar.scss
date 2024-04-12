@@ -2,17 +2,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0px;
+  padding: 20px 10px;
   .main-nav-items {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     list-style-type: none;
+    margin-bottom: 0px;
     .single-link {
-      font-size: 22px;
+      font-size: 18px;
       color: #000;
-      font-weight: 600;
+      font-weight: 400;
       &:hover {
         text-decoration: none;
       }

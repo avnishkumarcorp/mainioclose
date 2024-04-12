@@ -18,28 +18,28 @@ const MainPage = () => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    setInterval(() => {
-      dispatch(getNotificationFun(userid))
-      setToasterData((prev) => !prev)
-    }, 10000)
-  }, [])
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     dispatch(getNotificationFun(userid))
+  //     setToasterData((prev) => !prev)
+  //   }, 10000)
+  // }, [])
 
-  const allNotifications = useSelector((state) => state.notify.allNotifications)
+  // const allNotifications = useSelector((state) => state.notify.allNotifications)
 
-  useEffect(() => {
-    const SingleNotification = allNotifications[0]
-    const start = Date.now()
-    let startPoint = Date.now() + 120000
-    let anotherDate = start - 10000
-    let bool = true
-    let apiDate = new Date(SingleNotification?.notifyDate).getTime()
-    setTimeout(() => {
-      if (start >= apiDate && start <= apiDate + 30000) {
-        toast.success(SingleNotification.message)
-      }
-    }, 1000)
-  }, [toasterData])
+  // useEffect(() => {
+  //   const SingleNotification = allNotifications[0]
+  //   const start = Date.now()
+  //   let startPoint = Date.now() + 120000
+  //   let anotherDate = start - 10000
+  //   let bool = true
+  //   let apiDate = new Date(SingleNotification?.notifyDate).getTime()
+  //   setTimeout(() => {
+  //     if (start >= apiDate && start <= apiDate + 30000) {
+  //       toast.success(SingleNotification.message)
+  //     }
+  //   }, 1000)
+  // }, [toasterData])
 
   const authStatus = useSelector((state) => state.auth.isAuth)
 
