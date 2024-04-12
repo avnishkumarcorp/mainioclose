@@ -16,7 +16,7 @@ const SideNewSection = () => (
         </div>
         <div className="col-md-6 ">
           <HomeImageComp
-            imageurl={`https://images.pexels.com/photos/18409224/pexels-photo-18409224/free-photo-of-glass-ceiling-over-staircase.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`}
+            imageurl={`https://images.pexels.com/photos/4064839/pexels-photo-4064839.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1`}
             imgalt={`about image`}
             className={``}
           />
