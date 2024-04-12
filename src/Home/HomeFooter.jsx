@@ -6,11 +6,9 @@ import { Link } from "react-router-dom"
 const HomeFooter = () => {
   return (
     <footer className="container">
-      <div className="home-footer home-section-padding">
+      {/* <div className="home-footer home-section-padding">
         <div className="logo-part">
-          {/* <div className="main-logo">
-          <img src={logo} />
-        </div> */}
+         
           <h2 className="footer-heading">Corpseed</h2>
           <div className="footer-links-flex">
             <p className="footer-links">Corpseed ITES Pvt Ltd.</p>
@@ -48,7 +46,7 @@ const HomeFooter = () => {
             <Link className="footer-links">Knowledge Center</Link>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="below-footer">
         <div className="right-links">

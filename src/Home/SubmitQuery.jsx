@@ -10,7 +10,7 @@ const SubmitQuery = () => (
     <div className="container all-dir-center w-75">
       <SecondHeading data={`Submit Your Requirements`} />
       <SecondPara
-        data={`Have a project in mind? We’ll help you find out how Zoho Creator can automate your business processes. Our one-on-one demo will be tailored to your Our one-on-one demo will be tailored to your specific needs.`}
+        data={`Discover how Corpseed Creator can automate your business processes with a personalized one-on-one demo. Tailored to your specific needs, our demo will showcase the power of automation for your project.`}
       />
       <button className="tell-us-btn">Tell Us Your Need</button>
     </div>

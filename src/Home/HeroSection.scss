@@ -64,14 +64,52 @@
   }
 }
 
-
-
-.home-hero{
-  height: 60vh;
-  .image-section{
+.home-hero {
+  min-height: 60vh;
+  .hero-text {
+    .large-text {
+      font-size: 40px;
+      font-weight: 600;
+      span {
+        color: #2d69e6;
+      }
+    }
+    .hero-para {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: justify;
+    }
+    .list-data {
+      li {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+    }
+  }
+  .image-section {
     flex: 1;
   }
-  .text-section{
+  .text-section {
     flex: 1;
-  } 
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .home-hero {
+    min-height: 60vh;
+    .hero-text {
+      .large-text {
+        font-size: 30px;
+      }
+      .hero-para {
+        font-size: 16px;
+      }
+      .list-data {
+        li {
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }

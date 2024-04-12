@@ -11,7 +11,7 @@ const SideNewSection = () => (
         <div className=" col-md-6 all-center text-section">
           <HomeTextComp
             heading="No dated user trends here"
-            para="Embrace the latest visual trends and provide a better user experience in growing form factors like tablets, foldable phones, smart TVs, and more!"
+            para="Stay ahead with the latest visual trends for a superior user experience across tablets, foldable phones, smart TVs, and more!"
           />
         </div>
         <div className="col-md-6 ">
