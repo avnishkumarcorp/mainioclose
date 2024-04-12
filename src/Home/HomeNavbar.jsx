@@ -15,7 +15,7 @@ const HomeNavbar = () => {
       <div>
         <ul className="main-nav-items">
           <li>
-            <Link className="single-link" to="/erp/login">
+            <Link className="single-link tell-us-btn text-white" to="/erp/login">
               Login
             </Link>
           </li>
