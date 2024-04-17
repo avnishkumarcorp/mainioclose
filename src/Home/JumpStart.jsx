@@ -19,27 +19,27 @@ const JumpStart = () => {
           </div>
           <div className="jump-boxes">
             <ContentBox
-              icon={<i class="fa-solid fa-briefcase"></i>}
+              icon={<i className="fa-solid fa-briefcase"></i>}
               data={`Sales and Marketing`}
             />
             <ContentBox
-              icon={<i class="fa-solid fa-gears"></i>}
+              icon={<i className="fa-solid fa-gears"></i>}
               data={`Operation`}
             />
             <ContentBox
-              icon={<i class="fa-solid fa-desktop"></i>}
+              icon={<i className="fa-solid fa-desktop"></i>}
               data={`Human Resources`}
             />
             <ContentBox
-              icon={<i class="fa-solid fa-handshake"></i>}
+              icon={<i className="fa-solid fa-handshake"></i>}
               data={`IT and Administrtion`}
             />
             <ContentBox
-              icon={<i class="fa-solid fa-money-bill-1"></i>}
+              icon={<i className="fa-solid fa-money-bill-1"></i>}
               data={`Finance`}
             />
             <ContentBox
-              icon={<i class="fa-solid fa-phone-volume"></i>}
+              icon={<i className="fa-solid fa-phone-volume"></i>}
               data={`Support`}
             />
           </div>

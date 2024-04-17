@@ -328,7 +328,7 @@ const CreateHrDashBoard = ({ data, type }) => {
                 <div className="personal-info container">
                   <h4 className="info-text model-heading">
                     {type ? "Edit New user" : "Create New User"}
-                    {type ? <span className="pencil-ui" onClick={userRowDataFetch}><i class="fa-solid fa-pencil"></i></span> : ""}
+                    {type ? <span className="pencil-ui" onClick={userRowDataFetch}><i className="fa-solid fa-pencil"></i></span> : ""}
                   </h4>
                   <div className="cross-icon">
                     <i

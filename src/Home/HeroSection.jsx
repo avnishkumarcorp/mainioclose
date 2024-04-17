@@ -49,21 +49,21 @@ const HeroSection = () => (
           <button className="tell-us-btn">Book a Free Demo</button>
           <ul className="mt-4 list-data">
             <li>
-              <i class="fa-regular mr-2 fa-circle-check"></i>Highly customizable
+              <i className="fa-regular mr-2 fa-circle-check"></i>Highly customizable
             </li>
             <li>
-              <i class="fa-regular mr-2 fa-circle-check"></i>Seamlessly connect with over 650 applications
+              <i className="fa-regular mr-2 fa-circle-check"></i>Seamlessly connect with over 650 applications
             </li>
             <li>
-              <i class="fa-regular mr-2 fa-circle-check"></i>Multi-device
+              <i className="fa-regular mr-2 fa-circle-check"></i>Multi-device
               capability - Web and mobile apps
             </li>
             <li>
-              <i class="fa-regular mr-2 fa-circle-check"></i>Enterprise-grade
+              <i className="fa-regular mr-2 fa-circle-check"></i>Enterprise-grade
               security - ISO/IEC 27001, SOC 2 TYPE II, GDPR
             </li>
             <li>
-              <i class="fa-regular mr-2 fa-circle-check"></i>Simplified user
+              <i className="fa-regular mr-2 fa-circle-check"></i>Simplified user
               governance
             </li>
           </ul>
