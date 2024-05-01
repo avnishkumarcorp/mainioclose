@@ -7,7 +7,6 @@ import InputErrorComponent from "../components/InputErrorComponent"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { userDepartment } from "../data/FakeData"
-import { Link } from "react-router-dom"
 import { putQuery } from "../API/PutQuery"
 import ModelInput from "../components/Inputs/ModelInput"
 import TextFieldInput from "../components/Inputs/TextFieldInput"
@@ -53,30 +52,31 @@ const CreateHrDashBoard = ({ data, type }) => {
     permanentAddress: "",
     residentialAddress: "",
     manager: true,
+    lockerSize: 0,
+    master: true,
+    backupTeam: true,
   })
 
-  console.log("user data", userRowData);
 
-  const [aadharCardError, setAadharCardError] = useState(false);
+  const [aadharCardError, setAadharCardError] = useState(false)
 
+  const aadharCardRef = useRef()
+  const employeeIdRef = useRef()
+  const managerIdRef = useRef()
+  const expInMonthRef = useRef()
+  const expInYearRef = useRef()
+  const dateOfJoiningRef = useRef()
+  const fatherNameRef = useRef()
+  const fatherOccupationRef = useRef()
+  const motherNameRef = useRef()
+  const motherOccupationRef = useRef()
+  const nationalityRef = useRef()
+  const languageRef = useRef()
+  const emergencyNumberRef = useRef()
+  const panNumberRef = useRef()
+  const permanentAddressRef = useRef()
+  const residentialAddressRef = useRef()
 
- const aadharCardRef = useRef()
- const employeeIdRef = useRef()
- const managerIdRef = useRef()
- const expInMonthRef = useRef()
- const expInYearRef = useRef()
- const dateOfJoiningRef = useRef()
- const fatherNameRef = useRef()
- const fatherOccupationRef = useRef()
- const motherNameRef = useRef()
- const motherOccupationRef = useRef()
- const nationalityRef = useRef()
- const languageRef = useRef()
- const emergencyNumberRef = useRef()
- const panNumberRef = useRef()
- const permanentAddressRef = useRef()
- const residentialAddressRef = useRef()
- 
   console.log("i am data", data)
 
   const [btnLoading, setBtnLoading] = useState(false)
@@ -93,6 +93,11 @@ const CreateHrDashBoard = ({ data, type }) => {
   const emailRef = useRef()
   const roleRef = useRef()
   const designationRef = useRef()
+
+  let myBool = [
+    { id: 1, name: "true" },
+    { id: 2, name: "false" },
+  ]
 
   const GetRoleFun = (e) => {
     setUserRowData((prev) => ({ ...prev, role: [e.target.value] }))
@@ -328,7 +333,13 @@ const CreateHrDashBoard = ({ data, type }) => {
                 <div className="personal-info container">
                   <h4 className="info-text model-heading">
                     {type ? "Edit New user" : "Create New User"}
-                    {type ? <span className="pencil-ui" onClick={userRowDataFetch}><i className="fa-solid fa-pencil"></i></span> : ""}
+                    {type ? (
+                      <span className="pencil-ui" onClick={userRowDataFetch}>
+                        <i className="fa-solid fa-pencil"></i>
+                      </span>
+                    ) : (
+                      ""
+                    )}
                   </h4>
                   <div className="cross-icon">
                     <i
@@ -447,7 +458,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                           />
                         </div>
                       </div>
-
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
                           <label
@@ -478,7 +488,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                           </select>
                         </div>
                       </div>
-
                       <ModelInput
                         label="EPFO Number"
                         type="text"
@@ -487,21 +496,19 @@ const CreateHrDashBoard = ({ data, type }) => {
                         value={type ? userRowData.epfNo : userRowData.epfNo}
                         onChange={(e) => userRowDataFetch(e)}
                       />
-                
                       <ModelInput
                         label="Aadhar Card"
                         type="text"
                         placeholder="Enter Aadhar Card"
-                        ref= {aadharCardRef}
+                        ref={aadharCardRef}
                         name="aadharCard"
-                        error = {aadharCardError}
-                        errorData= {"Aadhar Card Number Can't be Blank"}
+                        error={aadharCardError}
+                        errorData={"Aadhar Card Number Can't be Blank"}
                         value={
                           type ? userRowData.aadharCard : userRowData.aadharCard
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Employee ID"
                         type="text"
@@ -512,7 +519,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <div className="form-group col-md-6">
                         <div className="pr-ten">
                           <label
@@ -543,7 +549,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                           </select>
                         </div>
                       </div>
-
                       <ModelInput
                         label="Experience In Months"
                         type="text"
@@ -554,7 +559,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Experience in Years"
                         type="text"
@@ -565,7 +569,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Date of Joining"
                         type="date"
@@ -578,7 +581,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Type"
                         type="text"
@@ -587,7 +589,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         value={type ? userRowData.type : userRowData.type}
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Father Name"
                         type="text"
@@ -598,7 +599,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Father Occupation"
                         type="text"
@@ -611,7 +611,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Father Contact No"
                         type="text"
@@ -624,7 +623,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Mother Name"
                         type="text"
@@ -635,7 +633,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Mother Occupation"
                         type="text"
@@ -648,7 +645,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Mother Contact No."
                         type="text"
@@ -661,7 +657,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Spouse Name"
                         type="text"
@@ -672,7 +667,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Spouse Contact Number"
                         type="text"
@@ -685,7 +679,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Nationality"
                         type="text"
@@ -698,7 +691,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Language"
                         type="text"
@@ -709,7 +701,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <ModelInput
                         label="Emergency Contact"
                         type="text"
@@ -722,7 +713,7 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
+                      {/* lockerSize */}
                       <TextFieldInput
                         label="Permanenet Address"
                         type="text"
@@ -735,7 +726,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         }
                         onChange={(e) => userRowDataFetch(e)}
                       />
-
                       <TextFieldInput
                         label="Residential Address"
                         type="text"
@@ -749,6 +739,84 @@ const CreateHrDashBoard = ({ data, type }) => {
                         onChange={(e) => userRowDataFetch(e)}
                       />
 
+                      <ModelInput
+                        label="Locker Size"
+                        type="text"
+                        placeholder="Enter Locker Size (Enter Digit Only)"
+                        name="lockerSize"
+                        value={
+                          type ? userRowData.lockerSize : userRowData.lockerSize
+                        }
+                        onChange={(e) => userRowDataFetch(e)}
+                      />
+
+                      {/* {type && 
+                       } */}
+
+                      {type && (
+                        <div className="form-group col-md-6">
+                          <div className="pr-ten">
+                            <label
+                              className="label-heading mb-1"
+                              htmlFor="mobileNo"
+                            >
+                              Master*
+                            </label>
+
+                            <select
+                              className="form-control input-focus"
+                              name="master"
+                              id="select-product"
+                              value={
+                                type ? userRowData.master : userRowData.master
+                              }
+                              // ref={roleRef}
+                              onChange={(e) => userRowDataFetch(e)}
+                            >
+                              <option>Select Master</option>
+                              {myBool.map((dep, index) => (
+                                <option key={index} value={dep?.name}>
+                                  {dep?.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      )}
+
+                      {type && (
+                        <div className="form-group col-md-6">
+                          <div className="pr-ten">
+                            <label
+                              className="label-heading mb-1"
+                              htmlFor="mobileNo"
+                            >
+                              Backup Team*
+                            </label>
+
+                            <select
+                              className="form-control input-focus"
+                              name="backupTeam"
+                              id="select-product"
+                              value={
+                                type
+                                  ? userRowData.backupTeam
+                                  : userRowData.backupTeam
+                              }
+                              // ref={roleRef}
+                              onChange={(e) => userRowDataFetch(e)}
+                            >
+                              <option>Select Backup Team</option>
+                              {myBool.map((dep, index) => (
+                                <option key={index} value={dep?.name}>
+                                  {dep?.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                      )}
+
                       {/* <ModelInput
                         label="Manager Name"
                         type="text"
@@ -756,7 +824,6 @@ const CreateHrDashBoard = ({ data, type }) => {
                         name="manager"
                         onChange={(e) => userRowDataFetch(e)}
                       /> */}
-
                       <div className="all-between-items">
                         <div className="all-center"></div>
                         <div>
