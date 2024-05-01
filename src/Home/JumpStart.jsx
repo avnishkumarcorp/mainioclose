@@ -1,7 +1,6 @@
 import React from "react"
 import "./JumpStart.scss"
 import SectionSaprater from "../components/design/SectionSaprater"
-import HomeTextComp from "../components/HomeTextComp"
 import SecondHeading from "../components/small/SecondHeading"
 import SecondPara from "../components/small/SecondPara"
 import ContentBox from "../components/boxes/ContentBox"

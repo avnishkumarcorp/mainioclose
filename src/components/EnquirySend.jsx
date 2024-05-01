@@ -5,7 +5,6 @@ import { postQuery } from "../API/PostQuery"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import FirstInput from "./Inputs/FirstInput"
-import SecondInput from "./Inputs/SecondInput"
 import InputErrorComponent from "./InputErrorComponent"
 import { useSelector } from "react-redux"
 toast.configure()
@@ -14,16 +13,17 @@ const EnquirySend = () => {
   const [openTab, setOpenTab] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  
-  const currentUserId = useSelector((state) => state?.AuthReducer?.currentUser?.id)
-  
+  const currentUserId = useSelector(
+    (state) => state?.AuthReducer?.currentUser?.id
+  )
+
   const [EnquiryTicketData, setEnquiryTicketData] = useState({
     userId: currentUserId,
     description: "",
     subject: "",
   })
 
-  const [subError, setSubError] = useState(false);
+  const [subError, setSubError] = useState(false)
 
   const subjectRef = useRef()
   const descriptionRef = useRef()
@@ -35,27 +35,15 @@ const EnquirySend = () => {
     }))
   }
 
-  // window.addEventListener('click', () =>{
-  //   if(openTab === true){
-  //     setOpenTab(false);
-  //   }
-  // })
-
-
   const submitTicketFun = (e) => {
     e.preventDefault()
-    if(subjectRef.current.value === ""){
-      setSubError(true);
+    if (subjectRef.current.value === "") {
+      setSubError(true)
       return
     }
 
     const submitTicketData = async () => {
-      
-     
-
       setLoading(true)
-
-
       try {
         const ticket = await postQuery(
           `/leadService/api/v1/createTicket`,
@@ -75,7 +63,6 @@ const EnquirySend = () => {
     }
     submitTicketData()
   }
-
 
   return (
     <div>
@@ -104,7 +91,11 @@ const EnquirySend = () => {
                 ref={descriptionRef}
                 onChange={(e) => ticketInfo(e)}
               ></textarea>
-             {subError ? <InputErrorComponent value="Subject Can't be Blank" /> : "" } 
+              {subError ? (
+                <InputErrorComponent value="Subject Can't be Blank" />
+              ) : (
+                ""
+              )}
               <button
                 className="action-btn"
                 onClick={(e) => submitTicketFun(e)}

@@ -1,4 +1,3 @@
-import axios from "axios"
 import React, { useEffect, useState } from "react"
 import UserListComponent from "../../Tables/UserListComponent"
 import { Link } from "react-router-dom"

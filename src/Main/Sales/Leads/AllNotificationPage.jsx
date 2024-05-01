@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react"
-import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
+import React, { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
-import { getQuery } from "../../../API/GetQuery"
-import { putQueryNoData } from "../../../API/PutQueryWithoutData"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  getNotificationFun,
-  updateNotification,
-} from "../../../Toolkit/Slices/NotificationSlice"
+import { updateNotification } from "../../../Toolkit/Slices/NotificationSlice"
 
 const AllNotificationPage = () => {
   // const [allNotificationData, setAllNotificationData] = useState([])
@@ -21,7 +15,6 @@ const AllNotificationPage = () => {
     dispatch(updateNotification(userid))
   }, [])
   // const SingleNotification = allNotifications[0]
-
 
   // useEffect(() => {
   //   getNotiFun()
@@ -45,7 +38,6 @@ const AllNotificationPage = () => {
   //     console.log(err)
   //   }
   // }
-
 
   const columns = [
     {
@@ -92,7 +84,6 @@ const AllNotificationPage = () => {
       },
     },
   ]
-
 
   return (
     <div className="small-box-padding">

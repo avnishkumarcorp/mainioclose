@@ -2,7 +2,7 @@ import React, { useRef } from "react"
 import "./OtpPage.scss"
 import OtpTimer from "otp-timer"
 import { useState } from "react"
-import {  useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import InputErrorComponent from "../components/InputErrorComponent"
 
@@ -10,9 +10,7 @@ const ForgetOtpPage = () => {
   const [otpData, setOtpData] = useState({})
   const [validOtpErr, setValidOtpErr] = useState(false)
 
-  const forgetOtpResponse = useSelector(
-    (auth) => auth.password.forgetData
-  )
+  const forgetOtpResponse = useSelector((auth) => auth.password.forgetData)
 
   const navigate = useNavigate()
 
@@ -25,41 +23,8 @@ const ForgetOtpPage = () => {
 
   const userOtpValidate = (e) => {
     e.preventDefault()
-    // let one = Object.values(otpData)
-    // const finalOtp = one.join("")
-
-    // if(forgetOtpResponse.otp !== finalOtp ){
-    //   setValidOtpErr(true)
-    //   return
-    // }
-
     navigate("/erp/change")
-
     let { mobile, otp } = { ...forgetOtpResponse }
-
-    // const validateuserData = async () => {
-    //   try {
-    //     const validateUser = await axios.get(
-    //       `/securityService/api/auth/validateOtp?mobile=${mobile}&otpNo=${otp}`,
-    //       {
-    //         headers: {
-    //           "Access-Control-Allow-Origin": "*",
-    //           "Content-Type": "application/json",
-    //         },
-    //       }
-    //     )
-    //     if (
-    //       validateUser.data.status === 200 &&
-    //       validateUser.data.isSuccess === true
-    //     ) {
-    //       navigate("/erp/change")
-    //     }
-    //   } catch (err) {
-    //     setValidOtpErr(true)
-    //   }
-    // }
-
-    // validateuserData()
   }
 
   const sendTimer = () => {
@@ -112,7 +77,9 @@ const ForgetOtpPage = () => {
   return (
     <div className="container otp-page">
       <h2 className="otp-heading">Enter confirmation code</h2>
-      <p className="otp-number">A 6-digit code was sent to your <b>Mail ID</b></p>
+      <p className="otp-number">
+        A 6-digit code was sent to your <b>Mail ID</b>
+      </p>
       <p className="otp-number">*****@gmail.com</p>
       <div className="input-boxes">
         <input
@@ -197,9 +164,7 @@ const ForgetOtpPage = () => {
       <div className="resend-timer">
         <OtpTimer seconds={30} minutes={1} resend={sendTimer} />
       </div>
-      <button 
-      onClick={(e) => userOtpValidate(e)}
-       className="login-button">
+      <button onClick={(e) => userOtpValidate(e)} className="login-button">
         Continue
       </button>
     </div>

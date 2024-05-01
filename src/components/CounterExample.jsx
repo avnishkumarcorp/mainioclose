@@ -1,11 +1,9 @@
 import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Decrement, Increment } from "../Redux/Action/CounterAction"
+import { useSelector } from "react-redux"
 import axios from "axios"
 
 const CounterExample = () => {
   const counterValue = useSelector((state) => state.counterReducer)
-  const dispatch = useDispatch()
 
   const [file, setFile] = useState()
 
@@ -27,8 +25,7 @@ const CounterExample = () => {
     }
     axios
       .post(url, formData, config)
-      .then((response) => {
-      })
+      .then((response) => {})
       .catch((err) => {
         console.log(err)
       })
@@ -36,19 +33,9 @@ const CounterExample = () => {
 
   return (
     <div>
-      <button
-       
-        className="btn btn-primary"
-      >
-        Increment
-      </button>
+      <button className="btn btn-primary">Increment</button>
       <h1>{counterValue}</h1>
-      <button
-       
-        className="btn btn-primary"
-      >
-        Decrement
-      </button>
+      <button className="btn btn-primary">Decrement</button>
       <form onSubmit={handleSubmit}>
         <h1>React File Upload</h1>
         <input type="file" onChange={handleChange} />

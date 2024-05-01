@@ -7,9 +7,6 @@ import { headHrUser } from "../../Toolkit/Slices/UsersSlice"
 import ColComp from "../../components/small/ColComp"
 import TableScalaton from "../../components/TableScalaton"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"
-import ButtonWithIcon from "../../components/button/ButtonWithIcon"
-import ApprovedBtn from "../../components/button/ApprovedBtn"
-import { putQueryNoData } from "../../API/PutQueryWithoutData"
 import { ApproveduserByHr } from "../../Toolkit/Slices/ApprovedStatus"
 
 const HRApprovalList = () => {
@@ -28,7 +25,7 @@ const HRApprovalList = () => {
 
   useEffect(() => {
     dispatch(headHrUser(currentUserId))
-  }, [dispatch, approvedUserDep])
+  }, [dispatch, approvedUserDep, currentUserId])
 
   const columns = [
     {

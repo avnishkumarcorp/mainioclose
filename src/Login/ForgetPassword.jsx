@@ -5,13 +5,11 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 
 import {
-  forgetPasswordAction,
-  userIsPresentData,
+  forgetPasswordAction
 } from "../Redux/Action/AuthAction"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import InputErrorComponent from "../components/InputErrorComponent"
-import ButtonTwo from "../components/button/ButtonTwo"
 import LongButton from "../components/button/LongButton"
 import { forgetPasswordApi } from "../Toolkit/Slices/ForgetPasswordSlice"
 import LoginSidebarArea from "../components/LoginSidebarArea"
@@ -28,9 +26,6 @@ const ForgetPassword = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // const forgetOtpResponse = useSelector(
-  //   (auth) => auth.AuthReducer.forgetPassword
-  // )
   const isUserData = useSelector((user) => user.AuthReducer)
 
   const handleSubmit = (e) => {

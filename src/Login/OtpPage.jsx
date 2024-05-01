@@ -3,7 +3,6 @@ import "./OtpPage.scss"
 import OtpTimer from "otp-timer"
 import { useState } from "react"
 import {  useSelector } from "react-redux"
-import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -15,10 +14,6 @@ const OtpPage = () => {
   const [otpData, setOtpData] = useState({})
 
   const signUpRedux = useSelector((prev) => prev.signup.userSignup);
-
-
-
-  console.log("signup data", signUpRedux);
   const [leadUserInfo, setLeadUserInfo] = useState({})
   const navigate = useNavigate()
 
