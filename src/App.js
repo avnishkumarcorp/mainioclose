@@ -50,6 +50,7 @@ import AllTickets from "./Main/DashBoard/AllTickets"
 import HrUserList from "./Main/HR/HrUserList"
 import AllManagerApprovals from "./Main/DashBoard/AllManagerApprovals"
 import HRApprovalList from "./Main/HR/HRApprovalList"
+import UserRating from "./Main/HR/UserRating"
 
 function App() {
   const authStatus = useSelector((state) => state.auth.isAuth)
@@ -102,7 +103,7 @@ function App() {
             <Route path="/erp/:userid/hr" element={<HRMod />}>
               <Route path="" element={<HrUserList />} />
               <Route path="approveUser" element={<HRApprovalList />} />
-              <Route path="hrlinkthree" element={<div>hrlinkthree</div>} />
+              <Route path="userrating" element={<UserRating />} />
               <Route path="hrlinkfour" element={<div>hrlinkfour</div>} />
               <Route path="hrlinkfive" element={<div>hrlinkfive</div>} />
               <Route path="hrlinksix" element={<div>hrlinksix</div>} />

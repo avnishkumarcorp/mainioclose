@@ -12,6 +12,7 @@ import TicketSlice from "./Slices/TicketSlice"
 import ForgetPasswordSlice from "./Slices/ForgetPasswordSlice"
 import SignUpSlice from "./Slices/SignUpSlice"
 import  ApprovedStatusSlice  from "./Slices/ApprovedStatus"
+import UserRatingSlice from "./Slices/UserRatingSlice"
 
 const reducers = combineReducers({
   auth: AuthSlice,
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   password: ForgetPasswordSlice,
   signup: SignUpSlice,
   approved: ApprovedStatusSlice,
+  rating: UserRatingSlice,
 })
 
 const persistConfig = {

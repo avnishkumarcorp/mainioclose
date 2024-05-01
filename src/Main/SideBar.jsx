@@ -227,6 +227,9 @@ const SideBar = () => {
               <NavLink className="link-itemss" to={`/erp/${userid}/hr/approveUser`}>
                 Approval List
               </NavLink>
+              <NavLink className="link-itemss" to={`/erp/${userid}/hr/userrating`}>
+                Rating List
+              </NavLink>
               </div>
             {/* <div className="link-child">
               <NavLink className="link-itemss" to="hr">
