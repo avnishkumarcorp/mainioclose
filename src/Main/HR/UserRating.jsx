@@ -35,7 +35,7 @@ const UserRating = () => {
         console.log(arrayOfZeros)
         return arrayOfZeros.map((star) => (
           <span className="text-warning ml-1">
-            <i class="fa-solid fa-star"></i>
+            <i className="fa-solid fa-star"></i>
           </span>
         ))
       },
