@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from "react"
 import MainHeading from "../../components/design/MainHeading"
 import TableCMPadding from "../../components/design/TableCMPadding"
-import { allManagerUser, headHrUser } from "../../Toolkit/Slices/UsersSlice"
+import { allManagerUser } from "../../Toolkit/Slices/UsersSlice"
 import { useDispatch, useSelector } from "react-redux"
 import TableScalaton from "../../components/TableScalaton"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"

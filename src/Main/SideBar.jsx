@@ -32,7 +32,6 @@ const SideBar = () => {
 
   return (
     <div className="sideTab">
-      {/* Dashboard links start */}
 
       <div className="user-profile">
         {/* <button className="btn btn-primary" >Logout</button> */}

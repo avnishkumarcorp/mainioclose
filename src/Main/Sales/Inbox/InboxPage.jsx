@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom"
 import axios from "axios"
 import TableScalaton from "../../../components/TableScalaton"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
+import MainHeading from "../../../components/design/MainHeading"
 
 const InboxPage = () => {
   const [activeTab, setActiveTab] = useState(false)
@@ -87,7 +88,7 @@ const InboxPage = () => {
   return (
     <div className="inbox-page cm-padding-one">
       <div className="pb-3">
-        <h1 className="table-heading">Inbox</h1>
+      <MainHeading data={`Inbox`} />
       </div>
       <div className="inbox-top-btn">
         <button to="/sales" className={`tab-btn `}>

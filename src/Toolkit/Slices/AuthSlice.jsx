@@ -17,14 +17,14 @@ export const AuthSlice = createSlice({
     isAuth: false,
   },
   reducers: {
-    logoutFun : (state, action) => {
+    logoutFun: (state, action) => {
       state.isAuth = false
       state.currentUser = null
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getCurrentUser.pending, (state, action) => {
-      state.loginLoading = true 
+      state.loginLoading = true
       state.loginError = false
     })
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {

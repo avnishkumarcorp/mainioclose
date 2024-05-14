@@ -1,12 +1,11 @@
 import React, { useRef, useState } from "react"
 import "./LeadStatusPage.scss"
-import ButtonTwo from "../../../components/button/ButtonTwo"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
-import TableScalaton from "../../../components/TableScalaton"
 import SmallTableScalaton from "../../../components/Scalaton/SmallTableScalaton"
 import InputErrorComponent from "../../../components/InputErrorComponent"
 import { postQuery } from "../../../API/PostQuery"
 import { deleteQuery } from "../../../API/DeleteQuery"
+import MainHeading from "../../../components/design/MainHeading"
 
 const LeadStatusPage = () => {
   const [createStatus, setCreateStatus] = useState({
@@ -77,10 +76,10 @@ const LeadStatusPage = () => {
 
   return (
     <div>
-      <h1 className="table-heading">Lead Status</h1>
+        <MainHeading data={`Lead Status`} />
       <div className="lead-box">
         <form>
-          <label className="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" htmlFor="statusCreate">
             Enter Lead Name
           </label>
           <br />
@@ -93,7 +92,7 @@ const LeadStatusPage = () => {
           />
           {nameError ? <InputErrorComponent value="Name can't be Blank" /> : ""}
           <br />
-          <label className="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" htmlFor="statusCreate">
             Enter Lead Description
           </label>
           <textarea

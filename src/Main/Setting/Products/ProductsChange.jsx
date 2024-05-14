@@ -5,9 +5,9 @@ import { postQuery } from "../../../API/PostQuery"
 import InputErrorComponent from "../../../components/InputErrorComponent"
 import SmallTableScalaton from "../../../components/Scalaton/SmallTableScalaton"
 import { deleteQuery } from "../../../API/DeleteQuery"
-import FirstInput from "../../../components/Inputs/FirstInput"
 import LongInput from "../../../components/Inputs/LongInput"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
+import MainHeading from "../../../components/design/MainHeading"
 
 const ProductsChange = () => {
   const { userid } = useParams()
@@ -90,7 +90,6 @@ const ProductsChange = () => {
     } catch (err) {
       console.log(err)
     }
-    
   }
 
   const categoryUrl = `/leadService/api/v1/category/getAllCategories`
@@ -151,10 +150,10 @@ const ProductsChange = () => {
 
   return (
     <div>
-      <h1 className="table-heading">Lead Product</h1>
+      <MainHeading data={`Lead Product`} />
       <div className="py-3">
         <form>
-          <label className="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" htmlFor="statusCreate">
             Enter Product Name
           </label>
           <br />
@@ -297,40 +296,6 @@ const ProductsChange = () => {
         ) : (
           <UserLeadComponent columns={ProductCol} row={productData} />
         )}
-
-        {/* <div className="table-responsive">
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">id</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Created Date</th>
-                <th scope="col">Created By</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productLoading ? (
-                <SmallTableScalaton />
-              ) : (
-                productData.map((status, index) => (
-                  <tr key={index}>
-                    <th>{status.id}</th>
-                    <td>{status?.productName}</td>
-                    <td>{new Date(status.createdDate).toLocaleDateString()}</td>
-                    <td>{status?.createdBy?.fullName}</td>
-                    <td>
-                      <i
-                        onClick={() => deleteProductFun(status.id)}
-                        className="fa-solid gray-cl fa-trash"
-                      ></i>{" "}
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div> */}
       </div>
     </div>
   )

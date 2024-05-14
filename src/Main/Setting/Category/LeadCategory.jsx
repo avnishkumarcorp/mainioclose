@@ -5,6 +5,7 @@ import InputErrorComponent from "../../../components/InputErrorComponent"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import SmallTableScalaton from "../../../components/Scalaton/SmallTableScalaton"
 import { deleteQuery } from "../../../API/DeleteQuery"
+import MainHeading from "../../../components/design/MainHeading"
 
 const LeadCategory = () => {
   const { userid } = useParams()
@@ -52,7 +53,6 @@ const LeadCategory = () => {
   const { productData: categoryData, loading: categoryLoading } =
     useCustomRoute(categoryUrl, categoryDep)
 
- 
   const deleteCategoryFun = async (statusId) => {
     if (window.confirm("Are you sure to delete this record?") == true) {
       try {
@@ -68,10 +68,10 @@ const LeadCategory = () => {
 
   return (
     <div>
-      <h1 className="table-heading">Lead Category</h1>
+        <MainHeading data={`Lead Category`} />
       <div className="lead-box">
         <form>
-          <label className="label-heading mb-1" for="statusCreate">
+          <label className="label-heading mb-1" htmlFor="statusCreate">
             Enter Category Name
           </label>
           <br />

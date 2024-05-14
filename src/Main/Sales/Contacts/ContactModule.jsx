@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./ContactModule.scss"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import UserListComponent from "../../../Tables/UserListComponent"
+import MainHeading from "../../../components/design/MainHeading"
 
 const ContactModule = () => {
 
@@ -22,7 +23,7 @@ const ContactModule = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading">All Contacts</h1>
+      <MainHeading data={`All Contacts`} />
       </div>
       <div className="mt-3">
         <UserListComponent row={allContact} columns={columns} />

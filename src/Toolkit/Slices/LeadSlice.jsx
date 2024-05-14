@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { getQuery } from "../../API/GetQuery"
 import { postQuery } from "../../API/PostQuery"
 
 export const getAllLeads = createAsyncThunk("allLeadsData", async (data) => {

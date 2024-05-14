@@ -32,21 +32,18 @@ export const RejectuserByManager = createAsyncThunk(
   }
 )
 
-// /leadService/api/v1/users/approvedUserByManager?currentUserId=1&userId=1&status=sdds
-
 export const ApprovedStatusSlice = createSlice({
   name: "approved",
   initialState: {
     Hrflag: "false",
     hrLoading: false,
     hrError: false,
-    ApprovedByManager: '',
+    ApprovedByManager: "",
     AppManLoading: false,
     AppManError: false,
-    RejectByManager: '',
+    RejectByManager: "",
     RejManLoading: false,
     RejManError: false,
-    
   },
   extraReducers: (builder) => {
     builder.addCase(ApproveduserByHr.pending, (state, action) => {
@@ -77,7 +74,6 @@ export const ApprovedStatusSlice = createSlice({
       state.AppManLoading = false
     })
 
-
     builder.addCase(ApproveduserByManager.pending, (state, action) => {
       state.RejManLoading = true
       state.RejManError = false
@@ -91,8 +87,6 @@ export const ApprovedStatusSlice = createSlice({
       state.RejManError = true
       state.RejManLoading = false
     })
-
-
   },
 })
 

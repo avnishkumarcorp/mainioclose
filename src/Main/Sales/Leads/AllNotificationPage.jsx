@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
 import { useDispatch, useSelector } from "react-redux"
 import { updateNotification } from "../../../Toolkit/Slices/NotificationSlice"
+import MainHeading from "../../../components/design/MainHeading"
 
 const AllNotificationPage = () => {
   // const [allNotificationData, setAllNotificationData] = useState([])
@@ -88,7 +89,7 @@ const AllNotificationPage = () => {
   return (
     <div className="small-box-padding">
       <>
-        <h1 className="table-heading">All Notification</h1>
+      <MainHeading data={`All Notification`} />
         <div>
           <UserLeadComponent row={allNotifications} columns={columns} />
         </div>

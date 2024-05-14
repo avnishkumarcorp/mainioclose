@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import { Link, useParams } from "react-router-dom"
 import UserLeadComponent from "../../../Tables/UserLeadComponent"
+import MainHeading from "../../../components/design/MainHeading"
 
 const GetAllTaskList = () => {
   const { userid } = useParams()
@@ -125,7 +126,7 @@ const GetAllTaskList = () => {
   return (
     <div className="lead-module small-box-padding">
       <div className="create-user-box">
-        <h1 className="table-heading">All Tasks ({taskCount})</h1>
+      <MainHeading data={`All Tasks (${taskCount})`} />
         <div>
           <input
             type="date"

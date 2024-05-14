@@ -1,22 +1,15 @@
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import "./App.css"
 import MainPage from "./Main/MainPage"
 import DashBoard from "./Main/DashBoard/DashBoard"
 import HRMod from "./Main/HR/HRMod"
 import SalesMod from "./Main/Sales/SalesMod"
 import InboxPage from "./Main/Sales/Inbox/InboxPage"  
-import Accounts from "./Main/Accounts/Accounts"
-import Operations from "./Main/Operations/Operations"
-import ManageClientModule from "./Main/ManageClients/ManageClientModule"
-import ActivityMasterModule from "./Main/ActivityMaster/ActivityMasterModule"
-import QualityModule from "./Main/Quality/QualityModule"
-import MyProfile from "./Main/MyProfile/MyProfile"
 import ContactModule from "./Main/Sales/Contacts/ContactModule"
 import Estimate from "./Main/Sales/Estimate/Estimate"
 import LeadsModule from "./Main/Sales/Leads/LeadsModule"
 import Opportunities from "./Main/Sales/Opportunities/Opportunities"
 import OrdersModule from "./Main/Sales/Orders/OrdersModule"
-import CounterExample from "./components/CounterExample"
 import Login from "./Login/Login"
 import SignUp from "./Login/SignUp"
 import LeadDetailsPage from "./Main/Sales/Inbox/LeadDetailsPage"
@@ -30,7 +23,6 @@ import ForgetOtpPage from "./Login/ForgetOtpPage"
 import DisplayDashboardUser from "./Main/DashBoard/DisplayDashboardUser"
 import DisplayUserTwo from "./Main/DashBoard/DisplayUserTwo"
 import SetNewPasswordPage from "./Login/SetNewPasswordPage"
-import LeadCreateModel from "./Model/LeadCreateModel"
 import EstimateCreatePage from "./Main/Sales/Leads/EstimateCreatePage"
 import TableScalaton from "./components/TableScalaton"
 import LeadHistory from "./Main/Sales/Leads/LeadHistory"
@@ -51,6 +43,8 @@ import HrUserList from "./Main/HR/HrUserList"
 import AllManagerApprovals from "./Main/DashBoard/AllManagerApprovals"
 import HRApprovalList from "./Main/HR/HRApprovalList"
 import UserRating from "./Main/HR/UserRating"
+import SlugCreate from "./Main/Setting/slug/SlugCreate"
+import UrlsPage from "./Main/Setting/urls/UrlsPage"
 
 function App() {
   const authStatus = useSelector((state) => state.auth.isAuth)
@@ -65,12 +59,6 @@ function App() {
             <Route path="/" element={<FrontMainPage />} />
             <Route path="/contact" element={<div>Contact</div>} />
           </Route>
-          {/* <Route
-            path="/counter"
-            element={
-              authStatus ? <CounterExample /> : <Navigate to="/erp/login" />
-            }
-          /> */}
           <Route path="/erp" element={<MainLoginRouter />}>
             <Route path="login" element={<Login />} />
             <Route
@@ -256,6 +244,8 @@ function App() {
               <Route path="" element={<LeadStatusPage />} />
               <Route path="products" element={<ProductsChange />} />
               <Route path="category" element={<LeadCategory />} />
+              <Route path="slug" element={<SlugCreate />} />
+              <Route path="urls" element={<UrlsPage />} />
             </Route>
 
             {/* profile routes */}

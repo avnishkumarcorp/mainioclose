@@ -21,7 +21,7 @@ const HRApprovalList = () => {
     userHRError,
   } = useSelector((state) => state?.user)
 
-  const { Hrflag, hrLoading, hrError } = useSelector((data) => data.approved)
+  const { Hrflag, hrLoading, hrError } = useSelector((data) => data?.approved)
 
   useEffect(() => {
     dispatch(headHrUser(currentUserId))

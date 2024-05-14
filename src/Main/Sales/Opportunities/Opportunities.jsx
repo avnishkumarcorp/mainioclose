@@ -1,11 +1,12 @@
 import React from "react"
 import "./Opportunities.scss"
 import AllLeadsDisplay from "../Leads/AllLeadsDisplay"
+import MainHeading from "../../../components/design/MainHeading"
 
 const Opportunities = () => {
   return (
     <div className="lead-module small-box-padding">
-      <h1 className="table-heading mb-2">Sales Pipeline</h1>
+        <MainHeading data={`Sales Pipeline`} />
       <div className="filter-fields">
         <div className="single-fields">
           <button>

@@ -21,6 +21,12 @@ const SettingMainPage = () => {
           <Link className="link-four" to={`/erp/${currentUserId}/setting/products`}>
             Lead Product
           </Link>
+          <Link className="link-four" to={`/erp/${currentUserId}/setting/slug`}>
+            Lead Slug
+          </Link>
+          <Link className="link-four" to={`/erp/${currentUserId}/setting/urls`}>
+            Lead Urls
+          </Link>
         </div>
       </div>
       <div className="side-data">

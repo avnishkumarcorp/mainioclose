@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { getNotificationFun } from "../Toolkit/Slices/NotificationSlice"
-import TableOutlet from "../components/design/TableOutlet"
 toast.configure()
 
 const MainPage = () => {

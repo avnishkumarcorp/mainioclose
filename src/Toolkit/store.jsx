@@ -13,6 +13,8 @@ import ForgetPasswordSlice from "./Slices/ForgetPasswordSlice"
 import SignUpSlice from "./Slices/SignUpSlice"
 import  ApprovedStatusSlice  from "./Slices/ApprovedStatus"
 import UserRatingSlice from "./Slices/UserRatingSlice"
+import LeadSlugSlice from "./Slices/LeadSlugSlice"
+import LeadUrlSlice from "./Slices/LeadUrlSlice"
 
 const reducers = combineReducers({
   auth: AuthSlice,
@@ -24,6 +26,8 @@ const reducers = combineReducers({
   signup: SignUpSlice,
   approved: ApprovedStatusSlice,
   rating: UserRatingSlice,
+  leadslug: LeadSlugSlice,
+  leadurls: LeadUrlSlice
 })
 
 const persistConfig = {
