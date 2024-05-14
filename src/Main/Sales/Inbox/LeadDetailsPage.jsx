@@ -83,6 +83,8 @@ const LeadDetailsPage = () => {
 
   const imageRefrence = useRef()
 
+  console.log("singl edata", singleLeadResponseData);
+
   const handleImageSize = () => {
     if (imageRefrence.current) {
       imageRefrence.current.classList.add("img-increase")
@@ -816,6 +818,8 @@ const LeadDetailsPage = () => {
           <div className="left-lead-section">
             {updateLeadNameToggle ? (
               <>
+              <div className="aic-center">
+              {singleLeadResponseData?.isBacklog ? <div className="green-point"></div>: <div className="red-point"></div>} 
                 <h3 className="company-name d-inline">
                   {singleLeadResponseData?.leadName}
                 </h3>
@@ -823,6 +827,8 @@ const LeadDetailsPage = () => {
                   onClick={() => setUpdateLeadNameToggle(false)}
                   className="fa-solid ml-3 fa-pencil green-cl"
                 ></i>
+                </div>
+              
               </>
             ) : (
               <>
