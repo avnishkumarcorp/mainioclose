@@ -1,35 +1,78 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllUrlAction } from "../../../Toolkit/Slices/LeadUrlSlice"
+import {
+  createAllUrlAction,
+  getAllUrlAction,
+} from "../../../Toolkit/Slices/LeadUrlSlice"
 import MainHeading from "../../../components/design/MainHeading"
 import TableBoot from "../../../components/tablesData/TableBoot"
 import LongInput from "../../../components/Inputs/LongInput"
 import SmOneBtn from "../../../components/button/SmOneBtn"
+import { MultiSelect } from "primereact/multiselect"
+import { getAllSlugAction } from "../../../Toolkit/Slices/LeadSlugSlice"
+import DropDownComp from "../../../components/Inputs/DropDownComp"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const UrlsPage = () => {
+  const [getAllSlug, setGetAllSlug] = useState([])
   const [urlLeadData, setUrlLeadData] = useState({
-    urlsName: "",
-    urlSlug: [],
+    name: "",
+    urlSlug: getAllSlug,
     quality: true,
   })
+  const [urlDep, setUrlDep] = useState(false)
 
-  console.log(urlLeadData);
+  useEffect(() => {
+    setUrlLeadData((prevData) => ({
+      ...prevData,
+      urlSlug: getAllSlug,
+    }))
+  }, [getAllSlug])
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllSlugAction())
+  }, [dispatch])
+
+  const { allLeadSlug } = useSelector((prev) => prev?.leadslug)
 
   const saveUrlData = (e) => {
     setUrlLeadData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const dispatch = useDispatch()
-
   useEffect(() => {
     dispatch(getAllUrlAction())
-  }, [dispatch])
+  }, [dispatch, urlDep])
 
   const { allLeadUrl, allLeadUrlLoading, allLeadUrlError } = useSelector(
     (prev) => prev?.leadurls
   )
 
-  console.log(allLeadUrl)
+  const { createLeadUrl, createLeadUrlLoading, createLeadUrlError } =
+    useSelector((prev) => prev?.leadurls)
+
+  const createUrlFun = async (e) => {
+    e.preventDefault()
+    const createNewUrl = await dispatch(createAllUrlAction(urlLeadData))
+    if (createNewUrl.type === "createLeadUrlData/fulfilled") {
+      toast.success("Url Created Succesfully")
+      setUrlDep((prev) => !prev)
+      setUrlLeadData({
+        name: "",
+        urlSlug: getAllSlug,
+        quality: true,
+      })
+      setGetAllSlug([])
+    }
+    if (createNewUrl.type === "createLeadUrlData/rejected") {
+      toast.success("Something Went Wrong")
+    }
+  }
+
+  const dataBool = ["True", "False"]
 
   const tableHead = ["id", "Url Name", "Quality"]
 
@@ -40,11 +83,33 @@ const UrlsPage = () => {
         <form>
           <LongInput
             type="text"
-            name="urlsName"
+            name="name"
+            value={urlLeadData.name}
             label={`Enter Url Name`}
             onChange={saveUrlData}
           />
-          <SmOneBtn name="Submit" />
+          <MultiSelect
+            style={{ dropdown: { backgroundColor: "#000" } }}
+            value={getAllSlug}
+            onChange={(e) => setGetAllSlug(e.value)}
+            options={allLeadSlug}
+            optionLabel="name"
+            placeholder="Select Urls"
+            optionValue="id"
+            maxSelectedLabels={6}
+            className="multi-select-boxx w-100 py-1 my-3"
+          />
+          <DropDownComp
+            name="quality"
+            onChange={saveUrlData}
+            value={urlLeadData.quality}
+            data={dataBool}
+            options="Select Quality"
+          />
+          <SmOneBtn
+            name={createLeadUrlLoading ? "Loading..." : "Submit"}
+            onClick={createUrlFun}
+          />
         </form>
       </div>
 
