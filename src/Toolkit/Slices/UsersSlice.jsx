@@ -3,7 +3,7 @@ import { getQuery } from "../../API/GetQuery"
 
 export const getAllUsers = createAsyncThunk("allUsers", async () => {
   const allUser = await getQuery(`/leadService/api/v1/users/getAllUser`)
-  return allUser.data
+  return allUser?.data
 })
 
 export const headHrUser = createAsyncThunk(
@@ -12,7 +12,7 @@ export const headHrUser = createAsyncThunk(
     const allDataUser = await getQuery(
       `/leadService/api/v1/hrManagment/getUserApprovalHr?userId=${id}`
     )
-    return allDataUser.data
+    return allDataUser?.data
   }
 )
 
@@ -22,7 +22,7 @@ export const allManagerUser = createAsyncThunk(
     const managerUserData = await getQuery(
       `/leadService/api/v1/users/getUserForManager?id=${id}`
     )
-    return managerUserData.data
+    return managerUserData?.data
   }
 )
 
@@ -32,7 +32,7 @@ export const allDeactivateUserFun = createAsyncThunk(
     const deactivateUserData = await getQuery(
       `/leadService/api/v1/users/getAllDeactivateUser`
     )
-    return deactivateUserData.data
+    return deactivateUserData?.data
   }
 )
 

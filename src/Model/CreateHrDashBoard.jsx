@@ -77,7 +77,6 @@ const CreateHrDashBoard = ({ data, type }) => {
   const permanentAddressRef = useRef()
   const residentialAddressRef = useRef()
 
-  console.log("i am data", data)
 
   const [btnLoading, setBtnLoading] = useState(false)
   const [allRoles, setAllRoles] = useState([])
@@ -103,15 +102,6 @@ const CreateHrDashBoard = ({ data, type }) => {
     setUserRowData((prev) => ({ ...prev, role: [e.target.value] }))
   }
 
-  //   useEffect(()=>{
-  //       setUserRowData(()=> ({
-  //         userName: data.fullName,
-  //         email: "",
-  //         role: [],
-  //         designation: "",
-  //         department: "",
-  //       }))
-  //  },[type])
 
   const userRowDataFetch = (e) => {
     if (type) {
@@ -122,9 +112,6 @@ const CreateHrDashBoard = ({ data, type }) => {
     }
   }
 
-  // const editUserData = () =>{
-  //   setUserRowData((prev) => ({...prev, ...data}))
-  // }
 
   useEffect(() => {
     getAllRole()
@@ -183,7 +170,6 @@ const CreateHrDashBoard = ({ data, type }) => {
         )
 
         let roleData = createNewUserData.data.data.role.map((role) => role.name)
-        console.warn("user data", createNewUserData)
 
         const newLeadObject = {
           id: createNewUserData?.data?.data?.userId,
@@ -216,8 +202,6 @@ const CreateHrDashBoard = ({ data, type }) => {
           residentialAddress: userRowData?.residentialAddress,
           manager: true,
         }
-
-        console.warn("after api calling ", newLeadObject)
 
         const createLeadUserByEmail = await postQuery(
           `/leadService/api/v1/users/createUserByHr`,

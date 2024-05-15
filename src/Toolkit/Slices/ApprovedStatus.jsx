@@ -4,11 +4,10 @@ import { putQueryNoData } from "../../API/PutQueryWithoutData"
 export const ApproveduserByHr = createAsyncThunk(
   "approvedUserByHrHead",
   async ({ currid, userid }) => {
-    console.log("api call before", currid, userid)
     const approvedUser = await putQueryNoData(
       `/leadService/api/v1/hrManagment/approvedUserByHr?currentUserId=${currid}&userId=${userid}&flag=${true}`
     )
-    return approvedUser.data
+    return approvedUser?.data
   }
 )
 
@@ -18,7 +17,7 @@ export const ApproveduserByManager = createAsyncThunk(
     const approvedUser = await putQueryNoData(
       `/leadService/api/v1/users/approvedUserByManager?currentUserId=${currid}&userId=${userid}&status=${`Approved`}`
     )
-    return approvedUser.data
+    return approvedUser?.data
   }
 )
 
@@ -28,7 +27,7 @@ export const RejectuserByManager = createAsyncThunk(
     const rejectUser = await putQueryNoData(
       `/leadService/api/v1/users/approvedUserByManager?currentUserId=${currid}&userId=${userid}&status=${`Rejected`}`
     )
-    return rejectUser.data
+    return rejectUser?.data
   }
 )
 

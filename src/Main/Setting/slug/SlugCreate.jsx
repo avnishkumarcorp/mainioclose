@@ -26,7 +26,6 @@ const SlugCreate = () => {
     (prev) => prev?.leadslug
   )
 
-  console.log(allLeadSlug)
 
   const createSlugFun = async (e) => {
     e.preventDefault()

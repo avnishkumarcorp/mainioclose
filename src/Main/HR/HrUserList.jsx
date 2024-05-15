@@ -31,7 +31,6 @@ const HrUserList = () => {
     setEditType(true)
   }
 
-  console.log("all User data", allMainUser)
 
   const columns = [
     ...hrUserData,

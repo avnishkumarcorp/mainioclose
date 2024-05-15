@@ -27,8 +27,6 @@ const OtpPage = () => {
   let one = Object.values(otpData)
   const finalOtp = one.join("")
   const finalApiData = { ...signUpRedux, otp: finalOtp }
-
-  console.log("final api data", finalApiData);
   
   const userRegistration = (e) => {
     e.preventDefault()

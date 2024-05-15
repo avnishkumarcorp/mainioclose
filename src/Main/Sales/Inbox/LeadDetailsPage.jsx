@@ -83,8 +83,6 @@ const LeadDetailsPage = () => {
 
   const imageRefrence = useRef()
 
-  console.log("singl edata", singleLeadResponseData);
-
   const handleImageSize = () => {
     if (imageRefrence.current) {
       imageRefrence.current.classList.add("img-increase")
@@ -97,7 +95,6 @@ const LeadDetailsPage = () => {
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log(fileRef.current.value)
     setUploadLoading(true)
     const url = "/leadService/api/v1/upload/uploadimageToFileSystem"
     const formData = new FormData()
@@ -117,7 +114,6 @@ const LeadDetailsPage = () => {
     })
   }
 
-  console.log("category data", categoryData)
 
   // const [selectedFile, setSelectedFile] = useState(null)
 
@@ -316,7 +312,6 @@ const LeadDetailsPage = () => {
   }
 
   let categoryName = addProductData.serviceName
-  console.log("i am category name", categoryName, categoryData)
 
   const categoryProducts = categoryData.filter(
     (cat) => cat.categoryName === categoryName && cat.products

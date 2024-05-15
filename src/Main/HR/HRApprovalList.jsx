@@ -235,23 +235,11 @@ const HRApprovalList = () => {
 
   const approvedUserFun = (id) => {
     const userId = { ids: id }
-    console.log("function call", currentUserId, flagDataT)
     const getApproval = dispatch(
       ApproveduserByHr({ currid: currentUserId, userid: userId.ids })
     )
     setApprovedUserDep((prev) => !prev)
-    console.log(getApproval)
   }
-
-  // const disapprovedUserFun = (id) => {
-  //   const userId = { ids: id }
-  //   console.log("function call", currentUserId, flagDataT)
-  //   const getApproval = dispatch(
-  //     ApproveduserByHr({ currid: currentUserId, userid: userId.ids })
-  //   )
-  //   setApprovedUserDep((prev) => !prev)
-  //   console.log(getApproval)
-  // }
 
   return (
     <TableOutlet>

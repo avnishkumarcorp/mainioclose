@@ -23,7 +23,6 @@ const AllManagerApprovals = () => {
     userManagerError,
   } = useSelector((state) => state?.user)
 
-  console.log(hrApprovalUser)
 
   useEffect(() => {
     dispatch(allManagerUser(currentUserId))
@@ -65,7 +64,6 @@ const AllManagerApprovals = () => {
         ApproveduserByManager({ currid: currentUserId, userid: userId.ids })
       )
       setApproverdUserDep((prev) => !prev)
-      console.log(getApprovalManager)
     }
   }
 

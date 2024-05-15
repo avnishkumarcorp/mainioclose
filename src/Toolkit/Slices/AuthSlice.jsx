@@ -3,7 +3,7 @@ import { postQuery } from "../../API/PostQuery"
 
 export const getCurrentUser = createAsyncThunk("currentUser", async (data) => {
   const userData = await postQuery(`/securityService/api/auth/signin`, data)
-  return userData.data
+  return userData?.data
 })
 
 export const AuthSlice = createSlice({

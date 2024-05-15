@@ -11,7 +11,6 @@ const ContactModule = () => {
 
   const { productData: allContact } = useCustomRoute(contactUrl, contactDep)
 
-  console.log(allContact)
 
   const columns = [
     { field: "id", headerName: "ID", width: 60 },

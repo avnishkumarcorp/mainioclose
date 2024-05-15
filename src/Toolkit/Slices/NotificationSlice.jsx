@@ -8,7 +8,7 @@ export const getNotificationFun = createAsyncThunk(
     const allNotification = await getQuery(
       `/leadService/api/v1/notification/getAllNotification?userId=${userid}`
     )
-    return allNotification.data.reverse()
+    return allNotification?.data?.reverse()
   }
 )
 

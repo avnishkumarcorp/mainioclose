@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { postQuery } from "../../API/PostQuery"
+import { createSlice } from "@reduxjs/toolkit"
 
 
 export const SignUpSlice = createSlice({

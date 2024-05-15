@@ -1,7 +1,6 @@
 import React from "react"
 
-const ImageComp = ({data, index}) => {
-  console.log("My Data is ", data);
+const ImageComp = ({ data, index }) => {
   return (
     <div className="team-model">
       <button

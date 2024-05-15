@@ -32,7 +32,6 @@ const UserRating = () => {
       width: 150,
       renderCell: (props) => {
         const arrayOfZeros = Array.from({ length: props?.row?.rating }, () => 0)
-        console.log(arrayOfZeros)
         return arrayOfZeros.map((star) => (
           <span className="text-warning ml-1">
             <i className="fa-solid fa-star"></i>
@@ -42,7 +41,6 @@ const UserRating = () => {
     },
   ]
 
-  console.log("i am", allUserRating)
 
   return (
     <TableOutlet>

@@ -31,7 +31,6 @@ const SignUp = () => {
 
   const selectData = useSelector((prev) => prev?.signup?.userSignUp);
 
-  console.log("select data is", selectData);
 
 
   const [loading, setLoading] = useState(false)
@@ -117,7 +116,6 @@ const SignUp = () => {
           "/securityService/api/auth/otp",
           generateOtpData
         )
-        console.log("otp is", getNewOtp);
         setLoading(false)
         navigate("/erp/otp")
       } catch (err) {

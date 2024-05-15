@@ -40,7 +40,6 @@ const ProductsChange = () => {
   const govermentfeesRef = useRef()
   const govermentGstRef = useRef()
 
-  console.log(addNewProduct)
 
   const [btnLoading, setBtnLoading] = useState(false)
 
@@ -56,7 +55,6 @@ const ProductsChange = () => {
       return
     }
 
-    console.warn(catRef.current)
 
     if (addNewProduct.categoryId === null) {
       setcatError(true)
@@ -86,7 +84,6 @@ const ProductsChange = () => {
         otherCode: "",
         otherGst: 0,
       })
-      console.log("Product created !!")
     } catch (err) {
       console.log(err)
     }
