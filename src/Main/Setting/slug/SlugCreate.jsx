@@ -8,15 +8,19 @@ import {
   leadSlugAction,
 } from "../../../Toolkit/Slices/LeadSlugSlice"
 import TableBoot from "../../../components/tablesData/TableBoot"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const SlugCreate = () => {
   const [slugName, setSlugName] = useState("")
+  const [slugDep, setSlugDep] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getAllSlugAction())
-  }, [dispatch])
+  }, [dispatch, slugDep])
 
   const { allLeadSlug, allLeadSlugLoading, allLeadSlugError } = useSelector(
     (prev) => prev?.leadslug
@@ -29,6 +33,8 @@ const SlugCreate = () => {
     const slugCreation = await dispatch(leadSlugAction(slugName))
     if ((slugCreation.type = "createLeadSlugData/fulfilled")) {
       setSlugName("")
+      setSlugDep((prev) => !prev)
+      toast.success("Slug Created Succesfully")
     }
   }
 

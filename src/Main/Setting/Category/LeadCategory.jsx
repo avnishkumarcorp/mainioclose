@@ -6,6 +6,9 @@ import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
 import SmallTableScalaton from "../../../components/Scalaton/SmallTableScalaton"
 import { deleteQuery } from "../../../API/DeleteQuery"
 import MainHeading from "../../../components/design/MainHeading"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
 const LeadCategory = () => {
   const { userid } = useParams()
@@ -39,10 +42,12 @@ const LeadCategory = () => {
         leadCategory
       )
       setCreateCategoryDep((prev) => !prev)
+      toast.success("Category Created Succesfully")
       setBtnLoading(false)
       nameRef.current.value = ""
     } catch (err) {
       console.log(err)
+      toast.error("Something went Wrong")
       setBtnLoading(false)
     }
   }
