@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAllRating } from "../../Toolkit/Slices/UserRatingSlice"
 import TableScalaton from "../../components/TableScalaton"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"
+import CreateuserDashboard from "../../Model/CreateuserDashboard"
+import CreateRatingModel from "../../Model/CreateRatingModel"
 
 const UserRating = () => {
   const dispatch = useDispatch()
@@ -44,7 +46,11 @@ const UserRating = () => {
 
   return (
     <TableOutlet>
+       <div className="create-user-box">
       <MainHeading data={"Rating List"} />
+
+          <CreateRatingModel  />
+      </div>
       <div className="mt-3">
         {UserRatingLoading && <TableScalaton />}
         {UserRatingError && <SomethingWrong />}

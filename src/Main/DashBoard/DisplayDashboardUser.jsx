@@ -3,7 +3,7 @@ import UserListComponent from "../../Tables/UserListComponent"
 import { Link } from "react-router-dom"
 import CreateuserDashboard from "../../Model/CreateuserDashboard"
 import { deleteQuery } from "../../API/DeleteQuery"
-import { getAllUsers } from "../../Toolkit/Slices/UsersSlice"
+import { allActiveUserFun, getAllUsers } from "../../Toolkit/Slices/UsersSlice"
 import { useDispatch, useSelector } from "react-redux"
 import TableScalaton from "../../components/TableScalaton"
 import MainHeading from "../../components/design/MainHeading"
@@ -13,6 +13,7 @@ import { allUserdataCol } from "../../data/Userdata"
 const DisplayDashboardUser = () => {
   const [userSuspand, setUserSuspand] = useState(false)
   const [getId, setGetId] = useState("")
+  const [userToggle, setUserToggle] = useState(false)
   const [editType, setEditType] = useState(false)
   const dispatch = useDispatch()
 
@@ -27,6 +28,8 @@ const DisplayDashboardUser = () => {
   useEffect(() => {
     dispatch(getAllUsers())
   }, [dispatch, userSuspand])
+
+  console.log("Main Users", allMainUser);
 
   const deleteUser = async (id) => {
     if (window.confirm("Are you sure to deActivate this User?") == true) {
@@ -49,8 +52,39 @@ const DisplayDashboardUser = () => {
     setEditType(true)
   }
 
+  const presentUserFun = async (id) => {
+    const activeRowData = {
+      id: id,
+      currentUserId: 2
+    }
+     if (window.confirm( "Do you really want to Not Assign Any Lead To User?")) {
+      console.log("api calll before");
+      const toggleData = await dispatch(allActiveUserFun(activeRowData)) 
+      console.log(toggleData);
+      setUserToggle((prev) => !prev)
+    }
+  }
+
   const columns = [
     ...allUserdataCol,
+    {
+      field: "autoActive",
+      headerName: "Present",
+      width: 180,
+      renderCell: (props) => {
+        return (
+          <>
+            <button
+              onClick={() => presentUserFun(props.row.id)}
+              className={`btn ${props?.row?.autoActive ? "btn-success" : "btn-danger"}`}
+            >
+              {props?.row?.autoActive ? "Present" : "Absent"}
+            </button>
+          </>
+        )
+      },
+    },
+
     {
       field: "Action",
       headerName: "Action",

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getQuery } from "../../API/GetQuery"
+import { putQueryNoData } from "../../API/PutQueryWithoutData"
 
 export const getAllUsers = createAsyncThunk("allUsers", async () => {
   const allUser = await getQuery(`/leadService/api/v1/users/getAllUser`)
@@ -36,6 +37,16 @@ export const allDeactivateUserFun = createAsyncThunk(
   }
 )
 
+export const allActiveUserFun = createAsyncThunk(
+  "allActivateUserApprovalList",
+  async ({ currentUserId, id }) => {
+    const statusUserData = await putQueryNoData(
+      `/leadService/api/v1/users/autoActive?userId=${id}&currentUser=${currentUserId}`
+    )
+    return statusUserData?.data
+  }
+)
+
 export const UsersSlice = createSlice({
   name: "user",
   initialState: {
@@ -51,6 +62,9 @@ export const UsersSlice = createSlice({
     allDeactivateUsers: [],
     userDeactivateLoading: false,
     userDeactivateError: false,
+    userActive: "",
+    userActiveLoading: false,
+    userActiveError: false,
   },
   extraReducers: (builder) => {
     builder.addCase(getAllUsers.pending, (state, action) => {
@@ -99,6 +113,18 @@ export const UsersSlice = createSlice({
     builder.addCase(allDeactivateUserFun.rejected, (state, action) => {
       state.userDeactivateError = true
       state.userDeactivateLoading = false
+    })
+
+    builder.addCase(allActiveUserFun.pending, (state, action) => {
+      state.userActiveLoading = true
+    })
+    builder.addCase(allActiveUserFun.fulfilled, (state, action) => {
+      state.userActive = action.payload
+      state.userActiveLoading = false
+    })
+    builder.addCase(allActiveUserFun.rejected, (state, action) => {
+      state.userActiveError = true
+      state.userActiveLoading = false
     })
   },
 })
