@@ -1,15 +1,31 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "./Model.css"
+import ModelInput from "../components/Inputs/ModelInput"
+import { MultiSelect } from "primereact/multiselect"
+import { useDispatch, useSelector } from "react-redux"
+import { getAllUsers } from "../Toolkit/Slices/UsersSlice"
 
 const CreateRatingModel = () => {
+  const [multiUser, setMultiUser] = useState([])
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllUsers())
+  }, [dispatch])
+
+  const { allUsers, userLoading, userError } = useSelector((prev) => prev?.user)
+
+  console.log("all users data", allUsers)
+
   return (
-    <nav className="all-center">
+    <nav>
       <div className="team-model">
         <button
           type="button"
           className="team-edit-button create-user-btn"
           data-toggle="modal"
-          data-target="#createRatingdashboard"
+          data-target="#createLead"
         >
           <i className="fa-solid mr-1 fa-circle-plus"></i>
         </button>
@@ -17,7 +33,7 @@ const CreateRatingModel = () => {
         {/* MODAL */}
         <div
           className="modal fade"
-          id="createRatingdashboard"
+          id="createLead"
           tabIndex="-1"
           role="dialog"
           aria-labelledby="exampleModalCenterTitle"
@@ -27,11 +43,11 @@ const CreateRatingModel = () => {
             className="modal-dialog mod-center modal-dialog-centered"
             role="document"
           >
-            <div className="modal-content all-center">
+            <div className="modal-content all-center-2">
               <div className="add-team-body">
                 {/* START */}
                 <div className="personal-info container">
-                  <h4 className="info-text model-heading">Create New Rating</h4>
+                  <h4 className="info-text model-heading">Add New Lead</h4>
                   <div className="cross-icon">
                     <i
                       data-dismiss="modal"
@@ -46,44 +62,61 @@ const CreateRatingModel = () => {
                             className="label-heading mb-1"
                             htmlFor="teamName"
                           >
-                            Username*
+                            Lead Name *
                           </label>
                           <input
                             type="text"
                             className="form-control input-focus"
-                            id="teamName"
-                            //   value={
-                            //     type ? userRowData.fullName : userRowData.fullName
-                            //   }
-                            //   ref={nameRef}
-                            placeholder="Enter Username"
-                            //   name={type ? "fullName" : "userName"}
-                            //   onChange={userRowDataFetch}
+                            id="leadName"
+                            // ref={leadNameRef}
+                            placeholder="Enter Team Name"
+                            name="leadName"
+                            // onChange={(e) => leadRowData(e)}
                           />
                         </div>
                       </div>
-                    </div>
-                    <div className="first-form form-row">
-                      <div className="form-group col-md-6">
-                        <div className="pr-ten">
-                          <label
-                            className="label-heading mb-1"
-                            htmlFor="teamName"
+
+                      <ModelInput
+                        type="text"
+                        label="Enter Rating"
+                        placeholder="Enter Rating"
+                      />
+
+                      {/* <ModelDropDown
+                        labelData={`Select Role`}
+                        // onChange={setUserDataFun}
+                        name="roleNames"
+                        value={userRoles.roleName}
+                        val={userRoles?.map((role) => ({
+                          value: role.id,
+                          label: role.roleName,
+                        }))}
+                      /> */}
+
+                      <div className="col-md-6">
+                        <MultiSelect
+                          style={{ dropdown: { backgroundColor: "#000" } }}
+                          value={multiUser}
+                          onChange={(e) => setMultiUser(e.value)}
+                          options={allUsers}
+                          optionLabel="fullName"
+                          placeholder="Select Urls"
+                          optionValue="id"
+                          maxSelectedLabels={6}
+                          className="multi-select-boxx w-100 py-1 my-3"
+                        />
+                      </div>
+
+                      <div className="all-between-items">
+                        <div className="all-center-2"></div>
+                        <div>
+                          <button
+                            // onClick={(e) => newLeadCreate(e)}
+                            className="first-button form-prev-btn"
                           >
-                            Username*
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control input-focus"
-                            id="teamName"
-                            //   value={
-                            //     type ? userRowData.fullName : userRowData.fullName
-                            //   }
-                            //   ref={nameRef}
-                            placeholder="Enter Username"
-                            //   name={type ? "fullName" : "userName"}
-                            //   onChange={userRowDataFetch}
-                          />
+                            Submit
+                            {/* {leadLoading ? "Loading..." : "Submit"} */}
+                          </button>
                         </div>
                       </div>
                     </div>

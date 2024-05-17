@@ -790,8 +790,55 @@ button:focus {
   width: 10px;
   border-radius: 50%;
   background-color: #1f8637;
-  
 }
+
+.sm-point{
+  display: block;
+  height: 8px;
+  width: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.point-error{
+  background-color: #dc3545;
+}
+
+.point-success{
+  background-color: #1f8637;
+}
+
+.present-btn{
+  color: #ffffff;
+  background-color: #1f8637;
+  border: 1px solid #1f8637;
+  padding: 2px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.absent-btn{
+  color: #ffffff;
+  background-color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 2px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.info-button{
+  color: #ffffff;
+  background-color: #17a2b8;
+  border: 1px solid #17a2b8;
+  padding: 2px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+
 /* 
 $lightBlue: #1a73e8;
 --blue-color: #093252; */

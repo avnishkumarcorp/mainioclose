@@ -45,6 +45,7 @@ import HRApprovalList from "./Main/HR/HRApprovalList"
 import UserRating from "./Main/HR/UserRating"
 import SlugCreate from "./Main/Setting/slug/SlugCreate"
 import UrlsPage from "./Main/Setting/urls/UrlsPage"
+import SingleUserHistory from "./Main/DashBoard/SingleUserHistory"
 
 function App() {
   const authStatus = useSelector((state) => state.auth.isAuth)
@@ -82,6 +83,7 @@ function App() {
           >
             <Route path=":userid/users" element={<DashBoard />}>
               <Route path="" element={<DisplayDashboardUser />} />
+              <Route path=":userid/history" element={<SingleUserHistory />} />
               <Route path="tickets" element={<AllTickets />} />
               <Route path="manager" element={<AllManagerApprovals />} />
               <Route path="muiuser" element={<DisplayUserTwo />} />

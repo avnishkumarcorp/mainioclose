@@ -1,15 +1,7 @@
 import ColComp from "../components/small/ColComp"
 
 export const allUserdataCol = [
-    {
-        field: "id",
-        headerName: "ID",
-        width: 150,
-        renderCell: (props) => {
-          return <p className="mb-0">CORP00{props?.row?.id}</p>
-        },
-      },
-      { field: "fullName", headerName: "Full Name", width: 150 },
+    
       { field: "email", headerName: "Email", width: 240, hideable: false },
       { field: "designation", headerName: "Designation", width: 150 },
       { field: "department", headerName: "Department", width: 150 },

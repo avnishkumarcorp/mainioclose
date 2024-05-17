@@ -43,15 +43,13 @@ const UserRating = () => {
     },
   ]
 
-
   return (
     <TableOutlet>
-       <div className="create-user-box">
-      <MainHeading data={"Rating List"} />
-
-          <CreateRatingModel  />
+      <div className="create-user-box">
+        <MainHeading data={"Rating List"} />
+        {/* <CreateRatingModel /> */}
       </div>
-      <div className="mt-3">
+      <div>
         {UserRatingLoading && <TableScalaton />}
         {UserRatingError && <SomethingWrong />}
         {allUserRating && !UserRatingLoading && !UserRatingError && (

@@ -27,7 +27,7 @@ const DisplayDashboardUser = () => {
 
   useEffect(() => {
     dispatch(getAllUsers())
-  }, [dispatch, userSuspand])
+  }, [dispatch, userSuspand, userToggle])
 
   console.log("Main Users", allMainUser);
 
@@ -66,7 +66,37 @@ const DisplayDashboardUser = () => {
   }
 
   const columns = [
+    {
+      field: "id",
+      headerName: "ID",
+      width: 150,
+      renderCell: (props) => {
+        return <p className="mb-0">CORP00{props?.row?.id}</p>
+      },
+    },
+    { field: "fullName", headerName: "Full Name", width: 150,
+    renderCell: (props) => <p className="all-center p-0"><span className={`sm-point  ${props?.row?.autoActive ? "point-success" : "point-error"}`}></span>{props?.row?.fullName} </p>
+     },
     ...allUserdataCol,
+     {
+      field: "viewHistory",
+      headerName: "View History",
+      width: 180,
+      renderCell: (props) => {
+        return (
+          <>
+            <Link
+            to={`${props?.row?.id}/history`}
+              // onClick={() => presentUserFun(props.row.id)}
+              className="info-button"
+            >
+              <i class="fa-regular fa-eye"></i> History
+            </Link>
+          </>
+        )
+      },
+    },
+
     {
       field: "autoActive",
       headerName: "Present",
@@ -76,7 +106,7 @@ const DisplayDashboardUser = () => {
           <>
             <button
               onClick={() => presentUserFun(props.row.id)}
-              className={`btn ${props?.row?.autoActive ? "btn-success" : "btn-danger"}`}
+              className={`btn ${props?.row?.autoActive ? "present-btn" : "absent-btn"}`}
             >
               {props?.row?.autoActive ? "Present" : "Absent"}
             </button>

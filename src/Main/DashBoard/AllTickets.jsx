@@ -15,7 +15,7 @@ const AllTickets = () => {
 
   useEffect(() => {
     dispatch(getAllTickets(currentUserId))
-  }, [])
+  }, [dispatch])
 
   const {
     allTickets: ticketsData,
