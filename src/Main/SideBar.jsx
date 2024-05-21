@@ -32,7 +32,6 @@ const SideBar = () => {
 
   return (
     <div className="sideTab">
-
       <div className="user-profile">
         {/* <button className="btn btn-primary" >Logout</button> */}
         <div className="profile-info">
@@ -139,98 +138,111 @@ const SideBar = () => {
         {/* end */}
 
         {/* sales links start */}
-        {!(hrRole) ? (
-        <div className="side-tabs">
-          <NavLink
-            to={`/erp/${userid}/sales/leads`}
-            className={`nav-heading ${({ isActive }) =>
-              isActive ? "linkactive" : ""}`}
-            data-toggle="collapse"
-            data-target={`#collapseSalesModule`}
-            aria-expanded="true"
-            aria-controls="collapseSalesModule"
-          >
-            <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-regular mr-2 fa-rectangle-list"></i> Sales
-          </NavLink>
-          <div
-            id={`collapseSalesModule`}
-            className="collapse"
-            aria-labelledby="headingOne"
-            data-parent="#accordion"
-          >
-            <div className="link-child">
-              <NavLink className="link-itemss" to={`${userid}/sales/leads`}>
-                <i className="fa-solid mr-1 fa-calculator"></i>
-                <span>Leads</span>
-              </NavLink>
-              {/* <NavLink
+        {!hrRole ? (
+          <div className="side-tabs">
+            <NavLink
+              to={`/erp/${userid}/sales/leads`}
+              className={`nav-heading ${({ isActive }) =>
+                isActive ? "linkactive" : ""}`}
+              data-toggle="collapse"
+              data-target={`#collapseSalesModule`}
+              aria-expanded="true"
+              aria-controls="collapseSalesModule"
+            >
+              <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+              <i className="fa-regular mr-2 fa-rectangle-list"></i> Sales
+            </NavLink>
+            <div
+              id={`collapseSalesModule`}
+              className="collapse"
+              aria-labelledby="headingOne"
+              data-parent="#accordion"
+            >
+              <div className="link-child">
+                <NavLink className="link-itemss" to={`${userid}/sales/leads`}>
+                  <i className="fa-solid mr-1 fa-calculator"></i>
+                  <span>Leads</span>
+                </NavLink>
+                {/* <NavLink
                 className="link-itemss"
                 to={`${userid}/sales/oppurtities`}
               >
                 <i className="fa-solid mr-1 fa-trophy"></i><span>Oppurtities</span>
               </NavLink> */}
-              {/* <NavLink className="link-itemss" to="sales/estimate">
+                {/* <NavLink className="link-itemss" to="sales/estimate">
                 <i className="fa-solid mr-1 fa-file-lines"></i><span>Estimate</span>
               </NavLink> */}
-              {/* <NavLink className="link-itemss" to="sales/orders">
+                {/* <NavLink className="link-itemss" to="sales/orders">
                 <i className="fa-solid mr-1 fa-box"></i>Orders
               </NavLink> */}
-              {adminRole ? (
-                <NavLink
-                  className="link-itemss"
-                  to={`${userid}/sales/contacts`}
-                >
-                  <i className="fa-solid mr-1 fa-user"></i>
-                  <span>Contacts</span>
-                </NavLink>
-              ) : (
-                ""
-              )}
+                {adminRole ? (
+                  <NavLink
+                    className="link-itemss"
+                    to={`${userid}/sales/contacts`}
+                  >
+                    <i className="fa-solid mr-1 fa-user"></i>
+                    <span>Contacts</span>
+                  </NavLink>
+                ) : (
+                  ""
+                )}
 
-              <NavLink className="link-itemss" to={`${userid}/sales`}>
-                <i className="fa-solid mr-1 fa-inbox"></i>
-                <span>Inbox</span>
-              </NavLink>
+                <NavLink className="link-itemss" to={`${userid}/sales`}>
+                  <i className="fa-solid mr-1 fa-inbox"></i>
+                  <span>Inbox</span>
+                </NavLink>
+
+                <NavLink className="link-itemss" to={`${userid}/sales/company`}>
+                  <i class="fa-regular fa-building"></i>
+                  <span>Company</span>
+                </NavLink>
+              </div>
             </div>
           </div>
-        </div>
-        ): "" }
+        ) : (
+          ""
+        )}
         {/* end */}
 
         {/* hr links start */}
         {hrRole || adminRole ? (
-        <div className="side-tabs">
-          <NavLink
-            to={`/erp/${userid}/hr`}
-            className={`nav-heading ${({ isActive }) =>
-              isActive ? "linkactive" : ""}`}
-            data-toggle="collapse"
-            data-target={`#collapseHrModule`}
-            aria-expanded="true"
-            aria-controls="collapseHrModule"
-          >
-            <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
-            <i className="fa-solid mr-2 fa-gear"></i> HR
-          </NavLink>
-          <div
-            id={`collapseHrModule`}
-            className="collapse"
-            aria-labelledby="headingOne"
-            data-parent="#accordion"
-          >
-            <div className="link-child">
-              <NavLink className="link-itemss" to={`/erp/${userid}/hr`}>
-                User List
-              </NavLink>
-              <NavLink className="link-itemss" to={`/erp/${userid}/hr/approveUser`}>
-                Approval List
-              </NavLink>
-              <NavLink className="link-itemss" to={`/erp/${userid}/hr/userrating`}>
-                Rating List
-              </NavLink>
+          <div className="side-tabs">
+            <NavLink
+              to={`/erp/${userid}/hr`}
+              className={`nav-heading ${({ isActive }) =>
+                isActive ? "linkactive" : ""}`}
+              data-toggle="collapse"
+              data-target={`#collapseHrModule`}
+              aria-expanded="true"
+              aria-controls="collapseHrModule"
+            >
+              <i className="fa-solid mr-1 fa-angle-right"></i>{" "}
+              <i className="fa-solid mr-2 fa-gear"></i> HR
+            </NavLink>
+            <div
+              id={`collapseHrModule`}
+              className="collapse"
+              aria-labelledby="headingOne"
+              data-parent="#accordion"
+            >
+              <div className="link-child">
+                <NavLink className="link-itemss" to={`/erp/${userid}/hr`}>
+                  User List
+                </NavLink>
+                <NavLink
+                  className="link-itemss"
+                  to={`/erp/${userid}/hr/approveUser`}
+                >
+                  Approval List
+                </NavLink>
+                <NavLink
+                  className="link-itemss"
+                  to={`/erp/${userid}/hr/userrating`}
+                >
+                  Rating List
+                </NavLink>
               </div>
-            {/* <div className="link-child">
+              {/* <div className="link-child">
               <NavLink className="link-itemss" to="hr">
                 HR First
               </NavLink>
@@ -250,9 +262,11 @@ const SideBar = () => {
                 HR Six
               </NavLink>
             </div> */}
+            </div>
           </div>
-        </div>
-        ): ""}
+        ) : (
+          ""
+        )}
         {/* end */}
 
         {/* accounts links start */}
@@ -270,7 +284,7 @@ const SideBar = () => {
             <i className="fa-solid fa-money-check-dollar"></i> Accounts
           </NavLink>
           <div
-            id={`collapseAccountModule`} 
+            id={`collapseAccountModule`}
             className="collapse"
             aria-labelledby="headingOne"
             data-parent="#accordion"

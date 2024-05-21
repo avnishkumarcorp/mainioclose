@@ -46,6 +46,8 @@ import UserRating from "./Main/HR/UserRating"
 import SlugCreate from "./Main/Setting/slug/SlugCreate"
 import UrlsPage from "./Main/Setting/urls/UrlsPage"
 import SingleUserHistory from "./Main/DashBoard/SingleUserHistory"
+import MainCompanyPage from "./Main/Sales/company/MainCompanyPage"
+import CompDetails from "./Main/Sales/company/CompDetails"
 
 function App() {
   const authStatus = useSelector((state) => state.auth.isAuth)
@@ -106,6 +108,8 @@ function App() {
               {/* <Route path=":id" element={<LeadDetailsPage />} /> */}
 
               <Route path="oppurtities" element={<Opportunities />} />
+              <Route path="company" element={<MainCompanyPage />} />
+              <Route path="company/details" element={<CompDetails />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
               <Route path="leads/:leadid" element={<LeadDetailsPage />} />
