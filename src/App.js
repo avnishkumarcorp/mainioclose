@@ -48,6 +48,7 @@ import UrlsPage from "./Main/Setting/urls/UrlsPage"
 import SingleUserHistory from "./Main/DashBoard/SingleUserHistory"
 import MainCompanyPage from "./Main/Sales/company/MainCompanyPage"
 import CompDetails from "./Main/Sales/company/CompDetails"
+import ProjectPage from "./Main/Sales/Project/ProjectPage"
 
 function App() {
   const authStatus = useSelector((state) => state.auth.isAuth)
@@ -109,6 +110,7 @@ function App() {
 
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="company" element={<MainCompanyPage />} />
+              <Route path="project" element={<ProjectPage />} />
               <Route path="company/details" element={<CompDetails />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />

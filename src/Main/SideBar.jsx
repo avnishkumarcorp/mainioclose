@@ -193,8 +193,12 @@ const SideBar = () => {
                 </NavLink>
 
                 <NavLink className="link-itemss" to={`${userid}/sales/company`}>
-                  <i class="fa-regular fa-building"></i>
+                  <i className="fa-regular fa-building"></i>
                   <span>Company</span>
+                </NavLink>
+                <NavLink className="link-itemss" to={`${userid}/sales/project`}>
+                  <i className="fa-regular fa-building"></i>
+                  <span>Project</span>
                 </NavLink>
               </div>
             </div>
