@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import TableOutlet from "../../components/design/TableOutlet"
 import MainHeading from "../../components/design/MainHeading"
 import UserListComponent from "../../Tables/UserListComponent"
@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAllRating } from "../../Toolkit/Slices/UserRatingSlice"
 import TableScalaton from "../../components/TableScalaton"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"
-import CreateuserDashboard from "../../Model/CreateuserDashboard"
 import CreateRatingModel from "../../Model/CreateRatingModel"
 
 const UserRating = () => {
+
+  const [hidebox, setHidebox] = useState(false)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -47,8 +49,14 @@ const UserRating = () => {
     <TableOutlet>
       <div className="create-user-box">
         <MainHeading data={"Rating List"} />
-        {/* <CreateRatingModel /> */}
+        <button
+          className="team-edit-button create-user-btn"
+          onClick={() => setHidebox((prev) => !prev)}
+        >
+          <i className="fa-solid mr-1 fa-circle-plus"></i>
+        </button>
       </div>
+      <CreateRatingModel hidebox={hidebox} />
       <div>
         {UserRatingLoading && <TableScalaton />}
         {UserRatingError && <SomethingWrong />}

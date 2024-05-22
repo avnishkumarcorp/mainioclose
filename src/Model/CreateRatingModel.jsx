@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { getAllUsers } from "../Toolkit/Slices/UsersSlice"
 import DropDownComp from "../components/Inputs/DropDownComp"
 
-const CreateRatingModel = () => {
+const CreateRatingModel = ({ hidebox }) => {
   const [multiUser, setMultiUser] = useState([])
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -28,79 +27,43 @@ const CreateRatingModel = () => {
   ]
 
   return (
-    <nav>
+    <>
       <div className="team-model">
-        <button
-          type="button"
-          className="team-edit-button create-user-btn"
-          data-toggle="modal"
-          data-target="#createLead"
-        >
-          <i className="fa-solid mr-1 fa-circle-plus"></i>
-        </button>
-
         {/* MODAL */}
         <div
-          className="modal fade"
-          id="createLead"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalCenterTitle"
-          aria-hidden="true"
+          className={`personal-info slide-data-ui  container ${
+            hidebox ? "d-none" : ""
+          }`}
         >
-          <div
-            className="modal-dialog mod-center modal-dialog-centered"
-            role="document"
-          >
-            <div className="modal-content all-center-2">
-              <div className="add-team-body" style={{ zIndex: 109 }}>
-                {/* START */}
-                <div className="personal-info container">
-                  <h4 className="info-text model-heading">Add New Lead</h4>
-                  <div className="cross-icon">
-                    <i
-                      data-dismiss="modal"
-                      className="fa-sharp fa-solid fa-circle-xmark"
-                    ></i>
-                  </div>
-                  <form>
-                    <div className="first-form form-row">
-                      <div className="form-group col-md-6">
-                        <div className="pr-ten">
-                          <label
-                            className="label-heading mb-1"
-                            htmlFor="teamName"
-                          >
-                            Lead Name *
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control input-focus"
-                            id="leadName"
-                            // ref={leadNameRef}
-                            placeholder="Enter Team Name"
-                            name="leadName"
-                            // onChange={(e) => leadRowData(e)}
-                          />
-                        </div>
-                      </div>
+          <h4 className="info-text model-heading">Add Rating User</h4>
+          <form>
+            <div className="first-form form-row">
+              <div className="form-group col-md-6">
+                <div className="pr-ten">
+                  <label className="label-heading mb-1" htmlFor="teamName">
+                    Lead Name *
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control input-focus"
+                    id="leadName"
+                    // ref={leadNameRef}
+                    placeholder="Enter Team Name"
+                    name="leadName"
+                    // onChange={(e) => leadRowData(e)}
+                  />
+                </div>
+              </div>
 
-                      {/* <DropDownComp
-                        label="Select Rating Starts"
-                        name="rating"
-                        data={allStars?.map((star) => ({
-                          value: star.id,
-                          label: star.number,
-                        }))}
-                      /> */}
+           
 
-                      <ModelInput
-                        type="text"
-                        label="Enter Rating"
-                        placeholder="Enter Rating"
-                      />
+              <ModelInput
+                type="text"
+                label="Enter Rating"
+                placeholder="Enter Rating"
+              />
 
-                      {/* <ModelDropDown
+              {/* <ModelDropDown
                         labelData={`Select Role`}
                         // onChange={setUserDataFun}
                         name="roleNames"
@@ -111,41 +74,40 @@ const CreateRatingModel = () => {
                         }))}
                       /> */}
 
-                      <div className="col-md-6">
-                        <MultiSelect
-                          style={{ dropdown: { backgroundColor: "#000" } }}
-                          value={multiUser}
-                          onChange={(e) => setMultiUser(e.target.value)}
-                          options={allUsers}
-                          optionLabel="fullName"
-                          placeholder="Select Urls"
-                          optionValue="id"
-                          maxSelectedLabels={6}
-                          className="multi-select-boxx w-100 py-1 my-3"
-                        />
-                      </div>
+              <div className="col-md-6">
+                <label className="label-heading mb-1" htmlFor="teamName">
+                  Select users *
+                </label>
+                <MultiSelect
+                  style={{ dropdown: { backgroundColor: "#000" } }}
+                  value={multiUser}
+                  onChange={(e) => setMultiUser(e.target.value)}
+                  options={allUsers}
+                  optionLabel="fullName"
+                  placeholder="Select Urls"
+                  optionValue="id"
+                  maxSelectedLabels={6}
+                  className="multi-select-boxx w-100 py-1 my-3"
+                />
+              </div>
 
-                      <div className="all-between-items">
-                        <div className="all-center-2"></div>
-                        <div>
-                          <button
-                            // onClick={(e) => newLeadCreate(e)}
-                            className="first-button form-prev-btn"
-                          >
-                            Submit
-                            {/* {leadLoading ? "Loading..." : "Submit"} */}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
+              <div className="all-between-items">
+                <div className="all-center-2"></div>
+                <div>
+                  <button
+                    // onClick={(e) => newLeadCreate(e)}
+                    className="first-button form-prev-btn border-1"
+                  >
+                    Submit
+                    {/* {leadLoading ? "Loading..." : "Submit"} */}
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-    </nav>
+    </>
   )
 }
 

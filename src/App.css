@@ -25,7 +25,7 @@ a {
   text-decoration: none;
 }
 
-li{
+li {
   list-style-type: none;
 }
 
@@ -42,7 +42,7 @@ a:hover {
   height: 100px;
 }
 
-.bg-g-light{
+.bg-g-light {
   background-color: #f4f6f9;
 }
 
@@ -78,11 +78,11 @@ button:focus {
   text-decoration: none;
 }
 
-.height-75{
+.height-75 {
   height: 75vh;
 }
 
-.large-font{
+.large-font {
   font-size: 60px;
 }
 
@@ -92,11 +92,11 @@ button:focus {
   align-items: center;
 }
 
-.all-dir-center{
+.all-dir-center {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;  
+  flex-direction: column;
 }
 
 .one-line {
@@ -134,10 +134,9 @@ button:focus {
   justify-content: flex-end;
 }
 
-.grid-two{
+.grid-two {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
 }
 
 .min-box {
@@ -263,12 +262,12 @@ button:focus {
   color: #464a55;
 }
 
-.section-cm-padding{
+.section-cm-padding {
   padding-top: 30px;
   padding-bottom: 30px;
 }
 
-.bl-clr{
+.bl-clr {
   color: #0d9dda;
 }
 
@@ -511,9 +510,6 @@ button:focus {
   border-radius: 4px;
   font-size: 12px;
 }
-
-
-
 
 .task-done {
   color: #5cb85c;
@@ -771,28 +767,50 @@ button:focus {
   cursor: pointer;
 }
 
-.green-point{
+.slide-data-ui {
+  background: #093252;
+  color: #fff !important;
+  padding: 20px !important;
+  border-radius: 5px;
+}
+
+.border-1 {
+  border: 1px solid #fff;
+}
+
+.normal-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  border: 1px solid #dfdfdf;
+}
+
+.normal-btn.active {
+  background: #093252;
+  color: #fff;
+  border: 1px solid #093252;
+}
+
+.green-point {
   height: 10px;
   width: 10px;
   border-radius: 50%;
   background-color: #1f8637;
-  
 }
 
-.aic-center{
+.aic-center {
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
-.red-point{
+.red-point {
   height: 10px;
   width: 10px;
   border-radius: 50%;
   background-color: #dc3545;
 }
 
-.sm-point{
+.sm-point {
   display: block;
   height: 8px;
   width: 8px;
@@ -800,15 +818,15 @@ button:focus {
   border-radius: 50%;
 }
 
-.point-error{
+.point-error {
   background-color: #dc3545;
 }
 
-.point-success{
+.point-success {
   background-color: #1f8637;
 }
 
-.present-btn{
+.present-btn {
   color: #ffffff;
   background-color: #1f8637;
   border: 1px solid #1f8637;
@@ -818,7 +836,7 @@ button:focus {
   font-size: 13px;
 }
 
-.absent-btn{
+.absent-btn {
   color: #ffffff;
   background-color: #dc3545;
   border: 1px solid #dc3545;
@@ -828,7 +846,7 @@ button:focus {
   font-size: 13px;
 }
 
-.info-button{
+.info-button {
   color: #ffffff;
   background-color: #17a2b8;
   border: 1px solid #17a2b8;
@@ -837,7 +855,6 @@ button:focus {
   cursor: pointer;
   font-size: 13px;
 }
-
 
 /* 
 $lightBlue: #1a73e8;
@@ -868,9 +885,8 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 @media only screen and (max-width: 992px) {
-  .grid-two{
-    grid-template-columns:  1fr;
-  
+  .grid-two {
+    grid-template-columns: 1fr;
   }
 }
 

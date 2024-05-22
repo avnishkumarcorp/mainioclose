@@ -36,7 +36,7 @@ const MainCompanyPage = () => {
       headerName: "Company Name",
       width: 200,
       renderCell: (props) => (
-        <Link to={`details`}>{props?.row?.companyName}</Link>
+        <Link to={`${props?.row?.companyId}/details`}>{props?.row?.companyName}</Link>
       ) ,
     },
     {

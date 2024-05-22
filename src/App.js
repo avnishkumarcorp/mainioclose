@@ -111,7 +111,7 @@ function App() {
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="company" element={<MainCompanyPage />} />
               <Route path="project" element={<ProjectPage />} />
-              <Route path="company/details" element={<CompDetails />} />
+              <Route path="company/:companyId/details" element={<CompDetails />} />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
               <Route path="leads/:leadid" element={<LeadDetailsPage />} />
