@@ -4,6 +4,7 @@ import ModelInput from "../components/Inputs/ModelInput"
 import { MultiSelect } from "primereact/multiselect"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllUsers } from "../Toolkit/Slices/UsersSlice"
+import DropDownComp from "../components/Inputs/DropDownComp"
 
 const CreateRatingModel = () => {
   const [multiUser, setMultiUser] = useState([])
@@ -17,6 +18,14 @@ const CreateRatingModel = () => {
   const { allUsers, userLoading, userError } = useSelector((prev) => prev?.user)
 
   console.log("all users data", allUsers)
+
+  const allStars = [
+    { id: 1, number: "1" },
+    { id: 2, number: "2" },
+    { id: 3, number: 3 },
+    { id: 4, number: 4 },
+    { id: 5, number: 5 },
+  ]
 
   return (
     <nav>
@@ -44,7 +53,7 @@ const CreateRatingModel = () => {
             role="document"
           >
             <div className="modal-content all-center-2">
-              <div className="add-team-body">
+              <div className="add-team-body" style={{ zIndex: 109 }}>
                 {/* START */}
                 <div className="personal-info container">
                   <h4 className="info-text model-heading">Add New Lead</h4>
@@ -76,6 +85,15 @@ const CreateRatingModel = () => {
                         </div>
                       </div>
 
+                      {/* <DropDownComp
+                        label="Select Rating Starts"
+                        name="rating"
+                        data={allStars?.map((star) => ({
+                          value: star.id,
+                          label: star.number,
+                        }))}
+                      /> */}
+
                       <ModelInput
                         type="text"
                         label="Enter Rating"
@@ -97,7 +115,7 @@ const CreateRatingModel = () => {
                         <MultiSelect
                           style={{ dropdown: { backgroundColor: "#000" } }}
                           value={multiUser}
-                          onChange={(e) => setMultiUser(e.value)}
+                          onChange={(e) => setMultiUser(e.target.value)}
                           options={allUsers}
                           optionLabel="fullName"
                           placeholder="Select Urls"
