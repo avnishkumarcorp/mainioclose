@@ -72,6 +72,7 @@ const AllDeactivateUser = () => {
             <UserListComponent
               tableName={""}
               columns={columns}
+              getRowId={(row) => row.companyId}
               row={allDeactivateUsers}
             />
           </Suspense>
