@@ -9,14 +9,14 @@ import SomethingWrong from "../../components/usefulThings/SomethingWrong"
 import CreateRatingModel from "../../Model/CreateRatingModel"
 
 const UserRating = () => {
-
-  const [hidebox, setHidebox] = useState(false)
+  const [hidebox, setHidebox] = useState(true)
+  const [ratingDep, setRatingDep] = useState(false)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getAllRating())
-  }, [])
+  }, [ratingDep])
 
   const { allUserRating, UserRatingLoading, UserRatingError } = useSelector(
     (prev) => prev?.rating
@@ -56,7 +56,7 @@ const UserRating = () => {
           <i className="fa-solid mr-1 fa-circle-plus"></i>
         </button>
       </div>
-      <CreateRatingModel hidebox={hidebox} />
+      <CreateRatingModel hidebox={hidebox} setRatingDep={setRatingDep} />
       <div>
         {UserRatingLoading && <TableScalaton />}
         {UserRatingError && <SomethingWrong />}

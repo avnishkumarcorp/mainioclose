@@ -1,14 +1,37 @@
 import React, { useEffect, useState } from "react"
 import "./Model.css"
-import ModelInput from "../components/Inputs/ModelInput"
 import { MultiSelect } from "primereact/multiselect"
 import { useDispatch, useSelector } from "react-redux"
 import { getAllUsers } from "../Toolkit/Slices/UsersSlice"
-import DropDownComp from "../components/Inputs/DropDownComp"
+import { getAllUrlAction } from "../Toolkit/Slices/LeadUrlSlice"
+import { addNewRating } from "../Toolkit/Slices/RatingSlice"
+import { toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+toast.configure()
 
-const CreateRatingModel = ({ hidebox }) => {
+const CreateRatingModel = ({ hidebox, setRatingDep }) => {
   const [multiUser, setMultiUser] = useState([])
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllUrlAction())
+  }, [])
+
+  const { allLeadUrl } = useSelector((prev) => prev?.leadurls)
+
+  const [createRating, setCreateRating] = useState({
+    rating: "",
+    urlsManagmentId: 0,
+    ratingsUser: multiUser,
+  })
+
+  useEffect(() => {
+    setCreateRating((prev) => ({ ...prev, ratingsUser: multiUser }))
+  }, [multiUser])
+
+  const getRatingData = (e) => {
+    setCreateRating((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
   useEffect(() => {
     dispatch(getAllUsers())
@@ -18,12 +41,24 @@ const CreateRatingModel = ({ hidebox }) => {
 
   console.log("all users data", allUsers)
 
+  const addRatingFun = async (e) => {
+    e.preventDefault()
+
+    const ratingResponse = await dispatch(addNewRating(createRating))
+    if (ratingResponse.type === "add-new-rating-star/rejected")
+      return toast.error("Something Went wrong")
+    if (ratingResponse.type === "add-new-rating-star/fulfilled") {
+      setRatingDep((prev) => !prev)
+      toast.success("Rating User Create Succesfully")
+    }
+  }
+
   const allStars = [
     { id: 1, number: "1" },
     { id: 2, number: "2" },
-    { id: 3, number: 3 },
-    { id: 4, number: 4 },
-    { id: 5, number: 5 },
+    { id: 3, number: "3" },
+    { id: 4, number: "4" },
+    { id: 5, number: "5" },
   ]
 
   return (
@@ -41,38 +76,44 @@ const CreateRatingModel = ({ hidebox }) => {
               <div className="form-group col-md-6">
                 <div className="pr-ten">
                   <label className="label-heading mb-1" htmlFor="teamName">
-                    Lead Name *
+                    Number of Rating*
                   </label>
-                  <input
-                    type="text"
+                  <select
+                    name="rating"
+                    id="ratingstar"
                     className="form-control input-focus"
-                    id="leadName"
-                    // ref={leadNameRef}
-                    placeholder="Enter Team Name"
-                    name="leadName"
-                    // onChange={(e) => leadRowData(e)}
-                  />
+                    onChange={getRatingData}
+                  >
+                    <option>Select Star</option>
+                    {allStars?.map((data, index) => (
+                      <option key={index} value={data?.id}>
+                        {data?.number}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
-           
-
-              <ModelInput
-                type="text"
-                label="Enter Rating"
-                placeholder="Enter Rating"
-              />
-
-              {/* <ModelDropDown
-                        labelData={`Select Role`}
-                        // onChange={setUserDataFun}
-                        name="roleNames"
-                        value={userRoles.roleName}
-                        val={userRoles?.map((role) => ({
-                          value: role.id,
-                          label: role.roleName,
-                        }))}
-                      /> */}
+              <div className="form-group col-md-6">
+                <div className="pr-ten">
+                  <label className="label-heading mb-1" htmlFor="teamName">
+                    Select Url*
+                  </label>
+                  <select
+                    name="urlsManagmentId"
+                    id="management"
+                    className="form-control input-focus"
+                    onChange={getRatingData}
+                  >
+                    <option>Select Url Name</option>
+                    {allLeadUrl?.map((data, index) => (
+                      <option key={index} value={data?.id}>
+                        {data?.urlsName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
               <div className="col-md-6">
                 <label className="label-heading mb-1" htmlFor="teamName">
@@ -95,7 +136,7 @@ const CreateRatingModel = ({ hidebox }) => {
                 <div className="all-center-2"></div>
                 <div>
                   <button
-                    // onClick={(e) => newLeadCreate(e)}
+                    onClick={(e) => addRatingFun(e)}
                     className="first-button form-prev-btn border-1"
                   >
                     Submit
