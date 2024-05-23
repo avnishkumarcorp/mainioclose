@@ -12,6 +12,7 @@ const UserListComponent = React.lazy(() =>
 
 const AllTickets = () => {
   const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getAllTickets(currentUserId))
@@ -25,7 +26,6 @@ const AllTickets = () => {
 
   const ticketCount = ticketsData.length
 
-  const dispatch = useDispatch()
 
   return (
     <>

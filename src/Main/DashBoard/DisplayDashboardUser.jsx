@@ -75,13 +75,13 @@ const DisplayDashboardUser = () => {
       },
     },
     { field: "fullName", headerName: "Full Name", width: 150,
-    renderCell: (props) => <p className="all-center p-0"><span className={`sm-point  ${props?.row?.autoActive ? "point-success" : "point-error"}`}></span>{props?.row?.fullName} </p>
+    renderCell: (props) => <p className="all-center m-0"><span className={`sm-point  ${props?.row?.autoActive ? "point-success" : "point-error"}`}></span>{props?.row?.fullName} </p>
      },
     ...allUserdataCol,
      {
       field: "viewHistory",
       headerName: "View History",
-      width: 180,
+      width: 160,
       renderCell: (props) => {
         return (
           <>
@@ -100,7 +100,7 @@ const DisplayDashboardUser = () => {
     {
       field: "autoActive",
       headerName: "Present",
-      width: 180,
+      width: 150,
       renderCell: (props) => {
         return (
           <>

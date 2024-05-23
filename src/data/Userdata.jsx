@@ -9,13 +9,13 @@ export const allUserdataCol = [
       {
         field: "lockerSize",
         headerName: "Locker Size",
-        width: 150,
+        width: 120,
         renderCell: (props) => <p>{props?.row?.lockerSize} </p>
       },
       {
         field: "backupTeam",
         headerName: "Backup Team",
-        width: 150,
+        width: 120,
         renderCell: (props) => <p>{props?.row?.backupTeam ? <i className="fa-solid text-success fa-check"></i> : <i className="fa-solid text-danger fa-xmark"></i>} </p>
       },
 ]

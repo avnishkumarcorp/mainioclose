@@ -17,12 +17,9 @@ const AllManagerApprovals = () => {
   const currentUserId = useSelector((state) => state?.auth?.currentUser?.id)
   const [approverdUserDep, setApproverdUserDep] = useState(false)
 
-  const {
-    allManagerUsers: hrApprovalUser,
-    userManagerLoading,
-    userManagerError,
-  } = useSelector((state) => state?.user)
-
+  const { allManagerUsers: hrApprovalUser, userManagerError } = useSelector(
+    (state) => state?.user
+  )
 
   useEffect(() => {
     dispatch(allManagerUser(currentUserId))

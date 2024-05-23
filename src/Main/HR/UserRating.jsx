@@ -43,6 +43,11 @@ const UserRating = () => {
         ))
       },
     },
+    { field: "edit", headerName: "Edit", width: 250, renderCell: (props) =>{
+      return(
+        <p>edit </p>
+      )
+     } },
   ]
 
   return (
