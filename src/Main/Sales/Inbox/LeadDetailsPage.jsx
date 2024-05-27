@@ -12,11 +12,12 @@ import "react-toastify/dist/ReactToastify.css"
 import DataShowScalaton from "../../../components/Scalaton/DataShowScalaton"
 import EstimateDesignPage from "../Leads/EstimateDesignPage"
 import { useCustomRoute } from "../../../Routes/GetCustomRoutes"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { putQuery } from "../../../API/PutQuery"
 import { deleteQuery } from "../../../API/DeleteQuery"
 import InputErrorComponent from "../../../components/InputErrorComponent"
 import AllTasksPage from "./AllTasksPage"
+import { updateAutoAssignnee } from "../../../Toolkit/Slices/LeadSlice"
 toast.configure()
 
 const LeadDetailsPage = () => {
@@ -113,7 +114,6 @@ const LeadDetailsPage = () => {
       setUploadSucess(true)
     })
   }
-
 
   // const [selectedFile, setSelectedFile] = useState(null)
 
@@ -235,6 +235,7 @@ const LeadDetailsPage = () => {
     getAllUserData()
   }, [])
 
+  const dispatch = useDispatch()
   // const currentUserRoles = useSelector(
   //   (prev) => prev.AuthReducer.currentUser.roles
   // )
@@ -291,6 +292,20 @@ const LeadDetailsPage = () => {
     assignedById: userid,
     expectedDate: "",
     statusId: 0,
+  })
+
+  const [autoUpdateLead, setAutoUpdateLead] = useState({
+    leadId: leadid,
+    updatedById: userid,
+    status: "Badfit",
+    autoSame: true,
+  })
+
+  const [autoUpdateNotLead, setAutoUpdateNotLead] = useState({
+    leadId: leadid,
+    updatedById: userid,
+    status: "Badfit",
+    autoSame: false,
   })
 
   const [EditNewTask, setEditNewTask] = useState({})
@@ -797,6 +812,31 @@ const LeadDetailsPage = () => {
     window.open(imageUrl, "_blank")
   }
 
+  const sameAssigneePresonFun = async () => {
+    if (window.confirm("Aree you Want to Sure")) {
+      
+      const autoUpdateSame = await dispatch(updateAutoAssignnee(autoUpdateLead))
+        console.log(autoUpdateSame);
+      if (autoUpdateSame.type === "auto-lead-assignee/rejected")
+        return toast.error("Something went Wrong")
+      if (autoUpdateSame.type === "auto-lead-assignee/fulfilled") {
+        toast.success("Lead Assignee Same Person Succesfully")
+      }
+    }
+  }
+
+  const notSameAssigneePresonFun = async () => {
+    if (window.confirm("Aree you Want to Sure")) {
+      const autoUpdateNotSame = await dispatch(updateAutoAssignnee(autoUpdateNotLead))
+      console.log(autoUpdateNotSame);
+    if (autoUpdateNotSame.type === "auto-lead-assignee/rejected")
+      return toast.error("Something went Wrong")
+    if (autoUpdateNotSame.type === "auto-lead-assignee/fulfilled") {
+      toast.success("Lead Assignee Different Person Succesfully")
+    }
+    }
+  }
+
   const imageRef = useRef()
 
   return (
@@ -813,17 +853,20 @@ const LeadDetailsPage = () => {
           <div className="left-lead-section">
             {updateLeadNameToggle ? (
               <>
-              <div className="aic-center">
-              {singleLeadResponseData?.isBacklog ? <div className="green-point"></div>: <div className="red-point"></div>} 
-                <h3 className="company-name d-inline">
-                  {singleLeadResponseData?.leadName}
-                </h3>
-                <i
-                  onClick={() => setUpdateLeadNameToggle(false)}
-                  className="fa-solid ml-3 fa-pencil green-cl"
-                ></i>
+                <div className="aic-center">
+                  {singleLeadResponseData?.isBacklog ? (
+                    <div className="green-point"></div>
+                  ) : (
+                    <div className="red-point"></div>
+                  )}
+                  <h3 className="company-name d-inline">
+                    {singleLeadResponseData?.leadName}
+                  </h3>
+                  <i
+                    onClick={() => setUpdateLeadNameToggle(false)}
+                    className="fa-solid ml-3 fa-pencil green-cl"
+                  ></i>
                 </div>
-              
               </>
             ) : (
               <>
@@ -878,7 +921,20 @@ const LeadDetailsPage = () => {
             ) : (
               <Skeleton variant="rectangular" width={210} height={25} />
             )}
-            <div></div>
+            <div>
+              <button
+                onClick={sameAssigneePresonFun}
+                className="common-btn-one mr-2"
+              >
+                Same
+              </button>
+              <button
+                onClick={notSameAssigneePresonFun}
+                className="common-btn-one "
+              >
+                Not same
+              </button>
+            </div>
             <div className="lead-product">
               <div className="card mt-2">
                 <div className="" id="headingThree">
