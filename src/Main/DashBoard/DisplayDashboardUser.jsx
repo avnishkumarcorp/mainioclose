@@ -90,7 +90,7 @@ const DisplayDashboardUser = () => {
               // onClick={() => presentUserFun(props.row.id)}
               className="info-button"
             >
-              <i class="fa-regular fa-eye"></i> History
+              <i className="fa-regular fa-eye"></i> History
             </Link>
           </>
         )

@@ -11,6 +11,8 @@ import CreateRatingModel from "../../Model/CreateRatingModel"
 const UserRating = () => {
   const [hidebox, setHidebox] = useState(true)
   const [ratingDep, setRatingDep] = useState(false)
+  const [myobjData, setmyObjData] = useState({})
+  const [editRatingDep, setEditRatingDep] = useState(false);
 
   const dispatch = useDispatch()
 
@@ -21,6 +23,12 @@ const UserRating = () => {
   const { allUserRating, UserRatingLoading, UserRatingError } = useSelector(
     (prev) => prev?.rating
   )
+
+  const editRatingUser = (data) => {
+    setmyObjData((prev) => ({ ...prev, data }))
+    setEditRatingDep(true)
+    setHidebox((prev) => !prev)
+  }
 
   const columns = [
     {
@@ -43,11 +51,21 @@ const UserRating = () => {
         ))
       },
     },
-    { field: "edit", headerName: "Edit", width: 250, renderCell: (props) =>{
-      return(
-        <p>edit </p>
-      )
-     } },
+    {
+      field: "edit",
+      headerName: "Edit",
+      width: 250,
+      renderCell: (props) => {
+        return (
+          <button
+            className="common-btn-one mr-2"
+            onClick={() => editRatingUser(props?.row)}
+          >
+            edit{" "}
+          </button>
+        )
+      },
+    },
   ]
 
   return (
@@ -61,7 +79,7 @@ const UserRating = () => {
           <i className="fa-solid mr-1 fa-circle-plus"></i>
         </button>
       </div>
-      <CreateRatingModel hidebox={hidebox} setRatingDep={setRatingDep} />
+      <CreateRatingModel editRatingDep={editRatingDep} myobjData={myobjData} hidebox={hidebox} setRatingDep={setRatingDep} />
       <div>
         {UserRatingLoading && <TableScalaton />}
         {UserRatingError && <SomethingWrong />}

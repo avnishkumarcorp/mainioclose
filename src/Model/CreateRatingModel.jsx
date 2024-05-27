@@ -9,9 +9,16 @@ import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 toast.configure()
 
-const CreateRatingModel = ({ hidebox, setRatingDep }) => {
+const CreateRatingModel = ({
+  hidebox,
+  setRatingDep,
+  editRatingDep,
+  myobjData,
+}) => {
   const [multiUser, setMultiUser] = useState([])
   const dispatch = useDispatch()
+
+  console.log("by child", myobjData.data)
 
   useEffect(() => {
     dispatch(getAllUrlAction())
@@ -24,6 +31,17 @@ const CreateRatingModel = ({ hidebox, setRatingDep }) => {
     urlsManagmentId: 0,
     ratingsUser: multiUser,
   })
+
+  console.warn("craete", createRating);
+
+  useEffect(() => {
+    setCreateRating((prev) => ({
+      ...prev,
+      rating: myobjData?.data?.rating,
+      urlsManagmentId: myobjData?.data?.urlsManagmentId,
+      ratingsUser: myobjData?.data?.ratingsUser,
+    }))
+  }, [editRatingDep])
 
   useEffect(() => {
     setCreateRating((prev) => ({ ...prev, ratingsUser: multiUser }))
