@@ -7,31 +7,33 @@ import { getAllRating } from "../../Toolkit/Slices/UserRatingSlice"
 import TableScalaton from "../../components/TableScalaton"
 import SomethingWrong from "../../components/usefulThings/SomethingWrong"
 import CreateRatingModel from "../../Model/CreateRatingModel"
-import { useLocation, useParams } from "react-router-dom"
-import { allRatingUsers } from "../../Toolkit/Slices/RatingSlice"
+import { getAllSlugAction } from "../../Toolkit/Slices/LeadSlugSlice"
+import { Link } from "react-router-dom"
 
-const UserRating = () => {
+const UserService = () => {
   const [hidebox, setHidebox] = useState(true)
   const [ratingDep, setRatingDep] = useState(false)
   const [myobjData, setmyObjData] = useState({})
   const [editRatingDep, setEditRatingDep] = useState(false)
 
   const dispatch = useDispatch()
-  const { serviceid } = useParams()
 
   useEffect(() => {
-    dispatch(allRatingUsers({ id: serviceid }))
-  }, [])
+    dispatch(getAllSlugAction())
+  }, [dispatch])
+
+  const { allLeadUrl, allLeadUrlLoading, allLeadUrlError } = useSelector(
+    (prev) => prev?.leadurls
+  )
+
+  console.log("all urls", allLeadUrl)
 
   // useEffect(() => {
   //   dispatch(getAllRating())
   // }, [ratingDep])
 
-  const { allUsersList, allUsersLoading, allUsersError } = useSelector(
-    (prev) => prev?.ratingn
-  )
-
  
+
   const editRatingUser = (data) => {
     setmyObjData((prev) => ({ ...prev, data }))
     setEditRatingDep(true)
@@ -44,51 +46,42 @@ const UserRating = () => {
       headerName: "ID",
       width: 80,
     },
-    { field: "urlsName", headerName: "Service Name", width: 250 },
-    { field: "user", headerName: "Assignee", width: 250 },
     {
-      field: "rating",
-      headerName: "Rating",
-      width: 150,
+      field: "urlsName",
+      headerName: "Url's Name",
+      width: 250,
       renderCell: (props) => {
-        const arrayOfZeros = Array.from({ length: props?.row?.rating }, () => 0)
-        return arrayOfZeros.map((star) => (
-          <span className="text-warning ml-1">
-            <i className="fa-solid fa-star"></i>
-          </span>
-        ))
+        return <Link to={`${props?.row?.id}`}>{props?.row?.urlsName}</Link>
       },
     },
-    // {
-    //   field: "edit",
-    //   headerName: "Edit",
-    //   width: 250,
-    //   renderCell: (props) => {
-    //     return (
-    //       <button
-    //         className="common-btn-one mr-2"
-    //         onClick={() => editRatingUser(props?.row)}
-    //       >
-    //         edit{" "}
-    //       </button>
-    //     )
-    //   },
-    // },
+    { field: "quality", headerName: "Quality", width: 250 },
   ]
 
   return (
     <TableOutlet>
       <div className="create-user-box">
-        <MainHeading data={"Rating List"} />
+        <MainHeading data={"All Service"} />
+        <button
+          className="team-edit-button create-user-btn"
+          onClick={() => setHidebox((prev) => !prev)}
+        >
+          <i className="fa-solid mr-1 fa-circle-plus"></i>
+        </button>
       </div>
+      <CreateRatingModel
+        editRatingDep={editRatingDep}
+        myobjData={myobjData}
+        hidebox={hidebox}
+        setRatingDep={setRatingDep}
+      />
       <div>
-        {allUsersLoading && <TableScalaton />}
-        {allUsersError && <SomethingWrong />}
-        {allUsersList && !allUsersLoading && !allUsersError && (
+        {allLeadUrlLoading && <TableScalaton />}
+        {allLeadUrlError && <SomethingWrong />}
+        {allLeadUrl && !allLeadUrlLoading && !allLeadUrlError && (
           <UserListComponent
             tableName={""}
             columns={columns}
-            row={allUsersList}
+            row={allLeadUrl}
           />
         )}
       </div>
@@ -96,4 +89,4 @@ const UserRating = () => {
   )
 }
 
-export default UserRating
+export default UserService

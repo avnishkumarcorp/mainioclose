@@ -18,11 +18,13 @@ const CreateRatingModel = ({
   const [multiUser, setMultiUser] = useState([])
   const dispatch = useDispatch()
 
-  console.log("by child", myobjData.data)
-
   useEffect(() => {
     dispatch(getAllUrlAction())
   }, [])
+
+  const { addRating, addRatingLoading, addratingError } = useSelector(
+    (prev) => prev?.ratingn
+  )
 
   const { allLeadUrl } = useSelector((prev) => prev?.leadurls)
 
@@ -31,8 +33,6 @@ const CreateRatingModel = ({
     urlsManagmentId: 0,
     ratingsUser: multiUser,
   })
-
-  console.warn("craete", createRating);
 
   useEffect(() => {
     setCreateRating((prev) => ({
@@ -57,8 +57,6 @@ const CreateRatingModel = ({
 
   const { allUsers, userLoading, userError } = useSelector((prev) => prev?.user)
 
-  console.log("all users data", allUsers)
-
   const addRatingFun = async (e) => {
     e.preventDefault()
 
@@ -68,6 +66,7 @@ const CreateRatingModel = ({
     if (ratingResponse.type === "add-new-rating-star/fulfilled") {
       setRatingDep((prev) => !prev)
       toast.success("Rating User Create Succesfully")
+      window.location.reload()
     }
   }
 
@@ -155,10 +154,9 @@ const CreateRatingModel = ({
                 <div>
                   <button
                     onClick={(e) => addRatingFun(e)}
-                    className="first-button form-prev-btn border-1"
+                    className="first-button form-prev-btn btn-bg"
                   >
-                    Submit
-                    {/* {leadLoading ? "Loading..." : "Submit"} */}
+                    {addRatingLoading ? "Loading..." : "Submit"}
                   </button>
                 </div>
               </div>

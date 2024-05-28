@@ -816,7 +816,6 @@ const LeadDetailsPage = () => {
     if (window.confirm("Aree you Want to Sure")) {
       
       const autoUpdateSame = await dispatch(updateAutoAssignnee(autoUpdateLead))
-        console.log(autoUpdateSame);
       if (autoUpdateSame.type === "auto-lead-assignee/rejected")
         return toast.error("Something went Wrong")
       if (autoUpdateSame.type === "auto-lead-assignee/fulfilled") {
@@ -828,7 +827,6 @@ const LeadDetailsPage = () => {
   const notSameAssigneePresonFun = async () => {
     if (window.confirm("Aree you Want to Sure")) {
       const autoUpdateNotSame = await dispatch(updateAutoAssignnee(autoUpdateNotLead))
-      console.log(autoUpdateNotSame);
     if (autoUpdateNotSame.type === "auto-lead-assignee/rejected")
       return toast.error("Something went Wrong")
     if (autoUpdateNotSame.type === "auto-lead-assignee/fulfilled") {

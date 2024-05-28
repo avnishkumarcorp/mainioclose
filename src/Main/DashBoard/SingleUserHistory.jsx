@@ -20,7 +20,6 @@ const SingleUserHistory = () => {
     (prev) => prev?.uhistory
   )
 
-  console.log(allHistory)
 
   const columns = [
     {

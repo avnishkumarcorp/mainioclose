@@ -241,7 +241,7 @@ const SideBar = () => {
                 </NavLink>
                 <NavLink
                   className="link-itemss"
-                  to={`/erp/${userid}/hr/userrating`}
+                  to={`/erp/${userid}/hr/userservice`}
                 >
                   Rating List
                 </NavLink>

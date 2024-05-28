@@ -4,7 +4,7 @@ import MainPage from "./Main/MainPage"
 import DashBoard from "./Main/DashBoard/DashBoard"
 import HRMod from "./Main/HR/HRMod"
 import SalesMod from "./Main/Sales/SalesMod"
-import InboxPage from "./Main/Sales/Inbox/InboxPage"  
+import InboxPage from "./Main/Sales/Inbox/InboxPage"
 import ContactModule from "./Main/Sales/Contacts/ContactModule"
 import Estimate from "./Main/Sales/Estimate/Estimate"
 import LeadsModule from "./Main/Sales/Leads/LeadsModule"
@@ -49,6 +49,7 @@ import SingleUserHistory from "./Main/DashBoard/SingleUserHistory"
 import MainCompanyPage from "./Main/Sales/company/MainCompanyPage"
 import CompDetails from "./Main/Sales/company/CompDetails"
 import ProjectPage from "./Main/Sales/Project/ProjectPage"
+import UserService from "./Main/HR/UserService"
 
 function App() {
   const authStatus = useSelector((state) => state.auth.isAuth)
@@ -96,7 +97,8 @@ function App() {
             <Route path="/erp/:userid/hr" element={<HRMod />}>
               <Route path="" element={<HrUserList />} />
               <Route path="approveUser" element={<HRApprovalList />} />
-              <Route path="userrating" element={<UserRating />} />
+              <Route path="userservice" element={<UserService />} />
+                <Route path="userservice/:serviceid" element={<UserRating />} />
               <Route path="hrlinkfour" element={<div>hrlinkfour</div>} />
               <Route path="hrlinkfive" element={<div>hrlinkfive</div>} />
               <Route path="hrlinksix" element={<div>hrlinksix</div>} />
@@ -111,7 +113,10 @@ function App() {
               <Route path="oppurtities" element={<Opportunities />} />
               <Route path="company" element={<MainCompanyPage />} />
               <Route path="project" element={<ProjectPage />} />
-              <Route path="company/:companyId/details" element={<CompDetails />} />
+              <Route
+                path="company/:companyId/details"
+                element={<CompDetails />}
+              />
               <Route path="estimate" element={<Estimate />} />
               <Route path="orders" element={<OrdersModule />} />
               <Route path="leads/:leadid" element={<LeadDetailsPage />} />

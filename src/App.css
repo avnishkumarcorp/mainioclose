@@ -774,8 +774,13 @@ button:focus {
   border-radius: 5px;
 }
 
-.border-1 {
+.btn-bg {
   border: 1px solid #fff;
+}
+
+.btn-bg:hover {
+  border: 1px solid #fff !important;
+  color: #fff !important;
 }
 
 .normal-btn {

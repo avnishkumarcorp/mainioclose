@@ -18,6 +18,7 @@ import LeadUrlSlice from "./Slices/LeadUrlSlice"
 import HistorySlice from "./Slices/HistorySlice"
 import CompanySlice from "./Slices/CompanySlice"
 import ProjectSlice from "./Slices/ProjectSlice"
+import RatingSlice from "./Slices/RatingSlice"
 
 const reducers = combineReducers({
   auth: AuthSlice,
@@ -34,6 +35,7 @@ const reducers = combineReducers({
   uhistory: HistorySlice,
   company: CompanySlice,
   project: ProjectSlice,
+  ratingn: RatingSlice
 })
 
 const persistConfig = {

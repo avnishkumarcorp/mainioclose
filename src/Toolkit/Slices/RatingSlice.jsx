@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { postQuery } from "../../API/PostQuery"
+import { getQuery } from "../../API/GetQuery"
 
 export const addNewRating = createAsyncThunk(
   "add-new-rating-star",
@@ -12,12 +13,26 @@ export const addNewRating = createAsyncThunk(
   }
 )
 
+export const allRatingUsers = createAsyncThunk(
+  "all-rating-users-list",
+  async ({id}) => {
+    const allUserRating = await getQuery(
+      `/leadService/api/v1/rating/getRetingByUrls?urlsId=${id}`
+    )
+    return allUserRating?.data
+  }
+)
+
+
 const RatingSlice = createSlice({
-  name: "rating",
+  name: "ratingn",
   initialState: {
     addRating: {},
     addRatingLoading: false,
     addratingError: false,
+    allUsersList: [],
+    allUsersLoading: false,
+    allUsersError: false,
   },
   extraReducers: (builder) => {
     builder.addCase(addNewRating.pending, (state, action) => {
@@ -32,6 +47,20 @@ const RatingSlice = createSlice({
     builder.addCase(addNewRating.rejected, (state, action) => {
       state.addratingError = true
       state.addRatingLoading = false
+    })
+
+    builder.addCase(allRatingUsers.pending, (state, action) => {
+      state.allUsersLoading = true
+      state.allUsersError = false
+    })
+    builder.addCase(allRatingUsers.fulfilled, (state, action) => {
+      state.allUsersList = action.payload
+      state.allUsersLoading = false
+      state.allUsersError = false
+    })
+    builder.addCase(allRatingUsers.rejected, (state, action) => {
+      state.allUsersError = true
+      state.allUsersLoading = false
     })
   },
 })

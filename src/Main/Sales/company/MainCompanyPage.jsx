@@ -13,7 +13,6 @@ const MainCompanyPage = () => {
   const dispatch = useDispatch()
 
   const currUserId = useSelector((prev) => prev?.auth?.currentUser?.id)
-  console.log(currUserId)
 
   useEffect(() => {
     dispatch(getCompanyAction({ id: currUserId }))
@@ -23,7 +22,6 @@ const MainCompanyPage = () => {
     (prev) => prev?.company
   )
 
-  console.log(allCompnay)
 
   const columns = [
     {

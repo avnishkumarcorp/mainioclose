@@ -29,7 +29,6 @@ const DisplayDashboardUser = () => {
     dispatch(getAllUsers())
   }, [dispatch, userSuspand, userToggle])
 
-  console.log("Main Users", allMainUser);
 
   const deleteUser = async (id) => {
     if (window.confirm("Are you sure to deActivate this User?") == true) {
@@ -58,9 +57,7 @@ const DisplayDashboardUser = () => {
       currentUserId: 2
     }
      if (window.confirm( "Do you really want to Not Assign Any Lead To User?")) {
-      console.log("api calll before");
       const toggleData = await dispatch(allActiveUserFun(activeRowData)) 
-      console.log(toggleData);
       setUserToggle((prev) => !prev)
     }
   }
