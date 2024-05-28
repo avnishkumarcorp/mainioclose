@@ -855,9 +855,9 @@ const LeadDetailsPage = () => {
               <>
                 <div className="aic-center">
                   {singleLeadResponseData?.isBacklog ? (
-                    <div className="green-point"></div>
-                  ) : (
                     <div className="red-point"></div>
+                  ) : (
+                    <div className="green-point"></div>
                   )}
                   <h3 className="company-name d-inline">
                     {singleLeadResponseData?.leadName}
