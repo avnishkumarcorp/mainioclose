@@ -72,7 +72,10 @@ const UrlsPage = () => {
     }
   }
 
-  const dataBool = ["True", "False"]
+  const dataBool = [
+    { id: 1, number: "True" },
+    { id: 2, number: "False" },
+  ]
 
   const tableHead = ["id", "Url Name", "Quality"]
 
@@ -102,9 +105,10 @@ const UrlsPage = () => {
           <DropDownComp
             name="quality"
             onChange={saveUrlData}
-            value={urlLeadData.quality}
+            // value={urlLeadData.quality}
             data={dataBool}
             options="Select Quality"
+            className= "pl-0"
           />
           <SmOneBtn
             name={createLeadUrlLoading ? "Loading..." : "Submit"}

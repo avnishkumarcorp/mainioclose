@@ -1,12 +1,14 @@
 import React from "react"
 
 const DropDownComp = React.forwardRef(
-  ({ name = "", className = "", options,label, data, ...props }, ref) => (
-    <div className="form-group col-md-6">
+  ({ name = "", className = "", options, label, data, ...props }, ref) => (
+    <div className={`form-group col-md-6 ${className}`}>
       <div className="pr-ten">
-        <label className="label-heading mb-1" htmlFor="teamName">
-          {label}
-        </label>
+        {label && (
+          <label className="label-heading mb-1" htmlFor="teamName">
+            {label}
+          </label>
+        )}
         <select
           className="form-control input-focus"
           name={name}
