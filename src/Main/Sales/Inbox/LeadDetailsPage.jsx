@@ -18,6 +18,7 @@ import { deleteQuery } from "../../../API/DeleteQuery"
 import InputErrorComponent from "../../../components/InputErrorComponent"
 import AllTasksPage from "./AllTasksPage"
 import { updateAutoAssignnee } from "../../../Toolkit/Slices/LeadSlice"
+import { getAllUrlAction } from "../../../Toolkit/Slices/LeadUrlSlice"
 toast.configure()
 
 const LeadDetailsPage = () => {
@@ -79,6 +80,11 @@ const LeadDetailsPage = () => {
   const [imageResponse, setImageResponse] = useState("")
   const [uploadSucess, setUploadSucess] = useState(false)
   const [uploadLoading, setUploadLoading] = useState(false)
+  const [updateOriginalName, setUpdateOriginalName] = useState(false)
+
+  const [origNameData, setOrigNameData] = useState("")
+
+  const dispatch = useDispatch()
 
   const fileRef = useRef()
 
@@ -185,7 +191,33 @@ const LeadDetailsPage = () => {
     }
   }
 
+  useEffect(() => {
+    dispatch(getAllUrlAction())
+  }, [dispatch])
+
+  const { allLeadUrl } = useSelector((prev) => prev?.leadurls)
+  console.log("all lead url", allLeadUrl)
   const { userid, leadid } = useParams()
+
+  const [originalData, setOriginalData] = useState({
+    leadId: leadid,
+    originalName: origNameData,
+    currentUserId: userid,
+  })
+  console.warn(originalData)
+
+  const updateOriginalNameFun = async (e) => {
+    try {
+      const originalNameRes = await putQuery(
+        "/leadService/api/v1/lead/updateLeadOriginalName",
+        originalData
+      )
+      setUpdateOriginalName((prev) => !prev)
+      toast.success("original name update succesfully")
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   // //  useEffect calls Start
   useEffect(() => {
@@ -205,6 +237,7 @@ const LeadDetailsPage = () => {
     editContactDep,
     contactDelDep,
     updateAssignee,
+    updateOriginalName,
   ])
 
   useEffect(() => {
@@ -235,7 +268,6 @@ const LeadDetailsPage = () => {
     getAllUserData()
   }, [])
 
-  const dispatch = useDispatch()
   // const currentUserRoles = useSelector(
   //   (prev) => prev.AuthReducer.currentUser.roles
   // )
@@ -814,7 +846,6 @@ const LeadDetailsPage = () => {
 
   const sameAssigneePresonFun = async () => {
     if (window.confirm("Aree you Want to Sure")) {
-      
       const autoUpdateSame = await dispatch(updateAutoAssignnee(autoUpdateLead))
       if (autoUpdateSame.type === "auto-lead-assignee/rejected")
         return toast.error("Something went Wrong")
@@ -826,12 +857,14 @@ const LeadDetailsPage = () => {
 
   const notSameAssigneePresonFun = async () => {
     if (window.confirm("Aree you Want to Sure")) {
-      const autoUpdateNotSame = await dispatch(updateAutoAssignnee(autoUpdateNotLead))
-    if (autoUpdateNotSame.type === "auto-lead-assignee/rejected")
-      return toast.error("Something went Wrong")
-    if (autoUpdateNotSame.type === "auto-lead-assignee/fulfilled") {
-      toast.success("Lead Assignee Different Person Succesfully")
-    }
+      const autoUpdateNotSame = await dispatch(
+        updateAutoAssignnee(autoUpdateNotLead)
+      )
+      if (autoUpdateNotSame.type === "auto-lead-assignee/rejected")
+        return toast.error("Something went Wrong")
+      if (autoUpdateNotSame.type === "auto-lead-assignee/fulfilled") {
+        toast.success("Lead Assignee Different Person Succesfully")
+      }
     }
   }
 
@@ -849,6 +882,53 @@ const LeadDetailsPage = () => {
       <div className="row">
         <div className="col-md-4">
           <div className="left-lead-section">
+            {updateOriginalName ? (
+              <>
+                <select
+                  className="status-select w-50"
+                  name="status"
+                  onChange={(e) =>
+                    setOriginalData((prev) => ({
+                      ...prev,
+                      originalName: e.target.value,
+                    }))
+                  }
+                  id="status"
+                  form="statusChange"
+                >
+                  <option>Select Url</option>
+                  {allLeadUrl.map((url, index) => (
+                    <option value={url?.urlsName} key={index}>
+                      {url?.urlsName}
+                    </option>
+                  ))}
+                </select>
+                <i
+                  onClick={(e) => updateOriginalNameFun(e)}
+                  className="fa-solid ml-2 green-cl disk-size fa-floppy-disk"
+                ></i>
+              </>
+            ) : (
+              <>
+                <div className="aic-center">
+                  {singleLeadResponseData?.originalName ? (
+                    <div className="red-point"></div>
+                  ) : (
+                    <div className="green-point"></div>
+                  )}
+                  <h3 className="company-name d-inline">
+                    {singleLeadResponseData?.originalName
+                      ? singleLeadResponseData?.originalName
+                      : "NA"}
+                  </h3>
+                  <i
+                    onClick={() => setUpdateOriginalName(true)}
+                    className="fa-solid ml-3 fa-pencil green-cl"
+                  ></i>
+                </div>
+              </>
+            )}
+
             {updateLeadNameToggle ? (
               <>
                 <div className="aic-center">
@@ -857,7 +937,7 @@ const LeadDetailsPage = () => {
                   ) : (
                     <div className="green-point"></div>
                   )}
-                  <h3 className="company-name d-inline">
+                  <h3 className="company-name font-sixteen d-inline">
                     {singleLeadResponseData?.leadName}
                   </h3>
                   <i
@@ -886,6 +966,7 @@ const LeadDetailsPage = () => {
                 ></i>
               </>
             )}
+
             <p className="lead-location">
               <i className="fa-solid mr-1 fa-location-dot"></i>
               {singleLeadResponseData?.city

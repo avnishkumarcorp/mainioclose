@@ -522,6 +522,10 @@ button:focus {
   font-size: 13px;
 }
 
+.font-sixteen{
+  font-size: 16px  !important;
+}
+
 .form-control.input-focus {
   padding: 3px 6px;
   font-size: 13px;
