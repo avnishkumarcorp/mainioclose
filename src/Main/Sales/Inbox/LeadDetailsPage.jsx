@@ -932,11 +932,6 @@ const LeadDetailsPage = () => {
             {updateLeadNameToggle ? (
               <>
                 <div className="aic-center">
-                  {singleLeadResponseData?.isBacklog ? (
-                    <div className="red-point"></div>
-                  ) : (
-                    <div className="green-point"></div>
-                  )}
                   <h3 className="company-name font-sixteen d-inline">
                     {singleLeadResponseData?.leadName}
                   </h3>
