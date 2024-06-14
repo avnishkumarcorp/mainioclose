@@ -17,7 +17,7 @@ export const AuthSlice = createSlice({
     isAuth: false,
   },
   reducers: {
-    logoutFun: (state, action) => {
+    logoutFun: (state, action) => { 
       state.isAuth = false
       state.currentUser = null
     },

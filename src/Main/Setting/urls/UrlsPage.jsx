@@ -73,8 +73,8 @@ const UrlsPage = () => {
   }
 
   const dataBool = [
-    { id: 1, number: "True" },
-    { id: 2, number: "False" },
+    { id: "true", number: "True" },
+    { id: "false", number: "False" },
   ]
 
   const tableHead = ["id", "Url Name", "Quality"]
@@ -97,7 +97,7 @@ const UrlsPage = () => {
             onChange={(e) => setGetAllSlug(e.value)}
             options={allLeadSlug}
             optionLabel="name"
-            placeholder="Select Urls"
+            placeholder="Select Slug"
             optionValue="id"
             maxSelectedLabels={6}
             className="multi-select-boxx w-100 py-1 my-3"
@@ -125,7 +125,7 @@ const UrlsPage = () => {
         {allLeadUrl?.map((status, index) => (
           <tr key={index}>
             <th>{status.id}</th>
-            <td>{status?.urlsName}</td>
+            <td>{status?.urlsName?.slice(0,70)}</td>
             <td>{status?.quality ? "True" : "False"}</td>
           </tr>
         ))}
